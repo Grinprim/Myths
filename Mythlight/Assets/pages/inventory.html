@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mythlight RPG | Inventory</title>
+    <link rel="icon" type="image/svg+xml" href="../img/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .row td { text-align: center; padding: 8px; }
+        .row { border-bottom: 1px solid #282e40; }
+        table { width: 100%; }
+        /* Tab Active State */
+        .tab-btn.active { background-color: rgba(99, 102, 241, 0.2); border-color: #6366f1; color: white; }
+    </style>
+</head>
+
+<body class="bg-custom-dark text-slate-300">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="pt-32 pb-20 px-6 max-w-7xl mx-auto space-y-12">
+
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-white mb-4">Inventory & Creation</h1>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                Browse standard issue gear, or delve into the arts of crafting and alchemy.
+            </p>
+        </header>
+
+        <div class="flex flex-wrap justify-center gap-4 border-b border-slate-800 pb-8 mb-8 sticky top-20 z-30 bg-custom-dark/95 backdrop-blur-sm py-4">
+            <button onclick="switchView('view-equipment')" class="tab-btn active px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+                Equipment
+            </button>
+            <button onclick="switchView('view-crafting')" class="tab-btn px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+                Crafting
+            </button>
+            <button onclick="switchView('view-brewing')" class="tab-btn px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+                Brewing
+            </button>
+        </div>
+
+        <div id="view-equipment" class="view-section space-y-12">
+            <div class="text-center space-y-4 mb-8">
+                <h2 class="text-3xl text-white font-bold">Standard Equipment</h2>
+                <p class="text-slate-400">Weapons, armor, and their damage types.</p>
+            </div>
+
+            <div>
+                <h3 class="text-xl text-indigo-400 font-bold mb-6 uppercase tracking-widest border-b border-slate-800 pb-2">Physical Damage Types</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="rule-card p-5 border-l-4 border-l-red-500 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-red-400 transition-colors">Puncture</strong><span class="text-xs text-slate-400 leading-relaxed">Piercing (Knives, Rapiers)</span></div>
+                    <div class="rule-card p-5 border-l-4 border-l-rose-500 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-rose-400 transition-colors">Slash</strong><span class="text-xs text-slate-400 leading-relaxed">Cutting (Swords, Sabers)</span></div>
+                    <div class="rule-card p-5 border-l-4 border-l-slate-400 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-slate-300 transition-colors">Blunt</strong><span class="text-xs text-slate-400 leading-relaxed">Crushing (Hammers, Clubs)</span></div>
+                    <div class="rule-card p-5 border-l-4 border-l-orange-500 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-orange-400 transition-colors">Cleave</strong><span class="text-xs text-slate-400 leading-relaxed">Chopping (Axes)</span></div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-xl text-indigo-400 font-bold mb-6 uppercase tracking-widest border-b border-slate-800 pb-2">Elemental Damage Types</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div class="rule-card p-5 border-l-4 border-l-orange-500 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-orange-400 transition-colors">Fire</strong><span class="text-xs text-slate-400 leading-relaxed">Heat, fire, certain explosions.</span></div>
+                    <div class="rule-card p-5 border-l-4 border-l-blue-500 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-blue-400 transition-colors">Ice</strong><span class="text-xs text-slate-400 leading-relaxed">Frost, freezing.</span></div>
+                    <div class="rule-card p-5 border-l-4 border-l-slate-400 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-slate-300 transition-colors">Lightning</strong><span class="text-xs text-slate-400 leading-relaxed">Electrical devices and magic.</span></div>
+                    <div class="rule-card p-5 border-l-4 border-l-yellow-500 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-yellow-400 transition-colors">Light</strong><span class="text-xs text-slate-400 leading-relaxed">Holy energy.</span></div>
+                    <div class="rule-card p-5 border-l-4 border-l-black-500 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-black-400 transition-colors">Dark</strong><span class="text-xs text-slate-400 leading-relaxed">Unholy energy.</span></div>
+                    <div class="rule-card p-5 border-l-4 border-l-rose-500 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-rose-400 transition-colors">Force</strong><span class="text-xs text-slate-400 leading-relaxed">Pure kinetic force.</span></div>
+                    <div class="rule-card p-5 border-l-4 border-l-purple-400 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-purple-300 transition-colors">Psychic</strong><span class="text-xs text-slate-400 leading-relaxed">Damage directly to the mind.</span></div>
+                    <div class="rule-card p-5 border-l-4 border-l-lime-500 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-lime-400 transition-colors">Poison</strong><span class="text-xs text-slate-400 leading-relaxed">Toxins and venom.</span></div>
+                    <div class="rule-card p-5 border-l-4 border-l-green-500 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-green-400 transition-colors">Acid</strong><span class="text-xs text-slate-400 leading-relaxed">Melting substances.</span></div>
+                    <div class="rule-card p-5 border-l-4 border-l-teal-500 hover:bg-slate-800/50 transition-colors group"><strong class="text-white block mb-2 text-lg group-hover:text-teal-400 transition-colors">Vibro</strong><span class="text-xs text-slate-400 leading-relaxed">Thunder and vibration.</span></div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl text-indigo-400 font-bold mb-6 uppercase tracking-widest border-b border-slate-800 pb-2">Equipment Tags</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-700/50 hover:border-indigo-500/30 transition-all hover:bg-slate-900/50 flex items-start gap-3"><div class="mt-1 w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)]"></div><div><strong class="text-indigo-300 block text-sm mb-1 uppercase tracking-wider">Concealable</strong><p class="text-slate-400 text-xs">Not considered a weapon/armor for RP.</p></div></div>
+                    <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-700/50 hover:border-indigo-500/30 transition-all hover:bg-slate-900/50 flex items-start gap-3"><div class="mt-1 w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div><div><strong class="text-emerald-300 block text-sm mb-1 uppercase tracking-wider">Flexible</strong><p class="text-slate-400 text-xs">No stealth/acrobatic penalties.</p></div></div>
+                    <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-700/50 hover:border-indigo-500/30 transition-all hover:bg-slate-900/50 flex items-start gap-3"><div class="mt-1 w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.6)]"></div><div><strong class="text-orange-300 block text-sm mb-1 uppercase tracking-wider">(Element)proof</strong><p class="text-slate-400 text-xs">Resistance to (Element) Damage.</p></div></div>
+                    <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-700/50 hover:border-indigo-500/30 transition-all hover:bg-slate-900/50 flex items-start gap-3"><div class="mt-1 w-2 h-2 rounded-full bg-slate-400 shadow-[0_0_8px_rgba(148,163,184,0.6)]"></div><div><strong class="text-slate-300 block text-sm mb-1 uppercase tracking-wider">Reinforced(P/B/S/C)</strong><p class="text-slate-400 text-xs">Resistance to specific physical damage.</p></div></div>
+                    <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-700/50 hover:border-indigo-500/30 transition-all hover:bg-slate-900/50 flex items-start gap-3"><div class="mt-1 w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]"></div><div><strong class="text-red-300 block text-sm mb-1 uppercase tracking-wider">Restrictive</strong><p class="text-slate-400 text-xs">Disadvantage on Finesse(Stealth) and Reflex.</p></div></div>
+                    <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-700/50 hover:border-indigo-500/30 transition-all hover:bg-slate-900/50 flex items-start gap-3"><div class="mt-1 w-2 h-2 rounded-full bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.6)]"></div><div><strong class="text-indigo-300 block text-sm mb-1 uppercase tracking-wider">Two-Handed</strong><p class="text-slate-400 text-xs">Requires two hands.</p></div></div>
+                    <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-700/50 hover:border-indigo-500/30 transition-all hover:bg-slate-900/50 flex items-start gap-3"><div class="mt-1 w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]"></div><div><strong class="text-cyan-300 block text-sm mb-1 uppercase tracking-wider">Compact</strong><p class="text-slate-400 text-xs">Lower weight class for storage.</p></div></div>
+                    <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-700/50 hover:border-indigo-500/30 transition-all hover:bg-slate-900/50 flex items-start gap-3"><div class="mt-1 w-2 h-2 rounded-full bg-yellow-600 shadow-[0_0_8px_rgba(202,138,4,0.6)]"></div><div><strong class="text-yellow-500 block text-sm mb-1 uppercase tracking-wider">Constructed</strong><p class="text-slate-400 text-xs">Has durability score.</p></div></div>
+                    <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-700/50 hover:border-indigo-500/30 transition-all hover:bg-slate-900/50 flex items-start gap-3"><div class="mt-1 w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.6)]"></div><div><strong class="text-purple-300 block text-sm mb-1 uppercase tracking-wider">Powered</strong><p class="text-slate-400 text-xs">Requires fuel.</p></div></div>
+                </div>
+            </div>
+
+            <section class="space-y-6">
+                <div class="flex items-center gap-4 mb-2">
+                    <h2 class="text-2xl text-white font-bold">Armory</h2>
+                    <div class="h-px bg-slate-700 flex-1"></div>
+                </div>
+                
+                <details open class="rule-card"><summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Light Melee</summary><div class="table-wrap mt-4"><table><thead><tr><th>Weapon</th><th>Damage</th><th>Reach</th><th>Tags</th><th>Notes</th></tr></thead><tbody id="m1"></tbody></table></div></details>
+                <details class="rule-card"><summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Medium Melee</summary><div class="table-wrap mt-4"><table><thead><tr><th>Weapon</th><th>Damage</th><th>Reach</th><th>Tags</th><th>Notes</th></tr></thead><tbody id="m2"></tbody></table></div></details>
+                <details class="rule-card"><summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Heavy Melee</summary><div class="table-wrap mt-4"><table><thead><tr><th>Weapon</th><th>Damage</th><th>Reach</th><th>Tags</th><th>Notes</th></tr></thead><tbody id="m3"></tbody></table></div></details>
+                
+                <details class="rule-card"><summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Light Ranged</summary><div class="table-wrap mt-4"><table><thead><tr><th>Weapon</th><th>Damage</th><th>Range</th><th>Ammo</th><th>Notes</th></tr></thead><tbody id="r1"></tbody></table></div></details>
+                <details class="rule-card"><summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Heavy Ranged</summary><div class="table-wrap mt-4"><table><thead><tr><th>Weapon</th><th>Damage</th><th>Range</th><th>Ammo</th><th>Notes</th></tr></thead><tbody id="r2"></tbody></table></div></details>
+                
+                <details class="rule-card"><summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Light Firearms</summary><div class="table-wrap mt-4"><table><thead><tr><th>Weapon</th><th>Damage</th><th>Range</th><th>Ammo</th><th>Notes</th></tr></thead><tbody id="f1"></tbody></table></div></details>
+                <details class="rule-card"><summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Heavy Firearms</summary><div class="table-wrap mt-4"><table><thead><tr><th>Weapon</th><th>Damage</th><th>Range</th><th>Ammo</th><th>Notes</th></tr></thead><tbody id="f2"></tbody></table></div></details>
+
+                <details class="rule-card"><summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Armor</summary><div class="table-wrap mt-4"><table><thead><tr><th>Armor</th><th>Rating</th><th>Penalty</th><th>Tags</th><th>Notes</th></tr></thead><tbody id="armor"></tbody></table></div></details>
+                <details class="rule-card"><summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Shields</summary><div class="table-wrap mt-4"><table><thead><tr><th>Shield</th><th>Bonus</th><th>Penalty</th><th>Tags</th><th>Notes</th></tr></thead><tbody id="shields"></tbody></table></div></details>
+            </section>
+        </div>
+
+        <div id="view-crafting" class="view-section hidden space-y-8">
+            <div class="text-center space-y-4 mb-8">
+                <h2 class="text-3xl text-white font-bold">Artisan Crafting</h2>
+                <p class="text-slate-400">Forge items of power using components found in your travels.</p>
+            </div>
+            <section class="rule-card space-y-6" id="crafting-checks">
+    <h2 class="text-2xl text-white font-bold">Crafting Difficulty & Precision</h2>
+
+    <!-- CORE CHECKS -->
+    <div class="space-y-3 text-sm text-slate-300">
+        <p>
+            Crafting requires a <strong class="text-white">Crafting Skill Check</strong>
+            (usually <strong>Tinkering</strong> or an equivalent skill).
+        </p>
+
+        <table class="w-full border border-slate-700 rounded-lg overflow-hidden">
+            <thead class="bg-slate-800">
+                <tr>
+                    <th class="p-2 text-left">Complexity</th>
+                    <th class="p-2 text-left">Craft Check</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">Trivial</td>
+                    <td class="p-2">No check required</td>
+                </tr>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">Simple</td>
+                    <td class="p-2">Tinkering 8</td>
+                </tr>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">Standard</td>
+                    <td class="p-2">Tinkering 12</td>
+                </tr>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">Difficult</td>
+                    <td class="p-2">Tinkering 16</td>
+                </tr>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">Complex</td>
+                    <td class="p-2">Tinkering 20</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="text-xs text-red-400">
+            <strong>Failure by 5 or more:</strong> One random component is destroyed.
+        </p>
+    </div>
+
+    <!-- PRECISION -->
+    <div class="space-y-3">
+        <h3 class="text-lg text-white font-bold">Precision Component Bonuses</h3>
+
+        <p class="text-sm text-slate-400">
+            Selecting the correct sub-components grants flat bonuses to the Craft Check.
+        </p>
+
+        <table class="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+            <thead class="bg-slate-800">
+                <tr>
+                    <th class="p-2 text-left">Precision</th>
+                    <th class="p-2 text-left">Bonus</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">Correct Family Only</td>
+                    <td class="p-2">No bonus</td>
+                </tr>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">Correct Sub-Component ×1</td>
+                    <td class="p-2">+1 Craft Bonus</td>
+                </tr>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">All Components Correct</td>
+                    <td class="p-2">+2 to final roll (global, not per item)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TIERS -->
+    <div class="space-y-3">
+        <h3 class="text-lg text-white font-bold">Craft Tiers</h3>
+
+        <table class="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+            <thead class="bg-slate-800">
+                <tr>
+                    <th class="p-2 text-left">Tier</th>
+                    <th class="p-2 text-left">Difficulty</th>
+                    <th class="p-2 text-left">Requirements</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">Trivial</td>
+                    <td class="p-2">Very Easy</td>
+                    <td class="p-2">Hands, basic tools</td>
+                </tr>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">Simple</td>
+                    <td class="p-2">Easy</td>
+                    <td class="p-2">Tools</td>
+                </tr>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">Standard</td>
+                    <td class="p-2">Moderate</td>
+                    <td class="p-2">Tools, workbench</td>
+                </tr>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">Difficult</td>
+                    <td class="p-2">Hard</td>
+                    <td class="p-2">Specialized tools, workshop</td>
+                </tr>
+                <tr class="border-t border-slate-700">
+                    <td class="p-2">Complex</td>
+                    <td class="p-2">Very Hard</td>
+                    <td class="p-2">Full workshop</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+            <details open class="rule-card">
+                <summary class="text-2xl text-white font-bold cursor-pointer hover:text-indigo-300 flex items-center justify-between group">
+                    <span>Combat Crafts</span>
+                </summary>
+                Combat crafts are quickly deployable craftables, these can be made in the middle of combat using 1 Action.
+                <div class="space-y-8 mt-6">
+                    <div>
+                        <h3 class="text-lg text-orange-400 font-bold mb-4 uppercase tracking-widest border-b border-slate-800 pb-2">Crafts</h3>
+                        <div class="bg-slate-900/40 rounded-3xl border border-slate-800 overflow-hidden shadow-xl">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse min-w-[300px]">
+                                    <thead><tr class="text-xs uppercase tracking-widest text-slate-500 border-b border-slate-800"><th class="px-6 py-4 font-bold w-2/5">Name</th><th class="px-6 py-4 font-bold w-1/5">Cost</th><th class="px-6 py-4 font-bold w-1/5">Tier</th><th class="px-6 py-4 font-bold w-1/5 text-right">Expand</th></tr></thead>
+                                    <tbody id="artisan-crafts-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+            
+            <details class="rule-card">
+                <summary class="text-2xl text-white font-bold cursor-pointer hover:text-indigo-300 flex items-center justify-between group">
+                    <span>Recipes</span>
+                </summary>
+
+                <div class="flex items-center gap-3 my-6 bg-slate-900/40 p-3 rounded-lg border border-slate-700 w-fit">
+                    <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Filter Tier:</label>
+                    <select id="tierFilter" onchange="filterCrafting()" class="select-dark text-sm">
+                        <option value="all">All Tiers</option>
+                        <option>Trivial</option>
+                        <option>Simple</option>
+                        <option>Standard</option>
+                        <option>Difficult</option>
+                        <option>Complex</option>
+                    </select>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Name</th><th>Tier</th><th>Category</th><th>Components</th><th>Effect</th></tr></thead>
+                        <tbody id="crafting-recipes"></tbody>
+                    </table>
+                </div>
+            </details>
+
+            <details class="rule-card">
+                <summary class="text-2xl text-white font-bold cursor-pointer hover:text-indigo-300">Components</summary>
+                <div class="table-wrap mt-4">
+                    <table>
+                        <thead><tr><th>Component</th><th>Category</th><th>Notes</th></tr></thead>
+                        <tbody id="craft-components"></tbody>
+                    </table>
+                </div>
+            </details>
+        </div>
+
+        <div id="view-brewing" class="view-section hidden space-y-8">
+            <div class="text-center space-y-4 mb-8">
+                <h2 class="text-3xl text-white font-bold">Alchemy & Brewing</h2>
+                <p class="text-slate-400">Combine aspects and tiers to produce volatile mixtures.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <details open class="rule-card h-fit">
+                    <summary class="text-2xl text-white font-bold cursor-pointer hover:text-indigo-300">Brewing Rules</summary>
+                    <ul class="list-disc list-outside ml-5 text-slate-300 space-y-3 mt-4 text-sm leading-relaxed">
+                        <li><strong>Total(A)</strong> = Sum of ingredient aspect values.</li>
+                        <li><strong>Tier</strong> = Majority tier of ingredients.</li>
+                        <li><strong>DC</strong> = 6 + BITS + DISPARITY + (Tier − 1)</li>
+                    </ul>
+                </details>
+
+                <div class="rule-card h-fit">
+                    <h3 class="text-xl text-white font-bold mb-4">Brewing Calculator</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Bitcode Pattern</label>
+                            <input id="brewBitcode" type="text" maxlength="5" placeholder="e.g. 10110" class="input-dark font-mono text-lg tracking-widest">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Disparity</label>
+                                <input id="brewDisparityInput" type="number" min="0" value="0" class="input-dark">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Target Tier</label>
+                                <select id="brewTier" class="select-dark w-full h-[46px]">
+                                    <option value="1">Tier I</option>
+                                    <option value="2">Tier II</option>
+                                    <option value="3">Tier III</option>
+                                    <option value="4">Tier IV</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pt-6 mt-4 border-t border-slate-700 flex justify-between items-center">
+                            <span class="text-slate-400 text-sm font-bold uppercase tracking-widest">Difficulty Class (DC)</span>
+                            <span id="brewDCResult" class="text-4xl text-indigo-400 font-bold fantasy-font">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <details class="rule-card">
+                <summary class="text-2xl text-white font-bold cursor-pointer hover:text-indigo-300">Potion Outcomes</summary>
+                <div class="table-wrap mt-4">
+                    <table>
+                        <thead><tr><th>Bitcode</th><th>Name</th><th>Tier I</th><th>Tier II</th><th>Tier III</th><th>Tier IV</th></tr></thead>
+                        <tbody id="brew-outcomes"></tbody>
+                    </table>
+                </div>
+            </details>
+            
+             <details class="rule-card">
+                <summary class="text-2xl text-white font-bold cursor-pointer hover:text-indigo-300">Ingredients</summary>
+                <div class="table-wrap mt-4">
+                    <table><thead><tr><th>Ingredient</th><th>Aspect</th><th>Value</th><th>Tier</th></tr></thead><tbody id="brew-ingredients"></tbody></table>
+                </div>
+            </details>
+        </div>
+
+    </main>
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // --- Tab Logic ---
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(viewId).classList.remove('hidden');
+            const index = ['view-equipment', 'view-crafting', 'view-brewing'].indexOf(viewId);
+            document.querySelectorAll('.tab-btn')[index].classList.add('active');
+        }
+
+        function toggleDetails(rowId) {
+            const row = document.getElementById(rowId);
+            row.classList.toggle('hidden');
+            const arrow = document.getElementById(`arrow-${rowId}`);
+            if(arrow) arrow.style.transform = row.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        // --- Standard Loading Logic ---
+        const formatTags = (tags) => {
+            if (!tags || tags === "-") return "-";
+            const list = Array.isArray(tags) ? tags : String(tags).split(',').map(t => t.trim());
+            return list.map(t => `<span class="tag-badge">${t}</span>`).join('');
+        };
+
+        // --- Artisan Row Creator ---
+        function createArtisanRow(item, index, type) {
+            const rowId = `artisan-${index}-${type}`;
+            const isCraft = item.Description.includes("Using [");
+            
+            return `
+            <tr onclick="toggleDetails('${rowId}')" class="expandable-row border-b border-slate-800/50 cursor-pointer hover:bg-slate-800/30">
+                <td class="px-6 py-4 font-bold text-white text-base">${item.Name}</td>
+                <td class="px-6 py-4 text-indigo-300 font-mono text-xs font-bold">${item.Material}</td>
+                <td class="px-6 py-4"><span class="category-tag">${item.Category || 'Artisan'}</span></td>
+                <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${rowId}" class="transition-transform duration-200 inline-block">▼</div></td>
+            </tr>
+            <tr id="${rowId}" class="hidden bg-slate-900/40"><td colspan="4" class="px-6 py-6 border-b border-slate-800"><div class="space-y-4">
+                    <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest"><span class="text-white font-bold bg-slate-700/50 px-2 py-1 rounded">Type: ${item.Type || '-'}</span><span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${item.Range || 'Self'}</span></div>
+                    <p class="text-slate-300 text-sm leading-relaxed">${item.Description}</p>
+                    <div class="text-slate-500 italic text-[11px] border-l-2 border-slate-700 pl-3">${item.Lore || ''}</div>
+            </div></td></tr>`;
+        }
+
+        async function loadData() {
+            // Equipment
+            try {
+                const res = await fetch('../json/equipment.json');
+                const data = await res.json();
+                const fill = (id, rows) => {
+                    const b = document.getElementById(id); if(!b || !rows) return;
+                    b.innerHTML = rows.map(r => `<tr class="row"><td class="font-bold text-white">${r.Name}</td><td><span class="text-emerald-300 font-mono">${r.Damage||r.Rating||r.Bonus||"-"}</span></td><td>${r.Reach||r.Range||"-"}</td><td>${formatTags(r.Ammo||r.Tags||"-")}</td><td class="text-slate-400 text-xs italic">${r.Description||""}</td></tr>`).join("");
+                };
+                if(data.weapons) { fill("m1", data.weapons.m1); fill("m2", data.weapons.m2); fill("m3", data.weapons.m3); fill("r1", data.weapons.r1); fill("r2", data.weapons.r2); fill("f1", data.weapons.f1); fill("f2", data.weapons.f2); }
+                if(data.armor) fill("armor", [...(data.armor.a1||[]), ...(data.armor.a2||[]), ...(data.armor.a3||[])]);
+                if(data.shields) fill("shields", data.shields.ss);
+            } catch(e) {}
+
+            // Crafting (Recipes)
+            try {
+                const res = await fetch('../json/crafting.json');
+                const data = await res.json();
+                document.getElementById("crafting-recipes").innerHTML = (data.recipes||[]).map(r => `<tr class="row" data-tier="${r.tier}"><td class="font-bold text-white">${r.name}</td><td><span class="text-xs bg-slate-800 px-2 py-1 rounded border border-slate-700">${r.tier}</span></td><td>${r.category}</td><td class="text-xs">${(r.components||[]).join(", ")}</td><td class="text-slate-400 italic">${r.effect}</td></tr>`).join("");
+                document.getElementById("craft-components").innerHTML = (data.components||[]).map(c => `<tr class="row"><td class="font-bold text-white">${c.name}</td><td>${c.category}</td><td class="text-slate-400 italic">${c.notes||""}</td></tr>`).join("");
+            } catch(e) {}
+
+            try {
+                const res = await fetch('../json/artisan.json');
+                const data = await res.json();
+                const rawArtisan = data.filter(item => item.Cost != 0);
+                const sArtisanCrafts = rawArtisan.filter(i => i.Cost != 0);
+
+                document.getElementById('artisan-crafts-body').innerHTML = sArtisanCrafts.length ? sArtisanCrafts.map((item, i) => createArtisanRow(item, i, 'craft')).join('') : '<tr><td colspan="4" class="p-6 text-center text-slate-600 italic">No crafts found.</td></tr>';
+
+            } catch(e) { console.error("Error loading artisan items", e); }
+
+            // Brewing
+            try {
+                const res = await fetch('../json/brewing.json');
+                const data = await res.json();
+                document.getElementById("brew-outcomes").innerHTML = (data.bitcodes||[]).map(b => `<tr class="row"><td class="font-mono text-indigo-400 font-bold">${b.code}</td><td class="font-bold text-white">${b.name}</td>${(b.effects||[]).map(e=>`<td class="text-slate-400 text-xs">${e}</td>`).join("")}</tr>`).join("");
+                document.getElementById("brew-ingredients").innerHTML = (data.ingredients||[]).map(i => `<tr class="row"><td class="font-bold text-white">${i.name}</td><td><span class="tag-badge">${i.aspect}</span></td><td class="font-mono text-emerald-300">${i.value}</td><td>Tier ${i.tier}</td></tr>`).join("");
+            } catch(e) {}
+        }
+
+        // Brewing Calculator
+        document.addEventListener("input", (e) => {
+            if(["brewBitcode", "brewDisparityInput", "brewTier"].includes(e.target.id)) {
+                const bits = (document.getElementById("brewBitcode").value.match(/1/g)||[]).length;
+                const disp = parseInt(document.getElementById("brewDisparityInput").value||0);
+                const tier = parseInt(document.getElementById("brewTier").value||1);
+                document.getElementById("brewDCResult").textContent = 6 + bits + disp + (tier - 1);
+            }
+        });
+        
+        // Crafting Filter
+        function filterCrafting() {
+            const val = document.getElementById('tierFilter').value;
+            document.querySelectorAll('#crafting-recipes tr').forEach(row => {
+                row.style.display = (val === 'all' || row.dataset.tier === val) ? 'table-row' : 'none';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+    <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
+</body>
+</html>

@@ -1,0 +1,438 @@
+{
+  "aspects": ["Vital", "Toxic", "Charging", "Arcane", "Wrathful"],
+
+  "formula": {
+    "aspectTotals": "Sum ingredient aspect values per required aspect",
+    "disparity": "Sum of differences between highest aspect total and all others",
+    "tierRule": "Highest tier shared by majority of ingredients; ties use highest",
+    "dc": "6 + BITS + DISPARITY + (Tier - 1)"
+  },
+
+  "bitcodes": [
+    {
+      "code": "00000",
+      "name": "Null Draught",
+      "effects": ["No effect", "No effect", "No effect", "No effect"]
+    },
+    {
+      "code": "00001",
+      "name": "Wrathful Tonic",
+      "effects": [
+        "+1 melee damage",
+        "+2 melee damage",
+        "+3 melee damage",
+        "+3 melee damage & +1 accuracy"
+      ]
+    },
+    {
+      "code": "00010",
+      "name": "Arcane Spirit",
+      "effects": [
+        "Restore 1 mana",
+        "Restore 2 mana",
+        "Restore 3 mana",
+        "Restore 3 mana & next spell costs 0 mana"
+      ]
+    },
+    {
+      "code": "00011",
+      "name": "Spellblade Elixir",
+      "effects": [
+        "Next melee attack gains +1 magic damage",
+        "Next melee attack gains +2 magic damage",
+        "Next melee attack gains +3 magic damage",
+        "+3 magic damage & attack gains spell-effect"
+      ]
+    },
+    {
+      "code": "00100",
+      "name": "Charging Serum",
+      "effects": [
+        "+2 movement",
+        "+3 movement",
+        "+4 movement",
+        "+4 movement & +1 action"
+      ]
+    },
+    {
+      "code": "00101",
+      "name": "Battle Rush Serum",
+      "effects": [
+        "+1 action & +1 melee damage",
+        "+1 action & +2 melee damage",
+        "+1 action & +3 melee damage",
+        "+2 actions & +3 melee damage"
+      ]
+    },
+    {
+      "code": "00110",
+      "name": "Spell Acceleration Draught",
+      "effects": [
+        "Next spell is a free action",
+        "Next 2 spells cost –1 action",
+        "Next spell is free & restore 1 mana",
+        "Next 2 spells are free"
+      ]
+    },
+    {
+      "code": "00111",
+      "name": "Spellblade Overdrive",
+      "effects": [
+        "+2 magic damage, free attack",
+        "+3 magic damage, free attack",
+        "+4 magic damage, free attack",
+        "Free attack, chains into second strike"
+      ]
+    },
+    {
+      "code": "01000",
+      "name": "Toxic Brew",
+      "effects": [
+        "Apply Weaken (–2 offense)",
+        "–3 enemy offense",
+        "–4 enemy offense",
+        "–4 offense & target loses 1 action"
+      ]
+    },
+    {
+      "code": "01001",
+      "name": "Bloodfury Brew",
+      "effects": [
+        "+2 melee damage, take 1 Harm",
+        "+3 melee damage, take 1 Harm",
+        "+4 melee damage, take 2 Harm",
+        "+4 melee damage & attacks apply –1 defense"
+      ]
+    },
+    {
+      "code": "01010",
+      "name": "Mana Rot Elixir",
+      "effects": [
+        "Next enemy spell costs +1 mana",
+        "Next 2 enemy spells cost +1 mana",
+        "Next enemy spell costs +2 mana",
+        "Target cannot cast next spell"
+      ]
+    },
+    {
+      "code": "01011",
+      "name": "Corrupted Spellblade",
+      "effects": [
+        "Next melee hit drains 1 mana",
+        "Next melee hit drains 2 mana",
+        "Drain 2 mana & apply –1 accuracy",
+        "Drain 3 mana & disable next spell"
+      ]
+    },
+    {
+      "code": "01100",
+      "name": "Viral Momentum Brew",
+      "effects": [
+        "Target loses 1 action",
+        "Target loses 1 action & –1 defense",
+        "Target loses 2 actions",
+        "Target loses all actions this round"
+      ]
+    },
+    {
+      "code": "01101",
+      "name": "Bloodrush Venom",
+      "effects": [
+        "+1 action & +1 melee damage, take 1 Harm",
+        "+1 action & +2 melee damage, take 1 Harm",
+        "+1 action & +3 melee damage, take 2 Harm",
+        "+2 actions & +3 melee damage"
+      ]
+    },
+    {
+      "code": "01110",
+      "name": "Corrupted Acceleration",
+      "effects": [
+        "Next spell causes target to lose 1 action",
+        "Next 2 spells cause target to lose 1 action",
+        "Next spell disables an action & drains 1 mana",
+        "Next spell stuns target for 1 round"
+      ]
+    },
+    {
+      "code": "01111",
+      "name": "Plagueblade Overdrive",
+      "effects": [
+        "+2 magic damage & target loses 1 action",
+        "+3 magic damage & target loses 1 action",
+        "+4 magic damage & target loses 2 actions",
+        "Free attack, drain 1 mana, target loses 2 actions"
+      ]
+    },
+    {
+      "code": "10000",
+      "name": "Vital Tonic",
+      "effects": [
+        "Restore 1 Harm",
+        "Restore 2 Harm",
+        "Restore 3 Harm & gain 2 guard",
+        "Restore 4 Harm & gain 3 guard"
+      ]
+    },
+    {
+      "code": "10001",
+      "name": "Vital Wrath Elixir",
+      "effects": [
+        "Restore 4 Harm & +1 melee damage",
+        "Restore 6 Harm & +1 melee damage",
+        "Restore 8 Harm & +2 melee damage",
+        "Restore 8 Harm & next attack deals +4 damage"
+      ]
+    },
+    {
+      "code": "10010",
+      "name": "Vital Arcane Draught",
+      "effects": [
+        "Restore 4 Harm & 1 mana",
+        "Restore 6 Harm & 2 mana",
+        "Restore 8 Harm & 2 mana",
+        "Restore 8 Harm, 3 mana & next spell has +1 potency"
+      ]
+    },
+    {
+      "code": "10011",
+      "name": "Mystic Spellblade",
+      "effects": [
+        "Restore 2 Harm & +2 magic damage",
+        "Restore 3 Harm & +3 magic damage",
+        "Restore 4 Harm & +4 magic damage",
+        "Restore 4 Harm, +4 magic damage & next spell free"
+      ]
+    },
+    {
+      "code": "10100",
+      "name": "Vital Charging Serum",
+      "effects": [
+        "Restore 4 Harm & +1 action",
+        "Restore 6 Harm & +1 action",
+        "Restore 8 Harm & +1 action",
+        "Restore 8 Harm & +2 actions"
+      ]
+    },
+    {
+      "code": "10101",
+      "name": "Vital Chargeblade",
+      "effects": [
+        "+1 action & next melee hit restores 2 Harm",
+        "+1 action & next melee hit restores 3 Harm",
+        "+1 action & next melee hit restores 4 Harm",
+        "+2 actions & next melee hit restores 4 Harm"
+      ]
+    },
+    {
+      "code": "10110",
+      "name": "Vital Spell Acceleration",
+      "effects": [
+        "Restore 2 Harm; next spell is free",
+        "Restore 3 Harm; next spell is free & +1 potency",
+        "Restore 4 Harm; next 2 spells cost –1 action",
+        "Restore 4 Harm; next 2 spells are free"
+      ]
+    },
+    {
+      "code": "10111",
+      "name": "Celestial Spellblade",
+      "effects": [
+        "+2 magic damage & heal 2 Harm",
+        "+3 magic damage & heal 3 Harm",
+        "+4 magic damage & heal 4 Harm",
+        "Free attack, +4 magic damage, heal 4 Harm, next spell free"
+      ]
+    },
+    {
+      "code": "11000",
+      "name": "Vital Toxic Tonic",
+      "effects": [
+        "Restore 2 Harm & remove 1 condition",
+        "Restore 3 Harm & remove 1 condition",
+        "Restore 4 Harm & remove 2 conditions",
+        "Restore 4 Harm, remove 2 conditions & gain +1 armor"
+      ]
+    },
+    {
+      "code": "11001",
+      "name": "Purging Fury Tonic",
+      "effects": [
+        "Remove 1 condition & +1 melee damage",
+        "Remove 1 condition & +2 melee damage",
+        "Remove 2 conditions & +2 melee damage",
+        "Remove 2 conditions & next attack gains +4 damage"
+      ]
+    },
+    {
+      "code": "11010",
+      "name": "Purging Arcana Elixir",
+      "effects": [
+        "Remove 1 condition & restore 1 mana",
+        "Remove 1 condition & restore 2 mana",
+        "Remove 2 conditions & restore 2 mana",
+        "Remove 2 conditions & next spell has +1 potency"
+      ]
+    },
+    {
+      "code": "11011",
+      "name": "Purified Spellblade",
+      "effects": [
+        "Remove 1 condition & +2 magic damage",
+        "Remove 1 condition & +3 magic damage",
+        "Remove 2 conditions & +3 magic damage",
+        "Remove 2 conditions & next attack chains once"
+      ]
+    },
+    {
+      "code": "11100",
+      "name": "Purging Charge",
+      "effects": [
+        "Remove 1 condition & +1 action",
+        "Remove 1 condition, +1 action & +1 movement",
+        "Remove 2 conditions & +1 action",
+        "Remove 2 conditions & +2 actions"
+      ]
+    },
+    {
+      "code": "11101",
+      "name": "Cleansing Chargeblade",
+      "effects": [
+        "+1 action & next melee hit removes 1 condition",
+        "+1 action & next melee hit removes 1 condition",
+        "+1 action & next melee hit removes 2 conditions",
+        "+2 actions & next melee hit removes 2 conditions"
+      ]
+    },
+    {
+      "code": "11110",
+      "name": "Purging Spell Acceleration",
+      "effects": [
+        "Remove 1 condition & next spell is free",
+        "Remove 1 condition & next 2 spells cost –1 action",
+        "Remove 2 conditions & next spell is free",
+        "Remove 2 conditions & next 2 spells are free"
+      ]
+    },
+    {
+      "code": "11111",
+      "name": "Ascendant Purgeblade",
+      "effects": [
+        "+2 magic damage & remove 1 condition",
+        "+3 magic damage & remove 1 condition",
+        "+4 magic damage & remove 2 conditions",
+        "Free attack, +4 damage, remove 2 conditions, next spell free"
+      ]
+    }
+  ],
+
+  "ingredients": [
+    { "name": "Vitalis Moss", "aspect": "Vital", "value": 6, "tier": 1 },
+    { "name": "Brightleaf", "aspect": "Vital", "value": 3, "tier": 1 },
+    { "name": "Sunpetal", "aspect": "Vital", "value": 8, "tier": 2 },
+    { "name": "Lifewater Crystal", "aspect": "Vital", "value": 10, "tier": 3 },
+    { "name": "Dewvine", "aspect": "Vital", "value": 5, "tier": 1 },
+    { "name": "Heartroot", "aspect": "Vital", "value": 7, "tier": 2 },
+    { "name": "Aurora Lotus", "aspect": "Vital", "value": 9, "tier": 3 },
+    { "name": "Sanctum Pearl", "aspect": "Vital", "value": 10, "tier": 4 },
+
+    { "name": "Toxic Fungus", "aspect": "Toxic", "value": 3, "tier": 1 },
+    { "name": "Rotcap", "aspect": "Toxic", "value": 6, "tier": 2 },
+    { "name": "Venom Gland", "aspect": "Toxic", "value": 9, "tier": 3 },
+    { "name": "Blight Resin", "aspect": "Toxic", "value": 10, "tier": 4 },
+    { "name": "Decay Pollen", "aspect": "Toxic", "value": 4, "tier": 1 },
+    { "name": "Gravecrawler Ichor", "aspect": "Toxic", "value": 7, "tier": 2 },
+    { "name": "Nightbane Leaf", "aspect": "Toxic", "value": 8, "tier": 3 },
+    { "name": "Abyssal Toxin", "aspect": "Toxic", "value": 10, "tier": 4 },
+
+    { "name": "Swiftthorn", "aspect": "Charging", "value": 4, "tier": 1 },
+    { "name": "Lightning Beetle Core", "aspect": "Charging", "value": 7, "tier": 2 },
+    { "name": "Hastebloom", "aspect": "Charging", "value": 9, "tier": 3 },
+    { "name": "Stormgrain", "aspect": "Charging", "value": 10, "tier": 4 },
+    { "name": "Sparkfruit", "aspect": "Charging", "value": 5, "tier": 1 },
+    { "name": "Blitz Crystal", "aspect": "Charging", "value": 6, "tier": 2 },
+    { "name": "Velocity Sap", "aspect": "Charging", "value": 8, "tier": 3 },
+    { "name": "Tempest Feather", "aspect": "Charging", "value": 10, "tier": 4 },
+
+    { "name": "Mana Bud", "aspect": "Arcane", "value": 4, "tier": 1 },
+    { "name": "Astral Bud", "aspect": "Arcane", "value": 6, "tier": 2 },
+    { "name": "Spellroot", "aspect": "Arcane", "value": 8, "tier": 3 },
+    { "name": "Null Shard", "aspect": "Arcane", "value": 10, "tier": 4 },
+    { "name": "Runic Leaf", "aspect": "Arcane", "value": 5, "tier": 1 },
+    { "name": "Glimmerstone", "aspect": "Arcane", "value": 7, "tier": 2 },
+    { "name": "Ether Bloom", "aspect": "Arcane", "value": 9, "tier": 3 },
+    { "name": "Soulglass Fragment", "aspect": "Arcane", "value": 10, "tier": 4 },
+
+    { "name": "Berserker Root", "aspect": "Wrathful", "value": 5, "tier": 1 },
+    { "name": "Rage Pepper", "aspect": "Wrathful", "value": 7, "tier": 2 },
+    { "name": "Ironhide Bark", "aspect": "Wrathful", "value": 9, "tier": 3 },
+    { "name": "War-fiend Horn", "aspect": "Wrathful", "value": 10, "tier": 4 },
+    { "name": "Crusher Seed", "aspect": "Wrathful", "value": 4, "tier": 1 },
+    { "name": "Titan Stem", "aspect": "Wrathful", "value": 6, "tier": 2 },
+    { "name": "Bloodforge Ore", "aspect": "Wrathful", "value": 8, "tier": 3 },
+    { "name": "Fury Core", "aspect": "Wrathful", "value": 10, "tier": 4 }
+  ],
+
+  "compoundIngredients": [
+    {
+      "name": "Blight Orchid",
+      "aspects": ["Vital", "Toxic"],
+      "values": [4, 6],
+      "tier": 2
+    },
+    {
+      "name": "Stormvine",
+      "aspects": ["Charging", "Vital"],
+      "values": [6, 4],
+      "tier": 2
+    },
+    {
+      "name": "Embercap",
+      "aspects": ["Wrathful", "Arcane"],
+      "values": [6, 6],
+      "tier": 2
+    },
+    {
+      "name": "Galebloom",
+      "aspects": ["Charging", "Wrathful"],
+      "values": [5, 5],
+      "tier": 2
+    },
+    {
+      "name": "Moonshadow Root",
+      "aspects": ["Toxic", "Arcane"],
+      "values": [5, 7],
+      "tier": 3
+    },
+    {
+      "name": "Soulthorn",
+      "aspects": ["Arcane", "Vital"],
+      "values": [5, 8],
+      "tier": 3
+    },
+    {
+      "name": "Thunder Bloom",
+      "aspects": ["Charging", "Arcane"],
+      "values": [7, 8],
+      "tier": 3
+    },
+    {
+      "name": "Bloodvine",
+      "aspects": ["Wrathful", "Toxic"],
+      "values": [6, 7],
+      "tier": 3
+    },
+    {
+      "name": "Aetherleaf",
+      "aspects": ["Vital", "Arcane"],
+      "values": [9, 9],
+      "tier": 4
+    },
+    {
+      "name": "Voidshard",
+      "aspects": ["Arcane", "Toxic"],
+      "values": [10, 8],
+      "tier": 4
+    }
+  ]
+}

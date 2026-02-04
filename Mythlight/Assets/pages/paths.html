@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mythlight RPG | Paths</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/svg+xml" href="../img/logo.png">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="bg-custom-dark text-slate-300">
+
+  <div id="navbar-placeholder"></div>
+  
+  <main class="pt-32 pb-20 px-6 max-w-5xl mx-auto">
+
+    <div class="mb-10 text-center">
+      <h1 class="text-5xl font-bold text-white mb-3">Paths</h1>
+      <p class="text-indigo-300">The discipline, philosophy, or calling that defines how you fight and grow.</p>
+    </div>
+
+    <div class="mb-10 max-w-xl mx-auto">
+      <div class="relative">
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">🔍</span>
+        <input
+          id="pathSearch"
+          type="text"
+          placeholder="Search paths..."
+          class="w-full px-11 py-3 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+        >
+        <button id="pathSearchClear" type="button" class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-200" onclick="clearPathSearch()">✕</button>
+      </div>
+    </div>
+
+    <div id="content" class="space-y-8">
+      <div class="text-center py-12 text-slate-500 animate-pulse">Summoning archives...</div>
+    </div>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    // 1. Fetch Paths JSON from ../json/
+    fetch('../json/paths.json')
+      .then(r => {
+        if (!r.ok) throw new Error('Failed to load paths.json from ../json/');
+        return r.json();
+      })
+      .then(data => {
+        const container = document.getElementById('content');
+        container.innerHTML = '';
+
+        // Handle both { paths: [] } and straight [] formats
+        const pathsList = data.paths || data;
+
+        pathsList.forEach(path => {
+          const card = document.createElement('section');
+          card.className = 'rule-card relative overflow-hidden group p-8 bg-slate-900/40 rounded-3xl border border-slate-800 shadow-xl transition-all hover:border-indigo-500/30';
+
+          card.innerHTML = `
+            <div class="absolute top-0 left-0 w-1 h-full bg-indigo-500 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+            
+            <span class="text-xs font-black bg-${path.source_color}-600 text-white px-2 py-0.5 rounded">${path.source}</span><h2 class="text-3xl text-white font-bold mb-2">${path.name}</h2>
+            <p class="italic text-indigo-300 mb-6 text-sm">${path.summary}</p>
+            <div class="space-y-4 text-slate-300 mb-8 leading-relaxed">
+                            ${path.description}
+                        </div>
+            <div class="mb-6">
+              <h3 class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-3 border-b border-slate-800 pb-1">Path Bonuses</h3>
+              <div class="flex flex-wrap gap-2">
+                ${path.bonuses.map(b => `
+                  <span class="px-3 py-1 rounded-md bg-slate-900/80 border border-slate-700 text-xs font-mono text-indigo-200">
+                    ${b}
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="bg-slate-800/20 border border-slate-700/50 rounded-xl p-5 hover:bg-slate-800/40 transition-colors">
+              <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-3">
+                <div class="flex items-center gap-3">
+                    
+                    <strong class="text-xl text-white font-serif">${path.feature.Name}</strong>
+                </div>
+                <div class="flex flex-wrap gap-2 text-[10px] uppercase tracking-wider font-bold">
+                  ${path.feature.Action ? `<span class="px-2 py-1 bg-indigo-900/40 border border-indigo-500/20 rounded text-indigo-300">Action: ${path.feature.Action}</span>` : ''}
+                  ${path.feature.Cost ? `<span class="px-2 py-1 bg-purple-900/40 border border-purple-500/20 rounded text-purple-300">Type: ${path.feature.Cost}</span>` : ''}
+                  ${path.feature.Parameters ? `<span class="px-2 py-1 bg-slate-700/40 border border-slate-600/20 rounded text-slate-300">${path.feature.Parameters}</span>` : ''}
+                </div>
+              </div>
+              ${path.feature.Symbols ? `<div class="text-xs text-yellow-500 mb-3 font-mono tracking-tighter">${path.feature.Symbols}</div>` : ''}
+              <p class="text-sm text-slate-400 leading-relaxed">${path.feature.Description}</p>
+            </div>
+          `;
+
+          container.appendChild(card);
+        });
+      })
+      .catch(err => {
+        document.getElementById('content').innerHTML = `
+            <div class="bg-red-900/20 border border-red-500/50 p-6 rounded-xl text-center">
+                <p class="text-red-400 font-bold">Arcane Error</p>
+                <p class="text-xs text-red-300/60 mt-1">${err.message}</p>
+            </div>
+        `;
+      });
+
+    // 2. Search Functionality
+    function togglePathClear() {
+      const input = document.getElementById('pathSearch');
+      const clearBtn = document.getElementById('pathSearchClear');
+      if (!input || !clearBtn) return;
+      clearBtn.classList.toggle('hidden', !input.value);
+    }
+
+    function clearPathSearch() {
+      const input = document.getElementById('pathSearch');
+      if (!input) return;
+      input.value = '';
+      togglePathClear();
+      const event = new Event('input');
+      input.dispatchEvent(event);
+    }
+
+    document.getElementById('pathSearch').addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('#content section').forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(q) ? '' : 'none';
+      });
+      togglePathClear();
+    });
+  </script>
+  <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
+
+</body>
+</html>

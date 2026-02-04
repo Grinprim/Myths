@@ -1,0 +1,691 @@
+{
+  "paths": [
+    {
+      "id": "warlord",
+      "name": "Path of the Warlord",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Victory is seized through command and unshakable fury.",
+      "description": "It's not brutality, it's a calculated risk. You guide your allies with ferocity, into battle no matter how unwinnable. And you always work to come out on top.",
+      "bonuses": [
+        "Athletics +1",
+        "Intimidation +1"
+      ],
+      "feature": {
+        "Name": "Commanding Presence",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "Allies within 2 tiles gain +1 Accuracy and +1 Damage. When you drop an enemy to 0 Health, all nearby allies gain +2 Accuracy for 1 turn."
+      }
+    },
+    {
+      "id": "duelist",
+      "name": "Path of the Duelist",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "A blade perfected through grace, patience, and lethal precision.",
+      "description": "A Duel is the most honorable of fights, one on one and to the death. You fight with grit and determination to strike down the foe standing across you. One blade, one strike, one kill.",
+      "bonuses": [
+        "Reflex +1",
+        "Finesse +1"
+      ],
+      "feature": {
+        "Name": "Perfect Form",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "When wielding a single one-handed weapon, gain +2 Accuracy and +1 Damage. If you hit without being hit that round, regain 1 Health."
+      }
+    },
+    {
+      "id": "bloodmage",
+      "name": "Path of the Bloodmage",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Power carved from flesh and paid for in blood.",
+      "description": "Your body's limits are merely suggestions, push past what is there, break it and reform it, that is your right. Blood is fuel for your magic, and your body will not resist.",
+      "bonuses": [
+        "Fortitude +1",
+        "Scholarship +1"
+      ],
+      "feature": {
+        "Name": "Sanguine Casting",
+        "Action": "⬖",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 3] | 3 [lvl 6] | 4 [lvl 9]",
+        "Parameters": "",
+        "Description": "Spend up to your level Health to add that much Damage or Healing to your next spell. If the spell kills an enemy, regain half the Health spent."
+      }
+    },
+    {
+      "id": "stormsinger",
+      "name": "Path of the Stormsinger",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Lightning answers your song.",
+      "description": "The song of the heavens calls to you, the rumble, crackle and pop of lightning. Electricity courses through your voice, breaking the air you speak through.",
+      "bonuses": [
+        "Performance +1",
+        "Aim +1"
+      ],
+      "feature": {
+        "Name": "Voice of Thunder",
+        "Action": "⭘",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 3] | 3 [lvl 6] | 4 [lvl 9]",
+        "Parameters": "",
+        "Description": "Cast a Lightning spell as if it were one level higher. Lightning spells deal 1 Damage targets wthin 2 units of the target."
+      }
+    },
+    {
+      "id": "beastcaller",
+      "name": "Path of the Beastcaller",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "The wild answers your call.",
+      "description": "Nature is an extension of your body, the creatures who roam it are as much you as you are. You call upon your own pack, you command them, you are the alpha.",
+      "bonuses": [
+        "Insight +1",
+        "Athletics +1"
+      ],
+      "feature": {
+        "Name": "Alpha Bond",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "You may control two animal companions simultaneously. Their attacks deal +1 Damage, and both gain +2 Accuracy when within 3 tiles of you."
+      }
+    },
+    {
+      "id": "wanderer",
+      "name": "Path of the Wanderer",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "The road itself is your home.",
+      "description": "You have traveled, and will keep traveling, there is no path you will not take, no place you will not see. Forever traveling, forever going, that is your calling.",
+      "bonuses": [
+        "Reflex +1",
+        "Fortitude +1"
+      ],
+      "feature": {
+        "Name": "Unbound Traveler",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "You cannot be ambushed. Movement speed +1 tile; after every combat, recover 3 Health and 3 Mana."
+      }
+    },
+    {
+      "id": "shadowblade",
+      "name": "Path of the Shadowblade",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "The perfect strike leaves no witness.",
+      "description": "Shadowblades strike from darkness, eliminating targets before they can react. Within the darkness they find their strength, waiting for the perfect time to strike.",
+      "bonuses": [
+        "Finesse +1",
+        "Stealth +1"
+      ],
+      "feature": {
+        "Name": "Silent Execution",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "While hidden, your first attack deals +2 Damage. While in darkness or dim light, you are considered hidden."
+      }
+    },
+    {
+      "id": "silver_tongue",
+      "name": "Path of the Silver Tongue",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Words carve deeper than steel.",
+      "description": "You speak such sweet words, people hang on your every word. Such fluent speech is bound to draw even the ones most opposed to you to your side.",
+      "bonuses": [
+        "Persuasion +1",
+        "Scholarship +1"
+      ],
+      "feature": {
+        "Name": "Master Manipulator",
+        "Action": "⬖",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 3] | 3 [lvl 6] | 4 [lvl 9]",
+        "Parameters": "",
+        "Description": "Attempt to Charm one intelligent creature for 3 turns, they must roll [Insight] vs [6 + Your Persuasion] to resist. Outside combat, you have advantage on negotiations and deals."
+      }
+    },
+    {
+      "id": "juggernaut",
+      "name": "Path of the Juggernaut",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "An avalanche given form.",
+      "description": "You are a living siege engine, advancing through pain and resistance without slowing. The more wounded they become, the harder they are to stop.",
+      "bonuses": [
+        "Fortitude +2"
+      ],
+      "feature": {
+        "Name": "Unstoppable Mass",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "Gain +2 Armor and +1 Damage when below half Health. You cannot be knocked prone or forcibly moved."
+      }
+    },
+    {
+      "id": "pyromancer",
+      "name": "Path of the Pyromancer",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Creation through flame.",
+      "description": "Heat and flame, they are to you as your own soul. You emit a burning presence, scorching the very earth you tread.",
+      "bonuses": [
+        "Scholarship +1",
+        "Reflex +1"
+      ],
+      "feature": {
+        "Name": "Living Flame",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "Damage X:+1 [lvl 1] | +2 [lvl 6] | +3 [lvl 12]",
+        "Parameters": "",
+        "Description": "Fire spells deal +X Damage, you gain resistance to the Burn Condition."
+      }
+    },
+    {
+      "id": "frostwarden",
+      "name": "Path of the Frostwarden",
+      "source": "CORE",
+      "summary": "The stillness of the glacier’s heart.",
+      "description": "Oh the stillness of ice, the frost that burns your flesh with its seething cold. They will not move unless you permit it.",
+      "bonuses": [
+        "Fortitude +1",
+        "Insight +1"
+      ],
+      "feature": {
+        "Name": "Glacial Guard",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "Armor X:+1 [lvl 1] | +2 [lvl 6] | +3 [lvl 12]",
+        "Parameters": "",
+        "Description": "Ice abilities Slow by 2 and grant you +X Armor for 1 turn per cast."
+      }
+    },
+    {
+      "id": "revenant",
+      "name": "Path of the Revenant",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Death obeys.",
+      "description": "You refuse to fall, fueled by stubborn will and defiance of death itself. Each return from the brink makes you deadlier and harder to finish.",
+      "bonuses": [
+        "Fortitude +1",
+        "Intimidation +1"
+      ],
+      "feature": {
+        "Name": "Undying Will",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "Damage X:+1 [lvl 1] | +2 [lvl 3] | +3 [lvl 6] | +4 [lvl 9]",
+        "Parameters": "",
+        "Description": "When reduced to 0 Health, lose Half your Max Health until your next rest and stand back up with Full Health. You perish if your maximum reaches 0. The first time this triggers each combat gain +X Damage."
+      }
+    },
+    {
+      "id": "shepherd",
+      "name": "Path of the Shepherd",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Strength measured in protection.",
+      "description": "You command your flock, those who follow you, those who stand beside you. Keep them safe, heal their aches. Bring them peace.",
+      "bonuses": [
+        "Persuasion +1",
+        "Insight +1"
+      ],
+      "feature": {
+        "Name": "Guardian’s Call",
+        "Action": "⬖",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 3] | 3 [lvl 6] | 4 [lvl 9]",
+        "Parameters": "",
+        "Description": "Heal all allies within 2 tiles for [Your Level] Health. Uppon activation, gain +1 Armor and +1 Reflex until your next turn."
+      }
+    },
+    {
+      "id": "seer",
+      "name": "Path of the Seer",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "You read the future like a flickering map.",
+      "description": "Glimpses of all possibilities flashing by, flowing from one second to another, what could possibly happen next? Doesn’t matter if you already know.",
+      "bonuses": [
+        "Insight +1",
+        "Scholarship +1"
+      ],
+      "feature": {
+        "Name": "Foresight",
+        "Action": "⬖",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 3] | 3 [lvl 6] | 4 [lvl 9]",
+        "Parameters": "",
+        "Description": "Predict the next attack or spell within 6 tiles. You or a chosen ally gain +4 Reflex/Armor against it."
+      }
+    },
+    {
+      "id": "chronomancer",
+      "name": "Path of the Chronomancer",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "You pull at the seams of time.",
+      "description": "The fabric of reality unfolds at your finger tips, it reverberates like waves through time. It all makes sense to you, infinities upon infinities, at your grasp.",
+      "bonuses": [
+        "Arcana +1",
+        "Reflex +1"
+      ],
+      "feature": {
+        "Name": "Temporal Surge",
+        "Action": "⭘",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 6] | 3 [lvl 12]",
+        "Parameters": "",
+        "Description": "Take an additional action this turn. Gain 1 Fatigue at the end of combat."
+      }
+    },
+    {
+      "id": "executioner",
+      "name": "Path of the Executioner",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "You bring the inevitable end.",
+      "description": "End them all, bring ruin and death to those who dare stand in your way. Be the executioner, be their final moment.",
+      "bonuses": [
+        "Intimidation +1",
+        "Spellcraft +1"
+      ],
+      "feature": {
+        "Name": "Inevitable End",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "Deal +2 Damage to targets below half Health. When you kill an enemy, nearby foes suffer –2 Accuracy for 1 turn."
+      }
+    },
+    {
+      "id": "veteran",
+      "name": "Path of the Veteran",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Wisdom carved into scar tissue.",
+      "description": "Your knowledge is vast, you have fought many battles, leaving scars all over your flesh. But these scars carry more than pain, they carry experience.",
+      "bonuses": [
+        "Fortitude +1",
+        "Insight +1"
+      ],
+      "feature": {
+        "Name": "Battle-Hardened",
+        "Action": "⭘",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 6] | 3 [lvl 12]",
+        "Parameters": "",
+        "Description": "Reroll one failed attack or defense roll. When an ally nearby fails an attack, they gain +2 Accuracy on their next strike."
+      }
+    },
+    {
+      "id": "artisan",
+      "name": "Path of the Artisan",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Creation is your weapon.",
+      "description": "Your hands blister, you're covered in wood dust and oils. No matter, it is all worth it in the end, your crafts will carry your name louder than any words ever could.",
+      "bonuses": [
+        "Tinkering +1",
+        "Scholarship +1"
+      ],
+      "feature": {
+        "Name": "Master Crafter",
+        "Action": "⭘",
+        "Cost": "☀",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "Repair or create simple crafts freely (No rolls required). During rest you may imbue 1 item with +1 Damage or +1 Armor until your next rest."
+      }
+    },
+    {
+      "id": "hunter",
+      "name": "Path of the Hunter",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "You strike before fear sets in.",
+      "description": "The smell is unmistakeable, your prey is near, rushing from bush to tree top you see it. It lays unaware of your presence, just how you like it.",
+      "bonuses": [
+        "Finesse +1",
+        "Aim +1"
+      ],
+      "feature": {
+        "Name": "Predator’s Edge",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "The first attack against an ambushed or taunted target deals +2 Damage. Ignore movement penalties from rough terrain."
+      }
+    },
+    {
+      "id": "miner",
+      "name": "Path of the Miner",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Stone knows your name.",
+      "description": "Hard work is your blood and soul. You dig and dig to find the beauty from within the earth itself. It's almost comforting, being so deep under the soil others call home.",
+      "bonuses": [
+        "Athletics +1",
+        "Fortitude +1"
+      ],
+      "feature": {
+        "Name": "Deep Delver",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "Gain +2 Armor underground or in darkness. Blunt weapons deal +1 Damage and ignore 1 Armor."
+      }
+    },
+
+
+
+
+
+
+
+    
+    {
+      "id": "voidwalker",
+      "name": "Path of the Voidwalker",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "You step where reality thins.",
+      "description": "Space bends willingly around you. Distance is a suggestion, obstacles a delay at best. You walk the gaps between moments, unseen and untouched.",
+      "bonuses": [
+        "Reflex +1",
+        "Arcana +1"
+      ],
+      "feature": {
+        "Name": "Phase Slip",
+        "Action": "⬖",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 6] | 3 [lvl 12]",
+        "Parameters": "",
+        "Description": "Teleport up to 4 tiles. Attacks against you have –2 Accuracy until your next turn."
+      }
+    },
+    {
+      "id": "battlesinger",
+      "name": "Path of the Battlesinger",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "War carried on rhythm and breath.",
+      "description": "Your voice cuts through steel and fear alike. Every strike lands in time, every step part of the greater song of battle.",
+      "bonuses": [
+        "Performance +1",
+        "Finesse +1"
+      ],
+      "feature": {
+        "Name": "War Chorus",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "After Attacking or Casting each turn, allies within 2 tiles gain +1 Damage on their next Attack. If an ally downs an enemy, regain 1 Mana."
+      }
+    },
+    {
+      "id": "ironwarden",
+      "name": "Path of the Ironwarden",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Hold the line. No matter the cost.",
+      "description": "You are the wall others shelter behind. Blades dull against you, spells break, and still you do not yield.",
+      "bonuses": [
+        "Fortitude +1",
+        "Brawn +1"
+      ],
+      "feature": {
+        "Name": "Immovable Guard",
+        "Action": "◇",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "While adjacent to an ally, you may redirect one attack against them to yourself. Gain +2 Armor when doing so."
+      }
+    },
+    {
+      "id": "hexweaver",
+      "name": "Path of the Hexweaver",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Every word a wound.",
+      "description": "You lace misfortune into your magic, pulling at threads unseen. What remains for those that oppose you is not but sorrow.",
+      "bonuses": [
+        "Spellcraft +1",
+        "Insight +1"
+      ],
+      "feature": {
+        "Name": "Lingering Hex",
+        "Action": "⬖",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 6] | 3 [lvl 12]",
+        "Parameters": "",
+        "Description": "You impose a curse on a creature, they must roll [Fortitude] resisting [6+ Your Spellcraft]. On a failure they suffer -2 Accuracy and -1 Damage for 2 Scenes."
+      }
+    },
+    {
+      "id": "skirmisher",
+      "name": "Path of the Skirmisher",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Never where they expect you.",
+      "description": "You strike, vanish, and strike again. The battlefield is yours to dance across, every opening exploited before it closes.",
+      "bonuses": [
+        "Reflex +1",
+        "Aim +1"
+      ],
+      "feature": {
+        "Name": "Hit and Fade",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "After making an attack, you may move 2 tiles without provoking melee attacks. If you change elevation or cover, gain +1 Accuracy on your next attack."
+      }
+    },
+    {
+      "id": "occultist",
+      "name": "Path of the Occultist",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Truths best left buried.",
+      "description": "You have learned what hides behind ritual and symbol. Power answers, but it never comes without consequence.",
+      "bonuses": [
+        "Scholarship +1",
+        "Spellcraft +1"
+      ],
+      "feature": {
+        "Name": "Forbidden Insight",
+        "Action": "⬖",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 6] | 3 [lvl 12]",
+        "Parameters": "",
+        "Description": "Learn one passive effect of a creature within 6 tiles. Your next attack or spell against it deals +2 Damage."
+      }
+    },
+    {
+      "id": "flagellant",
+      "name": "Path of the Flagellant",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Pain sharpens purpose.",
+      "description": "Suffering is clarity. Each wound is a lesson, each scar a vow. Through pain, you transcend fear and doubt.",
+      "bonuses": [
+        "Brawn +1",
+        "Intimidation +1"
+      ],
+      "feature": {
+        "Name": "Martyr’s Zeal",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "Whenever you take Health damage, gain +1 Damage on your next attack. This stacks up to 3 times and resets after the attack."
+      }
+    },
+    {
+      "id": "mirrorknight",
+      "name": "Path of the Mirror Knight",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Strike yourself if you dare.",
+      "description": "Polished steel and reflective magic turn aggression inward. Enemies learn quickly that violence aimed at you is rarely theirs alone.",
+      "bonuses": [
+        "Fortitude +1",
+        "Spellcraft +1"
+      ],
+      "feature": {
+        "Name": "Reflected Harm",
+        "Action": "◇",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 6] | 3 [lvl 12]",
+        "Parameters": "",
+        "Description": "Uppon taking damage; you may reflect half of that damage back at the source."
+      }
+    },
+    {
+      "id": "gravewarden",
+      "name": "Path of the Gravewarden",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "You stand between breath and silence.",
+      "description": "Death follows you closely, but it does not claim what is under your watch. You decide who falls, and when.",
+      "bonuses": [
+        "Insight +1",
+        "Scholarship +1"
+      ],
+      "feature": {
+        "Name": "Last Rites",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "Bringing an enemy to 0 Health releases a pulse of healing. You and all allies within 2 units are healed for [Half Your Level]."
+      }
+    },
+    {
+      "id": "gunslinger",
+      "name": "Path of the Gunslinger",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Fast hands, faster judgment.",
+      "description": "Every motion is practiced, every shot deliberate. You don’t hesitate—hesitation gets people killed.",
+      "bonuses": [
+        "Aim +1",
+        "Reflex +1"
+      ],
+      "feature": {
+        "Name": "Quickdraw",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "Your first ranged attack each scene gains +2 Accuracy and ignores cover penalties."
+      }
+    },
+    {
+      "id": "runebound",
+      "name": "Path of the Runebound",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Power etched into flesh and steel.",
+      "description": "Runes glow faintly beneath your skin and across your gear. Magic is not cast, it is worn.",
+      "bonuses": [
+        "Arcana +1",
+        "Tinkering +1"
+      ],
+      "feature": {
+        "Name": "Living Runes",
+        "Action": "⬖",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 6] | 3 [lvl 12]",
+        "Parameters": "",
+        "Description": "Choose Accuracy or Armor; gain +2 to the chosen stat for 2 Scenes."
+      }
+    },
+    {
+      "id": "corsair",
+      "name": "Path of the Corsair",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Take what you can, vanish before reprisal.",
+      "description": "A thief, a raider, a survivor. You thrive in chaos, moving through battle like a sudden storm.",
+      "bonuses": [
+        "Athletics +1",
+        "Stealth +1"
+      ],
+      "feature": {
+        "Name": "Plunder Momentum",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "When you damage an enemy, gain +1 Movement this turn. If the enemy is defeated, gain +1 Damage on your next attack."
+      }
+    },
+    {
+      "id": "lightbearer",
+      "name": "Path of the Lightbearer",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "Hope made manifest.",
+      "description": "The light in your soul shines 10 fold of daylight, you are the light for those around you. May darkness rot in your wake.",
+      "bonuses": [
+        "Persuasion +1",
+        "Reflex +1"
+      ],
+      "feature": {
+        "Name": "Radiant Presence",
+        "Action": "⭘",
+        "Cost": "⧖",
+        "Symbols": "",
+        "Parameters": "",
+        "Description": "When an ally is healed within 2 Units they gain 2 points of Mantra."
+      }
+    },
+    {
+      "id": "fleshshaper",
+      "name": "Path of the Fleshshaper",
+      "source": "CORE",
+      "source_color": "indigo",
+      "summary": "The body is clay.",
+      "description": "Bone bends, muscle reforms, and pain is merely feedback. Your form is endlessly adaptable.",
+      "bonuses": [
+        "Fortitude +1",
+        "Scholarship +1"
+      ],
+      "feature": {
+        "Name": "Mutable Form",
+        "Action": "⬖",
+        "Cost": "🗲",
+        "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 6] | 3 [lvl 12]",
+        "Parameters": "",
+        "Description": "You reshape your flesh, and adapt; Negative condition effects become reversed for 1 Scene."
+      }
+    }
+  ]
+
+}

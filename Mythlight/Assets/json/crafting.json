@@ -1,0 +1,319 @@
+{
+  "tiers": {
+    "Trivial": {
+      "difficulty": "Very Easy",
+      "requirements": "Basic tools, 1–2 common components",
+      "craftCheck": null
+    },
+    "Simple": {
+      "difficulty": "Easy",
+      "requirements": "Tools, 2–3 common components",
+      "craftCheck": 8
+    },
+    "Standard": {
+      "difficulty": "Moderate",
+      "requirements": "Tools, workbench, 3–4 components (1 advanced)",
+      "craftCheck": 12
+    },
+    "Difficult": {
+      "difficulty": "Hard",
+      "requirements": "Specialized tools, workshop, 4–6 components (up to 2 advanced)",
+      "craftCheck": 16
+    },
+    "Complex": {
+      "difficulty": "Very Hard",
+      "requirements": "Full workshop, 6+ components (advanced / exotic / cursed)",
+      "craftCheck": 20
+    }
+  },
+  "precisionBonuses": {
+    "familyOnly": 0,
+    "subComponent": 1,
+    "allCorrect": 2
+  },
+  "recipes": [
+    {
+      "name": "Wooden Starknife",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": ["Wood – Core x1"],
+      "effect": "Light thrown or melee weapon. Range 10. Damage 1. On a critical failure, the starknife splinters and becomes unusable. Can be crafted or replaced quickly in the field."
+    },
+    {
+      "name": "Glass Cutter",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": ["Glass – Shards x1"],
+      "effect": "Allows precise cutting of glass, crystal, and brittle stone. Grants advantage on checks involving precision carving, engraving, or dismantling fragile objects."
+    },
+    {
+      "name": "Stone Chalk",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": ["Stone – Dust x1"],
+      "effect": "Creates durable markings resistant to moisture and wind. Useful for navigation, trap marking, ritual circles, or territorial signs."
+    },
+
+    {
+      "name": "Field Knife",
+      "tier": "Simple",
+      "category": "Equipment",
+      "components": ["Metal – Plate x1", "Wood – Core x1"],
+      "effect": "Light melee weapon. Damage 2. Functions as a general-purpose tool for cutting rope, skinning creatures, prying, or fine manual work."
+    },
+    {
+      "name": "Weighted Sling",
+      "tier": "Simple",
+      "category": "Equipment",
+      "components": ["Rope – Line x1", "Stone – Cut x1"],
+      "effect": "Ranged weapon. Range 20. Damage 2. Uses stones or similar ammunition. Can also launch small objects such as flasks or signal markers."
+    },
+    {
+      "name": "Reinforced Strap",
+      "tier": "Simple",
+      "category": "Equipment",
+      "components": ["Rope – Cable x1", "Metal – Plate x1"],
+      "effect": "Strengthens attached gear or containers. Increases carrying capacity by +10 and reduces the chance of item breakage under stress."
+    },
+
+    {
+      "name": "Arc-Light Rod",
+      "tier": "Standard",
+      "category": "Equipment",
+      "components": ["Wood – Core x1", "Glass – Tube x1", "Arcane – Crystal x1"],
+      "effect": "Emits steady magical light in a wide radius. Light can be focused or dimmed. When struck against a surface, releases a brief flash that may distract nearby creatures."
+    },
+    {
+      "name": "Precision Saw",
+      "tier": "Standard",
+      "category": "Equipment",
+      "components": ["Metal – Plate x1", "Wood – Plank x1", "Metal – Wire x1"],
+      "effect": "Cuts wood, bone, and soft metal cleanly. Grants bonuses to crafting, dismantling, and salvage tasks. Can be used as a weapon (Damage 2) in emergencies."
+    },
+
+    {
+      "name": "Pulley Frame",
+      "tier": "Standard",
+      "category": "Machine",
+      "components": ["Metal – Plate x1", "Metal – Wire x1", "Rope – Cord x1"],
+      "effect": "Provides mechanical advantage when lifting or restraining objects. Doubles effective lifting capacity. Can be repurposed for traps, lifts, or battlefield control."
+    },
+    {
+      "name": "Fluid Regulator",
+      "tier": "Standard",
+      "category": "Machine",
+      "components": ["Glass – Tube x1", "Stone – Cut x1", "Liquid – Water x1"],
+      "effect": "Controls the flow rate of liquids. Used for irrigation, timed releases, pressure balancing, or slow dispersal of substances in combat or crafting."
+    },
+
+    {
+      "name": "Stabilized Harness",
+      "tier": "Difficult",
+      "category": "Equipment",
+      "components": ["Rope – Cable x1", "Metal – Wire x1", "Arcane – Residue x1"],
+      "effect": "Reduces recoil, impact, and forced movement. Grants resistance to knockback and falling damage. Essential for operating heavy tools or machinery safely."
+    },
+    {
+      "name": "Arc-Driven Press",
+      "tier": "Difficult",
+      "category": "Machine",
+      "components": ["Metal – Plate x2", "Arcane – Core x1", "Metal – Rod x1"],
+      "effect": "Uses arcane force to compress, shape, or bind materials. Can refine components, force doors open, or deliver crushing force in combat scenarios."
+    },
+
+    {
+      "name": "Bone-Plated Guardian Frame",
+      "tier": "Complex",
+      "category": "Construct",
+      "components": ["Bone – Plate x2", "Metal – Wire x1", "Arcane – Sigil x1", "Arcane – Spark x1"],
+      "effect": "A basic autonomous construct frame. Can guard an area, carry loads, or perform simple programmed tasks. Limited combat capability but highly durable."
+    },
+    {
+      "name": "Arc Suppression Array",
+      "tier": "Complex",
+      "category": "Machine",
+      "components": ["Stone – Block x1", "Metal – Plate x1", "Arcane – Sigil x1", "Arcane – Residue x1"],
+      "effect": "Dampens arcane activity in an area. Reduces magical effects, stabilizes volatile zones, and interferes with constructs or spellcasting devices."
+    }
+  ],
+  "components": [
+    {
+      "name": "Rod",
+      "category": "Wood",
+      "notes": "Straight, carved lengths"
+    },
+    {
+      "name": "Plank",
+      "category": "Wood",
+      "notes": "Flat boards"
+    },
+    {
+      "name": "Core",
+      "category": "Wood",
+      "notes": "Dense heartwood sections"
+    },
+
+    {
+      "name": "Pane",
+      "category": "Glass",
+      "notes": "Flat sheets"
+    },
+    {
+      "name": "Tube",
+      "category": "Glass",
+      "notes": "Hollow cylinders"
+    },
+    {
+      "name": "Shards",
+      "category": "Glass",
+      "notes": "Sharp fractured edges"
+    },
+
+    {
+      "name": "Block",
+      "category": "Stone",
+      "notes": "Solid construction pieces"
+    },
+    {
+      "name": "Dust",
+      "category": "Stone",
+      "notes": "Powdered mineral"
+    },
+    {
+      "name": "Cut",
+      "category": "Stone",
+      "notes": "Shaped, precise slabs"
+    },
+
+    {
+      "name": "Plate",
+      "category": "Metal",
+      "notes": "Flat forged plates"
+    },
+    {
+      "name": "Rod",
+      "category": "Metal",
+      "notes": "Short or long rods"
+    },
+    {
+      "name": "Wire",
+      "category": "Metal",
+      "notes": "Thin, flexible strands"
+    },
+
+    {
+      "name": "Cord",
+      "category": "Rope",
+      "notes": "Thin, tight weave"
+    },
+    {
+      "name": "Line",
+      "category": "Rope",
+      "notes": "Medium tensile"
+    },
+    {
+      "name": "Cable",
+      "category": "Rope",
+      "notes": "Heavy support rope"
+    },
+    
+    {
+      "name": "Water",
+      "category": "Liquid",
+      "notes": "The most common fluid"
+    },
+    {
+      "name": "Alcohol",
+      "category": "Liquid",
+      "notes": "Burnable, very useful"
+    },
+    {
+      "name": "Oil",
+      "category": "Liquid",
+      "notes": "Also burnable, but can lubricate"
+    },
+
+    {
+      "name": "Bolt",
+      "category": "Cloth",
+      "notes": "Long rolled fabric"
+    },
+    {
+      "name": "Patch",
+      "category": "Cloth",
+      "notes": "Small cut sections"
+    },
+    {
+      "name": "Thread",
+      "category": "Cloth",
+      "notes": "Fine binding fibers"
+    },
+
+    {
+      "name": "Crystal",
+      "category": "Arcane",
+      "notes": "Stable magical focus"
+    },
+    {
+      "name": "Powder",
+      "category": "Arcane",
+      "notes": "Ground spell reagent"
+    },
+    {
+      "name": "Sigil",
+      "category": "Arcane",
+      "notes": "Inscribed magical mark"
+    },
+
+    {
+      "name": "Plate",
+      "category": "Bone",
+      "notes": "Rigid skeletal segments"
+    },
+    {
+      "name": "Splinter",
+      "category": "Bone",
+      "notes": "Jagged fragments"
+    },
+    {
+      "name": "Marrow",
+      "category": "Bone",
+      "notes": "Alchemical inner substance"
+    },
+
+    {
+      "name": "Heart",
+      "category": "Biological",
+      "notes": "Condensed elemental energy"
+    },
+    {
+      "name": "Plasma",
+      "category": "Biological",
+      "notes": "Lingering magical trace"
+    },
+    {
+      "name": "Thinker",
+      "category": "Biological",
+      "notes": "Volatile energy fragment"
+    },
+
+    
+    {
+      "name": "Explosive",
+      "category": "Powder",
+      "notes": "Powder that explodes when provoked"
+    }
+    ,
+    {
+      "name": "Blinding",
+      "category": "Powder",
+      "notes": "Iritates the eyes of creatures"
+    }
+    ,
+    {
+      "name": "Conductive",
+      "category": "Powder",
+      "notes": "Bursting with static power"
+    }
+  ]
+}

@@ -1,0 +1,2809 @@
+[
+  {
+    "Name": "Medium Melee Weapon Proficiency",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can effectively wield Medium melee weapons.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Heavy Melee Weapon Proficiency",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can effectively wield Heavy melee weapons.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Light Bow Proficiency",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can effectively wield Light Bows, Slingshots and Crossbows.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Heavy Bow Proficiency",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can effectively wield Heavy Bows and Crossbows.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Light Firearm Proficiency",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can effectively wield Light Firearms.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Heavy Firearm Proficiency",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can effectively wield Heavy Firearms.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Medium Armor Training",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can equip Medium armor. While wearing it, gain +1 Athletics.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Heavy Armor Training",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can equip Heavy armor. While wearing it, gain -1 Reflex.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Shield Training",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Off-hand",
+    "Description": "While you have a shield equipped at the start of combat, gain Guard equal to your level.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Heavy Guard",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": " ⫘ Heavy Armor Training",
+    "Description": "When wearing Heavy armor and using a shield, gain +2 Armor.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Traveler’s Endurance",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "+1 Speed; ignore the first level of Fatigue.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Arcane Spellcaster",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Spellcasting",
+    "Description": "Gain access to Arcane Spellcasting. You learn a number of Arcane spells equal to your Scholarship, and learn 2 Arcane cantrips.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Divine Spellcaster",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Spellcasting",
+    "Description": "Gain access to Divine Spellcasting. You learn a number of Divine spells equal to your Scholarship, and learn 2 Divine cantrips.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Cosmic Spellcaster",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Spellcasting",
+    "Description": "Gain access to Cosmic Spellcasting. You learn a number of Cosmic spells equal to your Scholarship, you cannot learn spells above level 1. \"Upcasting\" casts spells multiple times instead.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Occult Spellcaster",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Spellcasting",
+    "Description": "Gain access to Occult Spellcasting. You learn a number of Occult spells equal to your Scholarship, you cannot learn spells above level 2. Spells are always upcast. You learn 2 Occult cantrips.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Elemental Spellcaster",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Spellcasting",
+    "Description": "Gain access to Elemental Spellcasting. You learn a number of Elemental spells equal to your Scholarship, choose one element; spells of that element deal +X damage . You learn 2 Elemental cantrips.",
+    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Cantrip Adept",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "You learn 2 additional cantrips from your chosen spellcasting type. If you have chosen cosmic, learn 1 extra spell instead.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Quick Reflexes",
+    "Action":"◇",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Reduce incoming damage by half your level (minimum 1).",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Cantrip Knowledge",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "Convert one level 1 spell from your spellcasting type into a cantrip.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Minor Channeling",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Cast one level 1 spell without spending Mana.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Chef",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "☀",
+    "Parameters": "",
+    "Description": "Cook allies a meal during a rest. Eating the meal grants them either +X+1 Accuracy or +X Armor next combat.",
+    "Scaling": "Value X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
+  },
+  {
+    "Name": "Tavern Brawler",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain proficiency with improvised weaponry; they deals +1 Damage.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Miner",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Identify and extract minerals. Deal +X damage to constructs and stone enemies. Ignore disadvantages from non-magical darkness.",
+    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
+  },
+  {
+    "Name": "Brewer",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "☀",
+    "Parameters": "",
+    "Description": "During a rest, create a potion per ally from your known potions list. Learn a number of Potion Recipes equal to [Half Your Level], gain +X to Brewing Related Checks.",
+    "Scaling": "Bonus X:<br>+0 [lvl 1]<br>+1 [lvl 3]<br>+2 [lvl 6]<br>+3 [lvl 9]<br>+4 [lvl 12]"
+  },
+  {
+    "Name": "Fisher",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "☀",
+    "Parameters": "",
+    "Description": "When resting near water, regain +50% Health; You can fish while resting, guarantee treasure worth at least X gold.",
+    "Scaling": "Gold X:<br>2 [lvl 1]<br>3 [lvl 3]<br>4 [lvl 6]<br>5 [lvl 9]<br>6 [lvl 12]"
+  },
+  {
+    "Name": "Storyteller",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "☀",
+    "Parameters": "",
+    "Description": "Tell a tale; allies gain 1 Grace at the start of next combat and remove a mental condition. Gain +1 Scholarship.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Gravedigger",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "☀",
+    "Parameters": "★ Death",
+    "Description": "During a rest, burying a dead ally grants Grace equal to remaining allies next combat; burying an enemy restores Health equal to allies × level.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Bardic Drunk",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While intoxicated, gain +X Damage and -2 Accuracy.",
+    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
+  },
+  {
+    "Name": "Hermit",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Recover +2 Health when resting alone. While no allies are within 2 units, gain +X Accuracy or +Y Armor.",
+    "Scaling": "Accuracy/Armor X/Y:<br>+2/+1 [lvl 1]<br>+3/+2 [lvl 3]<br>+4/+3 [lvl 6]<br>+5/+4 [lvl 9]"
+  },
+  {
+    "Name": "Street Performer",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Performing earns rewards worth atleast 3 gold (Narrators Discretion). Performing in combat grants allies within 5 units +2 Accuracy.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Candle Keeper",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Light sources you hold never go out. While in its light, gain +1 Insight and +1 Reflex.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Combat Trapper",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Using [1× Common Component] you can create a trap in an adjacent unoccupied tile. The trap can activate only once, dealing X damage and applying 3 stacks of Slow to a creature that stepped on the same tile as the trap. Using [1× Rope Component] you can create and throw a Bola. You are proficient with Bolas. Bolas can be thrown up to 6 tiles away doing X damage and applying 3 stacks of Slow to the creature.",
+    "Scaling": "Damage X:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Conductive Wiring",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Combat Trapper",
+    "Description": "Using [1× Metal - Wire], you can create fences up to 4 Tiles long and 1 Unit tall. Each fence deals Stuns dealing X Lightning Damage when a creature crosses it, loosing 1 durability.. The fence has 1 Durability.",
+    "Scaling": "Damage X:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Survivalist",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain +X Accuracy against beasts and natural creatures. Gain advantage on Insight, Reflex, and Fortitude checks in natural environments.",
+    "Scaling": "Accuracy X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
+  },
+  {
+    "Name": "Tracer Shot",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Fire a glowing projectile, it marks the struck target; allies gain +1 Accuracy against the marked target.",
+    "Scaling": "Accuracy/Uses X/🗲:<br>+1/1 [lvl 1]<br>+2/2 [lvl 3]<br>+3/3 [lvl 6]<br>+4/4 [lvl 9]"
+  },
+  {
+    "Name": "Non-lethal Shot",
+    "Action":"◆",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can choose to deal non-lethal damage with ranged attacks.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Arcane Edge",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Melee spell effects have +X Accuracy",
+    "Scaling": "Accuracy X:<br>+2 [lvl 1]<br>+3 [lvl 3]<br>+4 [lvl 6]<br>+5 [lvl 9]"
+  },
+  {
+    "Name": "Elemental Draw",
+    "Action":"◆",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "★ Infused Strike",
+    "Description": "You make an attack that deals +X elemental damage of a chosen type.",
+    "Scaling": "Damage/Uses X/🗲:<br>+1/1 [lvl 1]<br>+2/2 [lvl 3]<br>+3/3 [lvl 6]<br>+4/4 [lvl 9]"
+  },
+  {
+    "Name": "Mana Slash",
+    "Action":"◆",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "★ Infused Strike",
+    "Description": "You can spend a number of mana equal to your level, add that amount to as Damage to your next attack. Attack counts as magical.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Beast Whisperer",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Companion",
+    "Description": "You can tame animals or beasts to become companions (Narrator’s discretion).",
+    "Scaling": ""
+  },
+  {
+    "Name": "Bonded Instinct",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Companion",
+    "Description": "When you command your companion to strike the same target as you. It gains +X Accuracy.",
+    "Scaling": "Accuracy X:<br>+2 [lvl 1]<br>+3 [lvl 3]<br>+4 [lvl 6]<br>+5 [lvl 9]"
+  },
+  {
+    "Name": "Spirit Bond",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": " ⫘ ★ Companion",
+    "Description": "When your companion is healed, you recover half the Health restored. You can see through your companion within 12 tiles.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Noble Steed",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Beast Whisperer",
+    "Description": "While riding your companion, gain +2 Armor. First damage taken each combat grants Guard equal to companion’s Speed.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Carapace",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While unarmored, gain +X Armor.",
+    "Scaling": "Armor X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Forgotten History",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain +X Scholarship when identifying or examining historical objects.",
+    "Scaling": "Scholarship X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
+  },
+  {
+    "Name": "Weakpoint",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Landing an attack grants +X Accuracy against that target until combat ends.",
+    "Scaling": "Accuracy X:<br>+2 [lvl 1]<br>+3 [lvl 3]<br>+4 [lvl 6]<br>+5 [lvl 9]"
+  },
+  {
+    "Name": "Ancient Study",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖ ",
+    "Parameters": "★ Unbound ⫘ Occult Apprentice / Cosmic Novice",
+    "Description": "Occult and Cosmic spells/cantrips gain +1 Range. Learn 1 Occult cantrip and 1 Cosmic spell, bypassing type restrictions.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Coward’s Instinct",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain +2 tiles of movement while moving away from enemies or feared.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Master of Disguise",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain +1 Deception and Finesse while disguised or attempting to blend into a crowd.",
+    "Scaling": "Deception & Finesse X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Leg Day",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Double movement until next turn; movement is halved the following turn.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Focused Strike",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "The first melee hit you make each scene gains +X Damage.",
+    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Hard Swing / Big Bonk",
+    "Action":"◆",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Add +2 Damage to a melee attack.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Focused Mind",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "+1 to resist Charm, Fear, and Illusion effects.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Spell Scribe",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Ritualist ⫘ ★ Spellcasting",
+    "Description": "Identifying a used spell grants +1 Spellcraft against that enemy, stacking up to 3 times.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Ritualist’s Patience",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Ritualist ⫘ ★ Spellcasting",
+    "Description": "Ritual spells take half the time and grant +X Arcana on that spell.",
+    "Scaling": "Arcana X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
+  },
+  {
+    "Name": "Pocket Sand",
+    "Action":"◇",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "As a reaction, blind an enemy entering your melee range until their next turn.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Remote Activation",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Activate an allied mechanical device, trap, or gadget within 6 tiles as a free action.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Reinforced Construction",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Crafts and modifications you create gain +2 Durability.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Craftsman",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You gain the ability to Craft; You start with Trivial Recipes, at Levels 3, 6, 9 and 12 you unlock the next tier. Learn a number of Recipes equal to [Half your Level]",
+    "Scaling": ""
+  },
+  {
+    "Name": "Gearwright",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "☀",
+    "Parameters": "",
+    "Description": "Repair one trivial or simple craft during a rest without a check. <i>(Requires 1 relevant component)</i>",
+    "Scaling": ""
+  },
+  {
+    "Name": "Field Mechanic",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Repair a craft to full operation. Each craft can only benefit from this once.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Scrap Salvager",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Perform a Tinkering check to disassemble objects into components, crafts that you made grant 2, else grant 1.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Arc Current",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Constructs/Machines you have deployed can expend one unit of Durability (Fuel) to shock targets within 2 units, dealing 2 Lightning Damage. This counts as an attack by the machine.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Charged Conduit",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When casting a spell through a spellcasting craft, add +X Damage.",
+    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Spell Interface",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "Once per rest, imbue a spell into a machine or construct, the spell lasts for a day, and will trigger based on a declared condition. <i>(Complexity determines spell level, Trivial = Cantrips, Simple = level 1 etc.)</i>",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Relentless Advance",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Moving into melee range of an enemy grants +X Accuracy for your next attack.",
+    "Scaling": "Accuracy X:<br>+2 [lvl 1]<br>+3 [lvl 3]<br>+4 [lvl 6]<br>+5 [lvl 9]"
+  },
+  {
+    "Name": "Locksmith",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Open simple locks without tools; gain +X Finesse.",
+    "Scaling": "Finesse X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Companion Recall",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "If your companion is within 10 units, and is injured. You may teleport them to yourself and heal them by [half Your Level] Health",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Pathmaker",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "Once per scene",
+    "Description": "Dash into a target within 3 units, dealing 1 Force damage. Damage applies only to enemies.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Crippling Impact",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Impact ⫘ Pathmaker",
+    "Description": "The target you dash to gains 3 stacks of Slow until your next turn and takes +1 Force damage.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Crushing Impact",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Impact ⫘ Pathmaker",
+    "Description": "The target you dash to takes +1 Force damage. If below half Health, they instead take +2 Force damage.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Displacing Impact",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Impact ⫘ Pathmaker",
+    "Description": "The target you dash into is pushed 3 units away in the direction of the dash and takes +1 Force damage.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Switching Impact",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Impact ⫘ Pathmaker",
+    "Description": "The target you dash to is swapped with your original position. If the target is an ally, they gain Guard equal to your level.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Guarding Impact",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Impact ⫘ Pathmaker",
+    "Description": "If you dash onto an ally, they gain Guard equal to your level; otherwise, you gain the Guard.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Mana Charger",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can charge devices or machines that require electrical power using Mana.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Mechanical Assistant",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Companion",
+    "Description": "Using [1× Metal - Wire, 1× Metal - Plate], construct a small mechanical assistant. It counts as a companion with the following stat block: <br><br>| Health/Durability [Your Level] <br>| Armor [6+Your Tinkering] <br>| PHY 0 | TEC 1 | MYS 2 <br>| Traits: <br>- Assist: This companion assist you while crafting, smithing, brewing or casting a ritual. It grants you +2 to the relevant rolls.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Spell Drone",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Mechanical Assistant",
+    "Description": "Using [1× Metal - Wire, 1× Wooden - Core], create a flying spell drone that stays within 3 units of you. It counts as a companion with the following stat block: <br><br>| Health/Durability [Your Level] <br>| Armor [6+Your Tinkering] <br>| PHY 0 | TEC 1 | MYS 2 <br>| Traits: <br>- Conduit (1 Durability): You cast a spell from this companions position.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Combat Rover",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Mechanical Assistant",
+    "Description": "Using [1× Metal - Wire, 1× Stone - Cut], create a small combat rover, It counts as a companion with the following stat block: <br><br>| Health/Durability [Your Level] <br>| Armor [6+Your Tinkering] <br>| PHY 2 | TEC 1 | MYS 0 <br>| Traits: <br>- Melee Strike: Strike a target within Melee range with [Your Tinkering] Accuracy; It deals [1+ Your Tinkering] Force Damage.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Dual Wielding",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Off-hand",
+    "Description": "You can wield two Light weapons. Off-hand attacks use all applicable modifiers.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Dual Action",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Double Strike ⫘ Level 6+",
+    "Description": "Your companion makes a free attack against a target you attacked. ",
+    "Scaling": ""
+  },
+  {
+    "Name": "Second Strike",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Double Strike ⫘ Level 6+",
+    "Description": "After attacking with a melee weapon, make another attack without expending an action.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Guardian’s Oath",
+    "Action":"◇",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When an adjacent ally is attacked, take X damage to reduce that attack’s damage by Y.",
+    "Scaling": "Damage/Reduction X/Y:<br>2/3 [lvl 1]<br>3/5 [lvl 3]<br>4/7 [lvl 6]<br>5/9 [lvl 9]"
+  },
+  {
+    "Name": "Mana Reservoir",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Reservoir",
+    "Description": "Gain a reservoir of 3 bonus Mana for level 1 spells. Can be used on level 2 spells starting at level 6.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Unyielding Defense",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When at or below half Health, gain +X Armor.",
+    "Scaling": "Armor X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
+  },
+  {
+    "Name": "Precision Form",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When your attack modifiers exceed half (rounded up) of the enemy’s Armor, gain +X Damage.",
+    "Scaling": "Damage X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
+  },
+  {
+    "Name": "Tactical Awareness",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain +X Accuracy against enemies adjacent to your allies.",
+    "Scaling": "Accuracy X:<br>+2 [lvl 1]<br>+3 [lvl 3]<br>+4 [lvl 6]<br>+5 [lvl 9]<br>+6 [lvl 12]"
+  },
+  {
+    "Name": "Enduring Spirit",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When below half Health, gain Guard equal to half your level + X.",
+    "Scaling": "Guard X:<br>+5 [lvl 1]<br>+6 [lvl 3]<br>+7 [lvl 6]<br>+8 [lvl 9]<br>+9 [lvl 12]"
+  },
+  {
+    "Name": "Steady Aim",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "For each scene you do not take damage, gain +1 Accuracy, stacking infinitely. Resets when you get hit.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Channel Focus",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Casting a spell grants Guard equal to half your level. This refreshes but does not stack.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Duelist Technique",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While wielding a single one-handed weapon, gain +X Armor and +X Reflex.",
+    "Scaling": "Armor & Reflex X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Crushing Blow",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Your next melee attack deals +X Damage and you suffer -Y movement this turn.",
+    "Scaling": "Damage/Movement X/Y:<br>+2/-1 [lvl 1]<br>+3/-2 [lvl 6]<br>+4/-3 [lvl 12]"
+  },
+  {
+    "Name": "Executioner’s Edge",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Deal +2 Damage to enemies at half Health or lower.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Resolute Will",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Ignore the first negative condition each rest. Gain +1 Fortitude.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Perfectionist Strike",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "On a hit, deal bonus Damage equal to the half the amount your attack exceeded the target’s Armor. On a miss, take Damage equal to half the amount missed by.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Focus Breaker",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Damaging a Spellcaster causes them to lose 1 Mana (doubled on Midnights).",
+    "Scaling": ""
+  },
+  {
+    "Name": "Adaptive Guard",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Medium Armor Proficiency / Heavy Armor Proficiency",
+    "Description": "If an enemy attacks you twice in one combat, gain +X Armor against that enemy for the rest of combat.",
+    "Scaling": "Armor X:<br>2 [lvl 1]<br>3 [lvl 6]<br>4 [lvl 12]"
+  },
+  {
+    "Name": "Blood pact",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Spend up to your level in Health to deal half that amount (rounded up, minimum 1) as bonus Damage.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Blacksmith",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "☀",
+    "Parameters": "",
+    "Description": "Repair gear during rest. Restored gear gains +1 Damage or +1 Armor and 3 Durability before expiring. Gain +X Tinkering",
+    "Scaling": "Tinkering X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Treasure Hunter",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Explorer",
+    "Description": "Gain +2 Finesse for looting. Exploring new areas grants +X Speed",
+    "Scaling": "Speed X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
+  },
+  {
+    "Name": "Cartographer",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Explorer",
+    "Description": "Gain advantage on Insight checks when recalling known locations. When resting in a previously visited area, you cannot be ambushed.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Restorative Meditation",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "☀",
+    "Parameters": "★ Arcane Recovery",
+    "Description": "During rest recover X Mana.",
+    "Scaling": "Mana X:<br>3 [lvl 1]<br>4 [lvl 3]<br>5 [lvl 6]<br>6 [lvl 9]<br>7 [lvl 12]"
+  },
+  {
+    "Name": "Focused Conduit",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Manaflux",
+    "Description": "Your first spell each combat costs no Mana and gains +2 Range.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Mana Conservation",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Manaflux",
+    "Description": "When a spell is countered, regain its Mana cost plus 1.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Mana Flow",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖ ",
+    "Parameters": "⫘ ★ Manaflux",
+    "Description": "Slaying an enemy with a spell refunds its Mana cost.<i>(Triggers once per spell)</i>",
+    "Scaling": ""
+  },
+  {
+    "Name": "Spell Specialization",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Choose one known spell; it gains +2 Damage, Range, and Healing. Reduce known/prepared spells by 1. You may change out the chosen spell when you level up.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Aimed Shot",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Gain +2 Accuracy and +1 Damage (+1 Accuracy at levels 6 and 12).",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Quick Reload",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "Firearms",
+    "Description": "Reloading a firearm no longer costs an action.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Tracking Expertise",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Identify tracks and movement signs. Gain +X Insight against hidden or fleeing enemies.",
+    "Scaling": "Insight X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
+  },
+  {
+    "Name": "Piercing Shot",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Fire through up to two targets in a line. The first target takes +2 Damage. You only need to hit the first target.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Sudden Camouflage",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Hitting an enemy causes attacks against you to suffer -X Accuracy.",
+    "Scaling": "Accuracy X:<br>-2 [lvl 1]<br>-3 [lvl 6]<br>-4 [lvl 12]"
+  },
+  {
+    "Name": "Explosive Ammunition",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Make a Ranged attack that explodes in a 1-tile radius, dealing 1 Damage.",
+    "Scaling": "Damage/Uses X/🗲:<br>1/1 [lvl 1]<br>2/2 [lvl 3]<br>3/3 [lvl 6]<br>4/4 [lvl 9]<br>5/4 [lvl 12]"
+  },
+  {
+    "Name": "Elemental Coating",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "☀",
+    "Parameters": "",
+    "Description": "Modify one reload of ammunition to deal +X Elemental Damage of a chosen type.",
+    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Bounding Retreat",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "After a ranged attack, move 3 tiles without provoking oppertunity attacks.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Crippling Shot",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Make a ranged attack that reduces target movement by 3 tiles for X turns.",
+    "Scaling": "Turns/Uses X/🗲:<br>1/1 [lvl 1]<br>2/2 [lvl 3]<br>2/3 [lvl 6]<br>3/4 [lvl 9]"
+  },
+  {
+    "Name": "Runic Impact",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Conduit",
+    "Description": "When you hit with a melee attack, expend 1 Mana to trigger a level 1 spell at the hit’s location.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Runic Shot",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Conduit",
+    "Description": "When you hit with a ranged attack, expend 1 Mana to trigger a level 1 spell at the hit’s location.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Ranged Conduit",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "Conduit",
+    "Description": "You may cast cantrips through ranged attacks. On activation, you may instead cast a level 1 spell for free.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Spirit Conduit",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Conduit",
+    "Description": "You may cast spells from your companion’s position.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Arcane Link",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Reservoir",
+    "Description": "Your companion gains a Mana pool of 4. You may spend its Mana while it is within 6 units of you.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Unseen Strike",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "The first melee attack each combat is an automatic hit if performed from behind or above (no Midnights).",
+    "Scaling": ""
+  },
+  {
+    "Name": "Quick Cast",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "⫘ ★ Ritualist",
+    "Description": "Cast one spell as a Free Action instead of an Action. <i>(Does not bypass attack limit per turn.)</i>",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Spontaneous Insight",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Once per combat, reroll a die on any skill check. You gain only 1 Grace regardless of outcome.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Duelist’s Prowess",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "While wielding a single one-handed weapon, your critical success range expands [⚄⚄,⚄⚅,⚅⚅]. Misses do not consume charges.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Battlefield Awareness",
+    "Action":"◇",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Master of Stealth",
+    "Description": "When an enemy moves adjacent, you may react to move 2 tiles without provoking oppertunity attacks. Enemies within 10 tiles suffer stealth penalties equal to your Insight.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Vanishing Act",
+    "Action":"◇",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Master of Stealth",
+    "Description": "When you take damage you may use your reaction to immediately perform an attack with halved Damage (Rounded up) and you move up to 2 tiles. This does not trigger an opportunity attack.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Parry",
+    "Action":"◇",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "When hit by a melee (or ranged at level 6) attack, contest the roll with Athletics. On success, ignore the damage.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Braced Stance",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You count as one size larger for grappling checks.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Jury-Rig",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "⫘ Novice Craftsman",
+    "Description": "Restore a broken craft to 1 Durability for a scene. While active, it gains +2 Damage when applicable.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+
+
+
+
+
+
+
+
+  
+  {
+    "Name": "Lucky Fella",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You gain +2 On all Gambling / Luck related checks.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Carrying Mule",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You gain +5 Maximum Encumberance",
+    "Scaling": ""
+  },
+  {
+    "Name": "Pocket Aces",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Lucky Fella",
+    "Description": "You gain advantage on all Gambling / Luck related checks.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Compelling Invite",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Taunt",
+    "Description": "All adjacent enemies become Taunted",
+    "Scaling": ""
+  },
+  {
+    "Name": "Field Medic",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "☀",
+    "Parameters": "",
+    "Description": "Allies resting with you gain double healing, you can remove 1 Condition per ally once per combat.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Constructive Trapper",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Combat Trapper",
+    "Description": "[2× Common Component]: Create a trapped 2x2 area, it can trap multiple creatures, it will only trigger when a declared condition is met. Trapped creatures take X damage and have their movement reduced by 3.",
+    "Scaling": "Damage X:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Deployment Trapper",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Combat Trapper",
+    "Description": "Traps you can deploy can be deployed within a range of 5 units.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Guerila Trapper",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "☀",
+    "Parameters": "⫘ Combat Trapper",
+    "Description": "You can deploy 2 normal traps, or 1 Large trap during a rest.<br>Normal traps: Combat Trapper traps.<br>Large traps: Constructive Trapper traps",
+    "Scaling": ""
+  },
+  {
+    "Name": "Explosive Trapper",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Combat Trapper",
+    "Description": "Traps you deploy, when triggered, deal +1 Damage  in a 1 unit radius.<br><br><i>Large traps explosions count as a 4x4 square.</i>",
+    "Scaling": ""
+  },
+  {
+    "Name": "Binding Trapper",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Combat Trapper",
+    "Description": "Traps you deploy now knock enemies Prone, they must roll [Reflex] vs [6 + Tinkering] to resist.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Combat Guard",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Taunt",
+    "Description": "Taunting enemies grants 1 Guard per enemy taunted. Doubled for enemies larger than you.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Recovery",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Each scene you have guard, recover X Health",
+    "Scaling": "Health X:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Back to back we stand",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Choose an Ally or Companion, this choice can only be changed uppon leveling up.<br><br>While they are within 1 unit of you, gain +1 Accuracy and +1 Armor. Each  1 point of damage they take can be reduced if you take 2 points of damage instead. You gain +2 movement speed towards them.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Suppresive fire",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Unleash a 4 Unit cone of projectiles. Creatures within it must use seek the nearest cover as a reaction, if they do not find any, or do not have a reaction, they take 2 Damage.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Breserk",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "★ Rage",
+    "Description": "You gain the ability to enter a Rage state. In this state you loose 6 Armor, and gain +X Damage and +Y Accuracy. This state lasts until dismissed, unconcious or end of combat.",
+    "Scaling": "Damage/Accuracy X/Y:<br>+2/+3 [lvl 1]<br>+3/+4 [lvl 6]<br>+4/+5 [lvl 12]"
+  },
+  {
+    "Name": "Natural Defences",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Rage",
+    "Description": "While in Rage, you gain Resistances to Blunt, Slash, Pierce and Cleave damage.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Bodyslam",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You slam your body against a target within melee range. You loose all of your guard, and deal that much damage to the target.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Great Weapon Mastery",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Any Heavy Weapon Training",
+    "Description": "Heavy Weapons deal +X Damage, but suffer -3 Accuracy",
+    "Scaling": "Damage X:<br>2 [lvl 1]<br>3 [lvl 6]<br>4 [lvl 12]"
+  },
+  {
+    "Name": "Blood Vigor",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When you defeat an enemy, recover X Health",
+    "Scaling": "Health X:<br>2 [lvl 1]<br>3 [lvl 3]<br>4 [lvl 6]<br>5 [lvl 9]<br>6 [lvl 12]"
+  },
+  {
+    "Name": "Momentum Drive",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Consecutive hits against the same target grant you +1 Damage, stacking up to +4, Missing or Switching targets resets the Stack.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Counter Stance",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Compelling invite",
+    "Description": "When Taunted targets strike you, they take X Damage. The Damage type matches your weapons type.",
+    "Scaling": "Damage X:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]<br>5 [lvl 12]"
+  },
+  {
+    "Name": "Spellbreaker",
+    "Action":"◇",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "⫘ Focus Breaker",
+    "Description": "When a spell is cast within 3 units, you may dispell it. You can only do this before rolls are made.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Ethereal Step",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Move up to 5 units, you ignore terrain penalties, you may pass through 1 obstacle in your way. During movement you may refresh this ability to pass through multiple obstacles, however your movement does not refresh.<br><br><i>Obstacles must not be larger than 1 unit, relative to the direction you are moving through them.</i>",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Healing Pulse",
+    "Action":"⬖",
+    "Cost": "",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Heal all allies within 3 units for X Health.",
+    "Scaling": "Uses/Health 🗲/X:<br>1/2 [lvl 1]<br>2/3 [lvl 3]<br>3/4 [lvl 6]<br>4/5 [lvl 9]<br>5/6 [lvl 12]"
+  },
+  {
+    "Name": "Mystical Overload",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "⫘ ★ Spellcasting & ★ Ritualist",
+    "Description": "Double the damage of your next spell, take damage equal to the Mana cost of the spell.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Spell Echo",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "Repeat the last spell cast for free. If no spell was cast, cast a spell for free.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Minor Syphoned Healing",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When you cast a healing or support spell, you or one ally regain X Health",
+    "Scaling": "Health X:<br>2 [lvl 1]<br>3 [lvl 3]<br>4 [lvl 6]<br>5 [lvl 9]"
+  },
+  {
+    "Name": "Cursed Cycle",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When one of your controlled or cursed targets is defeated, move the curse to a new target and refresh its duration.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Camper’s Discipline",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "If you did not move this turn, your next ranged attack gains +X Damage and +Y Accuracy.",
+    "Scaling": "Damage/Accuracy X/Y:<br>+1/+2 [lvl 1]<br>+2/+3 [lvl 6]<br>+3/+4 [lvl 12]"
+  },
+  {
+    "Name": "Arc Shot",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When targeting creatures behind partial cover, gain +2 Accuracy",
+    "Scaling": ""
+  },
+  {
+    "Name": "Tough",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain +2 Max Health per level.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Skilled",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain 2 Skill points.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Mana Sap",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Focus Breaker",
+    "Description": "Mana you drain from Spellcasters replenishes your Mana.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Symbotic Flow",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Companion",
+    "Description": "When you cast a spell, your companion’s next attack deals +X Damage; when it attacks, your next spell deals +Y Damage",
+    "Scaling": "Damage X/Y:<br>+2/+1 [lvl 1]<br>+3/+2 [lvl 6]<br>+4/+3 [lvl 12]"
+  },
+  {
+    "Name": "Pheonix Recovery",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "★ Self-Revive ⫘ Blood Vigor",
+    "Description": "Upon reaching 0 Health, recover 6 Health and immediately take another turn.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Arcane Detonation",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "Release All Mana; deal 2 Force damage per Mana spent to enemies within 2 tiles; you gain 2 Fatigue.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Last stand",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While at or below half Health, gain +2 Damage and +1 Armor.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Cantrip Overflow",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While at full Mana, your cantrips deal +X Damage.",
+    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Elemental Reflection",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Elementalist’s Spark",
+    "Description": "Spells against you matching your chosen element, suffer a -X Accuracy penalty.",
+    "Scaling": "Accuracy X:<br>-2 [lvl 1]<br>-3 [lvl 3]<br>-4 [lvl 6]<br>-5 [lvl 9]"
+  },
+  {
+    "Name": "Eternal Discipline",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "2 Active trait uses restore automatically after each combat.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Eternal Guardian",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "⫘ Back to Back we stand",
+    "Description": "When your chosen Ally/Companion falls to 0 Health, they remain at 1 Health and gain +2 Armor until the end of their next turn.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Arcane Sniper",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Arcane Student",
+    "Description": "Arcane spells gain +4 Range.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Major Syphoned Healing",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Minor Syphoned Healing",
+    "Description": "When you cast a healing spell, extend its effect to one ally or you at full strength.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Cosmic Protection",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Cosmic Novice",
+    "Description": "Each cast of a Cosmic spell grants +1 Guard.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Occult Dominion",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Occult Apprentice",
+    "Description": "Occult Curses/Brands/Marks gain +1 Target.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Master Channeler",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "☀",
+    "Parameters": "⫘ Restorative Meditation",
+    "Description": "Spell Mana restores fully on a rest; you also recover 2 Mana after each combat.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Darkness Rise",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "After landing 3 Attacks you begin to emit a 1 unit radius Zone of Death.<br><br>Zone of Death: Counts as Rough terrain. Each scene, or when entering the zone, Enemies take X Dark Damage. If the zone has not damaged a target for 2 Scenes, it dissapates.",
+    "Scaling": "Damage X:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]<br>5 [lvl 12]"
+  },
+  {
+    "Name": "Second Shot",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Double Strike ⫘ Level 6+",
+    "Description": "After attacking with a ranged weapon, make another attack without expending an action.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Dead Horizon",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "⫘ Piercing Shot",
+    "Description": "Make one ranged attack with +X Damage, piercing all enemies in a 6 tile line. If any enemy dies to this, regain the traits use. Targets must roll [Reflex] vs the attack roll.",
+    "Scaling": "Uses/Damage 🗲/X:<br>1/+3 [lvl 1]<br>2/+4 [lvl 6]<br>3/+5 [lvl 12]"
+  },
+  {
+    "Name": "Eldritch Convergence",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When you attack a target affected by yours or an allies spell/curse, that attack gains +X Dark Damage.",
+    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
+  },
+  {
+    "Name": "Enduring Rage",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Breserk",
+    "Description": "When you enter Rage, gain Guard equal to [Your Level + 2].",
+    "Scaling": ""
+  },
+  {
+    "Name": "Workers companion",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Companion",
+    "Description": "Companions each grant +1 Tinkering when brewing, crafting, smithing, medicine, spellcrafting or ritual casting.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Longshot",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Any Ranged Weapon Training",
+    "Description": "Ranged weapons and traits, gain +X range",
+    "Scaling": "Range X:<br>+2 [lvl 1]<br>+4 [lvl 6]"
+  },
+  {
+    "Name": "Enticipation",
+    "Action":"◆",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You cannot attack this round, gain X Guard until your next attack.",
+    "Scaling": "Guard X:<br>2 [lvl 1]<br>4 [lvl 3]<br>6 [lvl 6]<br>8 [lvl 9]<br>10 [lvl 12]"
+  },
+  {
+    "Name": "Against the odds",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "If enemies outnumber allies within a 5×5 radius, gain Armor equal to the difference. Enemies at least 2 sizes larger than you count as two.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Thick skin",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "After combat, recover half of your missing hp.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Twoification",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Allies within 2 tiles gain +2 speed and +2 range for 2 turns.",
+    "Scaling": "Uses 🗲:<br>2 [lvl 2]"
+  },
+  {
+    "Name": "Sunblessed",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain +1 Armor while in direct sunlight, loose 1 Armor when in darkness.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Giant Slayer",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While targeting a creature thats at least 1 size larger than you, you gain +1 Damage and +1 Accuracy.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Climber",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You gain advantage on climbing checks, while not moving and on a wall, you cannot be knocked off.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Carpenter",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can convert between wooden components freely. When creating crafts mostly consisting of wooded components, you gain advantage.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Combat Carpenter",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "⫘ Carpenter",
+    "Description": "You can use wooden crafting components as weapons; Combine any number of components to create an improvised melee or ranged weapon that deals Force damage equal to the number of components used; ranged weapons have a 6 tile range. It has Durability equal to the number of components used.<br><br><i>Throw an ikea furniture set at them.</i>",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Drama Queen",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You attempt to convince creatures targeting you that you are dead. You are knocked prone; affected creatures must roll [Insight] vs [6 + your Deception] to resist; Creatures you have already tricked will gain +3 to the roll.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Seamstress",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "☀",
+    "Parameters": "",
+    "Description": "Using one piece of clothing, you transform it into another piece of clothing or a copy of non-magical equipment you already own.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Makeup maid",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Outside of combat, you may disguise yourself or allies. Creatures attempting to see through the disguise must roll [Insight] vs [6 + your Performance.]",
+    "Scaling": ""
+  },
+  {
+    "Name": "Shumpo",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "In combat, rolling a midnight no longer doubles damage; instead, you gain one additional action this turn, which may be used to attack.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Fair Strike",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "The chosen target’s next attack loses all modifiers and deals only base weapon damage.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Fair Fight",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "⫘ Fair Strike",
+    "Description": "You create a 3×3 zone you must occupy on cast. Spells cannot be cast within it, and spells from outside cannot target creatures inside. The zone lasts 3 Scenes, or ends immediately if you or the caster leaves the zone.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Commanding Presance",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You command a creature within 6 units to lay down its arms, it will not act for 2 scenes, or until damaged. It must roll [Insight] vs [6+ Intimidation] to resist.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "All warmed up",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "In combat, once you have spent all of your mana for the first time, all of your non-cantrip spells deal +2 damage.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Jewler",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "☀",
+    "Parameters": "",
+    "Description": "During a rest, you can restore a found object and increase its perceived market value. The increase is +X.",
+    "Scaling": "Value X:<br>+3 [lvl 1]<br>+5 [lvl 6]<br>+8 [lvl 12]"
+  },
+  {
+    "Name": "Fearsome Sight",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain advantage on intimidation checks.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Crimson Convergence",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Healing beyond your max HP is converted into Guard, up to a maximum of 2 + (X × your level).",
+    "Scaling": "Multiplier X:<br>0.5 [lvl 1]<br>1 [lvl 6]<br>2 [lvl 12]"
+  },
+  {
+    "Name": "Convenience Fee",
+    "Action":"◇",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When a creature within 6 units is healed by their ally, you may reduce that healing by (your level + X) and heal yourself for the amount reduced.",
+    "Scaling": "Health X:<br>+2 [lvl 1]<br>+4 [lvl 6]<br>+6 [lvl 12]"
+  },
+  {
+    "Name": "Redoubled Valor",
+    "Action":"◇",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While you have no known spells; When you are given a buff by an ally, you may choose to double its duration or effect.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Ghost",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You cannot be targeted by ANY creature until you make your next attack or the start of your next turn, whichever comes first.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Rush",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "If you haven’t acted this scene, swap initiative with a target; on your next turn, you may take only one action.",
+    "Scaling": ""
+  },
+  {
+    "Name": "High Guard",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When Obstructing aim, you count as half cover.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Stone Skin",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Casting Eearth spells, or using Earth elemental effects, grants 2 Guard, stacking.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Guardian",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Grant an ally 5 Guard, it disapates the first time they or you attack.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]<br>5 [lvl 12]"
+  },
+  {
+    "Name": "Deaths Respite",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Give yourself or an ally, with the highest current health (Guard included), immunity to death for 1 scene. If they were to drop bellow 1 Health, they remain at 1 Health",
+    "Scaling": ""
+  },
+  {
+    "Name": "Make it rain",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You fire 3 shots into the sky, these will land and hit 3 random targets within 8 units. They deal 1 Damage, and prioritize Enemies.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Thought out plan",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "As long as you have not acted this turn, you may skip it. Next turn you have 3 Actions.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Combat Wingman",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Allies have advantage against enemies Taunted by you.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Wingman",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Back to back we stand",
+    "Description": "Your chosen ally/companion gains Advantage on Charm checks.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Mystic Sacrifice",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Sacrifice 4 Health to Receive 2 Mana",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Unshakeable",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You gain [6 + Your Level + Your Fortitude] Guard, you cannot Move, Be Moved or Attack while this guard is active. (Can be removed with any Cleanse Effects.)",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Transfusion",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Deal 3 Damage to yourself, heal a creature other than yourself, by 6 Health.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>3 [lvl 9]"
+  },
+  {
+    "Name": "Death Lotus",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Deal [Half Your Level] damage in a 1 tile radius around you. Taunted enemies take damage an additional time.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Ruthless Predator",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Your Oppertunity attacks deal +2 Damage.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Dummies",
+    "Action":"◇",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You may spend this reaction at any point. You move to an unocupied space within 3 units, you leave a Target Dummy with 3 Health where you were standing. Any attacks targeting you are redirected to the dummy.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Twin Disciplines",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You gain either +2 Armor or +2 Accuracy until your next turn.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Mark of Death",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Transfer any and all negative conditions to a target within 9 tiles. You don't need to see the target, just know of their pressence.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Convenience Tax",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Drain 3 mana from an ally within 6 units, add it to yourself.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Guaranteed Yield",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Any Damage or Guard gain with a base value lower than X is increased to X.",
+    "Scaling": "Value 🗲:<br>2 [lvl 1]<br>3 [lvl 6]<br>4 [lvl 12]"
+  },
+  {
+    "Name": "Morning Light",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You treat the next Action of a chosen ally, or yourself, as if it were the first action they have taken this combat.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Piruette",
+    "Action":"◆",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Deal 1 Damage to all Adjacent creatures. If this is the first action in combat, it deals damage twice.",
+    "Scaling": "Uses 🗲:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
+  },
+  {
+    "Name": "Inhibit",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Remove all weapon proficiencies of a target until your next turn.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Overexertion",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You may activate traits, while you have no uses left. Doing so grants 1 point of fatigue per activation.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Vigor",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Spend all of your grace, granting yourself that amount of Guard.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Measured Restraint",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You loose access to a spell until your next sleep. You replenish Double its Mana cost as Mana.",
+    "Scaling": ""
+  },
+
+
+
+
+
+
+
+  
+  {
+    "Name": "Veiled Blessing",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can no longer be Healed or gain Guard from allies. Gain +X Armor.",
+    "Scaling": "Armor X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
+  },
+  {
+    "Name": "Time Crunch",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Starting after your turn ends, and lasting for 4 Scenes; Everyones turn consists of only 1 Action.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "One of each",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You gain +2 Damage on ALL attacks. You cannot use the same attack multiple times per combat. Lasts until your next rest.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Toss Me",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can throw a grappled creature at least 1 size smaller than you. They are treated as a ranged weapon you are proficient with, and have a max range of [3+ Your Might Total]. If the thrown creature is an ally, they may make an attack on landing; otherwise, they deal damage equal to [your Might total].",
+    "Scaling": ""
+  },
+  {
+    "Name": "Loaded Dice",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Make an attack that deals bonus damage equal to your Grace, then reset your Grace. Grace cannot increase Accuracy for this attack.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Riposte",
+    "Action":"◇",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "If you took Guard damage without your Guard being fully depleted, make an attack against the creature that struck you.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Risky Strike",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Make a X Damage Melee or Ranged strike with your weapon, if the target dies you gain X Gold",
+    "Scaling": "Damage/Gold X:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
+  },
+  {
+    "Name": "Rite of Dominance",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You lose 4 Health; The next 3 attacks in a 2 tile radius have their damage reduced by 2.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Rite of Negation",
+    "Action":"◇",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When a spell is cast within 8 units, you may counter it; doing so causes you to lose access to a spell you know of your choice until your next rest.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Rite of Calling",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You lose 4 armor, 3 enemies within 8 units have -3 Accuracy until the end of combat.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Sharing is caring",
+    "Action":"◇",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When an ally within 8 units casts a spell, you may pay for it with your mana instead.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Catalyst of Aeons",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can repair Durability of Crafts or Companions using Mana or Health; Each point of Durability is equal to 4 Mana or, 2 Health.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Intimidating Roar",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You stun all enemies with their Current Health below [Your Level] within a 3 tile radius.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Take a moment",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When you reload a firearm, you recover [Half Your Level] Health",
+    "Scaling": ""
+  },
+  {
+    "Name": "Survival Skills",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "At the start of each Scene you gain Guard equal to the number of times you were hit last Scene.",
+    "Scaling": ""
+  },
+  {
+    "Name": "One for All",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Any guard you gain is evenly divided among you and your allies.",
+    "Scaling": ""
+  },
+  {
+    "Name": "All for One",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Half of any guard gained by your allies is instead given to you.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Arenas Favourite",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "For the next 2 Scenes you lose 4 Armor and gain +4 Accuracy",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Crimson Banquet",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "All mana costs are reduced by 1. You lose 2 Health, each time you cast a spell.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Crimson Pact",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Crimson Banquet",
+    "Description": "Spells cost no mana, instead pay [Double the Spell level] as Health. Crimson Banquet no longer has an effect.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Light Footed",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "If you have traveled at least 8 tiles; You gain +3 Reflex and +1 Armor.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Sojourners",
+    "Action": "◇",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Whenever you receive a Buff from an ally you can apply a copy of the Buff to another ally.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Slam Dunk",
+    "Action":"◆",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘",
+    "Description": "If you climb a wall or jump over an obstacle, you can jump at an enemy and attack with your weaponm, doing +X Damage. An ally can also offer a boost to perform this attack.",
+    "Scaling": "Damage X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
+  },
+  {
+    "Name": "Return",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Return an object you threw within 6 tile to your hand.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Losers Fallacy",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘",
+    "Description": "Single-target Trait Attacks deal bonus damage equal to the granting trait’s point cost. This effect stacks.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Cold blooded",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While resting you must rest near a heat source. You consume half the amount of rations.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Syphoning Whirlpool",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You deal 1 Damage to all Adjacent Enemies; You regain Mana equal to the Damage dealt.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Deep Pockets",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Spend 2 mana to create one Crafting Component; if unused the Component dissapears on your next rest.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Even Deeper Pockets",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Deep Pockets",
+    "Description": "When summoning a component; You may pay +2 Mana, and instead gain one Trivial Craft. It will dissapear next rest.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Guillotine",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You deal +3 Damage to Prone Enemies",
+    "Scaling": ""
+  },
+  {
+    "Name": "Behold the Infinite",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "Gain X bonus Spells from your Spellcasting School; These spells can only be cast if you Pay for them using Grace.",
+    "Scaling": "Spells X:<br>2 [lvl 1]<br>3 [lvl 6]<br>4 [lvl 12]"
+  },
+  {
+    "Name": "Bodybuilder",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You gain +1 to Might and Intimidation Checks",
+    "Scaling": ""
+  },
+  {
+    "Name": "Battle Ready",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "During the first Scene of combat, all of your Spells cost 2 Less Mana",
+    "Scaling": ""
+  },
+  {
+    "Name": "Leg Sweep",
+    "Action":"◆",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Perform a non-Damaging melee attack; If the attack hits the target is knocked prone.",
+    "Scaling": "Uses 🗲:<br>2 [lvl 1]<br>3 [lvl 6]<br>4 [lvl 12]"
+  },
+  {
+    "Name": "Evasive Stance",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain bonus Armor equal to the amount of Speed over 5.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Snipers Nest",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While Prone you have Advantage on Non-Spell Ranged Attacks.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Personal Vendetta",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Taunt",
+    "Description": "You Taunt a target up to 6 units away. If your weapons range exceeds this amount, use that range instead.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Bloodlust",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Rage",
+    "Description": "While in Rage; You ignore Attack per turn restrictions, however you cannot take any actions that does not deal damage. You loose the ability to dismiss your Rage.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Returned Investment",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "For every turn you do not cast a spell, you reduce the cost of the next spell cast.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Bypassed",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You learn 1 cantrip not from your Spellcasting School.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Blindfold Training",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "The blind condition no longer imposes Disadvantage/Advantage. Instead it becomes a -2/+2 Respectively.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Steadfast",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Reduce all Incoming Damage by 1.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Bookies Choice",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Lose Access to Cantrips, gaining Maximum Mana equal to the number of cantrips lost. Future cantrips are also converted.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Strike the Hand",
+    "Action":"◆",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You make an attack with your Melee Weapon, attempting to disarm an enemy. They must roll [Fortitude] vs [6 + Your Might] to resist.",
+    "Scaling": ""
+  },
+  {
+    "Name": "High Road",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain 3 Grace at the Start of combat, if you had spared a life last combat.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Self Defence",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Taunt",
+    "Description": "Gain +2 Accuracy against creatures Taunted by you.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Lead and Follow",
+    "Action":"◇",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When an Ally preforms a Trait granted attack action, you may do the same Action against the same target, if you also have that Trait.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Shield Vault",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Impact ⫘ Pathmaker",
+    "Description": "The target you dash to becomes Stunned if you have a shield equipped.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Sharesies",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Throw your ally a weapon, if you are proficient with it, they also become proficient with it, until the end of combat.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Patient",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You start Combat with 1 Mantra Stack, Your Mantra Stacks cannot drop bellow 1. All healing you receive is given to you as Stacks of Mantra instead.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Reckless",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Rage",
+    "Description": "While in Rage; Your Armor becomes 0, All Melee Damage you deal is doubled.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Disagreeable Aegis",
+    "Action":"◇",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Shield Training",
+    "Description": "When you are struck by a projectile and you have guard; Reflect the projectile towards the person that attacked you, treat it as a ranged attack originating from you.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Mana Blast",
+    "Action":"⬖",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "This trait does not gain uses on a rest. Each time you cast a level 2 Spell you gain 1 use. Make a Ranged attack that uses [Spellcraft] as its bonus, dealing 3 damage to a creature within 6 units.",
+    "Scaling": "Max Uses 🗲:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
+  },
+  {
+    "Name": "Hostage",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While grappling a creature you are considered to be behind partial cover.",
+    "Scaling": ""
+  },
+  {
+    "Name": "No Restraints",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Deal Double Damage to Guard.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Treaded Ground",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While traveling on tiles an Ally has already walked on this Scene, you gain +3 Movement Speed.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Gracious",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You start combat with Grace equal to [Half your Level]",
+    "Scaling": ""
+  },
+  {
+    "Name": "Inspirational",
+    "Action":"⬖",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Gracious",
+    "Description": "You can no longer generate Grace, nor can you use it grant bonuses to rolls; You may use 1 Grace point to grant yourself or an ally Advantage.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Artilery Mage",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "Your Spells no longer cost Mana; You only have 1 Action per turn.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Lead Role",
+    "Action":"⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain +1 Charm; When you spend grace on an attack roll it deals bonus Damage equal to [Charm]",
+    "Scaling": ""
+  },
+  {
+    "Name": "Comfy Sleeper",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You gain the full benefits of sleep even if you sleep 6 hours or less.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Gardener",
+    "Action":"⭘",
+    "Cost": "",
+    "Symbols": "⧖",
+    "Parameters": "⫘★",
+    "Description": "Gain Advantage on checks needed to care for plants.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Merchant",
+    "Action":"⭘",
+    "Cost": "",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You sell items for 10% more gold, and buy items for 10% less gold (Narators Discretion).",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Sizeable Slash",
+    "Action":"◆",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You preform a large Slash with your Melee weapon, it deals +1 Damage in a 2 Tile Cone.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Answered Prayer",
+    "Action":"⭘",
+    "Cost": "",
+    "Symbols": "☀",
+    "Parameters": "",
+    "Description": "During your rest you may preform a 30 minute ritual; doing so grants you X Grace after the Rest concludes.",
+    "Scaling": "Grace X:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
+  },
+  {
+    "Name": "Musician",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You can play your chosen instrument and are proficient with it as an improvised weapon. While playing, allies within hearing range gain either +1 Armor or +2 Accuracy.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Sailor",
+    "Action": "⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "None",
+    "Description": "You are proficient with maps and compasses. Gain advantage on Scholarship checks regarding ports or islands. You can determine North while viewing any type of sky",
+    "Scaling": "-"
+  },
+  {
+    "Name": "Sharp Nose",
+    "Action": "⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "None",
+    "Description": "Gain advantage on checks involving smell (e.g. detecting poison).",
+    "Scaling": "-"
+  },
+  {
+    "Name": "Hard Target",
+    "Action": "⭘",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "None",
+    "Description": "Cover grants one higher tier of protection. While in cover, gain +2 Accuracy. You may move between covers (min. 3 units apart) as a Free Action.",
+    "Scaling": "-"
+  },
+  {
+    "Name": "Combat Artisan",
+    "Action":"⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Craftsman",
+    "Description": "You gain Access to Combat Crafts; You know a number of Combat Crafts equal to [Half Your Level], the maximum tier of craft depends on the tier unlocked by Craftsman.",
+    "Scaling": "-"
+  },
+  {
+    "Name": "Master Thrower",
+    "Action": "⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Any throwable item you use deals +X Damage.",
+    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Mind",
+    "Action": "⭘",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "★ Grace",
+    "Description": "You may spend X Grace to recharge X Mana.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Range",
+    "Action": "⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Grace",
+    "Description": "You may spend X Grace to increase the Range of ranged attacks or spells by X.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Dexterity",
+    "Action": "⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "★ Grace",
+    "Description": "You may spend X Grace to gain X Speed Stacks.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Haste",
+    "Action": "⭘",
+    "Cost": "1",
+    "Symbols": "🗲",
+    "Parameters": "★ Grace",
+    "Description": "Spend 6 Grace to gain 1 Haste Stack.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Scroll of a Madman",
+    "Action": "⭘",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain +3 Scholarship. You permanently gain Madness Conditions.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Soul Slash",
+    "Action": "◆",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "★ Impact ⫘ Pathmaker",
+    "Description": "Dash up to 3 tiles. Enemies you pass through take 2 Damage. You heal for the total Damage dealt; excess healing is converted into Guard.",
+    "Scaling": "-"
+  },
+  {
+    "Name": "Unstoppable Force",
+    "Action": "⭘",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "★ Rage",
+    "Description": "Cleanse all negative effects and Conditions. Until the end of any turn in which you did not perform a melee attack, you cannot gain negative effects or Conditions.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]"
+  }
+  
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

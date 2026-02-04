@@ -1,0 +1,285 @@
+[
+  {
+        "ID": "AR1-1",
+        "Category": "Simple",
+        "Name": "Smokebomb",
+        "Material":"| 1× Glass – Tube<br>| 1× Stone – Dust",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "6 units, 3 unit radius",
+        "Description": "You create and throw a smokebomb. All creatures in the area suffer –2 Accuracy for 4 scenes.",
+        "Upcast": "",
+        "Lore": "A cloud thick enough to turn certainty into guesswork."
+    },
+    {
+        "ID": "AR1-2",
+        "Category": "Simple",
+        "Name": "Flashbang",
+        "Material":"| 1× Glass – Tube<br>| 1× Stone – Dust",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "6 units, 3 unit radius",
+        "Description": "You create and throw a flashbang. All creatures in the area suffer –4 Accuracy until the end of their next turn.",
+        "Upcast": "",
+        "Lore": "Light, weaponized into a single disorienting instant."
+    },
+    {
+        "ID": "AR1-3",
+        "Category": "Trivial",
+        "Name": "Molly",
+        "Material":"| 1× Glass – Tube<br>| 1× Liquid – Alcohol",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "6 units, 2×2 area",
+        "Description": "You create and throw an incendiary flask. Creatures in the area take 2 Fire Damage and gain the Burn condition.",
+        "Upcast": "",
+        "Lore": "Some mixtures are meant to break, not last."
+    },
+    {
+        "ID": "AR1-5",
+        "Category": "Standard",
+        "Name": "Combat Engineer",
+        "Material":"| 2× Metal – Wire<br>| 1× Metal – Plate",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "4 units",
+        "Description": "You deploy an automated turret. The turret fires at the end of your turn, dealing 2 Damage and having 3 Durability.",
+        "Upcast": "",
+        "Lore": "Built for war, perfected by necessity."
+    },
+  {
+  "ID": "AR1-6",
+  "Category": "Trivial",
+  "Name": "Money Bomb",
+  "Material": "| 30× Coin<br>| 1× Cloth - Bolt (Sack)<br>| 1× Powder – Explosive",
+  "Cost": "1",
+  "Type": "Action",
+  "Range": "6 units, 2 unit radius",
+  "Description": "You create and throw a shrapnel bomb packed with coins. Creatures in the area take 4 Damage.",
+  "Upcast": "",
+  "Lore": "Greed hurts most when it hits at full speed."
+},
+{
+  "ID": "AR1-7",
+  "Category": "Standard",
+  "Name": "Time Bomb",
+  "Material": "| 1× Metal – Plate<br>| 1× Powder – Explosive",
+  "Cost": "2",
+  "Type": "Action",
+  "Range": "6 units, 1 unit radius",
+  "Description": "You throw an explosive that detonates after 1 round, dealing 3 Damage. If two Time Bombs occupy the same tile, they immediately detonate.",
+  "Upcast": "",
+  "Lore": "The deadliest part is knowing it’s coming."
+},
+{
+  "ID": "AR1-8",
+  "Category": "Simple",
+  "Name": "Deployable Cover",
+  "Material": "| 2× Metal – Plate<br>| 1× Metal – Plank",
+  "Cost": "1",
+  "Type": "Action",
+  "Range": "2 units",
+  "Description": "You deploy a 3 Tile Wide piece of Half Cover facing a chosen direction. It has 6 Durability.",
+  "Upcast": "",
+  "Lore": "Sometimes survival is just having something solid in front of you."
+},
+{
+  "ID": "AR1-9",
+  "Category": "Difficult",
+  "Name": "Dynamite!",
+  "Material": "| 1× Powder – Explosive<br>| 1× Rope - Cord<br>| 1× Cloth - Patch",
+  "Cost": "1",
+  "Type": "Action",
+  "Range": "6 units, 2×2 area",
+  "Description": "Creatures in the area take 5 Damage. Any non-reinforced cover in the affected tiles is destroyed.",
+  "Upcast": "",
+  "Lore": "Subtlety is optional."
+},
+{
+  "ID": "AR1-10",
+  "Category": "Trivial",
+  "Name": "Lasso",
+  "Material": "| 1× Rope Component",
+  "Cost": "1",
+  "Type": "Attack Action",
+  "Range": "4 units",
+  "Description": "Make a ranged attack you are proficient with. On a successful hit, the target is Restrained. You may roll Competing [Might] to pull the creature up to 2 units closer to you.",
+  "Upcast": "",
+  "Lore": "Control the rope, control the fight."
+},
+{
+  "ID": "AR1-11",
+  "Category": "Standard",
+  "Name": "Flare Gun",
+  "Material": "| 1× Metal – Rod<br>| 1× Powder – Explosive",
+  "Cost": "1",
+  "Type": "Attack Action",
+  "Range": "8 units",
+  "Description": "Make a ranged attack you are proficient with. Fires a bright projectile. On hit, the target takes 2 Damage and gains 2 Burn. Must be reloaded after each shot.",
+  "Upcast": "",
+  "Lore": "A signal that hurts."
+},
+{
+  "ID": "AR1-12",
+  "Category": "Trivial",
+  "Name": "Bola",
+  "Material": "| 1× Rope Component",
+  "Cost": "1",
+  "Type": "Attack Action",
+  "Range": "6 units",
+  "Description": "On hit, the target takes 1 Damage and gains 3 stacks of Slow.",
+  "Upcast": "",
+  "Lore": "Momentum does the rest."
+},
+{
+  "ID": "AR1-13",
+  "Category": "Standard",
+  "Name": "Satchel Charge",
+  "Material": "| 1× Cloth - Bolt (Satchel)<br>| 1× Powder – Explosive",
+  "Cost": "2",
+  "Type": "Action",
+  "Range": "Adjacent tile",
+  "Description": "You place an explosive charge. You may detonate it later as a Reaction, dealing 4 Damage in a 1-unit radius.",
+  "Upcast": "",
+  "Lore": "Set it. Forget it. Regret it."
+},
+{
+  "ID": "AR1-14",
+  "Category": "Trivial",
+  "Name": "Caltrops",
+  "Material": "| 1× Metal – Wire",
+  "Cost": "1",
+  "Type": "Action",
+  "Range": "3 units, cone",
+  "Description": "Creatures that move through affected tiles take 1 Damage.",
+  "Upcast": "",
+  "Lore": "Every step is a mistake."
+},
+{
+  "ID": "AR1-15",
+  "Category": "Simple",
+  "Name": "Sonic Wave",
+  "Material": "| 1× Wood - Core",
+  "Cost": "1",
+  "Type": "Action",
+  "Range": "3 unit cone",
+  "Description": "Creatures in the area suffer –2 Accuracy until the end of their next turn.",
+  "Upcast": "",
+  "Lore": "Weaponized noise."
+},
+{
+  "ID": "AR1-16",
+  "Category": "Simple",
+  "Name": "Net",
+  "Material": "| 1× Rope Component",
+  "Cost": "1",
+  "Type": "Attack Action",
+  "Range": "6 units",
+  "Description": "Make a ranged attack you are proficient with. On hit, the target is Restrained.",
+  "Upcast": "",
+  "Lore": "Movement denied."
+},
+{
+  "ID": "AR1-17",
+  "Category": "Standard",
+  "Name": "Adhesive Foam Grenade",
+  "Material": "| 1× Liquid - Oil<br>| 1× Glass – Tube<br>| 1× Powder – Conductive",
+  "Cost": "1",
+  "Type": "Action",
+  "Range": "6 units",
+  "Description": "The target cannot move for 2 scenes but does not grant advantage to attackers.",
+  "Upcast": "",
+  "Lore": "Held fast, not helpless."
+},
+{
+  "ID": "AR1-18",
+  "Category": "Simple",
+  "Name": "Dread Smoke",
+  "Material": "| 1× Glass – Tube<br>| 1× Powder - Conductive",
+  "Cost": "1",
+  "Type": "Action",
+  "Range": "6 units, 3 unit radius",
+  "Description": "Creates smoke. Creatures inside lose resistance to Intimidation effects for 4 scenes. And suffer a -4 penalty to resisting those effects.",
+  "Upcast": "",
+  "Lore": "Fear sticks in the lungs."
+},
+{
+  "ID": "AR1-19",
+  "Category": "Difficult",
+  "Name": "Snooze Gas",
+  "Material": "| 1× Glass – Tube<br>| 1× Bone - Marrow",
+  "Cost": "2",
+  "Type": "Action",
+  "Range": "6 units, 3 unit radius",
+  "Description": "Creatures must succeed a [Fortitude] Check or fall Asleep.",
+  "Upcast": "",
+  "Lore": "Rest, enforced."
+},
+{
+  "ID": "AR1-20",
+  "Category": "Difficult",
+  "Name": "Frag Grenade",
+  "Material": "| 1× Metal – Plate<br>| 1× Powder – Explosive",
+  "Cost": "1",
+  "Type": "Action",
+  "Range": "6 units, 2 unit radius",
+  "Description": "Creatures take 6 Damage and gain 6 Bleed.",
+  "Upcast": "",
+  "Lore": "Sharp problems, everywhere."
+},
+{
+  "ID": "AR1-21",
+  "Category": "Simple",
+  "Name": "Fireworks",
+  "Material": "| 1× Powder – Explosive<br>| 1× Powder - Conductive<br>| 1× Cloth - Patch",
+  "Cost": "1",
+  "Type": "Attack Action",
+  "Range": "8 units",
+  "Description": "You launch a rocket at a creature, you are proficient with this attack, dealing 3 Damage.",
+  "Upcast": "",
+  "Lore": "Celebration is optional."
+},
+{
+  "ID": "AR1-22",
+  "Category": "Complex",
+  "Name": "Rage Smoke",
+  "Material": "| 1× Glass – Tube<br>| 1× Liquid - Alcohol<br>| 1× Powder – Conductive",
+  "Cost": "2",
+  "Type": "Action",
+  "Range": "6 units, 3 unit radius",
+  "Description": "Creatures affected gain Rage. While enraged, they must attack the nearest creature and cannot choose targets.",
+  "Upcast": "",
+  "Lore": "Anger, bottled."
+},
+{
+  "ID": "AR1-23",
+  "Category": "Trivial",
+  "Name": "Sticky jar",
+  "Material": "| 1× Liquid – Oil<br>| 1× Glass - Tube",
+  "Cost": "1",
+  "Type": "Action",
+  "Range": "4 units, 2×2 area",
+  "Description": "The area becomes difficult terrain.",
+  "Upcast": "",
+  "Lore": "Every step lingers."
+},
+{
+  "ID": "AR1-24",
+  "Category": "Trivial",
+  "Name": "Oil Jar",
+  "Material": "| 1× Liquid – Oil<br>| 1× Glass - Tube",
+  "Cost": "1",
+  "Type": "Action",
+  "Range": "4 units, 2×2 area",
+  "Description": "The area becomes slippery terrain.",
+  "Upcast": "",
+  "Lore": "Balance is optional."
+}
+]
+
+
+
+
+
+
+
