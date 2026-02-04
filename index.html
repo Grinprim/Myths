@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myths</title>
+    <link rel="icon" type="image/svg+xml" href="./Myths/Assets/img/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./Myths/Assets/css/styles.css">
+</head>
+<body class="bg-custom-dark text-slate-300">
+
+    <header id="hero-header" class="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient">
+        <canvas id="starCanvas" class="absolute inset-0 pointer-events-none"></canvas>
+
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-600/10 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-orange-600/10 rounded-full blur-[120px]"></div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl">
+            
+            <div class="relative w-72 h-72 mx-auto mb-6 flex items-center justify-center group">
+                <div class="absolute inset-0 bg-amber-500/20 rounded-full blur-3xl animate-pulse"></div>
+                <div class="absolute inset-0 border-2 border-dashed border-amber-500/30 rounded-full animate-[spin_15s_linear_infinite]"></div>
+                <div class="absolute inset-8 border border-amber-400/20 rounded-full animate-[spin_10s_linear_infinite_reverse]"></div>
+                
+                <img src="./Myths/Assets/img/logo.png" 
+                    alt="Myths Logo" 
+                    class="relative z-10 h-56 w-auto mx-auto animate-float drop-shadow-[0_0_25px_rgba(245,158,11,0.8)] transition-transform duration-500 group-hover:scale-110">
+                
+                <div class="absolute inset-0 bg-gradient-to-tr from-amber-500/10 to-transparent rounded-full opacity-50 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+
+            <div class="mb-8 select-none">
+                <span class="text-4xl md:text-5xl font-bold tracking-[0.4em] text-white fantasy-font block logo-glow">MYTHS</span>
+                <div class="h-px w-32 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mt-4 opacity-50"></div>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight tracking-tight select-none">
+                Choose Your Realm in <br><span class="text-amber-400">Myths</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed select-none">
+                Choose a destination and begin your journey.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="./Mythlight/index.html" class="portal-button portal-mythlight">
+                    <span class="portal-ring"></span>
+                    <span class="portal-core">Mythlight</span>
+                </a>
+                <a href="./Mythblitz/index.html" class="portal-button portal-mythblitz">
+                    <span class="portal-ring"></span>
+                    <span class="portal-core">Mythblitz</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <script src="./Mythlight/Assets/dyn/starfield.js" defer></script>
+</body>
+</html>
