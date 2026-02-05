@@ -3,6 +3,9 @@
 :root{--glass-border:rgba(255,255,255,0.1);--glass-bg:rgba(15,23,42,0.6);--accent-glow:rgba(99,102,241,0.3)}
 
 /* Global */
+html {
+    scroll-padding-top: 6rem;
+}
 body {
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
@@ -90,6 +93,7 @@ h1,h2,h3,h4,.fantasy-font{font-family:'Cinzel',serif}
 .sidebar::-webkit-scrollbar-track{background:transparent}
 .sidebar::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}
 .nav-group-title{font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;color:#94a3b8;margin-top:1.5rem;margin-bottom:.5rem;font-weight:700}
+.nav-group-title + .sidebar-link{margin-top:.6rem}
 .sidebar-link{display:block;padding:.5rem .75rem;color:#cbd5e1;font-size:.85rem;border-left:2px solid transparent;transition:all .2s;border-radius:0 4px 4px 0}
 .sidebar-link:hover,.sidebar-link.active{border-left-color:#6366f1;background:rgba(99,102,241,.1);color:#fff;padding-left:1rem}
 .rule-card{background:rgba(30,41,59,.4);border:1px solid var(--glass-border);border-radius:1rem;padding:2rem;margin-bottom:2rem;backdrop-filter:blur(4px);transition:border-color .3s}
@@ -118,6 +122,14 @@ h1,h2,h3,h4,.fantasy-font{font-family:'Cinzel',serif}
 
 /* TRAITS */
 .legend-card{background:linear-gradient(to bottom right,rgba(30,41,59,.7),rgba(15,23,42,.9));border:1px solid rgba(99,102,241,.2)}
+.legend-frame{width:100%}
+.legend-sticky{z-index:40}
+@media (min-width:1024px){
+    .legend-frame{flex:0 0 var(--legend-width,18rem)}
+    .legend-sticky{position:fixed;top:9rem;width:var(--legend-width,18rem);max-height:calc(100vh - 10rem);overflow-y:auto;padding-right:.25rem}
+}
+.legend-sticky::-webkit-scrollbar{width:6px}
+.legend-sticky::-webkit-scrollbar-thumb{background:rgba(99,102,241,.25);border-radius:10px}
 .legend-symbol{font-size:1.1rem;color:#fff;background:rgba(255,255,255,.05);width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:8px;margin-right:.75rem;border:1px solid rgba(255,255,255,.1);flex-shrink:0;transition:all .2s}
 .legend-symbol.clickable{cursor:pointer}
 .legend-symbol.clickable:hover{background:rgba(99,102,241,.2);border-color:rgba(99,102,241,.5);transform:scale(1.05)}

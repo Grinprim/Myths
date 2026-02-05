@@ -38,13 +38,33 @@
             position: relative; 
         }
 
+        :root {
+            --rules-max-width: 1400px;
+            --rules-sidebar-width: 260px;
+            --rules-side-pad: 1.5rem;
+            --rules-sidebar-top: calc(9rem + 2cm);
+        }
+
         .sidebar {
-            position: sticky;
-            top: 6rem; /* Distance from top of viewport */
-            height: calc(100vh - 6rem);
+            position: relative;
+            align-self: start;
+            min-height: calc(100vh - var(--rules-sidebar-top));
+        }
+
+        .sidebar-fixed {
+            position: fixed;
+            top: var(--rules-sidebar-top);
+            left: max(var(--rules-side-pad), calc((100vw - var(--rules-max-width)) / 2 + var(--rules-side-pad)));
+            width: var(--rules-sidebar-width);
+            max-height: calc(100vh - var(--rules-sidebar-top));
             overflow-y: auto;
             padding-right: 1rem;
-            align-self: start;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.55));
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 1rem;
+            padding: 1.25rem 1rem 1.25rem 1.25rem;
+            box-shadow: 0 20px 40px -30px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
         }
 
         /* SCROLL OFFSET FIX 
@@ -52,12 +72,18 @@
            This pushes the scroll snap point down, so content appears 
            towards the middle of the screen, not the very top.
         */
-        .scroll-offset-center { scroll-margin-top: 35vh; }
+        .scroll-offset-center { scroll-margin-top: calc(var(--rules-sidebar-top) + 1rem); }
+
+        section[id] {
+            scroll-margin-top: calc(var(--rules-sidebar-top) + 1rem);
+        }
+
 
         /* Mobile Adjustments */
         @media(max-width: 1024px) {
             .rules-layout { grid-template-columns: 1fr; }
             .sidebar { display: none; }
+            .sidebar-fixed { position: static; width: auto; max-height: none; left: auto; top: auto; }
         }
     </style>
 </head>
@@ -87,32 +113,34 @@
         <div id="view-campaign" class="view-section rules-layout">
             
             <aside class="sidebar hidden lg:block">
-                <div class="mb-8">
-                    <p class="text-xs text-slate-500 mb-2">JUMP TO SECTION</p>
-                    <div class="h-1 w-10 bg-indigo-500 rounded"></div>
-                </div>
+                <div class="sidebar-fixed">
+                    <div class="mb-8">
+                        <p class="text-xs text-slate-500 mb-2">JUMP TO SECTION</p>
+                        <div class="h-1 w-10 bg-indigo-500 rounded"></div>
+                    </div>
 
-                <div class="nav-group-title">Core Rules</div>
-                <a href="#intro" class="sidebar-link">Introduction</a>
-                <a href="#resolution" class="sidebar-link">Resolution System (2d6)</a>
-                
-                <div class="nav-group-title">Character Creation</div>
-                <a href="#creation" class="sidebar-link">Attributes</a>
-                <a href="#origin" class="sidebar-link">Species & Path</a>
-                <a href="#skills" class="sidebar-link">Skills</a>
-                <a href="#damage" class="sidebar-link">Health, Guard & Death</a>
-                <a href="#progression" class="sidebar-link">Traits & Level ups</a>
-                <a href="#spellcasting" class="sidebar-link">Spellcasting</a>
-                <a href="#equipment" class="sidebar-link">Equipment</a>
-                
-                <div class="nav-group-title">Combat Rules</div>
-                <a href="#movement" class="sidebar-link">Movement</a>
-                <a href="#size" class="sidebar-link">Map Sizes & Effects</a>
-                <a href="#range" class="sidebar-link">Ranged Combat</a>
-                <a href="#combat" class="sidebar-link">Turn Structure</a>
-                <a href="#companion" class="sidebar-link">Companions</a>
-                <a href="#conditions" class="sidebar-link">Conditions</a>
-                <a href="#mount" class="sidebar-link">Mount & Vehicle Combat</a>
+                    <div class="nav-group-title">Core Rules</div>
+                    <a href="#intro" class="sidebar-link">Introduction</a>
+                    <a href="#resolution" class="sidebar-link">Resolution System (2d6)</a>
+                    
+                    <div class="nav-group-title">Character Creation</div>
+                    <a href="#creation" class="sidebar-link">Attributes</a>
+                    <a href="#origin" class="sidebar-link">Species & Path</a>
+                    <a href="#skills" class="sidebar-link">Skills</a>
+                    <a href="#damage" class="sidebar-link">Health, Guard & Death</a>
+                    <a href="#progression" class="sidebar-link">Traits & Level ups</a>
+                    <a href="#spellcasting" class="sidebar-link">Spellcasting</a>
+                    <a href="#equipment" class="sidebar-link">Equipment</a>
+                    
+                    <div class="nav-group-title">Combat Rules</div>
+                    <a href="#movement" class="sidebar-link">Movement</a>
+                    <a href="#size" class="sidebar-link">Map Sizes & Effects</a>
+                    <a href="#range" class="sidebar-link">Ranged Combat</a>
+                    <a href="#combat" class="sidebar-link">Turn Structure</a>
+                    <a href="#companion" class="sidebar-link">Companions</a>
+                    <a href="#conditions" class="sidebar-link">Conditions</a>
+                    <a href="#mount" class="sidebar-link">Mount & Vehicle Combat</a>
+                </div>
             </aside>
 
             <div class="content space-y-24">
@@ -246,29 +274,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="section-header">
-                            <span class="section-number">04</span>
-                            Species & Path
-                        </div>
-                        <div class="rule-card">
-                            <h3 id="origin" class="text-xl text-white font-bold mb-4">Species & Path</h3>
-                            <p class="mb-4">Your character is more than just numbers — it's also your past, culture and
-                                appearance. Use these to inform roleplay and mechanical choices.</p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
-                                    <strong class="text-orange-400 block">Species</strong>
-                                    Species represent your character’s physical traits and cultural background. Each species
-                                    grants <strong>minor bonuses</strong> to base attributes and provides <strong>one unique
-                                        trait</strong>.
-                                    <br><br>
-                                    You pick one at character creation.
-                                </div>
-                                <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
-                                    <strong class="text-orange-400 block">Path</strong>
-                                    Paths represent training and past experiences. Paths grant skill modifiers and one
-                                    trait.
-                                    <br><br>
-                                    You pick one at character creation.
+                        <div id="origin" class="scroll-offset-center">
+                            <div class="section-header">
+                                <span class="section-number">04</span>
+                                Species & Path
+                            </div>
+                            <div class="rule-card">
+                                <h3 class="text-xl text-white font-bold mb-4">Species & Path</h3>
+                                <p class="mb-4">Your character is more than just numbers — it's also your past, culture and
+                                    appearance. Use these to inform roleplay and mechanical choices.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
+                                        <strong class="text-orange-400 block">Species</strong>
+                                        Species represent your character’s physical traits and cultural background. Each species
+                                        grants <strong>minor bonuses</strong> to base attributes and provides <strong>one unique
+                                            trait</strong>.
+                                        <br><br>
+                                        You pick one at character creation.
+                                    </div>
+                                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
+                                        <strong class="text-orange-400 block">Path</strong>
+                                        Paths represent training and past experiences. Paths grant skill modifiers and one
+                                        trait.
+                                        <br><br>
+                                        You pick one at character creation.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1360,22 +1390,24 @@
         <div id="view-oneshots" class="view-section hidden rules-layout">
             
             <aside class="sidebar hidden lg:block">
-                <div class="mb-8">
-                    <p class="text-xs text-slate-500 mb-2">JUMP TO SECTION</p>
-                    <div class="h-1 w-10 bg-indigo-500 rounded"></div>
-                </div>
+                <div class="sidebar-fixed">
+                    <div class="mb-8">
+                        <p class="text-xs text-slate-500 mb-2">JUMP TO SECTION</p>
+                        <div class="h-1 w-10 bg-indigo-500 rounded"></div>
+                    </div>
 
-                <div class="nav-group-title">Creation</div>
-                <a href="#os-creation" class="sidebar-link">Character Creation</a>
-                
-                <div class="nav-group-title">Rules</div>
-                <a href="#os-health" class="sidebar-link">Health & Defeat</a>
-                <a href="#os-core" class="sidebar-link">Core Mechanics</a>
-                <a href="#os-turns" class="sidebar-link">Turns & Actions</a>
-                <a href="#os-movement" class="sidebar-link">Movement & Range</a>
-                <a href="#os-ranged" class="sidebar-link">Ranged Combat</a>
-                <a href="#os-companions" class="sidebar-link">Companions</a>
-                <a href="#os-narrator" class="sidebar-link">Narrator Guidance</a>
+                    <div class="nav-group-title">Creation</div>
+                    <a href="#os-creation" class="sidebar-link">Character Creation</a>
+
+                    <div class="nav-group-title">Rules</div>
+                    <a href="#os-health" class="sidebar-link">Health & Defeat</a>
+                    <a href="#os-core" class="sidebar-link">Core Mechanics</a>
+                    <a href="#os-turns" class="sidebar-link">Turns & Actions</a>
+                    <a href="#os-movement" class="sidebar-link">Movement & Range</a>
+                    <a href="#os-ranged" class="sidebar-link">Ranged Combat</a>
+                    <a href="#os-companions" class="sidebar-link">Companions</a>
+                    <a href="#os-narrator" class="sidebar-link">Narrator Guidance</a>
+                </div>
             </aside>
 
             <div class="content space-y-24">
@@ -1709,6 +1741,10 @@
                     document.querySelectorAll('.tab-btn')[index].classList.add('active');
                 }
             }
+            requestAnimationFrame(() => {
+                syncSidebarTop();
+                updateSidebarActive();
+            });
         }
 
         // --- 2. Dice Randomization ---
@@ -1722,50 +1758,67 @@
             });
         }
 
-        // --- 3. Sidebar Observer (Fixed) ---
-        // We use a large negative bottom margin so the observer triggers when 
-        // the element hits the top part of the viewport, not just when it enters the screen.
-        const observerOptions = {
-            root: null,
-            // '-20% 0px -60% 0px' creates a narrow 'active' band near the top of the screen.
-            // Elements only trigger when they are in this band.
-            rootMargin: '-20% 0px -60% 0px', 
-            threshold: 0
-        };
+        function syncSidebarTop() {
+            const title = document.querySelector('#view-campaign #core-section h2');
+            if (!title) return;
+            if (!window.matchMedia('(min-width: 1024px)').matches) return;
+            const rect = title.getBoundingClientRect();
+            if (rect.top <= 0) return;
+            document.documentElement.style.setProperty('--rules-sidebar-top', `${Math.round(rect.top)}px`);
+        }
+        function updateSidebarActive() {
+            const campaignVisible = !document.getElementById('view-campaign').classList.contains('hidden');
+            const activeViewId = campaignVisible ? 'view-campaign' : 'view-oneshots';
+            const activeSidebar = document.querySelector(`#${activeViewId} .sidebar`);
+            if (!activeSidebar) return;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // 1. Determine which view is currently active (Campaign or One Shot)
-                    const campaignVisible = !document.getElementById('view-campaign').classList.contains('hidden');
-                    const activeViewId = campaignVisible ? 'view-campaign' : 'view-oneshots';
-                    const activeSidebar = document.querySelector(`#${activeViewId} .sidebar`);
+            const sections = Array.from(document.querySelectorAll(`#${activeViewId} section[id]`));
+            if (!sections.length) return;
 
-                    if (activeSidebar) {
-                        // 2. Remove active class from all links in THIS sidebar
-                        activeSidebar.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active'));
-                        
-                        // 3. Find the link corresponding to the intersecting section
-                        const activeId = entry.target.getAttribute('id');
-                        const activeLink = activeSidebar.querySelector(`a[href="#${activeId}"]`);
-                        
-                        if (activeLink) {
-                            activeLink.classList.add('active');
-                        }
-                    }
+            const rawOffset = getComputedStyle(document.documentElement).getPropertyValue('--rules-sidebar-top');
+            const offset = Number.parseFloat(rawOffset) || 0;
+
+            let current = sections[0];
+            const threshold = 40;
+            for (const section of sections) {
+                const top = section.getBoundingClientRect().top - offset;
+                if (top <= threshold) current = section;
+                else break;
+            }
+
+            if (location.hash) {
+                const hashId = location.hash.replace('#', '');
+                const pinned = document.getElementById(hashId);
+                if (pinned) {
+                    const top = pinned.getBoundingClientRect().top - offset;
+                    if (Math.abs(top) <= 120) current = pinned;
                 }
-            });
-        }, observerOptions);
+            }
+
+            activeSidebar.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active'));
+            const activeLink = activeSidebar.querySelector(`a[href="#${current.id}"]`);
+            if (activeLink) activeLink.classList.add('active');
+        }
 
 
         // --- 4. Initialization ---
         document.addEventListener("DOMContentLoaded", () => {
-            // Observe sections for sidebar (Any section that has an ID)
-            document.querySelectorAll('section[id]').forEach(section => {
-                observer.observe(section);
-            });
-
             randomizeDiceFaces();
+            requestAnimationFrame(syncSidebarTop);
+            requestAnimationFrame(updateSidebarActive);
+            window.addEventListener('resize', () => {
+                requestAnimationFrame(syncSidebarTop);
+                requestAnimationFrame(updateSidebarActive);
+            });
+            document.addEventListener('scroll', () => {
+                requestAnimationFrame(updateSidebarActive);
+            }, { passive: true });
+
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    setTimeout(updateSidebarActive, 120);
+                });
+            });
         });
     </script>
     <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
