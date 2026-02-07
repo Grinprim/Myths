@@ -319,7 +319,7 @@
                             <div class="rule-card">
                                 <h4 class="text-white font-bold mb-3 border-b border-slate-700 pb-2">Physique Skills</h4>
                                 <ul class="text-sm space-y-2">
-                                    <li><span class="keyword">Might:</span> Lifting, breaking, melee strikes.</li>
+                                    <li><span class="keyword">Might:</span> Lifting, breaking, melee proficiencies.</li>
                                     <li><span class="keyword">Athletics:</span> Running, jumping, climbing, grappling,
                                         carrying capacity.</li>
                                     <li><span class="keyword">Fortitude:</span> Resisting poison, pain, disease, unarmored
@@ -330,7 +330,7 @@
                             <div class="rule-card">
                                 <h4 class="text-white font-bold mb-3 border-b border-slate-700 pb-2">Technique Skills</h4>
                                 <ul class="text-sm space-y-2">
-                                    <li><span class="keyword">Aim:</span> Ranged accuracy, hitting very small targets</li>
+                                    <li><span class="keyword">Aim:</span> Ranged proficiencies, hitting very small targets</li>
                                     <li><span class="keyword">Tinkering:</span> Repairing, crafting, brewing.</li>
                                     <li><span class="keyword">Finesse:</span> Sleight of hand, picking locks, finesse melee,
                                         looting.</li>
@@ -616,14 +616,14 @@
                         <div class="rule-card">
                             <p class="mb-4"><strong>Armor & Weaponry + Proficiencies</strong></p>
                             <p class="text-sm mb-4">You are restricted in how much of each type of equipment you can wear.
-                                Your character sheet has slots (helmet, body, shield, etc.). One piece of equipment per
+                                Your character sheet has slots (Armor, Shield Cloak). One piece of equipment per
                                 slot, unless a trait says otherwise.</p>
 
                             <div class="space-y-3 text-sm">
                                 <div class="bg-slate-900/30 p-2 rounded flex justify-between">
                                     <span>Armor</span>
-                                    <span class="text-slate-400">Worn to gain extra defence; usually overrides
-                                        <strong>unarmored defence [5 + Fortitude]</strong></span>
+                                    <span class="text-slate-400">Your base armor is [4 + Fortitude], armor you wear grants a flat bonus.
+                                        <strong>Shields; 1-2, Light; 1-2, Medium; 2-3, Heavy: 4-5</strong></span>
                                 </div>
                                 <div class="bg-slate-900/30 p-2 rounded flex justify-between">
                                     <span>Weaponry</span>
@@ -631,13 +631,12 @@
                                         traits only <strong>1 weapon</strong> is fully effective.</span>
                                 </div>
                                 <div class="bg-slate-900/30 p-2 rounded flex justify-between">
-                                    <span>Proficiencies</span>
-                                    <span class="text-slate-400">You gain effective use of certain gear from traits.</span>
+                                    <span>Weapon Proficiencies</span>
+                                    <span class="text-slate-400">Your Might and Aim determine how many points you may invest in Melee and Ranged proficiencies, respectively. To invest in a proficiency, you must have at least 1 point in a lower proficiency of the same type. Multiple points may be assigned to the same proficiency.</span>
                                 </div>
                                 <div class="bg-slate-900/30 p-2 rounded flex justify-between">
-                                    <span>Automatic Proficiencies</span>
-                                    <span class="text-slate-400"><strong>Light melee weapons</strong>, <strong>light
-                                            armor</strong> and <strong>shields</strong> are available by default.</span>
+                                    <span>Armor Proficiencies</span>
+                                    <span class="text-slate-400">You gain armor proficiencies based on your Fortitude: Shields 1+, Light 2+, Medium 3+, Heavy 4+</span>
                                 </div>
 
                                 <div class="rule-card mt-4 p-4">
@@ -920,19 +919,19 @@
                                 <div>
                                     <strong class="text-indigo-400">Melee Attack</strong>
                                     <div class="font-mono bg-black/30 p-2 rounded mt-1">
-                                        2d6 + Physique + Might Mod + Weapon Mod + Accuracy
+                                        2d6 + Proficiency + Weapon Mod + Accuracy
                                     </div>
                                 </div>
                                 <div>
                                     <strong class="text-indigo-400">Ranged Attack</strong>
                                     <div class="font-mono bg-black/30 p-2 rounded mt-1">
-                                        2d6 + Technique + Aim Mod + Weapon Mod + Accuracy
+                                        2d6 + Proficiency + Weapon Mod + Accuracy
                                     </div>
                                 </div>
                                 <div>
                                     <strong class="text-indigo-400">Magic Attack</strong>
                                     <div class="font-mono bg-black/30 p-2 rounded mt-1">
-                                        2d6 + Mystique + Spellcraft Mod + Focus Mod + Accuracy
+                                        2d6 + Proficiency + Focus Mod + Accuracy
                                     </div>
                                 </div>
                                 <p class="text-xs text-slate-500 mt-2">
