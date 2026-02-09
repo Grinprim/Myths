@@ -154,6 +154,16 @@
         let rawTraits = [];
         let activeSymbolFilter = null;
 
+        function getTraitPrerequisites(trait) {
+            if (!trait || !trait.Parameters || !trait.Parameters.includes('⫘')) return null;
+            const prereqs = trait.Parameters
+                .split('⫘')
+                .slice(1)
+                .map((part) => part.replace(/★/g, '').trim())
+                .filter(Boolean);
+            return prereqs.length ? prereqs.join(', ') : null;
+        }
+
         // --- Improved Random Trait Logic ---
         function pickRandomTrait() {
             if(!rawTraits.length) return;
@@ -194,8 +204,13 @@
                 nameEl.classList.remove('text-indigo-300', 'shuffling');
                 nameEl.textContent = trait.Name;
                 
+                const prereqText = getTraitPrerequisites(trait);
+
                 // USE INNERHTML to parse <b>, <i>, <br>
-                descEl.innerHTML = trait.Description || "No description available.";
+                descEl.innerHTML = `
+                    ${prereqText ? `<div class="mb-3 text-xs uppercase tracking-widest text-emerald-400">Prerequisite: <span class="text-emerald-200 font-semibold">${prereqText}</span></div>` : ''}
+                    ${trait.Description || "No description available."}
+                `;
 
                 // Build Meta Badges
                 let badges = ``;
@@ -212,6 +227,10 @@
                 // Symbol Badge
                 if(trait.Symbols && trait.Symbols !== "-") {
                     badges += `<span class="px-3 py-1 rounded-full bg-slate-700 border border-slate-600 text-indigo-300 text-[10px] font-mono">${trait.Symbols}</span>`;
+                }
+
+                if (prereqText) {
+                    badges += `<span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[10px] font-bold uppercase tracking-wider">Prereq</span>`;
                 }
 
                 metaEl.innerHTML = badges;
