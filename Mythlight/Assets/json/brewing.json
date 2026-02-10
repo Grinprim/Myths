@@ -28,10 +28,10 @@
       "code": "00010",
       "name": "Arcane Spirit",
       "effects": [
-        "Restore 1 mana",
-        "Restore 2 mana",
-        "Restore 3 mana",
-        "Restore 3 mana & next spell costs 0 mana"
+        "Restore [Drinker Level] mana",
+        "Restore [Drinker Level]+1 mana",
+        "Restore [Drinker Level]+2 mana",
+        "Restore [Drinker Level]+2 mana & next spell costs 0 mana"
       ]
     },
     {
@@ -98,9 +98,9 @@
       "code": "01001",
       "name": "Bloodfury Brew",
       "effects": [
-        "+2 melee damage, take 1 Harm",
-        "+3 melee damage, take 1 Harm",
-        "+4 melee damage, take 2 Harm",
+        "+2 melee damage, take 1 Damage",
+        "+3 melee damage, take 1 Damage",
+        "+4 melee damage, take 2 Damage",
         "+4 melee damage & attacks apply –1 defense"
       ]
     },
