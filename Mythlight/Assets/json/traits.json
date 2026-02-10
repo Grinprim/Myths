@@ -1,91 +1,10 @@
 [
   {
-    "Name": "Medium Melee Weapon Proficiency",
-    "Action":"⭘",
-    "Cost": "1",
-    "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "You can effectively wield Medium melee weapons.",
-    "Scaling": ""
-  },
-  {
-    "Name": "Heavy Melee Weapon Proficiency",
-    "Action":"⭘",
-    "Cost": "1",
-    "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "You can effectively wield Heavy melee weapons.",
-    "Scaling": ""
-  },
-  {
-    "Name": "Light Bow Proficiency",
-    "Action":"⭘",
-    "Cost": "1",
-    "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "You can effectively wield Light Bows, Slingshots and Crossbows.",
-    "Scaling": ""
-  },
-  {
-    "Name": "Heavy Bow Proficiency",
-    "Action":"⭘",
-    "Cost": "1",
-    "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "You can effectively wield Heavy Bows and Crossbows.",
-    "Scaling": ""
-  },
-  {
-    "Name": "Light Firearm Proficiency",
-    "Action":"⭘",
-    "Cost": "1",
-    "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "You can effectively wield Light Firearms.",
-    "Scaling": ""
-  },
-  {
-    "Name": "Heavy Firearm Proficiency",
-    "Action":"⭘",
-    "Cost": "1",
-    "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "You can effectively wield Heavy Firearms.",
-    "Scaling": ""
-  },
-  {
-    "Name": "Medium Armor Training",
-    "Action":"⭘",
-    "Cost": "1",
-    "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "You can equip Medium armor. While wearing it, gain +1 Athletics.",
-    "Scaling": ""
-  },
-  {
-    "Name": "Heavy Armor Training",
-    "Action":"⭘",
-    "Cost": "1",
-    "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "You can equip Heavy armor. While wearing it, gain -1 Reflex.",
-    "Scaling": ""
-  },
-  {
-    "Name": "Shield Training",
-    "Action":"⭘",
-    "Cost": "1",
-    "Symbols": "⧖",
-    "Parameters": "★ Off-hand",
-    "Description": "While you have a shield equipped at the start of combat, gain Guard equal to your level.",
-    "Scaling": ""
-  },
-  {
     "Name": "Heavy Guard",
     "Action":"⭘",
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": " ⫘ Heavy Armor Training",
+    "Parameters": " ⫘ Heavy Armor Proficiency, Shield Proficiency",
     "Description": "When wearing Heavy armor and using a shield, gain +2 Armor.",
     "Scaling": ""
   },
@@ -194,7 +113,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain proficiency with improvised weaponry; they deals +1 Damage.",
+    "Description": "Improvised weaponry uses the Highest proficiency tier you have; they deals +1 Damage.",
     "Scaling": ""
   },
   {
@@ -527,7 +446,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You gain the ability to Craft; You start with Trivial Recipes, at Levels 3, 6, 9 and 12 you unlock the next tier. Learn a number of Recipes equal to [Half your Level]",
+    "Description": "You gain the ability to Craft; You start with Trivial Recipes, at each point of Tinkering above 1, increases the known recipe tier. Learn a number of Recipes equal to [Half your Level]",
     "Scaling": ""
   },
   {
@@ -1318,7 +1237,7 @@
     "Action":"⭘",
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "⫘ Any Heavy Weapon Training",
+    "Parameters": "⫘ Heavy Weapon Proficiency",
     "Description": "Heavy Weapons deal +X Damage, but suffer -3 Accuracy",
     "Scaling": "Damage X:<br>2 [lvl 1]<br>3 [lvl 6]<br>4 [lvl 12]"
   },
@@ -1633,7 +1552,7 @@
     "Action":"⭘",
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "⫘ Any Ranged Weapon Training",
+    "Parameters": "⫘ Any Ranged Proficiency",
     "Description": "Ranged weapons and traits, gain +X range",
     "Scaling": "Range X:<br>+2 [lvl 1]<br>+4 [lvl 6]"
   },
@@ -1680,7 +1599,7 @@
     "Symbols": "⧖",
     "Parameters": "",
     "Description": "Gain +1 Armor while in direct sunlight, loose 1 Armor when in darkness.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Giant Slayer",
@@ -2263,8 +2182,8 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "If you have traveled at least 8 tiles; You gain +3 Reflex and +1 Armor.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Description": "If you have traveled at least 8 tiles; You gain +3 Reflex and +1 Armor. For 2 Scenes",
+    "Scaling": ""
   },
   {
     "Name": "Sojourners",
@@ -2282,7 +2201,7 @@
     "Symbols": "⧖",
     "Parameters": "⫘",
     "Description": "If you climb a wall or jump over an obstacle, you can jump at an enemy and attack with your weaponm, doing +X Damage. An ally can also offer a boost to perform this attack.",
-    "Scaling": "Damage X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Return",
@@ -2541,7 +2460,7 @@
     "Action":"◇",
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "⫘ Shield Training",
+    "Parameters": "⫘ Shield Proficiency",
     "Description": "When you are struck by a projectile and you have guard; Reflect the projectile towards the person that attacked you, treat it as a ranged attack originating from you.",
     "Scaling": ""
   },
@@ -2597,7 +2516,7 @@
     "Symbols": "⧖",
     "Parameters": "⫘ Gracious",
     "Description": "You can no longer generate Grace, nor can you use it grant bonuses to rolls; You may use 1 Grace point to grant yourself or an ally Advantage.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Artilery Mage",
@@ -2676,27 +2595,27 @@
     "Action": "⭘",
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "None",
-    "Description": "You are proficient with maps and compasses. Gain advantage on Scholarship checks regarding ports or islands. You can determine North while viewing any type of sky",
-    "Scaling": "-"
+    "Parameters": "",
+    "Description": "You are proficient with maps and compasses. Gain advantage on Scholarship checks regarding ports or islands. You can determine North while viewing any type of sky. You are proficient with driving Water vehicles.",
+    "Scaling": ""
   },
   {
     "Name": "Sharp Nose",
     "Action": "⭘",
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "None",
+    "Parameters": "",
     "Description": "Gain advantage on checks involving smell (e.g. detecting poison).",
-    "Scaling": "-"
+    "Scaling": ""
   },
   {
     "Name": "Hard Target",
     "Action": "⭘",
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "None",
+    "Parameters": "",
     "Description": "Cover grants one higher tier of protection. While in cover, gain +2 Accuracy. You may move between covers (min. 3 units apart) as a Free Action.",
-    "Scaling": "-"
+    "Scaling": ""
   },
   {
     "Name": "Combat Artisan",
@@ -2705,7 +2624,7 @@
     "Symbols": "⧖",
     "Parameters": "⫘ Craftsman",
     "Description": "You gain Access to Combat Crafts; You know a number of Combat Crafts equal to [Half Your Level], the maximum tier of craft depends on the tier unlocked by Craftsman.",
-    "Scaling": "-"
+    "Scaling": ""
   },
   {
     "Name": "Master Thrower",
@@ -2768,7 +2687,7 @@
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
     "Description": "Dash up to 3 tiles. Enemies you pass through take 2 Damage. You heal for the total Damage dealt; excess healing is converted into Guard.",
-    "Scaling": "-"
+    "Scaling": ""
   },
   {
     "Name": "Unstoppable Force",
