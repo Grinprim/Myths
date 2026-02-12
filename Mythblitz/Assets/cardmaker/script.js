@@ -101,8 +101,9 @@ function renderManaSymbols({ count, regions }){
     img.loading = 'eager';
     img.style.display = 'none';
 
-    // Try to load icon from img/<region>.png, fallback to color if missing.
-    img.src = `img/${region}.png`;
+    // Always use lowercase filenames for region images
+    const regionFile = region.toLowerCase();
+    img.src = `img/${regionFile}.png`;
     img.addEventListener('load', () => {
       pip.classList.add('hasIcon');
       img.style.display = 'block';
