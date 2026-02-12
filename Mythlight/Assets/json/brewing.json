@@ -28,20 +28,20 @@
       "code": "00010",
       "name": "Arcane Spirit",
       "effects": [
-        "Restore 1 mana",
-        "Restore 2 mana",
-        "Restore 3 mana",
-        "Restore 3 mana & next spell costs 0 mana"
+        "Restore [Drinker Level] mana",
+        "Restore [Drinker Level]+1 mana",
+        "Restore [Drinker Level]+2 mana",
+        "Restore [Drinker Level]+2 mana & next spell costs 0 mana"
       ]
     },
     {
       "code": "00011",
       "name": "Spellblade Elixir",
       "effects": [
-        "Next melee attack gains +1 magic damage",
-        "Next melee attack gains +2 magic damage",
-        "Next melee attack gains +3 magic damage",
-        "+3 magic damage & attack gains spell-effect"
+        "Next melee attack gains +1 Lightning damage",
+        "Next melee attack gains +2 Lightning damage",
+        "Next melee attack gains +3 Lightning damage",
+        "+3 Lightning damage & attack gains a lvl 1 Arcane spell-effect"
       ]
     },
     {
@@ -66,7 +66,7 @@
     },
     {
       "code": "00110",
-      "name": "Spell Acceleration Draught",
+      "name": "Spell Acceleratum",
       "effects": [
         "Next spell is a free action",
         "Next 2 spells cost –1 action",
@@ -76,37 +76,37 @@
     },
     {
       "code": "00111",
-      "name": "Spellblade Overdrive",
+      "name": "Zap-Zap juice",
       "effects": [
-        "+2 magic damage, free attack",
-        "+3 magic damage, free attack",
-        "+4 magic damage, free attack",
-        "Free attack, chains into second strike"
+        "Next melee attack gains +1 Lightning damage, free attack",
+        "Next melee attack gains +2 Lightning damage, free attack",
+        "Next melee attack gains +3 Lightning damage, free attack",
+        "Next melee attack gains +2 Lightning damage, 2 Free attacks"
       ]
     },
     {
       "code": "01000",
       "name": "Toxic Brew",
       "effects": [
-        "Apply Weaken (–2 offense)",
-        "–3 enemy offense",
-        "–4 enemy offense",
-        "–4 offense & target loses 1 action"
+        "Apply 2 Weakness",
+        "3 Weakness",
+        "4 Weakness",
+        "4 Weakness & 1 Stun"
       ]
     },
     {
       "code": "01001",
-      "name": "Bloodfury Brew",
+      "name": "Bloodstrike tonic",
       "effects": [
-        "+2 melee damage, take 1 Harm",
-        "+3 melee damage, take 1 Harm",
-        "+4 melee damage, take 2 Harm",
+        "+2 melee damage, take 1 Damage",
+        "+3 melee damage, take 1 Damage",
+        "+4 melee damage, take 2 Damage",
         "+4 melee damage & attacks apply –1 defense"
       ]
     },
     {
       "code": "01010",
-      "name": "Mana Rot Elixir",
+      "name": "Spellrot Elixir",
       "effects": [
         "Next enemy spell costs +1 mana",
         "Next 2 enemy spells cost +1 mana",
@@ -116,7 +116,7 @@
     },
     {
       "code": "01011",
-      "name": "Corrupted Spellblade",
+      "name": "Mana Syphoning Drought",
       "effects": [
         "Next melee hit drains 1 mana",
         "Next melee hit drains 2 mana",
@@ -126,27 +126,27 @@
     },
     {
       "code": "01100",
-      "name": "Viral Momentum Brew",
+      "name": "Concusion Juice",
       "effects": [
-        "Target loses 1 action",
-        "Target loses 1 action & –1 defense",
-        "Target loses 2 actions",
-        "Target loses all actions this round"
+        "Stun target",
+        "Stun target, reduce armor by 1",
+        "Stun target for 2",
+        "Target turn is skipped, regardless of actions"
       ]
     },
     {
       "code": "01101",
-      "name": "Bloodrush Venom",
+      "name": "Price of Blood",
       "effects": [
-        "+1 action & +1 melee damage, take 1 Harm",
-        "+1 action & +2 melee damage, take 1 Harm",
-        "+1 action & +3 melee damage, take 2 Harm",
+        "+1 action & +1 melee damage, take 2 Damage",
+        "+1 action & +2 melee damage, take 2 Damage",
+        "+1 action & +3 melee damage, take 3 Damage",
         "+2 actions & +3 melee damage"
       ]
     },
     {
       "code": "01110",
-      "name": "Corrupted Acceleration",
+      "name": "Slowium Spellum",
       "effects": [
         "Next spell causes target to lose 1 action",
         "Next 2 spells cause target to lose 1 action",
@@ -156,172 +156,172 @@
     },
     {
       "code": "01111",
-      "name": "Plagueblade Overdrive",
+      "name": "Corrosive Infusion",
       "effects": [
-        "+2 magic damage & target loses 1 action",
-        "+3 magic damage & target loses 1 action",
-        "+4 magic damage & target loses 2 actions",
-        "Free attack, drain 1 mana, target loses 2 actions"
+        "Next melee attack gains +2 Acid damage & target loses 1 action",
+        "Next melee attack gains +3 Acid damage & target loses 1 action",
+        "Next melee attack gains +4 Acid damage & target loses 2 actions",
+        "Next melee attack gains +4 Acid damage & target turn is skipped"
       ]
     },
     {
       "code": "10000",
       "name": "Vital Tonic",
       "effects": [
-        "Restore 1 Harm",
-        "Restore 2 Harm",
-        "Restore 3 Harm & gain 2 guard",
-        "Restore 4 Harm & gain 3 guard"
+        "Restore [1 x Drinker level] Health",
+        "Restore [2 x Drinker level] Health ",
+        "Restore [3 x Drinker level] Health & gain [1 x Drinker level] guard",
+        "Restore [4 x Drinker level] Health & gain [2 x Drinker level] guard"
       ]
     },
     {
       "code": "10001",
-      "name": "Vital Wrath Elixir",
+      "name": "Bloodrush Elixir",
       "effects": [
-        "Restore 4 Harm & +1 melee damage",
-        "Restore 6 Harm & +1 melee damage",
-        "Restore 8 Harm & +2 melee damage",
-        "Restore 8 Harm & next attack deals +4 damage"
+        "Restore 4 Health & +1 melee damage",
+        "Restore 6 Health & +1 melee damage",
+        "Restore 8 Health & +2 melee damage",
+        "Restore 10 Health & +3 melee damage"
       ]
     },
     {
       "code": "10010",
-      "name": "Vital Arcane Draught",
+      "name": "Replenishing Draught",
       "effects": [
-        "Restore 4 Harm & 1 mana",
-        "Restore 6 Harm & 2 mana",
-        "Restore 8 Harm & 2 mana",
-        "Restore 8 Harm, 3 mana & next spell has +1 potency"
+        "Restore 4 Health & 1 mana",
+        "Restore 6 Health & 2 mana",
+        "Restore 8 Health & 2 mana",
+        "Restore 10 Health & 3 mana"
       ]
     },
     {
       "code": "10011",
-      "name": "Mystic Spellblade",
+      "name": "Vital Spell Infusion",
       "effects": [
-        "Restore 2 Harm & +2 magic damage",
-        "Restore 3 Harm & +3 magic damage",
-        "Restore 4 Harm & +4 magic damage",
-        "Restore 4 Harm, +4 magic damage & next spell free"
+        "Restore 2 Health & +2 spell damage",
+        "Restore 3 Health & +3 spell damage",
+        "Restore 4 Health & +4 spell damage",
+        "Restore 4 Health, +4 spell damage & next spell free"
       ]
     },
     {
       "code": "10100",
-      "name": "Vital Charging Serum",
+      "name": "Adrenaline Serum",
       "effects": [
-        "Restore 4 Harm & +1 action",
-        "Restore 6 Harm & +1 action",
-        "Restore 8 Harm & +1 action",
-        "Restore 8 Harm & +2 actions"
+        "Restore 4 Health & +1 action",
+        "Restore 6 Health & +1 action",
+        "Restore 8 Health & +1 action",
+        "Restore 8 Health & +2 actions"
       ]
     },
     {
       "code": "10101",
-      "name": "Vital Chargeblade",
+      "name": "Draining Haste Diffusion",
       "effects": [
-        "+1 action & next melee hit restores 2 Harm",
-        "+1 action & next melee hit restores 3 Harm",
-        "+1 action & next melee hit restores 4 Harm",
-        "+2 actions & next melee hit restores 4 Harm"
+        "+1 action & next melee hit restores 4 Health",
+        "+1 action & next melee hit restores 6 Health",
+        "+1 action & next melee hit restores 8 Health",
+        "+2 actions & next melee hit restores 10 Health"
       ]
     },
     {
       "code": "10110",
       "name": "Vital Spell Acceleration",
       "effects": [
-        "Restore 2 Harm; next spell is free",
-        "Restore 3 Harm; next spell is free & +1 potency",
-        "Restore 4 Harm; next 2 spells cost –1 action",
-        "Restore 4 Harm; next 2 spells are free"
+        "Restore 2 Health; next spell is free",
+        "Restore 3 Health; next spell is free",
+        "Restore 4 Health; next 2 spells cost no action",
+        "Restore 4 Health; next 2 spells are free and cost no action"
       ]
     },
     {
       "code": "10111",
-      "name": "Celestial Spellblade",
+      "name": "Vital Spell Infusion",
       "effects": [
-        "+2 magic damage & heal 2 Harm",
-        "+3 magic damage & heal 3 Harm",
-        "+4 magic damage & heal 4 Harm",
-        "Free attack, +4 magic damage, heal 4 Harm, next spell free"
+        "+2 spell damage & heal 4 Health",
+        "+3 spell damage & heal 6 Health",
+        "+4 spell damage & heal 8 Health",
+        "Free attack, +4 spell damage, heal 8 Health, next spell free"
       ]
     },
     {
       "code": "11000",
-      "name": "Vital Toxic Tonic",
+      "name": "Cleansing Drought",
       "effects": [
-        "Restore 2 Harm & remove 1 condition",
-        "Restore 3 Harm & remove 1 condition",
-        "Restore 4 Harm & remove 2 conditions",
-        "Restore 4 Harm, remove 2 conditions & gain +1 armor"
+        "Restore 2 Health & remove 1 negative condition",
+        "Restore 3 Health & remove 1 negative condition",
+        "Restore 4 Health & remove 2 negative conditions",
+        "Restore 4 Health, remove 2 negative conditions & gain +2 armor for 2 scenes"
       ]
     },
     {
       "code": "11001",
-      "name": "Purging Fury Tonic",
+      "name": "Cleansing Fury Tonic",
       "effects": [
-        "Remove 1 condition & +1 melee damage",
-        "Remove 1 condition & +2 melee damage",
-        "Remove 2 conditions & +2 melee damage",
-        "Remove 2 conditions & next attack gains +4 damage"
+        "Remove 1 negative condition & +1 melee damage",
+        "Remove 1 negative condition & +2 melee damage",
+        "Remove 2 negative conditions & +2 melee damage",
+        "Remove 2 negative conditions & next attack gains +4 damage"
       ]
     },
     {
       "code": "11010",
-      "name": "Purging Arcana Elixir",
+      "name": "Cleansing Arcana Elixir",
       "effects": [
-        "Remove 1 condition & restore 1 mana",
-        "Remove 1 condition & restore 2 mana",
-        "Remove 2 conditions & restore 2 mana",
-        "Remove 2 conditions & next spell has +1 potency"
+        "Remove 1 negative condition & restore 1 mana",
+        "Remove 1 negative condition & restore 2 mana",
+        "Remove 2 negative conditions & restore 2 mana",
+        "Remove 2 negative conditions & restore 3 mana"
       ]
     },
     {
       "code": "11011",
-      "name": "Purified Spellblade",
+      "name": "Pureblade Drought",
       "effects": [
-        "Remove 1 condition & +2 magic damage",
-        "Remove 1 condition & +3 magic damage",
-        "Remove 2 conditions & +3 magic damage",
-        "Remove 2 conditions & next attack chains once"
+        "Remove 1 negative condition & +2 spell damage",
+        "Remove 1 negative condition & +3 spell damage",
+        "Remove 2 negative conditions & +3 spell damage",
+        "Remove 2 negative conditions & next spell gains +1 target. (Can target the same target)"
       ]
     },
     {
       "code": "11100",
-      "name": "Purging Charge",
+      "name": "Purging Charge Tonic",
       "effects": [
-        "Remove 1 condition & +1 action",
-        "Remove 1 condition, +1 action & +1 movement",
-        "Remove 2 conditions & +1 action",
-        "Remove 2 conditions & +2 actions"
+        "Remove 1 negative condition & +1 action",
+        "Remove 1 negative condition, +1 action & +3 movement",
+        "Remove 2 negative conditions & +1 action",
+        "Remove 2 negative conditions & +2 actions"
       ]
     },
     {
       "code": "11101",
-      "name": "Cleansing Chargeblade",
+      "name": "Hasteful Combat Diffusion",
       "effects": [
-        "+1 action & next melee hit removes 1 condition",
-        "+1 action & next melee hit removes 1 condition",
-        "+1 action & next melee hit removes 2 conditions",
-        "+2 actions & next melee hit removes 2 conditions"
+        "+1 action & next melee hit removes 1 of your negative conditions",
+        "+1 action & next melee hit removes 1 of your negative conditions",
+        "+1 action & next melee hit removes 2 of your negative conditions",
+        "+2 actions & next melee hit removes 2 of your negative conditions"
       ]
     },
     {
       "code": "11110",
-      "name": "Purging Spell Acceleration",
+      "name": "Cleansing Spell Acceleratum",
       "effects": [
-        "Remove 1 condition & next spell is free",
-        "Remove 1 condition & next 2 spells cost –1 action",
-        "Remove 2 conditions & next spell is free",
-        "Remove 2 conditions & next 2 spells are free"
+        "Remove 1 negative condition & next spell is free",
+        "Remove 1 negative condition & next 2 spells are free",
+        "Remove 2 negative conditions & next spell is free",
+        "Remove 2 negative conditions & next 2 spells are free"
       ]
     },
     {
       "code": "11111",
-      "name": "Ascendant Purgeblade",
+      "name": "Wild concoction",
       "effects": [
-        "+2 magic damage & remove 1 condition",
-        "+3 magic damage & remove 1 condition",
-        "+4 magic damage & remove 2 conditions",
-        "Free attack, +4 damage, remove 2 conditions, next spell free"
+        "1 Effect from random effects table.",
+        "2 Effect from random effects table.",
+        "3 Effect from random effects table.",
+        "4 Effect from random effects table."
       ]
     }
   ],
