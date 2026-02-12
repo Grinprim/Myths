@@ -720,7 +720,6 @@
       const { mod } = getRollConfig();
       const combinedMod = total + mod;
       const result = rollDicePool(2, combinedMod);
-      row.parentElement.querySelector('.roll-result').textContent = `Rolled: [${result.dice.join(', ')}] + ${combinedMod} = ${result.final}`;
       renderRollWidget(result, 'Skill');
     }
 
@@ -730,8 +729,6 @@
       const { mod } = getRollConfig();
       const combinedMod = attackBonus + mod;
       const result = rollDicePool(2, combinedMod);
-      const out = block.querySelector('.roll-result');
-      if (out) out.textContent = `Rolled: [${result.dice.join(', ')}] + ${combinedMod} = ${result.final}`;
       renderRollWidget(result, 'Attack');
     }
 
