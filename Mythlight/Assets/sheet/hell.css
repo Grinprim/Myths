@@ -162,6 +162,12 @@ body.sheet main {
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 1rem;
 }
+.grid_4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
 
 input,
 textarea,
