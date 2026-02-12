@@ -625,7 +625,7 @@
       const container = document.getElementById('attributes');
       Object.entries(attributeData).forEach(([attr, skills]) => {
         const card = document.createElement('div');
-        card.className = 'rule-card p-5 border-l-4 border-l-red-500 hover:bg-slate-800/50 transition-colors group attribute-card ' + attr.toLowerCase();
+        card.className = 'rule-card p-5 border-l-4 border-l-red-500 hover:bg-slate-800/50 transition-colors group ' + attr.toLowerCase();
         card.innerHTML = `
           <div class="attribute-header">
             <h3 class="text-white block mb-2 text-lg group-hover:text-red-400 transition-colors">${attr}</h3>
