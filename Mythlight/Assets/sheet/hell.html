@@ -12,6 +12,9 @@
 </head>
 
 <body class="sheet">
+  <audio id="dice_roll_sound" preload="auto">
+    <source src="../dice.mp3" type="audio/mpeg">
+  </audio>
   <header>
     <h1>Mythlight Character Sheet</h1>
     <p>Edition 4.0.0</p>
@@ -706,6 +709,8 @@
 
       const flags = [result.midnight ? 'Midnight!' : null, result.snakeEyes ? 'Snake Eyes!' : null].filter(Boolean).join(' ');
       summary.textContent = `${label || 'Roll'}: [${result.dice.join(', ')}] + ${result.modifier} = ${result.final}${flags ? ' — ' + flags : ''}`;
+
+      document.getElementById('dice_roll_sound')?.play();
     }
 
     function manualRoll() {
