@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Card Maker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="appHeader">
+    <h1 class="appTitle">Card Maker</h1>
+    <p class="appSubtitle">Edit fields on the left, preview updates instantly.</p>
+  </header>
+
+  <main class="app">
+    <section class="panel" aria-label="Card Settings">
+      <form id="cardForm" class="form" autocomplete="off">
+        <fieldset class="fieldset">
+          <legend>Text</legend>
+
+          <label class="field">
+            <span class="label">Card Type</span>
+            <select id="typeSelect">
+              <option value="Unit" selected>Unit</option>
+              <option value="Spell">Spell</option>
+              <option value="Landmark">Landmark</option>
+              <option value="Gear">Gear</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="label">Card Rarity</span>
+            <select id="raritySelect">
+              <option value="Common" selected>Common</option>
+              <option value="Uncommon">Uncommon</option>
+              <option value="Rare">Rare</option>
+              <option value="Epic">Epic</option>
+              <option value="Legendary">Legendary</option>
+              <option value="Alt Art">Alt Art</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="label">Name</span>
+            <input id="nameInput" type="text" maxlength="40" value="Sample Name" />
+          </label>
+
+          <label class="field">
+            <span class="label">Mana Cost</span>
+            <input id="manaInput" type="number" min="0" max="99" value="1" />
+          </label>
+          <label class="field">
+            <span class="label">Symbol Count (1–5)</span>
+            <input id="symbolCountInput" type="number" min="1" max="5" value="1" />
+          </label>
+
+          <div class="field">
+            <span class="label">Symbols (Regions)</span>
+            <div id="symbolsGrid" class="symbolsGrid">
+              <select id="symbol1Select" aria-label="Symbol 1">
+                <option value="Arcane" selected>Arcane (Blue)</option>
+                <option value="Divine">Divine (White)</option>
+                <option value="Elemental">Elemental (Red)</option>
+                <option value="Occult">Occult (Green)</option>
+                <option value="Cosmic">Cosmic (Black)</option>
+              </select>
+              <select id="symbol2Select" aria-label="Symbol 2">
+                <option value="Arcane" selected>Arcane (Blue)</option>
+                <option value="Divine">Divine (White)</option>
+                <option value="Elemental">Elemental (Red)</option>
+                <option value="Occult">Occult (Green)</option>
+                <option value="Cosmic">Cosmic (Black)</option>
+              </select>
+              <select id="symbol3Select" aria-label="Symbol 3">
+                <option value="Arcane" selected>Arcane (Blue)</option>
+                <option value="Divine">Divine (White)</option>
+                <option value="Elemental">Elemental (Red)</option>
+                <option value="Occult">Occult (Green)</option>
+                <option value="Cosmic">Cosmic (Black)</option>
+              </select>
+              <select id="symbol4Select" aria-label="Symbol 4">
+                <option value="Arcane" selected>Arcane (Blue)</option>
+                <option value="Divine">Divine (White)</option>
+                <option value="Elemental">Elemental (Red)</option>
+                <option value="Occult">Occult (Green)</option>
+                <option value="Cosmic">Cosmic (Black)</option>
+              </select>
+              <select id="symbol5Select" aria-label="Symbol 5">
+                <option value="Arcane" selected>Arcane (Blue)</option>
+                <option value="Divine">Divine (White)</option>
+                <option value="Elemental">Elemental (Red)</option>
+                <option value="Occult">Occult (Green)</option>
+                <option value="Cosmic">Cosmic (Black)</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Tags</legend>
+
+          <label class="field">
+            <span class="label">Tags</span>
+            <input id="tagsInput" type="text" maxlength="80" value="Sample Tags" />
+          </label>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Effect</legend>
+
+          <label class="field">
+            <span class="label">Effect</span>
+            <textarea id="descInput" rows="6">Sample Description</textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="fieldset" id="statsFieldset">
+          <legend>Unit / Gear Stats</legend>
+
+          <div class="row2">
+            <label class="field">
+              <span class="label">Attack</span>
+              <input id="powerInput" type="number" min="-99" max="99" value="1" />
+            </label>
+
+            <label class="field">
+              <span class="label">Health</span>
+              <input id="healthInput" type="number" min="-99" max="99" value="1" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Art (Move/Resize)</legend>
+
+          <label class="field">
+            <span class="label">Scale</span>
+            <input id="artScaleInput" type="range" min="0.5" max="2.5" step="0.01" value="1" />
+          </label>
+
+          <div class="row2">
+            <label class="field">
+              <span class="label">Move X</span>
+              <input id="artXInput" type="range" min="-120" max="120" step="1" value="0" />
+            </label>
+
+            <label class="field">
+              <span class="label">Move Y</span>
+              <input id="artYInput" type="range" min="-120" max="120" step="1" value="0" />
+            </label>
+          </div>
+
+          <div class="hint">Tip: you can also drag the art on the card to move it.</div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Art (Upload)</legend>
+
+          <label class="field">
+            <span class="label">Art Image</span>
+            <input id="artFile" type="file" accept="image/*" />
+          </label>
+        </fieldset>
+
+        <div class="actions">
+          <button id="resetBtn" type="button" class="btn">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel previewPanel" aria-label="Card Preview">
+      <div class="previewWrap">
+        <div id="card" class="card" role="img" aria-label="Card preview">
+          <img id="artImg" class="layer layerArt" alt="" />
+
+          <div class="topBar">
+            <div class="manaBadge" aria-label="Mana cost">
+              <span id="manaText" class="manaText">1</span>
+              <div id="manaSymbols" class="manaSymbols" aria-label="Symbols under mana"></div>
+            </div>
+            <div class="namePlate">
+              <span id="nameText" class="nameText">Sample Name</span>
+            </div>
+          </div>
+
+          <div class="tagsBar" aria-label="Tags">
+            <div id="tagsText" class="tagsLine">Sample Tags</div>
+          </div>
+
+          <div class="rulesBox">
+            <div id="descText" class="desc">Sample Description</div>
+          </div>
+
+          <div class="keywordsRow" aria-label="Keywords">
+            <div id="keywordsIcons" class="keywordsIcons"></div>
+          </div>
+
+          <div class="stats">
+            <div class="statBadge statBadgePower" aria-label="Power">
+              <span id="powerText">1</span>
+            </div>
+
+            <div class="statBadge statBadgeHealth" aria-label="Health">
+              <span id="healthText">1</span>
+            </div>
+          </div>
+
+          <div id="rarityGem" class="rarityGem rarity-common" aria-label="Rarity">
+            <svg id="raritySvg" class="raritySvg" viewBox="0 0 100 100" aria-hidden="true">
+              <defs>
+                <linearGradient id="rarityGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="100">
+                  <stop id="rarityStop1" offset="0" stop-color="#60a5fa" />
+                  <stop id="rarityStop2" offset="1" stop-color="#1d4ed8" />
+                </linearGradient>
+                <linearGradient id="rarityShine" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="100">
+                  <stop offset="0" stop-color="rgba(255,255,255,.65)" />
+                  <stop offset="0.55" stop-color="rgba(255,255,255,0)" />
+                </linearGradient>
+              </defs>
+              <polygon id="rarityDiamond" points="50,2 98,50 50,98 2,50" fill="url(#rarityGradient)" stroke="white" stroke-opacity="0.22" stroke-width="4" stroke-linejoin="round" />
+              <polygon id="rarityDiamondShine" points="50,2 98,50 50,98 2,50" fill="url(#rarityShine)" opacity="0.55" />
+
+              <polygon id="rarityAlt" points="50,0 64,10 84,8 92,24 100,38 90,50 100,62 92,76 84,92 64,90 50,100 36,90 16,92 8,76 0,62 10,50 0,38 8,24 16,8 36,10" fill="url(#rarityGradient)" stroke="white" stroke-opacity="0.26" stroke-width="4" stroke-linejoin="round" style="display:none" />
+              <polygon id="rarityAltShine" points="50,0 64,10 84,8 92,24 100,38 90,50 100,62 92,76 84,92 64,90 50,100 36,90 16,92 8,76 0,62 10,50 0,38 8,24 16,8 36,10" fill="url(#rarityShine)" opacity="0.45" style="display:none" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="exportBar">
+        <button id="exportPngBtn" type="button" class="btn btnPrimary">Export PNG</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

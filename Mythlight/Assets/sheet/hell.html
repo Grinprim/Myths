@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mythlight Character Sheet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="./hell.css">
+</head>
+
+<body class="sheet">
+  <header>
+    <h1>Mythlight Character Sheet</h1>
+    <p>Edition 4.0.0</p>
+    <div class="header-actions no-print">
+      <button type="button" onclick="exportToPDF()">Export to PDF</button>
+    </div>
+  </header>
+
+  <main>
+    <form onsubmit="return false;">
+
+      <div class="sheet-grid">
+
+      <div class="card sheet-full section-1">
+        <div class="section-title">
+          <div class="section-number">1</div>
+          <h2>Core Identity</h2>
+        </div>
+        <div class="grid">
+          <div><label>Name</label><input type="text" required></div>
+          <div><label>Species</label><input type="text" required></div>
+          <div><label>Path</label><input type="text" required></div>
+          <div><label>Level</label><input type="number" id="level_input" required></div>
+        </div>
+      </div>
+
+      <div class="sheet-col sheet-left">
+        <div class="card section-3">
+          <div class="section-title">
+            <div class="section-number">3</div>
+            <h2>Attributes</h2>
+          </div>
+          <div class="attribute-grid" id="attributes"></div>
+        </div>
+
+        <div class="card section-7">
+          <div class="section-title">
+            <div class="section-number">7</div>
+            <h2>Proficiencies</h2>
+          </div>
+          <div id="proficiencies_section" style="display: block">
+            <div class="grid_2">
+              <div><label>Weapons</label>
+                <div id="light_melee"><label for="light_melee">Light Melee</label> <input id="light_melee_input" type="number"></div>
+                <div id="medium_melee"><label for="medium_melee">Medium Melee</label> <input id="medium_melee_input" type="number"></div>
+                <div id="heavy_melee"><label for="heavy_melee">Heavy Melee</label> <input id="heavy_melee_input" type="number"></div>
+                <div id="light_ranged"><label for="light_ranged">Light Ranged</label> <input id="light_ranged_input" type="number"></div>
+                <div id="medium_ranged"><label for="medium_ranged">Medium Ranged</label> <input id="medium_ranged_input" type="number"></div>
+                <div id="heavy_ranged"><label for="heavy_ranged">Heavy Ranged</label> <input id="heavy_ranged_input" type="number"></div>
+                <div id="light_firearm"><label for="light_firearm">Light Firearm</label> <input id="light_firearm_input" type="number"></div>
+                <div id="medium_firearm"><label for="medium_firearm">Medium Firearm</label> <input id="medium_firearm_input" type="number"></div>
+                <div id="heavy_firearm"><label for="heavy_firearm">Heavy Firearm</label> <input id="heavy_firearm_input" type="number"></div>
+              </div>
+              <div><label>Armor</label>
+                <div id="light_armor"><label for="light_armor_checkbox">Light Armor</label> <input id="light_armor_checkbox" type="checkbox"></div>
+                <div id="medium_armor"><label for="medium_armor_checkbox">Medium Armor</label> <input id="medium_armor_checkbox" type="checkbox"></div>
+                <div id="heavy_armor"><label for="heavy_armor_checkbox">Heavy Armor</label> <input id="heavy_armor_checkbox" type="checkbox"></div>
+                <div id="shields"><label for="shields_checkbox">Shields</label> <input id="shields_checkbox" type="checkbox"></div>
+              </div>
+              <div><label>Tools</label><textarea rows="3" placeholder="List your tools here..."></textarea></div>
+              <div><label>Languages</label><textarea rows="3" placeholder="List your languages here..."></textarea></div>
+            </div>
+
+            <div class="grid" style="margin-top: 1rem">
+              <div>
+                <label>Melee Proficiency Points (Used / Max)</label>
+                <input type="text" id="melee_points_tracker" readonly placeholder="0 / 0">
+              </div>
+              <div>
+                <label>Ranged Proficiency Points (Used / Max)</label>
+                <input type="text" id="ranged_points_tracker" readonly placeholder="0 / 0">
+              </div>
+            </div>
+
+            <div id="proficiency_warning_melee" style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: solid red;" class="card">
+              Proficiency WARNING Your maximum Melee weapon proficiency sum exceeds Might. Adjust your proficiencies or increase your Might skill.</div>
+            <div id="proficiency_warning_ranged" style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: solid red;" class="card">
+              Proficiency WARNING Your maximum Ranged weapon proficiency sum exceeds Aim. Adjust your proficiencies or increase your Aim skill.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheet-col sheet-right">
+        <div class="card section-2">
+          <div class="section-title">
+            <div class="section-number">2</div>
+            <h2>Defense & Vitals</h2>
+          </div>
+          <div class="grid">
+            <div><label>Guard</label><input type="number" required></div>
+            <div><label>Armor</label><input type="number" id="armor_total" readonly></div>
+            <div><label>Speed</label><input type="number" required></div>
+            <div><label>Initiative</label><input type="number" required></div>
+            <div>
+              <label>Grace (0–6)</label>
+              <input type="number" id="grace_input" min="0" max="6" value="0" required class="grace-hidden">
+              <div class="grace-picker" id="grace_picker" aria-label="Grace selector">
+                <button type="button" class="grace-btn" data-grace="1" aria-label="Grace 1"><div class="die-inline face-1"></div></button>
+                <button type="button" class="grace-btn" data-grace="2" aria-label="Grace 2"><div class="die-inline face-2"></div></button>
+                <button type="button" class="grace-btn" data-grace="3" aria-label="Grace 3"><div class="die-inline face-3"></div></button>
+                <button type="button" class="grace-btn" data-grace="4" aria-label="Grace 4"><div class="die-inline face-4"></div></button>
+                <button type="button" class="grace-btn" data-grace="5" aria-label="Grace 5"><div class="die-inline face-5"></div></button>
+                <button type="button" class="grace-btn" data-grace="6" aria-label="Grace 6"><div class="die-inline face-6"></div></button>
+              </div>
+            </div>
+            <div>
+              <label>Max Health</label>
+              <input type="number" id="health_max" readonly>
+            </div>
+            <div>
+              <label>Health Bonus</label>
+              <input type="number" id="health_bonus" placeholder="+HP to Max">
+            </div>
+            <div>
+              <label>Current Health</label>
+              <input type="number" id="health_current" required>
+              <div class="health-bar">
+                <div class="health-fill" id="health_fill"></div>
+              </div>
+              <div class="inline-row top-gap">
+                <input type="number" id="health_delta" placeholder="Amount" class="input-sm">
+                <button type="button" onclick="applyHealth(-1)">Damage</button>
+                <button type="button" onclick="applyHealth(1)">Heal</button>
+              </div>
+            </div>
+            <div class="final-blow">
+              <label>Final Blow Resistances</label>
+              <input type="checkbox" id="final_blow_resistance_1">
+              <input type="checkbox" id="final_blow_resistance_2">
+              <input type="checkbox" id="final_blow_resistance_3">
+              <input type="checkbox" id="final_blow_resistance_4">
+            </div>
+          </div>
+        </div>
+
+        <div class="card weapons-card section-4">
+          <div class="section-title">
+            <div class="section-number">4</div>
+            <h2>Weapons</h2>
+          </div>
+          <div class="weapons-list">
+            <div class="weapon-block">
+              <div class="weapon-grid">
+                <div>
+                  <label>Weapon 1</label>
+                  <input type="text" placeholder="Name">
+                </div>
+                <div>
+                  <label>Damage</label>
+                  <input type="number" placeholder="Damage">
+                </div>
+                <div>
+                  <label>Attack</label>
+                  <input type="number" id="attack_1" placeholder="Attack" readonly>
+                </div>
+                <div>
+                  <label>Type</label>
+                  <select id="proficiency_selector">
+                    <option value="None">None</option>
+                    <option value="Light_Melee">Light Melee</option>
+                    <option value="Medium_Melee">Medium Melee</option>
+                    <option value="Heavy_Melee">Heavy Melee</option>
+                    <option value="Light_Ranged">Light Ranged</option>
+                    <option value="Medium_Ranged">Medium Ranged</option>
+                    <option value="Heavy_Ranged">Heavy Ranged</option>
+                    <option value="Light_Firearm">Light Firearm</option>
+                    <option value="Medium_Firearm">Medium Firearm</option>
+                    <option value="Heavy_Firearm">Heavy Firearm</option>
+                  </select>
+                </div>
+                <div class="weapon-actions">
+                  <button type="button" onclick="rollAttack(this)">Attack!</button>
+                </div>
+              </div>
+              <div class="roll-result"></div>
+            </div>
+
+            <div class="weapon-block">
+              <div class="weapon-grid">
+                <div>
+                  <label>Weapon 2</label>
+                  <input type="text" placeholder="Name">
+                </div>
+                <div>
+                  <label>Damage</label>
+                  <input type="number" placeholder="Damage">
+                </div>
+                <div>
+                  <label>Attack</label>
+                  <input type="number" id="attack_2" placeholder="Attack" readonly>
+                </div>
+                <div>
+                  <label>Type</label>
+                  <select id="proficiency_selector_2">
+                    <option value="None">None</option>
+                    <option value="Light_Melee">Light Melee</option>
+                    <option value="Medium_Melee">Medium Melee</option>
+                    <option value="Heavy_Melee">Heavy Melee</option>
+                    <option value="Light_Ranged">Light Ranged</option>
+                    <option value="Medium_Ranged">Medium Ranged</option>
+                    <option value="Heavy_Ranged">Heavy Ranged</option>
+                    <option value="Light_Firearm">Light Firearm</option>
+                    <option value="Medium_Firearm">Medium Firearm</option>
+                    <option value="Heavy_Firearm">Heavy Firearm</option>
+                  </select>
+                </div>
+                <div class="weapon-actions">
+                  <button type="button" onclick="rollAttack(this)">Attack!</button>
+                </div>
+              </div>
+              <div class="roll-result"></div>
+            </div>
+
+            <div class="weapon-block">
+              <div class="weapon-grid">
+                <div>
+                  <label>Weapon 3</label>
+                  <input type="text" placeholder="Name">
+                </div>
+                <div>
+                  <label>Damage</label>
+                  <input type="number" placeholder="Damage">
+                </div>
+                <div>
+                  <label>Attack</label>
+                  <input type="number" id="attack_3" placeholder="Attack" readonly>
+                </div>
+                <div>
+                  <label>Type</label>
+                  <select id="proficiency_selector_3">
+                    <option value="None">None</option>
+                    <option value="Light_Melee">Light Melee</option>
+                    <option value="Medium_Melee">Medium Melee</option>
+                    <option value="Heavy_Melee">Heavy Melee</option>
+                    <option value="Light_Ranged">Light Ranged</option>
+                    <option value="Medium_Ranged">Medium Ranged</option>
+                    <option value="Heavy_Ranged">Heavy Ranged</option>
+                    <option value="Light_Firearm">Light Firearm</option>
+                    <option value="Medium_Firearm">Medium Firearm</option>
+                    <option value="Heavy_Firearm">Heavy Firearm</option>
+                  </select>
+                </div>
+                <div class="weapon-actions">
+                  <button type="button" onclick="rollAttack(this)">Attack!</button>
+                </div>
+              </div>
+              <div class="roll-result"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card section-5">
+          <div class="section-title">
+            <div class="section-number">5</div>
+            <h2>Notes</h2>
+          </div>
+          <textarea id="notes" rows="8" placeholder="Session notes, reminders, NPC names..." style="resize: vertical"></textarea>
+        </div>
+
+        <div class="card section-6">
+          <div class="section-title">
+            <div class="section-number">6</div>
+            <h2>Armor</h2>
+          </div>
+          <div class="armor-slots">
+            <div class="armor-slot">
+              <div class="armor-head">
+                <div class="armor-icon" aria-hidden="true"></div>
+                <div class="armor-name">
+                  <label>Armor Name</label>
+                  <input type="text" id="armor_name" placeholder="Name">
+                </div>
+                <div class="armor-value">
+                  <label>Defense</label>
+                  <input type="number" id="armor_value" placeholder="0">
+                </div>
+              </div>
+              <div class="armor-notes">
+                <label>Notes</label>
+                <textarea id="armor_notes" rows="3" placeholder=""></textarea>
+              </div>
+            </div>
+
+            <div class="armor-slot">
+              <div class="armor-head">
+                <div class="armor-icon" aria-hidden="true"></div>
+                <div class="armor-name">
+                  <label>Shield Name</label>
+                  <input type="text" id="shield_name" placeholder="Name">
+                </div>
+                <div class="armor-value">
+                  <label>Defense</label>
+                  <input type="number" id="shield_value" placeholder="0">
+                </div>
+              </div>
+              <div class="armor-notes">
+                <label>Notes</label>
+                <textarea id="shield_notes" rows="3" placeholder=""></textarea>
+              </div>
+            </div>
+
+            <div class="armor-slot">
+              <div class="armor-head">
+                <div class="armor-icon" aria-hidden="true"></div>
+                <div class="armor-name">
+                  <label>Cloak Name</label>
+                  <input type="text" id="cloak_name" placeholder="Name">
+                </div>
+                <div class="armor-value">
+                  <label>Defense</label>
+                  <input type="number" id="cloak_value" placeholder="0">
+                </div>
+              </div>
+              <div class="armor-notes">
+                <label>Notes</label>
+                <textarea id="cloak_notes" rows="3" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="card sheet-full section-8">
+        <div class="section-title" onclick="toggle_inventory()" style="cursor: pointer;">
+          <div class="section-number">8</div>
+          <h2>Inventory</h2>
+        </div>
+        <div class="card">
+          <div style="display:flex; gap:.5rem; flex-wrap: wrap; align-items: end">
+            <div style="flex:1; min-width: 160px">
+              <label>Current Weight</label>
+              <input type="number" id="current_weight" placeholder="Current Weight">
+            </div>
+            <div style="flex:1; min-width: 160px">
+              <label>Max Weight</label>
+              <input type="number" id="max_weight" placeholder="Max Weight" readonly>
+            </div>
+            <div style="flex:1; min-width: 160px">
+              <label>Backpack Capacity</label>
+              <input type="number" id="backpack_capacity" placeholder="Adds to Max Weight">
+            </div>
+          </div>
+          <br>
+          <div style="display: flex; gap: .5rem; flex-wrap: wrap; align-items:center">
+            <label style="min-width:80px">Currency</label>
+            <input type="number" id="copper" placeholder="Copper">
+            <input type="number" id="silver" placeholder="Silver">
+            <input type="number" id="gold" placeholder="Gold">
+            <input type="number" id="platinum" placeholder="Platinum">
+          </div>
+        </div>
+
+      <div id="inventory_grid" class="grid_3" style="display: none;"></div>
+
+      <div id="inventory_extra" style="display:none">
+        <div class="card">
+          <h3 style="margin-top:0">Potions</h3>
+          <div class="grid_2 proficiencies-grid">
+            <div>
+              <div class="muted-label">Ingredients</div>
+              <div id="potions_ingredients_grid" class="grid"></div>
+            </div>
+            <div>
+              <div class="muted-label">Recipes</div>
+              <div id="potions_recipes_grid" class="grid"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-top:0">Crafts</h3>
+          <div class="grid_2">
+            <div>
+              <div class="muted-label">Components</div>
+              <div id="crafts_components_grid" class="grid"></div>
+            </div>
+            <div>
+              <div class="muted-label">Recipes</div>
+              <div id="crafts_recipes_grid" class="grid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <div class="traits-spells-row sheet-full">
+      <div class="card section-9">
+        <div class="section-title">
+          <div class="section-number">9</div>
+          <h2>Traits</h2>
+        </div>
+        <div class="grid">
+          <div>
+            <label>Trait Points (Max / Used)</label>
+            <div style="display:flex; gap:.5rem">
+              <input type="number" id="trait_points_max" readonly placeholder="Max">
+              <input type="number" id="trait_points_used" readonly placeholder="Used">
+            </div>
+          </div>
+          <div>
+            <label>Trait Points (Remaining)</label>
+            <input type="number" id="trait_points_remaining" readonly placeholder="Remaining">
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 1rem">
+          <div class="muted-label">Action legend</div>
+          <div class="legend-mini">
+            <div class="legend-item"><div class="legend-symbol-mini" style="color:#60a5fa">⧖</div><div><div style="color:white;font-weight:600">Passive</div><div class="muted-label">Always active</div></div></div>
+            <div class="legend-item"><div class="legend-symbol-mini" style="color:#ffffff">⭘</div><div><div style="color:white;font-weight:600">Free Action</div><div class="muted-label">No action cost</div></div></div>
+            <div class="legend-item"><div class="legend-symbol-mini" style="color:#ffffff">◇</div><div><div style="color:white;font-weight:600">Reaction</div><div class="muted-label">Condition-based</div></div></div>
+            <div class="legend-item"><div class="legend-symbol-mini" style="color:#ffffff">⬖</div><div><div style="color:white;font-weight:600">Action</div><div class="muted-label">Consumes 1 action</div></div></div>
+            <div class="legend-item"><div class="legend-symbol-mini" style="color:#ffffff">◆</div><div><div style="color:white;font-weight:600">Attack Action</div><div class="muted-label">Once per turn limit</div></div></div>
+          </div>
+        </div>
+
+        <div class="trait-controls">
+          <input type="text" id="trait_search" placeholder="Search traits by name...">
+          <select id="selectable_traits"></select>
+          <button type="button" onclick="selectTrait();">Add Trait</button>
+        </div>
+        <div id="trait_details"></div>
+        <div class="grid_3" id ="traits">
+
+        </div>
+      </div>
+
+      <div class="card section-10">
+        <div class="section-title">
+          <div class="section-number">10</div>
+          <h2>Spells</h2>
+        </div>
+        <div class="card">
+          <div class="grid">
+            <div>
+              <label>Max Mana</label>
+              <input type="number" placeholder="Max Mana" id="max_mana" readonly>
+            </div>
+            <div>
+              <label>Mana Bonus</label>
+              <input type="number" id="mana_bonus" placeholder="+Mana to Max">
+            </div>
+            <div>
+              <label>Current Mana</label>
+              <input type="number" id="current_mana" placeholder="Current Mana">
+              <div class="mana-bar"><div class="mana-fill" id="mana_fill"></div></div>
+              <div class="inline-row top-gap">
+                <input type="number" id="mana_delta" placeholder="Amount" class="input-sm">
+                <button type="button" onclick="applyMana(-1)">Spend</button>
+                <button type="button" onclick="applyMana(1)">Gain</button>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <input type="number" id="spell_attack" placeholder="Spell Attack Bonus" readonly>
+          <input type="number" id="spell_dc" placeholder="Spell DC">
+          <input type="number" id="spell_damage" placeholder="Spell Damage Bonus">
+          <br>
+          <input type="text" id="spellcasting_type" placeholder="Spellcasting School">
+        </div>
+
+        <div class="trait-controls">
+          <input type="text" id="spell_search" placeholder="Search spells by name...">
+          <select id="selectable_spells"></select>
+          <button type="button" onclick="selectSpell();">Add Spell</button>
+        </div>
+        <div id="spell_details"></div>
+        <div class="grid_3" id ="spells">
+
+        </div>
+      </div>
+      </div>
+
+    </form>
+  </main>
+
+  <div class="roll-widget" id="roll_widget">
+    <h3>Rolls</h3>
+    <div class="row">
+      <div>
+        <label class="muted-label">Advantage (+d6)</label>
+        <input type="number" id="roll_adv" min="0" max="6" value="0">
+      </div>
+      <div>
+        <label class="muted-label">Disadvantage (-d6)</label>
+        <input type="number" id="roll_dis" min="0" max="6" value="0">
+      </div>
+    </div>
+    <div style="margin-top:.5rem">
+      <label class="muted-label">Modifier</label>
+      <input type="number" id="roll_mod" value="0">
+    </div>
+    <div class="dice-visual-inline" id="roll_dice"></div>
+    <div style="display:flex; gap:.5rem; justify-content: space-between; align-items:center">
+      <button type="button" onclick="manualRoll()">Roll</button>
+      <div id="roll_summary" style="font-size:.85rem; color:#a5b4fc"></div>
+    </div>
+  </div>
+
+  <script>
+    const BASE_SLOTS = 2;
+    const BASE_RECIPE_SLOTS = 2;
+
+    const state = {
+      selectedTraits: new Map(),
+      selectedSpells: new Map(),
+      allTraits: [],
+      allSpells: []
+    };
+
+    const attributeData = {
+      Physique: ["Might", "Brawn", "Athletics", "Fortitude"],
+      Technique: ["Aim", "Tinkering", "Finesse", "Reflex"],
+      Mystique: ["Spellcraft", "Arcana", "Insight", "Scholarship"],
+      Charm: ["Persuasion", "Performance", "Deception", "Intimidation"]
+    };
+
+    const skillsList = [
+      'Might', 'Brawn', 'Athletics', 'Fortitude',
+      'Aim', 'Tinkering', 'Finesse', 'Reflex',
+      'Spellcraft', 'Arcana', 'Insight', 'Scholarship',
+      'Persuasion', 'Performance', 'Deception', 'Intimidation'
+    ];
+
+    const skillDescriptions = {
+      Might: "Physical power and brute strength.",
+      Brawn: "Endurance and toughness.",
+      Athletics: "Physical activities like climbing, jumping, and swimming.",
+      Fortitude: "Resistance to physical harm and fatigue.",
+      Aim: "Precision with ranged weapons.",
+      Tinkering: "Ability to repair and modify devices.",
+      Finesse: "Dexterity and agility in combat.",
+      Reflex: "Quickness in reacting to danger.",
+      Spellcraft: "Knowledge of magic and spellcasting.",
+      Arcana: "Understanding of magical lore and phenomena.",
+      Insight: "Perception of hidden motives and truths.",
+      Scholarship: "Academic knowledge and research skills.",
+      Persuasion: "Convincing others through charm or argument.",
+      Performance: "Entertaining others through art or skill.",
+      Deception: "Lying and trickery to mislead others.",
+      Intimidation: "Using fear to influence others."
+    };
+
+    // --- Inventory ---
+    function addInventorySlot() {
+      const slot = document.createElement('div');
+      slot.className = 'inventory_slot';
+      slot.innerHTML = `
+        <input type="text" placeholder="Name">
+        <textarea rows="4" placeholder="Description" style="resize: none;"></textarea>
+      `;
+      document.getElementById('inventory_grid').appendChild(slot);
+    }
+
+    function addSimpleSlot(parentId, namePlaceholder, descPlaceholder) {
+      const slot = document.createElement('div');
+      slot.className = 'inventory_slot';
+      slot.innerHTML = `
+        <input type="text" placeholder="${namePlaceholder}">
+        <textarea rows="3" placeholder="${descPlaceholder}" style="resize: none;"></textarea>
+      `;
+      document.getElementById(parentId).appendChild(slot);
+    }
+
+    function inventory_init() {
+      const currentSlots = document.querySelectorAll('#inventory_grid .inventory_slot').length;
+      for (let i = currentSlots; i < BASE_SLOTS; i++) addInventorySlot();
+
+      const ing = document.querySelectorAll('#potions_ingredients_grid .inventory_slot').length;
+      for (let i = ing; i < BASE_SLOTS; i++) addSimpleSlot('potions_ingredients_grid', 'Ingredient', 'Notes');
+
+      const pr = document.querySelectorAll('#potions_recipes_grid .inventory_slot').length;
+      for (let i = pr; i < BASE_RECIPE_SLOTS; i++) addSimpleSlot('potions_recipes_grid', 'Potion', 'Recipe');
+
+      const comp = document.querySelectorAll('#crafts_components_grid .inventory_slot').length;
+      for (let i = comp; i < BASE_SLOTS; i++) addSimpleSlot('crafts_components_grid', 'Component', 'Notes');
+
+      const cr = document.querySelectorAll('#crafts_recipes_grid .inventory_slot').length;
+      for (let i = cr; i < BASE_RECIPE_SLOTS; i++) addSimpleSlot('crafts_recipes_grid', 'Craft', 'Recipe');
+    }
+
+    function inventory_extra_slots() {
+      const slots = document.querySelectorAll('#inventory_grid .inventory_slot');
+      const allFull = Array.from(slots).every(slot => (slot.querySelector('input')?.value || '').trim().length > 0);
+      if (allFull) for (let i = 0; i < BASE_SLOTS; i++) addInventorySlot();
+
+      const expandIfAllFull = (gridId, count) => {
+        const grid = document.getElementById(gridId);
+        if (!grid) return;
+        const gridSlots = Array.from(grid.querySelectorAll('.inventory_slot'));
+        if (gridSlots.length === 0) return;
+        const full = gridSlots.every(s => (s.querySelector('input')?.value || '').trim().length > 0);
+        if (full) for (let i = 0; i < count; i++) addSimpleSlot(gridId, 'Name', 'Description');
+      };
+
+      expandIfAllFull('potions_ingredients_grid', BASE_SLOTS);
+      expandIfAllFull('potions_recipes_grid', BASE_RECIPE_SLOTS);
+      expandIfAllFull('crafts_components_grid', BASE_SLOTS);
+      expandIfAllFull('crafts_recipes_grid', BASE_RECIPE_SLOTS);
+    }
+
+    // --- Attributes UI ---
+    function setupAttributes() {
+      const container = document.getElementById('attributes');
+      Object.entries(attributeData).forEach(([attr, skills]) => {
+        const card = document.createElement('div');
+        card.className = 'attribute-card ' + attr.toLowerCase();
+        card.innerHTML = `
+          <div class="attribute-header">
+            <h3>${attr}</h3>
+            <div class="attribute-base-wrap">
+              <span class="muted-label">Base</span>
+              <input type="number" class="base attribute-base" id="${attr}_base" placeholder="0">
+            </div>
+          </div>
+        `;
+
+        skills.forEach(skill => {
+          const row = document.createElement('div');
+          row.innerHTML = `
+            <div class="skill-row">
+              <span onclick="toggleDesc(this)">${skill}</span>
+              <input type="number" class="mod" id="${skill}_mod_user" placeholder="User">
+              <input type="number" class="mod-trait" id="${skill}_mod_trait" placeholder="Trait" readonly>
+              <input type="number" class="total" id="${attr}_${skill}" readonly>
+              <button type="button" onclick="rollSkill(this)">Roll</button>
+            </div>
+            <div class="skill-desc">${skillDescriptions[skill] || "No description available."}</div>
+            <div class="roll-result"></div>
+          `;
+          card.appendChild(row);
+        });
+        container.appendChild(card);
+      });
+    }
+
+    // --- Utility ---
+    function toggleDesc(el) {
+      const desc = el.parentElement.nextElementSibling;
+      desc.style.display = desc.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function toggle_inventory() {
+      const section = document.getElementById('inventory_grid');
+      const extra = document.getElementById('inventory_extra');
+      section.style.display = section.style.display === 'grid' ? 'none' : 'grid';
+      if (extra) extra.style.display = section.style.display === 'grid' ? 'block' : 'none';
+    }
+
+    // --- Dice / Roll widget ---
+    function getRollConfig() {
+      const adv = Number.parseInt(document.getElementById('roll_adv')?.value, 10) || 0;
+      const dis = Number.parseInt(document.getElementById('roll_dis')?.value, 10) || 0;
+      const mod = Number.parseInt(document.getElementById('roll_mod')?.value, 10) || 0;
+      return { adv: Math.max(0, adv), dis: Math.max(0, dis), mod: Number.isFinite(mod) ? mod : 0 };
+    }
+
+    function rollDicePool(baseDice, modifier) {
+      const { adv, dis } = getRollConfig();
+      const diceCount = Math.max(0, baseDice + adv - dis);
+      const dice = [];
+      for (let i = 0; i < diceCount; i++) dice.push(Math.floor(Math.random() * 6) + 1);
+      const sum = dice.reduce((a, b) => a + b, 0);
+      const final = sum + (modifier || 0);
+      const midnight = dice.length >= 2 && dice.every(d => d === 6);
+      const snakeEyes = dice.length === 2 && dice[0] === 1 && dice[1] === 1;
+      return { dice, sum, modifier: modifier || 0, final, diceCount, midnight, snakeEyes };
+    }
+
+    function renderRollWidget(result, label) {
+      const diceWrap = document.getElementById('roll_dice');
+      const summary = document.getElementById('roll_summary');
+      if (!diceWrap || !summary) return;
+
+      diceWrap.innerHTML = '';
+
+      if (result.diceCount === 0) {
+        summary.textContent = `${label || 'Roll'}: 0d6 + ${result.modifier} = ${result.final}`;
+        return;
+      }
+
+      result.dice.forEach(face => {
+        const die = document.createElement('div');
+        die.className = `die-inline face-${face} rolling`;
+        diceWrap.appendChild(die);
+        setTimeout(() => die.classList.remove('rolling'), 800);
+      });
+
+      const flags = [result.midnight ? 'Midnight!' : null, result.snakeEyes ? 'Snake Eyes!' : null].filter(Boolean).join(' ');
+      summary.textContent = `${label || 'Roll'}: [${result.dice.join(', ')}] + ${result.modifier} = ${result.final}${flags ? ' — ' + flags : ''}`;
+    }
+
+    function manualRoll() {
+      const { mod } = getRollConfig();
+      const result = rollDicePool(2, mod);
+      renderRollWidget(result, 'Manual');
+    }
+
+    function rollSkill(btn) {
+      const row = btn.parentElement;
+      const total = Number.parseInt(row.querySelector('.total').value, 10) || 0;
+      const { mod } = getRollConfig();
+      const combinedMod = total + mod;
+      const result = rollDicePool(2, combinedMod);
+      row.parentElement.querySelector('.roll-result').textContent = `Rolled: [${result.dice.join(', ')}] + ${combinedMod} = ${result.final}`;
+      renderRollWidget(result, 'Skill');
+    }
+
+    function rollAttack(btn) {
+      const block = btn.closest('.weapon-block') || btn.parentElement;
+      const attackBonus = Number.parseInt(block.querySelector('input[placeholder="Attack"]').value, 10) || 0;
+      const { mod } = getRollConfig();
+      const combinedMod = attackBonus + mod;
+      const result = rollDicePool(2, combinedMod);
+      const out = block.querySelector('.roll-result');
+      if (out) out.textContent = `Rolled: [${result.dice.join(', ')}] + ${combinedMod} = ${result.final}`;
+      renderRollWidget(result, 'Attack');
+    }
+
+    // --- Grace UI ---
+    function setupGracePicker() {
+      const input = document.getElementById('grace_input');
+      const picker = document.getElementById('grace_picker');
+      if (!input || !picker) return;
+
+      const setGrace = (value) => {
+        const v = Math.max(0, Math.min(6, Number.parseInt(value, 10) || 0));
+        input.value = v;
+        picker.querySelectorAll('.grace-btn').forEach(btn => {
+          const btnVal = Number.parseInt(btn.dataset.grace, 10);
+          btn.classList.toggle('active', btnVal === v);
+        });
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      };
+
+      picker.addEventListener('click', (e) => {
+        const btn = e.target.closest('.grace-btn');
+        if (!btn) return;
+        const current = Number.parseInt(input.value, 10) || 0;
+        const next = Number.parseInt(btn.dataset.grace, 10) || 0;
+        setGrace(next === current ? 0 : next);
+      });
+
+      setGrace(input.value);
+    }
+
+    // --- Traits / Spells state ---
+    function extractSkillBonuses(text) {
+      const bonuses = {};
+      const bonusRegex = /([+-]\d+)\s*(Might|Brawn|Athletics|Fortitude|Aim|Tinkering|Finesse|Reflex|Spellcraft|Arcana|Insight|Scholarship|Persuasion|Performance|Deception|Intimidation)/gi;
+      let match;
+      while ((match = bonusRegex.exec(text || '')) !== null) {
+        const amount = Number.parseInt(match[1], 10);
+        const skill = match[2];
+        bonuses[skill] = (bonuses[skill] || 0) + (Number.isFinite(amount) ? amount : 0);
+      }
+      return bonuses;
+    }
+
+    function updateTraitPoints() {
+      const level = Number.parseInt(document.getElementById('level_input')?.value, 10) || 0;
+      const max = 1 + level + Math.round(level / 3);
+
+      let used = 0;
+      for (const trait of state.selectedTraits.values()) {
+        const cost = Number.parseInt(trait.Cost, 10);
+        used += Number.isFinite(cost) ? cost : 0;
+      }
+      const remaining = max - used;
+      const maxEl = document.getElementById('trait_points_max');
+      const usedEl = document.getElementById('trait_points_used');
+      const remEl = document.getElementById('trait_points_remaining');
+      if (maxEl) maxEl.value = max;
+      if (usedEl) usedEl.value = used;
+      if (remEl) remEl.value = remaining;
+    }
+
+    function recalculateTraitSkillBonuses() {
+      const totals = {};
+      for (const skill of skillsList) totals[skill] = 0;
+
+      for (const trait of state.selectedTraits.values()) {
+        const extracted = extractSkillBonuses(trait.Description);
+        for (const [skill, val] of Object.entries(extracted)) totals[skill] += val;
+      }
+
+      for (const skill of skillsList) {
+        const input = document.getElementById(`${skill}_mod_trait`);
+        if (input) input.value = totals[skill] || 0;
+      }
+
+      updateTraitPoints();
+      updateAllDerived();
+    }
+
+    function renderSelectedTraits() {
+      const traitsDiv = document.getElementById('traits');
+      if (!traitsDiv) return;
+      traitsDiv.innerHTML = '';
+
+      for (const trait of state.selectedTraits.values()) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'trait';
+        wrapper.dataset.traitName = trait.Name;
+        wrapper.innerHTML = `
+          <div class="card">
+            <div class="px-6 py-6">
+              <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
+                <h3 class="text-lg font-bold" style="margin:0">${trait.Name}</h3>
+                <button type="button" class="remove-btn" onclick="removeTrait('${encodeURIComponent(trait.Name)}')">Remove</button>
+              </div>
+              <div class="space-y-4">
+                <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
+                  ${trait.Action ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Action: ${trait.Action}</span>` : ''}
+                  ${trait.Cost ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Cost: ${trait.Cost}</span>` : ''}
+                  ${trait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${trait.Parameters}</span>` : ''}
+                </div>
+                <p class="text-slate-300 leading-relaxed text-sm">${trait.Description || ''}</p>
+                ${trait.Scaling ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800">${trait.Scaling}</div>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+        traitsDiv.appendChild(wrapper);
+      }
+    }
+
+    function removeTrait(encodedName) {
+      const name = decodeURIComponent(encodedName);
+      state.selectedTraits.delete(name);
+      renderSelectedTraits();
+      recalculateTraitSkillBonuses();
+    }
+
+    async function selectTrait() {
+      const selector = document.getElementById('selectable_traits');
+      const selected = state.allTraits.find(t => t.Name === selector.value);
+      if (!selected) return;
+      if (state.selectedTraits.has(selected.Name)) return;
+      state.selectedTraits.set(selected.Name, selected);
+      renderSelectedTraits();
+      recalculateTraitSkillBonuses();
+    }
+
+    function renderSelectedSpells() {
+      const spellsDiv = document.getElementById('spells');
+      if (!spellsDiv) return;
+      spellsDiv.innerHTML = '';
+
+      for (const spell of state.selectedSpells.values()) {
+        const costLabel = Number.parseInt(spell.Cost, 10) > 0 ? `Level ${spell.Cost}` : 'Cantrip';
+        const wrapper = document.createElement('div');
+        wrapper.className = 'spell';
+        wrapper.dataset.spellId = spell.ID;
+        wrapper.innerHTML = `
+          <div class="card">
+            <div class="px-6 py-6">
+              <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
+                <h3 class="text-lg font-bold" style="margin:0">${spell.Name} : ${costLabel}</h3>
+                <button type="button" class="remove-btn" onclick="removeSpell('${spell.ID}')">Remove</button>
+              </div>
+              <div class="space-y-4">
+                <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
+                  ${spell.Type ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Type: ${spell.Type}</span>` : ''}
+                  ${spell.Range ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${spell.Range}</span>` : ''}
+                </div>
+                <p class="text-slate-300 leading-relaxed text-sm">${spell.Description || ''}</p>
+                ${spell.Upcast ? `<p class="text-slate-300 leading-relaxed text-sm"><strong>Upcast:</strong> ${spell.Upcast}</p>` : ''}
+                ${spell.Lore ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800"><i>${spell.Lore}</i></div>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+        spellsDiv.appendChild(wrapper);
+      }
+    }
+
+    function removeSpell(id) {
+      state.selectedSpells.delete(id);
+      renderSelectedSpells();
+    }
+
+    async function selectSpell() {
+      const selector = document.getElementById('selectable_spells');
+      const selected = state.allSpells.find(s => s.ID === selector.value);
+      if (!selected) return;
+      if (state.selectedSpells.has(selected.ID)) return;
+      state.selectedSpells.set(selected.ID, selected);
+      renderSelectedSpells();
+    }
+
+    // --- Setup selectors ---
+    async function setupTraits() {
+      const traits_file = await fetch('../json/traits.json');
+      state.allTraits = await traits_file.json();
+      const selector = document.getElementById('selectable_traits');
+      const searchInput = document.getElementById('trait_search');
+
+      function renderTraitOptions(filterText) {
+        const prev = selector?.value;
+        const q = (filterText || '').trim().toLowerCase();
+        const filtered = q.length
+          ? state.allTraits.filter(t => (t.Name || '').toLowerCase().includes(q))
+          : state.allTraits;
+
+        selector.innerHTML = '';
+        filtered.forEach(trait => {
+          const option = document.createElement('option');
+          option.value = trait.Name;
+          option.textContent = trait.Name;
+          selector.appendChild(option);
+        });
+
+        if (prev && filtered.some(t => t.Name === prev)) selector.value = prev;
+      }
+
+      renderTraitOptions('');
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function () {
+          renderTraitOptions(this.value);
+          selector.dispatchEvent(new Event('change'));
+        });
+      }
+
+      selector.addEventListener('change', function () {
+        const selectedTrait = state.allTraits.find(t => t.Name === this.value);
+        const detailsDiv = document.getElementById('trait_details');
+        if (!detailsDiv) return;
+        if (!selectedTrait) {
+          detailsDiv.innerHTML = '';
+          return;
+        }
+
+        detailsDiv.innerHTML = `<br>
+          <div class="card">
+            <div class="px-6 py-6">
+              <div class="space-y-4">
+                <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
+                  ${selectedTrait.Action ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Action: ${selectedTrait.Action}</span>` : ''}
+                  ${selectedTrait.Cost ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Cost: ${selectedTrait.Cost}</span>` : ''}
+                  ${selectedTrait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${selectedTrait.Parameters}</span>` : ''}
+                </div>
+                <p class="text-slate-300 leading-relaxed text-sm">${selectedTrait.Description || ''}</p>
+                ${selectedTrait.Scaling ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800">${selectedTrait.Scaling}</div>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    async function setupSpells() {
+      const spells_file = await fetch('../json/spells_cantrips.json');
+      state.allSpells = await spells_file.json();
+
+      const spells_ordered = [...state.allSpells].sort((a, b) => {
+        const ca = Number.parseInt(a.Cost, 10);
+        const cb = Number.parseInt(b.Cost, 10);
+        const aCost = Number.isFinite(ca) ? ca : 0;
+        const bCost = Number.isFinite(cb) ? cb : 0;
+        if (aCost === bCost) return a.Name.localeCompare(b.Name);
+        return aCost - bCost;
+      });
+
+      const selector = document.getElementById('selectable_spells');
+      const searchInput = document.getElementById('spell_search');
+
+      function renderSpellOptions(filterText) {
+        const prev = selector?.value;
+        const q = (filterText || '').trim().toLowerCase();
+        const filtered = q.length
+          ? spells_ordered.filter(s => (s.Name || '').toLowerCase().includes(q))
+          : spells_ordered;
+
+        selector.innerHTML = '';
+        filtered.forEach(spell => {
+          const option = document.createElement('option');
+          option.value = spell.ID;
+          const c = Number.parseInt(spell.Cost, 10);
+          const spellCost = (Number.isFinite(c) && c > 0) ? `Level ${spell.Cost}` : 'Cantrip';
+          option.textContent = `${spell.Category} : ${spell.Name} (${spellCost})`;
+          selector.appendChild(option);
+        });
+
+        if (prev && filtered.some(s => s.ID === prev)) selector.value = prev;
+      }
+
+      renderSpellOptions('');
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function () {
+          renderSpellOptions(this.value);
+          selector.dispatchEvent(new Event('change'));
+        });
+      }
+
+      selector.addEventListener('change', function () {
+        const selectedSpell = state.allSpells.find(s => s.ID === this.value);
+        const detailsDiv = document.getElementById('spell_details');
+        if (!detailsDiv) return;
+        if (!selectedSpell) {
+          detailsDiv.innerHTML = '';
+          return;
+        }
+
+        detailsDiv.innerHTML = `<br>
+          <div class="card">
+            <div class="px-6 py-6">
+              <div class="space-y-4">
+                <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
+                  ${selectedSpell.Type ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Type: ${selectedSpell.Type}</span>` : ''}
+                  ${selectedSpell.Range ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${selectedSpell.Range}</span>` : ''}
+                </div>
+                <p class="text-slate-300 leading-relaxed text-sm">${selectedSpell.Description || ''}</p>
+                ${selectedSpell.Upcast ? `<p class="text-slate-300 leading-relaxed text-sm"><strong>Upcast:</strong> ${selectedSpell.Upcast}</p>` : ''}
+                ${selectedSpell.Lore ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800"><i>${selectedSpell.Lore}</i></div>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // --- Proficiencies ---
+    function proficiency_assignment() {
+      const weapons = ['proficiency_selector', 'proficiency_selector_2', 'proficiency_selector_3'];
+      const attacks = ['attack_1', 'attack_2', 'attack_3'];
+
+      const proficiencyMap = {
+        "Light_Melee": "light_melee_input",
+        "Medium_Melee": "medium_melee_input",
+        "Heavy_Melee": "heavy_melee_input",
+        "Light_Ranged": "light_ranged_input",
+        "Medium_Ranged": "medium_ranged_input",
+        "Heavy_Ranged": "heavy_ranged_input",
+        "Light_Firearm": "light_firearm_input",
+        "Medium_Firearm": "medium_firearm_input",
+        "Heavy_Firearm": "heavy_firearm_input"
+      };
+
+      weapons.forEach((w, i) => {
+        const el = document.getElementById(w);
+        if (!el) return;
+        const val = el.value;
+        if (proficiencyMap[val]) {
+          document.getElementById(attacks[i]).value = document.getElementById(proficiencyMap[val]).value || 0;
+        }
+      });
+    }
+
+    function exportToPDF() {
+      window.print();
+    }
+
+    function proficiency_warning() {
+      const might = parseInt(document.getElementById('Physique_Might').value) || 0;
+      const aim = parseInt(document.getElementById('Technique_Aim').value) || 0;
+
+      const melee_sum =
+        (parseInt(document.getElementById('light_melee_input').value) || 0) +
+        (parseInt(document.getElementById('medium_melee_input').value) || 0) +
+        (parseInt(document.getElementById('heavy_melee_input').value) || 0);
+
+      const ranged_sum =
+        (parseInt(document.getElementById('light_ranged_input').value) || 0) +
+        (parseInt(document.getElementById('medium_ranged_input').value) || 0) +
+        (parseInt(document.getElementById('heavy_ranged_input').value) || 0) +
+        (parseInt(document.getElementById('light_firearm_input').value) || 0) +
+        (parseInt(document.getElementById('medium_firearm_input').value) || 0) +
+        (parseInt(document.getElementById('heavy_firearm_input').value) || 0);
+
+      document.getElementById('proficiency_warning_melee').style.display = melee_sum > might ? 'block' : 'none';
+      document.getElementById('proficiency_warning_ranged').style.display = ranged_sum > aim ? 'block' : 'none';
+
+      const meleeTracker = document.getElementById('melee_points_tracker');
+      const rangedTracker = document.getElementById('ranged_points_tracker');
+      if (meleeTracker) meleeTracker.value = `${melee_sum} / ${might}`;
+      if (rangedTracker) rangedTracker.value = `${ranged_sum} / ${aim}`;
+    }
+
+    // --- Armor ---
+    function armor_proficiency() {
+      const fort = parseInt(document.getElementById('Physique_Fortitude').value) || 0;
+      document.getElementById('light_armor_checkbox').checked = fort >= 2;
+      document.getElementById('medium_armor_checkbox').checked = fort >= 3;
+      document.getElementById('heavy_armor_checkbox').checked = fort >= 4;
+      document.getElementById('shields_checkbox').checked = fort >= 1;
+    }
+
+    // --- Health ---
+    function applyHealth(direction) {
+      const delta = parseInt(document.getElementById('health_delta').value) || 0;
+      const currentInput = document.getElementById('health_current');
+      const max = parseInt(document.getElementById('health_max').value) || 0;
+
+      let current = parseInt(currentInput.value) || 0;
+      current += direction * delta;
+      if (current < 0) current = 0;
+      if (current > max) current = max;
+      currentInput.value = current;
+      updateHealthBar();
+    }
+
+    function updateHealthBar() {
+      const current = parseInt(document.getElementById('health_current').value) || 0;
+      const max = parseInt(document.getElementById('health_max').value) || 1;
+      const percent = (current / max) * 100;
+      document.getElementById('health_fill').style.width = percent + '%';
+    }
+
+    // --- Mana ---
+    function applyMana(direction) {
+      const delta = parseInt(document.getElementById('mana_delta').value) || 0;
+      const currentInput = document.getElementById('current_mana');
+      const max = parseInt(document.getElementById('max_mana').value) || 0;
+
+      let current = parseInt(currentInput.value) || 0;
+      current += direction * delta;
+      if (current < 0) current = 0;
+      if (current > max) current = max;
+      currentInput.value = current;
+      updateManaBar();
+    }
+
+    function updateManaBar() {
+      const current = parseInt(document.getElementById('current_mana').value) || 0;
+      const max = parseInt(document.getElementById('max_mana').value) || 1;
+      const percent = (current / max) * 100;
+      const fill = document.getElementById('mana_fill');
+      if (fill) fill.style.width = percent + '%';
+    }
+
+    function clampVitals() {
+      const hMax = parseInt(document.getElementById('health_max').value) || 0;
+      const hCurEl = document.getElementById('health_current');
+      if (hCurEl) {
+        const hCur = parseInt(hCurEl.value) || 0;
+        hCurEl.value = Math.max(0, Math.min(hCur, hMax));
+      }
+      const mMax = parseInt(document.getElementById('max_mana').value) || 0;
+      const mCurEl = document.getElementById('current_mana');
+      if (mCurEl) {
+        const mCur = parseInt(mCurEl.value) || 0;
+        mCurEl.value = Math.max(0, Math.min(mCur, mMax));
+      }
+    }
+
+    function updateAllDerived() {
+      // Attributes totals
+      document.querySelectorAll('.attribute-card').forEach(card => {
+        const base = parseInt(card.querySelector('.base').value) || 0;
+        card.querySelectorAll('.skill-row').forEach(row => {
+          const user = parseInt(row.querySelector('.mod')?.value) || 0;
+          const trait = parseInt(row.querySelector('.mod-trait')?.value) || 0;
+          row.querySelector('.total').value = base + user + trait;
+        });
+      });
+
+      const fortitude = parseInt(document.getElementById('Physique_Fortitude').value) || 0;
+      const armorItems =
+        (parseInt(document.getElementById('armor_value').value) || 0) +
+        (parseInt(document.getElementById('shield_value').value) || 0) +
+        (parseInt(document.getElementById('cloak_value').value) || 0);
+      document.getElementById('armor_total').value = 4 + fortitude + armorItems;
+
+      const level = parseInt(document.getElementById('level_input').value) || 0;
+      const brawn = parseInt(document.getElementById('Physique_Brawn').value) || 0;
+      const hpBonus = parseInt(document.getElementById('health_bonus')?.value) || 0;
+      document.getElementById('health_max').value = level + level * brawn + hpBonus;
+
+      const manaBonus = parseInt(document.getElementById('mana_bonus')?.value) || 0;
+      document.getElementById('max_mana').value = level + Math.floor(level / 3) + manaBonus;
+
+      document.getElementById('spell_attack').value = (parseInt(document.getElementById('Mystique_Spellcraft').value) || 0);
+      document.getElementById('spell_dc').value = 5 + (parseInt(document.getElementById('Mystique_Arcana').value) || 0);
+
+      const backpackCapacity = parseInt(document.getElementById('backpack_capacity')?.value) || 0;
+      document.getElementById('max_weight').value =
+        (parseInt(document.getElementById('Physique_base').value) || 0) +
+        ((parseInt(document.getElementById('Physique_Athletics').value) || 0) * 2) +
+        backpackCapacity;
+
+      updateTraitPoints();
+      clampVitals();
+      updateHealthBar();
+      updateManaBar();
+      armor_proficiency();
+      proficiency_warning();
+      proficiency_assignment();
+      inventory_extra_slots();
+    }
+
+    // --- Main Input Listener ---
+    document.addEventListener('input', function () {
+      updateAllDerived();
+    });
+
+    // --- Initialize ---
+    window.addEventListener('DOMContentLoaded', async () => {
+      setupAttributes();
+      setupGracePicker();
+      inventory_init();
+      await setupTraits();
+      await setupSpells();
+      renderSelectedTraits();
+      renderSelectedSpells();
+      recalculateTraitSkillBonuses();
+      updateAllDerived();
+    });
+  </script>
+
+
+</body>
+
+</html>
