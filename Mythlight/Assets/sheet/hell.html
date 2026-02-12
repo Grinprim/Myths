@@ -19,7 +19,13 @@
     <h1>Mythlight Character Sheet</h1>
     <p>Edition 4.0.0</p>
     <div class="header-actions no-print">
-      <button type="button" onclick="exportToPDF()">Export to PDF</button>
+      <button type="button" onclick="exportToPDF()">Print</button>
+      <button type="button" onclick="exportToJSON()">Export to JSON</button> <input type="file" id="import_file_input"
+        style="display:none" accept=".json" onchange="importFromJSON(event)"><button type="button"
+        onclick="document.getElementById('import_file_input').click()">Import from JSON</button>
+      <span id="save_warning" style="color:#f87171; font-weight:600; margin-left:1rem; display:none;">
+        • Unsaved Changes
+      </span>
     </div>
   </header>
 
@@ -28,319 +34,365 @@
 
       <div class="sheet-grid">
 
-      <div class="card sheet-full section-1">
-        <div class="section-title">
-          <div class="section-number">1</div>
-          <h2>Core Identity</h2>
-        </div>
-        <div class="grid">
-          <div><label>Name</label><input type="text" required></div>
-          <div><label>Species</label><input type="text" required></div>
-          <div><label>Path</label><input type="text" required></div>
-          <div><label>Level</label><input type="number" id="level_input" required></div>
-        </div>
-      </div>
-
-      <div class="sheet-col sheet-left">
-        <div class="card section-3">
+        <div class="card sheet-full section-1">
           <div class="section-title">
-            <div class="section-number">3</div>
-            <h2>Attributes</h2>
-          </div>
-          <div class="attribute-grid" id="attributes"></div>
-        </div>
-
-        <div class="card section-7">
-          <div class="section-title">
-            <div class="section-number">7</div>
-            <h2>Proficiencies</h2>
-          </div>
-          <div id="proficiencies_section" style="display: block">
-            <div class="grid_2"><label>Weapons</label>
-              <div class="grid_4">
-                <div id="light_melee"><label for="light_melee">Light Melee</label> <input id="light_melee_input" type="number"></div>
-                <div id="medium_melee"><label for="medium_melee">Medium Melee</label> <input id="medium_melee_input" type="number"></div>
-                <div id="heavy_melee"><label for="heavy_melee">Heavy Melee</label> <input id="heavy_melee_input" type="number"></div>
-                <div id="light_ranged"><label for="light_ranged">Light Ranged</label> <input id="light_ranged_input" type="number"></div>
-                <div id="medium_ranged"><label for="medium_ranged">Medium Ranged</label> <input id="medium_ranged_input" type="number"></div>
-                <div id="heavy_ranged"><label for="heavy_ranged">Heavy Ranged</label> <input id="heavy_ranged_input" type="number"></div>
-                <div id="light_firearm"><label for="light_firearm">Light Firearm</label> <input id="light_firearm_input" type="number"></div>
-                <div id="medium_firearm"><label for="medium_firearm">Medium Firearm</label> <input id="medium_firearm_input" type="number"></div>
-                <div id="heavy_firearm"><label for="heavy_firearm">Heavy Firearm</label> <input id="heavy_firearm_input" type="number"></div>
-              </div>
-              <label>Armor</label>
-              <div>
-                <div id="light_armor"><input id="light_armor_checkbox" type="checkbox"><label for="light_armor_checkbox">Light Armor</label> </div>
-                <div id="medium_armor"> <input id="medium_armor_checkbox" type="checkbox"><label for="medium_armor_checkbox">Medium Armor</label></div>
-                <div id="heavy_armor"><input id="heavy_armor_checkbox" type="checkbox"><label for="heavy_armor_checkbox">Heavy Armor</label> </div>
-                <div id="shields"><input id="shields_checkbox" type="checkbox"><label for="shields_checkbox">Shields</label> </div>
-              </div>
-              <div><label>Tools</label><textarea rows="3" placeholder="List your tools here..."></textarea></div>
-              <div><label>Languages</label><textarea rows="3" placeholder="List your languages here..."></textarea></div>
-            </div>
-
-            <div class="grid" style="margin-top: 1rem">
-              <div>
-                <label>Melee Proficiency Points (Used / Max)</label>
-                <input type="text" id="melee_points_tracker" readonly placeholder="0 / 0">
-              </div>
-              <div>
-                <label>Ranged Proficiency Points (Used / Max)</label>
-                <input type="text" id="ranged_points_tracker" readonly placeholder="0 / 0">
-              </div>
-            </div>
-
-            <div id="proficiency_warning_melee" style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: solid red;" class="card">
-              Proficiency WARNING Your maximum Melee weapon proficiency sum exceeds Might. Adjust your proficiencies or increase your Might skill.</div>
-            <div id="proficiency_warning_ranged" style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: solid red;" class="card">
-              Proficiency WARNING Your maximum Ranged weapon proficiency sum exceeds Aim. Adjust your proficiencies or increase your Aim skill.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sheet-col sheet-right">
-        <div class="card section-2">
-          <div class="section-title">
-            <div class="section-number">2</div>
-            <h2>Defense & Vitals</h2>
+            <div class="section-number">1</div>
+            <h2>Core Identity</h2>
           </div>
           <div class="grid">
-            <div><label>Guard</label><input type="number" required></div>
-            <div><label>Armor</label><input type="number" id="armor_total" readonly></div>
-            <div><label>Speed</label><input type="number" required></div>
-            <div><label>Initiative</label><input type="number" required></div>
-            <div>
-              <label>Grace (0–6)</label>
-              <input type="number" id="grace_input" min="0" max="6" value="0" required class="grace-hidden">
-              <div class="grace-picker" id="grace_picker" aria-label="Grace selector">
-                <button type="button" class="grace-btn" data-grace="1" aria-label="Grace 1"><div class="die-inline face-1"></div></button>
-                <button type="button" class="grace-btn" data-grace="2" aria-label="Grace 2"><div class="die-inline face-2"></div></button>
-                <button type="button" class="grace-btn" data-grace="3" aria-label="Grace 3"><div class="die-inline face-3"></div></button>
-                <button type="button" class="grace-btn" data-grace="4" aria-label="Grace 4"><div class="die-inline face-4"></div></button>
-                <button type="button" class="grace-btn" data-grace="5" aria-label="Grace 5"><div class="die-inline face-5"></div></button>
-                <button type="button" class="grace-btn" data-grace="6" aria-label="Grace 6"><div class="die-inline face-6"></div></button>
+            <div><label>Name</label><input type="text" id="character_name" required></div>
+            <div><label>Species</label><input type="text" id="character_species" required></div>
+            <div><label>Path</label><input type="text" id="character_path" required></div>
+            <div><label>Level</label><input type="number" id="level_input" required></div>
+          </div>
+        </div>
+
+        <div class="sheet-col sheet-left">
+          <div class="card section-3">
+            <div class="section-title">
+              <div class="section-number">3</div>
+              <h2>Attributes</h2>
+            </div>
+            <div class="attribute-grid" id="attributes"></div>
+          </div>
+
+          <div class="card section-7">
+            <div class="section-title">
+              <div class="section-number">7</div>
+              <h2>Proficiencies</h2>
+            </div>
+            <div id="proficiencies_section" style="display: block">
+              <div class="grid_2"><label>Weapons</label>
+                <div class="grid" style="margin-top: 1rem">
+                  <div>
+                    <label>Melee Proficiency Points (Used / Max)</label>
+                    <input type="text" id="melee_points_tracker" readonly placeholder="0 / 0">
+                  </div>
+                  <div>
+                    <label>Ranged Proficiency Points (Used / Max)</label>
+                    <input type="text" id="ranged_points_tracker" readonly placeholder="0 / 0">
+                  </div>
+                </div>
+
+                <div id="proficiency_warning_melee"
+                  style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: 1px solid red;"
+                  class="card">
+                  Proficiency WARNING Your maximum Melee weapon proficiency sum exceeds Might. Adjust your proficiencies
+                  or increase your Might skill.</div>
+                <div id="proficiency_warning_ranged"
+                  style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: 1px solid red;"
+                  class="card">
+                  Proficiency WARNING Your maximum Ranged weapon proficiency sum exceeds Aim. Adjust your proficiencies
+                  or increase your Aim skill.</div>
+                <div class="grid_4">
+                  <div id="light_melee"><label for="light_melee">Light Melee</label> <input id="light_melee_input"
+                      type="number"></div>
+                  <div id="medium_melee"><label for="medium_melee">Medium Melee</label> <input id="medium_melee_input"
+                      type="number"></div>
+                  <div id="heavy_melee"><label for="heavy_melee">Heavy Melee</label> <input id="heavy_melee_input"
+                      type="number"></div>
+                  <div id="light_ranged"><label for="light_ranged">Light Ranged</label> <input id="light_ranged_input"
+                      type="number"></div>
+                  <div id="medium_ranged"><label for="medium_ranged">Medium Ranged</label> <input
+                      id="medium_ranged_input" type="number"></div>
+                  <div id="heavy_ranged"><label for="heavy_ranged">Heavy Ranged</label> <input id="heavy_ranged_input"
+                      type="number"></div>
+                  <div id="light_firearm"><label for="light_firearm">Light Firearm</label> <input
+                      id="light_firearm_input" type="number"></div>
+                  <div id="medium_firearm"><label for="medium_firearm">Medium Firearm</label> <input
+                      id="medium_firearm_input" type="number"></div>
+                  <div id="heavy_firearm"><label for="heavy_firearm">Heavy Firearm</label> <input
+                      id="heavy_firearm_input" type="number"></div>
+                </div>
+                <label>Armor</label>
+                <div>
+                  <div id="light_armor"><input id="light_armor_checkbox" type="checkbox"><label
+                      for="light_armor_checkbox">Light Armor</label> </div>
+                  <div id="medium_armor"> <input id="medium_armor_checkbox" type="checkbox"><label
+                      for="medium_armor_checkbox">Medium Armor</label></div>
+                  <div id="heavy_armor"><input id="heavy_armor_checkbox" type="checkbox"><label
+                      for="heavy_armor_checkbox">Heavy Armor</label> </div>
+                  <div id="shields"><input id="shields_checkbox" type="checkbox"><label
+                      for="shields_checkbox">Shields</label> </div>
+                </div>
+                <div><label>Tools</label><textarea rows="5" placeholder="List your tools here..." style="resize: none;"
+                    id="tools_textarea"></textarea></div>
+                <div><label>Languages</label><textarea rows="5" placeholder="List your languages here..."
+                    style="resize: none;" id="languages_textarea"></textarea></div>
               </div>
-            </div>
-            <div>
-              <label>Max Health</label>
-              <input type="number" id="health_max" readonly>
-            </div>
-            <div>
-              <label>Health Bonus</label>
-              <input type="number" id="health_bonus" placeholder="+HP to Max">
-            </div>
-            <div>
-              <label>Current Health</label>
-              <input type="number" id="health_current" required>
-              <div class="health-bar">
-                <div class="health-fill" id="health_fill"></div>
-              </div>
-              <div class="inline-row top-gap">
-                <input type="number" id="health_delta" placeholder="Amount" class="input-sm">
-                <button type="button" onclick="applyHealth(-1)">Damage</button>
-                <button type="button" onclick="applyHealth(1)">Heal</button>
-              </div>
-            </div>
-            <div class="final-blow">
-              <label>Final Blow Resistances</label>
-              <input type="checkbox" id="final_blow_resistance_1">
-              <input type="checkbox" id="final_blow_resistance_2">
-              <input type="checkbox" id="final_blow_resistance_3">
-              <input type="checkbox" id="final_blow_resistance_4">
+
+
             </div>
           </div>
         </div>
 
-        <div class="card weapons-card section-4">
-          <div class="section-title">
-            <div class="section-number">4</div>
-            <h2>Weapons</h2>
+        <div class="sheet-col sheet-right">
+          <div class="card section-2">
+            <div class="section-title">
+              <div class="section-number">2</div>
+              <h2>Defense & Vitals</h2>
+            </div>
+            <div class="grid">
+              <div><label>Guard</label><input type="number" required id="guard_input"></div>
+              <div><label>Armor</label><input type="number" id="armor_total" readonly></div>
+              <div><label>Speed</label><input type="number" required id="speed_input"></div>
+              <div><label>Initiative</label><input type="number" required id="initiative_input"></div>
+              <div>
+                <label>Grace (0–6)</label>
+                <input type="number" id="grace_input" min="0" max="6" value="0" required class="grace-hidden">
+                <div class="grace-picker" id="grace_picker" aria-label="Grace selector">
+                  <button type="button" class="grace-btn" data-grace="1" aria-label="Grace 1">
+                    <div class="die-inline face-1"></div>
+                  </button>
+                  <button type="button" class="grace-btn" data-grace="2" aria-label="Grace 2">
+                    <div class="die-inline face-2"></div>
+                  </button>
+                  <button type="button" class="grace-btn" data-grace="3" aria-label="Grace 3">
+                    <div class="die-inline face-3"></div>
+                  </button>
+                  <button type="button" class="grace-btn" data-grace="4" aria-label="Grace 4">
+                    <div class="die-inline face-4"></div>
+                  </button>
+                  <button type="button" class="grace-btn" data-grace="5" aria-label="Grace 5">
+                    <div class="die-inline face-5"></div>
+                  </button>
+                  <button type="button" class="grace-btn" data-grace="6" aria-label="Grace 6">
+                    <div class="die-inline face-6"></div>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <label>Max Health</label>
+                <input type="number" id="health_max" readonly>
+              </div>
+              <div>
+                <label>Health Bonus</label>
+                <input type="number" id="health_bonus" placeholder="+HP to Max">
+              </div>
+              <div>
+                <label>Current Health</label>
+                <input type="number" id="health_current" required>
+                <div class="health-bar">
+                  <div class="health-fill" id="health_fill"></div>
+                </div>
+                <div class="inline-row top-gap">
+                  <input type="number" id="health_delta" placeholder="Amount" class="input-sm">
+                  <button type="button" onclick="applyHealth(-1)">Damage</button>
+                  <button type="button" onclick="applyHealth(1)">Heal</button>
+                </div>
+              </div>
+              <div class="final-blow">
+                <label>Final Blow Resistances</label>
+                <input type="checkbox" id="final_blow_resistance_1">
+                <input type="checkbox" id="final_blow_resistance_2">
+                <input type="checkbox" id="final_blow_resistance_3">
+                <input type="checkbox" id="final_blow_resistance_4">
+              </div>
+            </div>
           </div>
-          <div class="weapons-list">
-            <div class="weapon-block">
-              <div class="weapon-grid">
-                <div>
-                  <label>Weapon 1</label>
-                  <input type="text" placeholder="Name">
-                </div>
-                <div>
-                  <label>Damage</label>
-                  <input type="number" placeholder="Damage">
-                </div>
-                <div>
-                  <label>Attack</label>
-                  <input type="number" id="attack_1" placeholder="Attack" readonly>
-                </div>
-                <div>
-                  <label>Type</label>
-                  <select id="proficiency_selector">
-                    <option value="None">None</option>
-                    <option value="Light_Melee">Light Melee</option>
-                    <option value="Medium_Melee">Medium Melee</option>
-                    <option value="Heavy_Melee">Heavy Melee</option>
-                    <option value="Light_Ranged">Light Ranged</option>
-                    <option value="Medium_Ranged">Medium Ranged</option>
-                    <option value="Heavy_Ranged">Heavy Ranged</option>
-                    <option value="Light_Firearm">Light Firearm</option>
-                    <option value="Medium_Firearm">Medium Firearm</option>
-                    <option value="Heavy_Firearm">Heavy Firearm</option>
-                  </select>
-                </div>
-                <div class="weapon-actions">
-                  <button type="button" onclick="rollAttack(this)">Attack!</button>
-                </div>
-              </div>
-              
-            </div>
 
-            <div class="weapon-block">
-              <div class="weapon-grid">
-                <div>
-                  <label>Weapon 2</label>
-                  <input type="text" placeholder="Name">
-                </div>
-                <div>
-                  <label>Damage</label>
-                  <input type="number" placeholder="Damage">
-                </div>
-                <div>
-                  <label>Attack</label>
-                  <input type="number" id="attack_2" placeholder="Attack" readonly>
-                </div>
-                <div>
-                  <label>Type</label>
-                  <select id="proficiency_selector_2">
-                    <option value="None">None</option>
-                    <option value="Light_Melee">Light Melee</option>
-                    <option value="Medium_Melee">Medium Melee</option>
-                    <option value="Heavy_Melee">Heavy Melee</option>
-                    <option value="Light_Ranged">Light Ranged</option>
-                    <option value="Medium_Ranged">Medium Ranged</option>
-                    <option value="Heavy_Ranged">Heavy Ranged</option>
-                    <option value="Light_Firearm">Light Firearm</option>
-                    <option value="Medium_Firearm">Medium Firearm</option>
-                    <option value="Heavy_Firearm">Heavy Firearm</option>
-                  </select>
-                </div>
-                <div class="weapon-actions">
-                  <button type="button" onclick="rollAttack(this)">Attack!</button>
-                </div>
-              </div>
-              
+          <div class="card weapons-card section-4">
+            <div class="section-title">
+              <div class="section-number">4</div>
+              <h2>Weapons</h2>
             </div>
-
-            <div class="weapon-block">
-              <div class="weapon-grid">
-                <div>
-                  <label>Weapon 3</label>
-                  <input type="text" placeholder="Name">
+            <div class="weapons-list">
+              <div class="weapon-block">
+                <div class="weapon-grid">
+                  <div>
+                    <label>Weapon 1</label>
+                    <input type="text" placeholder="Name" id="weapon_1_name">
+                  </div>
+                  <div>
+                    <label>Damage</label>
+                    <input type="number" placeholder="Damage" id="weapon_1_damage">
+                  </div>
+                  <div>
+                    <label>Attack</label>
+                    <input type="number" id="attack_1" placeholder="Attack" readonly>
+                  </div>
+                  <div>
+                    <label>Type</label>
+                    <select id="proficiency_selector">
+                      <option value="None">None</option>
+                      <option value="Light_Melee">Light Melee</option>
+                      <option value="Medium_Melee">Medium Melee</option>
+                      <option value="Heavy_Melee">Heavy Melee</option>
+                      <option value="Light_Ranged">Light Ranged</option>
+                      <option value="Medium_Ranged">Medium Ranged</option>
+                      <option value="Heavy_Ranged">Heavy Ranged</option>
+                      <option value="Light_Firearm">Light Firearm</option>
+                      <option value="Medium_Firearm">Medium Firearm</option>
+                      <option value="Heavy_Firearm">Heavy Firearm</option>
+                    </select>
+                  </div>
+                  <div class="weapon-actions">
+                    <button type="button" onclick="rollAttack(this)">Attack!</button>
+                  </div>
                 </div>
-                <div>
-                  <label>Damage</label>
-                  <input type="number" placeholder="Damage">
-                </div>
-                <div>
-                  <label>Attack</label>
-                  <input type="number" id="attack_3" placeholder="Attack" readonly>
-                </div>
-                <div>
-                  <label>Type</label>
-                  <select id="proficiency_selector_3">
-                    <option value="None">None</option>
-                    <option value="Light_Melee">Light Melee</option>
-                    <option value="Medium_Melee">Medium Melee</option>
-                    <option value="Heavy_Melee">Heavy Melee</option>
-                    <option value="Light_Ranged">Light Ranged</option>
-                    <option value="Medium_Ranged">Medium Ranged</option>
-                    <option value="Heavy_Ranged">Heavy Ranged</option>
-                    <option value="Light_Firearm">Light Firearm</option>
-                    <option value="Medium_Firearm">Medium Firearm</option>
-                    <option value="Heavy_Firearm">Heavy Firearm</option>
-                  </select>
-                </div>
-                <div class="weapon-actions">
-                  <button type="button" onclick="rollAttack(this)">Attack!</button>
+                <div class="weapon-notes">
+                  <label>Notes</label>
+                  <textarea id="weapon_1_notes" rows="4" placeholder="" style="resize: none;"></textarea>
                 </div>
               </div>
-              
+
+              <div class="weapon-block">
+                <div class="weapon-grid">
+                  <div>
+                    <label>Weapon 2</label>
+                    <input type="text" placeholder="Name" id="weapon_2_name">
+                  </div>
+                  <div>
+                    <label>Damage</label>
+                    <input type="number" placeholder="Damage" id="weapon_2_damage">
+                  </div>
+                  <div>
+                    <label>Attack</label>
+                    <input type="number" id="attack_2" placeholder="Attack" readonly>
+                  </div>
+                  <div>
+                    <label>Type</label>
+                    <select id="proficiency_selector_2">
+                      <option value="None">None</option>
+                      <option value="Light_Melee">Light Melee</option>
+                      <option value="Medium_Melee">Medium Melee</option>
+                      <option value="Heavy_Melee">Heavy Melee</option>
+                      <option value="Light_Ranged">Light Ranged</option>
+                      <option value="Medium_Ranged">Medium Ranged</option>
+                      <option value="Heavy_Ranged">Heavy Ranged</option>
+                      <option value="Light_Firearm">Light Firearm</option>
+                      <option value="Medium_Firearm">Medium Firearm</option>
+                      <option value="Heavy_Firearm">Heavy Firearm</option>
+                    </select>
+                  </div>
+                  <div class="weapon-actions">
+                    <button type="button" onclick="rollAttack(this)">Attack!</button>
+                  </div>
+                </div>
+                <div class="weapon-notes">
+                  <label>Notes</label>
+                  <textarea id="weapon_2_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                </div>
+              </div>
+
+              <div class="weapon-block">
+                <div class="weapon-grid">
+                  <div>
+                    <label>Weapon 3</label>
+                    <input type="text" placeholder="Name" id="weapon_3_name">
+                  </div>
+                  <div>
+                    <label>Damage</label>
+                    <input type="number" placeholder="Damage" id="weapon_3_damage">
+                  </div>
+                  <div>
+                    <label>Attack</label>
+                    <input type="number" id="attack_3" placeholder="Attack" readonly>
+                  </div>
+                  <div>
+                    <label>Type</label>
+                    <select id="proficiency_selector_3">
+                      <option value="None">None</option>
+                      <option value="Light_Melee">Light Melee</option>
+                      <option value="Medium_Melee">Medium Melee</option>
+                      <option value="Heavy_Melee">Heavy Melee</option>
+                      <option value="Light_Ranged">Light Ranged</option>
+                      <option value="Medium_Ranged">Medium Ranged</option>
+                      <option value="Heavy_Ranged">Heavy Ranged</option>
+                      <option value="Light_Firearm">Light Firearm</option>
+                      <option value="Medium_Firearm">Medium Firearm</option>
+                      <option value="Heavy_Firearm">Heavy Firearm</option>
+                    </select>
+                  </div>
+                  <div class="weapon-actions">
+                    <button type="button" onclick="rollAttack(this)">Attack!</button>
+                  </div>
+
+                </div>
+                <div class="weapon-notes">
+                  <label>Notes</label>
+                  <textarea id="weapon_3_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="card section-5">
+            <div class="section-title">
+              <div class="section-number">5</div>
+              <h2>Notes</h2>
+            </div>
+            <textarea id="notes" rows="8" placeholder="Session notes, reminders, NPC names..."
+              style="resize: vertical"></textarea>
+          </div>
+
+          <div class="card section-6">
+            <div class="section-title">
+              <div class="section-number">6</div>
+              <h2>Armor</h2>
+            </div>
+            <div class="armor-slots">
+              <div class="armor-slot">
+                <div class="armor-head">
+                  <img class="armor-icon" src="../img/armor.png" aria-hidden="true">
+                  <div class="armor-name">
+                    <label>Armor Name</label>
+                    <input type="text" id="armor_name" placeholder="Name">
+                  </div>
+                  <div class="armor-value">
+                    <label>Defense</label>
+                    <input type="number" id="armor_value" placeholder="0">
+                  </div>
+                </div>
+                <div class="armor-notes">
+                  <label>Notes</label>
+                  <textarea id="armor_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                </div>
+              </div>
+
+              <div class="armor-slot">
+                <div class="armor-head">
+                  <img class="armor-icon" src="../img/shield.png" aria-hidden="true">
+                  <div class="armor-name">
+                    <label>Shield Name</label>
+                    <input type="text" id="shield_name" placeholder="Name">
+                  </div>
+                  <div class="armor-value">
+                    <label>Defense</label>
+                    <input type="number" id="shield_value" placeholder="0">
+                  </div>
+                </div>
+                <div class="armor-notes">
+                  <label>Notes</label>
+                  <textarea id="shield_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                </div>
+              </div>
+
+              <div class="armor-slot">
+                <div class="armor-head">
+                  <img class="armor-icon" src="../img/cloak.png" aria-hidden="true">
+                  <div class="armor-name">
+                    <label>Cloak Name</label>
+                    <input type="text" id="cloak_name" placeholder="Name">
+                  </div>
+                  <div class="armor-value">
+                    <label>Defense</label>
+                    <input type="number" id="cloak_value" placeholder="0">
+                  </div>
+                </div>
+                <div class="armor-notes">
+                  <label>Notes</label>
+                  <textarea id="cloak_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="card section-5">
-          <div class="section-title">
-            <div class="section-number">5</div>
-            <h2>Notes</h2>
-          </div>
-          <textarea id="notes" rows="8" placeholder="Session notes, reminders, NPC names..." style="resize: vertical"></textarea>
-        </div>
-
-        <div class="card section-6">
-          <div class="section-title">
-            <div class="section-number">6</div>
-            <h2>Armor</h2>
-          </div>
-          <div class="armor-slots">
-            <div class="armor-slot">
-              <div class="armor-head">
-                <img class="armor-icon" src="../img/armor.png" aria-hidden="true">
-                <div class="armor-name">
-                  <label>Armor Name</label>
-                  <input type="text" id="armor_name" placeholder="Name">
-                </div>
-                <div class="armor-value">
-                  <label>Defense</label>
-                  <input type="number" id="armor_value" placeholder="0">
-                </div>
-              </div>
-              <div class="armor-notes">
-                <label>Notes</label>
-                <textarea id="armor_notes" rows="3" placeholder=""></textarea>
-              </div>
-            </div>
-
-            <div class="armor-slot">
-              <div class="armor-head">
-                <img class="armor-icon" src="../img/shield.png" aria-hidden="true">
-                <div class="armor-name">
-                  <label>Shield Name</label>
-                  <input type="text" id="shield_name" placeholder="Name">
-                </div>
-                <div class="armor-value">
-                  <label>Defense</label>
-                  <input type="number" id="shield_value" placeholder="0">
-                </div>
-              </div>
-              <div class="armor-notes">
-                <label>Notes</label>
-                <textarea id="shield_notes" rows="3" placeholder=""></textarea>
-              </div>
-            </div>
-
-            <div class="armor-slot">
-              <div class="armor-head">
-                <img class="armor-icon" src="../img/cloak.png" aria-hidden="true">
-                <div class="armor-name">
-                  <label>Cloak Name</label>
-                  <input type="text" id="cloak_name" placeholder="Name">
-                </div>
-                <div class="armor-value">
-                  <label>Defense</label>
-                  <input type="number" id="cloak_value" placeholder="0">
-                </div>
-              </div>
-              <div class="armor-notes">
-                <label>Notes</label>
-                <textarea id="cloak_notes" rows="3" placeholder=""></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      </div>
-
-      <div class="card sheet-full section-8">
+      <div class="card sheet-full section-8" id="inventory">
         <div class="section-title" onclick="toggle_inventory()" style="cursor: pointer;">
           <div class="section-number">8</div>
           <h2>Inventory</h2>
@@ -361,135 +413,186 @@
             </div>
           </div>
           <br>
-          <div style="display: flex; gap: .5rem; flex-wrap: wrap; align-items:center">
-            <label style="min-width:80px">Currency</label>
-            <input type="number" id="copper" placeholder="Copper">
-            <input type="number" id="silver" placeholder="Silver">
-            <input type="number" id="gold" placeholder="Gold">
-            <input type="number" id="platinum" placeholder="Platinum">
+          <div class="grid_4">
+            <label style="min-width:80px; text-align: center;" for="copper">Copper</label>
+            <label style="min-width:80px; text-align: center; " for="silver">Silver</label>
+            <label style="min-width:80px; text-align: center;" for="gold">Gold</label>
+            <label style="min-width:80px; text-align: center;" for="platinum">Platinum</label>
+          </div>
+          <div class="grid_4">
+            <input type="number" id="copper" placeholder="Amount">
+            <input type="number" id="silver" placeholder="Amount">
+            <input type="number" id="gold" placeholder="Amount">
+            <input type="number" id="platinum" placeholder="Amount">
           </div>
         </div>
 
-      <div id="inventory_grid" class="grid_3" style="display: none;"></div>
+        <div id="inventory_grid" class="grid_3" style="display: none;"></div>
 
-      <div id="inventory_extra" style="display:none">
-        <div class="card">
-          <h3 style="margin-top:0">Potions</h3>
-          <div class="grid_2 proficiencies-grid">
-            <div>
-              <div class="muted-label">Ingredients</div>
-              <div id="potions_ingredients_grid" class="grid"></div>
-            </div>
-            <div>
-              <div class="muted-label">Recipes</div>
-              <div id="potions_recipes_grid" class="grid"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0">Crafts</h3>
-          <div class="grid_2">
-            <div>
-              <div class="muted-label">Components</div>
-              <div id="crafts_components_grid" class="grid"></div>
-            </div>
-            <div>
-              <div class="muted-label">Recipes</div>
-              <div id="crafts_recipes_grid" class="grid"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-      
-      <div class="traits-spells-row sheet-full">
-      <div class="card section-9">
-        <div class="section-title">
-          <div class="section-number">9</div>
-          <h2>Traits</h2>
-        </div>
-        <div class="grid">
-          <div>
-            <label>Trait Points (Max / Used)</label>
-            <div style="display:flex; gap:.5rem">
-              <input type="number" id="trait_points_max" readonly placeholder="Max">
-              <input type="number" id="trait_points_used" readonly placeholder="Used">
-            </div>
-          </div>
-          <div>
-            <label>Trait Points (Remaining)</label>
-            <input type="number" id="trait_points_remaining" readonly placeholder="Remaining">
-          </div>
-        </div>
-
-        <div class="card" style="margin-top: 1rem">
-          <div class="muted-label">Action legend</div>
-          <div class="legend-mini">
-            <div class="legend-item"><div class="legend-symbol-mini" style="color:#60a5fa">⧖</div><div><div style="color:white;font-weight:600">Passive</div><div class="muted-label">Always active</div></div></div>
-            <div class="legend-item"><div class="legend-symbol-mini" style="color:#ffffff">⭘</div><div><div style="color:white;font-weight:600">Free Action</div><div class="muted-label">No action cost</div></div></div>
-            <div class="legend-item"><div class="legend-symbol-mini" style="color:#ffffff">◇</div><div><div style="color:white;font-weight:600">Reaction</div><div class="muted-label">Condition-based</div></div></div>
-            <div class="legend-item"><div class="legend-symbol-mini" style="color:#ffffff">⬖</div><div><div style="color:white;font-weight:600">Action</div><div class="muted-label">Consumes 1 action</div></div></div>
-            <div class="legend-item"><div class="legend-symbol-mini" style="color:#ffffff">◆</div><div><div style="color:white;font-weight:600">Attack Action</div><div class="muted-label">Once per turn limit</div></div></div>
-          </div>
-        </div>
-
-        <div class="trait-controls">
-          <input type="text" id="trait_search" placeholder="Search traits by name...">
-          <select id="selectable_traits"></select>
-          <button type="button" onclick="selectTrait();">Add Trait</button>
-        </div>
-        <div id="trait_details"></div>
-        <div class="grid_3" id ="traits">
-
-        </div>
-      </div>
-
-      <div class="card section-10">
-        <div class="section-title">
-          <div class="section-number">10</div>
-          <h2>Spells</h2>
-        </div>
-        <div class="card">
-          <div class="grid">
-            <div>
-              <label>Max Mana</label>
-              <input type="number" placeholder="Max Mana" id="max_mana" readonly>
-            </div>
-            <div>
-              <label>Mana Bonus</label>
-              <input type="number" id="mana_bonus" placeholder="+Mana to Max">
-            </div>
-            <div>
-              <label>Current Mana</label>
-              <input type="number" id="current_mana" placeholder="Current Mana">
-              <div class="mana-bar"><div class="mana-fill" id="mana_fill"></div></div>
-              <div class="inline-row top-gap">
-                <input type="number" id="mana_delta" placeholder="Amount" class="input-sm">
-                <button type="button" onclick="applyMana(-1)">Spend</button>
-                <button type="button" onclick="applyMana(1)">Gain</button>
+        <div id="inventory_extra" style="display:none">
+          <div class="card">
+            <h3 style="margin-top:0">Potions</h3>
+            <div class="grid_2">
+              <div>
+                <div class="muted-label">Ingredients</div>
+                <div id="potions_ingredients_grid" class="grid"></div>
+              </div>
+              <div>
+                <div class="muted-label">Recipes</div>
+                <div id="potions_recipes_grid" class="grid"></div>
               </div>
             </div>
           </div>
 
-          <br>
-          <input type="number" id="spell_attack" placeholder="Spell Attack Bonus" readonly>
-          <input type="number" id="spell_dc" placeholder="Spell DC">
-          <input type="number" id="spell_damage" placeholder="Spell Damage Bonus">
-          <br>
-          <input type="text" id="spellcasting_type" placeholder="Spellcasting School">
-        </div>
-
-        <div class="trait-controls">
-          <input type="text" id="spell_search" placeholder="Search spells by name...">
-          <select id="selectable_spells"></select>
-          <button type="button" onclick="selectSpell();">Add Spell</button>
-        </div>
-        <div id="spell_details"></div>
-        <div class="grid_3" id ="spells">
-
+          <div class="card">
+            <h3 style="margin-top:0">Crafts</h3>
+            <div class="grid_2">
+              <div>
+                <div class="muted-label">Components</div>
+                <div id="crafts_components_grid" class="grid"></div>
+              </div>
+              <div>
+                <div class="muted-label">Recipes</div>
+                <div id="crafts_recipes_grid" class="grid"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div class="traits-spells-row sheet-full">
+        <div class="card section-9">
+          <div class="section-title">
+            <div class="section-number">9</div>
+            <h2>Traits</h2>
+          </div>
+          <div class="grid">
+            <div>
+              <label>Trait Points (Max / Used)</label>
+              <div style="display:flex; gap:.5rem">
+                <input type="number" id="trait_points_max" readonly placeholder="Max">
+                <input type="number" id="trait_points_used" readonly placeholder="Used">
+              </div>
+            </div>
+            <div>
+              <label>Trait Points (Remaining)</label>
+              <input type="number" id="trait_points_remaining" readonly placeholder="Remaining">
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 1rem">
+            <div class="muted-label">Action legend</div>
+            <div class="legend-mini">
+              <div class="legend-item">
+                <div class="legend-symbol-mini" style="color:#60a5fa">⧖</div>
+                <div>
+                  <div style="color:white;font-weight:600">Passive</div>
+                  <div class="muted-label">Always active</div>
+                </div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-symbol-mini" style="color:#ffffff">⭘</div>
+                <div>
+                  <div style="color:white;font-weight:600">Free Action</div>
+                  <div class="muted-label">No action cost</div>
+                </div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-symbol-mini" style="color:#ffffff">◇</div>
+                <div>
+                  <div style="color:white;font-weight:600">Reaction</div>
+                  <div class="muted-label">Condition-based</div>
+                </div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-symbol-mini" style="color:#ffffff">⬖</div>
+                <div>
+                  <div style="color:white;font-weight:600">Action</div>
+                  <div class="muted-label">Consumes 1 action</div>
+                </div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-symbol-mini" style="color:#ffffff">◆</div>
+                <div>
+                  <div style="color:white;font-weight:600">Attack Action</div>
+                  <div class="muted-label">Once per turn limit</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trait-controls">
+            <input type="text" id="trait_search" placeholder="Search traits by name...">
+            <select id="selectable_traits"></select>
+            <button type="button" onclick="selectTrait();">Add Trait</button>
+          </div>
+          <div id="trait_details"></div>
+          <div class="grid_3" id="traits">
+
+          </div>
+        </div>
+
+        <div class="card section-10">
+          <div class="section-title">
+            <div class="section-number">10</div>
+            <h2>Spells</h2>
+          </div>
+          <div class="card">
+            <div class="grid">
+              <div>
+                <label>Max Mana</label>
+                <input type="number" placeholder="Max Mana" id="max_mana" readonly>
+              </div>
+              <div>
+                <label>Mana Bonus</label>
+                <input type="number" id="mana_bonus" placeholder="+Mana to Max">
+              </div>
+              <div>
+                <label>Current Mana</label>
+                <input type="number" id="current_mana" placeholder="Current Mana">
+                <div class="mana-bar">
+                  <div class="mana-fill" id="mana_fill"></div>
+                </div>
+                <div class="inline-row top-gap">
+                  <input type="number" id="mana_delta" placeholder="Amount" class="input-sm">
+                  <button type="button" onclick="applyMana(-1)">Spend</button>
+                  <button type="button" onclick="applyMana(1)">Gain</button>
+                </div>
+              </div>
+            </div>
+            <br>
+            <label style="font-weight:600; color:#a5b4fc">Spellcasting Details</label>
+            <br><br>
+            <div class="grid_4">
+            <div>
+            <label for="spell_attack">Spell Attack Bonus</label>
+            <input type="number" id="spell_attack" placeholder="Spell Attack Bonus" readonly>
+            </div>
+            <div>
+            <label for="spell_dc">Spell DC</label>
+            <input type="number" id="spell_dc" placeholder="Spell DC">
+            </div>
+            <div>
+            <label for="spell_damage">Spell Damage Bonus</label>
+            <input type="number" id="spell_damage" placeholder="Amount">
+            </div>
+
+            </div>
+            <br>
+            <label for="spellcasting_type">Spellcasting School</label>
+            <input type="text" id="spellcasting_type" placeholder="Name of your spellcasting school">
+          </div>
+
+          <div class="trait-controls">
+            <input type="text" id="spell_search" placeholder="Search spells by name...">
+            <select id="selectable_spells"></select>
+            <button type="button" onclick="selectSpell();">Add Spell</button>
+          </div>
+          <div id="spell_details"></div>
+          <div class="grid_3" id="spells">
+
+          </div>
+        </div>
       </div>
 
     </form>
@@ -516,9 +619,12 @@
       <button type="button" onclick="manualRoll()">Roll</button>
       <div id="roll_summary" style="font-size:.85rem; color:#a5b4fc"></div>
     </div>
+    <br>
+    <div class="card" id="roll_history"></div>
   </div>
 
   <script>
+    let isDirty = false;
     const BASE_SLOTS = 2;
     const BASE_RECIPE_SLOTS = 2;
 
@@ -629,7 +735,7 @@
         card.innerHTML = `
           <div class="attribute-header">
             <h3>${attr}</h3>
-            <div class="attribute-base-wrap">
+            <div class="attribute-base-wrap" style="scale: 1.1">
               <span class="muted-label">Base</span>
               <input type="number" class="base attribute-base" id="${attr}_base" placeholder="0">
             </div>
@@ -641,10 +747,10 @@
           row.innerHTML = `
             <div class="skill-row">
               <span onclick="toggleDesc(this)">${skill}</span>
-              <input type="number" class="mod" id="${skill}_mod_user" placeholder="User">
-              <input type="number" class="mod-trait" id="${skill}_mod_trait" placeholder="Trait" readonly>
+              <input style="width: 6em;" type="number" class="mod" id="${skill}_mod_user" placeholder="Mod">
+              <input type="number" style="scale: 0.8;" class="mod-trait" id="${skill}_mod_trait" placeholder="Trait" readonly>
               <input type="number" class="total" id="${attr}_${skill}" readonly>
-              <button type="button" onclick="rollSkill(this)">Roll</button>
+              <button type="button" onclick="rollSkill(this, '${skill}')">Roll</button>
             </div>
             <div class="skill-desc">${skillDescriptions[skill] || "No description available."}</div>
             
@@ -716,15 +822,19 @@
     function manualRoll() {
       const { mod } = getRollConfig();
       const result = rollDicePool(2, mod);
+      document.getElementById('roll_history').innerHTML = `<div class="roll-history-entry" id="manual-roll-history">Rolled Manual: [${result.dice.join(', ')}] + ${mod} = ${result.final}</div>` + document.getElementById('roll_history').innerHTML;
+      historyCleaning();
       renderRollWidget(result, 'Manual');
     }
 
-    function rollSkill(btn) {
+    function rollSkill(btn, label) {
       const row = btn.parentElement;
       const total = Number.parseInt(row.querySelector('.total').value, 10) || 0;
       const { mod } = getRollConfig();
       const combinedMod = total + mod;
       const result = rollDicePool(2, combinedMod);
+      document.getElementById('roll_history').innerHTML = `<div class="roll-history-entry" id="skill-roll-history">Rolled ${label}: [${result.dice.join(', ')}] + ${combinedMod} = ${result.final}</div>` + document.getElementById('roll_history').innerHTML;
+      historyCleaning();
       renderRollWidget(result, 'Skill');
     }
 
@@ -734,6 +844,8 @@
       const { mod } = getRollConfig();
       const combinedMod = attackBonus + mod;
       const result = rollDicePool(2, combinedMod);
+      document.getElementById('roll_history').innerHTML = `<div class="roll-history-entry" id="attack-roll-history">Rolled Attack: [${result.dice.join(', ')}] + ${combinedMod} = ${result.final}</div>` + document.getElementById('roll_history').innerHTML;
+      historyCleaning();
       renderRollWidget(result, 'Attack');
     }
 
@@ -862,6 +974,29 @@
       recalculateTraitSkillBonuses();
     }
 
+    function rollSpell(spellId) {
+      let attack = Number.parseInt(document.getElementById('spell_attack')?.value, 10) || 0;
+      const { mod } = getRollConfig();
+      const combinedMod = attack + mod;
+      const result = rollDicePool(2, combinedMod);
+      document.getElementById('roll_history').innerHTML = `<div class="roll-history-entry" id="spell-roll-history">Cast ${spellId}: [${result.dice.join(', ')}] + ${combinedMod} = ${result.final}</div>` + document.getElementById('roll_history').innerHTML;
+      historyCleaning();
+      renderRollWidget(result, `Casting Spell: ${spellId}`);
+    }
+
+    function castSpell(cost, spellName) {
+      const currentMana = Number.parseInt(document.getElementById('current_mana')?.value, 10) || 0;
+      const manaCost = Number.parseInt(cost, 10) || 0;
+      if (currentMana < manaCost) {
+        alert('Not enough mana to cast this spell!');
+        return;
+      }
+      document.getElementById('current_mana').value = currentMana - manaCost;
+      updateManaBar();
+      
+      rollSpell(spellName);
+    }
+
     function renderSelectedSpells() {
       const spellsDiv = document.getElementById('spells');
       if (!spellsDiv) return;
@@ -877,6 +1012,7 @@
             <div class="px-6 py-6">
               <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
                 <h3 class="text-lg font-bold" style="margin:0">${spell.Name} : ${costLabel}</h3>
+                <button type="button" class="cast-btn" onclick="castSpell('${spell.Cost}', '${spell.Name}')">Cast</button>
                 <button type="button" class="remove-btn" onclick="removeSpell('${spell.ID}')">Remove</button>
               </div>
               <div class="space-y-4">
@@ -1073,6 +1209,140 @@
       window.print();
     }
 
+    function exportToJSON() {
+      const data = {
+        version: "4.0.0",
+        timestamp: new Date().toISOString(),
+        form: {},
+        inventory: {},
+        traits: [],
+        spells: []
+      };
+
+      // --- Save all inputs, selects, textareas ---
+      document.querySelectorAll('input, select, textarea').forEach(el => {
+        if (!el.id) return; // skip elements without id
+
+        if (el.type === "checkbox") {
+          data.form[el.id] = el.checked;
+        } else {
+          data.form[el.id] = el.value;
+        }
+      });
+
+      // --- Inventory Slots ---
+      function readSlots(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return [];
+
+        return Array.from(container.querySelectorAll('.inventory_slot')).map(slot => ({
+          name: slot.querySelector('input')?.value || "",
+          description: slot.querySelector('textarea')?.value || ""
+        }));
+      }
+
+      data.inventory.main = readSlots('inventory_grid');
+      data.inventory.potionIngredients = readSlots('potions_ingredients_grid');
+      data.inventory.potionRecipes = readSlots('potions_recipes_grid');
+      data.inventory.craftComponents = readSlots('crafts_components_grid');
+      data.inventory.craftRecipes = readSlots('crafts_recipes_grid');
+
+      // --- Traits ---
+      data.traits = Array.from(state.selectedTraits.keys());
+
+      // --- Spells ---
+      data.spells = Array.from(state.selectedSpells.keys());
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], {
+        type: "application/json"
+      });
+
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = (data.form.character_name || "character") + ".json";
+      a.click();
+      isDirty = false;
+      const warn = document.getElementById('save_warning');
+      if (warn) warn.style.display = 'none';
+    }
+    async function importFromJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const text = await file.text();
+      const data = JSON.parse(text);
+
+      // --- Restore Form Fields ---
+      if (data.form) {
+        Object.entries(data.form).forEach(([id, value]) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+
+          if (el.type === "checkbox") {
+            el.checked = value;
+          } else {
+            el.value = value;
+          }
+        });
+      }
+
+      // --- Restore Inventory ---
+      function restoreSlots(containerId, items) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        container.innerHTML = "";
+
+        items.forEach(item => {
+          const slot = document.createElement('div');
+          slot.className = 'inventory_slot';
+          slot.innerHTML = `
+        <input type="text" value="${item.name || ""}">
+        <textarea rows="4" style="resize:none;">${item.description || ""}</textarea>
+      `;
+          container.appendChild(slot);
+        });
+      }
+
+      if (data.inventory) {
+        restoreSlots('inventory_grid', data.inventory.main || []);
+        restoreSlots('potions_ingredients_grid', data.inventory.potionIngredients || []);
+        restoreSlots('potions_recipes_grid', data.inventory.potionRecipes || []);
+        restoreSlots('crafts_components_grid', data.inventory.craftComponents || []);
+        restoreSlots('crafts_recipes_grid', data.inventory.craftRecipes || []);
+      }
+
+      // --- Restore Traits ---
+      state.selectedTraits.clear();
+      if (data.traits && state.allTraits.length > 0) {
+        data.traits.forEach(name => {
+          const trait = state.allTraits.find(t => t.Name === name);
+          if (trait) state.selectedTraits.set(trait.Name, trait);
+        });
+      }
+      renderSelectedTraits();
+      recalculateTraitSkillBonuses();
+
+      // --- Restore Spells ---
+      state.selectedSpells.clear();
+      if (data.spells && state.allSpells.length > 0) {
+        data.spells.forEach(id => {
+          const spell = state.allSpells.find(s => s.ID === id);
+          if (spell) state.selectedSpells.set(spell.ID, spell);
+        });
+      }
+      renderSelectedSpells();
+
+      // --- Trigger recalculations ---
+      updateAllDerived?.();
+      proficiency_assignment?.();
+      proficiency_warning?.();
+      updateManaBar?.();
+      updateHealthBar?.();
+
+      alert("Character successfully loaded!");
+    }
+
     function proficiency_warning() {
       const might = parseInt(document.getElementById('Physique_Might').value) || 0;
       const aim = parseInt(document.getElementById('Technique_Aim').value) || 0;
@@ -1211,6 +1481,16 @@
       inventory_extra_slots();
     }
 
+    function historyCleaning() {
+      const history = document.getElementById('roll_history');
+      if (!history) return;
+
+      const entries = history.querySelectorAll('.roll-history-entry');
+      if (entries.length > 5) {
+        entries[entries.length - 1].remove();
+      }
+    }
+
     // --- Main Input Listener ---
     document.addEventListener('input', function () {
       updateAllDerived();
@@ -1227,6 +1507,19 @@
       renderSelectedSpells();
       recalculateTraitSkillBonuses();
       updateAllDerived();
+    });
+
+    document.addEventListener('input', () => {
+      isDirty = true;
+      const warn = document.getElementById('save_warning');
+      if (warn) warn.style.display = 'inline';
+    });
+
+    window.addEventListener('beforeunload', function (e) {
+      if (!isDirty) return;
+
+      e.preventDefault();
+      e.returnValue = '';
     });
   </script>
 
