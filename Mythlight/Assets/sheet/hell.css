@@ -298,7 +298,6 @@ button:active {
 .attribute-card {
   padding: 1rem;
   border-radius: 0.9rem;
-  border: 1px solid white;
 }
 
 .attribute-header {
@@ -326,18 +325,22 @@ button:active {
 
 .physique {
   background: rgba(220, 38, 38, 0.15);
+  border:1px solid rgba(220, 38, 38, 1);
 }
 
 .tinkering {
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(59, 246, 96, 0.15);
+  border:1px solid rgba(59, 246, 96, 1);
 }
 
 .mystique {
   background: rgba(168, 85, 247, 0.15);
+  border:1px solid rgba(168, 85, 247, 1);
 }
 
 .charm {
   background: rgba(236, 72, 153, 0.15);
+  border:1px solid rgba(236, 72, 153, 1);
 }
 
 .skill-row {
