@@ -379,23 +379,42 @@ function wire(){
       exportBtn.disabled = true;
       const prevText = exportBtn.textContent;
       exportBtn.textContent = 'Exporting...';
+      // Target print size: 63x88mm at 300DPI = 744x1040px
+      const exportWidth = 744;
+      const exportHeight = 1040;
+      // Save original style
+      const origWidth = cardEl.style.width;
+      const origHeight = cardEl.style.height;
+      const origBoxSizing = cardEl.style.boxSizing;
+      // Set card to export size
+      cardEl.style.width = exportWidth + 'px';
+      cardEl.style.height = exportHeight + 'px';
+      cardEl.style.boxSizing = 'border-box';
+      // Optionally, force font-size scaling if needed
+      // cardEl.style.fontSize = '32px';
       try {
         if (!window.html2canvas){
           throw new Error('html2canvas not loaded');
         }
-
+        // Wait a frame for layout
+        await new Promise(r => setTimeout(r, 30));
         const canvas = await window.html2canvas(cardEl, {
           backgroundColor: null,
-          scale: 2,
+          width: exportWidth,
+          height: exportHeight,
+          scale: 1, // 1:1 px output
           useCORS: true
         });
-
+        // Restore original style
+        cardEl.style.width = origWidth;
+        cardEl.style.height = origHeight;
+        cardEl.style.boxSizing = origBoxSizing;
         const dataUrl = canvas.toDataURL('image/png');
         const a = document.createElement('a');
-        a.href = dataUrl;
         const safeName = ((nameInput.value || 'card').trim() || 'card')
-          .replace(/[\\/:*?"<>|]+/g, '-')
+          .replace(/[\/:*?"<>|]+/g, '-')
           .slice(0, 60);
+        a.href = dataUrl;
         a.download = `${safeName}.png`;
         document.body.appendChild(a);
         a.click();
@@ -403,6 +422,10 @@ function wire(){
       } catch (e){
         alert(`Export failed: ${e && e.message ? e.message : e}`);
       } finally {
+        // Always restore style if error
+        cardEl.style.width = origWidth;
+        cardEl.style.height = origHeight;
+        cardEl.style.boxSizing = origBoxSizing;
         exportBtn.textContent = prevText;
         exportBtn.disabled = false;
       }
