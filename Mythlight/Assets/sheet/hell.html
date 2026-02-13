@@ -737,6 +737,11 @@
       allSpells: []
     };
 
+    const custom = {
+      traits: [],
+      spells: []
+    };
+
     const attributeData = {
       Physique: ["Might", "Brawn", "Athletics", "Fortitude"],
       Technique: ["Aim", "Tinkering", "Finesse", "Reflex"],
@@ -1059,57 +1064,60 @@
       traitDiv.remove();
     };
 
-    function addCustomTrait() {
-      const traitsDiv = document.getElementById('custom_traits');
-      const name = document.getElementById('custom_trait_name').value.trim();
-      const cost = document.getElementById('custom_trait_cost').value.trim();
-      const type = document.getElementById('custom_trait_type').value;
-      const actionType = document.getElementById('custom_trait_action').value;
-      const description = document.getElementById('custom_trait_description').value.trim();
+    function traitIdSafe(name) {
+  return name.replace(/\s+/g, "_").replace(/[^\w]/g, "");
+  }
 
-      if (!name || !cost || isNaN(Number(cost)) || !type || !actionType || !description) {
+    function addCustomTrait(trait) {
+    const traitsDiv = document.getElementById('custom_traits');
+      if (!trait) {
+        trait = {
+          Name: document.getElementById('custom_trait_name').value.trim(),
+          Cost: document.getElementById('custom_trait_cost').value.trim(),
+          Type: document.getElementById('custom_trait_type').value,
+          Action: document.getElementById('custom_trait_action').value,
+          Description: document.getElementById('custom_trait_description').value.trim()
+        };
+      }
+
+      
+
+      if (!trait.Name || !trait.Cost || isNaN(Number(trait.Cost)) || !trait.Type || !trait.Action || !trait.Description) {
         alert('All trait fields must be filled out correctly!');
         return;
       }
-      
 
-      const newTrait = {
-        Name: name,
-        Cost: cost,
-        Type: type,
-        Action: actionType,
-        Description: description
-      };
+      custom.traits.push(trait);
 
-      if (newTrait.Action === 'Free Action') newTrait.Action = '⭘';
-      else if (newTrait.Action === 'Reaction') newTrait.Action = '◇';
-      else if (newTrait.Action === 'Action') newTrait.Action = '⬖';
-      else if (newTrait.Action === 'Attack Action') newTrait.Action = '◆';
-      else newTrait.Action = '';
+      if (trait.Action === 'Free Action') trait.Action = '⭘';
+      else if (trait.Action === 'Reaction') trait.Action = '◇';
+      else if (trait.Action === 'Action') trait.Action = '⬖';
+      else if (trait.Action === 'Attack Action') trait.Action = '◆';
+      else trait.Action = '';
 
-      if (newTrait.Type === 'Rest') newTrait.Type = '☀';
-      else if (newTrait.Type === 'Passive') newTrait.Type = '⧖';
-      else if (newTrait.Type === 'Active') newTrait.Type = '🗲';
-      else newTrait.Type = '';
+      if (trait.Type === 'Rest') trait.Type = '☀';
+      else if (trait.Type === 'Passive') trait.Type = '⧖';
+      else if (trait.Type === 'Active') trait.Type = '🗲';
+      else trait.Type = '';
 
       const wrapper = document.createElement('div');
         wrapper.className = 'trait';
-        wrapper.dataset.traitName = newTrait.Name;
+        wrapper.dataset.traitName = trait.Name;
         wrapper.innerHTML = `
           <div class="card trait" style="margin-top:1rem">
             <div class="px-6 py-6">
               <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
-              <h3 class="text-lg font-bold" style="margin:0">${newTrait.Type} ${newTrait.Name}</h3><div><label class="muted-label" for="uses">Uses </label><input type="number" id="uses_${newTrait.Name}" style="width: 5em;"></div>
+              <h3 class="text-lg font-bold" style="margin:0">${trait.Type} ${trait.Name}</h3><div><label class="muted-label" for="uses">Uses </label><input type="number" id="uses_${traitIdSafe(trait.Name)}" style="width: 5em;"></div>
                 <button type="button" class="remove-btn" onclick="removeCustomTrait(this)">Remove</button>
               </div>
               <div class="space-y-4">
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
-                  ${newTrait.Action ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Action: ${newTrait.Action}</span>` : ''}
-                  ${newTrait.Cost ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Cost: ${newTrait.Cost}</span>` : ''}
-                  ${newTrait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${newTrait.Parameters}</span>` : ''}
+                  ${trait.Action ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Action: ${trait.Action}</span>` : ''}
+                  ${trait.Cost ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Cost: ${trait.Cost}</span>` : ''}
+                  ${trait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${trait.Parameters}</span>` : ''}
                 </div>
-                <p class="text-slate-300 leading-relaxed text-sm">${newTrait.Description || ''}</p>
-                ${newTrait.Scaling ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800">${newTrait.Scaling}</div>` : ''}
+                <p class="text-slate-300 leading-relaxed text-sm">${trait.Description || ''}</p>
+                ${trait.Scaling ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800">${trait.Scaling}</div>` : ''}
               </div>
             </div>
           </div>
@@ -1135,7 +1143,7 @@
           <div class="card" style="margin-top:1rem">
             <div class="px-6 py-6">
               <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
-              <h3 class="text-lg font-bold" style="margin:0">${trait.Symbols} ${trait.Name}</h3><div><label class="muted-label" for="uses">Uses </label><input type="number" id="uses_${trait.Name}" style="width: 5em;"> </div>
+              <h3 class="text-lg font-bold" style="margin:0">${trait.Symbols} ${trait.Name}</h3><div><label class="muted-label" for="uses">Uses </label><input type="number" id="uses_${traitIdSafe(trait.Name)}" style="width: 5em;"> </div>
                 <button type="button" class="remove-btn" onclick="removeTrait('${encodeURIComponent(trait.Name)}')">Remove</button>
               </div>
               <div class="space-y-4">
@@ -1201,21 +1209,46 @@
     };
 
 
-    addCustomSpell = () => {
+    addCustomSpell = (spell) => {
       const spellsDiv = document.getElementById('custom_spells');
-      const name = document.getElementById('custom_spell_name').value.trim();
-      const type = document.getElementById('custom_spell_type').value.trim();
-      const range = document.getElementById('custom_spell_range').value.trim();
-      const cost = parseInt(document.getElementById('custom_spell_cost').value);
-      const effect = document.getElementById('custom_spell_effect').value.trim();
-      const school = document.getElementById('custom_spell_school').value.trim();
-      const upcast = document.getElementById('custom_spell_upcast').value.trim();
-      const lore = document.getElementById('custom_spell_lore').value.trim();
+      let name = document.getElementById('custom_spell_name').value.trim();
+      let type = document.getElementById('custom_spell_type').value.trim();
+      let range = document.getElementById('custom_spell_range').value.trim();
+      let cost = parseInt(document.getElementById('custom_spell_cost').value);
+      let effect = document.getElementById('custom_spell_effect').value.trim();
+      let school = document.getElementById('custom_spell_school').value.trim();
+      let upcast = document.getElementById('custom_spell_upcast').value.trim();
+      let lore = document.getElementById('custom_spell_lore').value.trim();
 
-      if (!name || !effect|| !school || !cost || isNaN(cost)) {
-        alert('All fields are required to add a custom spell, and mana cost must be a valid number.');
-        return;
+      if (!spell) {
+        if (!name || !effect || !school || !cost || isNaN(cost)) {
+          alert('All fields are required to add a custom spell, and mana cost must be a valid number.');
+          return;
+        }
+      } else {
+        name = spell.Name;
+        type = spell.Type;
+        range = spell.Range;
+        cost = spell.Cost;
+        effect = spell.Effect;
+        school = spell.School;
+        upcast = spell.Upcast;
+        lore = spell.Lore;
       }
+
+      const spellData = {
+        Name: name,
+        Type: type,
+        Range: range,
+        Cost: cost,
+        Effect: effect,
+        School: school,
+        Upcast: upcast,
+        Lore: lore
+      };
+
+      custom.spells.push(spellData);
+
       const spellId = 'custom_' + Date.now();
       const costLabel = Number.parseInt(cost, 10) > 0 ? `Level ${cost}` : 'Cantrip';
         const wrapper = document.createElement('div');
@@ -1432,6 +1465,8 @@
         });
       }
 
+      
+
       selector.addEventListener('change', function () {
         const selectedSpell = state.allSpells.find(s => s.ID === this.value);
         const detailsDiv = document.getElementById('spell_details');
@@ -1534,6 +1569,11 @@
         }));
       }
 
+      data.custom = {
+          traits: custom?.traits || [],
+          spells: custom?.spells || []
+        };
+
       data.inventory.main = readSlots('inventory_grid');
       data.inventory.potionIngredients = readSlots('potions_ingredients_grid');
       data.inventory.potionRecipes = readSlots('potions_recipes_grid');
@@ -1577,6 +1617,21 @@
             el.value = value;
           }
         });
+      }
+
+      function loadCustomEntries() {
+        if (data.custom) {
+          if (data.custom.traits) {
+            data.custom.traits.forEach(trait => {
+              addCustomTrait(trait);
+            });
+          }
+          if (data.custom.spells) {
+            data.custom.spells.forEach(spell => {
+              addCustomSpell(spell);
+            });
+          }
+        }
       }
 
       // --- Restore Inventory ---
@@ -1632,6 +1687,7 @@
       proficiency_warning?.();
       updateManaBar?.();
       updateHealthBar?.();
+      loadCustomEntries();
 
       alert("Character successfully loaded!");
     }
