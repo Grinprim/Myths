@@ -16,12 +16,12 @@ function formatSignedNumber(n){
   return String(num);
 }
 
-
 function setLayerFromFile(inputEl, imgEl){
   if (!inputEl || !imgEl) return;
   const file = inputEl.files && inputEl.files[0];
   if (!file){
-    imgEl.removeAttribute('src');
+    // Use a transparent 1x1 pixel so html-to-image doesn't crash on an empty src
+    imgEl.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
     imgEl.style.display = 'none';
     return;
   }
@@ -30,8 +30,6 @@ function setLayerFromFile(inputEl, imgEl){
   imgEl.src = url;
   imgEl.style.display = 'block';
 }
-
-// Keyword rendering will be reintroduced when assets are added.
 
 function rarityToClass(rarity){
   switch (rarity){
@@ -101,7 +99,6 @@ function renderManaSymbols({ count, regions }){
     img.loading = 'eager';
     img.style.display = 'none';
 
-    // Always use lowercase filenames for region images
     const regionFile = region.toLowerCase();
     img.src = `img/${regionFile}.png`;
     img.addEventListener('load', () => {
@@ -301,7 +298,6 @@ function wire(){
     syncSymbolControls();
     renderManaSymbols({ count: symbolCountInput.value, regions: getSymbolRegions() });
 
-    // Big region badge (for now: color only)
     if (regionBadge){
       const mainRegion = String((symbol1Select && symbol1Select.value) ? symbol1Select.value : 'Arcane');
       regionBadge.classList.remove('manaRegion-Arcane', 'manaRegion-Divine', 'manaRegion-Elemental', 'manaRegion-Occult', 'manaRegion-Cosmic');
@@ -333,18 +329,13 @@ function wire(){
     el.addEventListener('change', syncText);
   }
 
-  // Image listeners
   if (artFile){
     artFile.addEventListener('change', syncImages);
   }
 
-  // Buttons
   const resetBtn = document.getElementById('resetBtn');
-
   resetBtn.addEventListener('click', () => {
     document.getElementById('cardForm').reset();
-
-    // restore defaults for fields with preset values
     nameInput.value = 'Sample Name';
     manaInput.value = 1;
     descInput.value = 'Sample Description';
@@ -353,94 +344,85 @@ function wire(){
     raritySelect.value = 'Common';
     typeSelect.value = 'Unit';
     tagsInput.value = 'Sample Tags';
-
     symbolCountInput.value = 1;
     symbol1Select.value = 'Arcane';
     symbol2Select.value = 'Arcane';
     symbol3Select.value = 'Arcane';
     symbol4Select.value = 'Arcane';
     symbol5Select.value = 'Arcane';
-
     artScaleInput.value = 1;
     artXInput.value = 0;
     artYInput.value = 0;
-
-    // clear art
     if (artFile) artFile.value = '';
-
     syncText();
     syncImages();
   });
+}
 
-  // Robust export using html-to-image (PNG & SVG)
-  function setupExportButton() {
-    const exportBtn = document.getElementById('exportBtn');
-    const cardEl = document.getElementById('cardPreview');
-    if (!exportBtn || !cardEl) return;
+function setupExportButton() {
+  const exportBtn = document.getElementById('exportBtn');
+  const cardEl = document.getElementById('cardPreview');
+  
+  if (!exportBtn || !cardEl) return;
 
-    exportBtn.addEventListener('click', async () => {
-      const format = document.getElementById('exportFormat').value;
-      const originalText = exportBtn.textContent;
-      exportBtn.textContent = 'Processing...';
-      exportBtn.disabled = true;
-      try {
-        // 1. Add Bleed for print
-        cardEl.classList.add('print-bleed');
+  exportBtn.addEventListener('click', async () => {
+    const format = document.getElementById('exportFormat').value;
+    const originalText = exportBtn.textContent;
+    exportBtn.textContent = 'Processing...';
+    exportBtn.disabled = true;
 
-        const options = { 
-          pixelRatio: 3, // High quality 300DPI equivalent
-          skipFonts: false,
-        };
+    try {
+      // Configuration for high quality render + CORS bypass
+      const options = { 
+        pixelRatio: 3, 
+        skipFonts: false,
+        useCORS: true, 
+        allowTaint: true,
+        backgroundColor: null // Prevents default white backgrounds on rounded corners
+      };
 
-        let dataUrl;
-        if (format === 'svg') {
-          dataUrl = await window.htmlToImage.toSvg(cardEl, options);
-        } else {
-          dataUrl = await window.htmlToImage.toPng(cardEl, options);
-        }
-
-        // 2. Remove Bleed immediately after "photo" is taken
-        cardEl.classList.remove('print-bleed');
-
-        const fileName = (document.getElementById('nameInput').value || 'card').trim();
-
-        if (format === 'pdf') {
-          const { jsPDF } = window.jspdf;
-          // Standard Card (63x88) + 3mm bleed on each side = 69x94mm
-          const pdf = new jsPDF({ 
-            orientation: 'portrait', 
-            unit: 'mm', 
-            format: [69, 94] 
-          });
-          pdf.addImage(dataUrl, 'PNG', 0, 0, 69, 94);
-          pdf.save(`${fileName}.pdf`);
-        } else {
-          const link = document.createElement('a');
-          link.download = `${fileName}.${format}`;
-          link.href = dataUrl;
-          link.click();
-        }
-      } catch (err) {
-        console.error("Export Error:", err);
-        cardEl.classList.remove('print-bleed');
-        alert("Export failed. Make sure you are using a local server (VS Code Live Server).");
-      } finally {
-        exportBtn.textContent = originalText;
-        exportBtn.disabled = false;
+      let dataUrl;
+      if (format === 'svg') {
+        dataUrl = await window.htmlToImage.toSvg(cardEl, options);
+      } else {
+        dataUrl = await window.htmlToImage.toPng(cardEl, options);
       }
-    });
-  }
 
-  // Always set up export button after DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupExportButton);
-  } else {
-    setupExportButton();
-  }
+      // Sanitize user input for safe filenames
+      const rawName = document.getElementById('nameInput').value || 'card';
+      const fileName = rawName.trim().replace(/[^a-z0-9]/gi, '_').toLowerCase();
+
+      if (format === 'pdf') {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({ 
+          orientation: 'portrait', 
+          unit: 'mm', 
+          format: [69, 94] 
+        });
+        pdf.addImage(dataUrl, 'PNG', 0, 0, 69, 94);
+        pdf.save(`${fileName}.pdf`);
+      } else {
+        const link = document.createElement('a');
+        link.download = `${fileName}.${format}`;
+        link.href = dataUrl;
+        link.click();
+      }
+    } catch (err) {
+      console.error("Export Error:", err);
+      alert("Export failed. If using external images, ensure you are running a local server to avoid CORS blockages.");
+    } finally {
+      exportBtn.textContent = originalText;
+      exportBtn.disabled = false;
+    }
+  });
 }
 
 if (document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', wire);
+  document.addEventListener('DOMContentLoaded', () => {
+    wire();
+    setupExportButton();
+  });
 } else {
   wire();
+  setupExportButton();
 }
