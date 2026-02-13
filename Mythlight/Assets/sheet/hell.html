@@ -393,15 +393,19 @@
       </div>
 
       <div class="card sheet-full section-8" id="inventory">
-        <div class="section-title" onclick="toggle_inventory()" style="cursor: pointer;">
+        <div class="section-title" style="cursor: pointer;">
           <div class="section-number">8</div>
-          <h2>Inventory</h2>
+          <h2>Inventory</h2> <button id="inventory_button" type="button" onclick="toggle_inventory()">Close</button>
+          <div class="muted-label encumberance" id="encumberance_label_1" style="font-size: .85rem; margin-left: 1rem; display: inline; color: #99ff9e;">Non-encumbered</div>
+          <div class="muted-label encumberance" id="encumberance_label_2" style="font-size: .85rem; margin-left: 1rem; display: none; color: #fffd99;">Encumbered (> Max Weight)</div>
+          <div class="muted-label encumberance" id="encumberance_label_3" style="font-size: .85rem; margin-left: 1rem; display: none; color: #ffb999;">Overencumbered (> 2× Max Weight)</div>
+          <div class="muted-label encumberance" id="encumberance_label_4" style="font-size: .85rem; margin-left: 1rem; display: none; color: #ff9999;">Crushed (> 3× Max Weight)</div>
         </div>
         <div class="card">
           <div style="display:flex; gap:.5rem; flex-wrap: wrap; align-items: end">
             <div style="flex:1; min-width: 160px">
               <label>Current Weight</label>
-              <input type="number" id="current_weight" placeholder="Current Weight">
+              <input type="number" id="current_weight" placeholder="Current Weight" readonly>
             </div>
             <div style="flex:1; min-width: 160px">
               <label>Max Weight</label>
@@ -426,10 +430,10 @@
             <input type="number" id="platinum" placeholder="Amount">
           </div>
         </div>
-
-        <div id="inventory_grid" class="grid_3" style="display: none;"></div>
-
-        <div id="inventory_extra" style="display:none">
+        
+        <div id="inventory_grid" class="grid_3" style="display: grid;"></div>
+          
+        <div id="inventory_extra" style="display:grid">
           <div class="card">
             <h3 style="margin-top:0">Potions</h3>
             <div class="grid_2">
@@ -673,7 +677,8 @@
       const slot = document.createElement('div');
       slot.className = 'inventory_slot';
       slot.innerHTML = `
-        <input type="text" placeholder="Name">
+        <input type="text" placeholder="Name" style="width: 79.5%;">
+        <input type="number" placeholder="Weight" style="width: 8em; margin-left: .5rem;">
         <textarea rows="4" placeholder="Description" style="resize: none;"></textarea>
       `;
       document.getElementById('inventory_grid').appendChild(slot);
@@ -706,6 +711,17 @@
       for (let i = cr; i < BASE_RECIPE_SLOTS; i++) addSimpleSlot('crafts_recipes_grid', 'Craft', 'Recipe');
     }
 
+    function encumberance_update() {
+      const currentWeight = Number.parseInt(document.getElementById('current_weight').value) || 0;
+      const maxWeight = Number.parseInt(document.getElementById('max_weight').value) || 0;
+      const encLabels = document.querySelectorAll('.encumberance');
+      encLabels.forEach(label => label.style.display = 'none');
+      if (currentWeight > 3 * maxWeight) document.getElementById('encumberance_label_4').style.display = 'inline';
+      else if (currentWeight > 2 * maxWeight) document.getElementById('encumberance_label_3').style.display = 'inline';
+      else if (currentWeight > maxWeight) document.getElementById('encumberance_label_2').style.display = 'inline';
+      else document.getElementById('encumberance_label_1').style.display = 'inline';
+    }
+
     function inventory_extra_slots() {
       const slots = document.querySelectorAll('#inventory_grid .inventory_slot');
       const allFull = Array.from(slots).every(slot => (slot.querySelector('input')?.value || '').trim().length > 0);
@@ -724,6 +740,16 @@
       expandIfAllFull('potions_recipes_grid', BASE_RECIPE_SLOTS);
       expandIfAllFull('crafts_components_grid', BASE_SLOTS);
       expandIfAllFull('crafts_recipes_grid', BASE_RECIPE_SLOTS);
+    }
+
+    function weight_update() {
+      const weightInputs = document.querySelectorAll('#inventory_grid .inventory_slot input[type="number"]');
+      let totalWeight = 0;
+      weightInputs.forEach(input => {
+        const val = Number.parseFloat(input.value);
+        if (Number.isFinite(val)) totalWeight += val;
+      });
+      document.getElementById('current_weight').value = totalWeight;
     }
 
     // --- Attributes UI ---
@@ -770,6 +796,7 @@
     function toggle_inventory() {
       const section = document.getElementById('inventory_grid');
       const extra = document.getElementById('inventory_extra');
+      document.getElementById('inventory_button').textContent = section.style.display === 'grid' ? 'Open' : 'Close';
       section.style.display = section.style.display === 'grid' ? 'none' : 'grid';
       if (extra) extra.style.display = section.style.display === 'grid' ? 'block' : 'none';
     }
@@ -822,7 +849,7 @@
     function manualRoll() {
       const { mod } = getRollConfig();
       const result = rollDicePool(2, mod);
-      document.getElementById('roll_history').innerHTML = `<div class="roll-history-entry" id="manual-roll-history">Rolled Manual: [${result.dice.join(', ')}] + ${mod} = ${result.final}</div>` + document.getElementById('roll_history').innerHTML;
+      document.getElementById('roll_history').innerHTML = `<div class="roll-history-entry" id="manual-roll-history">Rolled Manual: [${result.dice.join(', ')}] + ${mod} = ${result.final}</div>` + document.getElementById('roll_history').innerHTML; 
       historyCleaning();
       renderRollWidget(result, 'Manual');
     }
@@ -1479,6 +1506,8 @@
       proficiency_warning();
       proficiency_assignment();
       inventory_extra_slots();
+      weight_update();
+      encumberance_update();
     }
 
     function historyCleaning() {
