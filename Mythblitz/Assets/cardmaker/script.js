@@ -121,7 +121,7 @@ function renderManaSymbols({ count, regions }){
 function wire(){
   const statsFieldset = document.getElementById('statsFieldset');
 
-  const cardEl = document.getElementById('card');
+  const cardEl = document.getElementById('cardPreview');
   const artImg = document.getElementById('artImg');
   const regionBadge = document.getElementById('regionBadge');
 
@@ -372,61 +372,43 @@ function wire(){
     syncImages();
   });
 
-  // Export
-  const exportBtn = document.getElementById('exportPngBtn');
-  if (exportBtn && cardEl){
+  // Export using html-to-image (PNG & SVG)
+  const exportBtn = document.getElementById('exportBtn');
+  if (exportBtn) {
     exportBtn.addEventListener('click', async () => {
+      const cardEl = document.getElementById('cardPreview');
+      exportBtn.textContent = 'Generating...';
       exportBtn.disabled = true;
-      const prevText = exportBtn.textContent;
-      exportBtn.textContent = 'Exporting...';
-      // Target print size: 63x88mm at 300DPI = 744x1040px
-      const exportWidth = 744;
-      const exportHeight = 1040;
-      // Save original style
-      const origWidth = cardEl.style.width;
-      const origHeight = cardEl.style.height;
-      const origBoxSizing = cardEl.style.boxSizing;
-      // Set card to export size
-      cardEl.style.width = exportWidth + 'px';
-      cardEl.style.height = exportHeight + 'px';
-      cardEl.style.boxSizing = 'border-box';
-      // Optionally, force font-size scaling if needed
-      // cardEl.style.fontSize = '32px';
+      // Ask user for format
+      let format = 'png';
+      if (window.confirm('Export as SVG? (OK = SVG, Cancel = PNG)')) {
+        format = 'svg';
+      }
+      const options = {
+        quality: 1.0,
+        pixelRatio: 3, // For high-res print
+        backgroundColor: 'transparent',
+      };
       try {
-        if (!window.html2canvas){
-          throw new Error('html2canvas not loaded');
+        let dataUrl;
+        let extension;
+        if (format === 'svg') {
+          dataUrl = await window.htmlToImage.toSvg(cardEl, options);
+          extension = 'svg';
+        } else {
+          dataUrl = await window.htmlToImage.toPng(cardEl, options);
+          extension = 'png';
         }
-        // Wait a frame for layout
-        await new Promise(r => setTimeout(r, 30));
-        const canvas = await window.html2canvas(cardEl, {
-          backgroundColor: null,
-          width: exportWidth,
-          height: exportHeight,
-          scale: 1, // 1:1 px output
-          useCORS: true
-        });
-        // Restore original style
-        cardEl.style.width = origWidth;
-        cardEl.style.height = origHeight;
-        cardEl.style.boxSizing = origBoxSizing;
-        const dataUrl = canvas.toDataURL('image/png');
-        const a = document.createElement('a');
-        const safeName = ((nameInput.value || 'card').trim() || 'card')
-          .replace(/[\/:*?"<>|]+/g, '-')
-          .slice(0, 60);
-        a.href = dataUrl;
-        a.download = `${safeName}.png`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      } catch (e){
-        alert(`Export failed: ${e && e.message ? e.message : e}`);
+        const link = document.createElement('a');
+        const fileName = (document.getElementById('nameInput').value || 'custom-card').trim();
+        link.download = `${fileName}.${extension}`;
+        link.href = dataUrl;
+        link.click();
+      } catch (error) {
+        console.error('Export failed:', error);
+        alert('Failed to export image. Check console for details.');
       } finally {
-        // Always restore style if error
-        cardEl.style.width = origWidth;
-        cardEl.style.height = origHeight;
-        cardEl.style.boxSizing = origBoxSizing;
-        exportBtn.textContent = prevText;
+        exportBtn.textContent = 'Export Card';
         exportBtn.disabled = false;
       }
     });
