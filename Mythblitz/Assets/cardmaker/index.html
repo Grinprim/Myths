@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Card Maker</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
 </head>
 <body>
   <header class="appHeader">
@@ -228,7 +230,17 @@
       </div>
 
       <div class="exportBar">
-        <button id="exportBtn" type="button" class="btn btnPrimary">Export Card</button>
+        <form id="exportForm" style="display:inline;">
+          <label class="field" style="margin-bottom:0;">
+            <span class="label">Export Format</span>
+            <select id="exportFormat">
+              <option value="png">PNG (High Res)</option>
+              <option value="svg">SVG (Vector-ish)</option>
+              <option value="pdf">PDF (Print Ready)</option>
+            </select>
+          </label>
+          <button id="exportBtn" type="button" class="btn btnPrimary" style="vertical-align:bottom;">Export Card</button>
+        </form>
       </div>
     </section>
   </main>

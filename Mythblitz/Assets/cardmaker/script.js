@@ -372,46 +372,70 @@ function wire(){
     syncImages();
   });
 
-  // Export using html-to-image (PNG & SVG)
-  const exportBtn = document.getElementById('exportBtn');
-  if (exportBtn) {
+  // Robust export using html-to-image (PNG & SVG)
+  function setupExportButton() {
+    const exportBtn = document.getElementById('exportBtn');
+    const cardEl = document.getElementById('cardPreview');
+    if (!exportBtn || !cardEl) return;
+
     exportBtn.addEventListener('click', async () => {
-      const cardEl = document.getElementById('cardPreview');
-      exportBtn.textContent = 'Generating...';
+      const format = document.getElementById('exportFormat').value;
+      const originalText = exportBtn.textContent;
+      exportBtn.textContent = 'Processing...';
       exportBtn.disabled = true;
-      // Ask user for format
-      let format = 'png';
-      if (window.confirm('Export as SVG? (OK = SVG, Cancel = PNG)')) {
-        format = 'svg';
-      }
-      const options = {
-        quality: 1.0,
-        pixelRatio: 3, // For high-res print
-        backgroundColor: 'transparent',
-      };
       try {
+        // 1. Add Bleed for print
+        cardEl.classList.add('print-bleed');
+
+        const options = { 
+          pixelRatio: 3, // High quality 300DPI equivalent
+          skipFonts: false,
+        };
+
         let dataUrl;
-        let extension;
         if (format === 'svg') {
           dataUrl = await window.htmlToImage.toSvg(cardEl, options);
-          extension = 'svg';
         } else {
           dataUrl = await window.htmlToImage.toPng(cardEl, options);
-          extension = 'png';
         }
-        const link = document.createElement('a');
-        const fileName = (document.getElementById('nameInput').value || 'custom-card').trim();
-        link.download = `${fileName}.${extension}`;
-        link.href = dataUrl;
-        link.click();
-      } catch (error) {
-        console.error('Export failed:', error);
-        alert('Failed to export image. Check console for details.');
+
+        // 2. Remove Bleed immediately after "photo" is taken
+        cardEl.classList.remove('print-bleed');
+
+        const fileName = (document.getElementById('nameInput').value || 'card').trim();
+
+        if (format === 'pdf') {
+          const { jsPDF } = window.jspdf;
+          // Standard Card (63x88) + 3mm bleed on each side = 69x94mm
+          const pdf = new jsPDF({ 
+            orientation: 'portrait', 
+            unit: 'mm', 
+            format: [69, 94] 
+          });
+          pdf.addImage(dataUrl, 'PNG', 0, 0, 69, 94);
+          pdf.save(`${fileName}.pdf`);
+        } else {
+          const link = document.createElement('a');
+          link.download = `${fileName}.${format}`;
+          link.href = dataUrl;
+          link.click();
+        }
+      } catch (err) {
+        console.error("Export Error:", err);
+        cardEl.classList.remove('print-bleed');
+        alert("Export failed. Make sure you are using a local server (VS Code Live Server).");
       } finally {
-        exportBtn.textContent = 'Export Card';
+        exportBtn.textContent = originalText;
         exportBtn.disabled = false;
       }
     });
+  }
+
+  // Always set up export button after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupExportButton);
+  } else {
+    setupExportButton();
   }
 }
 
