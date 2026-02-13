@@ -261,6 +261,21 @@ function wire(){
   }
 
   function syncText(){
+        // Dynamic Border Logic
+        const cardBorder = document.getElementById('cardBorder');
+        if (cardBorder && typeSelect && cardEl) {
+          const type = typeSelect.value.toLowerCase();
+          const borderPath = `img/${type}-border.png`;
+          cardBorder.src = borderPath;
+          cardBorder.onload = () => {
+            cardBorder.style.display = 'block';
+            cardEl.classList.add('has-custom-border');
+          };
+          cardBorder.onerror = () => {
+            cardBorder.style.display = 'none';
+            cardEl.classList.remove('has-custom-border');
+          };
+        }
     setText('nameText', (nameInput.value || '').trim() || '');
     setText('manaText', String(clampNumber(manaInput.value, 0, 99)));
     setText('tagsText', (tagsInput.value || '').trim());

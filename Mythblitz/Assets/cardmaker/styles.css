@@ -1,3 +1,25 @@
+/* Styling for the border image layer */
+.layerBorder {
+  z-index: 1; /* Above art, below text elements */
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: var(--radius);
+  display: none;
+}
+
+/* When a custom border is found, we hide the default CSS borders and glows only when a custom image is successfully loaded. */
+.card.has-custom-border::after,
+.card.has-custom-border::before {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+/* Ensure the background stays the original unit color */
+.card.has-custom-border {
+  background: var(--panel2);
+}
 :root {
   /* Softer, more professional dashboard colors */
   --bg: #09090b;
@@ -273,15 +295,27 @@ input[type="file"]::file-selector-button {
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1); 
 }
 
-.layer {
+
+.unitBorder {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  top: 32px;
+  left: 32px;
+  width: 336px;
+  height: 336px;
+  z-index: 1;
   pointer-events: none;
   display: none;
-  z-index: 0;
+}
+
+.layerArt {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  width: 336px;
+  height: 336px;
+  object-fit: cover;
+  border-radius: 16px;
+  z-index: 2;
 }
 
 .layerBg { display: none; opacity: .9; }
@@ -571,8 +605,8 @@ input[type="file"]::file-selector-button {
 
 .stats {
   position: absolute;
-  left: 16px;
-  right: 16px;
+  left: 45px;
+  right: 45px;
   bottom: 12px;
   display: flex;
   justify-content: space-between;
@@ -670,7 +704,7 @@ input[type="file"]::file-selector-button {
   border-color: rgba(255,255,255,.22);
   color: rgba(255,255,255,.95);
   text-shadow: 0 1px 2px rgba(0,0,0,.55);
-  clip-path: polygon(12% 0%, 100% 0%, 88% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 88% 0%, 100% 100%, 12% 100%);
 }
 
 .statBadgeHealth {
@@ -678,7 +712,7 @@ input[type="file"]::file-selector-button {
   border-color: rgba(255,255,255,.22);
   color: rgba(255,255,255,.95);
   text-shadow: 0 1px 2px rgba(0,0,0,.55);
-  clip-path: polygon(0% 0%, 88% 0%, 100% 100%, 12% 100%);
+  clip-path: polygon(12% 0%, 100% 0%, 88% 100%, 0% 100%);
 }
 
 @media (max-width: 980px) {
