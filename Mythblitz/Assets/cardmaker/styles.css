@@ -504,7 +504,7 @@ input[type="file"]::file-selector-button {
 }
 
 .manaRegion-Arcane { --c1: 96,165,250; --c2: 29,78,216; --c1-low: 170,190,230; --c2-low: 110,130,180; --c1-muted: 85,110,150; --c2-muted: 40,55,90; }
-.manaRegion-Divine { --c1: 255,255,255; --c2: 203,213,225; --c1-low: 235,235,240; --c2-low: 210,215,225; --c1-muted: 210,210,215; --c2-muted: 170,175,185; border-color: rgba(0,0,0,.28); }
+.manaRegion-Divine { --c1: 255,255,255; --c2: 203,213,225; --c1-low: 235,235,240; --c2-low: 210,215,225; --c1-muted: 210,210,215; --c2-muted: 170,175,185; border-color: rgba(0,0,0,.28); scale: 1.5;}
 .manaRegion-Elemental { --c1: 251,113,133; --c2: 185,28,28; --c1-low: 240,160,170; --c2-low: 170,80,80; --c1-muted: 140,100,110; --c2-muted: 90,50,60; }
 .manaRegion-Occult { --c1: 74,222,128; --c2: 21,128,61; --c1-low: 140,220,170; --c2-low: 80,140,100; --c1-muted: 70,110,90; --c2-muted: 30,60,40; }
 .manaRegion-Cosmic {
