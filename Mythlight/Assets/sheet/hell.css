@@ -548,6 +548,10 @@ body.sheet input[type="checkbox"]:checked::before {
   margin-top: 25px;
 }
 
+#inventory_grid {
+  margin-bottom: 25px;
+}
+
 .armor-notes {
   margin-top: 0.65rem;
 }
