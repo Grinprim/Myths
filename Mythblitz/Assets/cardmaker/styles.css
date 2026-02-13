@@ -1,7 +1,7 @@
 /* Stat image mode for damage/health icons */
 
 .statImgBlock {
-  width: 120px;
+  width: 150px;
   height: 68px;
   display: flex;
   flex-direction: column;
