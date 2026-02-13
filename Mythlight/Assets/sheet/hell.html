@@ -488,13 +488,6 @@
             <div class="muted-label">Action legend</div>
             <div class="legend-mini">
               <div class="legend-item">
-                <div class="legend-symbol-mini" style="color:#60a5fa">⧖</div>
-                <div>
-                  <div style="color:white;font-weight:600">Passive</div>
-                  <div class="muted-label">Always active</div>
-                </div>
-              </div>
-              <div class="legend-item">
                 <div class="legend-symbol-mini" style="color:#ffffff">⭘</div>
                 <div>
                   <div style="color:white;font-weight:600">Free Action</div>
@@ -525,12 +518,60 @@
             </div>
           </div>
 
+          <button type="button" onclick="document.getElementById('custom_trait').style.display = document.getElementById('custom_trait').style.display === 'none' ? 'block' : 'none';" style="margin-top:1rem; margin-bottom:1rem;">
+            Custom Trait
+          </button>
+          <div id="custom_trait" class="card" style="margin-top:1rem; display:none">
+            <h3 style="margin-top:0">Custom Trait</h3>
+            <div class="grid_3">
+              <div>
+                <label for="custom_trait_name">Name</label>
+                <input type="text" id="custom_trait_name" placeholder="Trait Name">
+              </div>
+              <div>
+                <label for="custom_trait_cost">Cost</label>
+                <input type="number" id="custom_trait_cost" placeholder="Trait Point Cost">
+              </div>
+              <div>
+                <label for="custom_trait_type">Type</label>
+                <select id="custom_trait_type">
+                  <option value="Rest">Rest</option>
+                  <option value="Passive">Passive</option>
+                  <option value="Active">Active</option>
+                </select>
+              </div>
+              <div>
+                <label for="custom_trait_action">Action Type</label>
+                <select id="custom_trait_action">
+                  <option value="Free Action">Free Action</option>
+                  <option value="Reaction">Reaction</option>
+                  <option value="Action">Action</option>
+                  <option value="Attack Action">Attack Action</option>
+                </select>
+              </div>
+              <div>
+                <label for="custom_trait_description">Description</label>
+                <textarea id="custom_trait_description" rows="4" placeholder="Describe the trait's effect..." style="resize: none;"></textarea>
+              </div>
+              <div style="display:flex; flex-direction: column; gap:.5rem; align-items: flex-start;">
+                <button type="button" onclick="addCustomTrait()">Add Custom Trait</button>
+              </div>
+            </div>
+          </div>
+
           <div class="trait-controls">
             <input type="text" id="trait_search" placeholder="Search traits by name...">
             <select id="selectable_traits"></select>
             <button type="button" onclick="selectTrait();">Add Trait</button>
           </div>
+          <h3 style="margin-top:1rem">Trait Preview</h3>
           <div id="trait_details"></div>
+          <hr>
+          <h3 style="margin-top:1rem">Aquired Traits</h3>
+          <div class="grid_3" id="custom_traits">
+
+          </div>
+          <hr style="opacity: 0.5; border: dashed 0.5px #a5b4fc;">
           <div class="grid_3" id="traits">
 
           </div>
@@ -587,12 +628,64 @@
             <input type="text" id="spellcasting_type" placeholder="Name of your spellcasting school">
           </div>
 
+
+          <button type="button" onclick="document.getElementById('custom_spell').style.display = document.getElementById('custom_spell').style.display === 'none' ? 'block' : 'none';" style="margin-top:1rem; margin-bottom:1rem;">
+            Custom Spell
+          </button>
+          <div id="custom_spell" class="card" style="margin-top:1rem; display:none">
+            <h3 style="margin-top:0">Custom Spell</h3>
+            <div class="grid_3">
+              <div>
+                <label for="custom_spell_name">Name</label>
+                <input type="text" id="custom_spell_name" placeholder="Spell Name">
+              </div>
+              <div>
+                <label for="custom_spell_type">Action</label>
+                <input type="text" id="custom_spell_type" placeholder="Spell Action">
+              </div>
+              <div>
+                <label for="custom_spell_range">Range</label>
+                <input type="text" id="custom_spell_range" placeholder="Spell Range">
+              </div>
+              <div>
+                <label for="custom_spell_cost">Mana Cost</label>
+                <input type="number" id="custom_spell_cost" placeholder="Mana Cost">
+              </div>
+              <div>
+                <label for="custom_spell_effect">Effect</label>
+                <textarea id="custom_spell_effect" rows="3" placeholder="Describe the spell's effect..." style="resize: none;"></textarea>
+              </div>
+              <div>
+                <label for="custom_spell_upcast">Upcast</label>
+                <textarea id="custom_spell_upcast" rows="3" placeholder="Describe the spell's upcast effect..." style="resize: none;"></textarea>
+              </div>
+              <div>
+                <label for="custom_spell_lore">Lore</label>
+                <textarea id="custom_spell_lore" rows="3" placeholder="Describe the spell's lore..." style="resize: none;"></textarea>
+              </div>
+              <div style="display:flex; flex-direction: column; gap:.5rem; align-items: flex-start;">
+                <label for="custom_spell_school">School</label>
+                <input type="text" id="custom_spell_school" placeholder="Spell School">
+                <button type="button" onclick="addCustomSpell()">Add Custom Spell</button>
+              </div>
+            </div>
+          </div>
+
+
+
           <div class="trait-controls">
             <input type="text" id="spell_search" placeholder="Search spells by name...">
             <select id="selectable_spells"></select>
             <button type="button" onclick="selectSpell();">Add Spell</button>
           </div>
+          <h3 style="margin-top:1rem">Spell Preview</h3>
           <div id="spell_details"></div>
+          <hr>
+          <h3 style="margin-top:1rem">Known Spells</h3>
+          <div class="grid_3" id="custom_spells">
+
+          </div>
+          <hr style="opacity: 0.5; border: dashed 0.5px #a5b4fc;">
           <div class="grid_3" id="spells">
 
           </div>
@@ -628,6 +721,11 @@
   </div>
 
   <script>
+    const arcaneSymbol =  `<img src="./arcane.png" alt="Arcane" style="width:25px; height:25px; margin-right:-50px;">` ;
+    const divineSymbol = `<img src="./divine.png" alt="Divine" style="width:25px; height:25px; margin-right:-50px;">` ;
+    const occultSymbol = `<img src="./occult.png" alt="Occult" style="width:25px; height:25px; margin-right:-30px;">` ;
+    const elementalSymbol = `<img src="./elemental.png" alt="Elemental" style="width:25px; height:25px; margin-right:-60px;">`;
+    const cosmicSymbol = `<img src="./cosmic.png" alt="Cosmic" style="width:25px; height:25px; margin-right:-30px;">`;
     let isDirty = false;
     const BASE_SLOTS = 2;
     const BASE_RECIPE_SLOTS = 2;
@@ -671,6 +769,9 @@
       Deception: "Lying and trickery to mislead others.",
       Intimidation: "Using fear to influence others."
     };
+
+
+    
 
     // --- Inventory ---
     function addInventorySlot() {
@@ -952,6 +1053,75 @@
       updateAllDerived();
     }
 
+    removeCustomTrait = () => {
+      const btn = event.target;
+      const traitDiv = btn.closest('.trait');
+      traitDiv.remove();
+    };
+
+    function addCustomTrait() {
+      const traitsDiv = document.getElementById('custom_traits');
+      const name = document.getElementById('custom_trait_name').value.trim();
+      const cost = document.getElementById('custom_trait_cost').value.trim();
+      const type = document.getElementById('custom_trait_type').value;
+      const actionType = document.getElementById('custom_trait_action').value;
+      const description = document.getElementById('custom_trait_description').value.trim();
+
+      if (!name || !cost || isNaN(Number(cost)) || !type || !actionType || !description) {
+        alert('All trait fields must be filled out correctly!');
+        return;
+      }
+      
+
+      const newTrait = {
+        Name: name,
+        Cost: cost,
+        Type: type,
+        Action: actionType,
+        Description: description
+      };
+
+      if (newTrait.Action === 'Free Action') newTrait.Action = '⭘';
+      else if (newTrait.Action === 'Reaction') newTrait.Action = '◇';
+      else if (newTrait.Action === 'Action') newTrait.Action = '⬖';
+      else if (newTrait.Action === 'Attack Action') newTrait.Action = '◆';
+      else newTrait.Action = '';
+
+      if (newTrait.Type === 'Rest') newTrait.Type = '☀';
+      else if (newTrait.Type === 'Passive') newTrait.Type = '⧖';
+      else if (newTrait.Type === 'Active') newTrait.Type = '🗲';
+      else newTrait.Type = '';
+
+      const wrapper = document.createElement('div');
+        wrapper.className = 'trait';
+        wrapper.dataset.traitName = newTrait.Name;
+        wrapper.innerHTML = `
+          <div class="card trait" style="margin-top:1rem">
+            <div class="px-6 py-6">
+              <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
+              <h3 class="text-lg font-bold" style="margin:0">${newTrait.Type} ${newTrait.Name}</h3><div><label class="muted-label" for="uses">Uses </label><input type="number" id="uses_${newTrait.Name}" style="width: 5ch;"></div>
+                <button type="button" class="remove-btn" onclick="removeCustomTrait(this)">Remove</button>
+              </div>
+              <div class="space-y-4">
+                <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
+                  ${newTrait.Action ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Action: ${newTrait.Action}</span>` : ''}
+                  ${newTrait.Cost ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Cost: ${newTrait.Cost}</span>` : ''}
+                  ${newTrait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${newTrait.Parameters}</span>` : ''}
+                </div>
+                <p class="text-slate-300 leading-relaxed text-sm">${newTrait.Description || ''}</p>
+                ${newTrait.Scaling ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800">${newTrait.Scaling}</div>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+        traitsDiv.appendChild(wrapper);
+
+      // Clear input fields
+      document.getElementById('custom_trait_name').value = '';
+      document.getElementById('custom_trait_cost').value = '';
+      document.getElementById('custom_trait_description').value = '';
+    }
+
     function renderSelectedTraits() {
       const traitsDiv = document.getElementById('traits');
       if (!traitsDiv) return;
@@ -962,16 +1132,16 @@
         wrapper.className = 'trait';
         wrapper.dataset.traitName = trait.Name;
         wrapper.innerHTML = `
-          <div class="card">
+          <div class="card" style="margin-top:1rem">
             <div class="px-6 py-6">
               <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
-                <h3 class="text-lg font-bold" style="margin:0">${trait.Name}</h3>
+              <h3 class="text-lg font-bold" style="margin:0">${trait.Symbols} ${trait.Name}</h3><div><label class="muted-label" for="uses">Uses </label><input type="number" id="uses_${trait.Name}" style="width: 5ch;"> </div>
                 <button type="button" class="remove-btn" onclick="removeTrait('${encodeURIComponent(trait.Name)}')">Remove</button>
               </div>
               <div class="space-y-4">
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
-                  ${trait.Action ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Action: ${trait.Action}</span>` : ''}
-                  ${trait.Cost ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Cost: ${trait.Cost}</span>` : ''}
+                  ${trait.Action ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Action: ${trait.Action}</span>` : ''}
+                  ${trait.Cost ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Cost: ${trait.Cost}</span>` : ''}
                   ${trait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${trait.Parameters}</span>` : ''}
                 </div>
                 <p class="text-slate-300 leading-relaxed text-sm">${trait.Description || ''}</p>
@@ -1024,6 +1194,77 @@
       rollSpell(spellName);
     }
 
+    removeCustomSpell = () => {
+      const btn = event.target;
+      const spellDiv = btn.closest('.spell');
+      spellDiv.remove();
+    };
+
+
+    addCustomSpell = () => {
+      const spellsDiv = document.getElementById('custom_spells');
+      const name = document.getElementById('custom_spell_name').value.trim();
+      const type = document.getElementById('custom_spell_type').value.trim();
+      const range = document.getElementById('custom_spell_range').value.trim();
+      const cost = parseInt(document.getElementById('custom_spell_cost').value);
+      const effect = document.getElementById('custom_spell_effect').value.trim();
+      const school = document.getElementById('custom_spell_school').value.trim();
+      const upcast = document.getElementById('custom_spell_upcast').value.trim();
+      const lore = document.getElementById('custom_spell_lore').value.trim();
+
+      if (!name || !effect|| !school || !cost || isNaN(cost)) {
+        alert('All fields are required to add a custom spell, and mana cost must be a valid number.');
+        return;
+      }
+      const spellId = 'custom_' + Date.now();
+      const costLabel = Number.parseInt(cost, 10) > 0 ? `Level ${cost}` : 'Cantrip';
+        const wrapper = document.createElement('div');
+        const symbol = school ? (() => {
+          switch (school.toLowerCase()) {
+            case 'arcane': return arcaneSymbol;
+            case 'divine': return divineSymbol;
+            case 'occult': return occultSymbol;
+            case 'elemental': return elementalSymbol;
+            case 'cosmic': return cosmicSymbol;
+            default: return '';
+          }
+        })() : '';
+        
+        
+        wrapper.className = 'spell';
+        wrapper.dataset.spellId = spellId;
+        wrapper.innerHTML = `
+          <div class="card spell" style="margin-top: 1rem;">
+            <div class="px-6 py-6">${symbol}
+              <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
+                <h3 class="text-lg font-bold" style="margin:0">${name} : ${costLabel}</h3>
+                <button type="button" class="cast-btn" onclick="castSpell('${cost}', '${name}')">Cast</button>
+                <button type="button" class="remove-btn" onclick="removeCustomSpell(this)">Remove</button>
+              </div>
+              <div class="space-y-4">
+                <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
+                  ${type ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">${type}</span>` : 'Free Action'}
+                  ${range ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${range}</span>` : 'Self'}
+                </div>
+                <p class="text-slate-300 leading-relaxed text-sm">${effect || ''}</p>
+                ${upcast ? `<p class="text-slate-300 leading-relaxed text-sm"><strong>Upcast:</strong> ${upcast}</p>` : 'No upcast effect'}
+                ${lore ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800"><i>${lore}</i></div>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+        spellsDiv.appendChild(wrapper);
+      // Clear inputs
+      document.getElementById('custom_spell_name').value = '';
+      document.getElementById('custom_spell_cost').value = '';
+      document.getElementById('custom_spell_effect').value = '';
+      document.getElementById('custom_spell_school').value = '';
+      document.getElementById('custom_spell_type').value = '';
+      document.getElementById('custom_spell_range').value = '';
+      document.getElementById('custom_spell_upcast').value = '';
+      document.getElementById('custom_spell_lore').value = '';
+    };
+
     function renderSelectedSpells() {
       const spellsDiv = document.getElementById('spells');
       if (!spellsDiv) return;
@@ -1032,11 +1273,23 @@
       for (const spell of state.selectedSpells.values()) {
         const costLabel = Number.parseInt(spell.Cost, 10) > 0 ? `Level ${spell.Cost}` : 'Cantrip';
         const wrapper = document.createElement('div');
+        const symbol = spell.Category ? (() => {
+          switch (spell.Category.toLowerCase()) {
+            case 'arcane': return arcaneSymbol;
+            case 'divine': return divineSymbol;
+            case 'occult': return occultSymbol;
+            case 'elemental': return elementalSymbol;
+            case 'cosmic': return cosmicSymbol;
+            default: return '';
+          }
+        })() : '';
+        
+        
         wrapper.className = 'spell';
         wrapper.dataset.spellId = spell.ID;
         wrapper.innerHTML = `
-          <div class="card">
-            <div class="px-6 py-6">
+          <div class="card" style="margin-top: 1rem;">
+            <div class="px-6 py-6">${symbol}
               <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
                 <h3 class="text-lg font-bold" style="margin:0">${spell.Name} : ${costLabel}</h3>
                 <button type="button" class="cast-btn" onclick="castSpell('${spell.Cost}', '${spell.Name}')">Cast</button>
@@ -1044,7 +1297,7 @@
               </div>
               <div class="space-y-4">
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
-                  ${spell.Type ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Type: ${spell.Type}</span>` : ''}
+                  ${spell.Type ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">${spell.Type}</span>` : ''}
                   ${spell.Range ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${spell.Range}</span>` : ''}
                 </div>
                 <p class="text-slate-300 leading-relaxed text-sm">${spell.Description || ''}</p>
@@ -1119,9 +1372,10 @@
           <div class="card">
             <div class="px-6 py-6">
               <div class="space-y-4">
+                <h3 class="text-lg font-bold" style="margin:0">${selectedTrait.Symbols} ${selectedTrait.Name}</h3>
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
-                  ${selectedTrait.Action ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Action: ${selectedTrait.Action}</span>` : ''}
-                  ${selectedTrait.Cost ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Cost: ${selectedTrait.Cost}</span>` : ''}
+                  ${selectedTrait.Action ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Action: ${selectedTrait.Action}</span>` : ''}
+                  ${selectedTrait.Cost ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Cost: ${selectedTrait.Cost}</span>` : ''}
                   ${selectedTrait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${selectedTrait.Parameters}</span>` : ''}
                 </div>
                 <p class="text-slate-300 leading-relaxed text-sm">${selectedTrait.Description || ''}</p>
@@ -1181,6 +1435,16 @@
       selector.addEventListener('change', function () {
         const selectedSpell = state.allSpells.find(s => s.ID === this.value);
         const detailsDiv = document.getElementById('spell_details');
+        const symbol = selectedSpell.Category ? (() => {
+          switch (selectedSpell.Category.toLowerCase()) {
+            case 'arcane': return arcaneSymbol;
+            case 'divine': return divineSymbol;
+            case 'occult': return occultSymbol;
+            case 'elemental': return elementalSymbol;
+            case 'cosmic': return cosmicSymbol;
+            default: return '';
+          }
+        })() : '';
         if (!detailsDiv) return;
         if (!selectedSpell) {
           detailsDiv.innerHTML = '';
@@ -1189,8 +1453,10 @@
 
         detailsDiv.innerHTML = `<br>
           <div class="card">
+
             <div class="px-6 py-6">
               <div class="space-y-4">
+                ${symbol}<h3 class="text-lg font-bold" style="margin:0">${selectedSpell.Name} : ${Number.parseInt(selectedSpell.Cost, 10) > 0 ? `Level ${selectedSpell.Cost}` : 'Cantrip'}</h3>
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
                   ${selectedSpell.Type ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Type: ${selectedSpell.Type}</span>` : ''}
                   ${selectedSpell.Range ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${selectedSpell.Range}</span>` : ''}
