@@ -261,6 +261,15 @@ function wire(){
   }
 
   function syncText(){
+            // Stat image mode logic (always show, update numbers)
+            const statImgDamage = document.getElementById('statImgDamage');
+            const statImgHealth = document.getElementById('statImgHealth');
+            const statImgDamageNum = document.getElementById('statImgDamageNum');
+            const statImgHealthNum = document.getElementById('statImgHealthNum');
+            if (statImgDamage && statImgHealth && statImgDamageNum && statImgHealthNum) {
+              statImgDamageNum.textContent = powerInput.value;
+              statImgHealthNum.textContent = healthInput.value;
+            }
         // Dynamic Border Logic
         const cardBorder = document.getElementById('cardBorder');
         if (cardBorder && typeSelect && cardEl) {
