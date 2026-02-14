@@ -544,9 +544,7 @@ body.sheet input[type="checkbox"]:checked::before {
   background: rgba(15, 23, 42, 0.4);
 }
 
-#inventory {
-  margin-top: 25px;
-}
+
 
 #inventory_grid {
   margin-bottom: 25px;
@@ -825,6 +823,20 @@ body.sheet input[type="checkbox"]:checked::before {
   background: none;
   display: inline-flex;
   transform: none;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: none;
+  cursor: pointer;
+}
+
+.tab-button:hover {
+  background: rgba(99, 102, 241, 0.08);
 }
 
 .dice-visual-inline {

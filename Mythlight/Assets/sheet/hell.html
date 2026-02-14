@@ -27,13 +27,21 @@
         • Unsaved Changes
       </span>
     </div>
+    <hr style="opacity: 0.5; border: dashed 0.5px #a5b4fc;">
+    <div style="display: flex; justify-content: center; width: 100%; flex-wrap: wrap;"><button class="tab-button" data-tab="tab-main" onclick="switchTab(this)">Main</button>
+      <button class="tab-button" data-tab="tab-inventory" onclick="switchTab(this)">Inventory</button>
+      <button class="tab-button" data-tab="tab-traits" onclick="switchTab(this)">Traits</button>
+      <button class="tab-button" data-tab="tab-spells" onclick="switchTab(this)">Spells</button>
+    </div>
+    <hr style="opacity: 0.5; border: dashed 0.5px #a5b4fc;">
   </header>
 
   <main>
     <form onsubmit="return false;">
 
-      <div class="sheet-grid">
-
+      
+        <div id="tab-main" class="tab-section">
+          <div class="sheet-grid">
         <div class="card sheet-full section-1">
           <div class="section-title">
             <div class="section-number">1</div>
@@ -205,11 +213,11 @@
                   </div>
                   <div>
                     <label>Damage</label>
-                    <input type="number" placeholder="Damage" id="weapon_1_damage">
+                    <input style="width:6em;" type="number" placeholder="Dmg" id="weapon_1_damage">
                   </div>
                   <div>
                     <label>Attack</label>
-                    <input type="number" id="attack_1" placeholder="Attack" readonly>
+                    <input type="number" id="attack_1" placeholder="Atk" readonly>
                   </div>
                   <div>
                     <label>Type</label>
@@ -227,7 +235,7 @@
                     </select>
                   </div>
                   <div class="weapon-actions">
-                    <button type="button" onclick="rollAttack(this)">Attack!</button>
+                    <button style="height: 3.18em;" type="button" onclick="rollAttack(this)">Attack!</button>
                   </div>
                 </div>
                 <div class="weapon-notes">
@@ -244,11 +252,11 @@
                   </div>
                   <div>
                     <label>Damage</label>
-                    <input type="number" placeholder="Damage" id="weapon_2_damage">
+                    <input style="width:6em;" type="number" placeholder="Dmg" id="weapon_2_damage">
                   </div>
                   <div>
                     <label>Attack</label>
-                    <input type="number" id="attack_2" placeholder="Attack" readonly>
+                    <input type="number" id="attack_2" placeholder="Atk" readonly>
                   </div>
                   <div>
                     <label>Type</label>
@@ -266,7 +274,7 @@
                     </select>
                   </div>
                   <div class="weapon-actions">
-                    <button type="button" onclick="rollAttack(this)">Attack!</button>
+                    <button style="height: 3.18em;" type="button" onclick="rollAttack(this)">Attack!</button>
                   </div>
                 </div>
                 <div class="weapon-notes">
@@ -283,11 +291,11 @@
                   </div>
                   <div>
                     <label>Damage</label>
-                    <input type="number" placeholder="Damage" id="weapon_3_damage">
+                    <input style="width:6em;" type="number" placeholder="Dmg" id="weapon_3_damage">
                   </div>
                   <div>
                     <label>Attack</label>
-                    <input type="number" id="attack_3" placeholder="Attack" readonly>
+                    <input type="number" id="attack_3" placeholder="Atk" readonly>
                   </div>
                   <div>
                     <label>Type</label>
@@ -305,7 +313,7 @@
                     </select>
                   </div>
                   <div class="weapon-actions">
-                    <button type="button" onclick="rollAttack(this)">Attack!</button>
+                    <button style="height: 3.18em;" type="button" onclick="rollAttack(this)">Attack!</button>
                   </div>
 
                 </div>
@@ -391,7 +399,8 @@
         </div>
 
       </div>
-
+        </div>
+      <div id="tab-inventory" class="tab-section" style="display:none">
       <div class="card sheet-full section-8" id="inventory">
         <div class="section-title" style="cursor: pointer;">
           <div class="section-number">8</div>
@@ -464,7 +473,9 @@
         </div>
       </div>
 
-      <div class="traits-spells-row sheet-full">
+      </div>
+      <div id="tab-traits" class="tab-section" style="display:none">
+      
         <div class="card section-9">
           <div class="section-title">
             <div class="section-number">9</div>
@@ -577,6 +588,8 @@
           </div>
         </div>
 
+      </div>
+      <div id="tab-spells" class="tab-section" style="display:none">
         <div class="card section-10">
           <div class="section-title">
             <div class="section-number">10</div>
@@ -691,7 +704,7 @@
           </div>
         </div>
       </div>
-
+      </div>
     </form>
   </main>
 
@@ -776,6 +789,18 @@
       Deception: "Lying and trickery to mislead others.",
       Intimidation: "Using fear to influence others."
     };
+
+
+
+    function switchTab(btn) {
+      const target = btn.getAttribute('data-tab');
+      document.querySelectorAll('.tab-section').forEach(section => {
+        section.style.display = section.id === target ? 'block' : 'none';
+      });
+      document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.toggle('active', button === btn);
+      });
+    }
 
     function toggleButton() {
       const btn = document.getElementById('roll_button');
