@@ -821,6 +821,12 @@ body.sheet input[type="checkbox"]:checked::before {
   gap: 0.5rem;
 }
 
+#roll_button {
+  background: none;
+  display: inline-flex;
+  transform: none;
+}
+
 .dice-visual-inline {
   display: flex;
   gap: 0.5rem;
