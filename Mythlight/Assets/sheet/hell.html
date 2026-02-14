@@ -696,7 +696,8 @@
   </main>
 
   <div class="roll-widget" id="roll_widget">
-    <h3>Rolls</h3>
+    <h3 style="display:flex; justify-content: space-between; align-items:center;">Rolls<button type="button" onclick="toggleButton();" id="roll_button">▲</button></h3>
+    <div id="hideable">
     <div class="row">
       <div>
         <label class="muted-label">Advantage (+d6)</label>
@@ -718,6 +719,7 @@
     </div>
     <br>
     <div class="card" id="roll_history"></div>
+    </div>
   </div>
 
   <script>
@@ -775,7 +777,20 @@
       Intimidation: "Using fear to influence others."
     };
 
-
+    function toggleButton() {
+      const btn = document.getElementById('roll_button');
+      if (btn.textContent === '▲') {
+        btn.textContent = '▼';
+      } else {
+        btn.textContent = '▲';
+      }
+      const hideable = document.getElementById('hideable');
+      if (hideable.style.display === 'none') {
+        hideable.style.display = 'block';
+      } else {
+        hideable.style.display = 'none';
+        
+    }}
     
 
     // --- Inventory ---
@@ -1058,11 +1073,23 @@
       updateAllDerived();
     }
 
-    removeCustomTrait = () => {
-      const btn = event.target;
-      const traitDiv = btn.closest('.trait');
-      traitDiv.remove();
-    };
+    function removeCustomTrait(btn) {
+  const traitDiv = btn.closest('.trait');
+  if (!traitDiv) return;
+
+  const name = btn.value;
+
+  // Remove from custom array
+  for (let i = 0; i < custom.traits.length; i++) {
+    if (custom.traits[i].Name === name) {
+      custom.traits.splice(i, 1);
+      break;
+    }
+  }
+
+  traitDiv.remove();
+  recalculateTraitSkillBonuses();
+}
 
     function traitIdSafe(name) {
   return name.replace(/\s+/g, "_").replace(/[^\w]/g, "");
@@ -1082,23 +1109,25 @@
 
       
 
-      if (!trait.Name || !trait.Cost || isNaN(Number(trait.Cost)) || !trait.Type || !trait.Action || !trait.Description) {
+      if (!trait.Name || !trait.Cost || isNaN(trait.Cost) || !trait.Type || !trait.Action || !trait.Description) {
         alert('All trait fields must be filled out correctly!');
         return;
       }
 
+      if (trait.Action === 'Free Action' || trait.Action === '⭘') trait.Action = '⭘';
+        else if (trait.Action === 'Reaction' || trait.Action === '◇') trait.Action = '◇';
+        else if (trait.Action === 'Action' || trait.Action === '⬖') trait.Action = '⬖';
+        else if (trait.Action === 'Attack Action' || trait.Action === '◆') trait.Action = '◆';
+        else trait.Action = '';
+
+      if (trait.Type === 'Rest' || trait.Type === '☀') trait.Type = '☀';
+        else if (trait.Type === 'Passive' || trait.Type === '⧖') trait.Type = '⧖';
+        else if (trait.Type === 'Active' || trait.Type === '🗲') trait.Type = '🗲';
+        else trait.Type = '';
+
       custom.traits.push(trait);
 
-      if (trait.Action === 'Free Action') trait.Action = '⭘';
-      else if (trait.Action === 'Reaction') trait.Action = '◇';
-      else if (trait.Action === 'Action') trait.Action = '⬖';
-      else if (trait.Action === 'Attack Action') trait.Action = '◆';
-      else trait.Action = '';
-
-      if (trait.Type === 'Rest') trait.Type = '☀';
-      else if (trait.Type === 'Passive') trait.Type = '⧖';
-      else if (trait.Type === 'Active') trait.Type = '🗲';
-      else trait.Type = '';
+      
 
       const wrapper = document.createElement('div');
         wrapper.className = 'trait';
@@ -1108,7 +1137,7 @@
             <div class="px-6 py-6">
               <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
               <h3 class="text-lg font-bold" style="margin:0">${trait.Type} ${trait.Name}</h3><div><label class="muted-label" for="uses">Uses </label><input type="number" id="uses_${traitIdSafe(trait.Name)}" style="width: 5em;"></div>
-                <button type="button" class="remove-btn" onclick="removeCustomTrait(this)">Remove</button>
+                <button type="button" class="remove-btn" onclick="removeCustomTrait(this)" value="${trait.Name}">Remove</button>
               </div>
               <div class="space-y-4">
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
@@ -1202,11 +1231,21 @@
       rollSpell(spellName);
     }
 
-    removeCustomSpell = () => {
-      const btn = event.target;
-      const spellDiv = btn.closest('.spell');
-      spellDiv.remove();
-    };
+    function removeCustomSpell(btn) {
+  const spellDiv = btn.closest('.spell');
+  if (!spellDiv) return;
+
+  const name = btn.value;
+
+  for (let i = 0; i < custom.spells.length; i++) {
+    if (custom.spells[i].Name === name) {
+      custom.spells.splice(i, 1);
+      break;
+    }
+  }
+
+  spellDiv.remove();
+}
 
 
     addCustomSpell = (spell) => {
@@ -1221,7 +1260,7 @@
       let lore = document.getElementById('custom_spell_lore').value.trim();
 
       if (!spell) {
-        if (!name || !effect || !school || !cost || isNaN(cost)) {
+        if (!name || !effect || !school || isNaN(cost)) {
           alert('All fields are required to add a custom spell, and mana cost must be a valid number.');
           return;
         }
@@ -1266,13 +1305,14 @@
         
         wrapper.className = 'spell';
         wrapper.dataset.spellId = spellId;
+        wrapper.dataset.spellName = name;
         wrapper.innerHTML = `
           <div class="card spell" style="margin-top: 1rem;">
             <div class="px-6 py-6">${symbol}
               <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
                 <h3 class="text-lg font-bold" style="margin:0">${name} : ${costLabel}</h3>
                 <button type="button" class="cast-btn" onclick="castSpell('${cost}', '${name}')">Cast</button>
-                <button type="button" class="remove-btn" onclick="removeCustomSpell(this)">Remove</button>
+                <button type="button" class="remove-btn" onclick="removeCustomSpell(this)" value="${name}">Remove</button>
               </div>
               <div class="space-y-4">
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
@@ -1565,6 +1605,7 @@
 
         return Array.from(container.querySelectorAll('.inventory_slot')).map(slot => ({
           name: slot.querySelector('input')?.value || "",
+          weight: parseInt(slot.querySelector('input[type="number"]')?.value) || 0,
           description: slot.querySelector('textarea')?.value || ""
         }));
       }
@@ -1619,6 +1660,9 @@
         });
       }
 
+      custom.traits = [];
+      custom.spells = [];
+
       function loadCustomEntries() {
         if (data.custom) {
           if (data.custom.traits) {
@@ -1635,6 +1679,24 @@
       }
 
       // --- Restore Inventory ---
+
+      function restoreSimpleSlots(containerId, items) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        container.innerHTML = "";
+
+        items.forEach(item => {
+          const slot = document.createElement('div');
+          slot.className = 'inventory_slot';
+          slot.innerHTML = `
+          <input type="text" placeholder="Name" value="${item.name || ""}">
+        <textarea rows="4" placeholder="Description" style="resize: none;">${item.description || ""}</textarea>
+      `;
+          container.appendChild(slot);
+        });
+      }
+
       function restoreSlots(containerId, items) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -1645,8 +1707,9 @@
           const slot = document.createElement('div');
           slot.className = 'inventory_slot';
           slot.innerHTML = `
-        <input type="text" value="${item.name || ""}">
-        <textarea rows="4" style="resize:none;">${item.description || ""}</textarea>
+          <input type="text" placeholder="Name" style="width: 79.5%;" value="${item.name || ""}">
+        <input type="number" placeholder="Weight" style="width: 8em; margin-left: .5rem;" value="${item.weight || 0}">
+        <textarea rows="4" placeholder="Description" style="resize: none;">${item.description || ""}</textarea>
       `;
           container.appendChild(slot);
         });
@@ -1654,10 +1717,10 @@
 
       if (data.inventory) {
         restoreSlots('inventory_grid', data.inventory.main || []);
-        restoreSlots('potions_ingredients_grid', data.inventory.potionIngredients || []);
-        restoreSlots('potions_recipes_grid', data.inventory.potionRecipes || []);
-        restoreSlots('crafts_components_grid', data.inventory.craftComponents || []);
-        restoreSlots('crafts_recipes_grid', data.inventory.craftRecipes || []);
+        restoreSimpleSlots('potions_ingredients_grid', data.inventory.potionIngredients || []);
+        restoreSimpleSlots('potions_recipes_grid', data.inventory.potionRecipes || []);
+        restoreSimpleSlots('crafts_components_grid', data.inventory.craftComponents || []);
+        restoreSimpleSlots('crafts_recipes_grid', data.inventory.craftRecipes || []);
       }
 
       // --- Restore Traits ---
