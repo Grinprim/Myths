@@ -137,6 +137,7 @@ body.sheet main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
+  
 }
 
 /* Allow grid children to shrink without overflowing into adjacent columns */
@@ -173,6 +174,7 @@ input,
 textarea,
 button {
   font-family: inherit;
+  box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.1);
 }
 
 input,
@@ -183,6 +185,7 @@ textarea {
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(15, 23, 42, 0.6);
   color: white;
+  
 }
 
 input::placeholder,
@@ -298,6 +301,7 @@ button:active {
 .attribute-card {
   padding: 1rem;
   border-radius: 0.9rem;
+  box-shadow: 0px 10px 15px 11px rgba(0,0,0,0.1);
 }
 
 .attribute-header {
@@ -526,6 +530,7 @@ body.sheet input[type="checkbox"]:checked::before {
   border-radius: 0.9rem;
   padding: 0.75rem;
   background: rgba(30, 41, 59, 0.18);
+  box-shadow: 0px 10px 15px 11px rgba(0,0,0,0.1);
 }
 
 .armor-head {
@@ -634,6 +639,7 @@ body.sheet input[type="checkbox"]:checked::before {
     padding: 0.85rem !important;
     margin-bottom: 0.6rem !important;
     border-radius: 0 !important;
+    
   }
 
   .section-title {
@@ -673,6 +679,7 @@ body.sheet input[type="checkbox"]:checked::before {
     box-shadow: none !important;
     -webkit-appearance: none !important;
     appearance: none !important;
+    
   }
 
   input[type="checkbox"] {
@@ -702,6 +709,7 @@ body.sheet input[type="checkbox"]:checked::before {
   border-radius: 0.9rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(30, 41, 59, 0.18);
+  box-shadow: 0px 10px 15px 11px rgba(0,0,0,0.1);
 }
 
 .weapon-grid {
@@ -817,26 +825,13 @@ body.sheet input[type="checkbox"]:checked::before {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
+  
 }
 
 #roll_button {
   background: none;
   display: inline-flex;
   transform: none;
-}
-
-.tab-button {
-  background: none;
-  border: none;
-  font-size: 1rem;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: none;
-  cursor: pointer;
-}
-
-.tab-button:hover {
-  background: rgba(99, 102, 241, 0.08);
 }
 
 .dice-visual-inline {
@@ -851,6 +846,7 @@ body.sheet input[type="checkbox"]:checked::before {
   margin: 0.75rem 0;
   min-height: 56px;
   flex-wrap: wrap;
+  
 }
 
 .die-inline {
@@ -886,12 +882,14 @@ body.sheet input[type="checkbox"]:checked::before {
 .face-1 {
   background: radial-gradient(circle at 50% 50%, #0f172a 0rem, #0f172a 0.35rem, transparent 0.36rem),
     linear-gradient(145deg, #f8fafc, #e2e8f0);
+    box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.1);
 }
 
 .face-2 {
   background: radial-gradient(circle at 25% 25%, #0f172a 0rem, #0f172a 0.35rem, transparent 0.36rem),
     radial-gradient(circle at 75% 75%, #0f172a 0rem, #0f172a 0.35rem, transparent 0.36rem),
     linear-gradient(145deg, #f8fafc, #e2e8f0);
+    box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.1);
 }
 
 .face-3 {
@@ -899,6 +897,7 @@ body.sheet input[type="checkbox"]:checked::before {
     radial-gradient(circle at 50% 50%, #0f172a 0rem, #0f172a 0.35rem, transparent 0.36rem),
     radial-gradient(circle at 75% 75%, #0f172a 0rem, #0f172a 0.35rem, transparent 0.36rem),
     linear-gradient(145deg, #f8fafc, #e2e8f0);
+    box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.1);
 }
 
 .face-4 {
@@ -907,6 +906,7 @@ body.sheet input[type="checkbox"]:checked::before {
     radial-gradient(circle at 25% 75%, #0f172a 0rem, #0f172a 0.35rem, transparent 0.36rem),
     radial-gradient(circle at 75% 75%, #0f172a 0rem, #0f172a 0.35rem, transparent 0.36rem),
     linear-gradient(145deg, #f8fafc, #e2e8f0);
+    box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.1);
 }
 
 .face-5 {
@@ -916,6 +916,7 @@ body.sheet input[type="checkbox"]:checked::before {
     radial-gradient(circle at 25% 75%, #0f172a 0rem, #0f172a 0.35rem, transparent 0.36rem),
     radial-gradient(circle at 75% 75%, #0f172a 0rem, #0f172a 0.35rem, transparent 0.36rem),
     linear-gradient(145deg, #f8fafc, #e2e8f0);
+    box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.1);
 }
 
 .face-6 {
@@ -926,6 +927,7 @@ body.sheet input[type="checkbox"]:checked::before {
     radial-gradient(circle at 75% 50%, #0f172a 0rem, #0f172a 0.35rem, transparent 0.36rem),
     radial-gradient(circle at 75% 80%, #0f172a 0rem, #0f172a 0.35rem, transparent 0.36rem),
     linear-gradient(145deg, #f8fafc, #e2e8f0);
+    box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.1);
 }
 
 /* Mini legend styling */
@@ -970,6 +972,34 @@ body.sheet input[type="checkbox"]:checked::before {
   cursor: pointer;
 }
 
+#tab-selector {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.9);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: inset 0px 6px 17px 6px rgba(0,0,0,0.1);
+}
+
+.tab-button {
+  width: 10em;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0px;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background: rgba(99, 102, 241, 0.14);
+  box-shadow: inset 0px -2px 0px 0px rgba(99, 102, 241, 1);
+}
+
+.tab-button:hover {
+  background: rgba(99, 102, 241, 0.08);
+}
+
 .roll-history-entry {
   margin-bottom: 5px;
   display: flex;
@@ -993,4 +1023,57 @@ body.sheet input[type="checkbox"]:checked::before {
 
 #spell-roll-history{
   background: rgba(77, 140, 177, 0.18);
+}
+
+.identity-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 120px;
+  gap: 1.25rem;
+  align-items: end;
+}
+
+.identity-name input {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.section-1 {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.section-2 {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.section-3 {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.section-4 {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.section-5 {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.section-6 {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.section-7 {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.section-8 {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.section-9 {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.section-10 {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }

@@ -27,16 +27,14 @@
         • Unsaved Changes
       </span>
     </div>
-    <hr style="opacity: 0.5; border: dashed 0.5px #a5b4fc;">
-    <div style="display: flex; justify-content: center; width: 100%; flex-wrap: wrap;"><button class="tab-button"
-        data-tab="tab-main" onclick="switchTab(this)">Main</button>
+    
+  </header>
+<div style="display: flex; justify-content: center; width: 100%; flex-wrap: wrap;" id="tab-selector">
+  <button class="tab-button" data-tab="tab-main" onclick="switchTab(this)">Main</button>
       <button class="tab-button" data-tab="tab-inventory" onclick="switchTab(this)">Inventory</button>
       <button class="tab-button" data-tab="tab-traits" onclick="switchTab(this)">Traits</button>
       <button class="tab-button" data-tab="tab-spells" onclick="switchTab(this)">Spells</button>
     </div>
-    <hr style="opacity: 0.5; border: dashed 0.5px #a5b4fc;">
-  </header>
-
   <main>
     <form onsubmit="return false;">
 
@@ -44,17 +42,33 @@
       <div id="tab-main" class="tab-section">
         <div class="sheet-grid">
           <div class="card sheet-full section-1">
-            <div class="section-title">
-              <div class="section-number">1</div>
-              <h2>Core Identity</h2>
-            </div>
-            <div class="grid">
-              <div><label>Name</label><input type="text" id="character_name" required></div>
-              <div><label>Species</label><input type="text" id="character_species" required></div>
-              <div><label>Path</label><input type="text" id="character_path" required></div>
-              <div><label>Level</label><input type="number" id="level_input" required></div>
-            </div>
-          </div>
+  <div class="section-title">
+    <div class="section-number">1</div>
+    <h2>Core Identity</h2>
+  </div>
+
+  <div class="identity-grid">
+    <div class="identity-name">
+      <label>Character Name</label>
+      <input type="text" id="character_name" required>
+    </div>
+
+    <div>
+      <label>Species</label>
+      <input type="text" id="character_species" required>
+    </div>
+
+    <div>
+      <label>Path</label>
+      <input type="text" id="character_path" required>
+    </div>
+
+    <div>
+      <label>Level</label>
+      <input type="number" id="level_input" required>
+    </div>
+  </div>
+</div>
 
           <div class="sheet-col sheet-left">
             <div class="card section-3">
@@ -651,7 +665,7 @@
             </div>
             <br>
             <label for="spellcasting_type">Spellcasting School</label>
-            <input type="text" id="spellcasting_type" placeholder="Name of your spellcasting school">
+            <input type="text" id="spellcasting_type" placeholder="Name of your spellcasting school" onchange="updateSpellcastingType()">
           </div>
 
 
@@ -763,6 +777,30 @@
     let isDirty = false;
     const BASE_SLOTS = 2;
     const BASE_RECIPE_SLOTS = 2;
+
+    function updateSpellcastingType() {
+      const type = document.getElementById('spellcasting_type').value.toLowerCase();
+      const symbolDiv = document.getElementById('spellcasting_symbol');
+      switch (type) {
+        case 'arcane':
+          symbolDiv.innerHTML = arcaneSymbol;
+          break;
+        case 'divine':
+          symbolDiv.innerHTML = divineSymbol;
+          break;
+        case 'occult':
+          symbolDiv.innerHTML = occultSymbol;
+          break;
+        case 'elemental':
+          symbolDiv.innerHTML = elementalSymbol;
+          break;
+        case 'cosmic':
+          symbolDiv.innerHTML = cosmicSymbol;
+          break;
+        default:
+          symbolDiv.innerHTML = '';
+      }
+    }
 
     const state = {
       selectedTraits: new Map(),
@@ -1378,11 +1416,11 @@
       wrapper.dataset.spellName = name;
       wrapper.innerHTML = `
           <div class="card spell" style="margin-top: 1rem;">
-            <div class="px-6 py-6">${symbol}
+            <div class="px-6 py-6">${symbol} </div><label class="muted-label">${school}</label>
               <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
                 <h3 class="text-lg font-bold" style="margin:0">${name} : ${costLabel}</h3>
-                <button type="button" class="cast-btn" onclick="castSpell('${cost}', '${name}')">Cast</button>
-                <button type="button" class="remove-btn" onclick="removeCustomSpell(this)" value="${name}">Remove</button>
+                <div><button type="button" class="cast-btn" onclick="castSpell('${cost}', '${name}')">Cast</button>
+                <button type="button" class="remove-btn" onclick="removeCustomSpell(this)" value="${name}">Remove</button></div>
               </div>
               <div class="space-y-4">
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
@@ -1432,11 +1470,11 @@
         wrapper.dataset.spellId = spell.ID;
         wrapper.innerHTML = `
           <div class="card" style="margin-top: 1rem;">
-            <div class="px-6 py-6">${symbol}
+            <div class="px-6 py-6">${symbol}</div><label class="muted-label">${spell.Category}</label>
               <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
                 <h3 class="text-lg font-bold" style="margin:0">${spell.Name} : ${costLabel}</h3>
-                <button type="button" class="cast-btn" onclick="castSpell('${spell.Cost}', '${spell.Name}')">Cast</button>
-                <button type="button" class="remove-btn" onclick="removeSpell('${spell.ID}')">Remove</button>
+                <div><button type="button" class="cast-btn" onclick="castSpell('${spell.Cost}', '${spell.Name}')">Cast</button>
+                <button type="button" class="remove-btn" onclick="removeSpell('${spell.ID}')">Remove</button></div>
               </div>
               <div class="space-y-4">
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
@@ -1991,6 +2029,9 @@
       renderSelectedSpells();
       recalculateTraitSkillBonuses();
       updateAllDerived();
+      document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.toggle('active', button.dataset.tab === 'tab-main');
+      });
     });
 
     document.addEventListener('input', () => {
