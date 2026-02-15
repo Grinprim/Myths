@@ -960,6 +960,16 @@ body.sheet input[type="checkbox"]:checked::before {
   flex: 0 0 auto;
 }
 
+#custom_button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: none;
+  cursor: pointer;
+}
+
 .roll-history-entry {
   margin-bottom: 5px;
   display: flex;
