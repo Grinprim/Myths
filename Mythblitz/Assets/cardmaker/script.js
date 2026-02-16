@@ -1,3 +1,4 @@
+// --- UTILS ---
 function setText(id, value){
   const el = document.getElementById(id);
   if (!el) return;
@@ -16,30 +17,26 @@ function formatSignedNumber(n){
   return String(num);
 }
 
+// Handles simple image previews (Art)
 function setLayerFromFile(inputEl, imgEl){
   if (!inputEl || !imgEl) return;
   const file = inputEl.files && inputEl.files[0];
   if (!file){
-    // Use a transparent 1x1 pixel so html-to-image doesn't crash on an empty src
+    // 1x1 Transparent pixel
     imgEl.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
     imgEl.style.display = 'none';
     return;
   }
-
   const url = URL.createObjectURL(file);
   imgEl.src = url;
   imgEl.style.display = 'block';
 }
 
+// --- RARITY LOGIC ---
 function rarityToClass(rarity){
   switch (rarity){
-    case 'Common': return 'rarity-common';
-    case 'Uncommon': return 'rarity-uncommon';
-    case 'Rare': return 'rarity-rare';
-    case 'Epic': return 'rarity-epic';
-    case 'Legendary': return 'rarity-legendary';
     case 'Alt Art': return 'rarity-alt';
-    default: return 'rarity-rare';
+    default: return 'rarity-std';
   }
 }
 
@@ -63,17 +60,17 @@ function renderRaritySvg(rarity){
   const alt = document.getElementById('rarityAlt');
   const altShine = document.getElementById('rarityAltShine');
 
-  if (!stop1 || !stop2 || !diamond || !diamondShine || !alt || !altShine) return;
+  if (!stop1 || !stop2) return;
 
   const style = getRarityStyle(rarity);
   stop1.setAttribute('stop-color', style.a);
   stop2.setAttribute('stop-color', style.b);
 
   const isAlt = style.shape === 'alt';
-  diamond.style.display = isAlt ? 'none' : 'block';
-  diamondShine.style.display = isAlt ? 'none' : 'block';
-  alt.style.display = isAlt ? 'block' : 'none';
-  altShine.style.display = isAlt ? 'block' : 'none';
+  if(diamond) diamond.style.display = isAlt ? 'none' : 'block';
+  if(diamondShine) diamondShine.style.display = isAlt ? 'none' : 'block';
+  if(alt) alt.style.display = isAlt ? 'block' : 'none';
+  if(altShine) altShine.style.display = isAlt ? 'block' : 'none';
 }
 
 function renderManaSymbols({ count, regions }){
@@ -81,7 +78,7 @@ function renderManaSymbols({ count, regions }){
   if (!container) return;
   container.innerHTML = '';
 
-  const n = clampNumber(count, 1, 5);
+  const n = clampNumber(count, 0, 5); // Allow 0
   const list = (regions || []).slice(0, 5);
   const fallback = list[0] || 'Arcane';
 
@@ -89,39 +86,32 @@ function renderManaSymbols({ count, regions }){
     const region = String(list[i] || fallback);
     const pip = document.createElement('div');
     pip.className = `manaSymbol manaRegion-${region}`;
-    pip.setAttribute('aria-label', 'Mana symbol');
-    pip.title = region;
-
+    
     const img = document.createElement('img');
     img.className = 'manaSymbolImg';
-    img.alt = '';
-    img.decoding = 'async';
-    img.loading = 'eager';
+    img.alt = region;
     img.style.display = 'none';
 
+    // Requires files like img/arcane.png
     const regionFile = region.toLowerCase();
     img.src = `img/${regionFile}.png`;
-    img.addEventListener('load', () => {
-      pip.classList.add('hasIcon');
-      img.style.display = 'block';
-    });
-    img.addEventListener('error', () => {
-      pip.classList.remove('hasIcon');
-      img.style.display = 'none';
-    });
-
+    
+    img.onload = () => { img.style.display = 'block'; };
+    
     pip.appendChild(img);
     container.appendChild(pip);
   }
 }
 
+// --- MAIN WIRING ---
 function wire(){
+  // Elements
   const statsFieldset = document.getElementById('statsFieldset');
-
   const cardEl = document.getElementById('cardPreview');
   const artImg = document.getElementById('artImg');
-  const regionBadge = document.getElementById('regionBadge');
+  const cardBorder = document.getElementById('cardBorder');
 
+  // Inputs
   const nameInput = document.getElementById('nameInput');
   const manaInput = document.getElementById('manaInput');
   const descInput = document.getElementById('descInput');
@@ -131,6 +121,7 @@ function wire(){
   const typeSelect = document.getElementById('typeSelect');
   const tagsInput = document.getElementById('tagsInput');
 
+  // Symbols
   const symbolCountInput = document.getElementById('symbolCountInput');
   const symbol1Select = document.getElementById('symbol1Select');
   const symbol2Select = document.getElementById('symbol2Select');
@@ -138,24 +129,30 @@ function wire(){
   const symbol4Select = document.getElementById('symbol4Select');
   const symbol5Select = document.getElementById('symbol5Select');
 
+  // Art Controls
   const artScaleInput = document.getElementById('artScaleInput');
   const artXInput = document.getElementById('artXInput');
   const artYInput = document.getElementById('artYInput');
-
   const artFile = document.getElementById('artFile');
+  
+  // Custom Border Controls
+  const borderFile = document.getElementById('borderFile');
+  const removeBorderBtn = document.getElementById('removeBorderBtn');
 
+  // Stats Display
+  const statsRow = document.querySelector('.stats');
+  const statImgDamageNum = document.getElementById('statImgDamageNum');
+  const statImgHealthNum = document.getElementById('statImgHealthNum');
+
+  // Rarity Gem
   const rarityGem = document.getElementById('rarityGem');
 
-  const statsRow = document.querySelector('.stats');
-  const powerBadge = document.querySelector('.statBadgePower');
-  const healthBadge = document.querySelector('.statBadgeHealth');
-
-  // Drag-to-move art
+  // State
+  let customBorderURL = null; // Stores the object URL of manually uploaded border
+  
+  // --- DRAG LOGIC ---
   let isDraggingArt = false;
-  let dragStartX = 0;
-  let dragStartY = 0;
-  let dragOrigX = 0;
-  let dragOrigY = 0;
+  let dragStartX = 0, dragStartY = 0, dragOrigX = 0, dragOrigY = 0;
 
   function updateArtInputsFromVars(x, y){
     if (artXInput) artXInput.value = String(Math.round(x));
@@ -174,16 +171,12 @@ function wire(){
       dragOrigY = Number(artYInput.value) || 0;
       e.preventDefault();
     });
-
     artImg.addEventListener('pointermove', (e) => {
       if (!isDraggingArt) return;
       const dx = e.clientX - dragStartX;
       const dy = e.clientY - dragStartY;
-      const nextX = clampNumber(dragOrigX + dx, -120, 120);
-      const nextY = clampNumber(dragOrigY + dy, -120, 120);
-      updateArtInputsFromVars(nextX, nextY);
+      updateArtInputsFromVars(dragOrigX + dx, dragOrigY + dy);
     });
-
     const endDrag = () => { isDraggingArt = false; };
     artImg.addEventListener('pointerup', endDrag);
     artImg.addEventListener('pointercancel', endDrag);
@@ -192,13 +185,13 @@ function wire(){
       if (!artScaleInput) return;
       e.preventDefault();
       const cur = Number(artScaleInput.value) || 1;
-      const delta = e.deltaY > 0 ? -0.04 : 0.04;
-      const next = clampNumber(cur + delta, 0.5, 2.5);
-      artScaleInput.value = String(next);
+      const delta = e.deltaY > 0 ? -0.05 : 0.05;
+      artScaleInput.value = String(clampNumber(cur + delta, 0.1, 5));
       syncArtTransform();
     }, { passive: false });
   }
 
+  // --- SYNC HELPERS ---
   const symbolSelects = [symbol1Select, symbol2Select, symbol3Select, symbol4Select, symbol5Select];
 
   function getSymbolRegions(){
@@ -206,183 +199,164 @@ function wire(){
   }
 
   function syncSymbolControls(){
-    const n = clampNumber(symbolCountInput.value, 1, 5);
+    const n = clampNumber(symbolCountInput.value, 0, 5);
     for (let i = 0; i < symbolSelects.length; i++){
       const sel = symbolSelects[i];
       if (!sel) continue;
       const active = i < n;
-      sel.disabled = !active;
       sel.classList.toggle('isHidden', !active);
     }
   }
 
   function syncArtTransform(){
     if (!cardEl) return;
-    const scale = clampNumber(artScaleInput.value, 0.5, 2.5);
-    const x = clampNumber(artXInput.value, -120, 120);
-    const y = clampNumber(artYInput.value, -120, 120);
+    const scale = clampNumber(artScaleInput.value, 0.1, 5);
+    const x = Number(artXInput.value) || 0;
+    const y = Number(artYInput.value) || 0;
     cardEl.style.setProperty('--artScale', String(scale));
     cardEl.style.setProperty('--artX', `${x}px`);
     cardEl.style.setProperty('--artY', `${y}px`);
   }
 
   function syncTypeVisibility(){
-    const isUnit = typeSelect.value === 'Unit';
-    const isGear = typeSelect.value === 'Gear';
+    const type = typeSelect.value;
+    const isUnit = type === 'Unit';
+    const isGear = type === 'Gear';
     const showStats = isUnit || isGear;
-    if (statsFieldset){
-      statsFieldset.classList.toggle('isHidden', !showStats);
-    }
-    if (powerInput){
-      powerInput.disabled = !showStats;
-      powerInput.min = isGear ? '-99' : '0';
-      powerInput.max = '99';
-    }
-    if (healthInput){
-      healthInput.disabled = !showStats;
-      healthInput.min = isGear ? '-99' : '0';
-      healthInput.max = '99';
-    }
-
-    if (statsRow){
-      statsRow.classList.toggle('isNonUnit', !showStats);
-    }
-    if (powerBadge){
-      powerBadge.classList.toggle('isHidden', !showStats);
-    }
-    if (healthBadge){
-      healthBadge.classList.toggle('isHidden', !showStats);
-    }
-
+    
+    if (statsFieldset) statsFieldset.classList.toggle('isHidden', !showStats);
+    if (statsRow) statsRow.classList.toggle('isHidden', !showStats);
+    
+    // Type class for CSS fallback
     if (cardEl){
-      cardEl.classList.remove('type-Unit', 'type-Spell', 'type-Landmark', 'type-Gear');
-      cardEl.classList.add(`type-${typeSelect.value}`);
+      cardEl.className = `card type-${type}`; 
     }
   }
 
+  // --- BORDER RESOLUTION ---
+  function resolveBorder() {
+    if (!cardBorder) return;
+    
+    // 1. If Custom Upload exists, use it.
+    if (customBorderURL) {
+      cardBorder.src = customBorderURL;
+      cardBorder.style.display = 'block';
+      cardEl.classList.add('has-custom-border');
+      if(removeBorderBtn) removeBorderBtn.style.display = 'inline-block';
+      return;
+    }
+
+    // 2. Fallback to Automatic Type Border
+    if(removeBorderBtn) removeBorderBtn.style.display = 'none';
+    
+    const type = typeSelect.value.toLowerCase();
+    const borderPath = `img/${type}-border.png`;
+
+    // Try loading automatic border
+    const tempImg = new Image();
+    tempImg.src = borderPath;
+    tempImg.onload = () => {
+      cardBorder.src = borderPath;
+      cardBorder.style.display = 'block';
+      cardEl.classList.add('has-custom-border');
+    };
+    tempImg.onerror = () => {
+      // 3. No border found -> Use CSS fallback
+      cardBorder.style.display = 'none';
+      cardEl.classList.remove('has-custom-border');
+    };
+  }
+
+  // --- MAIN SYNC ---
   function syncText(){
-            // Stat image mode logic (always show, update numbers)
-            const statImgDamage = document.getElementById('statImgDamage');
-            const statImgHealth = document.getElementById('statImgHealth');
-            const statImgDamageNum = document.getElementById('statImgDamageNum');
-            const statImgHealthNum = document.getElementById('statImgHealthNum');
-            if (statImgDamage && statImgHealth && statImgDamageNum && statImgHealthNum) {
-              statImgDamageNum.textContent = powerInput.value;
-              statImgHealthNum.textContent = healthInput.value;
-            }
-        // Dynamic Border Logic
-        const cardBorder = document.getElementById('cardBorder');
-        if (cardBorder && typeSelect && cardEl) {
-          const type = typeSelect.value.toLowerCase();
-          const borderPath = `img/${type}-border.png`;
-          cardBorder.src = borderPath;
-          cardBorder.onload = () => {
-            cardBorder.style.display = 'block';
-            cardEl.classList.add('has-custom-border');
-          };
-          cardBorder.onerror = () => {
-            cardBorder.style.display = 'none';
-            cardEl.classList.remove('has-custom-border');
-          };
-        }
     setText('nameText', (nameInput.value || '').trim() || '');
     setText('manaText', String(clampNumber(manaInput.value, 0, 99)));
     setText('tagsText', (tagsInput.value || '').trim());
     setText('descText', (descInput.value || '').trim());
 
-    const isUnit = typeSelect.value === 'Unit';
+    // Stats
     const isGear = typeSelect.value === 'Gear';
+    const pVal = Number(powerInput.value);
+    const hVal = Number(healthInput.value);
+    if(statImgDamageNum) statImgDamageNum.textContent = isGear ? formatSignedNumber(pVal) : String(pVal);
+    if(statImgHealthNum) statImgHealthNum.textContent = isGear ? formatSignedNumber(hVal) : String(hVal);
 
-    const powerVal = isGear
-      ? clampNumber(powerInput.value, -99, 99)
-      : clampNumber(powerInput.value, 0, 99);
-    const healthVal = isGear
-      ? clampNumber(healthInput.value, -99, 99)
-      : clampNumber(healthInput.value, 0, 99);
-
-    setText('powerText', isGear ? formatSignedNumber(powerVal) : String(powerVal));
-    setText('healthText', isGear ? formatSignedNumber(healthVal) : String(healthVal));
-
+    // Rarity
     const rarity = raritySelect.value;
-    if (rarityGem){
-      rarityGem.classList.remove(
-        'rarity-common',
-        'rarity-uncommon',
-        'rarity-rare',
-        'rarity-epic',
-        'rarity-legendary',
-        'rarity-alt'
-      );
-      const cls = rarityToClass(rarity);
-      rarityGem.classList.add(cls);
-    }
-
+    if(rarityGem) rarityGem.className = 'rarityGem ' + rarityToClass(rarity);
     renderRaritySvg(rarity);
 
+    // Symbols
     syncSymbolControls();
     renderManaSymbols({ count: symbolCountInput.value, regions: getSymbolRegions() });
 
-    if (regionBadge){
-      const mainRegion = String((symbol1Select && symbol1Select.value) ? symbol1Select.value : 'Arcane');
-      regionBadge.classList.remove('manaRegion-Arcane', 'manaRegion-Divine', 'manaRegion-Elemental', 'manaRegion-Occult', 'manaRegion-Cosmic');
-      regionBadge.classList.add(`manaRegion-${mainRegion}`);
-      regionBadge.title = mainRegion;
-    }
-
     syncArtTransform();
-
-    const isAltArt = raritySelect.value === 'Alt Art';
-    if (artImg){
-      artImg.classList.toggle('artFull', isAltArt);
-    }
-
     syncTypeVisibility();
+    
+    // Alt Art Toggle
+    const isAltArt = raritySelect.value === 'Alt Art';
+    if (artImg) artImg.classList.toggle('artFull', isAltArt);
+
+    // Determine Border
+    resolveBorder();
   }
 
-  function syncImages(){
+  function syncArtFile(){
     setLayerFromFile(artFile, artImg);
   }
 
-  // Initial sync
+  function handleCustomBorderUpload() {
+    const file = borderFile.files && borderFile.files[0];
+    if (file) {
+      customBorderURL = URL.createObjectURL(file);
+      resolveBorder();
+    }
+  }
+
+  function clearCustomBorder() {
+    customBorderURL = null;
+    if(borderFile) borderFile.value = ''; // Reset input
+    resolveBorder();
+  }
+
+  // Initial Sync
   syncText();
-  syncImages();
 
-  // Text listeners
-  for (const el of [nameInput, manaInput, descInput, powerInput, healthInput, raritySelect, typeSelect, tagsInput, symbolCountInput, symbol1Select, symbol2Select, symbol3Select, symbol4Select, symbol5Select, artScaleInput, artXInput, artYInput]){
-    el.addEventListener('input', syncText);
-    el.addEventListener('change', syncText);
-  }
+  // --- LISTENERS ---
+  const inputs = [
+    nameInput, manaInput, descInput, powerInput, healthInput, 
+    raritySelect, typeSelect, tagsInput, symbolCountInput, 
+    symbol1Select, symbol2Select, symbol3Select, symbol4Select, symbol5Select, 
+    artScaleInput, artXInput, artYInput
+  ];
+  inputs.forEach(el => {
+    if(el) {
+      el.addEventListener('input', syncText);
+      el.addEventListener('change', syncText);
+    }
+  });
 
-  if (artFile){
-    artFile.addEventListener('change', syncImages);
-  }
+  if(artFile) artFile.addEventListener('change', syncArtFile);
+  
+  if(borderFile) borderFile.addEventListener('change', handleCustomBorderUpload);
+  if(removeBorderBtn) removeBorderBtn.addEventListener('click', clearCustomBorder);
 
   const resetBtn = document.getElementById('resetBtn');
-  resetBtn.addEventListener('click', () => {
-    document.getElementById('cardForm').reset();
-    nameInput.value = 'Sample Name';
-    manaInput.value = 1;
-    descInput.value = 'Sample Description';
-    powerInput.value = 1;
-    healthInput.value = 1;
-    raritySelect.value = 'Common';
-    typeSelect.value = 'Unit';
-    tagsInput.value = 'Sample Tags';
-    symbolCountInput.value = 1;
-    symbol1Select.value = 'Arcane';
-    symbol2Select.value = 'Arcane';
-    symbol3Select.value = 'Arcane';
-    symbol4Select.value = 'Arcane';
-    symbol5Select.value = 'Arcane';
-    artScaleInput.value = 1;
-    artXInput.value = 0;
-    artYInput.value = 0;
-    if (artFile) artFile.value = '';
-    syncText();
-    syncImages();
-  });
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      document.getElementById('cardForm').reset();
+      customBorderURL = null;
+      if(removeBorderBtn) removeBorderBtn.style.display = 'none';
+      if(artImg) {
+        artImg.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; 
+        artImg.style.display = 'none';
+      }
+      syncText();
+    });
+  }
 }
 
+// --- EXPORT FUNCTION ---
 function setupExportButton() {
   const exportBtn = document.getElementById('exportBtn');
   const cardEl = document.getElementById('cardPreview');
@@ -396,13 +370,12 @@ function setupExportButton() {
     exportBtn.disabled = true;
 
     try {
-      // Configuration for high quality render + CORS bypass
       const options = { 
         pixelRatio: 3, 
         skipFonts: false,
         useCORS: true, 
         allowTaint: true,
-        backgroundColor: null // Prevents default white backgrounds on rounded corners
+        backgroundColor: null 
       };
 
       let dataUrl;
@@ -412,17 +385,12 @@ function setupExportButton() {
         dataUrl = await window.htmlToImage.toPng(cardEl, options);
       }
 
-      // Sanitize user input for safe filenames
       const rawName = document.getElementById('nameInput').value || 'card';
       const fileName = rawName.trim().replace(/[^a-z0-9]/gi, '_').toLowerCase();
 
       if (format === 'pdf') {
         const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF({ 
-          orientation: 'portrait', 
-          unit: 'mm', 
-          format: [69, 94] 
-        });
+        const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [69, 94] });
         pdf.addImage(dataUrl, 'PNG', 0, 0, 69, 94);
         pdf.save(`${fileName}.pdf`);
       } else {
@@ -433,7 +401,7 @@ function setupExportButton() {
       }
     } catch (err) {
       console.error("Export Error:", err);
-      alert("Export failed. If using external images, ensure you are running a local server to avoid CORS blockages.");
+      alert("Export failed. If using external images, check console.");
     } finally {
       exportBtn.textContent = originalText;
       exportBtn.disabled = false;
@@ -441,6 +409,7 @@ function setupExportButton() {
   });
 }
 
+// --- INIT ---
 if (document.readyState === 'loading'){
   document.addEventListener('DOMContentLoaded', () => {
     wire();

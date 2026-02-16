@@ -3,7 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Card Maker</title>
+  <title>Mythblitz Card Maker</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
@@ -11,20 +16,21 @@
 <body>
   <header class="appHeader">
     <div class="headerContent">
-      <h1 class="appTitle">Card Maker</h1>
-      <p class="appSubtitle">Edit fields on the left, preview updates instantly.</p>
+      <h1 class="appTitle">Mythblitz Card Architect</h1>
+      <p class="appSubtitle">Forge your legend.</p>
     </div>
   </header>
 
   <main class="app">
     <section class="panel" aria-label="Card Settings">
       <form id="cardForm" class="form" autocomplete="off">
+        
         <fieldset class="fieldset">
-          <legend>Text</legend>
+          <legend>Core Details</legend>
 
           <label class="field">
             <span class="label">Card Type</span>
-            <select id="typeSelect">
+            <select id="typeSelect" class="input-dark">
               <option value="Unit" selected>Unit</option>
               <option value="Spell">Spell</option>
               <option value="Landmark">Landmark</option>
@@ -33,9 +39,9 @@
           </label>
 
           <label class="field">
-            <span class="label">Card Rarity</span>
-            <select id="raritySelect">
-              <option value="Common" selected>Common</option>
+            <span class="label">Rarity</span>
+            <select id="raritySelect" class="input-dark">
+              <option value="Common">Common</option>
               <option value="Uncommon">Uncommon</option>
               <option value="Rare">Rare</option>
               <option value="Epic">Epic</option>
@@ -46,143 +52,112 @@
 
           <label class="field">
             <span class="label">Name</span>
-            <input id="nameInput" type="text" maxlength="40" value="Sample Name" />
+            <input type="text" id="nameInput" class="input-dark" value="Sample Name" />
           </label>
 
           <div class="row2">
-            <label class="field">
+            <label class="field" style="flex:1;">
               <span class="label">Mana Cost</span>
-              <input id="manaInput" type="number" min="0" max="99" value="1" />
+              <input type="number" id="manaInput" class="input-dark" value="1" />
             </label>
-            <label class="field">
-              <span class="label">Symbol Count (1–5)</span>
-              <input id="symbolCountInput" type="number" min="1" max="5" value="1" />
+            <label class="field" style="flex:2;">
+              <span class="label">Tags</span>
+              <input type="text" id="tagsInput" class="input-dark" value="Sample Tags" />
             </label>
           </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Art & Border</legend>
+          
+          <label class="field">
+            <span class="label">Card Art</span>
+            <input type="file" id="artFile" accept="image/*" />
+          </label>
+
+          <label class="field">
+            <span class="label">Custom Border Override (Optional)</span>
+            <input type="file" id="borderFile" accept="image/*" />
+            <div class="hint">Upload a border to override the default type border.</div>
+            <button type="button" id="removeBorderBtn" class="btn btnSecondary" style="display:none; margin-top:5px;">
+              Remove Custom Border
+            </button>
+          </label>
 
           <div class="field">
-            <span class="label">Symbols (Regions)</span>
-            <div id="symbolsGrid" class="symbolsGrid">
-              <select id="symbol1Select" aria-label="Symbol 1">
-                <option value="Arcane" selected>Arcane (Blue)</option>
-                <option value="Divine">Divine (White)</option>
-                <option value="Elemental">Elemental (Red)</option>
-                <option value="Occult">Occult (Green)</option>
-                <option value="Cosmic">Cosmic (Black)</option>
-              </select>
-              <select id="symbol2Select" aria-label="Symbol 2">
-                <option value="Arcane" selected>Arcane (Blue)</option>
-                <option value="Divine">Divine (White)</option>
-                <option value="Elemental">Elemental (Red)</option>
-                <option value="Occult">Occult (Green)</option>
-                <option value="Cosmic">Cosmic (Black)</option>
-              </select>
-              <select id="symbol3Select" aria-label="Symbol 3">
-                <option value="Arcane" selected>Arcane (Blue)</option>
-                <option value="Divine">Divine (White)</option>
-                <option value="Elemental">Elemental (Red)</option>
-                <option value="Occult">Occult (Green)</option>
-                <option value="Cosmic">Cosmic (Black)</option>
-              </select>
-              <select id="symbol4Select" aria-label="Symbol 4">
-                <option value="Arcane" selected>Arcane (Blue)</option>
-                <option value="Divine">Divine (White)</option>
-                <option value="Elemental">Elemental (Red)</option>
-                <option value="Occult">Occult (Green)</option>
-                <option value="Cosmic">Cosmic (Black)</option>
-              </select>
-              <select id="symbol5Select" aria-label="Symbol 5">
-                <option value="Arcane" selected>Arcane (Blue)</option>
-                <option value="Divine">Divine (White)</option>
-                <option value="Elemental">Elemental (Red)</option>
-                <option value="Occult">Occult (Green)</option>
-                <option value="Cosmic">Cosmic (Black)</option>
-              </select>
+            <span class="label">Art Adjustments (Scroll wheel on art also works)</span>
+            <div class="row2">
+              <input type="number" id="artScaleInput" class="input-dark" step="0.1" value="1" title="Scale" />
+              <input type="number" id="artXInput" class="input-dark" step="1" value="0" title="X Position" />
+              <input type="number" id="artYInput" class="input-dark" step="1" value="0" title="Y Position" />
             </div>
           </div>
         </fieldset>
 
-        <fieldset class="fieldset">
-          <legend>Tags & Effect</legend>
-
-          <label class="field">
-            <span class="label">Tags</span>
-            <input id="tagsInput" type="text" maxlength="80" value="Sample Tags" />
-          </label>
-
-          <label class="field">
-            <span class="label">Effect</span>
-            <textarea id="descInput" rows="5">Sample Description</textarea>
-          </label>
-        </fieldset>
-
         <fieldset class="fieldset" id="statsFieldset">
-          <legend>Unit / Gear Stats</legend>
-
+          <legend>Stats</legend>
           <div class="row2">
             <label class="field">
-              <span class="label">Attack</span>
-              <input id="powerInput" type="number" min="-99" max="99" value="1" />
+              <span class="label">Power</span>
+              <input type="number" id="powerInput" class="input-dark" value="1" />
             </label>
-
             <label class="field">
               <span class="label">Health</span>
-              <input id="healthInput" type="number" min="-99" max="99" value="1" />
+              <input type="number" id="healthInput" class="input-dark" value="1" />
             </label>
           </div>
         </fieldset>
 
         <fieldset class="fieldset">
-          <legend>Art Configuration</legend>
-
-          <label class="field">
-            <span class="label">Art Image</span>
-            <input id="artFile" type="file" accept="image/*" />
-          </label>
-
-          <label class="field">
-            <span class="label">Scale</span>
-            <input id="artScaleInput" type="range" min="0.5" max="2.5" step="0.01" value="1" />
-          </label>
-
-          <div class="row2">
-            <label class="field">
-              <span class="label">Move X</span>
-              <input id="artXInput" type="range" min="-120" max="120" step="1" value="0" />
-            </label>
-
-            <label class="field">
-              <span class="label">Move Y</span>
-              <input id="artYInput" type="range" min="-120" max="120" step="1" value="0" />
-            </label>
+          <legend>Description</legend>
+          <textarea id="descInput" class="input-dark">Sample Description</textarea>
+          
+          <div class="field">
+            <span class="label">Region / Symbols</span>
+            <div class="row2">
+              <input type="number" id="symbolCountInput" class="input-dark" value="1" min="0" max="5" style="width:60px;" />
+              <select id="symbol1Select" class="input-dark">
+                <option value="Arcane">Arcane</option>
+                <option value="Divine">Divine</option>
+                <option value="Elemental">Elemental</option>
+                <option value="Occult">Occult</option>
+                <option value="Cosmic">Cosmic</option>
+              </select>
+            </div>
+            <select id="symbol2Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
+            <select id="symbol3Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
+            <select id="symbol4Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
+            <select id="symbol5Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
           </div>
-
-          <div class="hint">Tip: You can also click and drag the art directly on the card to reposition it.</div>
         </fieldset>
 
         <div class="actions">
-          <button id="resetBtn" type="button" class="btn btnSecondary">Reset Default</button>
+          <button type="button" id="resetBtn" class="btn btnSecondary">Reset</button>
         </div>
       </form>
     </section>
 
-    <section class="panel previewPanel" aria-label="Card Preview">
+    <section class="previewPanel">
       <div class="previewWrap">
+        
         <div id="cardPreview" class="card" role="img" aria-label="Card preview">
+          
           <img id="artImg" class="layer layerArt" alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="display: none;" />
+
           <img id="cardBorder" class="layer layerBorder" alt="" style="display: none;" />
 
           <div class="topBar">
-            <div class="manaBadge" aria-label="Mana cost">
+            <div class="manaBadge">
               <span id="manaText" class="manaText">1</span>
-              <div id="manaSymbols" class="manaSymbols" aria-label="Symbols under mana"></div>
+              <div class="manaSymbols" id="manaSymbols"></div>
             </div>
             <div class="namePlate">
-              <span id="nameText" class="nameText">Sample Name</span>
+              <div id="nameText" class="nameText">Sample Name</div>
             </div>
+            <div id="regionBadge" class="regionBadge"></div>
           </div>
 
-          <div class="tagsBar" aria-label="Tags">
+          <div class="tagsBar">
             <div id="tagsText" class="tagsLine">Sample Tags</div>
           </div>
 
@@ -190,59 +165,55 @@
             <div id="descText" class="desc">Sample Description</div>
           </div>
 
-          <div class="keywordsRow" aria-label="Keywords">
-            <div id="keywordsIcons" class="keywordsIcons"></div>
-          </div>
-
           <div class="stats">
             <div id="statImgDamage" class="statImgBlock">
-              <span class="statImgNumber" id="statImgDamageNum">1</span>
               <img src="img/Damage.png" alt="Damage" class="statImgIcon" />
+              <span class="statImgNumber" id="statImgDamageNum">1</span> 
             </div>
             <div id="statImgHealth" class="statImgBlock">
-              <span class="statImgNumber" id="statImgHealthNum">1</span>
               <img src="img/Health.png" alt="Health" class="statImgIcon" />
+              <span class="statImgNumber" id="statImgHealthNum">1</span>
             </div>
           </div>
 
-          <div id="rarityGem" class="rarityGem rarity-common" aria-label="Rarity">
-            <svg id="raritySvg" class="raritySvg" viewBox="0 0 100 100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <div id="rarityGem" class="rarityGem">
+            <svg viewBox="0 0 100 100" class="raritySvg">
               <defs>
-                <linearGradient id="rarityGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="100">
-                  <stop id="rarityStop1" offset="0" stop-color="#60a5fa" />
-                  <stop id="rarityStop2" offset="1" stop-color="#1d4ed8" />
+                <linearGradient id="rarityGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop id="rarityStop1" offset="0%" stop-color="#fff" />
+                  <stop id="rarityStop2" offset="100%" stop-color="#000" />
                 </linearGradient>
-                <linearGradient id="rarityShine" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="100">
-                  <stop offset="0" stop-color="rgba(255,255,255,.65)" />
-                  <stop offset="0.55" stop-color="rgba(255,255,255,0)" />
+                <linearGradient id="rarityShine" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+                  <stop offset="50%" stop-color="rgba(255,255,255,0.6)" />
+                  <stop offset="100%" stop-color="rgba(255,255,255,0)" />
                 </linearGradient>
               </defs>
               <polygon id="rarityDiamond" points="50,2 98,50 50,98 2,50" fill="url(#rarityGradient)" stroke="white" stroke-opacity="0.22" stroke-width="4" stroke-linejoin="round" />
               <polygon id="rarityDiamondShine" points="50,2 98,50 50,98 2,50" fill="url(#rarityShine)" opacity="0.55" />
-
               <polygon id="rarityAlt" points="50,0 64,10 84,8 92,24 100,38 90,50 100,62 92,76 84,92 64,90 50,100 36,90 16,92 8,76 0,62 10,50 0,38 8,24 16,8 36,10" fill="url(#rarityGradient)" stroke="white" stroke-opacity="0.26" stroke-width="4" stroke-linejoin="round" style="display:none" />
-              <polygon id="rarityAltShine" points="50,0 64,10 84,8 92,24 100,38 90,50 100,62 92,76 84,92 64,90 50,100 36,90 16,92 8,76 0,62 10,50 0,38 8,24 16,8 36,10" fill="url(#rarityShine)" opacity="0.45" style="display:none" />
+              <polygon id="rarityAltShine" points="50,0 64,10 84,8 92,24 100,38 90,50 100,62 92,76 84,92 64,90 50,100 36,90 16,92 8,76 0,62 10,50 0,38 8,24 16,8 36,10" fill="url(#rarityShine)" opacity="0.55" style="display:none" />
             </svg>
           </div>
-        </div>
-      </div>
 
+        </div> </div>
+      
       <div class="exportBar">
-        <form id="exportForm" class="exportForm">
-          <label class="field exportField">
-            <span class="label">Export Format</span>
-            <select id="exportFormat">
+        <div class="exportForm">
+          <label class="exportField">
+            <select id="exportFormat" class="input-dark">
               <option value="png">PNG (High Res)</option>
-              <option value="svg">SVG (Vector-ish)</option>
-              <option value="pdf">PDF (Print Ready)</option>
+              <option value="jpeg">JPEG</option>
+              <option value="svg">SVG</option>
+              <option value="pdf">PDF (Print)</option>
             </select>
           </label>
-          <button id="exportBtn" type="button" class="btn btnPrimary">Export Card</button>
-        </form>
+          <button type="button" id="exportBtn" class="btn btnPrimary">Download Card</button>
+        </div>
       </div>
     </section>
   </main>
-
+  
   <script src="script.js"></script>
 </body>
 </html>
