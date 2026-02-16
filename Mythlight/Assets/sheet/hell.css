@@ -1077,3 +1077,18 @@ body.sheet input[type="checkbox"]:checked::before {
 .section-10 {
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
+
+#rules_link {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(255, 255, 255, 0));
+  text-decoration: none;
+  border: 0px 0px 2px 0px rgba(99, 102, 241, 1) !important;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+#rules_link:hover {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 0.5rem;
+}
