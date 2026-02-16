@@ -24,6 +24,7 @@ body.sheet header {
   padding: 2rem;
   background: rgba(15, 23, 42, 0.9);
   border-bottom: 1px solid var(--glass-border);
+  
 }
 
 .header-actions {
@@ -803,10 +804,10 @@ body.sheet input[type="checkbox"]:checked::before {
 .roll-widget {
   position: fixed;
   right: 1rem;
-  top: 7rem;
+  top: 11rem;
   width: min(320px, calc(100vw - 2rem));
   z-index: 999;
-  background: rgba(15, 23, 42, 0.88);
+  background: linear-gradient(0deg, rgba(99, 101, 241, 0.055) 0%, rgba(15, 23, 42, 0.95) 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 1rem;
   padding: 1rem;
@@ -1078,17 +1079,24 @@ body.sheet input[type="checkbox"]:checked::before {
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
-#rules_link {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(255, 255, 255, 0));
+.header-links {
+  background: linear-gradient(270deg, rgba(99, 102, 241, 0.2), rgba(255, 255, 255, 0));
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+#header_link {
   text-decoration: none;
-  border: 0px 0px 2px 0px rgba(99, 102, 241, 1) !important;
+
   color: rgba(255, 255, 255, 0.9);
   padding: 0.25rem 0.5rem;
   cursor: pointer;
   border-radius: 0.5rem;
 }
 
-#rules_link:hover {
+#header_link:hover {
   background: rgba(99, 102, 241, 0.3);
   border-radius: 0.5rem;
 }

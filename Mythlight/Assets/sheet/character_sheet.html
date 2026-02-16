@@ -16,11 +16,22 @@
     <source src="./dice.mp3" type="audio/mpeg">
   </audio>
   <header>
-    <a href="../pages/rules.html" id="rules_link">⇦ Rules</a>
-    <h1>Mythlight Character Sheet</h1>
-    <p>Edition 4.0.0</p>
+    <div style="display:flex; align-items: center; gap: 0.5rem;">
+      <img src="../img/logo.png" alt="Mythlight Logo" style="height: 5rem;">
+      <h1>Mythlight Character Sheet</h1>
+    <div class="header-links no-print" style="width: 100%; border-radius: 5px;">
+    <a href="../pages/rules.html" id="header_link">Rules</a>
+    <a href="../pages/species.html" id="header_link">Species</a>
+    <a href="../pages/paths.html" id="header_link">Paths</a>
+    <a href="../pages/traits.html" id="header_link">Traits</a>
+    <a href="../pages/spells.html" id="header_link">Spells</a>
+    <a href="../pages/inventory.html" id="header_link">Inventory</a>
+  </div>
+  </div>
+    
+    
     <div class="header-actions no-print">
-      <button type="button" onclick="exportToPDF()">Print</button>
+      <button type="button" style="display: none;" onclick="exportToPDF()">Print</button>
       <button type="button" onclick="exportToJSON()">Export to JSON</button> <input type="file" id="import_file_input"
         style="display:none" accept=".json" onchange="importFromJSON(event)"><button type="button"
         onclick="document.getElementById('import_file_input').click()">Import from JSON</button>
@@ -768,6 +779,11 @@
       <div class="card" id="roll_history"></div>
     </div>
   </div>
+  <footer style="text-align: center; padding: 1rem; font-size: 0.85rem; color: #c5c5c577;">
+    <hr style="border: 0.5px solid #c5c5c577; margin-bottom: 0.5rem; box-shadow: 0 0 5px #c5c5c577;">
+    <p>Edition 4.0.2</p>
+    <div>Character Sheet by Grinprim & ScuttleCrab</div>
+  </footer>
 
   <script>
     const arcaneSymbol = `<img src="./arcane.png" alt="Arcane" style="width:25px; height:25px; margin-right:-50px;">`;
