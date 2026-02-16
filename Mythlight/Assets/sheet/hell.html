@@ -27,363 +27,470 @@
         • Unsaved Changes
       </span>
     </div>
+    
   </header>
-
+<div style="display: flex; justify-content: center; width: 100%; flex-wrap: wrap;" id="tab-selector">
+  <button class="tab-button" data-tab="tab-main" onclick="switchTab(this)">Main</button>
+      <button class="tab-button" data-tab="tab-inventory" onclick="switchTab(this)">Inventory</button>
+      <button class="tab-button" data-tab="tab-traits" onclick="switchTab(this)">Traits</button>
+      <button class="tab-button" data-tab="tab-spells" onclick="switchTab(this)">Spells</button>
+    </div>
   <main>
     <form onsubmit="return false;">
 
-      <div class="sheet-grid">
 
-        <div class="card sheet-full section-1">
-          <div class="section-title">
-            <div class="section-number">1</div>
-            <h2>Core Identity</h2>
-          </div>
-          <div class="grid">
-            <div><label>Name</label><input type="text" id="character_name" required></div>
-            <div><label>Species</label><input type="text" id="character_species" required></div>
-            <div><label>Path</label><input type="text" id="character_path" required></div>
-            <div><label>Level</label><input type="number" id="level_input" required></div>
-          </div>
-        </div>
+      <div id="tab-main" class="tab-section">
+        <div class="sheet-grid">
+          <div class="card sheet-full section-1">
+  <div class="section-title">
+    <div class="section-number">1</div>
+    <h2>Core Identity</h2>
+  </div>
 
-        <div class="sheet-col sheet-left">
-          <div class="card section-3">
-            <div class="section-title">
-              <div class="section-number">3</div>
-              <h2>Attributes</h2>
+  <div class="identity-grid">
+    <div class="identity-name">
+      <label>Character Name</label>
+      <input type="text" id="character_name" required>
+    </div>
+
+    <div>
+      <label>Species</label>
+      <input type="text" id="character_species" required>
+    </div>
+
+    <div>
+      <label>Path</label>
+      <input type="text" id="character_path" required>
+    </div>
+
+    <div>
+      <label>Level</label>
+      <input type="number" id="level_input" required>
+    </div>
+  </div>
+</div>
+
+          <div class="sheet-col sheet-left">
+            <div class="card section-3">
+              <div class="section-title">
+                <div class="section-number">3</div>
+                <h2>Attributes</h2>
+              </div>
+              <div class="attribute-grid" id="attributes"></div>
             </div>
-            <div class="attribute-grid" id="attributes"></div>
-          </div>
 
-          <div class="card section-7">
-            <div class="section-title">
-              <div class="section-number">7</div>
-              <h2>Proficiencies</h2>
-            </div>
-            <div id="proficiencies_section" style="display: block">
-              <div class="grid_2"><label>Weapons</label>
-                <div class="grid" style="margin-top: 1rem">
-                  <div>
-                    <label>Melee Proficiency Points (Used / Max)</label>
-                    <input type="text" id="melee_points_tracker" readonly placeholder="0 / 0">
+            <div class="card section-7">
+              <div class="section-title">
+                <div class="section-number">7</div>
+                <h2>Proficiencies</h2>
+              </div>
+              <div id="proficiencies_section" style="display: block">
+                <div class="grid_2"><label>Weapons</label>
+                  <div class="grid" style="margin-top: 1rem">
+                    <div>
+                      <label>Melee Proficiency Points (Used / Max)</label>
+                      <input type="text" id="melee_points_tracker" readonly placeholder="0 / 0">
+                    </div>
+                    <div>
+                      <label>Ranged Proficiency Points (Used / Max)</label>
+                      <input type="text" id="ranged_points_tracker" readonly placeholder="0 / 0">
+                    </div>
                   </div>
-                  <div>
-                    <label>Ranged Proficiency Points (Used / Max)</label>
-                    <input type="text" id="ranged_points_tracker" readonly placeholder="0 / 0">
+
+                  <div id="proficiency_warning_melee"
+                    style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: 1px solid red;"
+                    class="card">
+                    Proficiency WARNING Your maximum Melee weapon proficiency sum exceeds Might. Adjust your
+                    proficiencies
+                    or increase your Might skill.</div>
+                  <div id="proficiency_warning_ranged"
+                    style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: 1px solid red;"
+                    class="card">
+                    Proficiency WARNING Your maximum Ranged weapon proficiency sum exceeds Aim. Adjust your
+                    proficiencies
+                    or increase your Aim skill.</div>
+                  <div class="grid_4">
+                    <div id="light_melee"><label for="light_melee">Light Melee</label> <input id="light_melee_input"
+                        type="number"></div>
+                    <div id="medium_melee"><label for="medium_melee">Medium Melee</label> <input id="medium_melee_input"
+                        type="number"></div>
+                    <div id="heavy_melee"><label for="heavy_melee">Heavy Melee</label> <input id="heavy_melee_input"
+                        type="number"></div>
+                    <div id="light_ranged"><label for="light_ranged">Light Ranged</label> <input id="light_ranged_input"
+                        type="number"></div>
+                    <div id="medium_ranged"><label for="medium_ranged">Medium Ranged</label> <input
+                        id="medium_ranged_input" type="number"></div>
+                    <div id="heavy_ranged"><label for="heavy_ranged">Heavy Ranged</label> <input id="heavy_ranged_input"
+                        type="number"></div>
+                    <div id="light_firearm"><label for="light_firearm">Light Firearm</label> <input
+                        id="light_firearm_input" type="number"></div>
+                    <div id="medium_firearm"><label for="medium_firearm">Medium Firearm</label> <input
+                        id="medium_firearm_input" type="number"></div>
+                    <div id="heavy_firearm"><label for="heavy_firearm">Heavy Firearm</label> <input
+                        id="heavy_firearm_input" type="number"></div>
                   </div>
+                  <label>Armor</label>
+                  <div>
+                    <div id="light_armor"><input id="light_armor_checkbox" type="checkbox"><label
+                        for="light_armor_checkbox">Light Armor</label> </div>
+                    <div id="medium_armor"> <input id="medium_armor_checkbox" type="checkbox"><label
+                        for="medium_armor_checkbox">Medium Armor</label></div>
+                    <div id="heavy_armor"><input id="heavy_armor_checkbox" type="checkbox"><label
+                        for="heavy_armor_checkbox">Heavy Armor</label> </div>
+                    <div id="shields"><input id="shields_checkbox" type="checkbox"><label
+                        for="shields_checkbox">Shields</label> </div>
+                  </div>
+                  <div><label>Tools</label><textarea rows="5" placeholder="List your tools here..."
+                      style="resize: none;" id="tools_textarea"></textarea></div>
+                  <div><label>Languages</label><textarea rows="5" placeholder="List your languages here..."
+                      style="resize: none;" id="languages_textarea"></textarea></div>
                 </div>
 
-                <div id="proficiency_warning_melee"
-                  style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: 1px solid red;"
-                  class="card">
-                  Proficiency WARNING Your maximum Melee weapon proficiency sum exceeds Might. Adjust your proficiencies
-                  or increase your Might skill.</div>
-                <div id="proficiency_warning_ranged"
-                  style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: 1px solid red;"
-                  class="card">
-                  Proficiency WARNING Your maximum Ranged weapon proficiency sum exceeds Aim. Adjust your proficiencies
-                  or increase your Aim skill.</div>
-                <div class="grid_4">
-                  <div id="light_melee"><label for="light_melee">Light Melee</label> <input id="light_melee_input"
-                      type="number"></div>
-                  <div id="medium_melee"><label for="medium_melee">Medium Melee</label> <input id="medium_melee_input"
-                      type="number"></div>
-                  <div id="heavy_melee"><label for="heavy_melee">Heavy Melee</label> <input id="heavy_melee_input"
-                      type="number"></div>
-                  <div id="light_ranged"><label for="light_ranged">Light Ranged</label> <input id="light_ranged_input"
-                      type="number"></div>
-                  <div id="medium_ranged"><label for="medium_ranged">Medium Ranged</label> <input
-                      id="medium_ranged_input" type="number"></div>
-                  <div id="heavy_ranged"><label for="heavy_ranged">Heavy Ranged</label> <input id="heavy_ranged_input"
-                      type="number"></div>
-                  <div id="light_firearm"><label for="light_firearm">Light Firearm</label> <input
-                      id="light_firearm_input" type="number"></div>
-                  <div id="medium_firearm"><label for="medium_firearm">Medium Firearm</label> <input
-                      id="medium_firearm_input" type="number"></div>
-                  <div id="heavy_firearm"><label for="heavy_firearm">Heavy Firearm</label> <input
-                      id="heavy_firearm_input" type="number"></div>
-                </div>
-                <label>Armor</label>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="sheet-col sheet-right">
+            <div class="card section-2">
+              <div class="section-title">
+                <div class="section-number">2</div>
+                <h2>Defense & Vitals</h2>
+              </div>
+              <div class="grid">
+                <div><label>Guard</label><input type="number" required id="guard_input"></div>
+                <div><label>Armor</label><input type="number" id="armor_total" readonly></div>
+                <div><label>Speed</label><input type="number" required id="speed_input"></div>
+                <div><label>Initiative</label><input type="number" required id="initiative_input"></div>
                 <div>
-                  <div id="light_armor"><input id="light_armor_checkbox" type="checkbox"><label
-                      for="light_armor_checkbox">Light Armor</label> </div>
-                  <div id="medium_armor"> <input id="medium_armor_checkbox" type="checkbox"><label
-                      for="medium_armor_checkbox">Medium Armor</label></div>
-                  <div id="heavy_armor"><input id="heavy_armor_checkbox" type="checkbox"><label
-                      for="heavy_armor_checkbox">Heavy Armor</label> </div>
-                  <div id="shields"><input id="shields_checkbox" type="checkbox"><label
-                      for="shields_checkbox">Shields</label> </div>
+                  <label>Grace (0–6)</label>
+                  <input type="number" id="grace_input" min="0" max="6" value="0" required class="grace-hidden">
+                  <div class="grace-picker" id="grace_picker" aria-label="Grace selector">
+                    <button type="button" class="grace-btn" data-grace="1" aria-label="Grace 1">
+                      <div class="die-inline face-1"></div>
+                    </button>
+                    <button type="button" class="grace-btn" data-grace="2" aria-label="Grace 2">
+                      <div class="die-inline face-2"></div>
+                    </button>
+                    <button type="button" class="grace-btn" data-grace="3" aria-label="Grace 3">
+                      <div class="die-inline face-3"></div>
+                    </button>
+                    <button type="button" class="grace-btn" data-grace="4" aria-label="Grace 4">
+                      <div class="die-inline face-4"></div>
+                    </button>
+                    <button type="button" class="grace-btn" data-grace="5" aria-label="Grace 5">
+                      <div class="die-inline face-5"></div>
+                    </button>
+                    <button type="button" class="grace-btn" data-grace="6" aria-label="Grace 6">
+                      <div class="die-inline face-6"></div>
+                    </button>
+                  </div>
                 </div>
-                <div><label>Tools</label><textarea rows="5" placeholder="List your tools here..." style="resize: none;"
-                    id="tools_textarea"></textarea></div>
-                <div><label>Languages</label><textarea rows="5" placeholder="List your languages here..."
-                    style="resize: none;" id="languages_textarea"></textarea></div>
+                <div>
+                  <label>Max Health</label>
+                  <input type="number" id="health_max" readonly>
+                </div>
+                <div>
+                  <label>Health Bonus</label>
+                  <input type="number" id="health_bonus" placeholder="+HP to Max">
+                </div>
+                <div>
+                  <label>Current Health</label>
+                  <input type="number" id="health_current" required>
+                  <div class="health-bar">
+                    <div class="health-fill" id="health_fill"></div>
+                  </div>
+                  <div class="inline-row top-gap">
+                    <input type="number" id="health_delta" placeholder="Amount" class="input-sm">
+                    <button type="button" onclick="applyHealth(-1)">Damage</button>
+                    <button type="button" onclick="applyHealth(1)">Heal</button>
+                  </div>
+                </div>
+                <div class="final-blow">
+                  <label>Final Blow Resistances</label>
+                  <input type="checkbox" id="final_blow_resistance_1">
+                  <input type="checkbox" id="final_blow_resistance_2">
+                  <input type="checkbox" id="final_blow_resistance_3">
+                  <input type="checkbox" id="final_blow_resistance_4">
+                </div>
               </div>
+            </div>
 
+            <div class="card weapons-card section-4">
+              <div class="section-title">
+                <div class="section-number">4</div>
+                <h2>Weapons</h2>
+              </div>
+              <div class="weapons-list">
+                <div class="weapon-block">
+                  <div class="weapon-grid">
+                    <div>
+                      <label>Weapon 1</label>
+                      <input type="text" placeholder="Name" id="weapon_1_name">
+                    </div>
+                    <div>
+                      <label>Damage</label>
+                      <input style="width:6em;" type="number" placeholder="Dmg" id="weapon_1_damage">
+                    </div>
+                    <div>
+                      <label>Attack</label>
+                      <input type="number" id="attack_1" placeholder="Atk" readonly>
+                    </div>
+                    <div>
+                      <label>Type</label>
+                      <select id="proficiency_selector">
+                        <option value="None">None</option>
+                        <option value="Light_Melee">Light Melee</option>
+                        <option value="Medium_Melee">Medium Melee</option>
+                        <option value="Heavy_Melee">Heavy Melee</option>
+                        <option value="Light_Ranged">Light Ranged</option>
+                        <option value="Medium_Ranged">Medium Ranged</option>
+                        <option value="Heavy_Ranged">Heavy Ranged</option>
+                        <option value="Light_Firearm">Light Firearm</option>
+                        <option value="Medium_Firearm">Medium Firearm</option>
+                        <option value="Heavy_Firearm">Heavy Firearm</option>
+                      </select>
+                    </div>
+                    <div class="weapon-actions">
+                      <button style="height: 3.18em;" type="button" onclick="rollAttack(this)">Attack!</button>
+                    </div>
+                  </div>
+                  <div class="weapon-notes">
+                    <label>Notes</label>
+                    <textarea id="weapon_1_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                  </div>
+                </div>
 
+                <div class="weapon-block">
+                  <div class="weapon-grid">
+                    <div>
+                      <label>Weapon 2</label>
+                      <input type="text" placeholder="Name" id="weapon_2_name">
+                    </div>
+                    <div>
+                      <label>Damage</label>
+                      <input style="width:6em;" type="number" placeholder="Dmg" id="weapon_2_damage">
+                    </div>
+                    <div>
+                      <label>Attack</label>
+                      <input type="number" id="attack_2" placeholder="Atk" readonly>
+                    </div>
+                    <div>
+                      <label>Type</label>
+                      <select id="proficiency_selector_2">
+                        <option value="None">None</option>
+                        <option value="Light_Melee">Light Melee</option>
+                        <option value="Medium_Melee">Medium Melee</option>
+                        <option value="Heavy_Melee">Heavy Melee</option>
+                        <option value="Light_Ranged">Light Ranged</option>
+                        <option value="Medium_Ranged">Medium Ranged</option>
+                        <option value="Heavy_Ranged">Heavy Ranged</option>
+                        <option value="Light_Firearm">Light Firearm</option>
+                        <option value="Medium_Firearm">Medium Firearm</option>
+                        <option value="Heavy_Firearm">Heavy Firearm</option>
+                      </select>
+                    </div>
+                    <div class="weapon-actions">
+                      <button style="height: 3.18em;" type="button" onclick="rollAttack(this)">Attack!</button>
+                    </div>
+                  </div>
+                  <div class="weapon-notes">
+                    <label>Notes</label>
+                    <textarea id="weapon_2_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                  </div>
+                </div>
+
+                <div class="weapon-block">
+                  <div class="weapon-grid">
+                    <div>
+                      <label>Weapon 3</label>
+                      <input type="text" placeholder="Name" id="weapon_3_name">
+                    </div>
+                    <div>
+                      <label>Damage</label>
+                      <input style="width:6em;" type="number" placeholder="Dmg" id="weapon_3_damage">
+                    </div>
+                    <div>
+                      <label>Attack</label>
+                      <input type="number" id="attack_3" placeholder="Atk" readonly>
+                    </div>
+                    <div>
+                      <label>Type</label>
+                      <select id="proficiency_selector_3">
+                        <option value="None">None</option>
+                        <option value="Light_Melee">Light Melee</option>
+                        <option value="Medium_Melee">Medium Melee</option>
+                        <option value="Heavy_Melee">Heavy Melee</option>
+                        <option value="Light_Ranged">Light Ranged</option>
+                        <option value="Medium_Ranged">Medium Ranged</option>
+                        <option value="Heavy_Ranged">Heavy Ranged</option>
+                        <option value="Light_Firearm">Light Firearm</option>
+                        <option value="Medium_Firearm">Medium Firearm</option>
+                        <option value="Heavy_Firearm">Heavy Firearm</option>
+                      </select>
+                    </div>
+                    <div class="weapon-actions">
+                      <button style="height: 3.18em;" type="button" onclick="rollAttack(this)">Attack!</button>
+                    </div>
+
+                  </div>
+                  <div class="weapon-notes">
+                    <label>Notes</label>
+                    <textarea id="weapon_3_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="card section-5">
+              <div class="section-title">
+                <div class="section-number">5</div>
+                <h2>Notes</h2>
+              </div>
+              <textarea id="notes" rows="8" placeholder="Session notes, reminders, NPC names..."
+                style="resize: vertical"></textarea>
+            </div>
+
+            <div class="card section-6">
+              <div class="section-title">
+                <div class="section-number">6</div>
+                <h2>Armor</h2>
+              </div>
+              <div class="armor-slots">
+                <div class="armor-slot">
+                  <div class="armor-head">
+                    <img class="armor-icon" src="../img/armor.png" aria-hidden="true">
+                    <div class="armor-name">
+                      <label>Armor Name</label>
+                      <input type="text" id="armor_name" placeholder="Name">
+                    </div>
+                    <div class="armor-value">
+                      <label>Defense</label>
+                      <input type="number" id="armor_value" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="armor-notes">
+                    <label>Notes</label>
+                    <textarea id="armor_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                  </div>
+                </div>
+
+                <div class="armor-slot">
+                  <div class="armor-head">
+                    <img class="armor-icon" src="../img/shield.png" aria-hidden="true">
+                    <div class="armor-name">
+                      <label>Shield Name</label>
+                      <input type="text" id="shield_name" placeholder="Name">
+                    </div>
+                    <div class="armor-value">
+                      <label>Defense</label>
+                      <input type="number" id="shield_value" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="armor-notes">
+                    <label>Notes</label>
+                    <textarea id="shield_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                  </div>
+                </div>
+
+                <div class="armor-slot">
+                  <div class="armor-head">
+                    <img class="armor-icon" src="../img/cloak.png" aria-hidden="true">
+                    <div class="armor-name">
+                      <label>Cloak Name</label>
+                      <input type="text" id="cloak_name" placeholder="Name">
+                    </div>
+                    <div class="armor-value">
+                      <label>Defense</label>
+                      <input type="number" id="cloak_value" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="armor-notes">
+                    <label>Notes</label>
+                    <textarea id="cloak_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
-
-        <div class="sheet-col sheet-right">
-          <div class="card section-2">
-            <div class="section-title">
-              <div class="section-number">2</div>
-              <h2>Defense & Vitals</h2>
+      </div>
+      <div id="tab-inventory" class="tab-section" style="display:none">
+        <div class="card sheet-full section-8" id="inventory">
+          <div class="section-title" style="cursor: pointer;">
+            <div class="section-number">8</div>
+            <h2>Inventory</h2> <button id="inventory_button" type="button" onclick="toggle_inventory()">Close</button>
+            <div class="muted-label encumberance" id="encumberance_label_1"
+              style="font-size: .85rem; margin-left: 1rem; display: inline; color: #99ff9e;">Non-encumbered</div>
+            <div class="muted-label encumberance" id="encumberance_label_2"
+              style="font-size: .85rem; margin-left: 1rem; display: none; color: #fffd99;">Encumbered (> Max Weight)
             </div>
-            <div class="grid">
-              <div><label>Guard</label><input type="number" required id="guard_input"></div>
-              <div><label>Armor</label><input type="number" id="armor_total" readonly></div>
-              <div><label>Speed</label><input type="number" required id="speed_input"></div>
-              <div><label>Initiative</label><input type="number" required id="initiative_input"></div>
-              <div>
-                <label>Grace (0–6)</label>
-                <input type="number" id="grace_input" min="0" max="6" value="0" required class="grace-hidden">
-                <div class="grace-picker" id="grace_picker" aria-label="Grace selector">
-                  <button type="button" class="grace-btn" data-grace="1" aria-label="Grace 1">
-                    <div class="die-inline face-1"></div>
-                  </button>
-                  <button type="button" class="grace-btn" data-grace="2" aria-label="Grace 2">
-                    <div class="die-inline face-2"></div>
-                  </button>
-                  <button type="button" class="grace-btn" data-grace="3" aria-label="Grace 3">
-                    <div class="die-inline face-3"></div>
-                  </button>
-                  <button type="button" class="grace-btn" data-grace="4" aria-label="Grace 4">
-                    <div class="die-inline face-4"></div>
-                  </button>
-                  <button type="button" class="grace-btn" data-grace="5" aria-label="Grace 5">
-                    <div class="die-inline face-5"></div>
-                  </button>
-                  <button type="button" class="grace-btn" data-grace="6" aria-label="Grace 6">
-                    <div class="die-inline face-6"></div>
-                  </button>
-                </div>
+            <div class="muted-label encumberance" id="encumberance_label_3"
+              style="font-size: .85rem; margin-left: 1rem; display: none; color: #ffb999;">Overencumbered (> 2× Max
+              Weight)</div>
+            <div class="muted-label encumberance" id="encumberance_label_4"
+              style="font-size: .85rem; margin-left: 1rem; display: none; color: #ff9999;">Crushed (> 3× Max Weight)
+            </div>
+          </div>
+          <div class="card">
+            <div style="display:flex; gap:.5rem; flex-wrap: wrap; align-items: end">
+              <div style="flex:1; min-width: 160px">
+                <label>Current Weight</label>
+                <input type="number" id="current_weight" placeholder="Current Weight" readonly>
               </div>
-              <div>
-                <label>Max Health</label>
-                <input type="number" id="health_max" readonly>
+              <div style="flex:1; min-width: 160px">
+                <label>Max Weight</label>
+                <input type="number" id="max_weight" placeholder="Max Weight" readonly>
               </div>
-              <div>
-                <label>Health Bonus</label>
-                <input type="number" id="health_bonus" placeholder="+HP to Max">
+              <div style="flex:1; min-width: 160px">
+                <label>Backpack Capacity</label>
+                <input type="number" id="backpack_capacity" placeholder="Adds to Max Weight">
               </div>
-              <div>
-                <label>Current Health</label>
-                <input type="number" id="health_current" required>
-                <div class="health-bar">
-                  <div class="health-fill" id="health_fill"></div>
-                </div>
-                <div class="inline-row top-gap">
-                  <input type="number" id="health_delta" placeholder="Amount" class="input-sm">
-                  <button type="button" onclick="applyHealth(-1)">Damage</button>
-                  <button type="button" onclick="applyHealth(1)">Heal</button>
-                </div>
-              </div>
-              <div class="final-blow">
-                <label>Final Blow Resistances</label>
-                <input type="checkbox" id="final_blow_resistance_1">
-                <input type="checkbox" id="final_blow_resistance_2">
-                <input type="checkbox" id="final_blow_resistance_3">
-                <input type="checkbox" id="final_blow_resistance_4">
-              </div>
+            </div>
+            <br>
+            <div class="grid_4">
+              <label style="min-width:80px; text-align: center;" for="copper">Copper</label>
+              <label style="min-width:80px; text-align: center; " for="silver">Silver</label>
+              <label style="min-width:80px; text-align: center;" for="gold">Gold</label>
+              <label style="min-width:80px; text-align: center;" for="platinum">Platinum</label>
+            </div>
+            <div class="grid_4">
+              <input type="number" id="copper" placeholder="Amount">
+              <input type="number" id="silver" placeholder="Amount">
+              <input type="number" id="gold" placeholder="Amount">
+              <input type="number" id="platinum" placeholder="Amount">
             </div>
           </div>
 
-          <div class="card weapons-card section-4">
-            <div class="section-title">
-              <div class="section-number">4</div>
-              <h2>Weapons</h2>
+          <div id="inventory_grid" class="grid_3" style="display: grid;"></div>
+
+          <div id="inventory_extra" style="display:grid">
+            <div class="card">
+              <h3 style="margin-top:0">Potions</h3>
+              <div class="grid_2">
+                <div>
+                  <div class="muted-label">Ingredients</div>
+                  <div id="potions_ingredients_grid" class="grid"></div>
+                </div>
+                <div>
+                  <div class="muted-label">Recipes</div>
+                  <div id="potions_recipes_grid" class="grid"></div>
+                </div>
+              </div>
             </div>
-            <div class="weapons-list">
-              <div class="weapon-block">
-                <div class="weapon-grid">
-                  <div>
-                    <label>Weapon 1</label>
-                    <input type="text" placeholder="Name" id="weapon_1_name">
-                  </div>
-                  <div>
-                    <label>Damage</label>
-                    <input type="number" placeholder="Damage" id="weapon_1_damage">
-                  </div>
-                  <div>
-                    <label>Attack</label>
-                    <input type="number" id="attack_1" placeholder="Attack" readonly>
-                  </div>
-                  <div>
-                    <label>Type</label>
-                    <select id="proficiency_selector">
-                      <option value="None">None</option>
-                      <option value="Light_Melee">Light Melee</option>
-                      <option value="Medium_Melee">Medium Melee</option>
-                      <option value="Heavy_Melee">Heavy Melee</option>
-                      <option value="Light_Ranged">Light Ranged</option>
-                      <option value="Medium_Ranged">Medium Ranged</option>
-                      <option value="Heavy_Ranged">Heavy Ranged</option>
-                      <option value="Light_Firearm">Light Firearm</option>
-                      <option value="Medium_Firearm">Medium Firearm</option>
-                      <option value="Heavy_Firearm">Heavy Firearm</option>
-                    </select>
-                  </div>
-                  <div class="weapon-actions">
-                    <button type="button" onclick="rollAttack(this)">Attack!</button>
-                  </div>
-                </div>
-                <div class="weapon-notes">
-                  <label>Notes</label>
-                  <textarea id="weapon_1_notes" rows="4" placeholder="" style="resize: none;"></textarea>
-                </div>
-              </div>
 
-              <div class="weapon-block">
-                <div class="weapon-grid">
-                  <div>
-                    <label>Weapon 2</label>
-                    <input type="text" placeholder="Name" id="weapon_2_name">
-                  </div>
-                  <div>
-                    <label>Damage</label>
-                    <input type="number" placeholder="Damage" id="weapon_2_damage">
-                  </div>
-                  <div>
-                    <label>Attack</label>
-                    <input type="number" id="attack_2" placeholder="Attack" readonly>
-                  </div>
-                  <div>
-                    <label>Type</label>
-                    <select id="proficiency_selector_2">
-                      <option value="None">None</option>
-                      <option value="Light_Melee">Light Melee</option>
-                      <option value="Medium_Melee">Medium Melee</option>
-                      <option value="Heavy_Melee">Heavy Melee</option>
-                      <option value="Light_Ranged">Light Ranged</option>
-                      <option value="Medium_Ranged">Medium Ranged</option>
-                      <option value="Heavy_Ranged">Heavy Ranged</option>
-                      <option value="Light_Firearm">Light Firearm</option>
-                      <option value="Medium_Firearm">Medium Firearm</option>
-                      <option value="Heavy_Firearm">Heavy Firearm</option>
-                    </select>
-                  </div>
-                  <div class="weapon-actions">
-                    <button type="button" onclick="rollAttack(this)">Attack!</button>
-                  </div>
+            <div class="card">
+              <h3 style="margin-top:0">Crafts</h3>
+              <div class="grid_2">
+                <div>
+                  <div class="muted-label">Components</div>
+                  <div id="crafts_components_grid" class="grid"></div>
                 </div>
-                <div class="weapon-notes">
-                  <label>Notes</label>
-                  <textarea id="weapon_2_notes" rows="4" placeholder="" style="resize: none;"></textarea>
-                </div>
-              </div>
-
-              <div class="weapon-block">
-                <div class="weapon-grid">
-                  <div>
-                    <label>Weapon 3</label>
-                    <input type="text" placeholder="Name" id="weapon_3_name">
-                  </div>
-                  <div>
-                    <label>Damage</label>
-                    <input type="number" placeholder="Damage" id="weapon_3_damage">
-                  </div>
-                  <div>
-                    <label>Attack</label>
-                    <input type="number" id="attack_3" placeholder="Attack" readonly>
-                  </div>
-                  <div>
-                    <label>Type</label>
-                    <select id="proficiency_selector_3">
-                      <option value="None">None</option>
-                      <option value="Light_Melee">Light Melee</option>
-                      <option value="Medium_Melee">Medium Melee</option>
-                      <option value="Heavy_Melee">Heavy Melee</option>
-                      <option value="Light_Ranged">Light Ranged</option>
-                      <option value="Medium_Ranged">Medium Ranged</option>
-                      <option value="Heavy_Ranged">Heavy Ranged</option>
-                      <option value="Light_Firearm">Light Firearm</option>
-                      <option value="Medium_Firearm">Medium Firearm</option>
-                      <option value="Heavy_Firearm">Heavy Firearm</option>
-                    </select>
-                  </div>
-                  <div class="weapon-actions">
-                    <button type="button" onclick="rollAttack(this)">Attack!</button>
-                  </div>
-
-                </div>
-                <div class="weapon-notes">
-                  <label>Notes</label>
-                  <textarea id="weapon_3_notes" rows="4" placeholder="" style="resize: none;"></textarea>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="card section-5">
-            <div class="section-title">
-              <div class="section-number">5</div>
-              <h2>Notes</h2>
-            </div>
-            <textarea id="notes" rows="8" placeholder="Session notes, reminders, NPC names..."
-              style="resize: vertical"></textarea>
-          </div>
-
-          <div class="card section-6">
-            <div class="section-title">
-              <div class="section-number">6</div>
-              <h2>Armor</h2>
-            </div>
-            <div class="armor-slots">
-              <div class="armor-slot">
-                <div class="armor-head">
-                  <img class="armor-icon" src="../img/armor.png" aria-hidden="true">
-                  <div class="armor-name">
-                    <label>Armor Name</label>
-                    <input type="text" id="armor_name" placeholder="Name">
-                  </div>
-                  <div class="armor-value">
-                    <label>Defense</label>
-                    <input type="number" id="armor_value" placeholder="0">
-                  </div>
-                </div>
-                <div class="armor-notes">
-                  <label>Notes</label>
-                  <textarea id="armor_notes" rows="4" placeholder="" style="resize: none;"></textarea>
-                </div>
-              </div>
-
-              <div class="armor-slot">
-                <div class="armor-head">
-                  <img class="armor-icon" src="../img/shield.png" aria-hidden="true">
-                  <div class="armor-name">
-                    <label>Shield Name</label>
-                    <input type="text" id="shield_name" placeholder="Name">
-                  </div>
-                  <div class="armor-value">
-                    <label>Defense</label>
-                    <input type="number" id="shield_value" placeholder="0">
-                  </div>
-                </div>
-                <div class="armor-notes">
-                  <label>Notes</label>
-                  <textarea id="shield_notes" rows="4" placeholder="" style="resize: none;"></textarea>
-                </div>
-              </div>
-
-              <div class="armor-slot">
-                <div class="armor-head">
-                  <img class="armor-icon" src="../img/cloak.png" aria-hidden="true">
-                  <div class="armor-name">
-                    <label>Cloak Name</label>
-                    <input type="text" id="cloak_name" placeholder="Name">
-                  </div>
-                  <div class="armor-value">
-                    <label>Defense</label>
-                    <input type="number" id="cloak_value" placeholder="0">
-                  </div>
-                </div>
-                <div class="armor-notes">
-                  <label>Notes</label>
-                  <textarea id="cloak_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                <div>
+                  <div class="muted-label">Recipes</div>
+                  <div id="crafts_recipes_grid" class="grid"></div>
                 </div>
               </div>
             </div>
@@ -391,76 +498,8 @@
         </div>
 
       </div>
+      <div id="tab-traits" class="tab-section" style="display:none">
 
-      <div class="card sheet-full section-8" id="inventory">
-        <div class="section-title" onclick="toggle_inventory()" style="cursor: pointer;">
-          <div class="section-number">8</div>
-          <h2>Inventory</h2>
-        </div>
-        <div class="card">
-          <div style="display:flex; gap:.5rem; flex-wrap: wrap; align-items: end">
-            <div style="flex:1; min-width: 160px">
-              <label>Current Weight</label>
-              <input type="number" id="current_weight" placeholder="Current Weight">
-            </div>
-            <div style="flex:1; min-width: 160px">
-              <label>Max Weight</label>
-              <input type="number" id="max_weight" placeholder="Max Weight" readonly>
-            </div>
-            <div style="flex:1; min-width: 160px">
-              <label>Backpack Capacity</label>
-              <input type="number" id="backpack_capacity" placeholder="Adds to Max Weight">
-            </div>
-          </div>
-          <br>
-          <div class="grid_4">
-            <label style="min-width:80px; text-align: center;" for="copper">Copper</label>
-            <label style="min-width:80px; text-align: center; " for="silver">Silver</label>
-            <label style="min-width:80px; text-align: center;" for="gold">Gold</label>
-            <label style="min-width:80px; text-align: center;" for="platinum">Platinum</label>
-          </div>
-          <div class="grid_4">
-            <input type="number" id="copper" placeholder="Amount">
-            <input type="number" id="silver" placeholder="Amount">
-            <input type="number" id="gold" placeholder="Amount">
-            <input type="number" id="platinum" placeholder="Amount">
-          </div>
-        </div>
-
-        <div id="inventory_grid" class="grid_3" style="display: none;"></div>
-
-        <div id="inventory_extra" style="display:none">
-          <div class="card">
-            <h3 style="margin-top:0">Potions</h3>
-            <div class="grid_2">
-              <div>
-                <div class="muted-label">Ingredients</div>
-                <div id="potions_ingredients_grid" class="grid"></div>
-              </div>
-              <div>
-                <div class="muted-label">Recipes</div>
-                <div id="potions_recipes_grid" class="grid"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 style="margin-top:0">Crafts</h3>
-            <div class="grid_2">
-              <div>
-                <div class="muted-label">Components</div>
-                <div id="crafts_components_grid" class="grid"></div>
-              </div>
-              <div>
-                <div class="muted-label">Recipes</div>
-                <div id="crafts_recipes_grid" class="grid"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="traits-spells-row sheet-full">
         <div class="card section-9">
           <div class="section-title">
             <div class="section-number">9</div>
@@ -483,13 +522,6 @@
           <div class="card" style="margin-top: 1rem">
             <div class="muted-label">Action legend</div>
             <div class="legend-mini">
-              <div class="legend-item">
-                <div class="legend-symbol-mini" style="color:#60a5fa">⧖</div>
-                <div>
-                  <div style="color:white;font-weight:600">Passive</div>
-                  <div class="muted-label">Always active</div>
-                </div>
-              </div>
               <div class="legend-item">
                 <div class="legend-symbol-mini" style="color:#ffffff">⭘</div>
                 <div>
@@ -521,17 +553,70 @@
             </div>
           </div>
 
+          <button data-open="false" id="custom_button" type="button"
+            onclick="toggle_trait_button_display(this); document.getElementById('custom_trait').style.display = document.getElementById('custom_trait').style.display === 'none' ? 'block' : 'none';"
+            style="margin-top:1rem; margin-bottom:1rem;">
+            Custom Trait ▼
+          </button>
+          <div id="custom_trait" class="card" style="margin-top:1rem; display:none">
+            <h3 style="margin-top:0">Custom Trait</h3>
+            <div class="grid_3">
+              <div>
+                <label for="custom_trait_name">Name</label>
+                <input type="text" id="custom_trait_name" placeholder="Trait Name">
+              </div>
+              <div>
+                <label for="custom_trait_cost">Cost</label>
+                <input type="number" id="custom_trait_cost" placeholder="Trait Point Cost">
+              </div>
+              <div>
+                <label for="custom_trait_type">Type</label>
+                <select id="custom_trait_type">
+                  <option value="Rest">Rest</option>
+                  <option value="Passive">Passive</option>
+                  <option value="Active">Active</option>
+                </select>
+              </div>
+              <div>
+                <label for="custom_trait_action">Action Type</label>
+                <select id="custom_trait_action">
+                  <option value="Free Action">Free Action</option>
+                  <option value="Reaction">Reaction</option>
+                  <option value="Action">Action</option>
+                  <option value="Attack Action">Attack Action</option>
+                </select>
+              </div>
+              <div>
+                <label for="custom_trait_description">Description</label>
+                <textarea id="custom_trait_description" rows="4" placeholder="Describe the trait's effect..."
+                  style="resize: none;"></textarea>
+              </div>
+              <div style="display:flex; flex-direction: column; gap:.5rem; align-items: flex-start;">
+                <button type="button" onclick="addCustomTrait()">Add Custom Trait</button>
+              </div>
+            </div>
+          </div>
+
           <div class="trait-controls">
             <input type="text" id="trait_search" placeholder="Search traits by name...">
             <select id="selectable_traits"></select>
             <button type="button" onclick="selectTrait();">Add Trait</button>
           </div>
+          <h3 style="margin-top:1rem">Trait Preview</h3>
           <div id="trait_details"></div>
+          <hr>
+          <h3 style="margin-top:1rem">Aquired Traits</h3>
+          <div class="grid_3" id="custom_traits">
+
+          </div>
+          <hr style="opacity: 0.5; border: dashed 0.5px #a5b4fc;">
           <div class="grid_3" id="traits">
 
           </div>
         </div>
 
+      </div>
+      <div id="tab-spells" class="tab-section" style="display:none">
         <div class="card section-10">
           <div class="section-title">
             <div class="section-number">10</div>
@@ -564,75 +649,169 @@
             <label style="font-weight:600; color:#a5b4fc">Spellcasting Details</label>
             <br><br>
             <div class="grid_4">
-            <div>
-            <label for="spell_attack">Spell Attack Bonus</label>
-            <input type="number" id="spell_attack" placeholder="Spell Attack Bonus" readonly>
-            </div>
-            <div>
-            <label for="spell_dc">Spell DC</label>
-            <input type="number" id="spell_dc" placeholder="Spell DC">
-            </div>
-            <div>
-            <label for="spell_damage">Spell Damage Bonus</label>
-            <input type="number" id="spell_damage" placeholder="Amount">
-            </div>
+              <div>
+                <label for="spell_attack">Spell Attack Bonus</label>
+                <input type="number" id="spell_attack" placeholder="Spell Attack Bonus" readonly>
+              </div>
+              <div>
+                <label for="spell_dc">Spell DC</label>
+                <input type="number" id="spell_dc" placeholder="Spell DC">
+              </div>
+              <div>
+                <label for="spell_damage">Spell Damage Bonus</label>
+                <input type="number" id="spell_damage" placeholder="Amount">
+              </div>
 
             </div>
             <br>
             <label for="spellcasting_type">Spellcasting School</label>
-            <input type="text" id="spellcasting_type" placeholder="Name of your spellcasting school">
+            <input type="text" id="spellcasting_type" placeholder="Name of your spellcasting school" onchange="updateSpellcastingType()">
           </div>
+
+
+          <button data-open="false" id="custom_button" type="button"
+            onclick="toggle_spell_button_display(this); document.getElementById('custom_spell').style.display = document.getElementById('custom_spell').style.display === 'none' ? 'block' : 'none';"
+            style="margin-top:1rem; margin-bottom:1rem;">
+            Custom Spell ▼
+          </button>
+          <div id="custom_spell" class="card" style="margin-top:1rem; display:none">
+            <h3 style="margin-top:0">Custom Spell</h3>
+            <div class="grid_3">
+              <div>
+                <label for="custom_spell_name">Name</label>
+                <input type="text" id="custom_spell_name" placeholder="Spell Name">
+              </div>
+              <div>
+                <label for="custom_spell_type">Action</label>
+                <input type="text" id="custom_spell_type" placeholder="Spell Action">
+              </div>
+              <div>
+                <label for="custom_spell_range">Range</label>
+                <input type="text" id="custom_spell_range" placeholder="Spell Range">
+              </div>
+              <div>
+                <label for="custom_spell_cost">Mana Cost</label>
+                <input type="number" id="custom_spell_cost" placeholder="Mana Cost">
+              </div>
+              <div>
+                <label for="custom_spell_effect">Effect</label>
+                <textarea id="custom_spell_effect" rows="3" placeholder="Describe the spell's effect..."
+                  style="resize: none;"></textarea>
+              </div>
+              <div>
+                <label for="custom_spell_upcast">Upcast</label>
+                <textarea id="custom_spell_upcast" rows="3" placeholder="Describe the spell's upcast effect..."
+                  style="resize: none;"></textarea>
+              </div>
+              <div>
+                <label for="custom_spell_lore">Lore</label>
+                <textarea id="custom_spell_lore" rows="3" placeholder="Describe the spell's lore..."
+                  style="resize: none;"></textarea>
+              </div>
+              <div style="display:flex; flex-direction: column; gap:.5rem; align-items: flex-start;">
+                <label for="custom_spell_school">School</label>
+                <input type="text" id="custom_spell_school" placeholder="Spell School">
+                <button type="button" onclick="addCustomSpell()">Add Custom Spell</button>
+              </div>
+            </div>
+          </div>
+
+
 
           <div class="trait-controls">
             <input type="text" id="spell_search" placeholder="Search spells by name...">
             <select id="selectable_spells"></select>
             <button type="button" onclick="selectSpell();">Add Spell</button>
           </div>
+          <h3 style="margin-top:1rem">Spell Preview</h3>
           <div id="spell_details"></div>
+          <hr>
+          <h3 style="margin-top:1rem">Known Spells</h3>
+          <div class="grid_3" id="custom_spells">
+
+          </div>
+          <hr style="opacity: 0.5; border: dashed 0.5px #a5b4fc;">
           <div class="grid_3" id="spells">
 
           </div>
         </div>
       </div>
-
+      </div>
     </form>
   </main>
 
   <div class="roll-widget" id="roll_widget">
-    <h3>Rolls</h3>
-    <div class="row">
-      <div>
-        <label class="muted-label">Advantage (+d6)</label>
-        <input type="number" id="roll_adv" min="0" max="6" value="0">
+    <h3 style="display:flex; justify-content: space-between; align-items:center;">Rolls<button type="button"
+        onclick="toggleButton();" id="roll_button">▲</button></h3>
+    <div id="hideable">
+      <div class="row">
+        <div>
+          <label class="muted-label">Advantage (+d6)</label>
+          <input type="number" id="roll_adv" min="0" max="6" value="0">
+        </div>
+        <div>
+          <label class="muted-label">Disadvantage (-d6)</label>
+          <input type="number" id="roll_dis" min="0" max="6" value="0">
+        </div>
       </div>
-      <div>
-        <label class="muted-label">Disadvantage (-d6)</label>
-        <input type="number" id="roll_dis" min="0" max="6" value="0">
+      <div style="margin-top:.5rem">
+        <label class="muted-label">Modifier</label>
+        <input type="number" id="roll_mod" value="0">
       </div>
+      <div class="dice-visual-inline" id="roll_dice"></div>
+      <div style="display:flex; gap:.5rem; justify-content: space-between; align-items:center">
+        <button type="button" onclick="manualRoll()">Roll</button>
+        <div id="roll_summary" style="font-size:.85rem; color:#a5b4fc"></div>
+      </div>
+      <br>
+      <div class="card" id="roll_history"></div>
     </div>
-    <div style="margin-top:.5rem">
-      <label class="muted-label">Modifier</label>
-      <input type="number" id="roll_mod" value="0">
-    </div>
-    <div class="dice-visual-inline" id="roll_dice"></div>
-    <div style="display:flex; gap:.5rem; justify-content: space-between; align-items:center">
-      <button type="button" onclick="manualRoll()">Roll</button>
-      <div id="roll_summary" style="font-size:.85rem; color:#a5b4fc"></div>
-    </div>
-    <br>
-    <div class="card" id="roll_history"></div>
   </div>
 
   <script>
+    const arcaneSymbol = `<img src="./arcane.png" alt="Arcane" style="width:25px; height:25px; margin-right:-50px;">`;
+    const divineSymbol = `<img src="./divine.png" alt="Divine" style="width:25px; height:25px; margin-right:-50px;">`;
+    const occultSymbol = `<img src="./occult.png" alt="Occult" style="width:25px; height:25px; margin-right:-30px;">`;
+    const elementalSymbol = `<img src="./elemental.png" alt="Elemental" style="width:25px; height:25px; margin-right:-60px;">`;
+    const cosmicSymbol = `<img src="./cosmic.png" alt="Cosmic" style="width:25px; height:25px; margin-right:-30px;">`;
     let isDirty = false;
     const BASE_SLOTS = 2;
     const BASE_RECIPE_SLOTS = 2;
+
+    function updateSpellcastingType() {
+      const type = document.getElementById('spellcasting_type').value.toLowerCase();
+      const symbolDiv = document.getElementById('spellcasting_symbol');
+      switch (type) {
+        case 'arcane':
+          symbolDiv.innerHTML = arcaneSymbol;
+          break;
+        case 'divine':
+          symbolDiv.innerHTML = divineSymbol;
+          break;
+        case 'occult':
+          symbolDiv.innerHTML = occultSymbol;
+          break;
+        case 'elemental':
+          symbolDiv.innerHTML = elementalSymbol;
+          break;
+        case 'cosmic':
+          symbolDiv.innerHTML = cosmicSymbol;
+          break;
+        default:
+          symbolDiv.innerHTML = '';
+      }
+    }
 
     const state = {
       selectedTraits: new Map(),
       selectedSpells: new Map(),
       allTraits: [],
       allSpells: []
+    };
+
+    const custom = {
+      traits: [],
+      spells: []
     };
 
     const attributeData = {
@@ -668,12 +847,67 @@
       Intimidation: "Using fear to influence others."
     };
 
+
+
+    function switchTab(btn) {
+      const target = btn.getAttribute('data-tab');
+      document.querySelectorAll('.tab-section').forEach(section => {
+        section.style.display = section.id === target ? 'block' : 'none';
+      });
+      document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.toggle('active', button === btn);
+      });
+    }
+
+    function toggleButton() {
+      const btn = document.getElementById('roll_button');
+      if (btn.textContent === '▲') {
+        btn.textContent = '▼';
+      } else {
+        btn.textContent = '▲';
+      }
+      const hideable = document.getElementById('hideable');
+      if (hideable.style.display === 'none') {
+        hideable.style.display = 'block';
+      } else {
+        hideable.style.display = 'none';
+
+      }
+    }
+
+    function toggle_spell_button_display(button) {
+      const isOpen = button.dataset.open === "true";
+
+      if (isOpen) {
+        button.textContent = "Custom Spell ▼";
+        button.dataset.open = "false";
+      } else {
+        button.textContent = "Custom Spell ▲";
+        button.dataset.open = "true";
+      }
+    }
+
+
+    function toggle_trait_button_display(button) {
+      const isOpen = button.dataset.open === "true";
+
+      if (isOpen) {
+        button.textContent = "Custom Trait ▼";
+        button.dataset.open = "false";
+      } else {
+        button.textContent = "Custom Trait ▲";
+        button.dataset.open = "true";
+      }
+    }
+
+
     // --- Inventory ---
     function addInventorySlot() {
       const slot = document.createElement('div');
       slot.className = 'inventory_slot';
       slot.innerHTML = `
-        <input type="text" placeholder="Name">
+        <input type="text" placeholder="Name" style="width: 79.5%;">
+        <input type="number" placeholder="Weight" style="width: 8em; margin-left: .5rem;">
         <textarea rows="4" placeholder="Description" style="resize: none;"></textarea>
       `;
       document.getElementById('inventory_grid').appendChild(slot);
@@ -706,6 +940,17 @@
       for (let i = cr; i < BASE_RECIPE_SLOTS; i++) addSimpleSlot('crafts_recipes_grid', 'Craft', 'Recipe');
     }
 
+    function encumberance_update() {
+      const currentWeight = Number.parseInt(document.getElementById('current_weight').value) || 0;
+      const maxWeight = Number.parseInt(document.getElementById('max_weight').value) || 0;
+      const encLabels = document.querySelectorAll('.encumberance');
+      encLabels.forEach(label => label.style.display = 'none');
+      if (currentWeight > 3 * maxWeight) document.getElementById('encumberance_label_4').style.display = 'inline';
+      else if (currentWeight > 2 * maxWeight) document.getElementById('encumberance_label_3').style.display = 'inline';
+      else if (currentWeight > maxWeight) document.getElementById('encumberance_label_2').style.display = 'inline';
+      else document.getElementById('encumberance_label_1').style.display = 'inline';
+    }
+
     function inventory_extra_slots() {
       const slots = document.querySelectorAll('#inventory_grid .inventory_slot');
       const allFull = Array.from(slots).every(slot => (slot.querySelector('input')?.value || '').trim().length > 0);
@@ -724,6 +969,16 @@
       expandIfAllFull('potions_recipes_grid', BASE_RECIPE_SLOTS);
       expandIfAllFull('crafts_components_grid', BASE_SLOTS);
       expandIfAllFull('crafts_recipes_grid', BASE_RECIPE_SLOTS);
+    }
+
+    function weight_update() {
+      const weightInputs = document.querySelectorAll('#inventory_grid .inventory_slot input[type="number"]');
+      let totalWeight = 0;
+      weightInputs.forEach(input => {
+        const val = Number.parseFloat(input.value);
+        if (Number.isFinite(val)) totalWeight += val;
+      });
+      document.getElementById('current_weight').value = totalWeight;
     }
 
     // --- Attributes UI ---
@@ -748,9 +1003,9 @@
             <div class="skill-row">
               <span onclick="toggleDesc(this)">${skill}</span>
               <input style="width: 6em;" type="number" class="mod" id="${skill}_mod_user" placeholder="Mod">
-              <input type="number" style="scale: 0.8;" class="mod-trait" id="${skill}_mod_trait" placeholder="Trait" readonly>
+              <input type="number" style="scale: 0.8; border-radius: 0.25rem 5rem 5rem 0.25rem;" class="mod-trait" id="${skill}_mod_trait" placeholder="Trait" readonly>
               <input type="number" class="total" id="${attr}_${skill}" readonly>
-              <button type="button" onclick="rollSkill(this, '${skill}')">Roll</button>
+              <button style="height: 2.99em;" type="button" onclick="rollSkill(this, '${skill}')">Roll</button>
             </div>
             <div class="skill-desc">${skillDescriptions[skill] || "No description available."}</div>
             
@@ -770,6 +1025,7 @@
     function toggle_inventory() {
       const section = document.getElementById('inventory_grid');
       const extra = document.getElementById('inventory_extra');
+      document.getElementById('inventory_button').textContent = section.style.display === 'grid' ? 'Open' : 'Close';
       section.style.display = section.style.display === 'grid' ? 'none' : 'grid';
       if (extra) extra.style.display = section.style.display === 'grid' ? 'block' : 'none';
     }
@@ -925,6 +1181,92 @@
       updateAllDerived();
     }
 
+    function removeCustomTrait(btn) {
+      const traitDiv = btn.closest('.trait');
+      if (!traitDiv) return;
+
+      const name = btn.value;
+
+      // Remove from custom array
+      for (let i = 0; i < custom.traits.length; i++) {
+        if (custom.traits[i].Name === name) {
+          custom.traits.splice(i, 1);
+          break;
+        }
+      }
+
+      traitDiv.remove();
+      recalculateTraitSkillBonuses();
+    }
+
+    function traitIdSafe(name) {
+      return name.replace(/\s+/g, "_").replace(/[^\w]/g, "");
+    }
+
+    function addCustomTrait(trait) {
+      const traitsDiv = document.getElementById('custom_traits');
+      if (!trait) {
+        trait = {
+          Name: document.getElementById('custom_trait_name').value.trim(),
+          Cost: document.getElementById('custom_trait_cost').value.trim(),
+          Type: document.getElementById('custom_trait_type').value,
+          Action: document.getElementById('custom_trait_action').value,
+          Description: document.getElementById('custom_trait_description').value.trim()
+        };
+      }
+
+
+
+      if (!trait.Name || !trait.Cost || isNaN(trait.Cost) || !trait.Type || !trait.Action || !trait.Description) {
+        alert('All trait fields must be filled out correctly!');
+        return;
+      }
+
+      if (trait.Action === 'Free Action' || trait.Action === '⭘') trait.Action = '⭘';
+      else if (trait.Action === 'Reaction' || trait.Action === '◇') trait.Action = '◇';
+      else if (trait.Action === 'Action' || trait.Action === '⬖') trait.Action = '⬖';
+      else if (trait.Action === 'Attack Action' || trait.Action === '◆') trait.Action = '◆';
+      else trait.Action = '';
+
+      if (trait.Type === 'Rest' || trait.Type === '☀') trait.Type = '☀';
+      else if (trait.Type === 'Passive' || trait.Type === '⧖') trait.Type = '⧖';
+      else if (trait.Type === 'Active' || trait.Type === '🗲') trait.Type = '🗲';
+      else trait.Type = '';
+
+      custom.traits.push(trait);
+
+
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'trait';
+      wrapper.dataset.traitName = trait.Name;
+      wrapper.innerHTML = `
+          <div class="card trait" style="margin-top:1rem">
+            <div class="px-6 py-6">
+              <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
+              <h3 class="text-lg font-bold" style="margin:0">${trait.Type} ${trait.Name}</h3><div><label class="muted-label" for="uses">Uses </label><input type="number" id="uses_${traitIdSafe(trait.Name)}" style="width: 5em;"></div>
+                <button type="button" class="remove-btn" onclick="removeCustomTrait(this)" value="${trait.Name}">Remove</button>
+              </div>
+              <div class="space-y-4">
+                <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
+                  ${trait.Action ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Action: ${trait.Action}</span>` : ''}
+                  ${trait.Cost ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Cost: ${trait.Cost}</span>` : ''}
+                  ${trait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${trait.Parameters}</span>` : ''}
+                </div>
+                <p class="text-slate-300 leading-relaxed text-sm">${trait.Description || ''}</p>
+                ${trait.Scaling ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800">${trait.Scaling}</div>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      traitsDiv.appendChild(wrapper);
+
+      // Clear input fields
+      document.getElementById('custom_trait_name').value = '';
+      document.getElementById('custom_trait_cost').value = '';
+      document.getElementById('custom_trait_description').value = '';
+    }
+
     function renderSelectedTraits() {
       const traitsDiv = document.getElementById('traits');
       if (!traitsDiv) return;
@@ -935,16 +1277,16 @@
         wrapper.className = 'trait';
         wrapper.dataset.traitName = trait.Name;
         wrapper.innerHTML = `
-          <div class="card">
+          <div class="card" style="margin-top:1rem">
             <div class="px-6 py-6">
               <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
-                <h3 class="text-lg font-bold" style="margin:0">${trait.Name}</h3>
+              <h3 class="text-lg font-bold" style="margin:0">${trait.Symbols} ${trait.Name}</h3><div><label class="muted-label" for="uses">Uses </label><input type="number" id="uses_${traitIdSafe(trait.Name)}" style="width: 5em;"> </div>
                 <button type="button" class="remove-btn" onclick="removeTrait('${encodeURIComponent(trait.Name)}')">Remove</button>
               </div>
               <div class="space-y-4">
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
-                  ${trait.Action ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Action: ${trait.Action}</span>` : ''}
-                  ${trait.Cost ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Cost: ${trait.Cost}</span>` : ''}
+                  ${trait.Action ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Action: ${trait.Action}</span>` : ''}
+                  ${trait.Cost ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Cost: ${trait.Cost}</span>` : ''}
                   ${trait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${trait.Parameters}</span>` : ''}
                 </div>
                 <p class="text-slate-300 leading-relaxed text-sm">${trait.Description || ''}</p>
@@ -993,9 +1335,116 @@
       }
       document.getElementById('current_mana').value = currentMana - manaCost;
       updateManaBar();
-      
+
       rollSpell(spellName);
     }
+
+    function removeCustomSpell(btn) {
+      const spellDiv = btn.closest('.spell');
+      if (!spellDiv) return;
+
+      const name = btn.value;
+
+      for (let i = 0; i < custom.spells.length; i++) {
+        if (custom.spells[i].Name === name) {
+          custom.spells.splice(i, 1);
+          break;
+        }
+      }
+
+      spellDiv.remove();
+    }
+
+
+    addCustomSpell = (spell) => {
+      const spellsDiv = document.getElementById('custom_spells');
+      let name = document.getElementById('custom_spell_name').value.trim();
+      let type = document.getElementById('custom_spell_type').value.trim();
+      let range = document.getElementById('custom_spell_range').value.trim();
+      let cost = parseInt(document.getElementById('custom_spell_cost').value);
+      let effect = document.getElementById('custom_spell_effect').value.trim();
+      let school = document.getElementById('custom_spell_school').value.trim();
+      let upcast = document.getElementById('custom_spell_upcast').value.trim();
+      let lore = document.getElementById('custom_spell_lore').value.trim();
+
+      if (!spell) {
+        if (!name || !effect || !school || isNaN(cost)) {
+          alert('All fields are required to add a custom spell, and mana cost must be a valid number.');
+          return;
+        }
+      } else {
+        name = spell.Name;
+        type = spell.Type;
+        range = spell.Range;
+        cost = spell.Cost;
+        effect = spell.Effect;
+        school = spell.School;
+        upcast = spell.Upcast;
+        lore = spell.Lore;
+      }
+
+      const spellData = {
+        Name: name,
+        Type: type,
+        Range: range,
+        Cost: cost,
+        Effect: effect,
+        School: school,
+        Upcast: upcast,
+        Lore: lore
+      };
+
+      custom.spells.push(spellData);
+
+      const spellId = 'custom_' + Date.now();
+      const costLabel = Number.parseInt(cost, 10) > 0 ? `Level ${cost}` : 'Cantrip';
+      const wrapper = document.createElement('div');
+      const symbol = school ? (() => {
+        switch (school.toLowerCase()) {
+          case 'arcane': return arcaneSymbol;
+          case 'divine': return divineSymbol;
+          case 'occult': return occultSymbol;
+          case 'elemental': return elementalSymbol;
+          case 'cosmic': return cosmicSymbol;
+          default: return '';
+        }
+      })() : '';
+
+
+      wrapper.className = 'spell';
+      wrapper.dataset.spellId = spellId;
+      wrapper.dataset.spellName = name;
+      wrapper.innerHTML = `
+          <div class="card spell" style="margin-top: 1rem;">
+            <div class="px-6 py-6">${symbol} </div><label class="muted-label">${school}</label>
+              <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
+                <h3 class="text-lg font-bold" style="margin:0">${name} : ${costLabel}</h3>
+                <div><button type="button" class="cast-btn" onclick="castSpell('${cost}', '${name}')">Cast</button>
+                <button type="button" class="remove-btn" onclick="removeCustomSpell(this)" value="${name}">Remove</button></div>
+              </div>
+              <div class="space-y-4">
+                <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
+                  ${type ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">${type}</span>` : 'Free Action'}
+                  ${range ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${range}</span>` : 'Self'}
+                </div>
+                <p class="text-slate-300 leading-relaxed text-sm">${effect || ''}</p>
+                ${upcast ? `<p class="text-slate-300 leading-relaxed text-sm"><strong>Upcast:</strong> ${upcast}</p>` : 'No upcast effect'}
+                ${lore ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800"><i>${lore}</i></div>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      spellsDiv.appendChild(wrapper);
+      // Clear inputs
+      document.getElementById('custom_spell_name').value = '';
+      document.getElementById('custom_spell_cost').value = '';
+      document.getElementById('custom_spell_effect').value = '';
+      document.getElementById('custom_spell_school').value = '';
+      document.getElementById('custom_spell_type').value = '';
+      document.getElementById('custom_spell_range').value = '';
+      document.getElementById('custom_spell_upcast').value = '';
+      document.getElementById('custom_spell_lore').value = '';
+    };
 
     function renderSelectedSpells() {
       const spellsDiv = document.getElementById('spells');
@@ -1005,19 +1454,31 @@
       for (const spell of state.selectedSpells.values()) {
         const costLabel = Number.parseInt(spell.Cost, 10) > 0 ? `Level ${spell.Cost}` : 'Cantrip';
         const wrapper = document.createElement('div');
+        const symbol = spell.Category ? (() => {
+          switch (spell.Category.toLowerCase()) {
+            case 'arcane': return arcaneSymbol;
+            case 'divine': return divineSymbol;
+            case 'occult': return occultSymbol;
+            case 'elemental': return elementalSymbol;
+            case 'cosmic': return cosmicSymbol;
+            default: return '';
+          }
+        })() : '';
+
+
         wrapper.className = 'spell';
         wrapper.dataset.spellId = spell.ID;
         wrapper.innerHTML = `
-          <div class="card">
-            <div class="px-6 py-6">
+          <div class="card" style="margin-top: 1rem;">
+            <div class="px-6 py-6">${symbol}</div><label class="muted-label">${spell.Category}</label>
               <div style="display:flex; justify-content: space-between; gap: .75rem; align-items: start">
                 <h3 class="text-lg font-bold" style="margin:0">${spell.Name} : ${costLabel}</h3>
-                <button type="button" class="cast-btn" onclick="castSpell('${spell.Cost}', '${spell.Name}')">Cast</button>
-                <button type="button" class="remove-btn" onclick="removeSpell('${spell.ID}')">Remove</button>
+                <div><button type="button" class="cast-btn" onclick="castSpell('${spell.Cost}', '${spell.Name}')">Cast</button>
+                <button type="button" class="remove-btn" onclick="removeSpell('${spell.ID}')">Remove</button></div>
               </div>
               <div class="space-y-4">
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
-                  ${spell.Type ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Type: ${spell.Type}</span>` : ''}
+                  ${spell.Type ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">${spell.Type}</span>` : ''}
                   ${spell.Range ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${spell.Range}</span>` : ''}
                 </div>
                 <p class="text-slate-300 leading-relaxed text-sm">${spell.Description || ''}</p>
@@ -1092,9 +1553,10 @@
           <div class="card">
             <div class="px-6 py-6">
               <div class="space-y-4">
+                <h3 class="text-lg font-bold" style="margin:0">${selectedTrait.Symbols} ${selectedTrait.Name}</h3>
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
-                  ${selectedTrait.Action ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Action: ${selectedTrait.Action}</span>` : ''}
-                  ${selectedTrait.Cost ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Cost: ${selectedTrait.Cost}</span>` : ''}
+                  ${selectedTrait.Action ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Action: ${selectedTrait.Action}</span>` : ''}
+                  ${selectedTrait.Cost ? `<span style="color: #6366f1; border: 1px solid #6366f1; padding: 2px 4px; border-radius: 4px;">Cost: ${selectedTrait.Cost}</span>` : ''}
                   ${selectedTrait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${selectedTrait.Parameters}</span>` : ''}
                 </div>
                 <p class="text-slate-300 leading-relaxed text-sm">${selectedTrait.Description || ''}</p>
@@ -1151,9 +1613,21 @@
         });
       }
 
+
+
       selector.addEventListener('change', function () {
         const selectedSpell = state.allSpells.find(s => s.ID === this.value);
         const detailsDiv = document.getElementById('spell_details');
+        const symbol = selectedSpell.Category ? (() => {
+          switch (selectedSpell.Category.toLowerCase()) {
+            case 'arcane': return arcaneSymbol;
+            case 'divine': return divineSymbol;
+            case 'occult': return occultSymbol;
+            case 'elemental': return elementalSymbol;
+            case 'cosmic': return cosmicSymbol;
+            default: return '';
+          }
+        })() : '';
         if (!detailsDiv) return;
         if (!selectedSpell) {
           detailsDiv.innerHTML = '';
@@ -1162,8 +1636,10 @@
 
         detailsDiv.innerHTML = `<br>
           <div class="card">
+
             <div class="px-6 py-6">
               <div class="space-y-4">
+                ${symbol}<h3 class="text-lg font-bold" style="margin:0">${selectedSpell.Name} : ${Number.parseInt(selectedSpell.Cost, 10) > 0 ? `Level ${selectedSpell.Cost}` : 'Cantrip'}</h3>
                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
                   ${selectedSpell.Type ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Type: ${selectedSpell.Type}</span>` : ''}
                   ${selectedSpell.Range ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${selectedSpell.Range}</span>` : ''}
@@ -1237,9 +1713,15 @@
 
         return Array.from(container.querySelectorAll('.inventory_slot')).map(slot => ({
           name: slot.querySelector('input')?.value || "",
+          weight: parseInt(slot.querySelector('input[type="number"]')?.value) || 0,
           description: slot.querySelector('textarea')?.value || ""
         }));
       }
+
+      data.custom = {
+        traits: custom?.traits || [],
+        spells: custom?.spells || []
+      };
 
       data.inventory.main = readSlots('inventory_grid');
       data.inventory.potionIngredients = readSlots('potions_ingredients_grid');
@@ -1286,7 +1768,43 @@
         });
       }
 
+      custom.traits = [];
+      custom.spells = [];
+
+      function loadCustomEntries() {
+        if (data.custom) {
+          if (data.custom.traits) {
+            data.custom.traits.forEach(trait => {
+              addCustomTrait(trait);
+            });
+          }
+          if (data.custom.spells) {
+            data.custom.spells.forEach(spell => {
+              addCustomSpell(spell);
+            });
+          }
+        }
+      }
+
       // --- Restore Inventory ---
+
+      function restoreSimpleSlots(containerId, items) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        container.innerHTML = "";
+
+        items.forEach(item => {
+          const slot = document.createElement('div');
+          slot.className = 'inventory_slot';
+          slot.innerHTML = `
+          <input type="text" placeholder="Name" value="${item.name || ""}">
+        <textarea rows="4" placeholder="Description" style="resize: none;">${item.description || ""}</textarea>
+      `;
+          container.appendChild(slot);
+        });
+      }
+
       function restoreSlots(containerId, items) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -1297,8 +1815,9 @@
           const slot = document.createElement('div');
           slot.className = 'inventory_slot';
           slot.innerHTML = `
-        <input type="text" value="${item.name || ""}">
-        <textarea rows="4" style="resize:none;">${item.description || ""}</textarea>
+          <input type="text" placeholder="Name" style="width: 79.5%;" value="${item.name || ""}">
+        <input type="number" placeholder="Weight" style="width: 8em; margin-left: .5rem;" value="${item.weight || 0}">
+        <textarea rows="4" placeholder="Description" style="resize: none;">${item.description || ""}</textarea>
       `;
           container.appendChild(slot);
         });
@@ -1306,10 +1825,10 @@
 
       if (data.inventory) {
         restoreSlots('inventory_grid', data.inventory.main || []);
-        restoreSlots('potions_ingredients_grid', data.inventory.potionIngredients || []);
-        restoreSlots('potions_recipes_grid', data.inventory.potionRecipes || []);
-        restoreSlots('crafts_components_grid', data.inventory.craftComponents || []);
-        restoreSlots('crafts_recipes_grid', data.inventory.craftRecipes || []);
+        restoreSimpleSlots('potions_ingredients_grid', data.inventory.potionIngredients || []);
+        restoreSimpleSlots('potions_recipes_grid', data.inventory.potionRecipes || []);
+        restoreSimpleSlots('crafts_components_grid', data.inventory.craftComponents || []);
+        restoreSimpleSlots('crafts_recipes_grid', data.inventory.craftRecipes || []);
       }
 
       // --- Restore Traits ---
@@ -1339,6 +1858,7 @@
       proficiency_warning?.();
       updateManaBar?.();
       updateHealthBar?.();
+      loadCustomEntries();
 
       alert("Character successfully loaded!");
     }
@@ -1479,6 +1999,8 @@
       proficiency_warning();
       proficiency_assignment();
       inventory_extra_slots();
+      weight_update();
+      encumberance_update();
     }
 
     function historyCleaning() {
@@ -1507,6 +2029,9 @@
       renderSelectedSpells();
       recalculateTraitSkillBonuses();
       updateAllDerived();
+      document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.toggle('active', button.dataset.tab === 'tab-main');
+      });
     });
 
     document.addEventListener('input', () => {
