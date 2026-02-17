@@ -1164,7 +1164,21 @@
 
     function updateTraitPoints() {
       const level = Number.parseInt(document.getElementById('level_input')?.value, 10) || 0;
-      const max = 1 + level + Math.round(level / 3);
+      let max = 0;
+      if (level == 1) max = 2;
+      else if (level == 2) max = 4;
+      else if (level == 3) max = 6;
+      else if (level == 4) max = 7;
+      else if (level == 5) max = 8;
+      else if (level == 6) max = 10;
+      else if (level == 7) max = 11;
+      else if (level == 8) max = 12;
+      else if (level == 9) max = 14;
+      else if (level == 10) max = 15;
+      else if (level == 11) max = 16;
+      else if (level == 12) max = 18;
+      else if (level >= 13) max = 18 + (level - 12);
+      
 
       let used = 0;
       for (const trait of state.selectedTraits.values()) {
