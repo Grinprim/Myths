@@ -245,8 +245,6 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
 }
 .desc { font-size: 13px; line-height: 1.4; color: #e2e8f0; white-space: pre-wrap; font-family: 'Inter', sans-serif; }
 
-/* STATS - RESIZED AND CENTERED */
-
 .stats {
   position: absolute;
   left: 0; right: 0; bottom: 10px;
@@ -272,7 +270,6 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
   right: 115px;
 }
 
-/* RARITY */
 .rarityGem {
   position: absolute; left: 50%; bottom: 6px; width: 14px; height: 14px;
   transform: translate(-50%, 0); z-index: 5;
