@@ -246,32 +246,30 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
 .desc { font-size: 13px; line-height: 1.4; color: #e2e8f0; white-space: pre-wrap; font-family: 'Inter', sans-serif; }
 
 /* STATS - RESIZED AND CENTERED */
+
 .stats {
-  position: absolute; left: 35px; right: 35px; bottom: 10px;
-  display: flex; justify-content: space-between; align-items: flex-end;
-  z-index: 4; pointer-events: none;
-}
-.statImgBlock {
-  width: 72px; height: 72px; /* Slight size bump */
-  position: relative; /* Anchor for absolute centering */
-  display: flex; justify-content: center; align-items: center;
-}
-.statImgIcon {
-  width: 100%; height: 100%;
-  object-fit: contain; display: block;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
-}
-.statImgNumber {
   position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%); /* PERFECT CENTERING */
+  left: 0; right: 0; bottom: 10px;
+  height: 72px;
+  z-index: 4;
+  pointer-events: none;
+}
+.statNumber {
   font-family: 'Cinzel', serif;
   font-weight: 900;
-  font-size: 32px; /* Increased Size */
+  font-size: 32px;
   color: #fff;
   text-shadow: 0 2px 4px #000, 0 0 10px rgba(0,0,0,0.8);
-  margin: 0; padding: 0; line-height: 1;
+  line-height: 1;
   z-index: 2;
+  position: absolute;
+  bottom: 10px;
+}
+.statNumberLeft {
+  left: 115px;
+}
+.statNumberRight {
+  right: 115px;
 }
 
 /* RARITY */
