@@ -1113,7 +1113,7 @@
 
     function rollAttack(btn) {
       const block = btn.closest('.weapon-block') || btn.parentElement;
-      const attackBonus = Number.parseInt(block.querySelector('input[placeholder="Attack"]').value, 10) || 0;
+      const attackBonus = Number.parseInt(block.querySelector('input[placeholder="Atk"]').value, 10) || 0;
       const { mod } = getRollConfig();
       const combinedMod = attackBonus + mod;
       const result = rollDicePool(2, combinedMod);
