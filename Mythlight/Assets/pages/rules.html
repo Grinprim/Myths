@@ -10,23 +10,62 @@
     <link rel="stylesheet" href="../css/styles.css" />
 
     <style>
-        .map-tile { width: 32px; height: 32px; border: 1px solid #334155; }
-        .map-tile.center { background: #6366f1; }
-        .map-tile.range { background: rgba(99, 102, 241, 0.3); }
-        .map-tile.radius { background: rgba(239, 68, 68, 0.3); }
-        
+        .map-tile {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #334155;
+        }
+
+        .map-tile.center {
+            background: #6366f1;
+        }
+
+        .map-tile.range {
+            background: rgba(99, 102, 241, 0.3);
+        }
+
+        .map-tile.radius {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
         /* Reusable Card Components */
-        .condition-card { background: rgba(15, 23, 42, 0.6); border: 1px solid #334155; padding: 12px; border-radius: 10px; }
-        .rule-card { background: rgba(15, 23, 42, 0.6); border: 1px solid #334155; padding: 1.5rem; border-radius: 0.75rem; }
-        
+        .condition-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid #334155;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .rule-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid #334155;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+        }
+
         /* Text Highlighting */
-        .correct { color: rgb(204, 255, 110); }
-        .wrong { color: rgb(255, 110, 110); }
-        .notice { color: rgb(255, 216, 110); }
-        .notice_blue { color: rgb(110, 255, 241); }
-        
+        .correct {
+            color: rgb(204, 255, 110);
+        }
+
+        .wrong {
+            color: rgb(255, 110, 110);
+        }
+
+        .notice {
+            color: rgb(255, 216, 110);
+        }
+
+        .notice_blue {
+            color: rgb(110, 255, 241);
+        }
+
         /* Tab Active State */
-        .tab-btn.active { background-color: rgba(99, 102, 241, 0.2); border-color: #6366f1; color: white; }
+        .tab-btn.active {
+            background-color: rgba(99, 102, 241, 0.2);
+            border-color: #6366f1;
+            color: white;
+        }
 
         /* Sidebar Layout */
         .rules-layout {
@@ -35,7 +74,7 @@
             gap: 4rem;
             max-width: 1400px;
             margin: 0 auto;
-            position: relative; 
+            position: relative;
         }
 
         :root {
@@ -72,7 +111,9 @@
            This pushes the scroll snap point down, so content appears 
            towards the middle of the screen, not the very top.
         */
-        .scroll-offset-center { scroll-margin-top: calc(var(--rules-sidebar-top) + 1rem); }
+        .scroll-offset-center {
+            scroll-margin-top: calc(var(--rules-sidebar-top) + 1rem);
+        }
 
         section[id] {
             scroll-margin-top: calc(var(--rules-sidebar-top) + 1rem);
@@ -81,9 +122,169 @@
 
         /* Mobile Adjustments */
         @media(max-width: 1024px) {
-            .rules-layout { grid-template-columns: 1fr; }
-            .sidebar { display: none; }
-            .sidebar-fixed { position: static; width: auto; max-height: none; left: auto; top: auto; }
+            .rules-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .sidebar-fixed {
+                position: static;
+                width: auto;
+                max-height: none;
+                left: auto;
+                top: auto;
+            }
+        }
+
+        /* FORM */
+        .builder {
+            width: 350px;
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .builder input,
+        .builder textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 6px;
+            border-radius: 5px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+        }
+
+        .builder label {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        button {
+            padding: 8px 12px;
+            background: #6366f1;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #818cf8;
+        }
+
+        /* PREVIEW STATBLOCK */
+        .preview-wrapper {
+            flex-grow: 1;
+        }
+
+        .statblock {
+            width: 500px;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border: 2px solid #6366f1;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .statblock h2 {
+            margin: 0;
+            font-size: 26px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .section-title {
+            margin-top: 12px;
+            font-weight: bold;
+            font-size: 15px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 3px;
+        }
+
+        .abilities,
+        .spells {
+            font-size: 13px;
+            white-space: pre-wrap;
+        }
+
+        /* CARD STYLE (MTG INSPIRED) */
+        .card {
+            width: 420px;
+            height: 620px;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-radius: 20px;
+            border: 3px solid #6366f1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .card-header {
+            font-size: 22px;
+            font-weight: bold;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+            margin-bottom: 8px;
+        }
+
+        .portrait {
+            width: 100%;
+            height: 250px;
+            background: #0f172a;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .stat-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .section-title {
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            border-bottom: 1px solid #334155;
+        }
+
+        .text-block {
+            font-size: 12px;
+            white-space: pre-wrap;
+            margin-top: 4px;
+        }
+
+        .footer-stats {
+            margin-top: auto;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #334155;
+            padding-top: 6px;
         }
     </style>
 </head>
@@ -93,7 +294,7 @@
     <div id="navbar-placeholder"></div>
 
     <main class="pt-32 pb-20 px-6 max-w-[1600px] mx-auto">
-        
+
         <header class="text-center mb-8 max-w-4xl mx-auto">
             <h1 class="text-5xl font-bold text-white mb-4">Game Rules</h1>
             <p class="text-lg text-indigo-300">
@@ -101,17 +302,20 @@
             </p>
         </header>
 
-        <div class="flex flex-wrap justify-center gap-4 border-b border-slate-800 pb-8 mb-8 sticky top-20 z-30 bg-custom-dark/95 backdrop-blur-sm py-4">
-            <button onclick="switchView('view-campaign')" class="tab-btn active px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+        <div
+            class="flex flex-wrap justify-center gap-4 border-b border-slate-800 pb-8 mb-8 sticky top-20 z-30 bg-custom-dark/95 backdrop-blur-sm py-4">
+            <button onclick="switchView('view-campaign')"
+                class="tab-btn active px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
                 Campaign Rules
             </button>
-            <button onclick="switchView('view-oneshots')" class="tab-btn px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+            <button onclick="switchView('view-oneshots')"
+                class="tab-btn px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
                 One Shots
             </button>
         </div>
 
         <div id="view-campaign" class="view-section rules-layout">
-            
+
             <aside class="sidebar hidden lg:block">
                 <div class="sidebar-fixed">
                     <div class="mb-8">
@@ -122,7 +326,7 @@
                     <div class="nav-group-title">Core Rules</div>
                     <a href="#intro" class="sidebar-link">Introduction</a>
                     <a href="#resolution" class="sidebar-link">Resolution System (2d6)</a>
-                    
+
                     <div class="nav-group-title">Character Creation</div>
                     <a href="#creation" class="sidebar-link">Attributes</a>
                     <a href="#origin" class="sidebar-link">Species & Path</a>
@@ -131,7 +335,7 @@
                     <a href="#progression" class="sidebar-link">Traits & Level ups</a>
                     <a href="#spellcasting" class="sidebar-link">Spellcasting</a>
                     <a href="#equipment" class="sidebar-link">Equipment</a>
-                    
+
                     <div class="nav-group-title">Combat Rules</div>
                     <a href="#movement" class="sidebar-link">Movement</a>
                     <a href="#size" class="sidebar-link">Map Sizes & Effects</a>
@@ -140,6 +344,9 @@
                     <a href="#companion" class="sidebar-link">Companions</a>
                     <a href="#conditions" class="sidebar-link">Conditions</a>
                     <a href="#mount" class="sidebar-link">Mount & Vehicle Combat</a>
+
+                    <div class="nav-group-title">Narrator Rules</div>
+
                 </div>
             </aside>
 
@@ -147,20 +354,26 @@
                 <div id="core-section">
                     <div class="mb-12">
                         <h2 class="text-4xl font-bold text-white mb-4">Core Mechanics</h2>
-                        <p class="text-lg text-indigo-300">The fundamental mechanics that govern the Mythlight system.</p>
+                        <p class="text-lg text-indigo-300">The fundamental mechanics that govern the Mythlight system.
+                        </p>
                     </div>
 
                     <section id="intro" class="scroll-offset-center">
                         <div class="rule-card">
                             <h2 class="text-2xl text-white font-bold mb-4">Introduction</h2>
-                            <p class="mb-4">Mythlight is designed to be a simple narrative-focused roleplaying game, with
-                                rules that are easy to pick up and encourage roleplay. Combat uses a small number of rolls
+                            <p class="mb-4">Mythlight is designed to be a simple narrative-focused roleplaying game,
+                                with
+                                rules that are easy to pick up and encourage roleplay. Combat uses a small number of
+                                rolls
                                 so play stays fast.</p>
                             <p class="mb-4"><strong>What you need to play:</strong></p>
                             <ul class="list-disc ml-6 space-y-2 text-sm">
-                                <li><strong>2 six-sided dice (2d6)</strong> per player. This system doesn’t use polyhedral dice.</li>
-                                <li><strong>Character Sheet:</strong> Includes stats, traits, equipment, and backstory.</li>
-                                <li><strong>One Narrator:</strong> Guides the story, plays NPCs, and presents challenges.</li>
+                                <li><strong>2 six-sided dice (2d6)</strong> per player. This system doesn’t use
+                                    polyhedral dice.</li>
+                                <li><strong>Character Sheet:</strong> Includes stats, traits, equipment, and backstory.
+                                </li>
+                                <li><strong>One Narrator:</strong> Guides the story, plays NPCs, and presents
+                                    challenges.</li>
                             </ul>
                         </div>
                     </section>
@@ -174,7 +387,8 @@
                         <div class="rule-card flex flex-col md:flex-row gap-8 items-start">
                             <div class="flex-1">
                                 <h3 class="text-xl text-white font-bold mb-4">The 2d6 Engine</h3>
-                                <p class="mb-4">Most actions use a base roll of <strong>2d6</strong> to determine success or
+                                <p class="mb-4">Most actions use a base roll of <strong>2d6</strong> to determine
+                                    success or
                                     failure. You succeed if your total (Roll + Modifiers) meets or beats the <strong>CS
                                         (Challenge Score)</strong>.</p>
 
@@ -191,9 +405,12 @@
                                 </div>
                             </div>
 
-                            <div class="flex flex-col items-center justify-center bg-slate-800/50 p-6 rounded-xl border border-slate-700 w-full md:w-auto relative group">
-                                <button onclick="randomizeDiceFaces()" class="absolute inset-0 w-full h-full opacity-0 z-10 cursor-pointer" title="Click to Reroll"></button>
-                                
+                            <div
+                                class="flex flex-col items-center justify-center bg-slate-800/50 p-6 rounded-xl border border-slate-700 w-full md:w-auto relative group">
+                                <button onclick="randomizeDiceFaces()"
+                                    class="absolute inset-0 w-full h-full opacity-0 z-10 cursor-pointer"
+                                    title="Click to Reroll"></button>
+
                                 <div class="dice-visual mb-4">
                                     <div class="die face-6" aria-hidden="true"></div>
                                     <div class="die face-6" aria-hidden="true"></div>
@@ -210,7 +427,8 @@
                                 <ul class="list-disc ml-4 mt-2 text-xs text-slate-400">
                                     <li>Automatically hits.</li>
                                     <li>Deals <strong>Double Damage</strong>.</li>
-                                    <li>With Advantage: The trigger remains the same; however any additional rolled sixes
+                                    <li>With Advantage: The trigger remains the same; however any additional rolled
+                                        sixes
                                         will increase the effect (ex. 3 sixes = increased effect).</li>
                                 </ul>
                             </div>
@@ -219,7 +437,8 @@
                                 <p class="text-sm">Triggered on <strong>two natural ones</strong>.</p>
                                 <ul class="list-disc ml-4 mt-2 text-xs text-slate-400">
                                     <li>Automatically misses.</li>
-                                    <li>Causes a critical failure effect (tripping, self-damage, narrative setback).</li>
+                                    <li>Causes a critical failure effect (tripping, self-damage, narrative setback).
+                                    </li>
                                     <li>Snake Eyes cannot occur when rolling 0d6.</li>
                                 </ul>
                             </div>
@@ -230,7 +449,8 @@
                             <p class="text-sm mb-2">You acquire Grace as you fail. Use it in dire moments.</p>
                             <ul class="list-disc ml-4 text-xs text-slate-400 space-y-1">
                                 <li><strong>Gain:</strong> +1 Grace on failure.</li>
-                                <li><strong>Delay:</strong> Success does not reset Grace, but delays growth by 1 (must fail
+                                <li><strong>Delay:</strong> Success does not reset Grace, but delays growth by 1 (must
+                                    fail
                                     twice to grow again).</li>
                                 <li><strong>Spend:</strong> Must spend <strong>ALL</strong> Grace to boost any roll. Max
                                     Grace is 6.</li>
@@ -253,7 +473,8 @@
                         </div>
                         <div class="rule-card">
                             <h3 class="text-xl text-white font-bold mb-4">Attributes (Point Buy)</h3>
-                            <p class="mb-4">You have <strong>3 points</strong> to distribute. Max <strong>2 points</strong>
+                            <p class="mb-4">You have <strong>3 points</strong> to distribute. Max <strong>2
+                                    points</strong>
                                 per stat initially. These are modified by Lineage.</p>
                             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                                 <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
@@ -281,20 +502,24 @@
                             </div>
                             <div class="rule-card">
                                 <h3 class="text-xl text-white font-bold mb-4">Species & Path</h3>
-                                <p class="mb-4">Your character is more than just numbers — it's also your past, culture and
+                                <p class="mb-4">Your character is more than just numbers — it's also your past, culture
+                                    and
                                     appearance. Use these to inform roleplay and mechanical choices.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
                                         <strong class="text-orange-400 block">Species</strong>
-                                        Species represent your character’s physical traits and cultural background. Each species
-                                        grants <strong>minor bonuses</strong> to base attributes and provides <strong>one unique
+                                        Species represent your character’s physical traits and cultural background. Each
+                                        species
+                                        grants <strong>minor bonuses</strong> to base attributes and provides
+                                        <strong>one unique
                                             trait</strong>.
                                         <br><br>
                                         You pick one at character creation.
                                     </div>
                                     <div class="bg-slate-900/50 p-4 rounded border border-slate-700">
                                         <strong class="text-orange-400 block">Path</strong>
-                                        Paths represent training and past experiences. Paths grant skill modifiers and one
+                                        Paths represent training and past experiences. Paths grant skill modifiers and
+                                        one
                                         trait.
                                         <br><br>
                                         You pick one at character creation.
@@ -309,41 +534,50 @@
                             <span class="section-number">05</span>
                             Skills
                         </div>
-                        <p class="mb-6">Each attribute governs specific skills, which can be enhanced using <strong>skill
-                                points</strong>. At character creation you are given <strong>4 skill points</strong>. You
+                        <p class="mb-6">Each attribute governs specific skills, which can be enhanced using
+                            <strong>skill
+                                points</strong>. At character creation you are given <strong>4 skill points</strong>.
+                            You
                             can assign these however you wish, with a max of 2 in a single skill. Skill Checks follow:
                             <span class="text-white font-bold">[2d6 + Attribute + Skill Modifier]</span>.
                         </p>
 
                         <div class="grid md:grid-cols-2 gap-6">
                             <div class="rule-card">
-                                <h4 class="text-white font-bold mb-3 border-b border-slate-700 pb-2">Physique Skills</h4>
+                                <h4 class="text-white font-bold mb-3 border-b border-slate-700 pb-2">Physique Skills
+                                </h4>
                                 <ul class="text-sm space-y-2">
                                     <li><span class="keyword">Might:</span> Lifting, breaking, melee proficiencies.</li>
                                     <li><span class="keyword">Athletics:</span> Running, jumping, climbing, grappling,
                                         carrying capacity.</li>
-                                    <li><span class="keyword">Fortitude:</span> Resisting poison, pain, disease, unarmored
+                                    <li><span class="keyword">Fortitude:</span> Resisting poison, pain, disease,
+                                        unarmored
                                         defence.</li>
                                     <li><span class="keyword">Brawn:</span> Physical resistance (Health).</li>
                                 </ul>
                             </div>
                             <div class="rule-card">
-                                <h4 class="text-white font-bold mb-3 border-b border-slate-700 pb-2">Technique Skills</h4>
+                                <h4 class="text-white font-bold mb-3 border-b border-slate-700 pb-2">Technique Skills
+                                </h4>
                                 <ul class="text-sm space-y-2">
-                                    <li><span class="keyword">Aim:</span> Ranged proficiencies, hitting very small targets</li>
+                                    <li><span class="keyword">Aim:</span> Ranged proficiencies, hitting very small
+                                        targets</li>
                                     <li><span class="keyword">Tinkering:</span> Repairing, crafting, brewing.</li>
-                                    <li><span class="keyword">Finesse:</span> Sleight of hand, picking locks, finesse melee,
+                                    <li><span class="keyword">Finesse:</span> Sleight of hand, picking locks, finesse
+                                        melee,
                                         looting.</li>
                                     <li><span class="keyword">Reflex:</span> Dodging, reacting.</li>
                                 </ul>
                             </div>
                             <div class="rule-card">
-                                <h4 class="text-white font-bold mb-3 border-b border-slate-700 pb-2">Mystique Skills</h4>
+                                <h4 class="text-white font-bold mb-3 border-b border-slate-700 pb-2">Mystique Skills
+                                </h4>
                                 <ul class="text-sm space-y-2">
                                     <li><span class="keyword">Spellcraft:</span> Casting and shaping magic.</li>
                                     <li><span class="keyword">Arcana:</span> Spells, rituals, lore.</li>
                                     <li><span class="keyword">Insight:</span> Reading intentions, sensing magic.</li>
-                                    <li><span class="keyword">Scholarship:</span> Research, history, number of known spells.
+                                    <li><span class="keyword">Scholarship:</span> Research, history, number of known
+                                        spells.
                                     </li>
                                 </ul>
                             </div>
@@ -375,15 +609,19 @@
 
                             <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
                                 <strong class="text-white block mb-1">Guard</strong>
-                                <p>Temporary Health. Always lost <strong>before Health</strong>. Guard cannot be healed once
+                                <p>Temporary Health. Always lost <strong>before Health</strong>. Guard cannot be healed
+                                    once
                                     lost; it must be regained by traits or external effects.</p>
                             </div>
 
                             <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
                                 <strong class="text-white block mb-1">Death</strong>
-                                <p>At <strong>0 Health</strong>, you are unconscious. While unconscious, only <strong>Final
-                                        Blows</strong> can harm you; you can resist <strong>4 Final Blows</strong> before
-                                    dying. Narrator rulings may adjust this.</p>
+                                <p>At <strong>0 Health</strong>, you are unconscious. While unconscious, only
+                                    <strong>Final
+                                        Blows</strong> can harm you; you can resist <strong>4 Final Blows</strong>
+                                    before
+                                    dying. Narrator rulings may adjust this.
+                                </p>
                             </div>
                         </div>
 
@@ -397,13 +635,15 @@
                                 </div>
                                 <div>
                                     <h4 class="text-white font-bold mb-2">Sleep (8 hrs)</h4>
-                                    <p>Full recovery of Health and Mana. Replenish charged trait uses and remove 1 point of
+                                    <p>Full recovery of Health and Mana. Replenish charged trait uses and remove 1 point
+                                        of
                                         Fatigue. Sleeping less than 6 hours gives partial benefit as determined by the
                                         Narrator.</p>
                                 </div>
                             </div>
                             <div class="mt-4 pt-4 border-t border-slate-700">
-                                <p class="text-xs text-red-400"><strong>Fatigue:</strong> -2 penalty to all rolls per level
+                                <p class="text-xs text-red-400"><strong>Fatigue:</strong> -2 penalty to all rolls per
+                                    level
                                     (stacking). Level 6 without sleep is fatal.</p>
                             </div>
                         </div>
@@ -420,14 +660,18 @@
                                     <h1 class="text-white block">Traits</h1>
                                     In this system, there is no classes, there is no proffesions. Instead features,
                                     abilities and bonuses are aquired from traits. These are gained as you level up, and
-                                    vary in price and power. They are the core of your characters progression, and should be
-                                    picked with consideration<br><br>At level 1 you have 2 trait points to spend, use them
+                                    vary in price and power. They are the core of your characters progression, and
+                                    should be
+                                    picked with consideration<br><br>At level 1 you have 2 trait points to spend, use
+                                    them
                                     wisely!
                                 </li>
                                 <li>
                                     <h1 class="text-white block">Leveling up</h1>
-                                    Leveling up is dicteted by the Narrator. Each level you will gain a trait point, and on
-                                    a few special levels skill points. These are used as mentioned above. You start at level
+                                    Leveling up is dicteted by the Narrator. Each level you will gain a trait point, and
+                                    on
+                                    a few special levels skill points. These are used as mentioned above. You start at
+                                    level
                                     1, and make your way to level 12.
                                 </li>
                                 <li>
@@ -515,7 +759,7 @@
                             <span class="section-number">08</span>
                             Spellcasting
                         </div>
-                       
+
 
                         <div class="rule-card">
                             <h3 class="section-header">Mana Growth</h3>
@@ -524,7 +768,8 @@
                             <div class="grid md:grid-cols-2 gap-6 mb-6">
                                 <div>
                                     <strong class="text-white">Upcasting</strong>
-                                    <p class="text-sm text-slate-400">Cast a spell at a higher level for enhanced effects.
+                                    <p class="text-sm text-slate-400">Cast a spell at a higher level for enhanced
+                                        effects.
                                         Cost: +1 Mana per level.</p>
                                 </div>
                                 <div>
@@ -615,14 +860,16 @@
                         </div>
                         <div class="rule-card">
                             <p class="mb-4"><strong>Armor & Weaponry + Proficiencies</strong></p>
-                            <p class="text-sm mb-4">You are restricted in how much of each type of equipment you can wear.
+                            <p class="text-sm mb-4">You are restricted in how much of each type of equipment you can
+                                wear.
                                 Your character sheet has slots (Armor, Shield Cloak). One piece of equipment per
                                 slot, unless a trait says otherwise.</p>
 
                             <div class="space-y-3 text-sm">
                                 <div class="bg-slate-900/30 p-2 rounded flex justify-between">
                                     <span>Armor</span>
-                                    <span class="text-slate-400">Your base armor is [4 + Fortitude], armor you wear grants a flat bonus.
+                                    <span class="text-slate-400">Your base armor is [4 + Fortitude], armor you wear
+                                        grants a flat bonus.
                                         <strong>Shields; 1-2, Light; 1-2, Medium; 2-3, Heavy: 4-5</strong></span>
                                 </div>
                                 <div class="bg-slate-900/30 p-2 rounded flex justify-between">
@@ -632,15 +879,21 @@
                                 </div>
                                 <div class="bg-slate-900/30 p-2 rounded flex justify-between">
                                     <span>Weapon Proficiencies</span>
-                                    <span class="text-slate-400"><strong>Might</strong> and <strong>Aim</strong> set your maximum investment in <strong>Melee</strong> and <strong>Ranged</strong> proficiencies. You must have <strong>1 point</strong> in a lower proficiency to advance, and may invest <strong>multiple</strong> points in the same proficiency.</span>
+                                    <span class="text-slate-400"><strong>Might</strong> and <strong>Aim</strong> set
+                                        your maximum investment in <strong>Melee</strong> and <strong>Ranged</strong>
+                                        proficiencies. You must have <strong>1 point</strong> in a lower proficiency to
+                                        advance, and may invest <strong>multiple</strong> points in the same
+                                        proficiency.</span>
                                 </div>
                                 <div class="bg-slate-900/30 p-2 rounded flex justify-between">
                                     <span>Armor Proficiencies</span>
-                                    <span class="text-slate-400">You gain armor proficiencies based on your Fortitude: Shields 1+, Light 2+, Medium 3+, Heavy 4+</span>
+                                    <span class="text-slate-400">You gain armor proficiencies based on your Fortitude:
+                                        Shields 1+, Light 2+, Medium 3+, Heavy 4+</span>
                                 </div>
 
                                 <div class="rule-card mt-4 p-4">
-                                    <p class="mb-4"><strong>Encumbrance Limit = Physique + (2 × Athletics Total)</strong>
+                                    <p class="mb-4"><strong>Encumbrance Limit = Physique + (2 × Athletics
+                                            Total)</strong>
                                     </p>
                                     <p class="text-sm mb-4">Item Weights: None (0), Light (1), Medium (2), Heavy (3),
                                         Cumbersome (4). </p>
@@ -661,7 +914,8 @@
                                         </div>
                                         <div class="bg-slate-900/30 p-2 rounded flex justify-between">
                                             <span>Crushed (&gt; 3× Limit)</span>
-                                            <span class="text-slate-400">Speed 0. Disadvantage on all checks. 1 damage / 10
+                                            <span class="text-slate-400">Speed 0. Disadvantage on all checks. 1 damage /
+                                                10
                                                 min.</span>
                                         </div>
                                     </div>
@@ -672,7 +926,7 @@
                     </section>
                 </div>
 
-                <div id="narrator-section">
+                <div id="combat-section">
                     <h2 class="text-4xl font-bold text-white mb-4">Combat Rules</h2>
                     <p class="text-lg text-indigo-300">These rules govern combat and all of its sub-systems.</p>
                     <div class="mb-12 pt-12 border-t border-slate-800"></div>
@@ -684,11 +938,13 @@
 
                         <div class="grid md:grid-cols-2 gap-6 text-sm">
                             <div>
-                                <p>Combat takes place on a <strong class="text-white">grid-based map</strong>. Movement is
+                                <p>Combat takes place on a <strong class="text-white">grid-based map</strong>. Movement
+                                    is
                                     declared on the grid as described below.</p>
                                 <ul class="list-disc ml-5 space-y-1 mt-2">
                                     <li>Each Tile = <strong>1 Unit of Speed</strong></li>
-                                    <li class="correct"> ✔ Movement is limited to tiles directly adjacent to one another.
+                                    <li class="correct"> ✔ Movement is limited to tiles directly adjacent to one
+                                        another.
                                     </li>
                                     <li class="wrong"> ✘ Diagonal movement does not skip over tiles.</li>
                                 </ul>
@@ -701,9 +957,11 @@
                             <div>
                                 <p>Jumping is an alternative to normal movement. It can be useful when trying to avoid
                                     <strong>Rough</strong> or <strong>Slippery</strong> terrain, or jumping over floor
-                                    hazards.</p>
+                                    hazards.
+                                </p>
                                 <ul class="list-disc ml-5 space-y-1 mt-2">
-                                    <li class="notice_blue"> ✎ The maximum distance you can jump is half your Speed (rounded
+                                    <li class="notice_blue"> ✎ The maximum distance you can jump is half your Speed
+                                        (rounded
                                         up)</li>
                                     <li class="wrong"> ✘ You cannot jump through an area if any space along the path is
                                         occupied.</li>
@@ -722,12 +980,14 @@
                                     <div class="condition-card"><strong>Firm:</strong> No movement penalties.</div>
                                 </li>
                                 <li>
-                                    <div class="condition-card"><strong>Rough:</strong> Each tile of movement costs 2 Units
+                                    <div class="condition-card"><strong>Rough:</strong> Each tile of movement costs 2
+                                        Units
                                         of speed.</div>
                                 </li>
                                 <li>
                                     <div class="condition-card"><strong>Slippery:</strong> You can only move in one
-                                        direction at a time; each turn you make will prompt a <strong>Reflex check</strong>.
+                                        direction at a time; each turn you make will prompt a <strong>Reflex
+                                            check</strong>.
                                     </div>
                                 </li>
                             </ul>
@@ -742,25 +1002,33 @@
 
                         <div class="grid md:grid-cols-2 gap-6 text-sm">
                             <div>
-                                <p>Size defines a creature’s "Hitbox" and affects rules like adjacency and AoE, which rely
+                                <p>Size defines a creature’s "Hitbox" and affects rules like adjacency and AoE, which
+                                    rely
                                     on measuring covered areas and nearby spaces. Understanding size interactions is
                                     essential.</p>
                                 <p>Creatures can also not ocupy the same space, this has only a few exceptions.</p>
                                 <ul class="list-disc ml-5 space-y-1 mt-2">
-                                    <li> <strong class="notice_blue">Small [1 x 1]:</strong> While sharing their tile size
+                                    <li> <strong class="notice_blue">Small [1 x 1]:</strong> While sharing their tile
+                                        size
                                         with medium, small creatures do appear smaller, and <b>CAN</b> occupy spaces of
                                         large creatures and above with no penalty.</li>
-                                    <li> <strong class="correct">Medium [1 x 1]:</strong>This is the standard tile size for
-                                        most creatures, players should not exceed this size without the Narrators express
+                                    <li> <strong class="correct">Medium [1 x 1]:</strong>This is the standard tile size
+                                        for
+                                        most creatures, players should not exceed this size without the Narrators
+                                        express
                                         permison.</li>
-                                    <li> <strong class="notice">Large [2 x 2]:</strong> Larger creatures, these will be your
-                                        alphas of certain animals, or possibly a large mech. Whatever you need really</li>
-                                    <li> <strong class="wrong">Huge [3 x 3]:</strong> These should only be used to represent
+                                    <li> <strong class="notice">Large [2 x 2]:</strong> Larger creatures, these will be
+                                        your
+                                        alphas of certain animals, or possibly a large mech. Whatever you need really
+                                    </li>
+                                    <li> <strong class="wrong">Huge [3 x 3]:</strong> These should only be used to
+                                        represent
                                         the biggest of the big, creatures that really aren't meant to be fought.</li>
                                 </ul>
                                 <br>
                                 <p>Creatures larger than huge should not have 1 solid "Hitbox" but should instead be
-                                    asembled out of multiple smaller size categories (Head is Medium, Body is huge, wings
+                                    asembled out of multiple smaller size categories (Head is Medium, Body is huge,
+                                    wings
                                     are Large etc.)</p>
                             </div>
 
@@ -770,7 +1038,8 @@
 
 
                             <div>
-                                <p>Certain spells and effects will specify a Radius which is useful for circular effects on a
+                                <p>Certain spells and effects will specify a Radius which is useful for circular effects
+                                    on a
                                     square grid —though using a ruler to draw a circle is often simplest.</p>
                                 <ul class="list-disc ml-5 space-y-1 mt-2">
                                     <li class="notice"> ✎ Radius will always start as an [3 x 3] square (1 unit radius),
@@ -782,7 +1051,8 @@
                                         effects, it can also be centered on the caster of said effects.</li>
                                 </ul>
                                 <br>
-                                <p>Squares are simpler where it is simply specified a [A x A], the center of even squares
+                                <p>Squares are simpler where it is simply specified a [A x A], the center of even
+                                    squares
                                     should align with the lines on the grid.</p>
                             </div>
 
@@ -792,12 +1062,15 @@
 
 
                             <div>
-                                <p>Certain spells and effects will specify a Cone, this is determined by the formulas below,
+                                <p>Certain spells and effects will specify a Cone, this is determined by the formulas
+                                    below,
                                     however rulers and shapes can also be used to represent this.</p>
                                 <ul class="list-disc ml-5 space-y-1 mt-2">
-                                    <li class="notice_blue"> ✎ Cones are represented by a triangle of tiles, the Width of
+                                    <li class="notice_blue"> ✎ Cones are represented by a triangle of tiles, the Width
+                                        of
                                         the cone is equal to half of the Height rounded down</li>
-                                    <li>Cones will always be odd, and the "Center" of the cone alignes with the position of
+                                    <li>Cones will always be odd, and the "Center" of the cone alignes with the position
+                                        of
                                         the caster.</li>
                                     <li>Cones can be diagonal, following the same rules just tilted.</li>
                                 </ul>
@@ -822,7 +1095,8 @@
                                 <ul class="list-disc ml-5 space-y-2">
                                     <li class="correct"> ✔ Any creature within range can be shot at.</li>
                                     <li class="wrong">✘ Attacks beyond range automatically fail.</li>
-                                    <li class="notice">✎ Ranged attacks while adjacent to an enemy suffer Disadvantage</li>
+                                    <li class="notice">✎ Ranged attacks while adjacent to an enemy suffer Disadvantage
+                                    </li>
                                     <li>Cover will impose penalties outlined in the Cover section below.</li>
                                     <li>Elevation may negate cover (Narrator ruling)</li>
                                 </ul>
@@ -833,7 +1107,8 @@
                             </div>
 
                             <div>
-                                <p>Adjacency is important when considering melee combat, aswell as ranged. Being adjacent to
+                                <p>Adjacency is important when considering melee combat, aswell as ranged. Being
+                                    adjacent to
                                     another creature might not think what you think it means.</p>
                                 <ul class="list-disc ml-5 space-y-1 mt-2">
                                     <li class="notice"> ✎ Creatures in a 1 unit radius around the target are considered
@@ -848,8 +1123,10 @@
                             </div>
                             <div>
                                 <ul class="list-disc ml-5 space-y-2">
-                                    <li class="notice">✎ Creatures count as an <strong class="notice">"Obstruction"</strong>,
-                                        which is considered <strong class="notice">Partial (Reinforced) Cover</strong></li>
+                                    <li class="notice">✎ Creatures count as an <strong
+                                            class="notice">"Obstruction"</strong>,
+                                        which is considered <strong class="notice">Partial (Reinforced) Cover</strong>
+                                    </li>
                                 </ul>
                             </div>
 
@@ -869,16 +1146,19 @@
                                         depending on material and reinforcement.</div>
                                 </li>
                                 <li>
-                                    <div class="condition-card"><strong>Half:</strong> Aiming at targets behind this cover
+                                    <div class="condition-card"><strong>Half:</strong> Aiming at targets behind this
+                                        cover
                                         will impose disadvantage on the roll.</div>
                                 </li>
                                 <li>
-                                    <div class="condition-card"><strong>Full:</strong> You cannot aim at targets behind full
+                                    <div class="condition-card"><strong>Full:</strong> You cannot aim at targets behind
+                                        full
                                         cover (Some traits bypass this restriction.)</div>
                                 </li>
                             </ul>
                             <p class="mt-2 text-sm text-slate-400">Cover is made of various materials and may have
-                                durability. It only applies to ranged attacks; melee attacks can damage the cover directly
+                                durability. It only applies to ranged attacks; melee attacks can damage the cover
+                                directly
                                 to reduce its durability. Narrator should track cover durability if used.</p>
                         </div>
                     </section>
@@ -892,7 +1172,8 @@
                         <div class="rule-card mb-6">
                             <h3 class="text-white font-bold mb-4">The Turn Structure</h3>
                             <p class="mb-4"><strong>Scene:</strong> A scene represents one full cycle of all creatures’
-                                turns. Once every creature has acted, the scene ends and a new one begins; a scene can be
+                                turns. Once every creature has acted, the scene ends and a new one begins; a scene can
+                                be
                                 extended by Narrator choice.</p>
                             <p class="mb-4"><strong>Initiative:</strong> Determined by order of engagement and Narrator
                                 rulings. When a creature falls unconscious, it is moved to the bottom of the turn order
@@ -900,16 +1181,19 @@
                             <p class="mb-4"><strong>NPC Initiative:</strong> NPCs have a <span
                                     class="text-indigo-400">Turn Delay</span> based on when they joined combat. The turn
                                 delay is specified in their stat block.</p>
-                            <p class="mb-4"><strong>Ambush:</strong> When combat is initiated with an unaware target, the
+                            <p class="mb-4"><strong>Ambush:</strong> When combat is initiated with an unaware target,
+                                the
                                 initiator acts before normal initiative or turn delay.</p>
-                            <p class="mb-4"><strong>Opportunity Attack:</strong> When a creature leaves another creature’s
+                            <p class="mb-4"><strong>Opportunity Attack:</strong> When a creature leaves another
+                                creature’s
                                 melee range, the remaining creature may make a melee attack against it.</p>
                             <div class="bg-slate-800 p-4 rounded border border-slate-600 mb-4">
                                 <strong class="text-white">Action Economy</strong><br>
                                 Each Turn = <strong>2 Actions</strong>. Only 1 Attack per turn by default (some traits
                                 bypass).<br>
                                 Each Scene = <strong>1 Reaction</strong>.<br>
-                                Held Action = You can hold 1 Action until your next turn, triggering it when a declared condition is met.
+                                Held Action = You can hold 1 Action until your next turn, triggering it when a declared
+                                condition is met.
                             </div>
                         </div>
 
@@ -981,7 +1265,8 @@
                                     <strong class="text-white block mb-1">Attributes</strong>
                                     <p>Companions only have 3 core attributes, Physique, Mystique and Technique.</p>
                                     <br>
-                                    <p>Crafted companions have all of their stats set to 2, unless otherwise specified.</p>
+                                    <p>Crafted companions have all of their stats set to 2, unless otherwise specified.
+                                    </p>
                                     <br>
                                     <p>Tamed companions get these stats from their original stat block</p>
                                 </div>
@@ -990,7 +1275,8 @@
                         </div>
                         <p class="text-xs text-slate-500">
                             Companions do not have Skills, Grace or Mana unless explicitly stated.
-                            <br><br>Companions can have Traits, this is determined by the Narrator. When taming a companion,
+                            <br><br>Companions can have Traits, this is determined by the Narrator. When taming a
+                            companion,
                             some will have a "Tamed trait" on their sheet.
                         </p>
 
@@ -1005,13 +1291,15 @@
 
                                 <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
                                     <strong class="text-white block mb-1">Final Blow</strong>
-                                    <p>Enemies may finish off companions as an Action. If a Blow is dealt with no resistance
+                                    <p>Enemies may finish off companions as an Action. If a Blow is dealt with no
+                                        resistance
                                         left, the Companion Dies.</p>
                                 </div>
                             </div>
 
                             <p class="text-xs text-slate-400">
-                                Narrators are encouraged to treat companion deaths narratively, as if a player would die.
+                                Narrators are encouraged to treat companion deaths narratively, as if a player would
+                                die.
                                 Although work within reason, killing a pet cat is not a priority in combat.
                             </p>
                         </div>
@@ -1038,7 +1326,8 @@
                             <h3 class="text-xl text-white font-bold">Issuing Commands</h3>
 
                             <p class="text-sm">
-                                A companion only performs complex actions when commanded. Otherwise they will act within their
+                                A companion only performs complex actions when commanded. Otherwise they will act within
+                                their
                                 natural instinct, or follow a previously issued command.
                             </p>
 
@@ -1050,13 +1339,15 @@
 
                                 <div class="condition-card">
                                     <strong class="text-white">Simple Direction (Free)</strong>
-                                    <p>Follow, Stay or Retreat. Other smaller commands may fit here, Narrators Discretion.
+                                    <p>Follow, Stay or Retreat. Other smaller commands may fit here, Narrators
+                                        Discretion.
                                     </p>
                                 </div>
                             </div>
 
                             <p class="text-xs text-slate-400">
-                                Commands must be clear and reasonable, the Companion will always act to its best abilities
+                                Commands must be clear and reasonable, the Companion will always act to its best
+                                abilities
                                 to fulfill the command.
                             </p>
                         </div>
@@ -1066,7 +1357,8 @@
 
                             <ul class="list-disc ml-5 text-sm space-y-2">
                                 <li>Only one active combat companion per character by default</li>
-                                <li>Having multiple companions is left to the Narrators discretion, either having to switch
+                                <li>Having multiple companions is left to the Narrators discretion, either having to
+                                    switch
                                     them out during rests, or allowing it.</li>
                                 <li>There are traits in place that allow multiple companions.</li>
                                 <li>Companions summoned from spells do not count against this total.</li>
@@ -1091,114 +1383,138 @@
                             <div class="grid md:grid-cols-3 gap-4 text-sm">
                                 <div class="condition-card">
                                     <strong class="text-red-400">Poison</strong>
-                                    <p>This condition stacks. When you take Poison damage, gain stacks equal to the damage
+                                    <p>This condition stacks. When you take Poison damage, gain stacks equal to the
+                                        damage
                                         taken. Each scene, one stack expires and deals 1 Poison damage while active.</p>
                                 </div>
 
                                 <div class="condition-card">
                                     <strong class="text-red-400">Bleed</strong>
-                                    <p>This condition stacks. Each stack reduces healing by 1. One stack expires each scene.
+                                    <p>This condition stacks. Each stack reduces healing by 1. One stack expires each
+                                        scene.
                                     </p>
                                 </div>
 
                                 <div class="condition-card">
                                     <strong class="text-red-400">Slow</strong>
-                                    <p>This condition stacks. You lose 1 tile of movement per stack, cannot make reactions
-                                        while you have any stacks, and all stacks expire next scene if not reapplied.</p>
+                                    <p>This condition stacks. You lose 1 tile of movement per stack, cannot make
+                                        reactions
+                                        while you have any stacks, and all stacks expire next scene if not reapplied.
+                                    </p>
                                 </div>
 
                                 <div class="condition-card">
                                     <strong class="text-red-400">Stunned</strong>
-                                    <p>This condition stacks. Each stack reduces your actions per turn by 1; if reduced to
+                                    <p>This condition stacks. Each stack reduces your actions per turn by 1; if reduced
+                                        to
                                         0, your turn is skipped.</p>
                                 </div>
 
                                 <div class="condition-card">
                                     <strong class="text-red-400">Prone</strong>
-                                    <p>Your movement becomes 0, attacks against you have advantage, and standing up costs
+                                    <p>Your movement becomes 0, attacks against you have advantage, and standing up
+                                        costs
                                         half your movement.</p>
                                 </div>
 
                                 <div class="condition-card">
                                     <strong class="text-red-400">Restrained</strong>
-                                    <p>Your movement becomes 0, attacks against you have advantage. Ending this condition
-                                        depends on the type of restraints, though usually an Athletics check is required.
+                                    <p>Your movement becomes 0, attacks against you have advantage. Ending this
+                                        condition
+                                        depends on the type of restraints, though usually an Athletics check is
+                                        required.
                                     </p>
                                 </div>
 
                                 <div class="condition-card">
                                     <strong class="text-red-400">Exhausted</strong>
-                                    <p>This condition stacks. Each stack grants 1 temporary Fatigue; one stack expires each
+                                    <p>This condition stacks. Each stack grants 1 temporary Fatigue; one stack expires
+                                        each
                                         scene, and Fatigue gained this way cannot be fatal.</p>
                                 </div>
 
                                 <div class="condition-card">
                                     <strong class="text-red-400">Weakened</strong>
-                                    <p>This condition stacks. Each stack reduces damage dealt by 1; if an attack would deal
+                                    <p>This condition stacks. Each stack reduces damage dealt by 1; if an attack would
+                                        deal
                                         0 damage, it cannot be made. All stacks expire next scene if not reapplied.</p>
                                 </div>
 
                                 <div class="condition-card">
                                     <strong class="text-red-400">Blinded</strong>
-                                    <p>You have disadvantage on attacks you make, and attacks against you gain advantage.
+                                    <p>You have disadvantage on attacks you make, and attacks against you gain
+                                        advantage.
                                     </p>
                                 </div>
-                                
+
                                 <div class="condition-card">
                                     <strong class="text-red-400">Taunt</strong>
                                     <p>You are taunted by a creature, your next attack must target them.
                                     </p>
                                 </div>
-                                
+
                                 <div class="condition-card">
                                     <strong class="text-red-400">Burn</strong>
-                                    <p>Each of your turns with this condition you will take 1 damage, it expires at the end of the Scene if it was not reapplied.</p>
+                                    <p>Each of your turns with this condition you will take 1 damage, it expires at the
+                                        end of the Scene if it was not reapplied.</p>
                                 </div>
 
                                 <div class="condition-card">
                                     <strong class="text-red-400">Chilled</strong>
-                                    <p>Your movement speed is halved, it expires at the end of the Scene if it was not reapplied.</p>
+                                    <p>Your movement speed is halved, it expires at the end of the Scene if it was not
+                                        reapplied.</p>
                                 </div>
-            
+
                                 <div class="condition-card">
                                     <strong class="text-red-400">Compromised</strong>
-                                    <p>This condition stacks. Each stack reduces armor by 1; if you reach 0 Armor, all attacks automatically hit. Each Scene 1 Stack expires.</p>
+                                    <p>This condition stacks. Each stack reduces armor by 1; if you reach 0 Armor, all
+                                        attacks automatically hit. Each Scene 1 Stack expires.</p>
                                 </div>
-                                
+
                                 <div class="condition-card">
                                     <strong class="text-red-400">Madness</strong>
-                                    <p>While you have this condition, every time you cast a spell roll [1d6], you must pay the result instead of the mana cost.</p>
+                                    <p>While you have this condition, every time you cast a spell roll [1d6], you must
+                                        pay the result instead of the mana cost.</p>
                                 </div>
 
                                 <div class="condition-card">
                                     <strong class="text-red-400">Charmed</strong>
-                                    <p>While you have this condition you must follow commands of the creature that charmed you (The commands cannot be harmful to you.), it expires at the end of the Scene if it was not reapplied.</p>
+                                    <p>While you have this condition you must follow commands of the creature that
+                                        charmed you (The commands cannot be harmful to you.), it expires at the end of
+                                        the Scene if it was not reapplied.</p>
                                 </div>
                             </div>
                             <div class="grid md:grid-cols-3 gap-4 text-sm">
-                                
-                                <div class="condition-card">
-                                        <strong class="text-green-400">Mantra</strong>
-                                        <p>This condition stacks. Each of your turns you heal 1 health and reduce the number of Stacks by 1. The healing increases for each 4 Stacks.</p>
-                                    </div>
 
                                 <div class="condition-card">
-                                        <strong class="text-green-400">Courage</strong>
-                                        <p>This condition stacks. Each stack grants +1 to resisting Intimidation and Fear effects. Each time you attempt to resist this kind of effect a Stack Expires.</p>
-                                    </div>
-                                
+                                    <strong class="text-green-400">Mantra</strong>
+                                    <p>This condition stacks. Each of your turns you heal 1 health and reduce the number
+                                        of Stacks by 1. The healing increases for each 4 Stacks.</p>
+                                </div>
+
                                 <div class="condition-card">
-                                        <strong class="text-green-400">Haste</strong>
-                                        <p>This condition stacks. Each Stack grants an additional Action on your turn. All stacks expire at the end of the Scene if not reapplied.</p>
-                                    </div>
+                                    <strong class="text-green-400">Courage</strong>
+                                    <p>This condition stacks. Each stack grants +1 to resisting Intimidation and Fear
+                                        effects. Each time you attempt to resist this kind of effect a Stack Expires.
+                                    </p>
+                                </div>
+
+                                <div class="condition-card">
+                                    <strong class="text-green-400">Haste</strong>
+                                    <p>This condition stacks. Each Stack grants an additional Action on your turn. All
+                                        stacks expire at the end of the Scene if not reapplied.</p>
+                                </div>
                                 <div class="condition-card">
                                     <strong class="text-green-400">Speed</strong>
-                                    <p>This condition stacks. You gain 1 tile of movement per stack, you can make 2 reactions as long as you have any stacks, and all stacks expire next scene if not reapplied.</p>
+                                    <p>This condition stacks. You gain 1 tile of movement per stack, you can make 2
+                                        reactions as long as you have any stacks, and all stacks expire next scene if
+                                        not reapplied.</p>
                                 </div>
 
                                 <div class="condition-card">
                                     <strong class="text-green-400">Bolstered</strong>
-                                    <p>This condition stacks. You gain 1 Armor per stack, one stack expires each time you take Damage.</p>
+                                    <p>This condition stacks. You gain 1 Armor per stack, one stack expires each time
+                                        you take Damage.</p>
                                 </div>
 
                                 <div class="condition-card">
@@ -1206,7 +1522,7 @@
                                     <p>As long as you have this Condition you cannot be Taunted.</p>
                                 </div>
                             </div>
-        
+
                             <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4 text-xs text-slate-400">
                                 <strong class="text-white">Removal</strong><br>
                                 Conditions may require checks, items, magic, or rest. Multiple stacks may be removed at
@@ -1222,7 +1538,9 @@
                         <h2 class="text-3xl text-white font-bold">Mounted Combat</h2>
 
                         <p class="text-sm text-slate-400 max-w-3xl">
-                            Mounts are trusted steeds or fancy rides, offering a helping hand to those that need, they are faster and stronger than your two feet, with the following rules you will learn how they can help you out in combat!
+                            Mounts are trusted steeds or fancy rides, offering a helping hand to those that need, they
+                            are faster and stronger than your two feet, with the following rules you will learn how they
+                            can help you out in combat!
                         </p>
 
                         <div>
@@ -1259,7 +1577,7 @@
                                 an <strong>Accuracy penalty</strong> equal to the rider’s
                                 <strong>Reflex</strong>. When attacking a mounted creature, the
                                 attacker must <strong>declare whether they are targeting the rider
-                                or the mount</strong>.
+                                    or the mount</strong>.
                             </p>
                             <p class="text-sm text-slate-300 max-w-3xl mt-2">
                                 <strong>Area effects</strong> affect both rider and mount, while
@@ -1382,592 +1700,822 @@
                             </p>
                         </div>
                     </section>
+
+
+
+                </div>
+                <div id="narrator-section">
+                    <div class="mb-12">
+                        <h2 class="text-4xl font-bold text-white mb-4">Narrator Rules</h2>
+                        <p class="text-lg text-indigo-300">Rules and Advice for Running the Game</p>
+                    </div>
+                    <div class="mb-12 pt-12 border-t border-slate-800"></div>
                     <section id="narrator" class="scroll-offset-center">
-    <div class="rule-card">
+                        <div class="section-header">
+                            <span class="section-number">14</span>
+                            Overview & General Rules
+                        </div>
+                        <div class="rule-card">
 
-        <div class="section-header">
-            <div class="section-number">14</div>
-            Narrator Rules
-        </div>
+                            <!-- Overview -->
+                            <h3 class="text-xl text-white font-bold mb-3">Overview</h3>
+                            <p class="mb-4">
+                                The Narrator leads the story. You present the world, control its forces, and guide the
+                                flow of events
+                                while the players shape outcomes through their choices. You are the final authority on
+                                rules,
+                                rulings, and narrative direction.
+                            </p>
+                            <p class="mb-4">
+                                Your responsibility extends beyond mechanics. You maintain tone, fairness, and player
+                                safety.
+                                Conflict between characters may enrich the story — conflict between players does not.
+                                Protect the table’s enjoyment and keep the experience collaborative.
+                            </p>
+                            <div class="condition-card text-sm mb-6">
+                                Mythlight is designed to be modified. Adjust, remove, or expand rules as needed to
+                                support your story.
+                                The system is a framework — you are its interpreter.
+                            </div>
 
-        <!-- Overview -->
-        <h3 class="text-xl text-white font-bold mb-3">Overview</h3>
-        <p class="mb-4">
-            The Narrator leads the story. You present the world, control its forces, and guide the flow of events
-            while the players shape outcomes through their choices. You are the final authority on rules,
-            rulings, and narrative direction.
-        </p>
-        <p class="mb-4">
-            Your responsibility extends beyond mechanics. You maintain tone, fairness, and player safety.
-            Conflict between characters may enrich the story — conflict between players does not.
-            Protect the table’s enjoyment and keep the experience collaborative.
-        </p>
-        <div class="condition-card text-sm mb-6">
-            Mythlight is designed to be modified. Adjust, remove, or expand rules as needed to support your story.
-            The system is a framework — you are its interpreter.
-        </div>
+                            <!-- System Mastery -->
+                            <h3 class="text-xl text-white font-bold mb-3">System Familiarity</h3>
+                            <p class="mb-6">
+                                Familiarize yourself with the core mechanics before running a session. You are not
+                                expected to
+                                memorize everything, but you should understand how the system flows.
+                                Checking the rules mid-session is acceptable, and players should be encouraged to know
+                                their own abilities.
+                            </p>
 
-        <!-- System Mastery -->
-        <h3 class="text-xl text-white font-bold mb-3">System Mastery</h3>
-        <p class="mb-6">
-            Familiarize yourself with the core mechanics before running a session. You are not expected to
-            memorize everything, but you should understand how the system flows.
-            Checking the rules mid-session is acceptable, and players should be encouraged to know their own abilities.
-        </p>
+                            <!-- Starting Resources & Equipment -->
+                            <h3 class="text-xl text-white font-bold mb-3">Starting Resources & Equipment</h3>
+                            <p class="mb-4">
+                                Determine what resources characters begin with. Early equipment influences the tone and
+                                difficulty
+                                of the first several sessions. Choose one of the following approaches, or combine them:
+                            </p>
 
-        <!-- Starting Resources & Equipment -->
-        <h3 class="text-xl text-white font-bold mb-3">Starting Resources & Equipment</h3>
-        <p class="mb-4">
-            Determine what resources characters begin with. Early equipment influences the tone and difficulty
-            of the first several sessions. Choose one of the following approaches, or combine them:
-        </p>
+                            <ul class="list-disc ml-6 space-y-3 text-sm mb-6">
+                                <li>
+                                    <strong>Starting Funds:</strong> Provide an appropriate amount of currency based on
+                                    your setting.
+                                    Players purchase their own gear within reason.
+                                </li>
+                                <li>
+                                    <strong>Starting Gear:</strong> Provide a predefined loadout. A typical baseline
+                                    includes
+                                    light or medium armor, one proficient weapon, modest funds, and essential supplies.
+                                </li>
+                            </ul>
 
-        <ul class="list-disc ml-6 space-y-3 text-sm mb-6">
-            <li>
-                <strong>Starting Funds:</strong> Provide an appropriate amount of currency based on your setting.
-                Players purchase their own gear within reason.
-            </li>
-            <li>
-                <strong>Starting Gear:</strong> Provide a predefined loadout. A typical baseline includes
-                light or medium armor, one proficient weapon, modest funds, and essential supplies.
-            </li>
-        </ul>
+                            <div class="condition-card text-sm mb-6">
+                                Equipment should feel grounded in the narrative.
+                                Consider how each character acquired their starting items.
+                            </div>
 
-        <div class="condition-card text-sm mb-6">
-            Equipment should feel grounded in the narrative.
-            Consider how each character acquired their starting items.
-        </div>
+                            <!-- Tools & Proficiencies -->
+                            <h3 class="text-xl text-white font-bold mb-3">Tools & Tool Proficiencies</h3>
+                            <p class="mb-4">
+                                Tools enhance specific skills. You may define toolsets for any skill category.
+                                Tools typically grant a <strong>+1 to +3 bonus</strong> when appropriately applied.
+                            </p>
+                            <p class="mb-6">
+                                Tools are defined by purpose rather than base skill (e.g., Brewing Tools, Crafting
+                                Tools).
+                                Characters gain tool proficiencies through traits, and may begin play with tools
+                                they are proficient in at your discretion.
+                            </p>
 
-        <!-- Tools & Proficiencies -->
-        <h3 class="text-xl text-white font-bold mb-3">Tools & Tool Proficiencies</h3>
-        <p class="mb-4">
-            Tools enhance specific skills. You may define toolsets for any skill category.
-            Tools typically grant a <strong>+1 to +3 bonus</strong> when appropriately applied.
-        </p>
-        <p class="mb-6">
-            Tools are defined by purpose rather than base skill (e.g., Brewing Tools, Crafting Tools).
-            Characters gain tool proficiencies through traits, and may begin play with tools
-            they are proficient in at your discretion.
-        </p>
+                            <!-- Creature Taming -->
+                            <h3 class="text-xl text-white font-bold mb-3">Creature Taming</h3>
+                            <p class="mb-4">
+                                Characters may attempt to tame creatures when the narrative allows it and required
+                                checks are met.
+                                The difficulty, time, and risk depend on the creature’s nature.
+                            </p>
+                            <p class="mb-6">
+                                Small or docile creatures may require patience and care. Dangerous creatures carry real
+                                risk.
+                                Combat effectiveness with tamed creatures is typically restricted to characters
+                                with appropriate traits.
+                            </p>
 
-        <!-- Creature Taming -->
-        <h3 class="text-xl text-white font-bold mb-3">Creature Taming</h3>
-        <p class="mb-4">
-            Characters may attempt to tame creatures when the narrative allows it and required checks are met.
-            The difficulty, time, and risk depend on the creature’s nature.
-        </p>
-        <p class="mb-6">
-            Small or docile creatures may require patience and care. Dangerous creatures carry real risk.
-            Combat effectiveness with tamed creatures is typically restricted to characters
-            with appropriate traits.
-        </p>
+                        </div>
+                    </section>
+                    <section id="effect-stack" class="scroll-offset-center">
+                        <div class="section-header">
+                            <span class="section-number">15</span>
+                            Effect Stack
+                        </div>
+                        <div class="rule-card">
 
+                            <p class="mb-4">
+                                Multiple effects may modify the same stat or apply similar bonuses and penalties.
+                                To prevent confusion, all modifiers are resolved in a fixed order.
+                                This ordering ensures consistency and balance when many effects overlap.
+                            </p>
+
+                            <table class="w-full text-sm text-slate-300 border border-slate-700 rounded-lg mb-6">
+                                <thead class="bg-slate-800 text-slate-200">
+                                    <tr>
+                                        <th class="p-2 text-left">Modifier Type</th>
+                                        <th class="p-2 text-left">Examples</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">1. Paths</td>
+                                        <td class="p-2">Path traits that directly modify stats.</td>
+                                    </tr>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">2. Traits</td>
+                                        <td class="p-2">Character traits that provide bonuses or penalties.</td>
+                                    </tr>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">3. Spells / Items / Crafts</td>
+                                        <td class="p-2">Temporary effects from magic, equipment, or crafted items.</td>
+                                    </tr>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">4. Conditions / Battlefield Hazards</td>
+                                        <td class="p-2">Ongoing effects from conditions or environmental factors.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h3 class="text-xl text-white font-bold mb-3">Example: Modifying Speed (Base 5)</h3>
+
+                            <div class="space-y-4 text-sm mb-6">
+
+                                <div class="condition-card">
+                                    <strong class="text-indigo-400">1. Paths</strong>
+                                    <p>
+                                        Path effects apply first.
+                                        Example: “Lose 1 Movement Speed, gain 2 Damage.”
+                                        5 → 4
+                                    </p>
+                                </div>
+
+                                <div class="condition-card">
+                                    <strong class="text-indigo-400">2. Traits</strong>
+                                    <p>
+                                        Traits apply next. Direct reductions modify the stat immediately.
+                                        If a trait applies stacks (such as Slow), those stacks resolve later
+                                        under Conditions.
+                                        <br>4 → 2 (if reduced by 2)
+                                    </p>
+                                </div>
+
+                                <div class="condition-card">
+                                    <strong class="text-indigo-400">3. Spells / Items / Crafts</strong>
+                                    <p>
+                                        Temporary or external modifiers apply after Traits.
+                                        Example: Boots granting +3 Speed.
+                                        <br>2 → 5
+                                    </p>
+                                </div>
+
+                                <div class="condition-card">
+                                    <strong class="text-indigo-400">4. Conditions / Battlefield Hazards</strong>
+                                    <p>
+                                        Ongoing conditions resolve last.
+                                        Example: Rough terrain halves movement when moving through it.
+                                        Final calculations are based on the fully modified value.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <div>
+                                Apply this order consistently.
+                                In simple cases the result may appear identical regardless of order,
+                                but in complex interactions proper sequencing is essential for balance.
+                            </div>
+
+                        </div>
+                    </section>
+                    <section id="cs-difficulty" class="scroll-offset-center">
+                        <div class="section-header">
+                            <div class="section-number">16</div>
+                            CS Difficulty & Social Interactions
+                        </div>
+                        <div class="rule-card">
+
+
+
+                            <p class="mb-4">
+                                Whenever a player attempts an action with uncertain outcome, assign a CS (Challenge
+                                Score)
+                                based on how difficult the task is. This applies to physical feats, knowledge checks,
+                                environmental interaction, and social encounters.
+                            </p>
+
+                            <table id="CS_difficulty"
+                                class="w-full text-sm text-slate-300 border border-slate-700 rounded-lg mb-6">
+                                <thead class="bg-slate-800 text-slate-200">
+                                    <tr>
+                                        <th class="p-2 text-left">Difficulty</th>
+                                        <th class="p-2 text-left">CS Range</th>
+                                        <th class="p-2 text-left">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">Trivial</td>
+                                        <td class="p-2">4 (±2)</td>
+                                        <td class="p-2">Easily accomplished by anyone with basic competence.</td>
+                                    </tr>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">Easy</td>
+                                        <td class="p-2">6 (±2)</td>
+                                        <td class="p-2">Requires some effort or skill, but generally achievable.</td>
+                                    </tr>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">Standard</td>
+                                        <td class="p-2">8 (±2)</td>
+                                        <td class="p-2">A reasonable challenge for a competent character.</td>
+                                    </tr>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">Difficult</td>
+                                        <td class="p-2">10 (±2)</td>
+                                        <td class="p-2">Requires significant skill, preparation, or luck.</td>
+                                    </tr>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">Hard</td>
+                                        <td class="p-2">12 (±2)</td>
+                                        <td class="p-2">A formidable challenge that may require multiple attempts or
+                                            creative solutions.</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                            <p class="mb-4 text-sm">
+                                The ±2 range allows you to slightly adjust within a tier depending on context,
+                                preparation, tools, advantages, or narrative positioning.
+                            </p>
+
+                            <div class="condition-card text-sm mb-6">
+                                Impossible actions are not assigned a CS.
+                                You are not required to give players a chance at accomplishing something
+                                that cannot reasonably occur within the narrative.
+                            </div>
+
+                            <!-- Social Interactions -->
+                            <h3 class="text-xl text-white font-bold mb-3">Social Interactions</h3>
+
+                            <p class="mb-4">
+                                Social encounters should default to roleplay first. If discussion and
+                                character interaction reasonably resolve the situation, no roll is needed.
+                                Rolls are used when outcome is uncertain or contested.
+                            </p>
+
+                            <p class="mb-4">
+                                When a roll is required (Persuasion, Deception, Intimidation, etc.),
+                                determine the base CS from the difficulty table, then apply modifiers.
+                            </p>
+                            <table id="CS_difficulty"
+                                class="w-full text-sm text-slate-300 border border-slate-700 rounded-lg mb-6">
+                                <thead class="bg-slate-800 text-slate-200">
+                                    <tr>
+                                        <th class="p-2 text-left">Difficulty</th>
+                                        <th class="p-2 text-left">CS Range</th>
+                                        <th class="p-2 text-left">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">Trivial</td>
+                                        <td class="p-2">4 + Target Insight ± Reputation Modifier</td>
+                                        <td class="p-2">Non controversial statements, simple requests, or obvious
+                                            truths.</td>
+                                    </tr>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">Easy</td>
+                                        <td class="p-2">6 + Target Insight ± Reputation Modifier</td>
+                                        <td class="p-2">Simple but not trivial interactions, such as making a polite
+                                            request.</td>
+                                    </tr>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">Standard</td>
+                                        <td class="p-2">8 + Target Insight ± Reputation Modifier</td>
+                                        <td class="p-2">Convincing someone to act in a way that is not obvious or
+                                            straightforward.</td>
+                                    </tr>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">Difficult</td>
+                                        <td class="p-2">10 + Target Insight ± Reputation Modifier</td>
+                                        <td class="p-2">Actively convincing someone to do something they are reluctant
+                                            to do.</td>
+                                    </tr>
+                                    <tr class="border-t border-slate-700">
+                                        <td class="p-2">Hard</td>
+                                        <td class="p-2">12 + Target Insight ± Reputation Modifier</td>
+                                        <td class="p-2">Asking a near impossible request, or something they are
+                                            unwilling to do.</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                            <p class="text-sm mb-6">
+                                <strong>Reputation</strong> reflects how the target perceives the character.
+                                Positive reputation may lower the effective difficulty,
+                                while hostility or distrust may increase it.
+                            </p>
+
+                            <div class="condition-card text-sm">
+                                Adjust freely for tone and narrative stakes.
+                                Social encounters are dynamic, and the outcome should reflect the characters'
+                                personalities, relationships, and the context of the interaction.
+                            </div>
+
+                        </div>
+                    </section>
+                    <section id="campaign-prep" class="scroll-offset-center">
+                        <div class="section-header">
+                            <div class="section-number">17</div>
+                            Campaign & Session Preparation
+                        </div>
+
+                        <div class="rule-card">
+
+
+
+                            <!-- Campaign Preparation -->
+                            <h3 class="text-xl text-white font-bold mb-3">Campaign Preparation</h3>
+
+                            <p class="mb-4">
+                                Before the first session, establish the structural foundations of your campaign.
+                                Players should understand the tone, themes, and expectations of the world
+                                they are entering.
+                            </p>
+
+                            <ul class="list-disc ml-6 space-y-2 text-sm mb-6">
+                                <li><strong>World Framework:</strong> Define the setting’s stability, magic presence,
+                                    and political or cultural tensions.</li>
+                                <li><strong>Tone & Boundaries:</strong> Clarify narrative tone and establish player
+                                    safety expectations.</li>
+                                <li><strong>Character Integration:</strong> Ensure each character has a reason to exist
+                                    within the world and alongside the party.</li>
+                                <li><strong>Core Conflict:</strong> Introduce a central tension, threat, or mystery that
+                                    drives early engagement.</li>
+                            </ul>
+
+                            <!-- Worldbuilding & World Preparation -->
+                            <h3 class="text-xl text-white font-bold mb-3">Worldbuilding & World Preparation</h3>
+
+                            <p class="mb-4">
+                                Strong campaigns are built on strong preparation. Whether your story spans
+                                three sessions or thirty, a well-prepared world allows you to respond
+                                confidently to player decisions.
+                            </p>
+
+                            <p class="mb-6 text-sm">
+                                Preparation creates structure and a framework for your improvisation. It is not a script
+                                to be followed rigidly, but a foundation to support player agency.
+                            </p>
+                            <div class="condition-card text-sm mb-6">
+
+                                <!-- NPCs -->
+                                <h4 class="text-lg text-white font-semibold mb-2">1. NPCs</h4>
+                                <p class="mb-4 text-sm">
+                                    Even minor NPCs require at least minimal preparation.
+                                    Players frequently ask for names, occupations, personalities, and motivations.
+                                    Keep a quick-reference list for on-the-spot NPC creation:
+                                    names, traits, quirks, and basic goals.
+                                </p>
+
+                                <!-- Quests -->
+                                <h4 class="text-lg text-white font-semibold mb-2">2. Quests</h4>
+                                <p class="mb-4 text-sm">
+                                    Quests form the backbone of the campaign.
+                                    Prepare small jobs, side objectives, and at least one guiding main questline.
+                                    Whenever possible, connect quests together — logically or unexpectedly.
+                                </p>
+                                <p class="mb-6 text-sm">
+                                    Example: Saving a lost cat → Witnessing a crime → Exposing a larger conspiracy.
+                                    Interconnected threads make the world feel reactive and alive.
+                                </p>
+
+                                <!-- POIs -->
+                                <h4 class="text-lg text-white font-semibold mb-2">3. POIs (Points of Interest)</h4>
+                                <p class="mb-4 text-sm">
+                                    For every new location, prepare at least as many Points of Interest as there are
+                                    players.
+                                    Include expected locations (shops, taverns, guild halls) and any quest-relevant
+                                    sites.
+                                </p>
+
+                                <!-- Layout -->
+                                <h4 class="text-lg text-white font-semibold mb-2">3.a. Layout</h4>
+                                <p class="mb-4 text-sm">
+                                    Placement matters. Cities develop with logic.
+                                    Shops cluster together. Taverns gather near social centers.
+                                    Political buildings occupy secure positions.
+                                    Design settlements with believable structure.
+                                </p>
+
+                                <!-- Loot Tables -->
+                                <h4 class="text-lg text-white font-semibold mb-2">4. Loot Tables & Inventory Lists</h4>
+                                <p class="mb-4 text-sm">
+                                    Prepare loot in advance. Empty chests and empty stores weaken immersion.
+                                </p>
+                                <ul class="list-disc ml-6 space-y-2 text-sm mb-6">
+                                    <li><strong>Chests:</strong> Create rollable tables for randomized rewards.</li>
+                                    <li><strong>Stores:</strong> Prepare inventory lists with expected and minimum
+                                        prices.
+                                    </li>
+                                </ul>
+                                <p class="mb-6 text-sm">
+                                    Expect players to haggle. Remain realistic.
+                                    Avoid giving items away freely, as it can encourage unhealthy table dynamics.
+                                </p>
+
+                                <!-- Random Events -->
+                                <h4 class="text-lg text-white font-semibold mb-2">5. Random Events</h4>
+                                <p class="mb-4 text-sm">
+                                    During travel or rest, use themed random event tables.
+                                    Allow players to roll when appropriate.
+                                    Refresh these tables periodically to maintain variety.
+                                </p>
+                                <p class="mb-6 text-sm">
+                                    Avoid placing highly lethal outcomes in general travel tables
+                                    unless the region is explicitly dangerous.
+                                </p>
+
+                                <!-- Improvisation -->
+                                <h4 class="text-lg text-white font-semibold mb-2">6. Improvisation</h4>
+                                <p class="mb-4 text-sm">
+                                    No preparation can account for every player decision.
+                                    Learn to adapt.
+                                </p>
+                                <p class="mb-6 text-sm">
+                                    Preparation provides support,
+                                    but flexibility sustains the campaign.
+                                </p>
+                            </div>
+
+                            <!-- Languages -->
+                            <h3 class="text-xl text-white font-bold mb-3">Languages</h3>
+
+                            <p class="mb-4">
+                                The core system includes pre-made languages, but you may create additional ones
+                                to better reflect your setting. This section concerns how languages function
+                                within your world — not how they are designed.
+                            </p>
+
+                            <p class="mb-4">
+                                Not every nation, settlement, or species speaks the same tongue.
+                                Consider the dominant populations in each region and assign languages accordingly.
+                                A village butcher may struggle with Common yet speak fluent Eldar.
+                                Small distinctions like this make the world feel lived in and reward
+                                characters who invest in diverse languages.
+                            </p>
+
+                            <p class="mb-6">
+                                Languages may also be used privately. Characters can communicate in a language
+                                unknown to others at the table, allowing secrecy within guilds,
+                                professions, factions, or between specific party members.
+                            </p>
+
+                            <div class="condition-card text-sm">
+                                Use language barriers intentionally.
+                                They should create depth, tension, or opportunity —
+                                not unnecessary frustration.
+                            </div>
+                            <br>
+
+                            <!-- Session Preparation -->
+                            <h3 class="text-xl text-white font-bold mb-3">Session Preparation</h3>
+
+                            <p class="mb-4">
+                                Sessions should be open ended, having multiple potential paths and outcomes. Prepare key
+                                elements to support player actions, but be ready to improvise and adapt your plans. It's
+                                imporant to keep a cool head even if your players ignore everything you have planned.
+                            </p>
+
+                            <ul class="list-disc ml-6 space-y-2 text-sm mb-6">
+                                <li><strong>Primary Objective:</strong> A clear focus or situation for the session.</li>
+                                <li><strong>Secondary Hooks:</strong> Optional leads or branching opportunities.</li>
+                                <li><strong>NPC Motivations:</strong> What important figures want and how they act.</li>
+                                <li><strong>Mechanical Preperations:</strong> Relevant stat blocks, CS values, and
+                                    environmental effects prepared in advance.</li>
+                                <li><strong>Player Resources:</strong> Anticipate what tools, traits, or spells players
+                                    might use and prepare accordingly.</li>
+                                <li><strong>Flexibility:</strong> Be ready to pivot if players take unexpected actions.
+                                </li>
+                                <li><strong>Session Flow:</strong> Consider how the session might progress and prepare
+                                    for key moments, but allow player choices to shape the narrative.</li>
+
+
+                            </ul>
+
+                            <p class="mb-4 text-sm">
+                                Consider pacing. Balance exploration, interaction, and mechanical engagement.
+                                Avoid prolonged stagnation unless tension is intentionally building.
+                            </p>
+
+                            <div class="condition-card text-sm">
+                                Do not force outcomes.
+                                Allow consequences to emerge naturally from player action.
+                                The world reacts — it does not revolve.
+                            </div>
+
+                        </div>
+                    </section>
+                    <section id="downtime-travel" class="scroll-offset-center">
+                        <div class="section-header">
+                            <div class="section-number">18</div>
+                            Downtime & Travel
+                        </div>
+
+                        <div class="rule-card">
+
+
+
+                            <p class="mb-4">
+                                During prolonged travel, extended rest, or narrative time skips,
+                                characters may engage in structured downtime activities.
+                                Downtime rewards investment of time, it should feel as such, not as a shortcut. Here are
+                                a few downtime activities to consider, but feel free to create your own based on the
+                                needs of your story and characters.
+                            </p>
+
+                            <!-- Potions & Crafting -->
+                            <h3 class="text-xl text-white font-bold mb-3">1. Potions & Crafting</h3>
+
+                            <p class="mb-4">
+                                Brewing potions or crafting items during downtime guarantees success,
+                                provided the character commits hours equal to the potion or item’s normal CS
+                                requirement.
+                                No roll is required when sufficient uninterrupted time is invested.
+                            </p>
+
+                            <p class="mb-4">
+                                Crafting still requires all environmental and material prerequisites.
+                                Complex crafts may require a furnished workshop, specialized tools,
+                                assistants, or rare materials. Downtime removes the roll —
+                                it does not remove logistical requirements.
+                            </p>
+
+                            <p class="mb-6 text-sm">
+                                <strong>Recipes:</strong> Written potion recipes may be learned freely if documented.
+                                Discovering new potion recipes requires Hard CS experimentation checks
+                                (one per ingredient used). Crafting recipes cannot be discovered through experimentation
+                                —
+                                they must be learned from blueprints or traits.
+                            </p>
+
+                            <!-- Spells -->
+                            <h3 class="text-xl text-white font-bold mb-3">2. Spells</h3>
+
+                            <p class="mb-4">
+                                Spells may be learned from scrolls, spellbooks, or appropriate sources.
+                                Learning requires a minimum of <strong>4 hours per spell level</strong>.
+                            </p>
+
+                            <ul class="list-disc ml-6 space-y-2 text-sm mb-6">
+                                <li>The spell’s level must already be unlocked.</li>
+                                <li>The character must possess sufficient mana to cast it.</li>
+                                <li><strong>Cantrips</strong> require only 2 hours but demand a successful Difficult
+                                    Arcana check to commit to memory.</li>
+                            </ul>
+
+                            <!-- Traits -->
+                            <h3 class="text-xl text-white font-bold mb-3">3. Traits</h3>
+
+                            <p class="mb-4">
+                                Rare training manuals may allow characters to learn new traits.
+                                All normal prerequisites must still be met.
+                            </p>
+
+                            <p class="mb-6 text-sm">
+                                Learning a trait requires <strong>10 days per trait point</strong>.
+                                Certain traits (Narrator’s discretion) may be learned without manuals,
+                                but never without meeting their listed requirements.
+                            </p>
+
+                            <!-- Proficiencies -->
+                            <h3 class="text-xl text-white font-bold mb-3">4. Proficiencies</h3>
+
+                            <p class="mb-4">
+                                Characters may train with unfamiliar weapons or refine existing proficiency.
+                                Training requires at least <strong>4 hours per day for 7 consecutive days</strong>
+                                to increase proficiency by 1 point.
+                            </p>
+
+                            <p class="mb-6 text-sm">
+                                The proficiency gained corresponds to the weapon type trained with.
+                            </p>
+
+                            <!-- Languages -->
+                            <h3 class="text-xl text-white font-bold mb-3">5. Languages</h3>
+
+                            <p class="mb-4">
+                                Languages may be learned with access to proper teaching literature.
+                                Study requires <strong>3 hours per day for one full month</strong>.
+                            </p>
+
+                            <p class="mb-6 text-sm">
+                                Each additional month of study increases Language Score by 1 (1 → 6).
+                                At 6, the character is considered fluent.
+                            </p>
+
+                            <div class="condition-card text-sm">
+                                The Narrator has final authority over downtime limits, action availability, and time
+                                requirements.
+                            </div>
+
+                        </div>
+                    </section>
+                    <section id="combat-npc" class="scroll-offset-center">
+                        <div class="section-header">
+                            <div class="section-number">19</div>
+                            Combat-Relevant NPC Creation
+                        </div>
+
+                        <div class="rule-card">
+
+
+
+                            <p class="mb-4">
+                                Combat-ready NPCs require structured stat blocks to function within initiative,
+                                damage resolution, and the Effect Stack. Use the framework below to build
+                                balanced encounters quickly and consistently.
+                            </p>
+
+                            <!-- Player Fillable Table -->
+                            <h3 class="text-xl text-white font-bold mb-3">NPC Statblock Template</h3>
+
+                            <div
+                                style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: flex-start; margin-bottom: 20px; ">
+                                <div style="display: inline-block;" class="builder">
+                                    <h3>NPC Builder</h3>
+
+                                    <label>Name</label>
+                                    <input id="name">
+
+                                    <label>Speed</label>
+                                    <input id="speed">
+
+                                    <label>Health</label>
+                                    <input id="health" type="number">
+
+                                    <label>Armor</label>
+                                    <input id="armor" type="number">
+
+                                    <label>Physique</label>
+                                    <input id="physique" type="number">
+
+                                    <label>Technique</label>
+                                    <input id="technique" type="number">
+
+                                    <label>Mystique</label>
+                                    <input id="mystique" type="number">
+
+                                    <label>Weakness</label>
+                                    <input id="weakness">
+
+                                    <label>Resistance</label>
+                                    <input id="resistance">
+
+                                    <label>Immunity</label>
+                                    <input id="immunity">
+
+                                    <label>Spell Atk Bonus</label>
+                                    <input id="spellAtk" type="number">
+
+                                    <label>Spell Dmg Bonus</label>
+                                    <input id="spellDmg" type="number">
+
+                                    <label>Spell CS</label>
+                                    <input id="spellCS" type="number">
+
+                                    <label>Abilities (Separate by new line)</label>
+                                    <textarea id="abilities"></textarea>
+
+                                    <label>Spells</label>
+                                    <textarea id="spells"></textarea>
+
+                                    <button onclick="updatePreview()">Update Preview</button>
+                                    <button onclick="exportPNG()">Save as PNG</button>
+                                </div>
+
+                                <div id="card" class="card">
+
+    <div class="card-header" id="p_name">Creature Name</div>
+
+    <div class="portrait">
+        <img style="display: none;" id="p_portrait" src="" alt="Portrait"><input onchange="img_upload(this)" type="file" id="portrait-upload" accept="image/*">
     </div>
-</section>
-<section id="effect-stack" class="scroll-offset-center">
-    <div class="rule-card">
 
-        <div class="section-header">
-            <div class="section-number">15</div>
-            Effect Stack
-        </div>
+    <div class="stat-line"><span>Speed</span><span id="p_speed">-</span></div>
+    <div class="stat-line"><span>Health ♡</span><span id="p_health">-</span></div>
+    <div class="stat-line"><span>Armor ⛨</span><span id="p_armor">-</span></div>
 
-        <p class="mb-4">
-            Multiple effects may modify the same stat or apply similar bonuses and penalties.
-            To prevent confusion, all modifiers are resolved in a fixed order.
-            This ordering ensures consistency and balance when many effects overlap.
-        </p>
+    <div class="section-title">Attributes</div>
+    <div class="stat-line"><span>PHY</span><span id="p_physique">-</span></div>
+    <div class="stat-line"><span>TEC</span><span id="p_technique">-</span></div>
+    <div class="stat-line"><span>MYS</span><span id="p_mystique">-</span></div>
 
-        <div class="bg-slate-800 p-4 rounded border border-slate-600 mb-6 text-sm">
-            <strong class="text-white">Resolution Order</strong><br>
-            1. Paths<br>
-            2. Traits<br>
-            3. Spells / Items / Crafts<br>
-            4. Conditions / Battlefield Hazards
-        </div>
+    <div class="section-title">Abilities</div>
+    <div id="p_abilities" class="text-block"></div>
 
-        <h3 class="text-xl text-white font-bold mb-3">Example: Modifying Speed (Base 5)</h3>
+    <div class="section-title">Spellcasting</div>
+    <div class="stat-line"><span>Atk Bonus</span><span id="p_spellAtk">-</span></div>
+    <div class="stat-line"><span>Dmg Bonus</span><span id="p_spellDmg">-</span></div>
+    <div class="stat-line"><span>Spell CS</span><span id="p_spellCS">-</span></div>
+    <div id="p_spells" class="text-block"></div>
 
-        <div class="space-y-4 text-sm mb-6">
-
-            <div class="condition-card">
-                <strong class="text-indigo-400">1. Paths</strong>
-                <p>
-                    Path effects apply first.  
-                    Example: “Lose 1 Movement Speed, gain 2 Damage.”  
-                    5 → 4
-                </p>
-            </div>
-
-            <div class="condition-card">
-                <strong class="text-indigo-400">2. Traits</strong>
-                <p>
-                    Traits apply next. Direct reductions modify the stat immediately.
-                    If a trait applies stacks (such as Slow), those stacks resolve later
-                    under Conditions.
-                    <br>4 → 2 (if reduced by 2)
-                </p>
-            </div>
-
-            <div class="condition-card">
-                <strong class="text-indigo-400">3. Spells / Items / Crafts</strong>
-                <p>
-                    Temporary or external modifiers apply after Traits.
-                    Example: Boots granting +3 Speed.
-                    <br>2 → 5
-                </p>
-            </div>
-
-            <div class="condition-card">
-                <strong class="text-indigo-400">4. Conditions / Battlefield Hazards</strong>
-                <p>
-                    Ongoing conditions resolve last.  
-                    Example: Rough terrain halves movement when moving through it.
-                    Final calculations are based on the fully modified value.
-                </p>
-            </div>
-
-        </div>
-
-        <div class="condition-card text-sm">
-            Apply this order consistently.  
-            In simple cases the result may appear identical regardless of order,
-            but in complex interactions proper sequencing is essential for balance.
-        </div>
-
+    <div class="footer-stats">
+        <span>MYTHLIGHT NPC</span>
     </div>
-</section>
-<section id="cs-difficulty" class="scroll-offset-center">
-    <div class="rule-card">
 
-        <div class="section-header">
-            <div class="section-number">16</div>
-            CS Difficulty & Social Interactions
-        </div>
-
-        <p class="mb-4">
-            Whenever a player attempts an action with uncertain outcome, assign a CS (Challenge Score)
-            based on how difficult the task is. This applies to physical feats, knowledge checks,
-            environmental interaction, and social encounters.
-        </p>
-
-        <div class="bg-slate-800 p-4 rounded border border-slate-600 mb-6 text-sm">
-            <strong class="text-white">CS Difficulty Scale</strong><br><br>
-
-            Trivial — 4 (±2)<br>
-            Easy — 6 (±2)<br>
-            Standard — 8 (±2)<br>
-            Difficult — 10 (±2)<br>
-            Hard — 12 (±2)
-        </div>
-
-        <p class="mb-4 text-sm">
-            The ±2 range allows you to slightly adjust within a tier depending on context,
-            preparation, tools, advantages, or narrative positioning.
-        </p>
-
-        <div class="condition-card text-sm mb-6">
-            Impossible actions are not assigned a CS.
-            You are not required to give players a chance at accomplishing something
-            that cannot reasonably occur within the narrative.
-        </div>
-
-        <!-- Social Interactions -->
-        <h3 class="text-xl text-white font-bold mb-3">Social Interactions</h3>
-
-        <p class="mb-4">
-            Social encounters should default to roleplay first. If discussion and
-            character interaction reasonably resolve the situation, no roll is needed.
-            Rolls are used when outcome is uncertain or contested.
-        </p>
-
-        <p class="mb-4">
-            When a roll is required (Persuasion, Deception, Intimidation, etc.),
-            determine the base CS from the difficulty table, then apply modifiers.
-        </p>
-
-        <div class="bg-slate-800 p-4 rounded border border-slate-600 text-sm mb-4">
-            <strong class="text-white">Social CS Formula</strong><br>
-            Base CS (from table)<br>
-            + Target Insight<br>
-            ± Reputation Modifier
-        </div>
-
-        <p class="text-sm mb-6">
-            Reputation reflects how the target perceives the character.
-            Positive reputation may lower the effective difficulty,
-            while hostility or distrust may increase it.
-        </p>
-
-        <div class="condition-card text-sm">
-            Adjust freely for tone and narrative stakes.
-            Social encounters are dynamic — context, leverage,
-            and player creativity should meaningfully influence outcomes.
-        </div>
-
-    </div>
-</section>
-<section id="campaign-prep" class="scroll-offset-center">
-    <div class="rule-card">
-
-        <div class="section-header">
-            <div class="section-number">17</div>
-            Campaign & Session Preparation
-        </div>
-
-        <!-- Campaign Preparation -->
-        <h3 class="text-xl text-white font-bold mb-3">Campaign Preparation</h3>
-
-        <p class="mb-4">
-            Before the first session, establish the structural foundations of your campaign.
-            Players should understand the tone, themes, and expectations of the world
-            they are entering.
-        </p>
-
-        <ul class="list-disc ml-6 space-y-2 text-sm mb-6">
-            <li><strong>World Framework:</strong> Define the setting’s stability, magic presence, and political or cultural tensions.</li>
-            <li><strong>Tone & Boundaries:</strong> Clarify narrative tone and establish player safety expectations.</li>
-            <li><strong>Character Integration:</strong> Ensure each character has a reason to exist within the world and alongside the party.</li>
-            <li><strong>Core Conflict:</strong> Introduce a central tension, threat, or mystery that drives early engagement.</li>
-        </ul>
-        <!-- Languages -->
-<h3 class="text-xl text-white font-bold mb-3">Languages</h3>
-
-<p class="mb-4">
-    The core system includes pre-made languages, but you may create additional ones
-    to better reflect your setting. This section concerns how languages function
-    within your world — not how they are designed.
-</p>
-
-<p class="mb-4">
-    Not every nation, settlement, or species speaks the same tongue.
-    Consider the dominant populations in each region and assign languages accordingly.
-    A village butcher may struggle with Common yet speak fluent Eldar.
-    Small distinctions like this make the world feel lived in and reward
-    characters who invest in diverse languages.
-</p>
-
-<p class="mb-6">
-    Languages may also be used privately. Characters can communicate in a language
-    unknown to others at the table, allowing secrecy within guilds,
-    professions, factions, or between specific party members.
-</p>
-
-<div class="condition-card text-sm">
-    Use language barriers intentionally.
-    They should create depth, tension, or opportunity —
-    not unnecessary frustration.
 </div>
+                            </div>
+                            <!-- Speed -->
+                            <h3 class="text-xl text-white font-bold mb-3">Speed</h3>
+                            <p class="mb-6 text-sm">
+                                Determines movement in tiles. Follows normal player movement rules.
+                                Average ranges: Slow ~3, Moderate ~5, High ~7.
+                            </p>
 
-        <div class="condition-card text-sm mb-6">
-            Preparation should provide direction, not a script.
-            The campaign evolves through player decisions.
-        </div>
+                            <!-- Health -->
+                            <h3 class="text-xl text-white font-bold mb-3">Health</h3>
+                            <p class="mb-2 text-sm">
+                                1. Calculate total party health [H].<br>
+                                2. Select encounter difficulty pool:
+                            </p>
+                            <ul class="list-disc ml-6 text-sm mb-2">
+                                <li>Easy: 0.5 × H</li>
+                                <li>Moderate: 1 × H</li>
+                                <li>Hard: 2 × H</li>
+                            </ul>
+                            <p class="mb-6 text-sm">
+                                Distribute evenly among combatants. Allies receive equal HP but do not count toward
+                                division.
+                            </p>
 
-        <!-- Session Preparation -->
-        <h3 class="text-xl text-white font-bold mb-3">Session Preparation</h3>
+                            <!-- Armor -->
+                            <h3 class="text-xl text-white font-bold mb-3">Armor</h3>
+                            <p class="mb-6 text-sm">
+                                Select using the CS difficulty scale according to desired encounter challenge.
+                            </p>
 
-        <p class="mb-4">
-            Each session should contain structured flexibility.
-            Prepare enough material to maintain pacing, while leaving space
-            for player-driven divergence.
-        </p>
+                            <!-- Turn Delay -->
+                            <h3 class="text-xl text-white font-bold mb-3">Turn Delay</h3>
+                            <p class="mb-2 text-sm">
+                                <strong>Fixed:</strong> Acts after X player turns at combat start.<br>
+                                <strong>Recursive:</strong> Acts every X player turns.
+                            </p>
 
-        <ul class="list-disc ml-6 space-y-2 text-sm mb-6">
-            <li><strong>Primary Objective:</strong> A clear focus or situation for the session.</li>
-            <li><strong>Secondary Hooks:</strong> Optional leads or branching opportunities.</li>
-            <li><strong>NPC Motivations:</strong> What important figures want and how they act.</li>
-            <li><strong>Mechanical Readiness:</strong> Relevant stat blocks, CS values, and environmental effects prepared in advance.</li>
-        </ul>
+                            <!-- Action Number -->
+                            <h3 class="text-xl text-white font-bold mb-3">Action Number</h3>
+                            <p class="mb-6 text-sm">
+                                Number of actions taken each turn.
+                            </p>
 
-        <p class="mb-4 text-sm">
-            Consider pacing. Balance exploration, interaction, and mechanical engagement.
-            Avoid prolonged stagnation unless tension is intentionally building.
-        </p>
+                            <!-- Attributes -->
+                            <h3 class="text-xl text-white font-bold mb-3">Attributes</h3>
+                            <p class="mb-4 text-sm">
+                                NPCs use base Attributes instead of skills:
+                                Physique (Melee), Technique (Ranged), Mystique (Spells).
+                            </p>
+                            <p class="mb-6 text-sm">
+                                Distribute 4 total points.
+                                +2 if primary/boss target.
+                                −2 if weak/swarm enemy.
+                            </p>
 
-        <div class="condition-card text-sm">
-            Do not force outcomes.
-            Allow consequences to emerge naturally from player action.
-            The world reacts — it does not revolve.
-        </div>
+                            <!-- Damage Types -->
+                            <h3 class="text-xl text-white font-bold mb-3">Weaknesses, Resistances & Immunities</h3>
+                            <p class="mb-6 text-sm">
+                                Assign narratively. Undead may be weak to Light, fire spirits immune to Fire, etc.
+                            </p>
 
-    </div>
-</section>
-<section id="downtime-travel" class="scroll-offset-center">
-    <div class="rule-card">
+                            <!-- Abilities -->
+                            <h3 class="text-xl text-white font-bold mb-3">Abilities & Actions</h3>
+                            <p class="mb-6 text-sm">
+                                List all attacks and traits. Assign traits totaling
+                                0.5 × their Health (in trait points).
+                            </p>
 
-        <div class="section-header">
-            <div class="section-number">18</div>
-            Downtime & Travel
-        </div>
+                            <!-- Spells -->
+                            <h3 class="text-xl text-white font-bold mb-3">Spells</h3>
+                            <ul class="list-disc ml-6 text-sm mb-4">
+                                <li>Atk. Bonus = Mystique</li>
+                                <li>Dmg. Bonus = From items (lootable)</li>
+                                <li>Spell CS = 5 + Mystique</li>
+                                <li>Number of spells = 0.5 × Health (cantrips included)</li>
+                            </ul>
 
-        <p class="mb-4">
-            During prolonged travel, extended rest, or narrative time skips,
-            characters may engage in structured downtime activities.
-            Downtime rewards investment of time — it is not a shortcut to bypass difficulty.
-        </p>
+                            <div class="condition-card text-sm">
+                                Once complete, the NPC is ready for combat.
+                            </div>
 
-        <div class="condition-card text-sm mb-6">
-            Downtime should feel earned and contextual.
-            It represents focused effort over time, not passive benefit.
-        </div>
-
-        <!-- Potions & Crafting -->
-        <h3 class="text-xl text-white font-bold mb-3">Potions & Crafting</h3>
-
-        <p class="mb-4">
-            Brewing potions or crafting items during downtime guarantees success,
-            provided the character commits hours equal to the potion or item’s normal CS requirement.
-            No roll is required when sufficient uninterrupted time is invested.
-        </p>
-
-        <p class="mb-4">
-            Crafting still requires all environmental and material prerequisites.
-            Complex crafts may require a furnished workshop, specialized tools,
-            assistants, or rare materials. Downtime removes the roll —
-            it does not remove logistical requirements.
-        </p>
-
-        <p class="mb-6 text-sm">
-            <strong>Recipes:</strong> Written potion recipes may be learned freely if documented.
-            Discovering new potion recipes requires Hard CS experimentation checks
-            (one per ingredient used). Crafting recipes cannot be discovered through experimentation —
-            they must be learned from blueprints or traits.
-        </p>
-
-        <!-- Spells -->
-        <h3 class="text-xl text-white font-bold mb-3">Spells</h3>
-
-        <p class="mb-4">
-            Spells may be learned from scrolls, spellbooks, or appropriate sources.
-            Learning requires a minimum of <strong>4 hours per spell level</strong>.
-        </p>
-
-        <ul class="list-disc ml-6 space-y-2 text-sm mb-6">
-            <li>The spell’s level must already be unlocked.</li>
-            <li>The character must possess sufficient mana to cast it.</li>
-            <li><strong>Cantrips</strong> require only 2 hours but demand a successful Difficult Arcana check to commit to memory.</li>
-        </ul>
-
-        <!-- Traits -->
-        <h3 class="text-xl text-white font-bold mb-3">Traits</h3>
-
-        <p class="mb-4">
-            Rare training manuals may allow characters to learn new traits.
-            All normal prerequisites must still be met.
-        </p>
-
-        <p class="mb-6 text-sm">
-            Learning a trait requires <strong>10 days per trait point</strong>.
-            Certain traits (Narrator’s discretion) may be learned without manuals,
-            but never without meeting their listed requirements.
-        </p>
-
-        <!-- Proficiencies -->
-        <h3 class="text-xl text-white font-bold mb-3">Proficiencies</h3>
-
-        <p class="mb-4">
-            Characters may train with unfamiliar weapons or refine existing proficiency.
-            Training requires at least <strong>4 hours per day for 7 consecutive days</strong>
-            to increase proficiency by 1 point.
-        </p>
-
-        <p class="mb-6 text-sm">
-            The proficiency gained corresponds to the weapon type trained with.
-        </p>
-
-        <!-- Languages -->
-        <h3 class="text-xl text-white font-bold mb-3">Languages</h3>
-
-        <p class="mb-4">
-            Languages may be learned with access to proper teaching literature.
-            Study requires <strong>3 hours per day for one full month</strong>.
-        </p>
-
-        <p class="mb-6 text-sm">
-            Each additional month of study increases Language Score by 1 (1 → 6).
-            At 6, the character is considered fluent.
-        </p>
-
-        <div class="condition-card text-sm">
-            The Narrator has final authority over downtime limits.
-            Downtime should enhance narrative progression and reward time investment —
-            not serve as a method to exploit the system for unchecked power growth.
-        </div>
-
-    </div>
-</section>
-<section id="combat-npc" class="scroll-offset-center">
-    <div class="rule-card">
-
-        <div class="section-header">
-            <div class="section-number">19</div>
-            Combat-Relevant NPC Creation
-        </div>
-
-        <p class="mb-4">
-            Combat-ready NPCs require structured stat blocks to function within initiative,
-            damage resolution, and the Effect Stack. Use the framework below to build
-            balanced encounters quickly and consistently.
-        </p>
-
-        <!-- Player Fillable Table -->
-        <h3 class="text-xl text-white font-bold mb-3">NPC Statblock Template</h3>
-
-        <div class="overflow-x-auto mb-6">
-            <table class="w-full text-sm border border-slate-600">
-                <tbody>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold w-1/3">Name</td>
-                        <td class="p-2">______________________________</td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Image</td>
-                        <td class="p-2 h-20"></td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Speed</td>
-                        <td class="p-2">_____</td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Health ♡</td>
-                        <td class="p-2">_____</td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Armor ⛨</td>
-                        <td class="p-2">_____</td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Turn Delay</td>
-                        <td class="p-2">_____</td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Action Number</td>
-                        <td class="p-2">_____</td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Physique</td>
-                        <td class="p-2">_____</td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Technique</td>
-                        <td class="p-2">_____</td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Mystique</td>
-                        <td class="p-2">_____</td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Weakness</td>
-                        <td class="p-2">________________</td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Resistance</td>
-                        <td class="p-2">________________</td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Immunity</td>
-                        <td class="p-2">________________</td>
-                    </tr>
-                    <tr class="border-b border-slate-600">
-                        <td class="p-2 font-bold">Abilities & Actions</td>
-                        <td class="p-2 h-24"></td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 font-bold">Spells<br>Atk. Bonus<br>Dmg. Bonus<br>Spell CS</td>
-                        <td class="p-2 h-24"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="mb-8 text-right">
-            <button onclick="saveNPCAsPNG()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded text-white text-sm">
-                Save as PNG
-            </button>
-        </div>
-
-        <!-- Speed -->
-        <h3 class="text-xl text-white font-bold mb-3">Speed</h3>
-        <p class="mb-6 text-sm">
-            Determines movement in tiles. Follows normal player movement rules.
-            Average ranges: Slow ~3, Moderate ~5, High ~7.
-        </p>
-
-        <!-- Health -->
-        <h3 class="text-xl text-white font-bold mb-3">Health</h3>
-        <p class="mb-2 text-sm">
-            1. Calculate total party health [H].<br>
-            2. Select encounter difficulty pool:
-        </p>
-        <ul class="list-disc ml-6 text-sm mb-2">
-            <li>Easy: 0.5 × H</li>
-            <li>Moderate: 1 × H</li>
-            <li>Hard: 2 × H</li>
-        </ul>
-        <p class="mb-6 text-sm">
-            Distribute evenly among combatants. Allies receive equal HP but do not count toward division.
-        </p>
-
-        <!-- Armor -->
-        <h3 class="text-xl text-white font-bold mb-3">Armor</h3>
-        <p class="mb-6 text-sm">
-            Select using the CS difficulty scale according to desired encounter challenge.
-        </p>
-
-        <!-- Turn Delay -->
-        <h3 class="text-xl text-white font-bold mb-3">Turn Delay</h3>
-        <p class="mb-2 text-sm">
-            <strong>Fixed:</strong> Acts after X player turns at combat start.<br>
-            <strong>Recursive:</strong> Acts every X player turns.
-        </p>
-
-        <!-- Action Number -->
-        <h3 class="text-xl text-white font-bold mb-3">Action Number</h3>
-        <p class="mb-6 text-sm">
-            Number of actions taken each turn.
-        </p>
-
-        <!-- Attributes -->
-        <h3 class="text-xl text-white font-bold mb-3">Attributes</h3>
-        <p class="mb-4 text-sm">
-            NPCs use base Attributes instead of skills:
-            Physique (Melee), Technique (Ranged), Mystique (Spells).
-        </p>
-        <p class="mb-6 text-sm">
-            Distribute 4 total points.
-            +2 if primary/boss target.
-            −2 if weak/swarm enemy.
-        </p>
-
-        <!-- Damage Types -->
-        <h3 class="text-xl text-white font-bold mb-3">Weaknesses, Resistances & Immunities</h3>
-        <p class="mb-6 text-sm">
-            Assign narratively. Undead may be weak to Light, fire spirits immune to Fire, etc.
-        </p>
-
-        <!-- Abilities -->
-        <h3 class="text-xl text-white font-bold mb-3">Abilities & Actions</h3>
-        <p class="mb-6 text-sm">
-            List all attacks and traits. Assign traits totaling
-            0.5 × their Health (in trait points).
-        </p>
-
-        <!-- Spells -->
-        <h3 class="text-xl text-white font-bold mb-3">Spells</h3>
-        <ul class="list-disc ml-6 text-sm mb-4">
-            <li>Atk. Bonus = Mystique</li>
-            <li>Dmg. Bonus = From items (lootable)</li>
-            <li>Spell CS = 5 + Mystique</li>
-            <li>Number of spells = 0.5 × Health (cantrips included)</li>
-        </ul>
-
-        <div class="condition-card text-sm">
-            Once complete, the NPC is ready for combat.
-        </div>
-
-    </div>
-</section>
+                        </div>
+                    </section>
 
 
 
@@ -1976,7 +2524,7 @@
         </div>
 
         <div id="view-oneshots" class="view-section hidden rules-layout">
-            
+
             <aside class="sidebar hidden lg:block">
                 <div class="sidebar-fixed">
                     <div class="mb-8">
@@ -1999,11 +2547,11 @@
             </aside>
 
             <div class="content space-y-24">
-                
+
                 <section id="os-creation" class="scroll-offset-center">
                     <h3 class="text-3xl text-white font-bold mb-8">One Shot Character Creation</h3>
                     <p class="text-sm text-slate-300 mb-8 max-w-3xl">
-                        One Shot characters are quick to build and quick to play.  
+                        One Shot characters are quick to build and quick to play.
                         Focus on flavor, not optimization.
                     </p>
 
@@ -2061,62 +2609,65 @@
                             </p>
                             Your gain 1 Mana per level.<br>
                             Cantrips are spells that cost no mana<br>
-                            You can increase the power of spells by paying mana to cast them at a higher level, it equals 1 mana per level.
+                            You can increase the power of spells by paying mana to cast them at a higher level, it
+                            equals 1 mana per level.
                             <p class="text-xs text-slate-500 mt-2 px-2">
                                 Half of your mana restores on Rests, while all of your mana restores when you Sleep.
                             </p>
                         </div>
                     </div>
                 </section>
-                
+
                 <section id="os-health" class="scroll-offset-center">
-    <div class="rule-card space-y-6">
-        <h3 class="text-2xl text-white font-bold">Health, Guard & Defeat</h3>
+                    <div class="rule-card space-y-6">
+                        <h3 class="text-2xl text-white font-bold">Health, Guard & Defeat</h3>
 
-        <!-- STATES -->
-        <div class="grid md:grid-cols-4 gap-4 text-sm">
-            <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
-                <strong class="text-white block mb-1">Health</strong>
-                You have Health equal to [Your Level + (Your Physique * Your Level)]
-            </div>
-            
-            <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
-                <strong class="text-white block mb-1">Guard</strong>
-                Temporary Health.<br>
-                Always lost first.<br>
-                Cannot be healed.
-            </div>
+                        <!-- STATES -->
+                        <div class="grid md:grid-cols-4 gap-4 text-sm">
+                            <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
+                                <strong class="text-white block mb-1">Health</strong>
+                                You have Health equal to [Your Level + (Your Physique * Your Level)]
+                            </div>
 
-            <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
-                <strong class="text-white block mb-1">Unconcious</strong>
-                When your health reaches 0, you become unconcious; while in this state you cannot act.
-            </div>
+                            <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
+                                <strong class="text-white block mb-1">Guard</strong>
+                                Temporary Health.<br>
+                                Always lost first.<br>
+                                Cannot be healed.
+                            </div>
 
-            <div class="bg-red-900/20 p-4 rounded border border-red-500/30">
-                <strong class="text-red-400 block mb-1">Final Blows (×4)</strong>
-                While unconcious you may resist 4 Final blows per rest. If you have no resistances left you die.
-            </div>
-        </div> <!-- CORE RULES -->
-            <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
-                <strong class="text-white block mb-1">Rest</strong>
-                Heal Health equal to your Level, per Hour rested.
-            </div>
+                            <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
+                                <strong class="text-white block mb-1">Unconcious</strong>
+                                When your health reaches 0, you become unconcious; while in this state you cannot act.
+                            </div>
 
-            <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
-                <strong class="text-white block mb-1">Sleep</strong>
-                Full Health and Mana restored.
-            </div>
-    </div>
-</section>
+                            <div class="bg-red-900/20 p-4 rounded border border-red-500/30">
+                                <strong class="text-red-400 block mb-1">Final Blows (×4)</strong>
+                                While unconcious you may resist 4 Final blows per rest. If you have no resistances left
+                                you die.
+                            </div>
+                        </div> <!-- CORE RULES -->
+                        <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
+                            <strong class="text-white block mb-1">Rest</strong>
+                            Heal Health equal to your Level, per Hour rested.
+                        </div>
 
-                
+                        <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
+                            <strong class="text-white block mb-1">Sleep</strong>
+                            Full Health and Mana restored.
+                        </div>
+                    </div>
+                </section>
+
+
                 <div id="oneshot-rules-wrapper" class="space-y-24">
 
                     <section id="os-core" class="scroll-offset-center">
                         <div class="rule-card">
                             <h3 class="text-2xl text-white font-bold mb-6">Core Mechanics</h3>
 
-                            <div class="bg-slate-900/60 p-4 rounded border border-slate-700 text-sm mb-6 flex items-center gap-4">
+                            <div
+                                class="bg-slate-900/60 p-4 rounded border border-slate-700 text-sm mb-6 flex items-center gap-4">
                                 <div class="bg-indigo-600/20 p-3 rounded-full">
                                     <div class="w-6 h-6 border-2 border-indigo-400 rounded-sm"></div>
                                 </div>
@@ -2165,16 +2716,16 @@
                             <h3 class="text-2xl text-white font-bold mb-6">Turns & Actions</h3>
 
                             <div class="bg-slate-900/40 p-4 rounded border border-slate-700 text-sm space-y-2">
-            <strong class="text-white block">Initiative</strong>
+                                <strong class="text-white block">Initiative</strong>
 
-            <ul class="list-disc ml-5 space-y-1 text-slate-400">
-                <li>Determine initiative by word of mouth.</li>
-                <li>Non-players have turn delay to determine their turn order.</li>
-                <li>Becoming unconcious moves you to the bottom of initiative.</li>
-                <li>Mounts and companions share their turn with their owner.</li>
-            </ul>
-        </div>
-                   <br>         
+                                <ul class="list-disc ml-5 space-y-1 text-slate-400">
+                                    <li>Determine initiative by word of mouth.</li>
+                                    <li>Non-players have turn delay to determine their turn order.</li>
+                                    <li>Becoming unconcious moves you to the bottom of initiative.</li>
+                                    <li>Mounts and companions share their turn with their owner.</li>
+                                </ul>
+                            </div>
+                            <br>
                             <div class="overflow-x-auto rounded-lg border border-slate-700 mb-6">
                                 <table class="w-full text-sm border-collapse bg-slate-800/50">
                                     <thead class="bg-slate-900/80">
@@ -2206,7 +2757,7 @@
                             </div>
                         </div>
                     </section>
-                    
+
                     <section id="os-movement" class="scroll-offset-center">
                         <div class="rule-card">
                             <h3 class="text-2xl text-white font-bold mb-4">Movement & Range</h3>
@@ -2261,19 +2812,23 @@
                         <div class="rule-card">
                             <h3 class="text-2xl text-white font-bold mb-4">Companions</h3>
                             <div class="space-y-2">
-                                <div class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
+                                <div
+                                    class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
                                     <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
                                     Act immediately after their controller
                                 </div>
-                                <div class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
+                                <div
+                                    class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
                                     <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
                                     2 Actions, 1 Attack
                                 </div>
-                                <div class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
+                                <div
+                                    class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
                                     <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
                                     No Skills, Mana, or Grace
                                 </div>
-                                <div class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
+                                <div
+                                    class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
                                     <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
                                     Only one combat companion per player
                                 </div>
@@ -2287,21 +2842,25 @@
 
                             <ul class="space-y-3">
                                 <li class="text-sm text-slate-300">
-                                    <strong class="text-indigo-400">Suggested Length:</strong> Aim for oneshots to last about 3 - 4 hours
+                                    <strong class="text-indigo-400">Suggested Length:</strong> Aim for oneshots to last
+                                    about 3 - 4 hours
                                 </li>
                                 <li class="text-sm text-slate-300">
-                                    <strong class="text-indigo-400">Default CS:</strong> 6 easy, 8 standard, 12 hard, 16 "impossible"
+                                    <strong class="text-indigo-400">Default CS:</strong> 6 easy, 8 standard, 12 hard, 16
+                                    "impossible"
                                 </li>
                                 <li class="text-sm text-slate-300">
-                                    <strong class="text-indigo-400">NPC health:</strong> 0,5 x Party Health total = Easy, 1 x Party Health total = Standard, 2 x Party Health total = Hard. Encounters with multiple NPCs should divide this number amongst each NPC present.
+                                    <strong class="text-indigo-400">NPC health:</strong> 0,5 x Party Health total =
+                                    Easy, 1 x Party Health total = Standard, 2 x Party Health total = Hard. Encounters
+                                    with multiple NPCs should divide this number amongst each NPC present.
                                 </li>
                                 <li class="text-sm text-slate-300">
-                                    <strong class="text-indigo-400">NPC Traits:</strong> NPCs should have between 1 - 4 traits, depending on how difficult they should be to defeat.
+                                    <strong class="text-indigo-400">NPC Traits:</strong> NPCs should have between 1 - 4
+                                    traits, depending on how difficult they should be to defeat.
                                 </li>
                             </ul>
                         </div>
                     </section>
-
                 </div>
             </div>
         </div>
@@ -2311,31 +2870,66 @@
     <div id="footer-placeholder"></div>
 
     <script>
-// Floating legend adjustment
-function updateFloatingLegendPosition() {
-    const legend = document.querySelector('.floating-legend');
-    const subTabs = document.querySelector('.flex.flex-wrap.border-b');
-    if (!legend || !subTabs) return;
-    const subTabsRect = subTabs.getBoundingClientRect();
-    // Move legend up when sub-tabs are scrolled out of view
-    if (subTabsRect.top < 0) {
-        legend.style.top = `${Math.max(80, Math.abs(subTabsRect.top) + 60)}px`;
-        legend.style.marginBottom = '2em';
-    } else {
-        legend.style.top = `calc(var(--rules-sidebar-top) + 60px)`;
-        legend.style.marginBottom = '2em';
-    }
+
+        function updatePreview() {
+    p_name.innerText = name.value || "Creature Name";
+    p_speed.innerText = speed.value;
+    p_health.innerText = health.value;
+    p_armor.innerText = armor.value;
+    p_physique.innerText = physique.value;
+    p_technique.innerText = technique.value;
+    p_mystique.innerText = mystique.value;
+    p_spellAtk.innerText = spellAtk.value;
+    p_spellDmg.innerText = spellDmg.value;
+    p_spellCS.innerText = spellCS.value;
+    p_spells.innerHTML = spells.value.split("\n").map(line =>
+        `<div>• ${line}</div>`
+    ).join("");
+
+    // Auto-format abilities
+    let abilityLines = abilities.value.split("\n");
+    p_abilities.innerHTML = abilityLines.map(line =>
+        `<div>• ${line}</div>`
+    ).join("");
 }
 
-       
-function saveNPCAsPNG() {
-    html2canvas(document.querySelector("#combat-npc")).then(canvas => {
-        const link = document.createElement("a");
-        link.download = "npc_statblock.png";
-        link.href = canvas.toDataURL();
-        link.click();
-    });
+// Portrait preview
+portraitInput.addEventListener("change", function () {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        p_portrait.src = e.target.result;
+    };
+    reader.readAsDataURL(this.files[0]);
+});
+
+// Better PNG export
+function exportPNG() {
+    domtoimage.toBlob(document.getElementById("card"))
+        .then(function (blob) {
+            window.saveAs(blob, "npc_card.png");
+        });
 }
+
+// Fallback for saveAs
+function saveAs(blob, filename) {
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+}
+
+        function img_upload(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.getElementById('p_portrait');
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    input.style.display = 'none';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
 
         // --- 1. Tab Navigation Logic ---
         function switchView(viewId) {
@@ -2343,12 +2937,12 @@ function saveNPCAsPNG() {
             document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
             // Remove active state from buttons
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            
+
             // Show target
             const target = document.getElementById(viewId);
-            if(target) {
+            if (target) {
                 target.classList.remove('hidden');
-                
+
                 // Set active button
                 const index = ['view-campaign', 'view-oneshots'].indexOf(viewId);
                 if (index >= 0) {
@@ -2417,13 +3011,6 @@ function saveNPCAsPNG() {
 
         // --- 4. Initialization ---
         document.addEventListener("DOMContentLoaded", () => {
-                window.addEventListener('resize', () => {
-                    requestAnimationFrame(updateFloatingLegendPosition);
-                });
-                document.addEventListener('scroll', () => {
-                    requestAnimationFrame(updateFloatingLegendPosition);
-                }, { passive: true });
-                requestAnimationFrame(updateFloatingLegendPosition);
             randomizeDiceFaces();
             requestAnimationFrame(syncSidebarTop);
             requestAnimationFrame(updateSidebarActive);
@@ -2444,4 +3031,5 @@ function saveNPCAsPNG() {
     </script>
     <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
 </body>
+
 </html>
