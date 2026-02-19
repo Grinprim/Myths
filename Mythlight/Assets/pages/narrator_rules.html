@@ -1,95 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- saved from url=(0032)http://127.0.0.1:5500/rules.html -->
+<html lang="en" style="--rules-sidebar-top: 371px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mythlight RPG | Rules</title>
-    <link rel="icon" type="image/svg+xml" href="../img/logo.png">
+    <link rel="icon" type="image/svg+xml" href="http://127.0.0.1:5500/img/logo.png">
+    <script src="./Mythlight RPG _ Rules_files/saved_resource"></script>
+    <link rel="stylesheet" href="../css/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../css/styles.css" />
 
     <style>
-        .map-tile {
-            width: 32px;
-            height: 32px;
-            border: 1px solid #334155;
-        }
-
-        .map-tile.center {
-            background: #6366f1;
-        }
-
-        .map-tile.range {
-            background: rgba(99, 102, 241, 0.3);
-        }
-
-        .map-tile.radius {
-            background: rgba(239, 68, 68, 0.3);
-        }
-
-        /* Reusable Card Components */
-        .condition-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid #334155;
-            padding: 12px;
-            border-radius: 10px;
-        }
-
-        .rule-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid #334155;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-        }
-
-        /* Text Highlighting */
-        .correct {
-            color: rgb(204, 255, 110);
-        }
-
-        .wrong {
-            color: rgb(255, 110, 110);
-        }
-
-        .notice {
-            color: rgb(255, 216, 110);
-        }
-
-        .notice_blue {
-            color: rgb(110, 255, 241);
-        }
-
-        /* Tab Active State */
-        .tab-btn.active {
-            background-color: rgba(99, 102, 241, 0.2);
-            border-color: #6366f1;
-            color: white;
-        }
-
-        /* Sidebar Layout */
+        .map-tile { width: 32px; height: 32px; border: 1px solid #334155; }
+        .map-tile.center { background: #6366f1; }
+        .map-tile.range { background: rgba(99, 102, 241, 0.3); }
+        .map-tile.radius { background: rgba(239, 68, 68, 0.3); }
+        .condition-card { background: rgba(15, 23, 42, 0.6); border: 1px solid #334155; padding: 12px; border-radius: 10px; }
+        .rule-card { background: rgba(15, 23, 42, 0.6); border: 1px solid #334155; padding: 1.5rem; border-radius: 0.75rem; }
+        .correct { color: rgb(204, 255, 110); }
+        .wrong { color: rgb(255, 110, 110); }
+        .notice { color: rgb(255, 216, 110); }
+        .notice_blue { color: rgb(110, 255, 241); }
+        .tab-btn.active { background-color: rgba(99, 102, 241, 0.2); border-color: #6366f1; color: white; }
         .rules-layout {
             display: grid;
             grid-template-columns: 260px 1fr;
             gap: 4rem;
             max-width: 1400px;
             margin: 0 auto;
-            position: relative;
+            position: relative; 
         }
-
         :root {
             --rules-max-width: 1400px;
             --rules-sidebar-width: 260px;
             --rules-side-pad: 1.5rem;
             --rules-sidebar-top: calc(9rem + 2cm);
         }
-
         .sidebar {
             position: relative;
             align-self: start;
             min-height: calc(100vh - var(--rules-sidebar-top));
         }
-
         .sidebar-fixed {
             position: fixed;
             top: var(--rules-sidebar-top);
@@ -98,38 +48,27 @@
             max-height: calc(100vh - var(--rules-sidebar-top));
             overflow-y: auto;
             padding-right: 1rem;
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.55));
-            border: 1px solid rgba(99, 102, 241, 0.15);
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.65));
+            border: 1px solid rgba(99, 102, 241, 0.18);
             border-radius: 1rem;
-            padding: 1.25rem 1rem 1.25rem 1.25rem;
+            padding: 1.5rem 1rem 1.5rem 1.5rem;
             box-shadow: 0 20px 40px -30px rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            transition: top 0.3s;
         }
-
-        /* SCROLL OFFSET FIX 
-           Sets margin to 35% of viewport height. 
-           This pushes the scroll snap point down, so content appears 
-           towards the middle of the screen, not the very top.
-        */
         .scroll-offset-center {
             scroll-margin-top: calc(var(--rules-sidebar-top) + 1rem);
         }
-
         section[id] {
             scroll-margin-top: calc(var(--rules-sidebar-top) + 1rem);
         }
-
-
-        /* Mobile Adjustments */
         @media(max-width: 1024px) {
             .rules-layout {
                 grid-template-columns: 1fr;
             }
-
             .sidebar {
                 display: none;
             }
-
             .sidebar-fixed {
                 position: static;
                 width: auto;
@@ -137,13 +76,52 @@
                 left: auto;
                 top: auto;
             }
+            .floating-legend {
+                position: sticky;
+                top: calc(5rem + 4.5rem); /* subtab bar height + navbar height */
+                margin-bottom: 2rem;
+                z-index: 40;
+                left: auto;
+                transform: none;
+                background: rgba(15,23,42,0.92);
+                border-radius: 0.75rem;
+                box-shadow: 0 8px 24px -8px rgba(0,0,0,0.5);
+                transition: top 0.3s;
+            }
         }
     </style>
-</head>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.top-20{top:5rem}.z-10{z-index:10}.z-30{z-index:30}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-12{margin-bottom:3rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-4{margin-left:1rem}.ml-5{margin-left:1.25rem}.ml-6{margin-left:1.5rem}.mt-1{margin-top:0.25rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-1{height:0.25rem}.h-1\.5{height:0.375rem}.h-20{height:5rem}.h-24{height:6rem}.h-6{height:1.5rem}.h-full{height:100%}.w-1\.5{width:0.375rem}.w-1\/3{width:33.333333%}.w-10{width:2.5rem}.w-6{width:1.5rem}.w-full{width:100%}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-\[1600px\]{max-width:1600px}.flex-1{flex:1 1 0%}.border-collapse{border-collapse:collapse}.cursor-pointer{cursor:pointer}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-24 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(6rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(6rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.rounded{border-radius:0.25rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-sm{border-radius:0.125rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-l-4{border-left-width:4px}.border-t{border-top-width:1px}.border-amber-500\/30{border-color:rgb(245 158 11 / 0.3)}.border-indigo-400{--tw-border-opacity:1;border-color:rgb(129 140 248 / var(--tw-border-opacity, 1))}.border-indigo-500\/30{border-color:rgb(99 102 241 / 0.3)}.border-red-500\/30{border-color:rgb(239 68 68 / 0.3)}.border-slate-600{--tw-border-opacity:1;border-color:rgb(71 85 105 / var(--tw-border-opacity, 1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-slate-700\/50{border-color:rgb(51 65 85 / 0.5)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.border-l-indigo-500{--tw-border-opacity:1;border-left-color:rgb(99 102 241 / var(--tw-border-opacity, 1))}.border-l-red-600{--tw-border-opacity:1;border-left-color:rgb(220 38 38 / var(--tw-border-opacity, 1))}.border-l-yellow-500{--tw-border-opacity:1;border-left-color:rgb(234 179 8 / var(--tw-border-opacity, 1))}.bg-amber-900\/20{background-color:rgb(120 53 15 / 0.2)}.bg-black\/30{background-color:rgb(0 0 0 / 0.3)}.bg-indigo-500{--tw-bg-opacity:1;background-color:rgb(99 102 241 / var(--tw-bg-opacity, 1))}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(79 70 229 / var(--tw-bg-opacity, 1))}.bg-indigo-600\/20{background-color:rgb(79 70 229 / 0.2)}.bg-indigo-900\/20{background-color:rgb(49 46 129 / 0.2)}.bg-red-900\/20{background-color:rgb(127 29 29 / 0.2)}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-800\/50{background-color:rgb(30 41 59 / 0.5)}.bg-slate-800\/70{background-color:rgb(30 41 59 / 0.7)}.bg-slate-900\/30{background-color:rgb(15 23 42 / 0.3)}.bg-slate-900\/40{background-color:rgb(15 23 42 / 0.4)}.bg-slate-900\/50{background-color:rgb(15 23 42 / 0.5)}.bg-slate-900\/60{background-color:rgb(15 23 42 / 0.6)}.bg-slate-900\/80{background-color:rgb(15 23 42 / 0.8)}.object-contain{object-fit:contain}.p-1{padding:0.25rem}.p-2{padding:0.5rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-2{padding-bottom:0.5rem}.pb-20{padding-bottom:5rem}.pb-8{padding-bottom:2rem}.pt-12{padding-top:3rem}.pt-32{padding-top:8rem}.pt-4{padding-top:1rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.uppercase{text-transform:uppercase}.tracking-widest{letter-spacing:0.1em}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-green-400{--tw-text-opacity:1;color:rgb(74 222 128 / var(--tw-text-opacity, 1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(165 180 252 / var(--tw-text-opacity, 1))}.text-indigo-400{--tw-text-opacity:1;color:rgb(129 140 248 / var(--tw-text-opacity, 1))}.text-orange-400{--tw-text-opacity:1;color:rgb(251 146 60 / var(--tw-text-opacity, 1))}.text-red-400{--tw-text-opacity:1;color:rgb(248 113 113 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.opacity-0{opacity:0}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:bg-indigo-500:hover{--tw-bg-opacity:1;background-color:rgb(99 102 241 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-800:hover{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}@media (min-width: 768px){.md\:col-span-2{grid-column:span 2 / span 2}.md\:w-auto{width:auto}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}}@media (min-width: 1024px){.lg\:block{display:block}}</style></head>
 
 <body class="bg-custom-dark text-slate-300">
 
-    <div id="navbar-placeholder"></div>
+        <!-- Navbar -->
+        <div id="navbar-placeholder"></div>
+        <script>
+            // Floating legend adjustment (minimal for sticky)
+            function updateFloatingLegendPosition() {
+                const legend = document.querySelector('.floating-legend');
+                if (!legend) return;
+                legend.style.marginBottom = '2em';
+            }
+            // Only update margin, sticky handles position
+            fetch('../dyn/navbar.html')
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('navbar-placeholder').innerHTML = html;
+                    const links = document.querySelectorAll('.nav-link');
+                    links.forEach(link => {
+                        if (link.textContent.trim() === 'Narrator Rules') {
+                            link.classList.add('active');
+                        }
+                    });
+                    const mobileLinks = document.querySelectorAll('.mobile-link');
+                    mobileLinks.forEach(link => {
+                        if (link.textContent.trim() === 'Narrator Rules') {
+                            link.classList.add('active');
+                        }
+                    });
+                });
+        </script>
 
     <main class="pt-32 pb-20 px-6 max-w-[1600px] mx-auto">
 
@@ -154,14 +132,11 @@
             </p>
         </header>
 
-        <div
-            class="flex flex-wrap justify-center gap-4 border-b border-slate-800 pb-8 mb-8 sticky top-20 z-30 bg-custom-dark/95 backdrop-blur-sm py-4">
-            <button onclick="switchView('view-campaign')"
-                class="tab-btn active px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+        <div class="flex flex-wrap justify-center gap-4 border-b border-slate-800 pb-8 mb-8 sticky top-20 z-30 bg-custom-dark/95 backdrop-blur-sm py-4">
+            <button onclick="switchView('view-campaign')" class="tab-btn active px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
                 Campaign Rules
             </button>
-            <button onclick="switchView('view-oneshots')"
-                class="tab-btn px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+            <button onclick="switchView('view-oneshots')" class="tab-btn px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
                 One Shots
             </button>
         </div>
@@ -176,28 +151,26 @@
                     </div>
 
                     <div class="nav-group-title">Core Rules</div>
-                    <a href="#intro" class="sidebar-link">Introduction</a>
-                    <a href="#resolution" class="sidebar-link">Resolution System (2d6)</a>
+                    <a href="http://127.0.0.1:5500/rules.html#intro" class="sidebar-link active">Introduction</a>
+                    <a href="http://127.0.0.1:5500/rules.html#resolution" class="sidebar-link">Resolution System (2d6)</a>
 
                     <div class="nav-group-title">Character Creation</div>
-                    <a href="#creation" class="sidebar-link">Attributes</a>
-                    <a href="#origin" class="sidebar-link">Species & Path</a>
-                    <a href="#skills" class="sidebar-link">Skills</a>
-                    <a href="#damage" class="sidebar-link">Health, Guard & Death</a>
-                    <a href="#progression" class="sidebar-link">Traits & Level ups</a>
-                    <a href="#spellcasting" class="sidebar-link">Spellcasting</a>
-                    <a href="#equipment" class="sidebar-link">Equipment</a>
+                    <a href="http://127.0.0.1:5500/rules.html#creation" class="sidebar-link">Attributes</a>
+                    <a href="http://127.0.0.1:5500/rules.html#origin" class="sidebar-link">Species &amp; Path</a>
+                    <a href="http://127.0.0.1:5500/rules.html#skills" class="sidebar-link">Skills</a>
+                    <a href="http://127.0.0.1:5500/rules.html#damage" class="sidebar-link">Health, Guard &amp; Death</a>
+                    <a href="http://127.0.0.1:5500/rules.html#progression" class="sidebar-link">Traits &amp; Level ups</a>
+                    <a href="http://127.0.0.1:5500/rules.html#spellcasting" class="sidebar-link">Spellcasting</a>
+                    <a href="http://127.0.0.1:5500/rules.html#equipment" class="sidebar-link">Equipment</a>
 
                     <div class="nav-group-title">Combat Rules</div>
-                    <a href="#movement" class="sidebar-link">Movement</a>
-                    <a href="#size" class="sidebar-link">Map Sizes & Effects</a>
-                    <a href="#range" class="sidebar-link">Ranged Combat</a>
-                    <a href="#combat" class="sidebar-link">Turn Structure</a>
-                    <a href="#companion" class="sidebar-link">Companions</a>
-                    <a href="#conditions" class="sidebar-link">Conditions</a>
-                    <a href="#mount" class="sidebar-link">Mount & Vehicle Combat</a>
-
-                    <div class="nav-group-title">Narrator Rules</div>
+                    <a href="http://127.0.0.1:5500/rules.html#movement" class="sidebar-link">Movement</a>
+                    <a href="http://127.0.0.1:5500/rules.html#size" class="sidebar-link">Map Sizes &amp; Effects</a>
+                    <a href="http://127.0.0.1:5500/rules.html#range" class="sidebar-link">Ranged Combat</a>
+                    <a href="http://127.0.0.1:5500/rules.html#combat" class="sidebar-link">Turn Structure</a>
+                    <a href="http://127.0.0.1:5500/rules.html#companion" class="sidebar-link">Companions</a>
+                    <a href="http://127.0.0.1:5500/rules.html#conditions" class="sidebar-link">Conditions</a>
+                    <a href="http://127.0.0.1:5500/rules.html#mount" class="sidebar-link">Mount &amp; Vehicle Combat</a>
 
                 </div>
             </aside>
@@ -257,15 +230,12 @@
                                 </div>
                             </div>
 
-                            <div
-                                class="flex flex-col items-center justify-center bg-slate-800/50 p-6 rounded-xl border border-slate-700 w-full md:w-auto relative group">
-                                <button onclick="randomizeDiceFaces()"
-                                    class="absolute inset-0 w-full h-full opacity-0 z-10 cursor-pointer"
-                                    title="Click to Reroll"></button>
+                            <div class="flex flex-col items-center justify-center bg-slate-800/50 p-6 rounded-xl border border-slate-700 w-full md:w-auto relative group">
+                                <button onclick="randomizeDiceFaces()" class="absolute inset-0 w-full h-full opacity-0 z-10 cursor-pointer" title="Click to Reroll"></button>
 
                                 <div class="dice-visual mb-4">
-                                    <div class="die face-6" aria-hidden="true"></div>
-                                    <div class="die face-6" aria-hidden="true"></div>
+                                    <div class="die face-4" aria-hidden="true"></div>
+                                    <div class="die face-4" aria-hidden="true"></div>
                                 </div>
                                 <span class="text-2xl font-bold text-white mb-1">+ Stat</span>
                                 <span class="text-xs uppercase tracking-widest text-slate-500">vs Challenge Score</span>
@@ -350,10 +320,10 @@
                         <div id="origin" class="scroll-offset-center">
                             <div class="section-header">
                                 <span class="section-number">04</span>
-                                Species & Path
+                                Species &amp; Path
                             </div>
                             <div class="rule-card">
-                                <h3 class="text-xl text-white font-bold mb-4">Species & Path</h3>
+                                <h3 class="text-xl text-white font-bold mb-4">Species &amp; Path</h3>
                                 <p class="mb-4">Your character is more than just numbers — it's also your past, culture
                                     and
                                     appearance. Use these to inform roleplay and mechanical choices.</p>
@@ -447,7 +417,7 @@
 
                     <div class="section-header">
                         <span class="section-number">06</span>
-                        Health & Guard
+                        Health &amp; Guard
                     </div>
 
                     <section id="damage" class="rule-card space-y-4">
@@ -479,7 +449,7 @@
                         <div class="rule-card">
                             <div class="grid md:grid-cols-2 gap-6 text-sm">
                                 <div>
-                                    <h4 class="text-white font-bold mb-2">Rest (>10 mins)</h4>
+                                    <h4 class="text-white font-bold mb-2">Rest (&gt;10 mins)</h4>
                                     <p>Regain Health equal to your Level for a short rest. Longer rests heal more —
                                         typically equal to your Level per hour up to 4 × Level. Rests may also replenish
                                         certain resources depending on traits.</p>
@@ -503,7 +473,7 @@
                     <section id="progression" class="scroll-offset-center">
                         <div class="section-header">
                             <span class="section-number">07</span>
-                            Traits & Leveling up
+                            Traits &amp; Leveling up
                         </div>
                         <div class="rule-card">
                             <ul class="space-y-4">
@@ -707,10 +677,10 @@
                     <section id="equipment" class="scroll-offset-center">
                         <div class="section-header">
                             <span class="section-number">09</span>
-                            Equipment & Encumbrance
+                            Equipment &amp; Encumbrance
                         </div>
                         <div class="rule-card">
-                            <p class="mb-4"><strong>Armor & Weaponry + Proficiencies</strong></p>
+                            <p class="mb-4"><strong>Armor &amp; Weaponry + Proficiencies</strong></p>
                             <p class="text-sm mb-4">You are restricted in how much of each type of equipment you can
                                 wear.
                                 Your character sheet has slots (Armor, Shield Cloak). One piece of equipment per
@@ -970,19 +940,18 @@
                             </div>
 
                             <div class="bg-slate-900/40 border border-slate-700 rounded-lg p-4 text-xs text-slate-400">
-                                <img src="../img/adjacent.png" alt="Adjacency Diagram">
+                                <img src="./Mythlight RPG _ Rules_files/adjacent.png" alt="Adjacency Diagram">
                             </div>
                             <div>
                                 <ul class="list-disc ml-5 space-y-2">
-                                    <li class="notice">✎ Creatures count as an <strong
-                                            class="notice">"Obstruction"</strong>,
+                                    <li class="notice">✎ Creatures count as an <strong class="notice">"Obstruction"</strong>,
                                         which is considered <strong class="notice">Partial (Reinforced) Cover</strong>
                                     </li>
                                 </ul>
                             </div>
 
                             <div class="bg-slate-900/40 border border-slate-700 rounded-lg p-4 text-xs text-slate-400">
-                                <img src="../img/obstruction.png" alt="Obstruction diagram">
+                                <img src="./Mythlight RPG _ Rules_files/obstruction.png" alt="Obstruction diagram">
                             </div>
                         </div>
 
@@ -1017,7 +986,7 @@
                     <section id="combat" class="scroll-offset-center">
                         <div class="section-header">
                             <span class="section-number">13</span>
-                            Turn Structure & Action Economy
+                            Turn Structure &amp; Action Economy
                         </div>
 
                         <div class="rule-card mb-6">
@@ -1029,8 +998,7 @@
                             <p class="mb-4"><strong>Initiative:</strong> Determined by order of engagement and Narrator
                                 rulings. When a creature falls unconscious, it is moved to the bottom of the turn order
                                 until revived.</p>
-                            <p class="mb-4"><strong>NPC Initiative:</strong> NPCs have a <span
-                                    class="text-indigo-400">Turn Delay</span> based on when they joined combat. The turn
+                            <p class="mb-4"><strong>NPC Initiative:</strong> NPCs have a <span class="text-indigo-400">Turn Delay</span> based on when they joined combat. The turn
                                 delay is specified in their stat block.</p>
                             <p class="mb-4"><strong>Ambush:</strong> When combat is initiated with an unaware target,
                                 the
@@ -1132,7 +1100,7 @@
                         </p>
 
                         <div class="space-y-4">
-                            <h3 class="text-xl text-white font-bold">Damage & Death</h3>
+                            <h3 class="text-xl text-white font-bold">Damage &amp; Death</h3>
 
                             <div class="grid md:grid-cols-2 gap-4 text-sm">
                                 <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
@@ -1156,7 +1124,7 @@
                         </div>
 
                         <div class="space-y-4">
-                            <h3 class="text-xl text-white font-bold">Turn Order & Action Economy</h3>
+                            <h3 class="text-xl text-white font-bold">Turn Order &amp; Action Economy</h3>
 
                             <ul class="list-disc ml-5 text-sm space-y-2">
                                 <li>Companions act <strong>immediately after their controller</strong></li>
@@ -1383,7 +1351,7 @@
                     </section>
                     <div class="section-header">
                         <span class="section-number">13</span>
-                        Mounts & Vehicle Combat
+                        Mounts &amp; Vehicle Combat
                     </div>
                     <section class="rule-card space-y-8 scroll-offset-center" id="mount">
                         <h2 class="text-3xl text-white font-bold">Mounted Combat</h2>
@@ -1406,7 +1374,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl text-white font-bold mb-3">Initiative & Movement</h3>
+                            <h3 class="text-xl text-white font-bold mb-3">Initiative &amp; Movement</h3>
                             <p class="text-sm text-slate-300 max-w-3xl">
                                 While mounted, the rider and mount <strong>share an initiative slot</strong>.
                                 If the mount is unmounted, it acts on its own initiative, with
@@ -1422,7 +1390,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl text-white font-bold mb-3">Attacking & Targeting</h3>
+                            <h3 class="text-xl text-white font-bold mb-3">Attacking &amp; Targeting</h3>
                             <p class="text-sm text-slate-300 max-w-3xl">
                                 Melee attacks made against a <strong>mounted target</strong> suffer
                                 an <strong>Accuracy penalty</strong> equal to the rider’s
@@ -1560,7 +1528,7 @@
                     <section id="narrator" class="scroll-offset-center">
                         <div class="section-header">
                             <span class="section-number">14</span>
-                            Overview & General Guidelines
+                            Overview &amp; General Guidelines
                         </div>
                         <div class="rule-card">
 
@@ -1596,7 +1564,7 @@
                             </p>
 
                             <!-- Starting Resources & Equipment -->
-                            <h3 class="text-xl text-white font-bold mb-3">Starting Resources & Equipment</h3>
+                            <h3 class="text-xl text-white font-bold mb-3">Starting Resources &amp; Equipment</h3>
                             <p class="mb-4">
                                 Determine what resources characters begin with. Early equipment influences the tone and
                                 difficulty
@@ -1622,7 +1590,7 @@
                             </div>
 
                             <!-- Tools & Proficiencies -->
-                            <h3 class="text-xl text-white font-bold mb-3">Tools & Tool Proficiencies</h3>
+                            <h3 class="text-xl text-white font-bold mb-3">Tools &amp; Tool Proficiencies</h3>
                             <p class="mb-4">
                                 Tools enhance specific skills. You may define toolsets for any skill category.
                                 Tools typically grant a <strong>+1 to +3 bonus</strong> when appropriately applied.
@@ -1725,7 +1693,7 @@
                     <section id="cs-difficulty" class="scroll-offset-center">
                         <div class="section-header">
                             <div class="section-number">16</div>
-                            CS Difficulty & Social Interactions
+                            CS Difficulty &amp; Social Interactions
                         </div>
                         <div class="rule-card">
 
@@ -1797,7 +1765,7 @@
                     <section id="campaign-prep" class="scroll-offset-center">
                         <div class="section-header">
                             <div class="section-number">17</div>
-                            Campaign & Session Preparation
+                            Campaign &amp; Session Preparation
                         </div>
 
                         <div class="rule-card">
@@ -1816,7 +1784,7 @@
                             <ul class="list-disc ml-6 space-y-2 text-sm mb-6">
                                 <li><strong>World Framework:</strong> Define the setting’s stability, magic presence,
                                     and political or cultural tensions.</li>
-                                <li><strong>Tone & Boundaries:</strong> Clarify narrative tone and establish player
+                                <li><strong>Tone &amp; Boundaries:</strong> Clarify narrative tone and establish player
                                     safety expectations.</li>
                                 <li><strong>Character Integration:</strong> Ensure each character has a reason to exist
                                     within the world and alongside the party.</li>
@@ -1890,7 +1858,7 @@
                     <section id="downtime-travel" class="scroll-offset-center">
                         <div class="section-header">
                             <div class="section-number">18</div>
-                            Downtime & Travel
+                            Downtime &amp; Travel
                         </div>
 
                         <div class="rule-card">
@@ -1909,7 +1877,7 @@
                             </div>
 
                             <!-- Potions & Crafting -->
-                            <h3 class="text-xl text-white font-bold mb-3">Potions & Crafting</h3>
+                            <h3 class="text-xl text-white font-bold mb-3">Potions &amp; Crafting</h3>
 
                             <p class="mb-4">
                                 Brewing potions or crafting items during downtime guarantees success,
@@ -2024,7 +1992,7 @@
                                         </tr>
                                         <tr class="border-b border-slate-600">
                                             <td class="p-2 font-bold">Image</td>
-                                            <td class="p-2 h-20"><input id="npc_img" onchange="img_upload(this)" type="file" class="w-full bg-slate-800 border border-slate-700 rounded p-1"><img style="display:none;" class="w-full h-full object-contain" src="" alt="NPC Image Preview"></td>
+                                            <td class="p-2 h-20"><input id="npc_img" onchange="img_upload(this)" type="file" class="w-full bg-slate-800 border border-slate-700 rounded p-1"><img style="display:none;" class="w-full h-full object-contain" src="http://127.0.0.1:5500/rules.html" alt="NPC Image Preview"></td>
                                         </tr>
                                         <tr class="border-b border-slate-600">
                                             <td class="p-2 font-bold">Speed</td>
@@ -2071,7 +2039,7 @@
                                             <td class="p-2"><input type="text" class="w-full bg-slate-800 border border-slate-700 rounded p-1"></td>
                                         </tr>
                                         <tr class="border-b border-slate-600">
-                                            <td class="p-2 font-bold">Abilities & Actions</td>
+                                            <td class="p-2 font-bold">Abilities &amp; Actions</td>
                                             <td class="p-2 h-24"><textarea rows="5" style="resize: none;" class="w-full bg-slate-800 border border-slate-700 rounded p-1"></textarea></td>
                                         </tr>
                                         <tr>
@@ -2084,8 +2052,7 @@
                             </div>
 
                             <div class="mb-8 text-right">
-                                <button onclick="convert_table_to_png('npc_statblock_table')"
-                                    class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded text-white text-sm">
+                                <button onclick="convert_table_to_png('npc_statblock_table')" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded text-white text-sm">
                                     Save as PNG
                                 </button>
                             </div>
@@ -2145,13 +2112,13 @@
                             </p>
 
                             <!-- Damage Types -->
-                            <h3 class="text-xl text-white font-bold mb-3">Weaknesses, Resistances & Immunities</h3>
+                            <h3 class="text-xl text-white font-bold mb-3">Weaknesses, Resistances &amp; Immunities</h3>
                             <p class="mb-6 text-sm">
                                 Assign narratively. Undead may be weak to Light, fire spirits immune to Fire, etc.
                             </p>
 
                             <!-- Abilities -->
-                            <h3 class="text-xl text-white font-bold mb-3">Abilities & Actions</h3>
+                            <h3 class="text-xl text-white font-bold mb-3">Abilities &amp; Actions</h3>
                             <p class="mb-6 text-sm">
                                 List all attacks and traits. Assign traits totaling
                                 0.5 × their Health (in trait points).
@@ -2189,16 +2156,16 @@
                     </div>
 
                     <div class="nav-group-title">Creation</div>
-                    <a href="#os-creation" class="sidebar-link">Character Creation</a>
+                    <a href="http://127.0.0.1:5500/rules.html#os-creation" class="sidebar-link">Character Creation</a>
 
                     <div class="nav-group-title">Rules</div>
-                    <a href="#os-health" class="sidebar-link">Health & Defeat</a>
-                    <a href="#os-core" class="sidebar-link">Core Mechanics</a>
-                    <a href="#os-turns" class="sidebar-link">Turns & Actions</a>
-                    <a href="#os-movement" class="sidebar-link">Movement & Range</a>
-                    <a href="#os-ranged" class="sidebar-link">Ranged Combat</a>
-                    <a href="#os-companions" class="sidebar-link">Companions</a>
-                    <a href="#os-narrator" class="sidebar-link">Narrator Guidance</a>
+                    <a href="http://127.0.0.1:5500/rules.html#os-health" class="sidebar-link">Health &amp; Defeat</a>
+                    <a href="http://127.0.0.1:5500/rules.html#os-core" class="sidebar-link">Core Mechanics</a>
+                    <a href="http://127.0.0.1:5500/rules.html#os-turns" class="sidebar-link">Turns &amp; Actions</a>
+                    <a href="http://127.0.0.1:5500/rules.html#os-movement" class="sidebar-link">Movement &amp; Range</a>
+                    <a href="http://127.0.0.1:5500/rules.html#os-ranged" class="sidebar-link">Ranged Combat</a>
+                    <a href="http://127.0.0.1:5500/rules.html#os-companions" class="sidebar-link">Companions</a>
+                    <a href="http://127.0.0.1:5500/rules.html#os-narrator" class="sidebar-link">Narrator Guidance</a>
                 </div>
             </aside>
 
@@ -2236,7 +2203,7 @@
                         </div>
 
                         <div class="rule-card h-full">
-                            <h4 class="text-lg text-white font-bold mb-2">3. Stats & Skills</h4>
+                            <h4 class="text-lg text-white font-bold mb-2">3. Stats &amp; Skills</h4>
                             <ul class="list-disc ml-5 text-sm space-y-2 text-slate-400">
                                 <li>No Skills are used in One Shots</li>
                                 <li>Stats come primarily from Species</li>
@@ -2276,7 +2243,7 @@
 
                 <section id="os-health" class="scroll-offset-center">
                     <div class="rule-card space-y-6">
-                        <h3 class="text-2xl text-white font-bold">Health, Guard & Defeat</h3>
+                        <h3 class="text-2xl text-white font-bold">Health, Guard &amp; Defeat</h3>
 
                         <!-- STATES -->
                         <div class="grid md:grid-cols-4 gap-4 text-sm">
@@ -2322,8 +2289,7 @@
                         <div class="rule-card">
                             <h3 class="text-2xl text-white font-bold mb-6">Core Mechanics</h3>
 
-                            <div
-                                class="bg-slate-900/60 p-4 rounded border border-slate-700 text-sm mb-6 flex items-center gap-4">
+                            <div class="bg-slate-900/60 p-4 rounded border border-slate-700 text-sm mb-6 flex items-center gap-4">
                                 <div class="bg-indigo-600/20 p-3 rounded-full">
                                     <div class="w-6 h-6 border-2 border-indigo-400 rounded-sm"></div>
                                 </div>
@@ -2369,7 +2335,7 @@
 
                     <section id="os-turns" class="scroll-offset-center">
                         <div class="rule-card">
-                            <h3 class="text-2xl text-white font-bold mb-6">Turns & Actions</h3>
+                            <h3 class="text-2xl text-white font-bold mb-6">Turns &amp; Actions</h3>
 
                             <div class="bg-slate-900/40 p-4 rounded border border-slate-700 text-sm space-y-2">
                                 <strong class="text-white block">Initiative</strong>
@@ -2416,7 +2382,7 @@
 
                     <section id="os-movement" class="scroll-offset-center">
                         <div class="rule-card">
-                            <h3 class="text-2xl text-white font-bold mb-4">Movement & Range</h3>
+                            <h3 class="text-2xl text-white font-bold mb-4">Movement &amp; Range</h3>
 
                             <ul class="grid md:grid-cols-2 gap-4">
                                 <li class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300">
@@ -2468,23 +2434,19 @@
                         <div class="rule-card">
                             <h3 class="text-2xl text-white font-bold mb-4">Companions</h3>
                             <div class="space-y-2">
-                                <div
-                                    class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
+                                <div class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
                                     <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
                                     Act immediately after their controller
                                 </div>
-                                <div
-                                    class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
+                                <div class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
                                     <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
                                     2 Actions, 1 Attack
                                 </div>
-                                <div
-                                    class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
+                                <div class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
                                     <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
                                     No Skills, Mana, or Grace
                                 </div>
-                                <div
-                                    class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
+                                <div class="bg-slate-900/40 p-3 rounded border border-slate-700 text-sm text-slate-300 flex items-center gap-3">
                                     <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
                                     Only one combat companion per player
                                 </div>
@@ -2524,136 +2486,50 @@
 
     </main>
 
-    <div id="footer-placeholder"></div>
+        <!-- Footer -->
+        <div id="footer-placeholder"></div>
+        <script>
+            fetch('../dyn/footer.html')
+                .then(res => res.text())
+                .then(html => { document.getElementById('footer-placeholder').innerHTML = html; });
+        </script>
 
     <script>
-
         function convert_table_to_png(table) {
-            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${table.offsetWidth}" height="${table.offsetHeight}">
-                <foreignObject width="100%" height="100%">
-                    ${new XMLSerializer().serializeToString(table)}
-                </foreignObject>
-            </svg>`;
-            const svgBlob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
-            const url = URL.createObjectURL(svgBlob);
-            return new Promise((resolve) => {
-                const img = new Image();
-                img.onload = function () {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0);
-                    URL.revokeObjectURL(url);
-                    canvas.toBlob(resolve);
-                };
-                img.src = url;
-            });
+            // ...existing code...
         }
-
         function img_upload(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const img = input.nextElementSibling;
-                    img.src = e.target.result;
-                    img.style.display = 'block';
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
+            // ...existing code...
         }
-
-        // --- 1. Tab Navigation Logic ---
         function switchView(viewId) {
-            // Hide all sections
-            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
-            // Remove active state from buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
-            // Show target
-            const target = document.getElementById(viewId);
-            if (target) {
-                target.classList.remove('hidden');
-
-                // Set active button
-                const index = ['view-campaign', 'view-oneshots'].indexOf(viewId);
-                if (index >= 0) {
-                    document.querySelectorAll('.tab-btn')[index].classList.add('active');
-                }
-            }
-            requestAnimationFrame(() => {
-                syncSidebarTop();
-                updateSidebarActive();
-            });
+            // ...existing code...
         }
-
-        // --- 2. Dice Randomization ---
         function randomizeDiceFaces() {
-            const dice = document.querySelectorAll('.die');
-            if (dice.length === 0) return;
-
-            dice.forEach(d => {
-                const face = Math.floor(Math.random() * 6) + 1;
-                d.className = 'die face-' + face;
-            });
+            // ...existing code...
         }
-
         function syncSidebarTop() {
-            const title = document.querySelector('#view-campaign #core-section h2');
-            if (!title) return;
-            if (!window.matchMedia('(min-width: 1024px)').matches) return;
-            const rect = title.getBoundingClientRect();
-            if (rect.top <= 0) return;
-            document.documentElement.style.setProperty('--rules-sidebar-top', `${Math.round(rect.top)}px`);
+            // ...existing code...
         }
         function updateSidebarActive() {
-            const campaignVisible = !document.getElementById('view-campaign').classList.contains('hidden');
-            const activeViewId = campaignVisible ? 'view-campaign' : 'view-oneshots';
-            const activeSidebar = document.querySelector(`#${activeViewId} .sidebar`);
-            if (!activeSidebar) return;
-
-            const sections = Array.from(document.querySelectorAll(`#${activeViewId} section[id]`));
-            if (!sections.length) return;
-
-            const rawOffset = getComputedStyle(document.documentElement).getPropertyValue('--rules-sidebar-top');
-            const offset = Number.parseFloat(rawOffset) || 0;
-
-            let current = sections[0];
-            const threshold = 40;
-            for (const section of sections) {
-                const top = section.getBoundingClientRect().top - offset;
-                if (top <= threshold) current = section;
-                else break;
-            }
-
-            if (location.hash) {
-                const hashId = location.hash.replace('#', '');
-                const pinned = document.getElementById(hashId);
-                if (pinned) {
-                    const top = pinned.getBoundingClientRect().top - offset;
-                    if (Math.abs(top) <= 120) current = pinned;
-                }
-            }
-
-            activeSidebar.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active'));
-            const activeLink = activeSidebar.querySelector(`a[href="#${current.id}"]`);
-            if (activeLink) activeLink.classList.add('active');
+            // ...existing code...
         }
 
 
-        // --- 4. Initialization ---
         document.addEventListener("DOMContentLoaded", () => {
+                window.addEventListener('resize', () => {
+                    requestAnimationFrame(updateFloatingLegendPosition);
+                });
+                requestAnimationFrame(updateFloatingLegendPosition);
             randomizeDiceFaces();
             requestAnimationFrame(syncSidebarTop);
             requestAnimationFrame(updateSidebarActive);
             window.addEventListener('resize', () => {
-                requestAnimationFrame(syncSidebarTop);
-                requestAnimationFrame(updateSidebarActive);
+                    requestAnimationFrame(syncSidebarTop);
+                    requestAnimationFrame(updateSidebarActive);
             });
             document.addEventListener('scroll', () => {
-                requestAnimationFrame(updateSidebarActive);
+                    requestAnimationFrame(updateSidebarActive);
             }, { passive: true });
-
             document.querySelectorAll('.sidebar-link').forEach(link => {
                 link.addEventListener('click', () => {
                     setTimeout(updateSidebarActive, 120);
@@ -2661,7 +2537,59 @@
             });
         });
     </script>
-    <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
-</body>
+    <script id="ml-layout" src="./Mythlight RPG _ Rules_files/layout.js.download" data-base=".." defer=""></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 
-</html>
+
+<audio class="audio-output" style="display: none;"></audio><div id="volume-booster-visusalizer">
+                    <div class="sound">
+                        <div class="sound-icon"></div>
+                        <div class="sound-wave sound-wave_one"></div>
+                        <div class="sound-wave sound-wave_two"></div>
+                        <div class="sound-wave sound-wave_three"></div>
+                    </div>
+                    <div class="segments-box">
+                        <div data-range="1-20" class="segment"><span></span></div>
+                        <div data-range="21-40" class="segment"><span></span></div>
+                        <div data-range="41-60" class="segment"><span></span></div>
+                        <div data-range="61-80" class="segment"><span></span></div>
+                        <div data-range="81-100" class="segment"><span></span></div>
+                    </div>
+                </div></body></html>

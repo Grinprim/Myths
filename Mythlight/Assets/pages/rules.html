@@ -2311,6 +2311,21 @@
     <div id="footer-placeholder"></div>
 
     <script>
+// Floating legend adjustment
+function updateFloatingLegendPosition() {
+    const legend = document.querySelector('.floating-legend');
+    const subTabs = document.querySelector('.flex.flex-wrap.border-b');
+    if (!legend || !subTabs) return;
+    const subTabsRect = subTabs.getBoundingClientRect();
+    // Move legend up when sub-tabs are scrolled out of view
+    if (subTabsRect.top < 0) {
+        legend.style.top = `${Math.max(80, Math.abs(subTabsRect.top) + 60)}px`;
+        legend.style.marginBottom = '2em';
+    } else {
+        legend.style.top = `calc(var(--rules-sidebar-top) + 60px)`;
+        legend.style.marginBottom = '2em';
+    }
+}
 
        
 function saveNPCAsPNG() {
@@ -2402,6 +2417,13 @@ function saveNPCAsPNG() {
 
         // --- 4. Initialization ---
         document.addEventListener("DOMContentLoaded", () => {
+                window.addEventListener('resize', () => {
+                    requestAnimationFrame(updateFloatingLegendPosition);
+                });
+                document.addEventListener('scroll', () => {
+                    requestAnimationFrame(updateFloatingLegendPosition);
+                }, { passive: true });
+                requestAnimationFrame(updateFloatingLegendPosition);
             randomizeDiceFaces();
             requestAnimationFrame(syncSidebarTop);
             requestAnimationFrame(updateSidebarActive);
