@@ -332,6 +332,13 @@
                     <a href="#mount" class="sidebar-link">Mount & Vehicle Combat</a>
 
                     <div class="nav-group-title">Narrator Rules</div>
+                    <a href="#narrator" class="sidebar-link">Overview and General Rules</a>
+                    <a href="#effect-stack" class="sidebar-link">Effect Stack</a>
+                    <a href="#cs-difficulty" class="sidebar-link">CS Difficulty</a>
+                    <a href="#campaign-prep" class="sidebar-link">Campaign Preparation</a>
+                    <a href="#downtime-travel" class="sidebar-link">Downtime & Travel</a>
+                    <a href="#combat-npc" class="sidebar-link">Combat NPC Creation</a>
+
 
                 </div>
             </aside>
@@ -2351,19 +2358,19 @@
                                     <input placeholder="Turn Delay" style="width: 32%;" id="turnDelay">
 
                                     <input placeholder="Action Num" style="width: 32%;" id="numActions" type="number">
-                                    <br><br>
+                                    <br>Attributes:<br>
                                     <input placeholder="Physique" style="width: 32%;" id="physique" type="number">
 
                                     <input placeholder="Technique" style="width: 32%;" id="technique" type="number">
 
                                     <input placeholder="Mystique" style="width: 32%;" id="mystique" type="number">
-                                    <br><br>
+                                    <br>Defences/Weaknesses:<br>
                                     <input placeholder="Weakness" style="width: 32%;" id="weakness">
 
                                     <input placeholder="Resistance" style="width: 32%;" id="resistance">
 
                                     <input placeholder="Immunity" style="width: 32%;" id="immunity">
-                                    <br><br>
+                                    <br>Spellcasting:<br>
                                     <input placeholder="Spell Atk Bonus" style="width: 32%;" id="spellAtk"
                                         type="number">
 
@@ -2412,6 +2419,11 @@
                                     <div class="stat-line"><span>PHY</span><span id="p_physique">-</span></div>
                                     <div class="stat-line"><span>TEC</span><span id="p_technique">-</span></div>
                                     <div class="stat-line"><span>MYS</span><span id="p_mystique">-</span></div>
+
+                                    <div class="section-title">Defenses/Weaknesses</div>
+                                    <div class="stat-line"><span>Weakness</span><span id="p_weakness">-</span></div>
+                                    <div class="stat-line"><span>Resistance</span><span id="p_resistance">-</span></div>
+                                    <div class="stat-line"><span>Immunity</span><span id="p_immunity">-</span></div>
 
                                     <div class="section-title">Abilities</div>
                                     <div id="p_abilities" class="text-block"></div>
@@ -2871,9 +2883,14 @@
             p_speed.innerText = speed.value;
             p_health.innerText = health.value;
             p_armor.innerText = armor.value;
+            p_turnDelay.innerText = turnDelay.value;
+            p_numActions.innerText = numActions.value;
             p_physique.innerText = physique.value;
             p_technique.innerText = technique.value;
             p_mystique.innerText = mystique.value;
+            p_weakness.innerText = weakness.value;
+            p_resistance.innerText = resistance.value;
+            p_immunity.innerText = immunity.value;
             p_spellAtk.innerText = spellAtk.value;
             p_spellDmg.innerText = spellDmg.value;
             p_spellCS.innerText = spellCS.value;
