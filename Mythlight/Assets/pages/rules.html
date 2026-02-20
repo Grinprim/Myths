@@ -2336,41 +2336,41 @@
 
                             <div
                                 style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: justify; align-items: flex-start; margin-bottom: 20px;">
-                                <div style="width: 55%; min-width: 250px;"
+                                <div style="width: 40%; min-width: 250px;"
                                     style="display: inline-flex; justify-content: space-between;" class="builder">
                                     <h3>NPC Builder</h3>
 
-                                    <input placeholder="Name" style="width: 100%;" id="name">
+                                    <input placeholder="Name" style="width: 98.5%;" id="name">
 
-                                    <input placeholder="Speed" style="width: 49%;" id="speed">
+                                    <input placeholder="Speed" style="width: 32%;" id="speed">
 
-                                    <input placeholder="Health" style="width: 49%;" id="health" type="number">
+                                    <input placeholder="Health" style="width: 32%;" id="health" type="number">
 
-                                    <input placeholder="Armor" style="width: 49%;" id="armor" type="number">
+                                    <input placeholder="Armor" style="width: 32%;" id="armor" type="number">
 
-                                    <input placeholder="Turn Delay" style="width: 49%;" id="turnDelay">
+                                    <input placeholder="Turn Delay" style="width: 32%;" id="turnDelay">
 
-                                    <input placeholder="Number of Actions" style="width: 49%;" id="numActions" type="number">
+                                    <input placeholder="Action Num" style="width: 32%;" id="numActions" type="number">
+                                    <br><br>
+                                    <input placeholder="Physique" style="width: 32%;" id="physique" type="number">
 
-                                    <input placeholder="Physique" style="width: 49%;" id="physique" type="number">
+                                    <input placeholder="Technique" style="width: 32%;" id="technique" type="number">
 
-                                    <input placeholder="Technique" style="width: 49%;" id="technique" type="number">
+                                    <input placeholder="Mystique" style="width: 32%;" id="mystique" type="number">
+                                    <br><br>
+                                    <input placeholder="Weakness" style="width: 32%;" id="weakness">
 
-                                    <input placeholder="Mystique" style="width: 49%;" id="mystique" type="number">
+                                    <input placeholder="Resistance" style="width: 32%;" id="resistance">
 
-                                    <input placeholder="Weakness" style="width: 49%;" id="weakness">
-
-                                    <input placeholder="Resistance" style="width: 49%;" id="resistance">
-
-                                    <input placeholder="Immunity" style="width: 49%;" id="immunity">
-
-                                    <input placeholder="Spell Atk Bonus" style="width: 49%;" id="spellAtk"
+                                    <input placeholder="Immunity" style="width: 32%;" id="immunity">
+                                    <br><br>
+                                    <input placeholder="Spell Atk Bonus" style="width: 32%;" id="spellAtk"
                                         type="number">
 
-                                    <input placeholder="Spell Dmg Bonus" style="width: 49%;" id="spellDmg"
+                                    <input placeholder="Spell Dmg Bonus" style="width: 32%;" id="spellDmg"
                                         type="number">
 
-                                    <input placeholder="Spell CS" style="width: 49%;" id="spellCS" type="number"><br>
+                                    <input placeholder="Spell CS" style="width: 32%;" id="spellCS" type="number"><br>
 
                                     <label>Abilities (Separate by new line)</label>
                                     <textarea id="abilities"></textarea>
@@ -2390,22 +2390,24 @@
                                             accept="image/*"></div>
                                 </div>
 
-                                <div id="card" class="card">
+                                <div style="width: 58%; float: right;" id="card" class="card">
 
                                     <div class="card-header" id="p_name">Creature Name</div>
-
-                                    <div style="height: 200px;" class="portrait">
+                                    <div style="display: flex;">
+                                    <div style="height: 200px; width: 50%;" class="portrait">
                                         <img style="display: none;" id="p_portrait" src="" alt="Portrait">
                                     </div>
-
+                                    <div style="width: 50%; padding: 10px; display: flex; flex-direction: column; justify-content: space-between;">
+                                    <div class="section-title">Scores</div>
                                     <div class="stat-line"><span>Speed</span><span id="p_speed">-</span></div>
                                     <div class="stat-line"><span>Health ♡</span><span id="p_health">-</span></div>
                                     <div class="stat-line"><span>Armor ⛨</span><span id="p_armor">-</span></div>
-
+                                    
                                     <div class="section-title">Action Economy</div>
                                     <div class="stat-line"><span>Turn Delay ⧖</span><span id="p_turnDelay">-</span></div>
                                     <div class="stat-line"><span>Actions</span><span id="p_numActions">-</span></div>
-
+                                    </div>
+                                </div>
                                     <div class="section-title">Attributes</div>
                                     <div class="stat-line"><span>PHY</span><span id="p_physique">-</span></div>
                                     <div class="stat-line"><span>TEC</span><span id="p_technique">-</span></div>
@@ -2418,6 +2420,7 @@
                                     <div class="stat-line"><span>Atk Bonus</span><span id="p_spellAtk">-</span></div>
                                     <div class="stat-line"><span>Dmg Bonus</span><span id="p_spellDmg">-</span></div>
                                     <div class="stat-line"><span>Spell CS</span><span id="p_spellCS">-</span></div>
+                                    <div class="section-title">Spells</div>
                                     <div id="p_spells" class="text-block"></div>
 
                                     <div class="footer-stats">
@@ -2875,13 +2878,13 @@
             p_spellDmg.innerText = spellDmg.value;
             p_spellCS.innerText = spellCS.value;
             p_spells.innerHTML = spells.value.split("\n").map(line =>
-                `<div>• ${line}</div>`
+                `<div>• ${line}</div><br>`
             ).join("");
 
             // Auto-format abilities
             let abilityLines = abilities.value.split("\n");
             p_abilities.innerHTML = abilityLines.map(line =>
-                `<div>• ${line}</div>`
+                `<div>• ${line}</div><br>`
             ).join("");
         }
         
