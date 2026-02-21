@@ -2384,37 +2384,41 @@
 
                                     <label>Spells (Separate by new line)</label>
                                     <textarea id="spells"></textarea>
-
+                                    <br><label>Portrait Upload</label>
+                                    <div id="changeArtButton"><input onchange="img_upload(this)" type="file"
+                                            id="portrait-upload" accept="image/*"></div>
+                                    <label>Border Color</label><input onchange="updateColor()" style="height: 50px;"
+                                        type="color" id="border-color" value="#6366f1"><br>
                                     <button
                                         style="border: 1px solid #6366f1; background-color: #6365f193; color: white; padding: 2px 8px; border-radius: 10px;"
                                         onclick="updatePreview()">Update Preview</button>
                                     <button
                                         style="border: 1px solid #6366f1; background-color: #6365f193; color: white; padding: 2px 8px; border-radius: 10px;"
                                         onclick="exportPNG()">Save as PNG</button>
-                                    <br><br><div
-                                        id="changeArtButton"><input
-                                            onchange="img_upload(this)" type="file" id="portrait-upload"
-                                            accept="image/*"></div>
                                 </div>
 
                                 <div style="width: 58%; float: right;" id="card" class="card">
 
                                     <div class="card-header" id="p_name">Creature Name</div>
                                     <div style="display: flex;">
-                                    <div style="height: 200px; width: 50%;" class="portrait">
-                                        <img style="display: none;" id="p_portrait" src="" alt="Portrait">
+                                        <div style="height: 200px; width: 50%;" class="portrait">
+                                            <img style="display: none;" id="p_portrait" src="" alt="Portrait">
+                                        </div>
+                                        <div
+                                            style="width: 50%; padding: 10px; display: flex; flex-direction: column; justify-content: space-between;">
+                                            <div class="section-title">Scores</div>
+                                            <div class="stat-line"><span>Speed</span><span id="p_speed">-</span></div>
+                                            <div class="stat-line"><span>Health ♡</span><span id="p_health">-</span>
+                                            </div>
+                                            <div class="stat-line"><span>Armor ⛨</span><span id="p_armor">-</span></div>
+
+                                            <div class="section-title">Action Economy</div>
+                                            <div class="stat-line"><span>Turn Delay ⧖</span><span
+                                                    id="p_turnDelay">-</span></div>
+                                            <div class="stat-line"><span>Actions</span><span id="p_numActions">-</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div style="width: 50%; padding: 10px; display: flex; flex-direction: column; justify-content: space-between;">
-                                    <div class="section-title">Scores</div>
-                                    <div class="stat-line"><span>Speed</span><span id="p_speed">-</span></div>
-                                    <div class="stat-line"><span>Health ♡</span><span id="p_health">-</span></div>
-                                    <div class="stat-line"><span>Armor ⛨</span><span id="p_armor">-</span></div>
-                                    
-                                    <div class="section-title">Action Economy</div>
-                                    <div class="stat-line"><span>Turn Delay ⧖</span><span id="p_turnDelay">-</span></div>
-                                    <div class="stat-line"><span>Actions</span><span id="p_numActions">-</span></div>
-                                    </div>
-                                </div>
                                     <div class="section-title">Attributes</div>
                                     <div class="stat-line"><span>PHY</span><span id="p_physique">-</span></div>
                                     <div class="stat-line"><span>TEC</span><span id="p_technique">-</span></div>
@@ -2454,11 +2458,32 @@
                                 1. Calculate total party health [H].<br>
                                 2. Select encounter difficulty pool:
                             </p>
-                            <ul class="list-disc ml-6 text-sm mb-2">
-                                <li>Easy: 0.5 × H</li>
-                                <li>Moderate: 1 × H</li>
-                                <li>Hard: 2 × H</li>
-                            </ul>
+                            <table class="w-full text-sm text-slate-300 border border-slate-700 rounded-lg mb-6">
+                                <thead>
+                                    <tr class="bg-slate-800 text-slate-200">
+                                        <th class="border border-gray-300 px-3 py-1 text-left">Difficulty</th>
+                                        <th class="border border-gray-300 px-3 py-1 text-left">Formula</th>
+                                        <th class="border border-gray-300 px-3 py-1 text-left">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="correct">
+                                        <td class="border border-gray-300 px-3 py-1">Easy</td>
+                                        <td class="border border-gray-300 px-3 py-1">0.5 × H</td>
+                                        <td class="border border-gray-300 px-3 py-1">Suitable for minor threats or skirmishes.</td>
+                                    </tr>
+                                    <tr class="notice">
+                                        <td class="border border-gray-300 px-3 py-1">Moderate</td>
+                                        <td class="border border-gray-300 px-3 py-1">1 × H</td>
+                                        <td class="border border-gray-300 px-3 py-1">Balanced for standard encounters.</td>
+                                    </tr>
+                                    <tr class="wrong">
+                                        <td class="border border-gray-300 px-3 py-1">Hard</td>
+                                        <td class="border border-gray-300 px-3 py-1">2 × H</td>
+                                        <td class="border border-gray-300 px-3 py-1">Challenging fights that test player resources.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <p class="mb-6 text-sm">
                                 Distribute evenly among combatants. Allies receive equal HP but do not count toward
                                 division.
@@ -2498,7 +2523,33 @@
                             <!-- Damage Types -->
                             <h3 class="text-xl text-white font-bold mb-3">Weaknesses, Resistances & Immunities</h3>
                             <p class="mb-6 text-sm">
-                                Assign narratively. Undead may be weak to Light, fire spirits immune to Fire, etc.
+                                Assign narratively. Represents how a creature’s biology, magic, or nature interacts with different damage types.
+                            <table class="w-full text-sm text-slate-300 border border-slate-700 rounded-lg mb-6">
+                                <thead>
+                                    <tr class="bg-slate-800 text-slate-200">
+                                        <th class="border border-gray-300 px-3 py-1 text-left">Type</th>
+                                        <th class="border border-gray-300 px-3 py-1 text-left">Effect</th>
+                                        <th class="border border-gray-300 px-3 py-1 text-left">Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-300 px-3 py-1">Weakness</td>
+                                        <td class="border border-gray-300 px-3 py-1">Takes 50% more damage from specified type.</td>
+                                        <td class="border border-gray-300 px-3 py-1">Skeletons weak to Blunt damage.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-3 py-1">Resistance</td>
+                                        <td class="border border-gray-300 px-3 py-1">Takes 50% less damage from specified type.</td>
+                                        <td class="border border-gray-300 px-3 py-1">Fire elementals resistant to Fire damage.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-3 py-1">Immunity</td>
+                                        <td class="border border-gray-300 px-3 py-1">Unaffected by specified type.</td>
+                                        <td class="border border-gray-300 px-3 py-1">Golems immune to Poison damage.</td>
+                                    </tr>
+                                </tbody>
+                                                        </table>
                             </p>
 
                             <!-- Abilities -->
@@ -2878,6 +2929,13 @@
 
     <script>
 
+        function updateColor() {
+            const color = document.getElementById('border-color').value;
+            const card = document.getElementById('card');
+            card.style.borderColor = color;
+            document.getElementById('changeArtButton').style.borderColor = color;
+        }
+
         function updatePreview() {
             p_name.innerText = name.value || "Creature Name";
             p_speed.innerText = speed.value;
@@ -2904,7 +2962,7 @@
                 `<div>• ${line}</div><br>`
             ).join("");
         }
-        
+
 
         function exportPNG() {
             const card = document.getElementById('card');
