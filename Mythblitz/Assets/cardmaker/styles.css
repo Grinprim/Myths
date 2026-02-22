@@ -265,17 +265,17 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
   bottom: 10px;
 }
 .statNumberLeft {
-  left: 115px;
+  left: 40px;
 }
 .statNumberRight {
-  right: 115px;
+  right: 40px;
 }
 
 .type-Gear .statNumberLeft {
-  left: 95px;
+  left: 25px;
 }
 .type-Gear .statNumberRight {
-  right: 105px;
+  right: 35px;
 }
 
 .rarityGem {
