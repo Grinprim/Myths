@@ -107,9 +107,9 @@
       { "name": "Masterwork", "description": "+2 to a stat, +1 to another, unbreakable." }
     ],
     "functional": [
-      { "name": "Sharp", "description": "+1 Puncture" },
-      { "name": "Keen", "description": "+2 Puncture" },
-      { "name": "Lethal", "description": "+3 Puncture" },
+      { "name": "Sharp", "description": "+1 Pierce" },
+      { "name": "Keen", "description": "+2 Pierce" },
+      { "name": "Lethal", "description": "+3 Pierce" },
       { "name": "Edged", "description": "+1 Slash" },
       { "name": "Honed", "description": "+2 Slash" },
       { "name": "Razor", "description": "+3 Slash" },
