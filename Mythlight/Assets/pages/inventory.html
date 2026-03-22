@@ -28,6 +28,11 @@
             border-color: #6366f1;
             color: white;
         }
+
+        .weapon-roll.shuffling {
+            filter: blur(1px);
+            opacity: 0.8;
+        }
     </style>
 </head>
 
@@ -253,173 +258,39 @@
 
             <section class="space-y-6">
                 <div class="flex items-center gap-4 mb-2">
-                    <h2 class="text-2xl text-white font-bold">Armory</h2>
+                    <h2 class="text-2xl text-white font-bold">Random Weapon Generator</h2>
                     <div class="h-px bg-slate-700 flex-1"></div>
                 </div>
 
-                <details open class="rule-card">
-                    <summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Light Melee
-                    </summary>
-                    <div class="table-wrap mt-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Weapon</th>
-                                    <th>Damage</th>
-                                    <th>Reach</th>
-                                    <th>Tags</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody id="m1"></tbody>
-                        </table>
-                    </div>
-                </details>
-                <details class="rule-card">
-                    <summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Medium Melee
-                    </summary>
-                    <div class="table-wrap mt-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Weapon</th>
-                                    <th>Damage</th>
-                                    <th>Reach</th>
-                                    <th>Tags</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody id="m2"></tbody>
-                        </table>
-                    </div>
-                </details>
-                <details class="rule-card">
-                    <summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Heavy Melee
-                    </summary>
-                    <div class="table-wrap mt-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Weapon</th>
-                                    <th>Damage</th>
-                                    <th>Reach</th>
-                                    <th>Tags</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody id="m3"></tbody>
-                        </table>
-                    </div>
-                </details>
+                <div class="rule-card space-y-6">
+                    <p class="text-sm text-slate-400">Build a random weapon by rolling a base type plus a chosen number of prefixes.</p>
 
-                <details class="rule-card">
-                    <summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Light Ranged
-                    </summary>
-                    <div class="table-wrap mt-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Weapon</th>
-                                    <th>Damage</th>
-                                    <th>Range</th>
-                                    <th>Ammo</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody id="r1"></tbody>
-                        </table>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
+                        <label class="space-y-2">
+                            <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Prefixes</span>
+                            <input id="weapon-prefix-count" type="number" min="0" max="5" value="1" class="search-input w-full" />
+                        </label>
+                        <button onclick="pickRandomWeapon()" class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold uppercase tracking-widest border border-indigo-400/30 transition-all">Roll Weapon</button>
                     </div>
-                </details>
-                <details class="rule-card">
-                    <summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Heavy Ranged
-                    </summary>
-                    <div class="table-wrap mt-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Weapon</th>
-                                    <th>Damage</th>
-                                    <th>Range</th>
-                                    <th>Ammo</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody id="r2"></tbody>
-                        </table>
-                    </div>
-                </details>
 
-                <details class="rule-card">
-                    <summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Light Firearms
-                    </summary>
-                    <div class="table-wrap mt-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Weapon</th>
-                                    <th>Damage</th>
-                                    <th>Range</th>
-                                    <th>Ammo</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody id="f1"></tbody>
-                        </table>
+                    <div id="weapon-roll" class="weapon-roll bg-slate-900/50 border border-slate-700 rounded-2xl p-6 space-y-3 transition-all duration-100">
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-indigo-400 font-bold">Generated Weapon</div>
+                        <h3 id="weapon-name" class="text-3xl text-white font-bold">-</h3>
+                        <div id="weapon-meta" class="flex flex-wrap gap-2"></div>
+                        <div id="weapon-effects" class="text-sm text-slate-300 leading-relaxed"></div>
                     </div>
-                </details>
-                <details class="rule-card">
-                    <summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Heavy Firearms
-                    </summary>
-                    <div class="table-wrap mt-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Weapon</th>
-                                    <th>Damage</th>
-                                    <th>Range</th>
-                                    <th>Ammo</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody id="f2"></tbody>
-                        </table>
-                    </div>
-                </details>
 
-                <details class="rule-card">
-                    <summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Armor</summary>
-                    <div class="table-wrap mt-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Armor</th>
-                                    <th>Rating</th>
-                                    <th>Penalty</th>
-                                    <th>Tags</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody id="armor"></tbody>
-                        </table>
+                    <div class="space-y-3">
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold">Preset Rolls (Max 5)</div>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="runWeaponPreset(0)" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-xs font-bold uppercase tracking-wider">Simple (0)</button>
+                            <button onclick="runWeaponPreset(1)" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-xs font-bold uppercase tracking-wider">Balanced (1)</button>
+                            <button onclick="runWeaponPreset(2)" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-xs font-bold uppercase tracking-wider">Hunter (2)</button>
+                            <button onclick="runWeaponPreset(3)" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-xs font-bold uppercase tracking-wider">Elite (3)</button>
+                            <button onclick="runWeaponPreset(4)" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-xs font-bold uppercase tracking-wider">Artifact (4)</button>
+                        </div>
                     </div>
-                </details>
-                <details class="rule-card">
-                    <summary class="text-xl text-white font-bold cursor-pointer hover:text-indigo-300">Shields</summary>
-                    <div class="table-wrap mt-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Shield</th>
-                                    <th>Bonus</th>
-                                    <th>Penalty</th>
-                                    <th>Tags</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody id="shields"></tbody>
-                        </table>
-                    </div>
-                </details>
+                </div>
             </section>
         </div>
 
@@ -920,6 +791,8 @@
     <div id="footer-placeholder"></div>
 
     <script>
+        let weaponGeneratorData = null;
+
         // --- Tab Logic ---
         function switchView(viewId) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
@@ -943,6 +816,107 @@
             return list.map(t => `<span class="tag-badge">${t}</span>`).join('');
         };
 
+        const randomFromList = (list) => list[Math.floor(Math.random() * list.length)];
+
+        function clampCount(value) {
+            const parsed = Number.parseInt(value, 10);
+            if (Number.isNaN(parsed)) return 0;
+            return Math.max(0, Math.min(5, parsed));
+        }
+
+        function pickUniqueEntries(pool, count, excludeNames = new Set()) {
+            if (!Array.isArray(pool) || !pool.length || count <= 0) return [];
+            const copy = pool.filter(entry => entry && entry.name && !excludeNames.has(entry.name));
+            const picks = [];
+            const maxCount = Math.min(count, copy.length);
+            for (let i = 0; i < maxCount; i++) {
+                const index = Math.floor(Math.random() * copy.length);
+                picks.push(copy.splice(index, 1)[0]);
+            }
+            return picks;
+        }
+
+        function renderWeaponResult(result) {
+            const nameEl = document.getElementById('weapon-name');
+            const metaEl = document.getElementById('weapon-meta');
+            const effectsEl = document.getElementById('weapon-effects');
+            if (!nameEl || !metaEl || !effectsEl) return;
+
+            nameEl.textContent = result.name;
+            metaEl.innerHTML = `
+                <span class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-[10px] font-bold uppercase tracking-wider">${result.category}</span>
+                <span class="px-3 py-1 rounded-full bg-slate-700 border border-slate-600 text-slate-200 text-[10px] font-bold uppercase tracking-wider">${result.prefixes.length} Prefixes</span>
+            `;
+
+            const effectBlocks = [];
+            if (result.prefixes.length) {
+                effectBlocks.push(`<div><strong class="text-emerald-300">Prefixes:</strong> ${result.prefixes.map(p => `${p.name} (${p.description})`).join(' | ')}</div>`);
+            }
+            effectsEl.innerHTML = effectBlocks.length ? effectBlocks.join('') : '<span class="text-slate-500 italic">No modifiers selected.</span>';
+        }
+
+        function buildRandomWeapon(prefixCount) {
+            if (!weaponGeneratorData) return null;
+            const categories = weaponGeneratorData?.categories?.weapons || [];
+            const qualityPool = weaponGeneratorData?.prefixes?.quality || [];
+            const functionalPool = weaponGeneratorData?.prefixes?.functional || [];
+            if (!categories.length) return null;
+
+            const base = randomFromList(categories);
+            const targetPrefixCount = clampCount(prefixCount);
+
+            const qualityPrefix = pickUniqueEntries(qualityPool, Math.min(1, targetPrefixCount));
+            const extraPrefixCount = Math.max(0, targetPrefixCount - qualityPrefix.length);
+            const extraPrefixes = pickUniqueEntries(functionalPool, extraPrefixCount, new Set(qualityPrefix.map(item => item.name)));
+            const prefixes = [...qualityPrefix, ...extraPrefixes];
+
+            const suffixes = pickUniqueEntries(suffixPool, clampCount(suffixCount), new Set(prefixes.map(item => item.name)));
+
+            const nameParts = [
+                ...prefixes.map(item => item.name),
+                base
+            ];
+
+            return {
+                category: base,
+                name: nameParts.join(' '),
+                prefixes
+            };
+        }
+
+        function pickRandomWeapon() {
+            const card = document.getElementById('weapon-roll');
+            if (!card || !weaponGeneratorData) return;
+
+            const prefixInput = document.getElementById('weapon-prefix-count');
+            const prefixCount = clampCount(prefixInput ? prefixInput.value : 0);
+
+            if (prefixInput) prefixInput.value = String(prefixCount);
+
+            let shuffleCount = 0;
+            const maxShuffles = 8;
+            card.classList.add('shuffling');
+
+            const shuffleInterval = setInterval(() => {
+                const sample = buildRandomWeapon(prefixCount);
+                if (sample) renderWeaponResult(sample);
+                shuffleCount += 1;
+
+                if (shuffleCount >= maxShuffles) {
+                    clearInterval(shuffleInterval);
+                    const finalResult = buildRandomWeapon(prefixCount);
+                    if (finalResult) renderWeaponResult(finalResult);
+                    card.classList.remove('shuffling');
+                }
+            }, 60);
+        }
+
+        function runWeaponPreset(prefixCount) {
+            const prefixInput = document.getElementById('weapon-prefix-count');
+            if (prefixInput) prefixInput.value = String(prefixCount);
+            pickRandomWeapon();
+        }
+
         // --- Artisan Row Creator ---
         function createArtisanRow(item, index, type) {
             const rowId = `artisan-${index}-${type}`;
@@ -963,18 +937,14 @@
         }
 
         async function loadData() {
-            // Equipment
+            // Weapon Generator
             try {
-                const res = await fetch('../json/equipment.json');
-                const data = await res.json();
-                const fill = (id, rows) => {
-                    const b = document.getElementById(id); if (!b || !rows) return;
-                    b.innerHTML = rows.map(r => `<tr class="row"><td class="font-bold text-white">${r.Name}</td><td><span class="text-emerald-300 font-mono">${r.Damage || r.Rating || r.Bonus || "-"}</span></td><td>${r.Reach || r.Range || "-"}</td><td>${formatTags(r.Ammo || r.Tags || "-")}</td><td class="text-slate-400 text-xs italic">${r.Description || ""}</td></tr>`).join("");
-                };
-                if (data.weapons) { fill("m1", data.weapons.m1); fill("m2", data.weapons.m2); fill("m3", data.weapons.m3); fill("r1", data.weapons.r1); fill("r2", data.weapons.r2); fill("f1", data.weapons.f1); fill("f2", data.weapons.f2); }
-                if (data.armor) fill("armor", [...(data.armor.a1 || []), ...(data.armor.a2 || []), ...(data.armor.a3 || [])]);
-                if (data.shields) fill("shields", data.shields.ss);
-            } catch (e) { }
+                const res = await fetch('../json/weapons.json');
+                weaponGeneratorData = await res.json();
+                pickRandomWeapon();
+            } catch (e) {
+                console.error('Weapon generator data failed to load:', e);
+            }
 
             // Crafting (Recipes)
             try {
