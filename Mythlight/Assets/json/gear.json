@@ -1,52 +1,49 @@
 {
   "categories": {
-    "light": [
+    "light_armor": [
       "Cloth Armor",
-      "Leather Armor",
       "Padded Armor",
+      "Leather Armor"
+    ],
+    "medium_armor": [
+      "Hide Armor",
+      "Studded Armor",
+      "Chain Shirt",
+      "Scale Armor"
+    ],
+    "heavy_armor": [
+      "Chainmail",
+      "Splint Armor",
+      "Plate Armor"
+    ],
+    "shields": [
+      "Light Shield",
+      "Heavy Shield",
+      "Tower Shield"
+    ],
+    "backpacks": [
+      "Satchel",
+      "Small Backpack",
+      "Standard Backpack",
+      "Large Backpack",
+      "War Pack"
+    ],
+    "utility": [
       "Cloak",
       "Gloves",
       "Boots",
       "Belt",
-      "Satchel",
-      "Small Backpack",
-      "Bandolier"
-    ],
-    "medium": [
-      "Studded Armor",
-      "Hide Armor",
-      "Chain Shirt",
-      "Scale Armor",
+      "Bandolier",
       "Helmet",
       "Gauntlets",
       "Greaves",
-      "Standard Backpack",
-      "Tool Kit",
-      "Potion Belt"
-    ],
-    "heavy": [
-      "Chainmail",
-      "Splint Armor",
-      "Plate Armor",
-      "Tower Shield",
-      "Heavy Shield",
-      "War Pack",
-      "Large Backpack",
-      "Supply Crate",
-      "Portable Forge",
-      "Field Kit"
-    ],
-    "utility": [
-      "Rope",
+      "Potion Belt",
       "Torch",
       "Lantern",
       "Grappling Hook",
-      "Bedroll",
       "Waterskin",
-      "Rations",
       "Lockpicks",
-      "Map Kit",
-      "Compass"
+      "Field Kit"
     ],
     "special": [
       "Brewer's Kit",
@@ -56,7 +53,8 @@
       "Disguise Kit",
       "Scholar Kit",
       "Enchanter's Tools",
-      "Portable Lab"
+      "Portable Lab",
+      "Portable Forge"
     ]
   },
   "prefixes": {
