@@ -274,6 +274,17 @@
                         <div id="gear-effects" class="text-sm text-slate-300 leading-relaxed"></div>
                     </div>
                 </div>
+
+                <div class="mb-6 border-b border-slate-800 pb-2">
+                    <h3 class="text-xl text-indigo-400 font-bold uppercase tracking-widest flex items-center justify-between cursor-pointer"
+                        onclick="toggleGearPrefixGrid()">
+                        Gear Prefixes
+                        <span id="gear-prefix-arrow" class="transition-transform duration-200 inline-block">▼</span>
+                    </h3>
+
+                    <div id="gear-prefix-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 hidden">
+                    </div>
+                </div>
             </section>
         </div>
 
@@ -915,6 +926,94 @@
             return 2;
         }
 
+        function getBaseGearBonuses(categoryKey) {
+            const key = String(categoryKey || '').toLowerCase();
+            if (key.includes('light_armor')) return { armor: 1 };
+            if (key.includes('medium_armor')) return { armor: 2 };
+            if (key.includes('heavy_armor')) return { armor: 3 };
+            if (key.includes('shield')) return { armor: 1 };
+            if (key.includes('backpack') || key.includes('pack')) return { carryCapacity: 4 };
+            return {};
+        }
+
+        function interpretGearPrefix(description) {
+            const text = String(description || '');
+            const lower = text.toLowerCase();
+            const bonuses = {};
+            const notes = [];
+
+            const addBonus = (key, value) => {
+                if (!Number.isFinite(value) || value <= 0) return;
+                bonuses[key] = (bonuses[key] || 0) + value;
+            };
+
+            const numberFrom = (regex) => {
+                const match = lower.match(regex);
+                if (!match) return 0;
+                const value = Number.parseInt(match[1], 10);
+                return Number.isFinite(value) ? value : 0;
+            };
+
+            addBonus('armor', numberFrom(/\+(\d+)\s*armor\b/));
+            addBonus('allResist', numberFrom(/\+(\d+)\s*resist\s*\(all\)/));
+            addBonus('movement', numberFrom(/\+(\d+)\s*movement\b/));
+            addBonus('reflex', numberFrom(/\+(\d+)\s*reflex\b/));
+            addBonus('carryCapacity', numberFrom(/\+(\d+)\s*encumbrance\b/));
+            addBonus('healingReceived', numberFrom(/\+(\d+)\s*healing\s+received\b/));
+            addBonus('conditionResist', numberFrom(/\+(\d+)\s*resist\s+vs\s+conditions\b/));
+            addBonus('maxHealth', numberFrom(/\+(\d+)\s*max\s+health\b/));
+            addBonus('opportunityAccuracy', numberFrom(/\+(\d+)\s*accuracy\s+on\s+opportunity\s+attacks\b/));
+            addBonus('brewChecks', numberFrom(/\+(\d+)\s*to\s+brew\s+checks\b/));
+            addBonus('regenPerTurn', numberFrom(/heal\s+(\d+)\s+per\s+turn\b/));
+            addBonus('blockDamage', numberFrom(/deal\s+(\d+)\s+damage\s+on\s+block\b/));
+
+            if (/can\s+brew\s+potions\b/.test(lower)) notes.push('Can brew potions');
+            if (/immovable\b/.test(lower)) notes.push('Immovable');
+
+            const summaryOrder = [
+                ['armor', 'Armor'],
+                ['carryCapacity', 'Carry Capacity'],
+                ['allResist', 'Resist (All)'],
+                ['conditionResist', 'Resist vs Conditions'],
+                ['movement', 'Movement'],
+                ['reflex', 'Reflex'],
+                ['maxHealth', 'Max Health'],
+                ['healingReceived', 'Healing Received'],
+                ['regenPerTurn', 'Heal/Turn'],
+                ['opportunityAccuracy', 'Opportunity Accuracy'],
+                ['blockDamage', 'Block Damage'],
+                ['brewChecks', 'Brew Checks']
+            ];
+
+            const summaryParts = summaryOrder
+                .filter(([key]) => bonuses[key])
+                .map(([key, label]) => `+${bonuses[key]} ${label}`);
+
+            if (notes.length) summaryParts.push(...notes);
+
+            return {
+                bonuses,
+                summary: summaryParts.length ? summaryParts.join(' | ') : null
+            };
+        }
+
+        function applyMasterworkBonusByOrder(target, statOrder) {
+            const available = statOrder.filter(([key]) => (target[key] || 0) > 0);
+            if (!available.length) return null;
+
+            if (available.length === 1) {
+                const [key, label] = available[0];
+                target[key] = (target[key] || 0) + 3;
+                return `+3 ${label}`;
+            }
+
+            const [firstKey, firstLabel] = available[0];
+            const [secondKey, secondLabel] = available[1];
+            target[firstKey] = (target[firstKey] || 0) + 2;
+            target[secondKey] = (target[secondKey] || 0) + 1;
+            return `+2 ${firstLabel} | +1 ${secondLabel}`;
+        }
+
         function clampCount(value) {
             const parsed = Number.parseInt(value, 10);
             if (Number.isNaN(parsed)) return 0;
@@ -939,6 +1038,7 @@
             const foundTypes = findDamageTypes(text); // recognized damage types
 
             let sameTypeBonus = 0;
+            let accuracyBonus = 0;
             const extraTypeBonuses = {};
 
             // Match +N optionally followed by a word
@@ -961,6 +1061,9 @@
                     if (maybeType === baseType) sameTypeBonus += value;
                     else extraTypeBonuses[maybeType] = (extraTypeBonuses[maybeType] || 0) + value;
                 }
+                if (maybeType === 'accuracy') {
+                    accuracyBonus += value;
+                }
                 // Otherwise ignore it (e.g., Accuracy, Armor)
             });
 
@@ -969,9 +1072,11 @@
             Object.entries(extraTypeBonuses).forEach(([type, bonus]) => {
                 summaryParts.push(`+${bonus} ${toTitleCase(type)} damage`);
             });
+            if (accuracyBonus > 0) summaryParts.push(`+${accuracyBonus} Accuracy`);
 
             return {
                 sameTypeBonus,
+                accuracyBonus,
                 extraTypeBonuses,
                 summary: summaryParts.length ? summaryParts.join(' | ') : null
             };
@@ -1034,11 +1139,59 @@
                 new Set(qualityPrefix.map(p => p.name))
             );
 
-            const prefixes = [...qualityPrefix, ...extraPrefixes];
+            const rawPrefixes = [...qualityPrefix, ...extraPrefixes];
+            const hasMasterwork = rawPrefixes.some(prefix => String(prefix?.name || '').toLowerCase() === 'masterwork');
+            const totalBonuses = { ...getBaseGearBonuses(base.categoryKey) };
+            const gearMasterworkOrder = [
+                ['armor', 'Armor'],
+                ['carryCapacity', 'Carry Capacity'],
+                ['allResist', 'Resist (All)'],
+                ['conditionResist', 'Resist vs Conditions'],
+                ['movement', 'Movement'],
+                ['reflex', 'Reflex'],
+                ['maxHealth', 'Max Health'],
+                ['healingReceived', 'Healing Received'],
+                ['regenPerTurn', 'Heal/Turn'],
+                ['opportunityAccuracy', 'Opportunity Accuracy'],
+                ['blockDamage', 'Block Damage'],
+                ['brewChecks', 'Brew Checks']
+            ];
+
+            const prefixes = rawPrefixes.map((prefix) => {
+                if (String(prefix?.name || '').toLowerCase() === 'masterwork') {
+                    return {
+                        ...prefix,
+                        interpretedSummary: null
+                    };
+                }
+
+                const interpretation = interpretGearPrefix(prefix.description);
+                Object.entries(interpretation.bonuses).forEach(([key, value]) => {
+                    totalBonuses[key] = (totalBonuses[key] || 0) + value;
+                });
+
+                return {
+                    ...prefix,
+                    interpretedSummary: interpretation.summary
+                };
+            });
+
+            if (hasMasterwork) {
+                const masterworkSummary = applyMasterworkBonusByOrder(totalBonuses, gearMasterworkOrder);
+                const masterworkIndex = prefixes.findIndex(prefix => String(prefix?.name || '').toLowerCase() === 'masterwork');
+                if (masterworkIndex >= 0) {
+                    prefixes[masterworkIndex] = {
+                        ...prefixes[masterworkIndex],
+                        interpretedSummary: masterworkSummary ? `Masterwork: ${masterworkSummary}` : 'Masterwork'
+                    };
+                }
+            }
 
             return {
                 name: [...prefixes.map(p => p.name), base.name].join(' '),
+                category: base.categoryKey,
                 categoryLabel: base.categoryLabel,
+                totalBonuses,
                 prefixes
             };
         }
@@ -1052,16 +1205,38 @@
 
             nameEl.textContent = result.name;
 
+            const badgeOrder = [
+                ['armor', 'Armor'],
+                ['carryCapacity', 'Carry Capacity'],
+                ['allResist', 'Resist (All)'],
+                ['conditionResist', 'Resist vs Conditions'],
+                ['movement', 'Movement'],
+                ['reflex', 'Reflex'],
+                ['maxHealth', 'Max Health'],
+                ['healingReceived', 'Healing Received'],
+                ['regenPerTurn', 'Heal/Turn'],
+                ['opportunityAccuracy', 'Opportunity Accuracy'],
+                ['blockDamage', 'Block Damage'],
+                ['brewChecks', 'Brew Checks']
+            ];
+
+            const statBadges = badgeOrder
+                .filter(([key]) => (result.totalBonuses?.[key] || 0) > 0)
+                .map(([key, label]) => `<span class="px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 text-xs font-bold uppercase tracking-wide">+${result.totalBonuses[key]} ${label}</span>`)
+                .join('');
+
             metaEl.innerHTML = `
         <span class="px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-200 text-xs font-bold uppercase tracking-wide">
             ${result.categoryLabel}
         </span>
+        ${statBadges}
     `;
 
             effectsEl.innerHTML = result.prefixes.map(prefix => `
         <div class="rounded-lg border border-slate-700/70 bg-slate-900/40 px-3 py-2">
             <div class="text-sm text-white font-semibold">${escapeHtml(prefix.name)}</div>
             <div class="text-xs text-slate-300">${escapeHtml(prefix.description)}</div>
+            ${prefix.interpretedSummary ? `<div class="text-[11px] text-emerald-300 mt-1">${escapeHtml(prefix.interpretedSummary)}</div>` : ''}
         </div>
     `).join('');
         }
@@ -1085,8 +1260,6 @@
 
             const qualityPool = weaponGeneratorData?.prefixes?.quality || [];
             const options = qualityPool
-                .slice()
-                .sort((a, b) => String(a?.name || '').localeCompare(String(b?.name || '')))
                 .map((quality) => `<option value="quality::${escapeHtml(quality.name)}">${escapeHtml(quality.name)}</option>`)
                 .join('');
 
@@ -1104,6 +1277,7 @@
             metaEl.innerHTML = `
                 <span class="px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-200 text-xs font-bold uppercase tracking-wide">${result.categoryLabel}</span>
                 <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 text-xs font-bold uppercase tracking-wide">${result.totalBaseDamage} ${toTitleCase(baseType)} Damage</span>
+                ${result.totalAccuracy > 0 ? `<span class="px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-200 text-xs font-bold uppercase tracking-wide">+${result.totalAccuracy} Accuracy</span>` : ''}
                 ${Object.entries(result.extraDamageBonuses || {}).map(([type, bonus]) => `<span class="px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-200 text-xs font-bold uppercase tracking-wide">+${bonus} ${toTitleCase(type)} Damage</span>`).join('')}
             `;
 
@@ -1135,14 +1309,24 @@
             const qualityPrefix = selectedQuality ? [selectedQuality] : pickUniqueEntries(qualityPool, 1);
             const extraPrefixes = pickUniqueEntries(functionalPool, extraPrefixCount, new Set(qualityPrefix.map(item => item.name)));
             const rawPrefixes = [...qualityPrefix, ...extraPrefixes];
+            const hasMasterwork = rawPrefixes.some(prefix => String(prefix?.name || '').toLowerCase() === 'masterwork');
 
             const baseType = normalizeDamageType(base.damageType);
             let totalBaseDamage = base.damage;
+            let totalAccuracy = 0;
             const extraDamageBonuses = {};
 
             const prefixes = rawPrefixes.map((prefix) => {
+                if (String(prefix?.name || '').toLowerCase() === 'masterwork') {
+                    return {
+                        ...prefix,
+                        interpretedSummary: null
+                    };
+                }
+
                 const interpretation = interpretPrefixDamage(prefix.description, baseType);
                 totalBaseDamage += interpretation.sameTypeBonus;
+                totalAccuracy += interpretation.accuracyBonus;
 
                 Object.entries(interpretation.extraTypeBonuses).forEach(([type, bonus]) => {
                     extraDamageBonuses[type] = (extraDamageBonuses[type] || 0) + bonus;
@@ -1153,6 +1337,24 @@
                     interpretedSummary: interpretation.summary
                 };
             });
+
+            if (hasMasterwork) {
+                const masterworkTarget = { totalBaseDamage, totalAccuracy };
+                const masterworkSummary = applyMasterworkBonusByOrder(masterworkTarget, [
+                    ['totalBaseDamage', `${toTitleCase(baseType)} Damage`],
+                    ['totalAccuracy', 'Accuracy']
+                ]);
+                totalBaseDamage = masterworkTarget.totalBaseDamage;
+                totalAccuracy = masterworkTarget.totalAccuracy;
+
+                const masterworkIndex = prefixes.findIndex(prefix => String(prefix?.name || '').toLowerCase() === 'masterwork');
+                if (masterworkIndex >= 0) {
+                    prefixes[masterworkIndex] = {
+                        ...prefixes[masterworkIndex],
+                        interpretedSummary: masterworkSummary ? `Masterwork: ${masterworkSummary}` : 'Masterwork'
+                    };
+                }
+            }
 
             const nameParts = [
                 ...prefixes.map(item => item.name),
@@ -1165,6 +1367,7 @@
                 damage: base.damage,
                 damageType: base.damageType,
                 totalBaseDamage,
+                totalAccuracy,
                 extraDamageBonuses,
                 extraPrefixCount,
                 name: nameParts.join(' '),
@@ -1360,10 +1563,54 @@
             }
         }
 
+        async function populateGearPrefixGrid() {
+            try {
+                const res = await fetch('../json/gear.json');
+                const data = await res.json();
+                const grid = document.getElementById('gear-prefix-grid');
+                if (!grid) return;
+
+                const prefixTypes = [
+                    { key: 'quality', color: 'emerald', shadow: '16,185,129' },
+                    { key: 'functional', color: 'orange', shadow: '249,115,22' }
+                ];
+
+                const cards = [];
+
+                prefixTypes.forEach(({ key, color, shadow }) => {
+                    const pool = data.prefixes[key] || [];
+                    pool.forEach(prefix => {
+                        cards.push(`
+                    <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-700/50 hover:border-indigo-500/30 transition-all hover:bg-slate-900/50 flex items-start gap-3">
+                        <div class="mt-1 w-2 h-2 rounded-full bg-${color}-500 shadow-[0_0_8px_rgba(${shadow},0.6)]"></div>
+                        <div>
+                            <strong class="text-${color}-300 block text-sm mb-1 uppercase tracking-wider">${prefix.name}</strong>
+                            <p class="text-slate-400 text-xs">${prefix.description}</p>
+                        </div>
+                    </div>
+                `);
+                    });
+                });
+
+                grid.innerHTML = cards.join('');
+            } catch (e) {
+                console.error("Failed to load gear prefixes:", e);
+            }
+        }
+
         // --- Collapse/expand logic ---
         function togglePrefixGrid() {
             const grid = document.getElementById('prefix-grid');
             const arrow = document.getElementById('prefix-arrow');
+            if (!grid || !arrow) return;
+
+            const isHidden = grid.classList.toggle('hidden');
+            arrow.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        function toggleGearPrefixGrid() {
+            const grid = document.getElementById('gear-prefix-grid');
+            const arrow = document.getElementById('gear-prefix-arrow');
             if (!grid || !arrow) return;
 
             const isHidden = grid.classList.toggle('hidden');
@@ -1386,6 +1633,7 @@
         document.addEventListener('DOMContentLoaded', loadGearData);
 
         document.addEventListener('DOMContentLoaded', populatePrefixGrid);
+        document.addEventListener('DOMContentLoaded', populateGearPrefixGrid);
         document.addEventListener('DOMContentLoaded', loadData);
     </script>
     <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
