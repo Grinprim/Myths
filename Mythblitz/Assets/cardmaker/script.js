@@ -5,6 +5,53 @@ function setText(id, value){
   el.textContent = value;
 }
 
+function setHtml(id, value){
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = value;
+}
+
+function escapeHtml(value){
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function renderDescriptionText(raw){
+  let html = escapeHtml(raw);
+  html = html
+    .replace(/\[b\](.*?)\[\/b\]/gis, '<strong>$1</strong>')
+    .replace(/\[i\](.*?)\[\/i\]/gis, '<em>$1</em>')
+    .replace(/\[u\](.*?)\[\/u\]/gis, '<u>$1</u>')
+    .replace(/\[br\]/gi, '<br>')
+    .replace(/\n/g, '<br>');
+  return html;
+}
+
+function fitTextToSingleLine(el, maxSize = 10, minSize = 6){
+  if (!el) return;
+
+  el.style.fontSize = `${maxSize}px`;
+  el.style.letterSpacing = '1px';
+
+  let size = maxSize;
+  while (size > minSize && el.scrollWidth > el.clientWidth) {
+    size -= 0.25;
+    el.style.fontSize = `${size}px`;
+  }
+
+  if (el.scrollWidth > el.clientWidth) {
+    el.style.letterSpacing = '0.2px';
+    while (size > 5 && el.scrollWidth > el.clientWidth) {
+      size -= 0.25;
+      el.style.fontSize = `${size}px`;
+    }
+  }
+}
+
 function clampNumber(value, min, max){
   const n = Number(value);
   if (Number.isNaN(n)) return min;
@@ -120,6 +167,8 @@ function wire(){
   const raritySelect = document.getElementById('raritySelect');
   const typeSelect = document.getElementById('typeSelect');
   const tagsInput = document.getElementById('tagsInput');
+  const tagsTextEl = document.getElementById('tagsText');
+  const descToolButtons = Array.from(document.querySelectorAll('.textToolBtn'));
 
   // Symbols
   const symbolCountInput = document.getElementById('symbolCountInput');
@@ -272,7 +321,7 @@ function wire(){
     setText('nameText', (nameInput.value || '').trim() || '');
     setText('manaText', String(clampNumber(manaInput.value, 0, 99)));
     setText('tagsText', (tagsInput.value || '').trim());
-    setText('descText', (descInput.value || '').trim());
+    setHtml('descText', renderDescriptionText((descInput.value || '').trim()));
 
     // Stats
     const isGear = typeSelect.value === 'Gear';
@@ -299,6 +348,8 @@ function wire(){
 
     // Determine Border
     resolveBorder();
+
+    fitTextToSingleLine(tagsTextEl);
   }
 
   function syncArtFile(){
@@ -317,6 +368,24 @@ function wire(){
     customBorderURL = null;
     if(borderFile) borderFile.value = ''; // Reset input
     resolveBorder();
+  }
+
+  function applyTextTool(startToken, endToken = ''){
+    if (!descInput) return;
+
+    const start = descInput.selectionStart || 0;
+    const end = descInput.selectionEnd || 0;
+    const current = descInput.value || '';
+    const selected = current.slice(start, end);
+    const insertion = `${startToken}${selected}${endToken}`;
+
+    descInput.value = `${current.slice(0, start)}${insertion}${current.slice(end)}`;
+
+    const caretStart = start + startToken.length;
+    const caretEnd = caretStart + selected.length;
+    descInput.focus();
+    descInput.setSelectionRange(caretStart, caretEnd);
+    syncText();
   }
 
   // Initial Sync
@@ -341,6 +410,20 @@ function wire(){
   if(borderFile) borderFile.addEventListener('change', handleCustomBorderUpload);
   if(removeBorderBtn) removeBorderBtn.addEventListener('click', clearCustomBorder);
 
+  descToolButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const insert = btn.dataset.insert;
+      const wrapStart = btn.dataset.wrapStart;
+      const wrapEnd = btn.dataset.wrapEnd || '';
+
+      if (insert) {
+        applyTextTool(insert, '');
+      } else if (wrapStart) {
+        applyTextTool(wrapStart, wrapEnd);
+      }
+    });
+  });
+
   const resetBtn = document.getElementById('resetBtn');
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
@@ -354,6 +437,10 @@ function wire(){
       syncText();
     });
   }
+
+  window.addEventListener('resize', () => {
+    fitTextToSingleLine(tagsTextEl);
+  });
 }
 
 // --- EXPORT FUNCTION ---
@@ -370,6 +457,9 @@ function setupExportButton() {
     exportBtn.disabled = true;
 
     try {
+      const tagsEl = document.getElementById('tagsText');
+      fitTextToSingleLine(tagsEl);
+
       const options = { 
         pixelRatio: 3, 
         skipFonts: false,

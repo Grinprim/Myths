@@ -29,6 +29,11 @@
           <legend>Core Details</legend>
 
           <label class="field">
+            <span class="label">Name</span>
+            <input type="text" id="nameInput" class="input-dark" value="Sample Name" />
+          </label>
+
+          <label class="field">
             <span class="label">Card Type</span>
             <select id="typeSelect" class="input-dark">
               <option value="Unit" selected>Unit</option>
@@ -51,19 +56,65 @@
           </label>
 
           <label class="field">
-            <span class="label">Name</span>
-            <input type="text" id="nameInput" class="input-dark" value="Sample Name" />
+            <span class="label">Mana Cost</span>
+            <input type="number" id="manaInput" class="input-dark" value="1" />
+          </label>
+        </fieldset>
+
+        <fieldset class="fieldset" id="statsFieldset">
+          <legend>Stats</legend>
+          <div class="row2">
+            <label class="field">
+              <span class="label">Power</span>
+              <input type="number" id="powerInput" class="input-dark" value="1" />
+            </label>
+            <label class="field">
+              <span class="label">Health</span>
+              <input type="number" id="healthInput" class="input-dark" value="1" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Card Text & Symbols</legend>
+
+          <label class="field">
+            <span class="label">Tags</span>
+            <input type="text" id="tagsInput" class="input-dark" value="Sample Tags" />
           </label>
 
-          <div class="row2">
-            <label class="field" style="flex:1;">
-              <span class="label">Mana Cost</span>
-              <input type="number" id="manaInput" class="input-dark" value="1" />
+          <div class="field">
+            <span class="label">Description</span>
+            <div class="textTools" role="toolbar" aria-label="Description formatting tools">
+              <button type="button" class="btn btnSecondary textToolBtn" data-wrap-start="[b]" data-wrap-end="[/b]" title="Bold">Bold</button>
+              <button type="button" class="btn btnSecondary textToolBtn" data-wrap-start="[i]" data-wrap-end="[/i]" title="Italic">Italic</button>
+              <button type="button" class="btn btnSecondary textToolBtn" data-wrap-start="[u]" data-wrap-end="[/u]" title="Underline">Underline</button>
+              <button type="button" class="btn btnSecondary textToolBtn" data-insert="[br]" title="Line Break">Line Break</button>
+            </div>
+            <textarea id="descInput" class="input-dark" placeholder="Supports [b]bold[/b], [i]italic[/i], [u]underline[/u], and [br] line breaks.">Sample Description</textarea>
+            <div class="hint">Formatting tags: [b]...[/b], [i]...[/i], [u]...[/u], [br]</div>
+          </div>
+          
+          <div class="field">
+            <span class="label">Region / Symbols</span>
+            <label class="field">
+              <span class="label">Symbol Count</span>
+              <input type="number" id="symbolCountInput" class="input-dark" value="1" min="0" max="5" />
             </label>
-            <label class="field" style="flex:2;">
-              <span class="label">Tags</span>
-              <input type="text" id="tagsInput" class="input-dark" value="Sample Tags" />
+            <label class="field">
+              <span class="label">Region 1</span>
+              <select id="symbol1Select" class="input-dark">
+                <option value="Arcane">Arcane</option>
+                <option value="Divine">Divine</option>
+                <option value="Elemental">Elemental</option>
+                <option value="Occult">Occult</option>
+                <option value="Cosmic">Cosmic</option>
+              </select>
             </label>
+            <select id="symbol2Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
+            <select id="symbol3Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
+            <select id="symbol4Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
+            <select id="symbol5Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
           </div>
         </fieldset>
 
@@ -91,43 +142,6 @@
               <input type="number" id="artXInput" class="input-dark" step="1" value="0" title="X Position" />
               <input type="number" id="artYInput" class="input-dark" step="1" value="0" title="Y Position" />
             </div>
-          </div>
-        </fieldset>
-
-        <fieldset class="fieldset" id="statsFieldset">
-          <legend>Stats</legend>
-          <div class="row2">
-            <label class="field">
-              <span class="label">Power</span>
-              <input type="number" id="powerInput" class="input-dark" value="1" />
-            </label>
-            <label class="field">
-              <span class="label">Health</span>
-              <input type="number" id="healthInput" class="input-dark" value="1" />
-            </label>
-          </div>
-        </fieldset>
-
-        <fieldset class="fieldset">
-          <legend>Description</legend>
-          <textarea id="descInput" class="input-dark">Sample Description</textarea>
-          
-          <div class="field">
-            <span class="label">Region / Symbols</span>
-            <div class="row2">
-              <input type="number" id="symbolCountInput" class="input-dark" value="1" min="0" max="5" style="width:60px;" />
-              <select id="symbol1Select" class="input-dark">
-                <option value="Arcane">Arcane</option>
-                <option value="Divine">Divine</option>
-                <option value="Elemental">Elemental</option>
-                <option value="Occult">Occult</option>
-                <option value="Cosmic">Cosmic</option>
-              </select>
-            </div>
-            <select id="symbol2Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
-            <select id="symbol3Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
-            <select id="symbol4Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
-            <select id="symbol5Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
           </div>
         </fieldset>
 
