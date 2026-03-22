@@ -1,0 +1,72 @@
+{
+  "categories": {
+    "weapons": ["Sword", "Axe", "Mace", "Dagger", "Spear", "Bow"]
+  },
+  "prefixes": {
+    "quality": [
+      { "name": "Improvised", "description": "2 max durability, attacks are counted as improvised." },
+      { "name": "Dilapidated", "description": "3 max durability." },
+      { "name": "Defective", "description": "6 max durability, can be repaired by a skilled craftsman." },
+      { "name": "Faulty", "description": "9 max durability, can be repaired by a mediocre craftsman." },
+      { "name": "Unreliable", "description": "Chance to become Defective on use." },
+      { "name": "Rackety", "description": "12 max durability, uncomfortable to use." },
+      { "name": "Ordinary", "description": "No durability, breaks only on misuse (snake eyes → Rackety)." },
+      { "name": "Acceptable", "description": "No durability, breakable with medium might." },
+      { "name": "Standard", "description": "No durability, breakable with high might." },
+      { "name": "Reliable", "description": "No durability, requires very high might to break." },
+      { "name": "Solid", "description": "No durability, lasts a lifetime." },
+      { "name": "Fair", "description": "No durability, may sell for higher price." },
+      { "name": "Well-maintained", "description": "No durability, higher value." },
+      { "name": "Superior", "description": "+1 to a stat." },
+      { "name": "Refined", "description": "+2 to a stat." },
+      { "name": "Military Grade", "description": "Functionally unbreakable." },
+      { "name": "Preserved", "description": "Pristine condition, very high value." },
+      { "name": "Masterwork", "description": "+2 to a stat, +1 to another, unbreakable." }
+    ],
+    "functional": [
+      { "name": "Sharp", "description": "+1 Puncture" },
+      { "name": "Keen", "description": "+2 Puncture" },
+      { "name": "Lethal", "description": "+3 Puncture" },
+
+      { "name": "Edged", "description": "+1 Slash" },
+      { "name": "Honed", "description": "+2 Slash" },
+      { "name": "Razor", "description": "+3 Slash" },
+
+      { "name": "Heavy", "description": "+1 Blunt" },
+      { "name": "Solid", "description": "+2 Blunt" },
+      { "name": "Crushing", "description": "+3 Blunt" },
+
+      { "name": "Hewing", "description": "+1 Cleave" },
+      { "name": "Cleaving", "description": "+2 Cleave" },
+      { "name": "Reaving", "description": "+3 Cleave" },
+
+      { "name": "Flaming", "description": "+2 Fire" },
+      { "name": "Frozen", "description": "+3 Ice" },
+      { "name": "Thunderous", "description": "+3 Lightning" },
+
+      { "name": "Wounding", "description": "+1 damage vs Injured targets" },
+      { "name": "Maiming", "description": "+2 damage vs Injured targets" },
+      { "name": "Executing", "description": "+3 damage vs Injured targets" },
+
+      { "name": "Penetrating", "description": "Ignore 1 Armor" },
+      { "name": "Piercing", "description": "Ignore 2 Armor" },
+      { "name": "Sundering", "description": "Ignore 3 Armor" },
+
+      { "name": "True", "description": "+1 Accuracy" },
+      { "name": "Precise", "description": "+2 Accuracy" },
+      { "name": "Perfect", "description": "+3 Accuracy" },
+
+      { "name": "Devastating", "description": "+x1 Crit Damage" },
+      { "name": "Brutal", "description": "+x2 Crit Damage" },
+      { "name": "Deadly", "description": "+x3 Crit Damage" },
+
+      { "name": "Leeching", "description": "Heal 1 on hit" },
+      { "name": "Draining", "description": "Heal 2 on hit" },
+      { "name": "Vampiric", "description": "Heal 3 on hit" },
+
+      { "name": "Disruptive", "description": "Target -1 Accuracy next turn" },
+      { "name": "Stunning", "description": "Target -2 Accuracy next turn" },
+      { "name": "Overwhelming", "description": "Target -3 Accuracy next turn" }
+    ]
+  }
+}
