@@ -1,6 +1,63 @@
 {
   "categories": {
-    "gear": ["Armor", "Shield", "Backpack", "Utility Gear", "Brewing Kit"]
+    "light": [
+      "Cloth Armor",
+      "Leather Armor",
+      "Padded Armor",
+      "Cloak",
+      "Gloves",
+      "Boots",
+      "Belt",
+      "Satchel",
+      "Small Backpack",
+      "Bandolier"
+    ],
+    "medium": [
+      "Studded Armor",
+      "Hide Armor",
+      "Chain Shirt",
+      "Scale Armor",
+      "Helmet",
+      "Gauntlets",
+      "Greaves",
+      "Standard Backpack",
+      "Tool Kit",
+      "Potion Belt"
+    ],
+    "heavy": [
+      "Chainmail",
+      "Splint Armor",
+      "Plate Armor",
+      "Tower Shield",
+      "Heavy Shield",
+      "War Pack",
+      "Large Backpack",
+      "Supply Crate",
+      "Portable Forge",
+      "Field Kit"
+    ],
+    "utility": [
+      "Rope",
+      "Torch",
+      "Lantern",
+      "Grappling Hook",
+      "Bedroll",
+      "Waterskin",
+      "Rations",
+      "Lockpicks",
+      "Map Kit",
+      "Compass"
+    ],
+    "special": [
+      "Brewer's Kit",
+      "Alchemy Kit",
+      "Medical Kit",
+      "Trap Kit",
+      "Disguise Kit",
+      "Scholar Kit",
+      "Enchanter's Tools",
+      "Portable Lab"
+    ]
   },
   "prefixes": {
     "quality": [
@@ -22,50 +79,38 @@
       { "name": "Padded", "description": "+1 Armor" },
       { "name": "Reinforced", "description": "+2 Armor" },
       { "name": "Fortified", "description": "+3 Armor" },
-
       { "name": "Warded", "description": "+1 Resist (all)" },
       { "name": "Shielded", "description": "+2 Resist (all)" },
       { "name": "Aegis", "description": "+3 Resist (all)" },
-
       { "name": "Flexible", "description": "+1 Movement" },
       { "name": "Supple", "description": "+2 Movement" },
       { "name": "Unburdened", "description": "+3 Movement" },
-
       { "name": "Silent", "description": "+1 Reflex" },
       { "name": "Muffled", "description": "+2 Reflex" },
       { "name": "Ghosted", "description": "+3 Reflex" },
-
       { "name": "Roomy", "description": "+4 Encumbrance" },
       { "name": "Spacious", "description": "+6 Encumbrance" },
       { "name": "Bottomless", "description": "+8 Encumbrance" },
-
       { "name": "Soothing", "description": "+1 healing received" },
       { "name": "Restorative", "description": "+2 healing received" },
       { "name": "Renewing", "description": "+3 healing received" },
-
       { "name": "Steadfast", "description": "+1 Resist vs conditions" },
       { "name": "Resolute", "description": "+2 Resist vs conditions" },
       { "name": "Unyielding", "description": "+3 Resist vs conditions" },
-
       { "name": "Stalwart", "description": "+2 Max Health" },
       { "name": "Enduring", "description": "+4 Max Health" },
       { "name": "Titanic", "description": "+6 Max Health" },
-
       { "name": "Regenerating", "description": "Heal 1 per turn" },
       { "name": "Rejuvenating", "description": "Heal 2 per turn" },
       { "name": "Immortal", "description": "Heal 3 per turn" },
-
       { "name": "Sturdy", "description": "+1 Armor (shield)" },
       { "name": "Hardened", "description": "+2 Armor (shield)" },
       { "name": "Unbreakable", "description": "+3 Armor (shield)" },
-
       { "name": "Spiked", "description": "Deal 2 damage on block" },
       { "name": "Barbed", "description": "Deal 3 damage on block" },
-
       { "name": "Ready", "description": "+1 Accuracy on opportunity attacks" },
       { "name": "Watchful", "description": "+2 Accuracy on opportunity attacks" },
       { "name": "Sentinel", "description": "+3 Accuracy on opportunity attacks" },
-
       { "name": "Capable Brewing Kit", "description": "Can brew potions." },
       { "name": "Competent Brewing Kit", "description": "+1 to brew checks." },
       { "name": "Personal Brewing Kit", "description": "+2 to brew checks." },
