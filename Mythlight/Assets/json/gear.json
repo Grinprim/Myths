@@ -44,17 +44,6 @@
       "Waterskin",
       "Lockpicks",
       "Field Kit"
-    ],
-    "special": [
-      "Brewer's Kit",
-      "Alchemy Kit",
-      "Medical Kit",
-      "Trap Kit",
-      "Disguise Kit",
-      "Scholar Kit",
-      "Enchanter's Tools",
-      "Portable Lab",
-      "Portable Forge"
     ]
   },
   "prefixes": {
