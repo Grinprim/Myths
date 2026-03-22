@@ -7,31 +7,487 @@
 
   "ingredients": [
     {
-      "name": "Redroot",
-      "aspect": "Vital",
-      "value": 2,
-      "quality": "Adequate"
+      "Name": "Glowcap Spores",
+      "Aspects": ["Arcane", "Flux"],
+      "Value": 2,
+      "Quality": "Subpar",
+      "Yield": 0
     },
     {
-      "name": "Ashcap Mushroom",
-      "aspect": "Inversive",
-      "value": 1,
-      "quality": "Subpar"
+      "Name": "Ironbark Resin",
+      "Aspects": ["Vital", "Zeal"],
+      "Value": 3,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Zephyr Bloom",
+      "Aspects": ["Charge", "Arcane"],
+      "Value": 2,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Gravetar Sludge",
+      "Aspects": ["Flux", "Vital"],
+      "Value": 1,
+      "Quality": "Subpar",
+      "Yield": 0
+    },
+    {
+      "Name": "Sunflare Pollen",
+      "Aspects": ["Zeal", "Arcane"],
+      "Value": 2,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Cragroot Chunk",
+      "Aspects": ["Vital", "Charge"],
+      "Value": 2,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Blinkdew Droplet",
+      "Aspects": ["Charge", "Flux"],
+      "Value": 1,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Wyrmspice",
+      "Aspects": ["Zeal", "Flux"],
+      "Value": 2,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Moonlit Sap",
+      "Aspects": ["Arcane", "Vital"],
+      "Value": 3,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Riftglass Shard",
+      "Aspects": ["Flux", "Arcane"],
+      "Value": 2,
+      "Quality": "Subpar",
+      "Yield": 0
+    },
+    {
+      "Name": "Thunderleaf",
+      "Aspects": ["Charge", "Zeal"],
+      "Value": 2,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Hollowbone Dust",
+      "Aspects": ["Flux"],
+      "Value": 1,
+      "Quality": "Subpar",
+      "Yield": 0
+    },
+    {
+      "Name": "Kingsfoil Extract",
+      "Aspects": ["Vital", "Arcane"],
+      "Value": 3,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Quickstep Nectar",
+      "Aspects": ["Charge"],
+      "Value": 2,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Bloodthorn Essence",
+      "Aspects": ["Zeal", "Vital"],
+      "Value": 2,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Manashard Crystal",
+      "Aspects": ["Arcane"],
+      "Value": 2,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Fluxweed Fiber",
+      "Aspects": ["Flux", "Charge"],
+      "Value": 2,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Dawnmist Condensate",
+      "Aspects": ["Vital", "Charge", "Arcane"],
+      "Value": 3,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Nightshade Oil",
+      "Aspects": ["Flux", "Zeal"],
+      "Value": 2,
+      "Quality": "Subpar",
+      "Yield": 0
+    },
+    {
+      "Name": "Runic Ash",
+      "Aspects": ["Arcane", "Flux", "Zeal"],
+      "Value": 3,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Frostcap Crystal",
+      "Aspects": ["Arcane", "Charge"],
+      "Value": 2,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Emberroot",
+      "Aspects": ["Zeal", "Vital"],
+      "Value": 2,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Slipvine Sap",
+      "Aspects": ["Flux", "Charge"],
+      "Value": 1,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Grimlily Petal",
+      "Aspects": ["Flux", "Vital"],
+      "Value": 2,
+      "Quality": "Subpar",
+      "Yield": 0
+    },
+    {
+      "Name": "Starpetal Dust",
+      "Aspects": ["Arcane"],
+      "Value": 3,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Ironthorn Bark",
+      "Aspects": ["Vital", "Zeal"],
+      "Value": 3,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Galespore Puff",
+      "Aspects": ["Charge"],
+      "Value": 2,
+      "Quality": "Subpar",
+      "Yield": 0
+    },
+    {
+      "Name": "Manadrift Vapor",
+      "Aspects": ["Arcane", "Flux"],
+      "Value": 2,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Bloodsap Amber",
+      "Aspects": ["Vital", "Zeal"],
+      "Value": 2,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Crackleleaf",
+      "Aspects": ["Zeal", "Charge"],
+      "Value": 2,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Duskmire Ooze",
+      "Aspects": ["Flux"],
+      "Value": 1,
+      "Quality": "Subpar",
+      "Yield": 0
+    },
+    {
+      "Name": "Silverstem Fiber",
+      "Aspects": ["Vital", "Arcane"],
+      "Value": 3,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Quickflare Resin",
+      "Aspects": ["Charge", "Zeal"],
+      "Value": 2,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Aetherglass Filament",
+      "Aspects": ["Arcane", "Charge", "Flux"],
+      "Value": 3,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Rotbloom Nectar",
+      "Aspects": ["Flux", "Vital"],
+      "Value": 2,
+      "Quality": "Subpar",
+      "Yield": 0
+    },
+    {
+      "Name": "Suncoil Vine",
+      "Aspects": ["Vital", "Charge"],
+      "Value": 2,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Voidpepper Seed",
+      "Aspects": ["Flux", "Zeal"],
+      "Value": 2,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Runeblossom Core",
+      "Aspects": ["Arcane", "Zeal"],
+      "Value": 3,
+      "Quality": "Excellent",
+      "Yield": 2
+    },
+    {
+      "Name": "Mistvine Thread",
+      "Aspects": ["Charge", "Arcane"],
+      "Value": 2,
+      "Quality": "Adequate",
+      "Yield": 1
+    },
+    {
+      "Name": "Stoneheart Fragment",
+      "Aspects": ["Vital"],
+      "Value": 3,
+      "Quality": "Adequate",
+      "Yield": 1
     }
   ],
 
   "potions": [
     {
-      "name": "Lesser Vital Draught",
-      "tier": "simple",
-      "aspects": ["Vital"],
-      "effect": "Restore HP equal to Total(A)."
+      "Name": "Vital Tonic",
+      "Tier": "Simple",
+      "Aspects": ["Vital"],
+      "Effect": "Restore health equal to half the target's level (rounded up)."
     },
     {
-      "name": "Wrathfire Tonic",
-      "tier": "medium",
-      "aspects": ["Wrath", "Arcane"],
-      "effect": "Deal damage equal to Total(A)."
+      "Name": "Charging Serum",
+      "Tier": "Simple",
+      "Aspects": ["Charge"],
+      "Effect": "Target gains +2 movement for one turn."
+    },
+    {
+      "Name": "Flux Draft",
+      "Tier": "Simple",
+      "Aspects": ["Flux"],
+      "Effect": "Apply 1 Poison, 1 Mantra, 1 Stun, 1 Haste, 1 Guard. Target takes 1 damage and gains 1 Grace."
+    },
+    {
+      "Name": "Zeal Potion",
+      "Tier": "Simple",
+      "Aspects": ["Zeal"],
+      "Effect": "Gain bonus melee damage equal to Might modifier until end of turn."
+    },
+    {
+      "Name": "Arcane Elixir",
+      "Tier": "Simple",
+      "Aspects": ["Arcane"],
+      "Effect": "Restore mana equal to half the target's level (rounded up)."
+    },
+
+    {
+      "Name": "Vitality Resonant",
+      "Tier": "Medium",
+      "Aspects": ["Vital", "Vital"],
+      "Effect": "Restore health equal to target's level."
+    },
+    {
+      "Name": "Xoliratos",
+      "Tier": "Medium",
+      "Aspects": ["Vital", "Charge"],
+      "Effect": "Negate 2 Exhaustion until next rest."
+    },
+    {
+      "Name": "Friot Toxin",
+      "Tier": "Medium",
+      "Aspects": ["Vital", "Flux"],
+      "Effect": "Apply 3 Poison (clearly harmful)."
+    },
+    {
+      "Name": "Zanetohelav",
+      "Tier": "Medium",
+      "Aspects": ["Vital", "Zeal"],
+      "Effect": "Next attack grants Guard equal to damage dealt, lasting until end of combat. Persists until hit."
+    },
+    {
+      "Name": "Venediction",
+      "Tier": "Medium",
+      "Aspects": ["Vital", "Arcane"],
+      "Effect": "Remove all conditions (persistent sources immediately reapply)."
+    },
+    {
+      "Name": "Overcharge Beverage",
+      "Tier": "Medium",
+      "Aspects": ["Charge", "Charge"],
+      "Effect": "Remove Slow stacks; gain +1 Reaction, +4 Reflex, +2 Movement for the scene."
+    },
+    {
+      "Name": "Rekolesence",
+      "Tier": "Medium",
+      "Aspects": ["M", "Flux"],
+      "Effect": "Blind target and double movement until end of turn."
+    },
+    {
+      "Name": "Lamifonistation",
+      "Tier": "Medium",
+      "Aspects": ["Charge", "Zeal"],
+      "Effect": "After dealing damage, may move tiles equal to damage dealt."
+    },
+    {
+      "Name": "Fanlaneries",
+      "Tier": "Medium",
+      "Aspects": ["Charge", "Arcane"],
+      "Effect": "Teleport within range equal to Movement +2."
+    },
+    {
+      "Name": "Atherflux",
+      "Tier": "Medium",
+      "Aspects": ["Flux", "Flux"],
+      "Effect": "All level-based effects treat target as Level 12."
+    },
+    {
+      "Name": "Zelt Imonoratu",
+      "Tier": "Medium",
+      "Aspects": ["Flux", "Zeal"],
+      "Effect": "Swap Range and Armor until start of next turn."
+    },
+    {
+      "Name": "Maddening Sap",
+      "Tier": "Medium",
+      "Aspects": ["Flux", "Arcane"],
+      "Effect": "Apply Madness until end of combat."
+    },
+    {
+      "Name": "Brew of Fury",
+      "Tier": "Medium",
+      "Aspects": ["Zeal", "Zeal"],
+      "Effect": "Enter Rage, intoxicated, +1 melee damage for 2 turns."
+    },
+    {
+      "Name": "Amourius",
+      "Tier": "Medium",
+      "Aspects": ["Zeal", "Arcane"],
+      "Effect": "Next attack damage type is predetermined at brewing."
+    },
+    {
+      "Name": "Arcane Resonant",
+      "Tier": "Medium",
+      "Aspects": ["Arcane", "Arcane"],
+      "Effect": "Restore mana equal to target's level."
+    },
+
+    {
+      "Name": "Vitality Absolute",
+      "Tier": "Hard",
+      "Aspects": ["Vital", "Vital", "Vital"],
+      "Effect": "Restore health equal to 2× target level."
+    },
+    {
+      "Name": "Nestivazi",
+      "Tier": "Hard",
+      "Aspects": ["Flux", "Flux", "Charge"],
+      "Effect": "Put target to sleep until sunrise or taking >3 damage; life signs unreadable."
+    },
+    {
+      "Name": "Vanolazi",
+      "Tier": "Hard",
+      "Aspects": ["Charge", "Charge", "Vital"],
+      "Effect": "Set all proficiencies below 2 to 2 for 4 turns."
+    },
+    {
+      "Name": "Charging Resonant",
+      "Tier": "Hard",
+      "Aspects": ["Charge", "Charge", "Charge"],
+      "Effect": "Remove Slow; gain +1 Reaction, +4 Reflex, +3 Range, +2 Aim, +2 Finesse, +2 Tinkering, +2 Movement for 2 scenes."
+    },
+    {
+      "Name": "Dranolavs",
+      "Tier": "Hard",
+      "Aspects": ["Arcane", "Arcane", "Zeal"],
+      "Effect": "Casts Inferno Pulse when used (drink, throw, or break), each dose triggers separately."
+    },
+    {
+      "Name": "Onroaclorialis",
+      "Tier": "Hard",
+      "Aspects": ["Arcane", "Flux", "Zeal"],
+      "Effect": "Changes color of target; can recolor other potions without altering effects."
+    },
+    {
+      "Name": "Chuonvilianes",
+      "Tier": "Hard",
+      "Aspects": ["Vital", "Charge", "Flux"],
+      "Effect": "Cannot hold items; becomes slippery terrain; treats all terrain as slippery; fit into smaller spaces; gain +2 Armor."
+    },
+    {
+      "Name": "Omnistatitz",
+      "Tier": "Hard",
+      "Aspects": ["Charge", "Zeal", "Vital"],
+      "Effect": "Gain +2 to all base attributes for 2 minutes."
+    },
+    {
+      "Name": "Thorinalak",
+      "Tier": "Hard",
+      "Aspects": ["Charge", "Zeal", "Arcane"],
+      "Effect": "Amplify voice (or object's sound) to extreme levels."
+    },
+    {
+      "Name": "Zealicious",
+      "Tier": "Hard",
+      "Aspects": ["Zeal", "Zeal", "Zeal"],
+      "Effect": "Enter Rage; can go below 0 HP; die if still below 0 when Rage ends."
+    },
+    {
+      "Name": "Vanaglue",
+      "Tier": "Hard",
+      "Aspects": ["Arcane", "Flux", "Vital"],
+      "Effect": "Apply Stoned for 2 hours; auto-fail reality checks; hallucinations."
+    },
+    {
+      "Name": "Amponorada",
+      "Tier": "Hard",
+      "Aspects": ["Arcane", "Zeal", "Zeal"],
+      "Effect": "Next spell deals double damage; caster takes half that damage."
+    },
+    {
+      "Name": "Atherenium",
+      "Tier": "Hard",
+      "Aspects": ["Arcane", "Arcane", "Arcane"],
+      "Effect": "Upcast spells up to +2 levels higher for one turn."
     }
   ]
 }
