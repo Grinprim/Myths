@@ -26,6 +26,12 @@ function renderDescriptionText(raw){
     .replace(/\[b\](.*?)\[\/b\]/gis, '<strong>$1</strong>')
     .replace(/\[i\](.*?)\[\/i\]/gis, '<em>$1</em>')
     .replace(/\[u\](.*?)\[\/u\]/gis, '<u>$1</u>')
+    .replace(/\[\/b\]/gi, '</strong>')
+    .replace(/\[\/i\]/gi, '</em>')
+    .replace(/\[\/u\]/gi, '</u>')
+    .replace(/\[b\]/gi, '<strong>')
+    .replace(/\[i\]/gi, '<em>')
+    .replace(/\[u\]/gi, '<u>')
     .replace(/\[br\]/gi, '<br>')
     .replace(/\n/g, '<br>');
   return html;
@@ -57,6 +63,7 @@ function fitDescriptionToBox(el, maxSize = 13, minSize = 8){
 
   let size = maxSize;
   let line = 1.4;
+  el.style.overflow = 'hidden';
   el.style.fontSize = `${size}px`;
   el.style.lineHeight = `${line}`;
 
@@ -68,7 +75,12 @@ function fitDescriptionToBox(el, maxSize = 13, minSize = 8){
   }
 
   if (el.scrollHeight > el.clientHeight) {
-    el.style.overflow = 'hidden';
+    while (size > 6 && el.scrollHeight > el.clientHeight) {
+      size -= 0.25;
+      if (line > 1.02) line -= 0.01;
+      el.style.fontSize = `${size}px`;
+      el.style.lineHeight = `${line}`;
+    }
   }
 }
 
