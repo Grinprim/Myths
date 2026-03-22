@@ -1,6 +1,89 @@
 {
   "categories": {
-    "weapons": ["Sword", "Axe", "Mace", "Dagger", "Spear", "Bow"]
+    "light": [
+      { "name": "Dagger", "damage_type": "pierce" },
+      { "name": "Whip", "damage_type": "slash" },
+      { "name": "Meteor Hammer", "damage_type": "blunt" },
+      { "name": "Cane", "damage_type": "blunt" },
+      { "name": "Staff", "damage_type": "blunt" },
+      { "name": "Dirk", "damage_type": "pierce" },
+      { "name": "Razor", "damage_type": "slash" },
+      { "name": "Baton", "damage_type": "blunt" },
+      { "name": "Katar", "damage_type": "pierce" },
+      { "name": "Sai", "damage_type": "pierce" },
+      { "name": "Tonfa", "damage_type": "blunt" },
+      { "name": "Sickle", "damage_type": "slash" },
+      { "name": "Punch Dagger", "damage_type": "pierce" }
+    ],
+    "medium": [
+      { "name": "Shortsword", "damage_type": "pierce" },
+      { "name": "Axe", "damage_type": "slash" },
+      { "name": "Mace", "damage_type": "blunt" },
+      { "name": "Spear", "damage_type": "pierce" },
+      { "name": "Warhammer", "damage_type": "blunt" },
+      { "name": "Flail", "damage_type": "blunt" },
+      { "name": "Rapier", "damage_type": "pierce" },
+      { "name": "Cleaver", "damage_type": "slash" },
+      { "name": "Club", "damage_type": "blunt" },
+      { "name": "Falchion", "damage_type": "slash" },
+      { "name": "Morningstar", "damage_type": "pierce" },
+      { "name": "Scimitar", "damage_type": "slash" },
+      { "name": "Pick", "damage_type": "pierce" },
+      { "name": "Trident", "damage_type": "pierce" }
+    ],
+    "heavy": [
+      { "name": "Greatsword", "damage_type": "cleave" },
+      { "name": "Greataxe", "damage_type": "cleave" },
+      { "name": "Maul", "damage_type": "blunt" },
+      { "name": "Halberd", "damage_type": "cleave" },
+      { "name": "Poleaxe", "damage_type": "cleave" },
+      { "name": "Glaive", "damage_type": "cleave" },
+      { "name": "Executioner Sword", "damage_type": "cleave" },
+      { "name": "War Scythe", "damage_type": "cleave" },
+      { "name": "Greatclub", "damage_type": "blunt" }
+    ],
+    "ranged_light": [
+      { "name": "Shortbow", "damage_type": "pierce" },
+      { "name": "Sling", "damage_type": "blunt" },
+      { "name": "Throwing Knives", "damage_type": "pierce" },
+      { "name": "Hand Crossbow", "damage_type": "pierce" },
+      { "name": "Throwing Axe", "damage_type": "slash" },
+      { "name": "Darts", "damage_type": "pierce" },
+      { "name": "Javelin", "damage_type": "pierce" },
+      { "name": "Chakram", "damage_type": "slash" },
+      { "name": "Boomerang", "damage_type": "blunt" },
+      { "name": "Throwing Hammer", "damage_type": "blunt" },
+      { "name": "Shuriken", "damage_type": "pierce" }
+    ],
+    "ranged_heavy": [
+      { "name": "Longbow", "damage_type": "pierce" },
+      { "name": "Crossbow", "damage_type": "pierce" },
+      { "name": "Heavy Crossbow", "damage_type": "pierce" },
+      { "name": "Greatbow", "damage_type": "pierce" },
+      { "name": "Arbalest", "damage_type": "pierce" },
+      { "name": "Repeating Crossbow", "damage_type": "pierce" },
+      { "name": "Ballista (Portable)", "damage_type": "pierce" }
+    ],
+    "firearms_light": [
+      { "name": "Pistol", "damage_type": "pierce" },
+      { "name": "Revolver", "damage_type": "pierce" },
+      { "name": "Derringer", "damage_type": "pierce" },
+      { "name": "Semi-Auto Pistol", "damage_type": "pierce" },
+      { "name": "Machine Pistol", "damage_type": "pierce" },
+      { "name": "Pepperbox", "damage_type": "pierce" }
+    ],
+    "firearms_heavy": [
+      { "name": "Rifle", "damage_type": "pierce" },
+      { "name": "Shotgun", "damage_type": "cleave" },
+      { "name": "Blunderbuss", "damage_type": "cleave" },
+      { "name": "Musket", "damage_type": "pierce" },
+      { "name": "Lever-Action Rifle", "damage_type": "pierce" },
+      { "name": "Bolt-Action Rifle", "damage_type": "pierce" },
+      { "name": "Double-Barrel Shotgun", "damage_type": "cleave" },
+      { "name": "Automatic Rifle", "damage_type": "pierce" },
+      { "name": "Sniper Rifle", "damage_type": "pierce" },
+      { "name": "Light Machine Gun", "damage_type": "pierce" }
+    ]
   },
   "prefixes": {
     "quality": [
@@ -27,43 +110,33 @@
       { "name": "Sharp", "description": "+1 Puncture" },
       { "name": "Keen", "description": "+2 Puncture" },
       { "name": "Lethal", "description": "+3 Puncture" },
-
       { "name": "Edged", "description": "+1 Slash" },
       { "name": "Honed", "description": "+2 Slash" },
       { "name": "Razor", "description": "+3 Slash" },
-
       { "name": "Heavy", "description": "+1 Blunt" },
       { "name": "Solid", "description": "+2 Blunt" },
       { "name": "Crushing", "description": "+3 Blunt" },
-
       { "name": "Hewing", "description": "+1 Cleave" },
       { "name": "Cleaving", "description": "+2 Cleave" },
       { "name": "Reaving", "description": "+3 Cleave" },
-
       { "name": "Flaming", "description": "+2 Fire" },
       { "name": "Frozen", "description": "+3 Ice" },
       { "name": "Thunderous", "description": "+3 Lightning" },
-
       { "name": "Wounding", "description": "+1 damage vs Injured targets" },
       { "name": "Maiming", "description": "+2 damage vs Injured targets" },
       { "name": "Executing", "description": "+3 damage vs Injured targets" },
-
       { "name": "Penetrating", "description": "Ignore 1 Armor" },
       { "name": "Piercing", "description": "Ignore 2 Armor" },
       { "name": "Sundering", "description": "Ignore 3 Armor" },
-
       { "name": "True", "description": "+1 Accuracy" },
       { "name": "Precise", "description": "+2 Accuracy" },
       { "name": "Perfect", "description": "+3 Accuracy" },
-
       { "name": "Devastating", "description": "+x1 Crit Damage" },
       { "name": "Brutal", "description": "+x2 Crit Damage" },
       { "name": "Deadly", "description": "+x3 Crit Damage" },
-
       { "name": "Leeching", "description": "Heal 1 on hit" },
       { "name": "Draining", "description": "Heal 2 on hit" },
       { "name": "Vampiric", "description": "Heal 3 on hit" },
-
       { "name": "Disruptive", "description": "Target -1 Accuracy next turn" },
       { "name": "Stunning", "description": "Target -2 Accuracy next turn" },
       { "name": "Overwhelming", "description": "Target -3 Accuracy next turn" }
