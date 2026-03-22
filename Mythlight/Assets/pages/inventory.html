@@ -263,12 +263,24 @@
                 </div>
 
                 <div class="rule-card space-y-6">
-                    <p class="text-sm text-slate-400">Build a random weapon by rolling a base type plus a chosen number of prefixes.</p>
+                    <p class="text-sm text-slate-400">Build a random weapon by rolling a base type, one guaranteed quality prefix, plus extra functional prefixes.</p>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end">
                         <label class="space-y-2">
                             <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Prefixes</span>
                             <input id="weapon-prefix-count" type="number" min="0" max="5" value="1" class="search-input w-full" />
+                        </label>
+                        <label class="space-y-2">
+                            <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Weapon</span>
+                            <select id="weapon-base-select" class="search-input w-full">
+                                <option value="">None (Random)</option>
+                            </select>
+                        </label>
+                        <label class="space-y-2">
+                            <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Quality</span>
+                            <select id="weapon-quality-select" class="search-input w-full">
+                                <option value="">None (Random)</option>
+                            </select>
                         </label>
                         <button onclick="pickRandomWeapon()" class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold uppercase tracking-widest border border-indigo-400/30 transition-all">Roll Weapon</button>
                     </div>
@@ -278,17 +290,6 @@
                         <h3 id="weapon-name" class="text-3xl text-white font-bold">-</h3>
                         <div id="weapon-meta" class="flex flex-wrap gap-2"></div>
                         <div id="weapon-effects" class="text-sm text-slate-300 leading-relaxed"></div>
-                    </div>
-
-                    <div class="space-y-3">
-                        <div class="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold">Preset Rolls (Max 5)</div>
-                        <div class="flex flex-wrap gap-2">
-                            <button onclick="runWeaponPreset(0)" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-xs font-bold uppercase tracking-wider">Simple (0)</button>
-                            <button onclick="runWeaponPreset(1)" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-xs font-bold uppercase tracking-wider">Balanced (1)</button>
-                            <button onclick="runWeaponPreset(2)" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-xs font-bold uppercase tracking-wider">Hunter (2)</button>
-                            <button onclick="runWeaponPreset(3)" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-xs font-bold uppercase tracking-wider">Elite (3)</button>
-                            <button onclick="runWeaponPreset(4)" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-xs font-bold uppercase tracking-wider">Artifact (4)</button>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -818,10 +819,115 @@
 
         const randomFromList = (list) => list[Math.floor(Math.random() * list.length)];
 
+        const toTitleCase = (value) => String(value || '')
+            .split(/[_\s]+/)
+            .filter(Boolean)
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+            .join(' ');
+
+        const DAMAGE_TYPE_ALIASES = {
+            puncture: 'pierce',
+            pierce: 'pierce',
+            slash: 'slash',
+            blunt: 'blunt',
+            cleave: 'cleave',
+            fire: 'fire',
+            ice: 'ice',
+            lightning: 'lightning',
+            light: 'light',
+            dark: 'dark',
+            force: 'force',
+            psychic: 'psychic',
+            poison: 'poison',
+            acid: 'acid',
+            vibro: 'vibro'
+        };
+
+        const DAMAGE_TYPE_SCAN_ORDER = [
+            'lightning',
+            'puncture',
+            'pierce',
+            'cleave',
+            'slash',
+            'blunt',
+            'fire',
+            'force',
+            'psychic',
+            'poison',
+            'acid',
+            'vibro',
+            'light',
+            'dark',
+            'ice'
+        ];
+
+        function damageFromCategoryKey(categoryKey) {
+            const key = String(categoryKey || '').toLowerCase();
+            if (key.includes('light')) return 1;
+            if (key.includes('medium')) return 2;
+            if (key.includes('heavy')) return 3;
+            return 2;
+        }
+
         function clampCount(value) {
             const parsed = Number.parseInt(value, 10);
             if (Number.isNaN(parsed)) return 0;
             return Math.max(0, Math.min(5, parsed));
+        }
+
+        function normalizeDamageType(type) {
+            return DAMAGE_TYPE_ALIASES[String(type || '').toLowerCase()] || String(type || '').toLowerCase();
+        }
+
+        function findDamageTypes(description) {
+            const text = String(description || '').toLowerCase();
+            return DAMAGE_TYPE_SCAN_ORDER
+                .filter(type => new RegExp(`\\b${type}\\b`, 'i').test(text))
+                .map(type => normalizeDamageType(type))
+                .filter((type, index, arr) => type && arr.indexOf(type) === index);
+        }
+
+        function interpretPrefixDamage(description, baseDamageType) {
+            const text = String(description || '');
+            const baseType = normalizeDamageType(baseDamageType);
+            const plusValues = [...text.matchAll(/\+(\d+)/g)].map(match => Number.parseInt(match[1], 10)).filter(Number.isFinite);
+            if (!plusValues.length) {
+                return {
+                    sameTypeBonus: 0,
+                    extraTypeBonuses: {},
+                    summary: null
+                };
+            }
+
+            const foundTypes = findDamageTypes(text);
+            const impliedSameType = /to\s+a\s+stat/i.test(text) || !foundTypes.length;
+
+            let sameTypeBonus = 0;
+            const extraTypeBonuses = {};
+
+            plusValues.forEach((value) => {
+                if (impliedSameType) {
+                    sameTypeBonus += value;
+                    return;
+                }
+
+                foundTypes.forEach((type) => {
+                    if (type === baseType) sameTypeBonus += value;
+                    else extraTypeBonuses[type] = (extraTypeBonuses[type] || 0) + value;
+                });
+            });
+
+            const summaryParts = [];
+            if (sameTypeBonus > 0) summaryParts.push(`+${sameTypeBonus} ${toTitleCase(baseType)} damage`);
+            Object.entries(extraTypeBonuses).forEach(([type, bonus]) => {
+                summaryParts.push(`+${bonus} ${toTitleCase(type)} damage`);
+            });
+
+            return {
+                sameTypeBonus,
+                extraTypeBonuses,
+                summary: summaryParts.length ? summaryParts.join(' | ') : null
+            };
         }
 
         function pickUniqueEntries(pool, count, excludeNames = new Set()) {
@@ -836,6 +942,47 @@
             return picks;
         }
 
+        function getWeaponPool() {
+            const categoryEntries = Object.entries(weaponGeneratorData?.categories || {});
+            if (!categoryEntries.length) return [];
+
+            return categoryEntries.flatMap(([categoryKey, list]) =>
+                (Array.isArray(list) ? list : []).map((weapon) => ({
+                    id: `${categoryKey}::${weapon?.name || 'Unknown Weapon'}`,
+                    categoryKey,
+                    categoryLabel: toTitleCase(categoryKey),
+                    name: weapon?.name || 'Unknown Weapon',
+                    damageType: weapon?.damage_type || 'unknown',
+                    damage: damageFromCategoryKey(categoryKey)
+                }))
+            );
+        }
+
+        function populateWeaponSelect() {
+            const select = document.getElementById('weapon-base-select');
+            if (!select) return;
+
+            const pool = getWeaponPool();
+            const options = pool
+                .sort((a, b) => `${a.categoryLabel} ${a.name}`.localeCompare(`${b.categoryLabel} ${b.name}`))
+                .map((weapon) => `<option value="${weapon.id}">${weapon.name} (${weapon.categoryLabel})</option>`)
+                .join('');
+
+            select.innerHTML = `<option value="">None (Random)</option>${options}`;
+        }
+
+        function populateQualitySelect() {
+            const select = document.getElementById('weapon-quality-select');
+            if (!select) return;
+
+            const qualityPool = weaponGeneratorData?.prefixes?.quality || [];
+            const options = qualityPool
+                .map((quality) => `<option value="quality::${quality.name}">${quality.name}</option>`)
+                .join('');
+
+            select.innerHTML = `<option value="">None (Random)</option>${options}`;
+        }
+
         function renderWeaponResult(result) {
             const nameEl = document.getElementById('weapon-name');
             const metaEl = document.getElementById('weapon-meta');
@@ -843,42 +990,73 @@
             if (!nameEl || !metaEl || !effectsEl) return;
 
             nameEl.textContent = result.name;
+            const baseType = normalizeDamageType(result.damageType);
             metaEl.innerHTML = `
-                <span class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-[10px] font-bold uppercase tracking-wider">${result.category}</span>
-                <span class="px-3 py-1 rounded-full bg-slate-700 border border-slate-600 text-slate-200 text-[10px] font-bold uppercase tracking-wider">${result.prefixes.length} Prefixes</span>
+                <span class="px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-200 text-xs font-bold uppercase tracking-wide">${result.categoryLabel}</span>
+                <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 text-xs font-bold uppercase tracking-wide">${result.totalBaseDamage} ${toTitleCase(baseType)} Damage</span>
+                ${Object.entries(result.extraDamageBonuses || {}).map(([type, bonus]) => `<span class="px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-200 text-xs font-bold uppercase tracking-wide">+${bonus} ${toTitleCase(type)} Damage</span>`).join('')}
             `;
 
             const effectBlocks = [];
             if (result.prefixes.length) {
-                effectBlocks.push(`<div><strong class="text-emerald-300">Prefixes:</strong> ${result.prefixes.map(p => `${p.name} (${p.description})`).join(' | ')}</div>`);
+                const prefixRows = result.prefixes.map((prefix) => {
+                    const interpreted = prefix.interpretedSummary ? `<div class="text-[11px] text-emerald-300 mt-1">${prefix.interpretedSummary}</div>` : '';
+                    return `<div class="rounded-lg border border-slate-700/70 bg-slate-900/40 px-3 py-2"><div class="text-sm text-white font-semibold">${prefix.name}</div><div class="text-xs text-slate-300">${prefix.description}</div>${interpreted}</div>`;
+                }).join('');
+                effectBlocks.push(`<div class="space-y-2"><div class="text-xs uppercase tracking-widest text-emerald-300 font-bold">Prefixes</div>${prefixRows}</div>`);
             }
             effectsEl.innerHTML = effectBlocks.length ? effectBlocks.join('') : '<span class="text-slate-500 italic">No modifiers selected.</span>';
         }
 
-        function buildRandomWeapon(prefixCount) {
+        function buildRandomWeapon(prefixCount, selectedWeaponId = '', selectedQualityId = '') {
             if (!weaponGeneratorData) return null;
-            const categories = weaponGeneratorData?.categories?.weapons || [];
             const qualityPool = weaponGeneratorData?.prefixes?.quality || [];
             const functionalPool = weaponGeneratorData?.prefixes?.functional || [];
-            if (!categories.length) return null;
+            const weaponPool = getWeaponPool();
+            if (!weaponPool.length) return null;
 
-            const base = randomFromList(categories);
-            const targetPrefixCount = clampCount(prefixCount);
+            const selectedBase = selectedWeaponId ? weaponPool.find(weapon => weapon.id === selectedWeaponId) : null;
+            const base = selectedBase || randomFromList(weaponPool);
+            const extraPrefixCount = clampCount(prefixCount);
 
-            const qualityPrefix = pickUniqueEntries(qualityPool, Math.min(1, targetPrefixCount));
-            const extraPrefixCount = Math.max(0, targetPrefixCount - qualityPrefix.length);
+            const selectedQuality = selectedQualityId
+                ? qualityPool.find(prefix => `quality::${prefix.name}` === selectedQualityId)
+                : null;
+            const qualityPrefix = selectedQuality ? [selectedQuality] : pickUniqueEntries(qualityPool, 1);
             const extraPrefixes = pickUniqueEntries(functionalPool, extraPrefixCount, new Set(qualityPrefix.map(item => item.name)));
-            const prefixes = [...qualityPrefix, ...extraPrefixes];
+            const rawPrefixes = [...qualityPrefix, ...extraPrefixes];
 
-            const suffixes = pickUniqueEntries(suffixPool, clampCount(suffixCount), new Set(prefixes.map(item => item.name)));
+            const baseType = normalizeDamageType(base.damageType);
+            let totalBaseDamage = base.damage;
+            const extraDamageBonuses = {};
+
+            const prefixes = rawPrefixes.map((prefix) => {
+                const interpretation = interpretPrefixDamage(prefix.description, baseType);
+                totalBaseDamage += interpretation.sameTypeBonus;
+
+                Object.entries(interpretation.extraTypeBonuses).forEach(([type, bonus]) => {
+                    extraDamageBonuses[type] = (extraDamageBonuses[type] || 0) + bonus;
+                });
+
+                return {
+                    ...prefix,
+                    interpretedSummary: interpretation.summary
+                };
+            });
 
             const nameParts = [
                 ...prefixes.map(item => item.name),
-                base
+                base.name
             ];
 
             return {
-                category: base,
+                category: base.categoryKey,
+                categoryLabel: base.categoryLabel,
+                damage: base.damage,
+                damageType: base.damageType,
+                totalBaseDamage,
+                extraDamageBonuses,
+                extraPrefixCount,
                 name: nameParts.join(' '),
                 prefixes
             };
@@ -889,7 +1067,11 @@
             if (!card || !weaponGeneratorData) return;
 
             const prefixInput = document.getElementById('weapon-prefix-count');
+            const weaponSelect = document.getElementById('weapon-base-select');
+            const qualitySelect = document.getElementById('weapon-quality-select');
             const prefixCount = clampCount(prefixInput ? prefixInput.value : 0);
+            const selectedWeaponId = weaponSelect ? weaponSelect.value : '';
+            const selectedQualityId = qualitySelect ? qualitySelect.value : '';
 
             if (prefixInput) prefixInput.value = String(prefixCount);
 
@@ -898,23 +1080,17 @@
             card.classList.add('shuffling');
 
             const shuffleInterval = setInterval(() => {
-                const sample = buildRandomWeapon(prefixCount);
+                const sample = buildRandomWeapon(prefixCount, selectedWeaponId, selectedQualityId);
                 if (sample) renderWeaponResult(sample);
                 shuffleCount += 1;
 
                 if (shuffleCount >= maxShuffles) {
                     clearInterval(shuffleInterval);
-                    const finalResult = buildRandomWeapon(prefixCount);
+                    const finalResult = buildRandomWeapon(prefixCount, selectedWeaponId, selectedQualityId);
                     if (finalResult) renderWeaponResult(finalResult);
                     card.classList.remove('shuffling');
                 }
             }, 60);
-        }
-
-        function runWeaponPreset(prefixCount) {
-            const prefixInput = document.getElementById('weapon-prefix-count');
-            if (prefixInput) prefixInput.value = String(prefixCount);
-            pickRandomWeapon();
         }
 
         // --- Artisan Row Creator ---
@@ -941,6 +1117,8 @@
             try {
                 const res = await fetch('../json/weapons.json');
                 weaponGeneratorData = await res.json();
+                populateWeaponSelect();
+                populateQualitySelect();
                 pickRandomWeapon();
             } catch (e) {
                 console.error('Weapon generator data failed to load:', e);
