@@ -267,7 +267,7 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end">
                         <label class="space-y-2">
-                            <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Prefixes</span>
+                            <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Extra Prefixes</span>
                             <input id="weapon-prefix-count" type="number" min="0" max="5" value="1" class="search-input w-full" />
                         </label>
                         <label class="space-y-2">
@@ -825,6 +825,13 @@
             .map(part => part.charAt(0).toUpperCase() + part.slice(1))
             .join(' ');
 
+        const escapeHtml = (value) => String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+
         const DAMAGE_TYPE_ALIASES = {
             puncture: 'pierce',
             pierce: 'pierce',
@@ -965,7 +972,7 @@
             const pool = getWeaponPool();
             const options = pool
                 .sort((a, b) => `${a.categoryLabel} ${a.name}`.localeCompare(`${b.categoryLabel} ${b.name}`))
-                .map((weapon) => `<option value="${weapon.id}">${weapon.name} (${weapon.categoryLabel})</option>`)
+                .map((weapon) => `<option value="${escapeHtml(weapon.id)}">${escapeHtml(weapon.name)} (${escapeHtml(weapon.categoryLabel)})</option>`)
                 .join('');
 
             select.innerHTML = `<option value="">None (Random)</option>${options}`;
@@ -977,7 +984,9 @@
 
             const qualityPool = weaponGeneratorData?.prefixes?.quality || [];
             const options = qualityPool
-                .map((quality) => `<option value="quality::${quality.name}">${quality.name}</option>`)
+                .slice()
+                .sort((a, b) => String(a?.name || '').localeCompare(String(b?.name || '')))
+                .map((quality) => `<option value="quality::${escapeHtml(quality.name)}">${escapeHtml(quality.name)}</option>`)
                 .join('');
 
             select.innerHTML = `<option value="">None (Random)</option>${options}`;
@@ -1000,8 +1009,8 @@
             const effectBlocks = [];
             if (result.prefixes.length) {
                 const prefixRows = result.prefixes.map((prefix) => {
-                    const interpreted = prefix.interpretedSummary ? `<div class="text-[11px] text-emerald-300 mt-1">${prefix.interpretedSummary}</div>` : '';
-                    return `<div class="rounded-lg border border-slate-700/70 bg-slate-900/40 px-3 py-2"><div class="text-sm text-white font-semibold">${prefix.name}</div><div class="text-xs text-slate-300">${prefix.description}</div>${interpreted}</div>`;
+                    const interpreted = prefix.interpretedSummary ? `<div class="text-[11px] text-emerald-300 mt-1">${escapeHtml(prefix.interpretedSummary)}</div>` : '';
+                    return `<div class="rounded-lg border border-slate-700/70 bg-slate-900/40 px-3 py-2"><div class="text-sm text-white font-semibold">${escapeHtml(prefix.name)}</div><div class="text-xs text-slate-300">${escapeHtml(prefix.description)}</div>${interpreted}</div>`;
                 }).join('');
                 effectBlocks.push(`<div class="space-y-2"><div class="text-xs uppercase tracking-widest text-emerald-300 font-bold">Prefixes</div>${prefixRows}</div>`);
             }
