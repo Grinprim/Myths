@@ -52,6 +52,26 @@ function fitTextToSingleLine(el, maxSize = 10, minSize = 6){
   }
 }
 
+function fitDescriptionToBox(el, maxSize = 13, minSize = 8){
+  if (!el) return;
+
+  let size = maxSize;
+  let line = 1.4;
+  el.style.fontSize = `${size}px`;
+  el.style.lineHeight = `${line}`;
+
+  while (size > minSize && el.scrollHeight > el.clientHeight) {
+    size -= 0.25;
+    if (line > 1.1) line -= 0.01;
+    el.style.fontSize = `${size}px`;
+    el.style.lineHeight = `${line}`;
+  }
+
+  if (el.scrollHeight > el.clientHeight) {
+    el.style.overflow = 'hidden';
+  }
+}
+
 function clampNumber(value, min, max){
   const n = Number(value);
   if (Number.isNaN(n)) return min;
@@ -168,6 +188,7 @@ function wire(){
   const typeSelect = document.getElementById('typeSelect');
   const tagsInput = document.getElementById('tagsInput');
   const tagsTextEl = document.getElementById('tagsText');
+  const descTextEl = document.getElementById('descText');
   const descToolButtons = Array.from(document.querySelectorAll('.textToolBtn'));
 
   // Symbols
@@ -350,6 +371,7 @@ function wire(){
     resolveBorder();
 
     fitTextToSingleLine(tagsTextEl);
+    fitDescriptionToBox(descTextEl);
   }
 
   function syncArtFile(){
@@ -440,6 +462,7 @@ function wire(){
 
   window.addEventListener('resize', () => {
     fitTextToSingleLine(tagsTextEl);
+    fitDescriptionToBox(descTextEl);
   });
 }
 
@@ -458,7 +481,9 @@ function setupExportButton() {
 
     try {
       const tagsEl = document.getElementById('tagsText');
+      const descEl = document.getElementById('descText');
       fitTextToSingleLine(tagsEl);
+      fitDescriptionToBox(descEl);
 
       const options = { 
         pixelRatio: 3, 

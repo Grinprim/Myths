@@ -260,7 +260,17 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
   overflow: hidden;
   text-overflow: clip;
 }
-.desc { font-size: 13px; line-height: 1.4; color: #e2e8f0; white-space: pre-wrap; font-family: 'Inter', sans-serif; }
+.desc {
+  height: 100%;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+  overflow: hidden;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  font-family: 'Inter', sans-serif;
+}
 .desc strong { font-weight: 700; }
 .desc em { font-style: italic; }
 .desc u { text-decoration: underline; }
