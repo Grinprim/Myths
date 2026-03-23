@@ -1,9 +1,4 @@
 {
-  "tiers": [
-    { "id": "simple", "name": "Simple", "target": 9, "requiresBrewer": false },
-    { "id": "medium", "name": "Medium", "target": 11, "requiresBrewer": true },
-    { "id": "hard", "name": "Hard", "target": 13, "requiresBrewer": true }
-  ],
 
   "ingredients": [
     {
