@@ -51,7 +51,7 @@ function fitTextToSingleLine(el, maxSize = 10, minSize = 6){
 
   if (el.scrollWidth > el.clientWidth) {
     el.style.letterSpacing = '0.2px';
-    while (size > 5 && el.scrollWidth > el.clientWidth) {
+    while (size > minSize && el.scrollWidth > el.clientWidth) {
       size -= 0.25;
       el.style.fontSize = `${size}px`;
     }
@@ -81,6 +81,21 @@ function fitDescriptionToBox(el, maxSize = 13, minSize = 8){
       el.style.fontSize = `${size}px`;
       el.style.lineHeight = `${line}`;
     }
+  }
+}
+
+function fitTextToBox(el, maxSize = 25, minSize = 2){
+  if (!el) return;
+
+  // Reset inline size first so each pass can grow back to the stylesheet base.
+  el.style.fontSize = '';
+  const cssSize = parseFloat(window.getComputedStyle(el).fontSize);
+  let size = Number.isFinite(cssSize) ? Math.min(cssSize, maxSize) : maxSize;
+  el.style.fontSize = `${size}px`;
+
+  while (size > minSize && (el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight)) {
+    size -= 0.25;
+    el.style.fontSize = `${size}px`;
   }
 }
 
@@ -193,12 +208,17 @@ function wire(){
   // Inputs
   const nameInput = document.getElementById('nameInput');
   const manaInput = document.getElementById('manaInput');
+  const manaXInput = document.getElementById('manaXInput');
+  const explainManaInput = document.getElementById('explainManaInput');
   const descInput = document.getElementById('descInput');
+  const descHeightInput = document.getElementById('descHeightInput');
+  const descHideInput = document.getElementById('descHideInput');
   const powerInput = document.getElementById('powerInput');
   const healthInput = document.getElementById('healthInput');
   const raritySelect = document.getElementById('raritySelect');
   const typeSelect = document.getElementById('typeSelect');
   const tagsInput = document.getElementById('tagsInput');
+  const nameTextEl = document.getElementById('nameText');
   const tagsTextEl = document.getElementById('tagsText');
   const descTextEl = document.getElementById('descText');
   const descToolButtons = Array.from(document.querySelectorAll('.textToolBtn'));
@@ -210,6 +230,10 @@ function wire(){
   const symbol3Select = document.getElementById('symbol3Select');
   const symbol4Select = document.getElementById('symbol4Select');
   const symbol5Select = document.getElementById('symbol5Select');
+  const region2Wrap = document.getElementById('region2Wrap');
+  const region3Wrap = document.getElementById('region3Wrap');
+  const region4Wrap = document.getElementById('region4Wrap');
+  const region5Wrap = document.getElementById('region5Wrap');
 
   // Art Controls
   const artScaleInput = document.getElementById('artScaleInput');
@@ -275,6 +299,7 @@ function wire(){
 
   // --- SYNC HELPERS ---
   const symbolSelects = [symbol1Select, symbol2Select, symbol3Select, symbol4Select, symbol5Select];
+  const symbolWrappers = [null, region2Wrap, region3Wrap, region4Wrap, region5Wrap];
 
   function getSymbolRegions(){
     return symbolSelects.map(s => (s && s.value) ? s.value : 'Arcane');
@@ -287,6 +312,8 @@ function wire(){
       if (!sel) continue;
       const active = i < n;
       sel.classList.toggle('isHidden', !active);
+      const wrap = symbolWrappers[i];
+      if (wrap) wrap.classList.toggle('isHidden', !active);
     }
   }
 
@@ -309,9 +336,10 @@ function wire(){
     if (statsFieldset) statsFieldset.classList.toggle('isHidden', !showStats);
     if (statsRow) statsRow.classList.toggle('isHidden', !showStats);
     
-    // Type class for CSS fallback
+    // Preserve card mode classes while updating type class
     if (cardEl){
-      cardEl.className = `card type-${type}`; 
+      cardEl.classList.remove('type-Unit', 'type-Spell', 'type-Landmark', 'type-Gear');
+      cardEl.classList.add(`type-${type}`);
     }
   }
 
@@ -351,17 +379,61 @@ function wire(){
 
   // --- MAIN SYNC ---
   function syncText(){
+    const manaValue = clampNumber(manaInput.value, 0, 12);
+    if (manaInput && String(manaInput.value) !== String(manaValue)) {
+      manaInput.value = String(manaValue);
+    }
+    const manaDisplay = (manaXInput && manaXInput.checked) ? 'X' : String(manaValue);
+
+    let descRaw = (descInput.value || '').trim();
+    if (explainManaInput && explainManaInput.checked) {
+      const manaExplainLine = `Mana Cost: ${manaDisplay}`;
+      descRaw = descRaw ? `${manaExplainLine}[br]${descRaw}` : manaExplainLine;
+    }
+
     setText('nameText', (nameInput.value || '').trim() || '');
-    setText('manaText', String(clampNumber(manaInput.value, 0, 99)));
+    setText('manaText', manaDisplay);
     setText('tagsText', (tagsInput.value || '').trim());
-    setHtml('descText', renderDescriptionText((descInput.value || '').trim()));
+    setHtml('descText', renderDescriptionText(descRaw));
 
     // Stats
     const isGear = typeSelect.value === 'Gear';
-    const pVal = Number(powerInput.value);
-    const hVal = Number(healthInput.value);
-    if(statImgDamageNum) statImgDamageNum.textContent = isGear ? formatSignedNumber(pVal) : String(pVal);
-    if(statImgHealthNum) statImgHealthNum.textContent = isGear ? formatSignedNumber(hVal) : String(hVal);
+    const pVal = clampNumber(powerInput.value, 0, 999);
+    if (powerInput && String(powerInput.value) !== String(pVal)) {
+      powerInput.value = String(pVal);
+    }
+    const hVal = clampNumber(healthInput.value, 1, 999);
+    if (healthInput && String(healthInput.value) !== String(hVal)) {
+      healthInput.value = String(hVal);
+    }
+    const leftFallback = isGear ? formatSignedNumber(pVal) : String(pVal);
+    const rightFallback = isGear ? formatSignedNumber(hVal) : String(hVal);
+
+    if(statImgDamageNum) {
+      statImgDamageNum.textContent = leftFallback;
+    }
+    if(statImgHealthNum) {
+      statImgHealthNum.textContent = rightFallback;
+    }
+
+    if (cardEl) {
+      const descHeight = clampNumber((descHeightInput && descHeightInput.value) || 125, 80, 220);
+      cardEl.style.setProperty('--descHeight', `${descHeight}px`);
+
+      const descHidden = !!(descHideInput && descHideInput.checked);
+      cardEl.classList.toggle('desc-hidden', descHidden);
+
+      // Keep tags 20px above the highest stat slot when description is hidden
+      const css = window.getComputedStyle(cardEl);
+      const statsBottom = parseFloat(css.getPropertyValue('--statsBottom')) || 10;
+      const leftY = parseFloat(css.getPropertyValue('--statSlotLeftY')) || 0;
+      const leftH = parseFloat(css.getPropertyValue('--statSlotLeftH')) || 0;
+      const rightY = parseFloat(css.getPropertyValue('--statSlotRightY')) || 0;
+      const rightH = parseFloat(css.getPropertyValue('--statSlotRightH')) || 0;
+      const topOfStats = Math.max(leftY + leftH, rightY + rightH);
+      const tagsBottomHidden = Math.max(0, statsBottom + topOfStats + 20);
+      cardEl.style.setProperty('--tagsBottomHidden', `${tagsBottomHidden}px`);
+    }
 
     // Rarity
     const rarity = raritySelect.value;
@@ -375,19 +447,27 @@ function wire(){
     syncArtTransform();
     syncTypeVisibility();
     
-    // Alt Art Toggle
-    const isAltArt = raritySelect.value === 'Alt Art';
-    if (artImg) artImg.classList.toggle('artFull', isAltArt);
+    // Keep art frame position consistent across rarities, including Alt Art.
+    if (artImg) artImg.classList.remove('artFull');
 
     // Determine Border
     resolveBorder();
 
     fitTextToSingleLine(tagsTextEl);
+    fitTextToSingleLine(nameTextEl, 15, 7);
     fitDescriptionToBox(descTextEl);
+    fitTextToBox(statImgDamageNum);
+    fitTextToBox(statImgHealthNum);
   }
 
   function syncArtFile(){
     setLayerFromFile(artFile, artImg);
+
+    // New uploads start centered in the art frame.
+    if (artXInput) artXInput.value = '0';
+    if (artYInput) artYInput.value = '0';
+    if (artScaleInput) artScaleInput.value = '1';
+    syncArtTransform();
   }
 
   function handleCustomBorderUpload() {
@@ -427,7 +507,7 @@ function wire(){
 
   // --- LISTENERS ---
   const inputs = [
-    nameInput, manaInput, descInput, powerInput, healthInput, 
+    nameInput, manaInput, manaXInput, explainManaInput, descInput, descHeightInput, descHideInput, powerInput, healthInput,
     raritySelect, typeSelect, tagsInput, symbolCountInput, 
     symbol1Select, symbol2Select, symbol3Select, symbol4Select, symbol5Select, 
     artScaleInput, artXInput, artYInput
@@ -474,7 +554,10 @@ function wire(){
 
   window.addEventListener('resize', () => {
     fitTextToSingleLine(tagsTextEl);
+    fitTextToSingleLine(nameTextEl, 15, 7);
     fitDescriptionToBox(descTextEl);
+    fitTextToBox(statImgDamageNum);
+    fitTextToBox(statImgHealthNum);
   });
 }
 
@@ -493,8 +576,10 @@ function setupExportButton() {
 
     try {
       const tagsEl = document.getElementById('tagsText');
+      const nameEl = document.getElementById('nameText');
       const descEl = document.getElementById('descText');
       fitTextToSingleLine(tagsEl);
+      fitTextToSingleLine(nameEl, 15, 7);
       fitDescriptionToBox(descEl);
 
       const options = { 
