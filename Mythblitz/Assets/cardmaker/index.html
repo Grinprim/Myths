@@ -24,126 +24,162 @@
   <main class="app">
     <section class="panel" aria-label="Card Settings">
       <form id="cardForm" class="form" autocomplete="off">
-        
-        <fieldset class="fieldset">
-          <legend>Core Details</legend>
+        <div class="editorSplit">
+          <div class="editorColumn">
+            <fieldset class="fieldset">
+              <legend>Core Card</legend>
 
-          <label class="field">
-            <span class="label">Name</span>
-            <input type="text" id="nameInput" class="input-dark" value="Sample Name" />
-          </label>
+              <div class="rowPairWide rowCompact formLine">
+                <label class="field">
+                  <span class="label">Name</span>
+                  <input type="text" id="nameInput" class="input-dark" value="Sample Name" />
+                </label>
+                <label class="field">
+                  <span class="label">Card Type</span>
+                  <select id="typeSelect" class="input-dark">
+                    <option value="Unit" selected>Unit</option>
+                    <option value="Spell">Spell</option>
+                    <option value="Landmark">Landmark</option>
+                    <option value="Gear">Gear</option>
+                  </select>
+                </label>
+              </div>
 
-          <label class="field">
-            <span class="label">Card Type</span>
-            <select id="typeSelect" class="input-dark">
-              <option value="Unit" selected>Unit</option>
-              <option value="Spell">Spell</option>
-              <option value="Landmark">Landmark</option>
-              <option value="Gear">Gear</option>
-            </select>
-          </label>
+              <div class="rowPairWide rowCompact formLine">
+                <label class="field">
+                  <span class="label">Tags</span>
+                  <input type="text" id="tagsInput" class="input-dark" value="Sample Tags" />
+                </label>
+                <label class="field">
+                  <span class="label">Card Rarity</span>
+                  <select id="raritySelect" class="input-dark">
+                    <option value="Common">Common</option>
+                    <option value="Uncommon">Uncommon</option>
+                    <option value="Rare">Rare</option>
+                    <option value="Epic">Epic</option>
+                    <option value="Legendary">Legendary</option>
+                    <option value="Alt Art">Alt Art</option>
+                  </select>
+                </label>
+              </div>
 
-          <label class="field">
-            <span class="label">Rarity</span>
-            <select id="raritySelect" class="input-dark">
-              <option value="Common">Common</option>
-              <option value="Uncommon">Uncommon</option>
-              <option value="Rare">Rare</option>
-              <option value="Epic">Epic</option>
-              <option value="Legendary">Legendary</option>
-              <option value="Alt Art">Alt Art</option>
-            </select>
-          </label>
+              <div class="rowShort4 rowCompact formLine" id="statsFieldset">
+                <label class="field">
+                  <span class="label">Mana Cost</span>
+                  <input type="number" id="manaInput" class="input-dark" value="1" min="0" max="12" />
+                </label>
+                <label class="field">
+                  <span class="label">Regions</span>
+                  <input type="number" id="symbolCountInput" class="input-dark" value="1" min="0" max="5" />
+                </label>
+                <label class="field">
+                  <span class="label">Might</span>
+                  <input type="number" id="powerInput" class="input-dark" value="1" min="0" max="999" />
+                </label>
+                <label class="field">
+                  <span class="label">Health</span>
+                  <input type="number" id="healthInput" class="input-dark" value="1" min="1" max="999" />
+                </label>
+              </div>
+                                <div class="manaOptions">
+                    <label class="checkInline">
+                      <input type="checkbox" id="manaXInput" />
+                      <span><b>X</b>: Explain Mana Cost in Description</span>
+                    </label>
+                  </div>
+            </fieldset>
 
-          <label class="field">
-            <span class="label">Mana Cost</span>
-            <input type="number" id="manaInput" class="input-dark" value="1" />
-          </label>
-        </fieldset>
+            <fieldset class="fieldset">
+              <legend>Text & Art</legend>
 
-        <fieldset class="fieldset" id="statsFieldset">
-          <legend>Stats</legend>
-          <div class="row2">
-            <label class="field">
-              <span class="label">Power</span>
-              <input type="number" id="powerInput" class="input-dark" value="1" />
-            </label>
-            <label class="field">
-              <span class="label">Health</span>
-              <input type="number" id="healthInput" class="input-dark" value="1" />
-            </label>
+              <div class="field">
+                <span class="label">Description</span>
+                <div class="textTools" role="toolbar" aria-label="Description formatting tools">
+                  <button type="button" class="btn btnSecondary textToolBtn" data-wrap-start="[b]" data-wrap-end="[/b]" title="Bold">Bold</button>
+                  <button type="button" class="btn btnSecondary textToolBtn" data-wrap-start="[i]" data-wrap-end="[/i]" title="Italic">Italic</button>
+                  <button type="button" class="btn btnSecondary textToolBtn" data-wrap-start="[u]" data-wrap-end="[/u]" title="Underline">Underline</button>
+                  <button type="button" class="btn btnSecondary textToolBtn" data-insert="[br]" title="Line Break">Line Break</button>
+                </div>
+                <textarea id="descInput" class="input-dark" placeholder="Supports [b]bold[/b], [i]italic[/i], [u]underline[/u], and [br] line breaks.">Sample Description</textarea>
+                <div class="hint">Formatting tags: [b]...[/b], [i]...[/i], [u]...[/u], [br]</div>
+              </div>
+
+            </fieldset>
           </div>
-        </fieldset>
 
-        <fieldset class="fieldset">
-          <legend>Card Text & Symbols</legend>
+          <div class="editorColumn">
+            <fieldset class="fieldset">
+              <legend>Regions & Slots</legend>
 
-          <label class="field">
-            <span class="label">Tags</span>
-            <input type="text" id="tagsInput" class="input-dark" value="Sample Tags" />
-          </label>
+              <label class="field">
+                <span class="label">Region 1</span>
+                <select id="symbol1Select" class="input-dark">
+                  <option value="Arcane">Arcane</option>
+                  <option value="Divine">Divine</option>
+                  <option value="Elemental">Elemental</option>
+                  <option value="Occult">Occult</option>
+                  <option value="Cosmic">Cosmic</option>
+                </select>
+              </label>
 
-          <div class="field">
-            <span class="label">Description</span>
-            <div class="textTools" role="toolbar" aria-label="Description formatting tools">
-              <button type="button" class="btn btnSecondary textToolBtn" data-wrap-start="[b]" data-wrap-end="[/b]" title="Bold">Bold</button>
-              <button type="button" class="btn btnSecondary textToolBtn" data-wrap-start="[i]" data-wrap-end="[/i]" title="Italic">Italic</button>
-              <button type="button" class="btn btnSecondary textToolBtn" data-wrap-start="[u]" data-wrap-end="[/u]" title="Underline">Underline</button>
-              <button type="button" class="btn btnSecondary textToolBtn" data-insert="[br]" title="Line Break">Line Break</button>
-            </div>
-            <textarea id="descInput" class="input-dark" placeholder="Supports [b]bold[/b], [i]italic[/i], [u]underline[/u], and [br] line breaks.">Sample Description</textarea>
-            <div class="hint">Formatting tags: [b]...[/b], [i]...[/i], [u]...[/u], [br]</div>
+              <label class="field isHidden" id="region2Wrap">
+                <span class="label">Region 2</span>
+                <select id="symbol2Select" class="input-dark"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
+              </label>
+              <label class="field isHidden" id="region3Wrap">
+                <span class="label">Region 3</span>
+                <select id="symbol3Select" class="input-dark"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
+              </label>
+              <label class="field isHidden" id="region4Wrap">
+                <span class="label">Region 4</span>
+                <select id="symbol4Select" class="input-dark"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
+              </label>
+              <label class="field isHidden" id="region5Wrap">
+                <span class="label">Region 5</span>
+                <select id="symbol5Select" class="input-dark"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
+              </label>
+
+            </fieldset>
+
+            <fieldset class="fieldset">
+              <legend>Border & Positioning</legend>
+
+              <label class="field">
+                <span class="label">Description Box Height</span>
+                <input type="number" id="descHeightInput" class="input-dark" value="125" min="80" max="220" />
+              </label>
+
+              <label class="field checkboxField">
+                <span class="label">Hide Description</span>
+                <input type="checkbox" id="descHideInput" class="checkboxInput" />
+              </label>
+
+              <label class="field">
+                <span class="label">Custom Border Override (Optional)</span>
+                <input type="file" id="borderFile" accept="image/*" />
+                <div class="hint">Upload a border to override the default type border.</div>
+                <div class="hint">Current border size: 744 x 1039 px.</div>
+                <button type="button" id="removeBorderBtn" class="btn btnSecondary" style="display:none; margin-top:5px;">
+                  Remove Custom Border
+                </button>
+              </label>
+
+              <label class="field">
+                <span class="label">Art</span>
+                <input type="file" id="artFile" accept="image/*" />
+              </label>
+
+              <div class="field">
+                <span class="label">Art Adjustments (Scroll wheel on art also works)</span>
+                <div class="row3">
+                  <input type="number" id="artScaleInput" class="input-dark" step="0.1" value="1" title="Scale" />
+                  <input type="number" id="artXInput" class="input-dark" step="1" value="0" title="X Position" />
+                  <input type="number" id="artYInput" class="input-dark" step="1" value="0" title="Y Position" />
+                </div>
+              </div>
+            </fieldset>
           </div>
-          
-          <div class="field">
-            <span class="label">Region / Symbols</span>
-            <label class="field">
-              <span class="label">Symbol Count</span>
-              <input type="number" id="symbolCountInput" class="input-dark" value="1" min="0" max="5" />
-            </label>
-            <label class="field">
-              <span class="label">Region 1</span>
-              <select id="symbol1Select" class="input-dark">
-                <option value="Arcane">Arcane</option>
-                <option value="Divine">Divine</option>
-                <option value="Elemental">Elemental</option>
-                <option value="Occult">Occult</option>
-                <option value="Cosmic">Cosmic</option>
-              </select>
-            </label>
-            <select id="symbol2Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
-            <select id="symbol3Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
-            <select id="symbol4Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
-            <select id="symbol5Select" class="input-dark isHidden"><option value="Arcane">Arcane</option><option value="Divine">Divine</option><option value="Elemental">Elemental</option><option value="Occult">Occult</option><option value="Cosmic">Cosmic</option></select>
-          </div>
-        </fieldset>
-
-        <fieldset class="fieldset">
-          <legend>Art & Border</legend>
-          
-          <label class="field">
-            <span class="label">Card Art</span>
-            <input type="file" id="artFile" accept="image/*" />
-          </label>
-
-          <label class="field">
-            <span class="label">Custom Border Override (Optional)</span>
-            <input type="file" id="borderFile" accept="image/*" />
-            <div class="hint">Upload a border to override the default type border.</div>
-            <button type="button" id="removeBorderBtn" class="btn btnSecondary" style="display:none; margin-top:5px;">
-              Remove Custom Border
-            </button>
-          </label>
-
-          <div class="field">
-            <span class="label">Art Adjustments (Scroll wheel on art also works)</span>
-            <div class="row2">
-              <input type="number" id="artScaleInput" class="input-dark" step="0.1" value="1" title="Scale" />
-              <input type="number" id="artXInput" class="input-dark" step="1" value="0" title="X Position" />
-              <input type="number" id="artYInput" class="input-dark" step="1" value="0" title="Y Position" />
-            </div>
-          </div>
-        </fieldset>
+        </div>
 
         <div class="actions">
           <button type="button" id="resetBtn" class="btn btnSecondary">Reset</button>
@@ -180,8 +216,10 @@
           </div>
 
           <div class="stats">
-            <span class="statNumber statNumberLeft" id="statImgDamageNum">1</span>
-            <span class="statNumber statNumberRight" id="statImgHealthNum">1</span>
+            <span class="statSlotGuide statSlotLeftPos"></span>
+            <span class="statSlotGuide statSlotRightPos"></span>
+            <span class="statSlotValue statSlotLeftPos" id="statImgDamageNum">1</span>
+            <span class="statSlotValue statSlotRightPos" id="statImgHealthNum">1</span>
           </div>
 
           <div id="rarityGem" class="rarityGem">
