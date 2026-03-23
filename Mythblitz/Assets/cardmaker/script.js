@@ -247,6 +247,8 @@ function wire(){
   const tagsTextEl = document.getElementById('tagsText');
   const descTextEl = document.getElementById('descText');
   const descToolButtons = Array.from(document.querySelectorAll('.textToolBtn'));
+  let lastDescSelectionStart = 0;
+  let lastDescSelectionEnd = 0;
 
   // Symbols
   const symbolCountInput = document.getElementById('symbolCountInput');
@@ -588,11 +590,21 @@ function wire(){
     resolveBorder();
   }
 
+  function rememberDescSelection() {
+    if (!descInput) return;
+    if (typeof descInput.selectionStart !== 'number' || typeof descInput.selectionEnd !== 'number') return;
+    lastDescSelectionStart = descInput.selectionStart;
+    lastDescSelectionEnd = descInput.selectionEnd;
+  }
+
   function applyTextTool(startToken, endToken = ''){
     if (!descInput) return;
 
-    const start = descInput.selectionStart || 0;
-    const end = descInput.selectionEnd || 0;
+    const hasLiveSelection = document.activeElement === descInput
+      && typeof descInput.selectionStart === 'number'
+      && typeof descInput.selectionEnd === 'number';
+    const start = hasLiveSelection ? descInput.selectionStart : lastDescSelectionStart;
+    const end = hasLiveSelection ? descInput.selectionEnd : lastDescSelectionEnd;
     const current = descInput.value || '';
     const selected = current.slice(start, end);
     const insertion = `${startToken}${selected}${endToken}`;
@@ -603,6 +615,7 @@ function wire(){
     const caretEnd = caretStart + selected.length;
     descInput.focus();
     descInput.setSelectionRange(caretStart, caretEnd);
+    rememberDescSelection();
     syncText();
   }
 
@@ -628,7 +641,18 @@ function wire(){
   if(borderFile) borderFile.addEventListener('change', handleCustomBorderUpload);
   if(removeBorderBtn) removeBorderBtn.addEventListener('click', clearCustomBorder);
 
+  if (descInput) {
+    ['select', 'keyup', 'click', 'focus', 'input'].forEach((evt) => {
+      descInput.addEventListener(evt, rememberDescSelection);
+    });
+    rememberDescSelection();
+  }
+
   descToolButtons.forEach((btn) => {
+    btn.addEventListener('mousedown', (event) => {
+      // Keep textarea selection intact when clicking formatting tools.
+      event.preventDefault();
+    });
     btn.addEventListener('click', () => {
       const insert = btn.dataset.insert;
       const wrapStart = btn.dataset.wrapStart;
