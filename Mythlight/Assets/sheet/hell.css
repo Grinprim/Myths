@@ -328,24 +328,22 @@ button:active {
   width: 92px;
 }
 
-.physique {
+.body {
   background: rgba(220, 38, 38, 0.15);
-  border:1px solid rgba(220, 38, 38, 1);
 }
 
-.technique {
+.skill {
   background: rgba(59, 246, 96, 0.15);
-  border:1px solid rgba(59, 246, 96, 1);
 }
 
-.mystique {
+.mind {
   background: rgba(168, 85, 247, 0.15);
-  border:1px solid rgba(168, 85, 247, 1);
+
 }
 
-.charm {
+.style {
   background: rgba(236, 72, 153, 0.15);
-  border:1px solid rgba(236, 72, 153, 1);
+
 }
 
 .skill-row {

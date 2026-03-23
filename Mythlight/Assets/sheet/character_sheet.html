@@ -19,17 +19,17 @@
     <div style="display:flex; align-items: center; gap: 0.5rem;">
       <img src="../img/logo.png" alt="Mythlight Logo" style="height: 5rem;">
       <h1>Mythlight Character Sheet</h1>
-    <div class="header-links no-print" style="width: 100%; border-radius: 5px;">
-    <a href="../pages/rules.html" id="header_link">Rules</a>
-    <a href="../pages/species.html" id="header_link">Species</a>
-    <a href="../pages/paths.html" id="header_link">Paths</a>
-    <a href="../pages/traits.html" id="header_link">Traits</a>
-    <a href="../pages/spells.html" id="header_link">Spells</a>
-    <a href="../pages/inventory.html" id="header_link">Inventory</a>
-  </div>
-  </div>
-    
-    
+      <div class="header-links no-print" style="width: 100%; border-radius: 5px;">
+        <a href="../pages/rules.html" id="header_link">Rules</a>
+        <a href="../pages/species.html" id="header_link">Species</a>
+        <a href="../pages/paths.html" id="header_link">Paths</a>
+        <a href="../pages/traits.html" id="header_link">Traits</a>
+        <a href="../pages/spells.html" id="header_link">Spells</a>
+        <a href="../pages/inventory.html" id="header_link">Inventory</a>
+      </div>
+    </div>
+
+
     <div class="header-actions no-print">
       <button type="button" style="display: none;" onclick="exportToPDF()">Print</button>
       <button type="button" onclick="exportToJSON()">Export to JSON</button> <input type="file" id="import_file_input"
@@ -39,14 +39,14 @@
         • Unsaved Changes
       </span>
     </div>
-    
+
   </header>
-<div style="display: flex; justify-content: center; width: 100%; flex-wrap: wrap;" id="tab-selector">
-  <button class="tab-button" data-tab="tab-main" onclick="switchTab(this)">Main</button>
-      <button class="tab-button" data-tab="tab-inventory" onclick="switchTab(this)">Inventory</button>
-      <button class="tab-button" data-tab="tab-traits" onclick="switchTab(this)">Traits</button>
-      <button class="tab-button" data-tab="tab-spells" onclick="switchTab(this)">Spells</button>
-    </div>
+  <div style="display: flex; justify-content: center; width: 100%; flex-wrap: wrap;" id="tab-selector">
+    <button class="tab-button" data-tab="tab-main" onclick="switchTab(this)">Main</button>
+    <button class="tab-button" data-tab="tab-inventory" onclick="switchTab(this)">Inventory</button>
+    <button class="tab-button" data-tab="tab-traits" onclick="switchTab(this)">Traits</button>
+    <button class="tab-button" data-tab="tab-spells" onclick="switchTab(this)">Spells</button>
+  </div>
   <main>
     <form onsubmit="return false;">
 
@@ -54,33 +54,33 @@
       <div id="tab-main" class="tab-section">
         <div class="sheet-grid">
           <div class="card sheet-full section-1">
-  <div class="section-title">
-    <div class="section-number">1</div>
-    <h2>Core Identity</h2>
-  </div>
+            <div class="section-title">
+              <div class="section-number">1</div>
+              <h2>Core Identity</h2>
+            </div>
 
-  <div class="identity-grid">
-    <div class="identity-name">
-      <label>Character Name</label>
-      <input type="text" id="character_name" required>
-    </div>
+            <div class="identity-grid">
+              <div class="identity-name">
+                <label>Character Name</label>
+                <input type="text" id="character_name" required>
+              </div>
 
-    <div>
-      <label>Species</label>
-      <input type="text" id="character_species" required>
-    </div>
+              <div>
+                <label>Species</label>
+                <input type="text" id="character_species" required>
+              </div>
 
-    <div>
-      <label>Path</label>
-      <input type="text" id="character_path" required>
-    </div>
+              <div>
+                <label>Path</label>
+                <input type="text" id="character_path" required>
+              </div>
 
-    <div>
-      <label>Level</label>
-      <input type="number" id="level_input" required>
-    </div>
-  </div>
-</div>
+              <div>
+                <label>Level</label>
+                <input type="number" id="level_input" required>
+              </div>
+            </div>
+          </div>
 
           <div class="sheet-col sheet-left">
             <div class="card section-3">
@@ -104,7 +104,7 @@
                       <input type="text" id="melee_points_tracker" readonly placeholder="0 / 0">
                     </div>
                     <div>
-                      <label>Ranged Proficiency Points (Used / Max)</label>
+                      <label>Finesse/Firearm Proficiency Points (Used / Max)</label>
                       <input type="text" id="ranged_points_tracker" readonly placeholder="0 / 0">
                     </div>
                   </div>
@@ -118,7 +118,7 @@
                   <div id="proficiency_warning_ranged"
                     style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: 1px solid red;"
                     class="card">
-                    Proficiency WARNING Your maximum Ranged weapon proficiency sum exceeds Aim. Adjust your
+                    Proficiency WARNING Your maximum Finesse/Firearm weapon proficiency sum exceeds Aim. Adjust your
                     proficiencies
                     or increase your Aim skill.</div>
                   <div class="grid_4">
@@ -128,11 +128,11 @@
                         type="number"></div>
                     <div id="heavy_melee"><label for="heavy_melee">Heavy Melee</label> <input id="heavy_melee_input"
                         type="number"></div>
-                    <div id="light_ranged"><label for="light_ranged">Light Ranged</label> <input id="light_ranged_input"
+                    <div id="light_ranged"><label for="light_ranged">Light Finesse</label> <input id="light_ranged_input"
                         type="number"></div>
-                    <div id="medium_ranged"><label for="medium_ranged">Medium Ranged</label> <input
+                    <div id="medium_ranged"><label for="medium_ranged">Medium Finesse</label> <input
                         id="medium_ranged_input" type="number"></div>
-                    <div id="heavy_ranged"><label for="heavy_ranged">Heavy Ranged</label> <input id="heavy_ranged_input"
+                    <div id="heavy_ranged"><label for="heavy_ranged">Heavy Finesse</label> <input id="heavy_ranged_input"
                         type="number"></div>
                     <div id="light_firearm"><label for="light_firearm">Light Firearm</label> <input
                         id="light_firearm_input" type="number"></div>
@@ -255,9 +255,9 @@
                         <option value="Light_Melee">Light Melee</option>
                         <option value="Medium_Melee">Medium Melee</option>
                         <option value="Heavy_Melee">Heavy Melee</option>
-                        <option value="Light_Ranged">Light Ranged</option>
-                        <option value="Medium_Ranged">Medium Ranged</option>
-                        <option value="Heavy_Ranged">Heavy Ranged</option>
+                        <option value="Light_Ranged">Light Finesse</option>
+                        <option value="Medium_Ranged">Medium Finesse</option>
+                        <option value="Heavy_Ranged">Heavy Finesse</option>
                         <option value="Light_Firearm">Light Firearm</option>
                         <option value="Medium_Firearm">Medium Firearm</option>
                         <option value="Heavy_Firearm">Heavy Firearm</option>
@@ -294,9 +294,9 @@
                         <option value="Light_Melee">Light Melee</option>
                         <option value="Medium_Melee">Medium Melee</option>
                         <option value="Heavy_Melee">Heavy Melee</option>
-                        <option value="Light_Ranged">Light Ranged</option>
-                        <option value="Medium_Ranged">Medium Ranged</option>
-                        <option value="Heavy_Ranged">Heavy Ranged</option>
+                        <option value="Light_Ranged">Light Finesse</option>
+                        <option value="Medium_Ranged">Medium Finesse</option>
+                        <option value="Heavy_Ranged">Heavy Finesse</option>
                         <option value="Light_Firearm">Light Firearm</option>
                         <option value="Medium_Firearm">Medium Firearm</option>
                         <option value="Heavy_Firearm">Heavy Firearm</option>
@@ -333,9 +333,9 @@
                         <option value="Light_Melee">Light Melee</option>
                         <option value="Medium_Melee">Medium Melee</option>
                         <option value="Heavy_Melee">Heavy Melee</option>
-                        <option value="Light_Ranged">Light Ranged</option>
-                        <option value="Medium_Ranged">Medium Ranged</option>
-                        <option value="Heavy_Ranged">Heavy Ranged</option>
+                        <option value="Light_Ranged">Light Finesse</option>
+                        <option value="Medium_Ranged">Medium Finesse</option>
+                        <option value="Heavy_Ranged">Heavy Finesse</option>
                         <option value="Light_Firearm">Light Firearm</option>
                         <option value="Medium_Firearm">Medium Firearm</option>
                         <option value="Heavy_Firearm">Heavy Firearm</option>
@@ -677,7 +677,8 @@
             </div>
             <br>
             <label for="spellcasting_type">Spellcasting School</label>
-            <input type="text" id="spellcasting_type" placeholder="Name of your spellcasting school" onchange="updateSpellcastingType()">
+            <input type="text" id="spellcasting_type" placeholder="Name of your spellcasting school"
+              onchange="updateSpellcastingType()">
           </div>
 
 
@@ -832,36 +833,35 @@
     };
 
     const attributeData = {
-      Physique: ["Might", "Brawn", "Athletics", "Fortitude"],
-      Technique: ["Aim", "Tinkering", "Finesse", "Reflex"],
-      Mystique: ["Spellcraft", "Arcana", "Insight", "Scholarship"],
-      Charm: ["Persuasion", "Performance", "Deception", "Intimidation"]
+      Body: ["Might", "Brawn", "Fortitude"],
+      Skill: ["Finesse", "Reflex", "Tinker"],
+      Mind: ["Arcane", "Spirit", "Scholarship"],
+      Style: ["Charm", "Insight", "Awareness"]
     };
 
     const skillsList = [
-      'Might', 'Brawn', 'Athletics', 'Fortitude',
-      'Aim', 'Tinkering', 'Finesse', 'Reflex',
-      'Spellcraft', 'Arcana', 'Insight', 'Scholarship',
-      'Persuasion', 'Performance', 'Deception', 'Intimidation'
+      "Might", "Brawn", "Fortitude",
+      "Finesse", "Reflex", "Tinker",
+      "Arcane", "Spirit", "Scholarship",
+      "Charm", "Insight", "Awareness"
     ];
 
     const skillDescriptions = {
       Might: "Physical power and brute strength.",
       Brawn: "Endurance and toughness.",
-      Athletics: "Physical activities like climbing, jumping, and swimming.",
       Fortitude: "Resistance to physical harm and fatigue.",
-      Aim: "Precision with ranged weapons.",
-      Tinkering: "Ability to repair and modify devices.",
+
       Finesse: "Dexterity and agility in combat.",
       Reflex: "Quickness in reacting to danger.",
-      Spellcraft: "Knowledge of magic and spellcasting.",
-      Arcana: "Understanding of magical lore and phenomena.",
-      Insight: "Perception of hidden motives and truths.",
+      Tinker: "Ability to repair and modify devices.",
+
+      Arcane: "Understanding of magical lore and phenomena.",
+      Spirit: "Connection to spiritual forces and racial essence (Eldenring).",
       Scholarship: "Academic knowledge and research skills.",
-      Persuasion: "Convincing others through charm or argument.",
-      Performance: "Entertaining others through art or skill.",
-      Deception: "Lying and trickery to mislead others.",
-      Intimidation: "Using fear to influence others."
+
+      Charm: "Influencing others through likability and presence.",
+      Insight: "Perception of hidden motives and truths.",
+      Awareness: "General perception of surroundings and danger."
     };
 
 
@@ -1178,7 +1178,7 @@
       else if (level == 11) max = 16;
       else if (level == 12) max = 18;
       else if (level >= 13) max = 18 + (level - 12);
-      
+
 
       let used = 0;
       for (const trait of state.selectedTraits.values()) {

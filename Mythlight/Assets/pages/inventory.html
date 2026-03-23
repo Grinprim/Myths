@@ -1482,8 +1482,7 @@
 
             } catch (e) { console.error("Error loading artisan items", e); }
 
-            // Brewing
-            // Brewing Data Loader (New System)
+            // Brewing Data Loader (Fixed)
             try {
                 const res = await fetch('../json/brewing.json');
                 const data = await res.json();
@@ -1492,10 +1491,13 @@
                 document.getElementById("brew-ingredients").innerHTML =
                     (data.ingredients || []).map(i => `
             <tr class="row">
-                <td class="font-bold text-white">${i.name}</td>
-                <td><span class="tag-badge">${i.aspect}</span></td>
-                <td class="font-mono text-emerald-300">${i.value}</td>
-                <td>${i.quality}</td>
+                <td class="font-bold text-white">${i.Name}</td>
+                <td>
+                    ${(i.Aspects || []).map(a =>
+                        `<span class="tag-badge">${a}</span>`
+                    ).join(" ")}
+                </td>
+                <td>${i.Quality}</td>
             </tr>
         `).join("");
 
@@ -1503,14 +1505,14 @@
                 document.getElementById("brew-potions").innerHTML =
                     (data.potions || []).map(p => `
             <tr class="row">
-                <td class="font-bold text-white">${p.name}</td>
-                <td class="text-indigo-400 capitalize">${p.tier}</td>
+                <td class="font-bold text-white">${p.Name}</td>
+                <td class="text-indigo-400 capitalize">${p.Tier}</td>
                 <td>
-                    ${(p.aspects || []).map(a =>
+                    ${(p.Aspects || []).map(a =>
                         `<span class="tag-badge">${a}</span>`
                     ).join(" ")}
                 </td>
-                <td class="text-slate-400 text-sm">${p.effect}</td>
+                <td class="text-slate-400 text-sm">${p.Effect}</td>
             </tr>
         `).join("");
 
