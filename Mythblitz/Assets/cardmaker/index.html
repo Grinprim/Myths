@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -26,7 +26,7 @@
       <form id="cardForm" class="form" autocomplete="off">
         <div class="editorSplit">
           <div class="editorColumn">
-            <fieldset class="fieldset">
+            <fieldset class="fieldset coreCardFieldset">
               <legend>Core Card</legend>
 
               <div class="rowPairWide rowCompact formLine">
@@ -34,15 +34,21 @@
                   <span class="label">Name</span>
                   <input type="text" id="nameInput" class="input-dark" value="Sample Name" />
                 </label>
-                <label class="field">
+                <div class="field typeField">
                   <span class="label">Card Type</span>
-                  <select id="typeSelect" class="input-dark">
-                    <option value="Unit" selected>Unit</option>
-                    <option value="Spell">Spell</option>
-                    <option value="Landmark">Landmark</option>
-                    <option value="Gear">Gear</option>
-                  </select>
-                </label>
+                  <div class="typeRow">
+                    <select id="typeSelect" class="input-dark">
+                      <option value="Unit" selected>Unit</option>
+                      <option value="Spell">Spell</option>
+                      <option value="Landmark">Landmark</option>
+                      <option value="Gear">Gear</option>
+                    </select>
+                    <label class="checkInline typeLightInline" title="Use _light border variant">
+                      <input type="checkbox" id="typeLightInput" />
+                      <span>Light</span>
+                    </label>
+                  </div>
+                </div>
               </div>
 
               <div class="rowPairWide rowCompact formLine">
@@ -72,11 +78,29 @@
                   <span class="label">Regions</span>
                   <input type="number" id="symbolCountInput" class="input-dark" value="1" min="0" max="5" />
                 </label>
-                <label class="field">
+                <label class="field isHidden" id="spellSpeedWrap">
+                  <span class="label">Spell Speed</span>
+                  <select id="spellSpeedSelect" class="input-dark">
+                    <option value="Slow" selected>Slow</option>
+                    <option value="Fast">Fast</option>
+                    <option value="Blitz">Blitz</option>
+                  </select>
+                </label>
+
+                <label class="field isHidden" id="landmarkTypeWrap">
+                  <span class="label">Landmark Type</span>
+                  <select id="landmarkTypeSelect" class="input-dark">
+                    <option value="Passive" selected>Passive</option>
+                    <option value="Reactive">Reactive</option>
+                    <option value="Story">Story</option>
+                    <option value="Countdown">Countdown</option>
+                  </select>
+                </label>
+                <label class="field" id="mightWrap">
                   <span class="label">Might</span>
                   <input type="number" id="powerInput" class="input-dark" value="1" min="0" max="999" />
                 </label>
-                <label class="field">
+                <label class="field" id="healthWrap">
                   <span class="label">Health</span>
                   <input type="number" id="healthInput" class="input-dark" value="1" min="1" max="999" />
                 </label>
@@ -141,34 +165,33 @@
 
             </fieldset>
 
-            <fieldset class="fieldset">
+            <fieldset class="fieldset borderPositionFieldset">
               <legend>Border & Positioning</legend>
 
               <label class="field">
                 <span class="label">Description Box Height</span>
                 <input type="number" id="descHeightInput" class="input-dark" value="125" min="80" max="220" />
               </label>
-
+              <br>
               <label class="field checkboxField">
                 <span class="label">Hide Description</span>
                 <input type="checkbox" id="descHideInput" class="checkboxInput" />
               </label>
-
-              <label class="field">
-                <span class="label">Custom Border Override (Optional)</span>
-                <input type="file" id="borderFile" accept="image/*" />
-                <div class="hint">Upload a border to override the default type border.</div>
-                <div class="hint">Current border size: 744 x 1039 px.</div>
-                <button type="button" id="removeBorderBtn" class="btn btnSecondary" style="display:none; margin-top:5px;">
-                  Remove Custom Border
-                </button>
-              </label>
-
+              <br>
               <label class="field">
                 <span class="label">Art</span>
                 <input type="file" id="artFile" accept="image/*" />
               </label>
-
+              <label class="field">
+                <span class="label">Custom Border Override (Optional)</span>
+                <input type="file" id="borderFile" accept="image/*" />
+                <div class="hint">Upload a border to override the default type border.</div>
+                <div class="hint">Border size must be: 744 x 1039 px.</div>
+                <button type="button" id="removeBorderBtn" class="btn btnSecondary" style="display:none; margin-top:5px;">
+                  Remove Custom Border
+                </button>
+              </label>
+              <br>
               <div class="field">
                 <span class="label">Art Adjustments (Scroll wheel on art also works)</span>
                 <div class="row3">
@@ -195,7 +218,7 @@
           <img id="artImg" class="layer layerArt" alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="display: none;" />
 
           <img id="cardBorder" class="layer layerBorder" alt="" style="display: none;" />
-
+          <br>
           <div class="topBar">
             <div class="manaBadge">
               <span id="manaText" class="manaText">1</span>
@@ -206,7 +229,7 @@
             </div>
             <div id="regionBadge" class="regionBadge"></div>
           </div>
-
+          <br>
           <div class="tagsBar">
             <div id="tagsText" class="tagsLine">Sample Tags</div>
           </div>
@@ -216,8 +239,8 @@
           </div>
 
           <div class="stats">
-            <span class="statSlotGuide statSlotLeftPos"></span>
-            <span class="statSlotGuide statSlotRightPos"></span>
+            <span class="statSlotGuide statSlotLeftPos" id="statGuideLeft"></span>
+            <span class="statSlotGuide statSlotRightPos" id="statGuideRight"></span>
             <span class="statSlotValue statSlotLeftPos" id="statImgDamageNum">1</span>
             <span class="statSlotValue statSlotRightPos" id="statImgHealthNum">1</span>
           </div>

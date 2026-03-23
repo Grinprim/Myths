@@ -37,13 +37,24 @@ function renderDescriptionText(raw){
   return html;
 }
 
-function fitTextToSingleLine(el, maxSize = 10, minSize = 6){
+function fitTextToSingleLine(el, maxSize, minSize = 5){
   if (!el) return;
 
-  el.style.fontSize = `${maxSize}px`;
-  el.style.letterSpacing = '1px';
+  el.style.fontSize = '';
+  el.style.letterSpacing = '';
 
-  let size = maxSize;
+  const cssSize = parseFloat(window.getComputedStyle(el).fontSize);
+  const startSize = Number.isFinite(cssSize) ? cssSize : 12;
+  const cap = Number.isFinite(maxSize) ? maxSize : startSize;
+  const floor = Math.max(5, minSize);
+  let size = Math.min(startSize, cap);
+
+  if (el.scrollWidth <= el.clientWidth) {
+    return;
+  }
+
+  el.style.fontSize = `${size}px`;
+  el.style.letterSpacing = '1px';
   while (size > minSize && el.scrollWidth > el.clientWidth) {
     size -= 0.25;
     el.style.fontSize = `${size}px`;
@@ -51,7 +62,7 @@ function fitTextToSingleLine(el, maxSize = 10, minSize = 6){
 
   if (el.scrollWidth > el.clientWidth) {
     el.style.letterSpacing = '0.2px';
-    while (size > minSize && el.scrollWidth > el.clientWidth) {
+    while (size > floor && el.scrollWidth > el.clientWidth) {
       size -= 0.25;
       el.style.fontSize = `${size}px`;
     }
@@ -84,16 +95,23 @@ function fitDescriptionToBox(el, maxSize = 13, minSize = 8){
   }
 }
 
-function fitTextToBox(el, maxSize = 25, minSize = 2){
+function fitTextToBox(el, minSize = 5){
   if (!el) return;
 
-  // Reset inline size first so each pass can grow back to the stylesheet base.
+  // Reset inline size so each pass starts from CSS-defined max size.
   el.style.fontSize = '';
   const cssSize = parseFloat(window.getComputedStyle(el).fontSize);
-  let size = Number.isFinite(cssSize) ? Math.min(cssSize, maxSize) : maxSize;
+  let size = Number.isFinite(cssSize) ? cssSize : 16;
+  const floor = Math.max(5, minSize);
+
+  // If the CSS size already fits, keep font-size controlled by stylesheet only.
+  if (el.scrollWidth <= el.clientWidth && el.scrollHeight <= el.clientHeight) {
+    return;
+  }
+
   el.style.fontSize = `${size}px`;
 
-  while (size > minSize && (el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight)) {
+  while (size > floor && (el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight)) {
     size -= 0.25;
     el.style.fontSize = `${size}px`;
   }
@@ -215,8 +233,15 @@ function wire(){
   const descHideInput = document.getElementById('descHideInput');
   const powerInput = document.getElementById('powerInput');
   const healthInput = document.getElementById('healthInput');
+  const spellSpeedSelect = document.getElementById('spellSpeedSelect');
+  const landmarkTypeSelect = document.getElementById('landmarkTypeSelect');
+  const mightWrap = document.getElementById('mightWrap');
+  const healthWrap = document.getElementById('healthWrap');
+  const spellSpeedWrap = document.getElementById('spellSpeedWrap');
+  const landmarkTypeWrap = document.getElementById('landmarkTypeWrap');
   const raritySelect = document.getElementById('raritySelect');
   const typeSelect = document.getElementById('typeSelect');
+  const typeLightInput = document.getElementById('typeLightInput');
   const tagsInput = document.getElementById('tagsInput');
   const nameTextEl = document.getElementById('nameText');
   const tagsTextEl = document.getElementById('tagsText');
@@ -249,6 +274,7 @@ function wire(){
   const statsRow = document.querySelector('.stats');
   const statImgDamageNum = document.getElementById('statImgDamageNum');
   const statImgHealthNum = document.getElementById('statImgHealthNum');
+  const statGuideRight = document.getElementById('statGuideRight');
 
   // Rarity Gem
   const rarityGem = document.getElementById('rarityGem');
@@ -331,10 +357,18 @@ function wire(){
     const type = typeSelect.value;
     const isUnit = type === 'Unit';
     const isGear = type === 'Gear';
-    const showStats = isUnit || isGear;
+    const isSpell = type === 'Spell';
+    const isLandmark = type === 'Landmark';
+    const isSpellOrLandmark = isSpell || isLandmark;
     
-    if (statsFieldset) statsFieldset.classList.toggle('isHidden', !showStats);
-    if (statsRow) statsRow.classList.toggle('isHidden', !showStats);
+    if (statsFieldset) statsFieldset.classList.remove('isHidden');
+    if (mightWrap) mightWrap.classList.toggle('isHidden', isSpellOrLandmark);
+    if (healthWrap) healthWrap.classList.toggle('isHidden', isSpellOrLandmark);
+    if (spellSpeedWrap) spellSpeedWrap.classList.toggle('isHidden', !isSpell);
+    if (landmarkTypeWrap) landmarkTypeWrap.classList.toggle('isHidden', !isLandmark);
+    if (statsRow) statsRow.classList.remove('isHidden');
+    if (statImgHealthNum) statImgHealthNum.classList.toggle('isHidden', isSpellOrLandmark);
+    if (statGuideRight) statGuideRight.classList.toggle('isHidden', isSpellOrLandmark);
     
     // Preserve card mode classes while updating type class
     if (cardEl){
@@ -360,7 +394,9 @@ function wire(){
     if(removeBorderBtn) removeBorderBtn.style.display = 'none';
     
     const type = typeSelect.value.toLowerCase();
-    const borderPath = `img/${type}-border.png`;
+    const isLightBorder = !!(typeLightInput && typeLightInput.checked);
+    const borderSuffix = isLightBorder ? '_light' : '';
+    const borderPath = `img/${type}-border${borderSuffix}.png`;
 
     // Try loading automatic border
     const tempImg = new Image();
@@ -397,16 +433,43 @@ function wire(){
     setHtml('descText', renderDescriptionText(descRaw));
 
     // Stats
-    const isGear = typeSelect.value === 'Gear';
-    const pVal = clampNumber(powerInput.value, 0, 999);
+    const type = typeSelect.value;
+    const isUnit = type === 'Unit';
+    const isGear = type === 'Gear';
+    const isSpell = type === 'Spell';
+    const isLandmark = type === 'Landmark';
+
+    const powerMin = isGear ? -999 : 0;
+    const powerMax = 999;
+    const healthMin = isGear ? -999 : 1;
+    const healthMax = 999;
+
+    if (powerInput) {
+      powerInput.min = String(powerMin);
+      powerInput.max = String(powerMax);
+    }
+    if (healthInput) {
+      healthInput.min = String(healthMin);
+      healthInput.max = String(healthMax);
+    }
+
+    const pVal = clampNumber(powerInput.value, powerMin, powerMax);
     if (powerInput && String(powerInput.value) !== String(pVal)) {
       powerInput.value = String(pVal);
     }
-    const hVal = clampNumber(healthInput.value, 1, 999);
+    const hVal = clampNumber(healthInput.value, healthMin, healthMax);
     if (healthInput && String(healthInput.value) !== String(hVal)) {
       healthInput.value = String(hVal);
     }
-    const leftFallback = isGear ? formatSignedNumber(pVal) : String(pVal);
+
+    const spellSpeed = (spellSpeedSelect && spellSpeedSelect.value) || 'Slow';
+    const landmarkType = (landmarkTypeSelect && landmarkTypeSelect.value) || 'Passive';
+
+    const leftFallback = isSpell
+      ? spellSpeed
+      : isLandmark
+        ? landmarkType
+        : (isGear ? formatSignedNumber(pVal) : String(pVal));
     const rightFallback = isGear ? formatSignedNumber(hVal) : String(hVal);
 
     if(statImgDamageNum) {
@@ -431,7 +494,12 @@ function wire(){
       const rightY = parseFloat(css.getPropertyValue('--statSlotRightY')) || 0;
       const rightH = parseFloat(css.getPropertyValue('--statSlotRightH')) || 0;
       const topOfStats = Math.max(leftY + leftH, rightY + rightH);
-      const tagsBottomHidden = Math.max(0, statsBottom + topOfStats + 20);
+
+      // Keep description 10px above the stat containers; height then expands upward.
+      const descBottom = Math.max(0, statsBottom + topOfStats + 10);
+      cardEl.style.setProperty('--descBottom', `${descBottom}px`);
+
+      const tagsBottomHidden = Math.max(0, statsBottom + topOfStats + 10);
       cardEl.style.setProperty('--tagsBottomHidden', `${tagsBottomHidden}px`);
     }
 
@@ -453,7 +521,7 @@ function wire(){
     // Determine Border
     resolveBorder();
 
-    fitTextToSingleLine(tagsTextEl);
+    fitTextToSingleLine(tagsTextEl, 10, 5);
     fitTextToSingleLine(nameTextEl, 15, 7);
     fitDescriptionToBox(descTextEl);
     fitTextToBox(statImgDamageNum);
@@ -470,15 +538,51 @@ function wire(){
     syncArtTransform();
   }
 
-  function handleCustomBorderUpload() {
+  function validateBorderDimensions(file, expectedW, expectedH) {
+    return new Promise((resolve) => {
+      const testURL = URL.createObjectURL(file);
+      const img = new Image();
+
+      img.onload = () => {
+        const ok = img.naturalWidth === expectedW && img.naturalHeight === expectedH;
+        URL.revokeObjectURL(testURL);
+        resolve(ok);
+      };
+
+      img.onerror = () => {
+        URL.revokeObjectURL(testURL);
+        resolve(false);
+      };
+
+      img.src = testURL;
+    });
+  }
+
+  async function handleCustomBorderUpload() {
     const file = borderFile.files && borderFile.files[0];
-    if (file) {
-      customBorderURL = URL.createObjectURL(file);
-      resolveBorder();
+    if (!file) return;
+
+    const expectedW = 744;
+    const expectedH = 1039;
+    const isValidSize = await validateBorderDimensions(file, expectedW, expectedH);
+
+    if (!isValidSize) {
+      if (borderFile) borderFile.value = '';
+      alert(`Custom border must be exactly ${expectedW}x${expectedH} pixels.`);
+      return;
     }
+
+    if (customBorderURL) {
+      URL.revokeObjectURL(customBorderURL);
+    }
+    customBorderURL = URL.createObjectURL(file);
+    resolveBorder();
   }
 
   function clearCustomBorder() {
+    if (customBorderURL) {
+      URL.revokeObjectURL(customBorderURL);
+    }
     customBorderURL = null;
     if(borderFile) borderFile.value = ''; // Reset input
     resolveBorder();
@@ -507,8 +611,8 @@ function wire(){
 
   // --- LISTENERS ---
   const inputs = [
-    nameInput, manaInput, manaXInput, explainManaInput, descInput, descHeightInput, descHideInput, powerInput, healthInput,
-    raritySelect, typeSelect, tagsInput, symbolCountInput, 
+    nameInput, manaInput, manaXInput, explainManaInput, descInput, descHeightInput, descHideInput, powerInput, healthInput, spellSpeedSelect, landmarkTypeSelect,
+    raritySelect, typeSelect, typeLightInput, tagsInput, symbolCountInput, 
     symbol1Select, symbol2Select, symbol3Select, symbol4Select, symbol5Select, 
     artScaleInput, artXInput, artYInput
   ];
@@ -553,7 +657,7 @@ function wire(){
   }
 
   window.addEventListener('resize', () => {
-    fitTextToSingleLine(tagsTextEl);
+    fitTextToSingleLine(tagsTextEl, 10, 5);
     fitTextToSingleLine(nameTextEl, 15, 7);
     fitDescriptionToBox(descTextEl);
     fitTextToBox(statImgDamageNum);
@@ -578,7 +682,7 @@ function setupExportButton() {
       const tagsEl = document.getElementById('tagsText');
       const nameEl = document.getElementById('nameText');
       const descEl = document.getElementById('descText');
-      fitTextToSingleLine(tagsEl);
+      fitTextToSingleLine(tagsEl, 10, 5);
       fitTextToSingleLine(nameEl, 15, 7);
       fitDescriptionToBox(descEl);
 

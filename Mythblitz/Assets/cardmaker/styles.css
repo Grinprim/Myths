@@ -18,14 +18,20 @@
 
   /* Stat slot debug: 1=true (show container borders), 0=false (hide). */
   --showStatSlotDebug: 0;
-  --statSlotLeftW: 90px;
-  --statSlotLeftH: 40px;
+  --statSlotLeftW: 105px;
+  --statSlotLeftH: 45px;
   --statSlotLeftX: 0px;
-  --statSlotLeftY: -5px;
-  --statSlotRightW: 90px;
-  --statSlotRightH: 40px;
+  --statSlotLeftY: -10px;
+  --statSlotRightW: 105px;
+  --statSlotRightH: 45px;
   --statSlotRightX: 0px;
-  --statSlotRightY: -5px;
+  --statSlotRightY: -10px;
+  --statSlotFontSize: 35px;
+  --cardNumberFontFamily: 'Iosevka Charon Mono', 'Iosevka', 'Consolas', 'Courier New', monospace;
+  /* 0 = normal, 1 = bold (supports values between 0 and 1). */
+  --cardNumberFontWeight: 1;
+  --cardNumberWeightNormal: 400;
+  --cardNumberWeightBold: 650;
 }
 
 * { box-sizing: border-box; }
@@ -186,10 +192,45 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
 .row3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .row4 { grid-template-columns: repeat(4, minmax(150px, 1fr)); }
 .rowCompact .field { margin-top: 0; }
+.typeRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.typeRow #typeSelect {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.typeLightInline {
+  flex: 0 0 auto;
+  font-size: 10px;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.typeLightInline input {
+  width: 13px;
+  height: 13px;
+}
 .formLine {
   padding-bottom: 14px;
   margin-bottom: 4px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.coreCardFieldset .formLine {
+  padding-bottom: 18px;
+  margin-bottom: 12px;
+}
+
+.borderPositionFieldset .field {
+  margin-top: 18px;
+}
+
+.borderPositionFieldset .field:first-of-type {
+  margin-top: 0;
 }
 .hint { margin-top: 8px; color: var(--muted); font-size: 11px; font-style: italic; }
 .actions { display: flex; gap: 12px; margin-top: 8px; }
@@ -241,11 +282,12 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
   width: var(--cardW);
   height: var(--cardH);
   --descHeight: 125px;
-  --descBottom: 76px;
+  --descBottom: 71px;
   --tagsHeight: 24px;
   --tagsGap: 6px;
   --statsBottom: 10px;
-  --tagsBottomHidden: 70px;
+  --tagsBottomHidden: 65px;
+  --rarityGemYAdjust: 2px;
   border-radius: var(--radius);
   overflow: hidden;
   background: #121925; /* Keep dark base */
@@ -314,8 +356,12 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
   position: relative;
 }
 .manaText {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 900;
+  font-family: var(--cardNumberFontFamily);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-weight: calc(
+    var(--cardNumberWeightNormal) +
+    (var(--cardNumberWeightBold) - var(--cardNumberWeightNormal)) * var(--cardNumberFontWeight)
+  );
   font-size: 24px;
   color: #fff;
   text-shadow: 0 1.25px 2.25px #000, 0 0 6px rgba(0,0,0,0.7);
@@ -380,7 +426,7 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
   height: var(--tagsHeight);
   border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);
   background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
-  padding: 0 12px; z-index: 3; display: flex; align-items: center;
+  padding: 0 30px 0 12px; z-index: 3; display: flex; align-items: center;
   overflow: hidden;
 }
 
@@ -431,9 +477,13 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
   pointer-events: none;
 }
 .statSlotValue {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 900;
-  font-size: 25px;
+  font-family: var(--cardNumberFontFamily);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-weight: calc(
+    var(--cardNumberWeightNormal) +
+    (var(--cardNumberWeightBold) - var(--cardNumberWeightNormal)) * var(--cardNumberFontWeight)
+  );
+  font-size: var(--statSlotFontSize);
   color: #fff;
   text-shadow: 0 1.25px 2.25px #000, 0 0 6px rgba(0,0,0,0.7);
   line-height: 1.05;
@@ -478,9 +528,27 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
   height: var(--statSlotRightH);
 }
 
+/* Spell left-slot text is intentionally smaller than stats by 35%. */
+.card.type-Spell .statSlotValue.statSlotLeftPos {
+  font-size: calc(var(--statSlotFontSize) * 0.65);
+}
+
+.card.type-Landmark .statSlotValue.statSlotLeftPos {
+  font-size: calc(var(--statSlotFontSize) * 0.65);
+}
+
 .rarityGem {
-  position: absolute; left: 50%; bottom: 6px; width: 14px; height: 14px;
-  transform: translate(-50%, 0); z-index: 5;
+  position: absolute;
+  right: 21px;
+  bottom: calc(var(--descBottom) + var(--descHeight) + var(--tagsGap) + ((var(--tagsHeight) - 14px) / 2) + var(--rarityGemYAdjust));
+  width: 14px;
+  height: 14px;
+  transform: none;
+  z-index: 5;
+}
+
+.card.desc-hidden .rarityGem {
+  bottom: calc(var(--tagsBottomHidden) + ((var(--tagsHeight) - 14px) / 2) + var(--rarityGemYAdjust));
 }
 .raritySvg { width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); }
 
