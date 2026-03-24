@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Card Game Counter</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  color: #fff;
+  background: #0b1a12;
+}
+
+.global-controls {
+  padding: 8px;
+  display: flex;
+  gap: 6px;
+}
+
+/* Center HP controls overlay */
+#hp-controls, #player-controls {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  padding: 10px;
+  display: none; /* hidden by default */
+}
+
+#hp-controls button, #player-controls button {
+  flex: 1;
+  padding: 14px;
+  font-size: 16px;
+}
+
+.global-controls button {
+  flex: 1;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 8px;
+  padding: 8px;
+  height: calc(100vh - 100px);
+}
+
+.player {
+  border-radius: 14px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+}
+
+.stat {
+  text-align: center;
+  margin: 6px 0;
+}
+
+.value {
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.label {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.controls {
+  display: flex;
+  gap: 6px;
+}
+
+.controls button {
+  flex: 1;
+  padding: 14px;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+button:active {
+  background: rgba(255,255,255,0.3);
+}
+</style>
+</head>
+<body>
+
+<div id="hp-controls" class="global-controls">
+  <button onclick="setAllHP(12)">12</button>
+  <button onclick="setAllHP(24)">24</button>
+  <button onclick="setAllHP(48)">48</button>
+</div>
+
+<button onclick="toggleHPControls()" style="position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:11;padding:10px 16px;">HP</button>
+
+<div id="player-controls" class="global-controls">
+  <button onclick="addPlayer()">+ Player</button>
+  <button onclick="removePlayer()">- Player</button>
+</div>
+
+<button onclick="togglePlayerControls()" style="position:fixed;top:50px;left:50%;transform:translateX(-50%);z-index:11;padding:10px 16px;">Players</button>
+
+<div class="container" id="container"></div>
+
+<script>
+var playerCount = 0;
+
+function randomGradient() {
+  var hue = Math.floor(Math.random() * 360);
+  var hue2 = (hue + 20) % 360;
+  return 'linear-gradient(135deg, hsl(' + hue + ',70%,60%), hsl(' + hue2 + ',70%,45%))';
+}
+
+function createPlayer() {
+  var id = playerCount++;
+  var player = {
+    id: id,
+    maxHP: 24,
+    hp: 24,
+    mana: 0,
+    color: randomGradient()
+  };
+
+  var el = document.createElement("div");
+  el.className = "player";
+  el.id = "player-" + id;
+  el.style.background = player.color;
+
+  el.innerHTML =
+    '<div class="header">Player' + (id + 1) + '</div>' +
+    '<div class="stat"><div class="value" id="hp-' + id + '"></div><div class="label">HP</div></div>' +
+    '<div class="controls"><button onclick="changeHP(' + id + ', -1)">-</button><button onclick="changeHP(' + id + ', 1)">+</button></div>' +
+    '<div class="stat"><div class="value" id="mana-' + id + '"></div><div class="label">Mana</div></div>' +
+    '<div class="controls"><button onclick="changeMana(' + id + ', -1)">-</button><button onclick="changeMana(' + id + ', 1)">+</button></div>';
+
+  document.getElementById("container").appendChild(el);
+  window['player' + id] = player;
+  update(id);
+}
+
+function update(id) {
+  var p = window['player' + id];
+  document.getElementById('hp-' + id).innerText = p.hp;
+  document.getElementById('mana-' + id).innerText = p.mana;
+}
+
+function changeHP(id, amount) {
+  var p = window['player' + id];
+  p.hp = Math.max(0, p.hp + amount); // Removed upper limit
+  update(id);
+}
+
+function changeMana(id, amount) {
+  var p = window['player' + id];
+  p.mana = Math.max(0, Math.min(12, p.mana + amount));
+  update(id);
+}
+
+function setAllHP(value) {
+  for (var i = 0; i < playerCount; i++) {
+    var p = window['player' + i];
+    if (p) {
+      p.maxHP = value;
+      p.hp = value;
+      update(i);
+    }
+  }
+}
+
+function addPlayer() {
+  createPlayer();
+}
+
+function removePlayer() {
+  if (playerCount <= 1) return;
+  playerCount--;
+  var el = document.getElementById('player-' + playerCount);
+  if (el) el.remove();
+  delete window['player' + playerCount];
+}
+
+function toggleHPControls() {
+  var el = document.getElementById('hp-controls');
+  el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
+}
+
+function togglePlayerControls() {
+  var el = document.getElementById('player-controls');
+  el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
+}
+
+createPlayer();
+createPlayer();
+createPlayer();
+createPlayer();
+</script>
+
+</body>
+</html>
