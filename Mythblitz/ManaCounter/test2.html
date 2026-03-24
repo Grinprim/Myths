@@ -12,7 +12,7 @@ body {
   font-family: 'Inter', sans-serif;
   margin: 0;
   color: #fff;
-  background: #0b1a12;
+  background: #153825;
 }
 
 .global-controls {
@@ -143,6 +143,7 @@ function createPlayer() {
     maxHP: 24,
     hp: 24,
     mana: 0,
+    turn: 0,
     color: randomGradient()
   };
 
@@ -152,11 +153,13 @@ function createPlayer() {
   el.style.background = player.color;
 
   el.innerHTML =
-    '<div class="header">Player' + (id + 1) + '</div>' +
+    '<div class="header">P' + (id + 1) + '</div>' +
     '<div class="stat"><div class="value" id="hp-' + id + '"></div><div class="label">HP</div></div>' +
     '<div class="controls"><button onclick="changeHP(' + id + ', -1)">-</button><button onclick="changeHP(' + id + ', 1)">+</button></div>' +
     '<div class="stat"><div class="value" id="mana-' + id + '"></div><div class="label">Mana</div></div>' +
-    '<div class="controls"><button onclick="changeMana(' + id + ', -1)">-</button><button onclick="changeMana(' + id + ', 1)">+</button></div>';
+    '<div class="controls"><button onclick="changeMana(' + id + ', -1)">-</button><button onclick="changeMana(' + id + ', 1)">+</button></div>' +
+    '<div class="stat"><div class="value" id="turn-' + id + '"></div><div class="label">Turns</div></div>' +
+    '<div class="controls"><button onclick="nextTurn(' + id + ')">Next Turn</button></div>';
 
   document.getElementById("container").appendChild(el);
   window['player' + id] = player;
@@ -166,18 +169,28 @@ function createPlayer() {
 function update(id) {
   var p = window['player' + id];
   document.getElementById('hp-' + id).innerText = p.hp;
-  document.getElementById('mana-' + id).innerText = p.mana;
+  var maxMana = Math.min(12, p.maxHP === 12 ? p.turn * 2 : p.turn);
+  document.getElementById('mana-' + id).innerText = p.mana + '/' + maxMana;
+  document.getElementById('turn-' + id).innerText = p.turn;
 }
 
 function changeHP(id, amount) {
   var p = window['player' + id];
-  p.hp = Math.max(0, p.hp + amount); // Removed upper limit
+  p.hp = Math.max(0, p.hp + amount); // No upper limit
   update(id);
 }
 
 function changeMana(id, amount) {
   var p = window['player' + id];
-  p.mana = Math.max(0, Math.min(12, p.mana + amount));
+  var maxMana = Math.min(12, p.maxHP === 12 ? p.turn * 2 : p.turn);
+  p.mana = Math.max(0, Math.min(maxMana, p.mana + amount));
+  update(id);
+}
+
+function nextTurn(id) {
+  var p = window['player' + id];
+  p.turn++;
+  var maxMana = Math.min(12, p.maxHP === 12 ? p.turn * 2 : p.turn);
   update(id);
 }
 
