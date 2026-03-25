@@ -37,14 +37,16 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid var(--glass-border);
+  border: 0px solid var(--glass-border);
   backdrop-filter: blur(6px);
 }
 
 .header {
   text-align: center;
+  color: white;
   font-family: 'Cinzel', serif;
-  font-size: 13px;
+  font-size: 20px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7); /* stronger for readability */
 }
 
 .stat-row {
@@ -61,24 +63,28 @@ body {
   font-size: 36px;
   font-weight: 700;
   color: #fff;
-  min-width: 64px; /* keeps buttons close */
+  min-width: 64px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7); /* stronger for readability */
 }
 
 .label {
   text-align: center;
-  font-size: 10px;
+  font-size: 15px;
   opacity: 0.6;
+  color: #fff;
+   text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7); /* stronger for readability */
 }
 
 button {
-  border: 1px solid var(--glass-border);
+  border: 0px solid var(--glass-border);
   border-radius: 9px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(39, 39, 39, 0.226);
   color: #fff;
   padding: 12px 6px; /* slightly bigger */
   font-size: 15px;
   width: 34px; /* slightly wider */
   flex-shrink: 0;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7); /* stronger for readability */
 }
 
 button:active {
@@ -171,15 +177,29 @@ function randomGradient() {
 
 function createPlayer() {
   var id = playerCount++;
-  var player = { id, maxHP: 24, hp: 24, mana: 0, turn: 0, color: randomGradient() };
+
+  var colors = [
+    {name:'arcane', color:'linear-gradient(135deg, #60a5fa, #1e3a8a)'},
+    {name:'occult', color:'linear-gradient(135deg, #4ade80, #14532d)'},
+    {name:'divine', color:'linear-gradient(135deg, #fefce8, #fde68a)'},
+    {name:'cosmic', color:'linear-gradient(135deg, #c084fc, #4c1d95)'},
+    {name:'elemental', color:'linear-gradient(135deg, #f87171, #7f1d1d)'}
+  ];
+
+  var randomTheme = colors[Math.floor(Math.random()*colors.length)];
+
+  var player = { id, maxHP: 24, hp: 24, mana: 0, turn: 0, color: randomTheme.color, theme: randomTheme.name };
 
   var el = document.createElement("div");
   el.className = "player";
   el.id = "player-" + id;
   el.style.background = player.color;
+  el.style.boxShadow = '0 10px 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,0,0,0.3)';
 
   el.innerHTML =
-    '<div class="header">P' + (id + 1) + '</div>' +
+    '<div class="header" onclick="toggleColorPicker(' + id + ')">Player ' + (id + 1) + '</div>' +
+
+    '<div class="color-picker" id="color-' + id + '"></div>' +
 
     '<div class="stat-row">' +
       '<button onclick="changeHP(' + id + ',-1)">-</button>' +
@@ -199,7 +219,7 @@ function createPlayer() {
       '<button onclick="changeTurn(' + id + ',1)">+</button>' +
     '</div>' +
 
-    ' <div class="stat-row">' +
+    '<div class="stat-row">' +
       '<button onclick="resetPlayer(' + id + ')">⟲</button>' +
       '<div></div>' +
       '<button onclick="refillPlayer(' + id + ')">✦</button>' +
@@ -207,7 +227,68 @@ function createPlayer() {
 
   document.getElementById("container").appendChild(el);
   window['player' + id] = player;
+
+  createColorOptions(id);
   update(id);
+}
+
+function createColorOptions(id) {
+  var colors = [
+    {name:'arcane', color:'linear-gradient(135deg, #60a5fa, #1e3a8a)'},
+    {name:'occult', color:'linear-gradient(135deg, #4ade80, #14532d)'},
+    {name:'divine', color:'linear-gradient(135deg, #fefce8, #fde68a)'},
+    {name:'cosmic', color:'linear-gradient(135deg, #c084fc, #4c1d95)'},
+    {name:'elemental', color:'linear-gradient(135deg, #f87171, #7f1d1d)'}
+  ];
+
+  var container = document.getElementById('color-' + id);
+  container.style.display = 'none';
+  container.style.position = 'absolute';
+  container.style.top = '30px';
+  container.style.left = '50%';
+  container.style.transform = 'translateX(-50%)';
+  container.style.background = 'rgba(15,23,42,0.95)';
+  container.style.padding = '8px';
+  container.style.borderRadius = '10px';
+  container.style.gap = '6px';
+  container.style.boxShadow = '0 10px 25px rgba(0,0,0,0.6)';
+  container.style.zIndex = '50';
+
+  colors.forEach(c => {
+    var btn = document.createElement('button');
+    btn.style.background = c.color;
+    btn.style.overflow = 'hidden';
+    btn.style.display = 'flex';
+    btn.style.alignItems = 'center';
+    btn.style.justifyContent = 'center';
+    btn.style.boxShadow = '0 2px 6px rgba(0,0,0,0.6)';
+    btn.style.width = '28px';
+    btn.style.height = '28px';
+    btn.style.borderRadius = '6px';
+    btn.onclick = function() { setPlayerColor(id, c); };
+
+    var img = document.createElement('img');
+    img.src = c.name + '.png';
+    img.style.width = '18px';
+    img.style.height = '18px';
+    img.style.display = 'block';
+    img.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))';
+
+    btn.appendChild(img);
+    container.appendChild(btn);
+  });
+}
+
+function toggleColorPicker(id) {
+  var el = document.getElementById('color-' + id);
+  el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
+}
+
+function setPlayerColor(id, c) {
+  var p = window['player' + id];
+  p.theme = c.name;
+  document.getElementById('player-' + id).style.background = c.color;
+  document.getElementById('color-' + id).style.display = 'none';
 }
 
 function update(id) {
@@ -263,9 +344,7 @@ function setAllHP(value) {
   }
 }
 
-function addPlayer() { 
-  if (playerCount < 6)
-  createPlayer(); }
+function addPlayer() { createPlayer(); }
 
 function removePlayer() {
   if (playerCount <= 1) return;
