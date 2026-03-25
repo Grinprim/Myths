@@ -344,7 +344,9 @@ function setAllHP(value) {
   }
 }
 
-function addPlayer() { createPlayer(); }
+function addPlayer() { 
+  if (playerCount < 6)
+  createPlayer(); }
 
 function removePlayer() {
   if (playerCount <= 1) return;
