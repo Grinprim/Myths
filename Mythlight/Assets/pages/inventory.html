@@ -291,7 +291,7 @@
         <div id="view-crafting" class="view-section hidden space-y-8">
             <div class="text-center space-y-4 mb-8">
                 <h2 class="text-3xl text-white font-bold">Artisan Crafting</h2>
-                <p class="text-slate-400">Forge items of power using components found in your travels.</p>
+                <p class="text-slate-400">Forge items of power using components found in your travels. Some crafts have durability, others don't, how to repair is specified in the gear itself.</p>
             </div>
             <section class="rule-card space-y-6" id="crafting-checks">
                 <h2 class="text-2xl text-white font-bold">Crafting Difficulty & Precision</h2>
@@ -471,7 +471,7 @@
                                 <th>Name</th>
                                 <th>Tier</th>
                                 <th>Category</th>
-                                <th>Components</th>
+                                <th style="width: 200px;">Components</th>
                                 <th>Effect</th>
                             </tr>
                         </thead>
@@ -1232,7 +1232,7 @@
     `;
 
             effectsEl.innerHTML = result.prefixes.map(prefix => `
-        <div class="rounded-lg border border-slate-700/70 bg-slate-900/40 px-3 py-2">
+        <div class="rounded-lg border border-slate-700/70 bg-slate-900/40 px-3 py-2" style="margin-top: 10px;">
             <div class="text-sm text-white font-semibold">${escapeHtml(prefix.name)}</div>
             <div class="text-xs text-slate-300">${escapeHtml(prefix.description)}</div>
             ${prefix.interpretedSummary ? `<div class="text-[11px] text-emerald-300 mt-1">${escapeHtml(prefix.interpretedSummary)}</div>` : ''}
@@ -1468,7 +1468,7 @@
             try {
                 const res = await fetch('../json/crafting.json');
                 const data = await res.json();
-                document.getElementById("crafting-recipes").innerHTML = (data.recipes || []).map(r => `<tr class="row" data-tier="${r.tier}"><td class="font-bold text-white">${r.name}</td><td><span class="text-xs bg-slate-800 px-2 py-1 rounded border border-slate-700">${r.tier}</span></td><td>${r.category}</td><td class="text-xs">${(r.components || []).join(", ")}</td><td class="text-slate-400 italic">${r.effect}</td></tr>`).join("");
+                document.getElementById("crafting-recipes").innerHTML = (data.recipes || []).map(r => `<tr class="row" data-tier="${r.tier}"><td class="font-bold text-white">${r.name}</td><td><span class="text-xs bg-slate-800 px-2 py-1 rounded border border-slate-700">${r.tier}</span></td><td>${r.category}</td><td class="text-xs">${(r.components || []).join(",<br> ")}</td><td class="text-slate-400 italic">${r.effect}</td></tr>`).join("");
                 document.getElementById("craft-components").innerHTML = (data.components || []).map(c => `<tr class="row"><td class="font-bold text-white">${c.name}</td><td>${c.category}</td><td class="text-slate-400 italic">${c.notes || ""}</td></tr>`).join("");
             } catch (e) { }
 

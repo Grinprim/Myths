@@ -116,7 +116,7 @@
         "Cost": "0",
         "Type": "Action",
         "Range": "Sight",
-        "Description": "You attempt to impose -2 Accuracy onto a creature you can see, they must roll [Insight] to resist.",
+        "Description": "You attempt to impose -2 Accuracy onto a creature you can see, they must roll [Spirit] to resist.",
         "Upcast": "",
         "Lore": "Whispers to cloud the mind, whispers to cloud the soul."
     },
@@ -193,7 +193,7 @@
         "Cost": "0",
         "Type": "Action",
         "Range": "Touch",
-        "Description": "You attempt to impose -2 Insight onto a creature, they must roll [Insight] to resist.",
+        "Description": "You attempt to impose -2 Spirit onto a creature, they must roll [Spirit] to resist.",
         "Upcast": "",
         "Lore": "Use their own mind against themselves."
     },
@@ -204,7 +204,7 @@
         "Cost": "0",
         "Type": "Action",
         "Range": "12 Units",
-        "Description": "You lock eyes with a creature you can see. The next time they take damage before your next turn, they take +1 Psychic Damage. They must roll [Insight] to resist.",
+        "Description": "You lock eyes with a creature you can see. The next time they take damage before your next turn, they take +1 Psychic Damage. They must roll [Spirit] to resist.",
         "Upcast": "",
         "Lore": "A look that crawls beneath the skin, refusing to be forgotten."
     },
@@ -215,7 +215,7 @@
         "Cost": "0",
         "Type": "Action",
         "Range": "5 units",
-        "Description": "You attempt to splinter a creature’s focus, imposing -2 Accuracy on their next spell or attack. They must roll [Insight] to resist.",
+        "Description": "You attempt to splinter a creature’s focus, imposing -2 Accuracy on their next spell or attack. They must roll [Spirit] to resist.",
         "Upcast": "",
         "Lore": "A single doubt, driven deep enough, can unravel intent entirely."
     },
@@ -534,7 +534,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Touch",
-        "Description": "A creature you touch has their next spell cost +1 mana. They must roll [Insight] to resist.",
+        "Description": "A creature you touch has their next spell cost +1 mana. They must roll [Spirit] to resist.",
         "Upcast": "Affects the next additional spell the creature casts.",
         "Lore": "Knowledge remains — access does not."
     },
@@ -567,7 +567,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Sight",
-        "Description": "You tear at a creature’s psyche, dealing 2 Psychic Damage and imposing -2 Insight until the end of their next turn. They must roll [Insight] to resist.",
+        "Description": "You tear at a creature’s psyche, dealing 2 Psychic Damage and imposing -2 Spirit until the end of their next turn. They must roll [Spirit] to resist.",
         "Upcast": "Increase the Psychic Damage by +1.",
         "Lore": "Thought is fragile when pulled from the wrong angle."
     },
@@ -578,7 +578,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "4 units",
-        "Description": "Manifest spectral hands that reduce a creature’s movement by 2 units and impose -2 Accuracy until the end of their next turn. They must roll [Insight] to resist.",
+        "Description": "Manifest spectral hands that reduce a creature’s movement by 2 units and impose -2 Accuracy until the end of their next turn. They must roll [Spirit] to resist.",
         "Upcast": "Increase the Accuracy penalty by -1.",
         "Lore": "Hesitation clings tighter than chains."
     },
@@ -633,7 +633,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Cone 3 units",
-        "Description": "Shatter the boundary between fear and reality, dealing 2 Dark Damage and [Fearing] all creatures in the cone. Creatures must roll [Insight] to resist.",
+        "Description": "Shatter the boundary between fear and reality, dealing 2 Dark Damage and [Fearing] all creatures in the cone. Creatures must roll [Spirit] to resist.",
         "Upcast": "Increase the damage by +1.",
         "Lore": "The veil breaks easiest where terror has already worn it thin."
     },
@@ -644,7 +644,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "7 units",
-        "Description": "Bind your soul to a creature. Until the start of your next turn, when they take damage, you regain 1 Health. They must roll [Insight] to resist.",
+        "Description": "Bind your soul to a creature. Until the start of your next turn, when they take damage, you regain 1 Health. They must roll [Spirit] to resist.",
         "Upcast": "Increase the healing by +1.",
         "Lore": "Suffering shared is suffering diminished."
     },
@@ -677,7 +677,7 @@
         "Cost": "2",
         "Type": "Action",
         "Range": "Sight",
-        "Description": "Rip violently through a creature’s thoughts, dealing 3 Psychic Damage and imposing -3 Insight until the end of their next turn. They must roll [Insight] to resist the Insight reduction.",
+        "Description": "Rip violently through a creature’s thoughts, dealing 3 Psychic Damage and imposing -3 Spirit until the end of their next turn. They must roll [Spirit] to resist the Spirit reduction.",
         "Upcast": "Increase the Psychic Damage by +1.",
         "Lore": "Some ideas are better left intact."
     },
@@ -754,7 +754,7 @@
         "Cost": "2",
         "Type": "Action",
         "Range": "6 units",
-        "Description": "Shatter part of a creature’s soul, dealing 3 Psychic Damage. The target cannot benefit from healing until the end of their next turn. They must roll [Insight] to resist the healing suppression.",
+        "Description": "Shatter part of a creature’s soul, dealing 3 Psychic Damage. The target cannot benefit from healing until the end of their next turn. They must roll [Spirit] to resist the healing suppression.",
         "Upcast": "Increase either damage type by +1.",
         "Lore": "Not all wounds are meant to close."
     },

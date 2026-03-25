@@ -2,22 +2,22 @@
   "tiers": {
     "Trivial": {
       "difficulty": "Very Easy",
-      "requirements": "Basic tools, 1–2 common components",
+      "requirements": "Basic tools, 1-2 common components",
       "craftCheck": null
     },
     "Simple": {
       "difficulty": "Easy",
-      "requirements": "Tools, 2–3 common components",
+      "requirements": "Tools, 2-3 common components",
       "craftCheck": 8
     },
     "Standard": {
       "difficulty": "Moderate",
-      "requirements": "Tools, workbench, 3–4 components (1 advanced)",
+      "requirements": "Tools, workbench, 3-4 components (1 advanced)",
       "craftCheck": 12
     },
     "Difficult": {
       "difficulty": "Hard",
-      "requirements": "Specialized tools, workshop, 4–6 components (up to 2 advanced)",
+      "requirements": "Specialized tools, workshop, 4-6 components (up to 2 advanced)",
       "craftCheck": 16
     },
     "Complex": {
@@ -33,107 +33,726 @@
   },
   "recipes": [
     {
-      "name": "Wooden Starknife",
-      "tier": "Trivial",
-      "category": "Equipment",
-      "components": ["Wood – Core x1"],
-      "effect": "Light thrown or melee weapon. Range 10. Damage 1. On a critical failure, the starknife splinters and becomes unusable. Can be crafted or replaced quickly in the field."
-    },
-    {
-      "name": "Glass Cutter",
-      "tier": "Trivial",
-      "category": "Equipment",
-      "components": ["Glass – Shards x1"],
-      "effect": "Allows precise cutting of glass, crystal, and brittle stone. Grants advantage on checks involving precision carving, engraving, or dismantling fragile objects."
-    },
-    {
-      "name": "Stone Chalk",
-      "tier": "Trivial",
-      "category": "Equipment",
-      "components": ["Stone – Dust x1"],
-      "effect": "Creates durable markings resistant to moisture and wind. Useful for navigation, trap marking, ritual circles, or territorial signs."
-    },
-
-    {
-      "name": "Field Knife",
+      "name": "Spine Lash Whip",
       "tier": "Simple",
       "category": "Equipment",
-      "components": ["Metal – Plate x1", "Wood – Core x1"],
-      "effect": "Light melee weapon. Damage 2. Functions as a general-purpose tool for cutting rope, skinning creatures, prying, or fine manual work."
+      "components": [
+        "Bone - Splinter x2",
+        "Leather - Strip x1"
+      ],
+      "effect": "Light melee whip weapon. Damage 1, type: Slash. Grants +1 reach for disarming enemies. Can also be used to climb or swing across gaps. Durability 5; can be repaired with bone splinters and leather."
     },
     {
-      "name": "Weighted Sling",
-      "tier": "Simple",
-      "category": "Equipment",
-      "components": ["Rope – Line x1", "Stone – Cut x1"],
-      "effect": "Ranged weapon. Range 20. Damage 2. Uses stones or similar ammunition. Can also launch small objects such as flasks or signal markers."
-    },
-    {
-      "name": "Reinforced Strap",
-      "tier": "Simple",
-      "category": "Equipment",
-      "components": ["Rope – Cable x1", "Metal – Plate x1"],
-      "effect": "Strengthens attached gear or containers. Increases carrying capacity by +10 and reduces the chance of item breakage under stress."
-    },
-
-    {
-      "name": "Arc-Light Rod",
+      "name": "Crystal Lens Goggles",
       "tier": "Standard",
       "category": "Equipment",
-      "components": ["Wood – Core x1", "Glass – Tube x1", "Arcane – Crystal x1"],
-      "effect": "Emits steady magical light in a wide radius. Light can be focused or dimmed. When struck against a surface, releases a brief flash that may distract nearby creatures."
+      "components": [
+        "Glass - Pane x2",
+        "Arcane - Crystal x1",
+        "Leather - Patch x1"
+      ],
+      "effect": "Wearable optics. Grants +2 to Awareness checks involving distance, darkness, or arcane detection. Reduces visual impairment from smoke or dust. Durability 3; repairable with glass panes."
     },
     {
-      "name": "Precision Saw",
+      "name": "Reinforced Travel Pack",
       "tier": "Standard",
       "category": "Equipment",
-      "components": ["Metal – Plate x1", "Wood – Plank x1", "Metal – Wire x1"],
-      "effect": "Cuts wood, bone, and soft metal cleanly. Grants bonuses to crafting, dismantling, and salvage tasks. Can be used as a weapon (Damage 2) in emergencies."
-    },
-
-    {
-      "name": "Pulley Frame",
-      "tier": "Standard",
-      "category": "Machine",
-      "components": ["Metal – Plate x1", "Metal – Wire x1", "Rope – Cord x1"],
-      "effect": "Provides mechanical advantage when lifting or restraining objects. Doubles effective lifting capacity. Can be repurposed for traps, lifts, or battlefield control."
+      "components": [
+        "Cloth - Bolt x2",
+        "Rope - Cord x1",
+        "Metal - Plate x1"
+      ],
+      "effect": "Increases Encumberance by +5. Items inside are protected from crushing or minor impacts. Can attach additional gear using ropes or straps. Durability 10; repairable with cloth and rope."
     },
     {
-      "name": "Fluid Regulator",
-      "tier": "Standard",
-      "category": "Machine",
-      "components": ["Glass – Tube x1", "Stone – Cut x1", "Liquid – Water x1"],
-      "effect": "Controls the flow rate of liquids. Used for irrigation, timed releases, pressure balancing, or slow dispersal of substances in combat or crafting."
-    },
-
-    {
-      "name": "Stabilized Harness",
+      "name": "Arc-Powered Kukri",
       "tier": "Difficult",
       "category": "Equipment",
-      "components": ["Rope – Cable x1", "Metal – Wire x1", "Arcane – Residue x1"],
-      "effect": "Reduces recoil, impact, and forced movement. Grants resistance to knockback and falling damage. Essential for operating heavy tools or machinery safely."
+      "components": [
+        "Metal - Plate x1",
+        "Wood - Core x1",
+        "Arcane - Crystal x1"
+      ],
+      "effect": "Light Melee weapon. Damage 1, type: Slash, +1 accuracy. On hit, deals minor arcane burn (1 magic damage). Durability 8; recharges arc energy with exposure to ambient magic."
     },
     {
-      "name": "Arc-Driven Press",
+      "name": "Bone-Linked Bracers",
+      "tier": "Complex",
+      "category": "Equipment",
+      "components": [
+        "Bone - Plate x2",
+        "Metal - Wire x1",
+        "Arcane - Sigil x1"
+      ],
+      "effect": "Armor for forearms. Reduces incoming Blunt damage by 1. Can store kinetic energy from 2 hits to release as a 1 unit knockback once per scene. Durability 12; repairable with bones and wire."
+    },
+    {
+      "name": "Everflow Flask",
+      "tier": "Simple",
+      "category": "Machine",
+      "components": [
+        "Glass - Tube x1",
+        "Liquid - Water x1"
+      ],
+      "effect": "Automatically refills one drink of water per hour. Costs 1 durability per use; durable up to 5 refills per day before needing maintenance."
+    },
+    {
+      "name": "Weighted Counterbalance",
+      "tier": "Standard",
+      "category": "Machine",
+      "components": [
+        "Metal - Rod x1",
+        "Stone - Block x1",
+        "Rope - Line x1"
+      ],
+      "effect": "Reduces effort needed to lift heavy loads. Provides +2 effective Might when lifting, holding, or restraining objects. Durability 10; components are reusable."
+    },
+    {
+      "name": "Smoke Diffuser Lantern",
       "tier": "Difficult",
       "category": "Machine",
-      "components": ["Metal – Plate x2", "Arcane – Core x1", "Metal – Rod x1"],
-      "effect": "Uses arcane force to compress, shape, or bind materials. Can refine components, force doors open, or deliver crushing force in combat scenarios."
+      "components": [
+        "Metal - Plate x1",
+        "Glass - Tube x1",
+        "Powder - Blinding x1"
+      ],
+      "effect": "Emits a low cloud of obscuring smoke that lightly blinds enemies in a 1 unit radius for 2 rounds. Useful for escapes or stealth. Durability 6; refill powder every 3 uses."
     },
-
     {
-      "name": "Bone-Plated Guardian Frame",
+      "name": "Arcane Gear Compressor",
+      "tier": "Complex",
+      "category": "Machine",
+      "components": [
+        "Metal - Plate x2",
+        "Arcane - Core x1",
+        "Metal - Rod x1"
+      ],
+      "effect": "Can crush, bind, or refine materials using arcane pressure. Doubles effectiveness of crafting checks involving compression or shaping. Durability 10; requires arc crystals to maintain output."
+    },
+    {
+      "name": "Scout Hover Drone",
+      "tier": "Standard",
+      "category": "Construct",
+      "components": [
+        "Metal - Rod x1",
+        "Arcane - Crystal x1",
+        "Glass - Tube x1"
+      ],
+      "effect": "Small autonomous flying drone. Can scout ahead, relay visual info, and mark enemies. Movement speed 3 units/round. Battery/durability 5; recharges with ambient arcane energy."
+    },
+    {
+      "name": "Mechanical Sentry Spider",
+      "tier": "Difficult",
+      "category": "Construct",
+      "components": [
+        "Metal - Wire x2",
+        "Metal - Plate x1",
+        "Arcane - Residue x1"
+      ],
+      "effect": "Small autonomous combat drone. Attacks nearby enemies with small Piercing appendages (Damage 2, type: Pierce). Can climb walls and ceilings. Durability 8; repairs with metal wire and arcane residue."
+    },
+    {
+      "name": "Alchemical Courier Bot",
       "tier": "Complex",
       "category": "Construct",
-      "components": ["Bone – Plate x2", "Metal – Wire x1", "Arcane – Sigil x1", "Arcane – Spark x1"],
-      "effect": "A basic autonomous construct frame. Can guard an area, carry loads, or perform simple programmed tasks. Limited combat capability but highly durable."
+      "components": [
+        "Metal - Plate x2",
+        "Glass - Tube x1",
+        "Liquid - Alcohol x1",
+        "Arcane - Sigil x1"
+      ],
+      "effect": "Autonomous delivery unit. Can carry and dispense liquids or powders, open small doors, and avoid obstacles. Movement speed 2 units/round. Durability 12; refill liquids as needed, repairs require arcane sigil."
     },
     {
-      "name": "Arc Suppression Array",
+      "name": "Ironjaw Dagger",
+      "tier": "Simple",
+      "category": "Equipment",
+      "components": [
+        "Metal - Plate x1",
+        "Wood - Core x1"
+      ],
+      "effect": "Light melee weapon. Damage 2, type: Pierce. +1 accuracy on attacks from behind. Durability 5; repairable with metal plate."
+    },
+    {
+      "name": "Reinforced Shoulder Pads",
+      "tier": "Standard",
+      "category": "Equipment",
+      "components": [
+        "Metal - Plate x2",
+        "Leather - Patch x1"
+      ],
+      "effect": "Armor for shoulders. Reduces incoming Blunt damage by 2. Adds +1 to body-based checks involving lifting or pushing. Durability 8; repairable with metal plates."
+    },
+    {
+      "name": "Stormcaster Gloves",
+      "tier": "Standard",
+      "category": "Equipment",
+      "components": [
+        "Leather - Patch x2",
+        "Arcane - Crystal x1"
+      ],
+      "effect": "Wearable gloves. Adds +1 to Lightning damage dealt by touch and grants minor lightning shock on melee attacks (1 damage, Lightning). Durability 6; recharge with ambient magic."
+    },
+    {
+      "name": "Traveler’s Cloak",
+      "tier": "Simple",
+      "category": "Equipment",
+      "components": [
+        "Cloth - Bolt x2",
+        "Leather - Patch x1"
+      ],
+      "effect": "Wearable cloak. Grants +1 to Finesse and resistance to minor environmental hazards. Durability 6; repairable with cloth."
+    },
+    {
+      "name": "Bone Fang Greaves",
+      "tier": "Difficult",
+      "category": "Equipment",
+      "components": [
+        "Bone - Plate x2",
+        "Metal - Wire x1"
+      ],
+      "effect": "Leg armor. Reduces Slash damage by 2. Grants +1 movement speed bonus on natural terrain. Durability 10; repairable with bones and wire."
+    },
+    {
+      "name": "Arcane Focus Amulet",
+      "tier": "Standard",
+      "category": "Equipment",
+      "components": [
+        "Arcane - Crystal x1",
+        "Metal - Wire x1"
+      ],
+      "effect": "Wearable. Increases arcane spell accuracy by +2. Can store 1 cantrip for quick release (oppertunity attack). Durability 5; recharges with ambient magic."
+    },
+    {
+      "name": "Water Sprout Canister",
+      "tier": "Standard",
+      "category": "Machine",
+      "components": [
+        "Glass - Tube x2",
+        "Liquid - Water x2"
+      ],
+      "effect": "Dispenses small amounts of water. Refill 15 uses/day. Costs 1 durability per use; repairable with glass tube."
+    },
+    {
+      "name": "Gear-Assisted Pulley",
+      "tier": "Difficult",
+      "category": "Machine",
+      "components": [
+        "Metal - Rod x1",
+        "Rope - Cord x1",
+        "Metal - Plate x1"
+      ],
+      "effect": "Provides mechanical advantage for lifting. Doubles Encumberance."
+    },
+    {
+      "name": "Smoke Bomb Launcher",
+      "tier": "Difficult",
+      "category": "Machine",
+      "components": [
+        "Metal - Plate x1",
+        "Powder - Blinding x1",
+        "Glass - Tube x1"
+      ],
+      "effect": "Launches smoke bombs to obscure vision in a 2 unit radius (Range 4 Units). Durability 6; refill powder every 3 uses."
+    },
+    {
+      "name": "Arc-Powered Grinder",
       "tier": "Complex",
       "category": "Machine",
-      "components": ["Stone – Block x1", "Metal – Plate x1", "Arcane – Sigil x1", "Arcane – Residue x1"],
-      "effect": "Dampens arcane activity in an area. Reduces magical effects, stabilizes volatile zones, and interferes with constructs or spellcasting devices."
+      "components": [
+        "Metal - Plate x2",
+        "Arcane - Core x1",
+        "Metal - Rod x1"
+      ],
+      "effect": "Automates grinding or refining materials. Doubles crafting efficiency for applicable tasks. Durability 12; requires arcane crystals to recharge."
+    },
+    {
+      "name": "Thunderstrike Warhammer",
+      "tier": "Difficult",
+      "category": "Equipment",
+      "components": [
+        "Metal - Plate x2",
+        "Wood - Core x1",
+        "Arcane - Crystal x1"
+      ],
+      "effect": "Heavy Melee weapon. Damage 2, type: Blunt, +1 accuracy. Deals bonus lightning damage (1)."
+    },
+    {
+      "name": "Glass Prism Blade",
+      "tier": "Complex",
+      "category": "Equipment",
+      "components": [
+        "Glass - Pane x2",
+        "Metal - Rod x1",
+        "Arcane - Crystal x1"
+      ],
+      "effect": "Medium Melee weapon. Damage 2, type: Slash. Can refract light to blind an adjacent enemy once per scene. Durability 8; repairable with glass panes."
+    },
+    {
+      "name": "Solar-Powered Lantern",
+      "tier": "Simple",
+      "category": "Machine",
+      "components": [
+        "Glass - Tube x1",
+        "Metal - Rod x1"
+      ],
+      "effect": "Emits light during darkness 3 hours per 1 durability. Recharges in daylight. Durability 6; no additional fuel needed."
+    },
+    {
+      "name": "Arcane Mining Drill",
+      "tier": "Complex",
+      "category": "Machine",
+      "components": [
+        "Metal - Plate x2",
+        "Arcane - Core x1",
+        "Metal - Rod x1"
+      ],
+      "effect": "Mechanically drills rock or ore, 3 units mined per Durability. Doubles extraction speed. Durability 12; arcane core recharges daily."
+    },
+    {
+      "name": "Clockwork Spy Rat",
+      "tier": "Difficult",
+      "category": "Construct",
+      "components": [
+        "Metal - Rod x1",
+        "Metal - Wire x1",
+        "Arcane - Residue x1"
+      ],
+      "effect": "Small autonomous scout. Can squeeze into tight spaces, gather information, and relay signals. Movement speed 3 units/round. Durability 6; repairs with wire and arcane residue."
+    },
+    {
+      "name": "Arc-Shield Gauntlets",
+      "tier": "Difficult",
+      "category": "Equipment",
+      "components": [
+        "Metal - Plate x1",
+        "Arcane - Crystal x1",
+        "Leather - Patch x1"
+      ],
+      "effect": "Wearable gauntlets. Grants +1 to Spirit and Fortitude."
+    },
+    {
+      "name": "Sharpened Stick",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Wood - Rod x1"
+      ],
+      "effect": "Light melee weapon. Damage 1, type: Pierce. Can be used for hunting or self-defense. Durability 3; easily replaced in the field."
+    },
+    {
+      "name": "Stone Sling",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Rope - Line x1",
+        "Stone - Cut x1"
+      ],
+      "effect": "Light Finesse weapon. Range 3. Damage 1, type: Blunt. Useful for hunting or distraction. Durability 5; can replace stones as ammo."
+    },
+    {
+      "name": "Leather Wrist Wraps",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Leather - Patch x1",
+        "Thread x1"
+      ],
+      "effect": "Wearable. Provides minor protection for wrists, +2 Encumberance."
+    },
+    {
+      "name": "Simple Backpack",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Cloth - Bolt x1",
+        "Rope - Cord x1"
+      ],
+      "effect": "Increases Encumberance by +3. Can store small tools or provisions."
+    },
+    {
+      "name": "Wooden Shield",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Wood - Plank x1",
+        "Leather - Strip x1"
+      ],
+      "effect": "Basic shield. Reduces incoming damage by 1 (all physical types). Can block minor attacks. Durability 6; repairable with wood and leather."
+    },
+    {
+      "name": "Glass Magnifier",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Glass - Pane x1"
+      ],
+      "effect": "Provides minor visual enhancement for reading small text or examining objects."
+    },
+    {
+      "name": "Stone Hammer",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Stone - Block x1",
+        "Wood - Rod x1"
+      ],
+      "effect": "Light melee weapon. Damage 2, type: Blunt. Can be used for simple construction or breaking objects. Durability 5; easily repaired with wood and stone."
+    },
+    {
+      "name": "Basic Hunting Bow",
+      "tier": "Simple",
+      "category": "Equipment",
+      "components": [
+        "Wood - Rod x1",
+        "Rope - Line x1"
+      ],
+      "effect": "Light Firearm weapon. Range 4. Damage 2, type: Pierce. Requires arrows or sharpened sticks as ammo. Durability 6; repairable with wood and rope."
+    },
+    {
+      "name": "Iron-Tipped Spear",
+      "tier": "Simple",
+      "category": "Equipment",
+      "components": [
+        "Wood - Rod x1",
+        "Metal - Plate x1"
+      ],
+      "effect": "Medium Melee or Medium Finesse weapon. Damage 3, type: Pierce. Versatile for combat and hunting. Durability 6; repairable with wood and metal."
+    },
+    {
+      "name": "Cloth Facewrap",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Cloth - Patch x1"
+      ],
+      "effect": "Wearable. Provides minor protection against dust, smoke, or sand. Can be soaked to filter liquids. Durability 4; repairable with cloth."
+    },
+    {
+      "name": "Wooden Practice Sword",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Wood - Rod x1",
+        "Wood - Plank x1"
+      ],
+      "effect": "Improvised Melee weapon. Damage 1, type: Slash. Ideal for practice without risk of serious injury. Durability 5; easily replaced or repaired."
+    },
+    {
+      "name": "Leather Pouch",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Leather - Patch x1",
+        "Thread x1"
+      ],
+      "effect": "Small container. Increases Encumberance by +2. Protects small items from dust or minor damage."
+    },
+    {
+      "name": "Basic Torch",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Wood - Rod x1",
+        "Oil x1"
+      ],
+      "effect": "Provides light in dark areas. Burns for 1 hour. Damage 1, type: fire if used as improvised weapon. Durability 1 per use; consumable."
+    },
+    {
+      "name": "Handheld Compass",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Metal - Plate x1",
+        "Glass - Pane x1"
+      ],
+      "effect": "Navigational tool. Grants +1 to navigation checks. Durable for light field use."
+    },
+    {
+      "name": "Leather Knee Pads",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Leather - Patch x2",
+        "Thread x1"
+      ],
+      "effect": "Wearable. Improves stability on rough terrain (Entering or exiting no longer costs double movement)."
+    },
+    {
+      "name": "Stone Throwing Axe",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Wood - Rod x1",
+        "Stone - Cut x1"
+      ],
+      "effect": "Light Finesse weapon. Damage 2, type: Cleave. Can also be used for chopping small wood. Durability 5; repairable with stone and wood."
+    },
+    {
+      "name": "Basic Leather Belt",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Leather - Strip x1"
+      ],
+      "effect": "Wearable. Holds tools or small pouches. +1 to Encumberance."
+    },
+    {
+      "name": "Wooden Staff",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Wood - Rod x2"
+      ],
+      "effect": "Light melee weapon. Damage 1, type: Blunt. Can double as walking stick. Durability 5; repairable with wood."
+    },
+    {
+      "name": "Cloth Bandages",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Cloth - Patch x1"
+      ],
+      "effect": "Medical aid. Can be used to clear 3 Bleed Stacks. Single-use."
+    },
+    {
+      "name": "Flint-Tipped Dagger",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Wood - Rod x1",
+        "Stone - Cut x1"
+      ],
+      "effect": "Light melee weapon. Damage 1, type: Pierce. Durable for field use."
+    },
+    {
+      "name": "Reinforced Leather Boots",
+      "tier": "Simple",
+      "category": "Equipment",
+      "components": [
+        "Leather - Patch x2",
+        "Thread x1"
+      ],
+      "effect": "Wearable. Adds +1 movement speed on rough terrain."
+    },
+    {
+      "name": "Steel Shortsword",
+      "tier": "Standard",
+      "category": "Equipment",
+      "components": [
+        "Metal - Plate x1",
+        "Wood - Core x1"
+      ],
+      "effect": "Medium Melee weapon. Damage 2, type: Slash. +1 Damage to targets bellow half Health. Durability 8; repairable with metal and wood."
+    },
+    {
+      "name": "Arcane Focusing Ring",
+      "tier": "Difficult",
+      "category": "Equipment",
+      "components": [
+        "Arcane - Crystal x1",
+        "Metal - Wire x1"
+      ],
+      "effect": "Wearable. Grants +2 spell accuracy and stores 1 level 1 spell for release. Durability 5; repair with Arcane Crystal"
+    },
+    {
+      "name": "Bone Edge Bracers",
+      "tier": "Difficult",
+      "category": "Equipment",
+      "components": [
+        "Bone - Plate x2",
+        "Metal - Wire x1"
+      ],
+      "effect": "Armor for forearms. Reduces Slash damage by 2. Grants +1 to grappling."
+    },
+    {
+      "name": "Arc-Powered Lantern",
+      "tier": "Simple",
+      "category": "Machine",
+      "components": [
+        "Glass - Tube x1",
+        "Arcane - Crystal x1",
+        "Metal - Rod x1"
+      ],
+      "effect": "Provides light in darkness. Can emit a flash to distract enemies once per scene. Durability 6; recharges with ambient magic."
+    },
+    {
+      "name": "Steam Pressure Pump",
+      "tier": "Complex",
+      "category": "Machine",
+      "components": [
+        "Metal - Plate x2",
+        "Liquid - Water x1",
+        "Arcane - Core x1"
+      ],
+      "effect": "Generates pressurized steam for machinery or traps. Can double output of mechanical devices. Durability 12; refill water daily."
+    },
+    {
+      "name": "Leather Satchel",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Leather - Patch x2",
+        "Thread x1"
+      ],
+      "effect": "Small storage. Increases Encumberance by +4."
+    },
+    {
+      "name": "Crystal-Focused Staff",
+      "tier": "Standard",
+      "category": "Equipment",
+      "components": [
+        "Wood - Rod x1",
+        "Arcane - Crystal x2"
+      ],
+      "effect": "Melee weapon or Arcane focus. Damage 2, type: Blunt. +2 accuracy to Spell attacks. Durability 7; recharges with ambient magic."
+    },
+    {
+      "name": "Bone-Plated Helm",
+      "tier": "Difficult",
+      "category": "Equipment",
+      "components": [
+        "Bone - Plate x2",
+        "Metal - Wire x1"
+      ],
+      "effect": "Head armor. Reduces incoming Cleave damage by 2. Durability 10; repairable with bones and wire."
+    },
+    {
+      "name": "Portable Grinding Wheel",
+      "tier": "Standard",
+      "category": "Machine",
+      "components": [
+        "Metal - Plate x1",
+        "Arcane - Crystal x1",
+        "Metal - Rod x1"
+      ],
+      "effect": "Grinds and sharpens tools or weapons. Doubles crafting speed for edge work. Durability 8; recharges with ambient magic."
+    },
+    {
+      "name": "Clockwork Spy Beetle",
+      "tier": "Difficult",
+      "category": "Construct",
+      "components": [
+        "Metal - Wire x1",
+        "Metal - Plate x1",
+        "Arcane - Residue x1"
+      ],
+      "effect": "Small scout. Can crawl into tight spaces, record info, and relay signals. Movement speed 3 units/round. Durability 6; repairable with wire and arcane residue."
+    },
+    {
+      "name": "Arc-Powered Crossbow",
+      "tier": "Difficult",
+      "category": "Equipment",
+      "components": [
+        "Wood - Core x1",
+        "Metal - Plate x1",
+        "Arcane - Crystal x1"
+      ],
+      "effect": "Heavy Firearm weapon. Range 6, Damage 4, type: Pierce, +1 accuracy. Can discharge minor arcane bolt (1 magic damage) once per reload. Durability 8; recharges with ambient magic."
+    },
+    {
+      "name": "Stone Mallet",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Stone - Block x1",
+        "Wood - Rod x1"
+      ],
+      "effect": "Medium Melee weapon. Damage 2, type: Blunt. Useful for simple construction or breaking objects. Durability 5; repairable with wood and stone."
+    },
+    {
+      "name": "Arcane Workbench",
+      "tier": "Complex",
+      "category": "Machine",
+      "components": [
+        "Metal - Plate x2",
+        "Arcane - Core x2",
+        "Wood - Plank x1"
+      ],
+      "effect": "Station for crafting complex magical items. Grants +2 to all arcane crafting checks. Durability 12; requires arcane crystals to maintain functionality."
+    },
+    {
+      "name": "Guardian Drone",
+      "tier": "Complex",
+      "category": "Construct",
+      "components": [
+        "Metal - Plate x2",
+        "Arcane - Core x1",
+        "Metal - Rod x1",
+        "Arcane - Residue x1"
+      ],
+      "effect": "Autonomous combat drone. Melee attack Damage 4, type: Slash; can guard an area. Movement speed 3 units/round. Durability 12; repairs require metal and arcane residue."
+    },
+    {
+      "name": "Stone Sling Pouch",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Rope - Line x1",
+        "Cloth - Patch x1",
+        "Stone - Cut x1"
+      ],
+      "effect": "Small pouch for carrying sling stones. Improves reload speed. Durability 5; repairable with cloth and rope."
+    },
+    {
+      "name": "Basic Hood",
+      "tier": "Trivial",
+      "category": "Equipment",
+      "components": [
+        "Cloth - Bolt x1"
+      ],
+      "effect": "Wearable. Provides minor protection from weather and concealment. Durability 3; repairable with cloth."
+    },
+    {
+      "name": "Rope Ladder",
+      "tier": "Simple",
+      "category": "Equipment",
+      "components": [
+        "Rope - Cord x2",
+        "Wood - Rod x2"
+      ],
+      "effect": "Portable ladder for climbing vertical surfaces (length 8 units). Durability 6; repairable with rope and wood."
+    },
+    {
+      "name": "Hunting Bow",
+      "tier": "Simple",
+      "category": "Equipment",
+      "components": [
+        "Wood - Rod x1",
+        "Rope - Line x1"
+      ],
+      "effect": "Medium Firearm weapon. Range 5. Damage 2, type: Pierce. Durability 6; repairable with wood and rope."
+    },
+    {
+      "name": "Steel Hatchet",
+      "tier": "Standard",
+      "category": "Equipment",
+      "components": [
+        "Metal - Plate x1",
+        "Wood - Core x1"
+      ],
+      "effect": "Medium Melee weapon. Damage 3, type: Cleave. Can chop wood and deal damage. Durability 7; repairable with metal and wood."
+    },
+    {
+      "name": "Crystal Lens Monocle",
+      "tier": "Difficult",
+      "category": "Equipment",
+      "components": [
+        "Glass - Pane x1",
+        "Arcane - Crystal x1",
+        "Metal - Wire x1"
+      ],
+      "effect": "Wearable. +2 Awareness bonus for inspecting details or arcane phenomena."
+    },
+    {
+      "name": "Bone Spiked Shield",
+      "tier": "Difficult",
+      "category": "Equipment",
+      "components": [
+        "Bone - Plate x2",
+        "Metal - Rod x1"
+      ],
+      "effect": "Armor. Reduces incoming damage by 2, can deal damage when bashing (1, type: Blunt). Durability 10; repairable with bone and metal."
     }
   ],
   "components": [
@@ -152,7 +771,6 @@
       "category": "Wood",
       "notes": "Dense heartwood sections"
     },
-
     {
       "name": "Pane",
       "category": "Glass",
@@ -168,7 +786,6 @@
       "category": "Glass",
       "notes": "Sharp fractured edges"
     },
-
     {
       "name": "Block",
       "category": "Stone",
@@ -184,7 +801,6 @@
       "category": "Stone",
       "notes": "Shaped, precise slabs"
     },
-
     {
       "name": "Plate",
       "category": "Metal",
@@ -200,7 +816,6 @@
       "category": "Metal",
       "notes": "Thin, flexible strands"
     },
-
     {
       "name": "Cord",
       "category": "Rope",
@@ -216,7 +831,6 @@
       "category": "Rope",
       "notes": "Heavy support rope"
     },
-    
     {
       "name": "Water",
       "category": "Liquid",
@@ -232,7 +846,6 @@
       "category": "Liquid",
       "notes": "Also burnable, but can lubricate"
     },
-
     {
       "name": "Bolt",
       "category": "Cloth",
@@ -248,7 +861,6 @@
       "category": "Cloth",
       "notes": "Fine binding fibers"
     },
-
     {
       "name": "Crystal",
       "category": "Arcane",
@@ -264,7 +876,6 @@
       "category": "Arcane",
       "notes": "Inscribed magical mark"
     },
-
     {
       "name": "Plate",
       "category": "Bone",
@@ -280,7 +891,6 @@
       "category": "Bone",
       "notes": "Alchemical inner substance"
     },
-
     {
       "name": "Heart",
       "category": "Biological",
@@ -296,20 +906,16 @@
       "category": "Biological",
       "notes": "Volatile energy fragment"
     },
-
-    
     {
       "name": "Explosive",
       "category": "Powder",
       "notes": "Powder that explodes when provoked"
-    }
-    ,
+    },
     {
       "name": "Blinding",
       "category": "Powder",
       "notes": "Iritates the eyes of creatures"
-    }
-    ,
+    },
     {
       "name": "Conductive",
       "category": "Powder",
