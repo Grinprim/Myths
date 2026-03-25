@@ -886,8 +886,7 @@
                             </div>
 
                             <div class="rule-card mt-4 p-4">
-                                <p class="mb-4"><strong>Encumbrance Limit = Physique + (2 × Athletics
-                                        Total)</strong>
+                                <p class="mb-4"><strong>Encumbrance Limit = Level + Might + Brawn</strong>
                                 </p>
                                 <p class="text-sm mb-4">Item Weights: None (0), Light (1), Medium (2), Heavy (3),
                                     Cumbersome (4). </p>
@@ -904,7 +903,7 @@
                                     <div class="bg-slate-900/30 p-2 rounded flex justify-between">
                                         <span>Overencumbered (&gt; 2× Limit)</span>
                                         <span class="text-slate-400">Speed halved. Disadvantage on
-                                            Physique/Technique.</span>
+                                            Body/Skill checks.</span>
                                     </div>
                                     <div class="bg-slate-900/30 p-2 rounded flex justify-between">
                                         <span>Crushed (&gt; 3× Limit)</span>
@@ -1216,7 +1215,13 @@
                                 </div>
                             </div>
                             <div>
-                                <strong class="text-indigo-400">Ranged Attack</strong>
+                                <strong class="text-indigo-400">Finesse Attack</strong>
+                                <div class="font-mono bg-black/30 p-2 rounded mt-1">
+                                    2d6 + Proficiency + Weapon Mod + Accuracy
+                                </div>
+                            </div>
+                            <div>
+                                <strong class="text-indigo-400">Firearm Attack</strong>
                                 <div class="font-mono bg-black/30 p-2 rounded mt-1">
                                     2d6 + Proficiency + Weapon Mod + Accuracy
                                 </div>
@@ -1229,8 +1234,8 @@
                             </div>
                             <p class="text-xs text-slate-500 mt-2">
                                 *Off-hand attacks use ONLY base stat score.<br>
-                                *Finesse weapons use Technique + Finesse.<br>
-                                *Improvised weapons use only Might (melee) or Aim (thrown) modifiers.
+                                *If Proficiency is 0, attack is treated as Improvised<br>
+                                *Improvised weapons use only Might (melee) or Finesse (thrown) modifiers.
                             </p>
                         </div>
                     </div>
@@ -1272,7 +1277,7 @@
 
                             <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
                                 <strong class="text-white block mb-1">Attributes</strong>
-                                <p>Companions only have 3 core attributes, Physique, Mystique and Technique.</p>
+                                <p>Companions only have 3 core attributes, Body, Mind and Skill.</p>
                                 <br>
                                 <p>Crafted companions have all of their stats set to 2, unless otherwise specified.
                                 </p>
@@ -1638,7 +1643,7 @@
                                     </tr>
                                     <tr class="border-t border-slate-700">
                                         <td class="p-2">Armor</td>
-                                        <td class="p-2">6 + Mount’s Physique</td>
+                                        <td class="p-2">6 + Mount’s Body Score</td>
                                         <td class="p-2">6 + Rider’s <strong>Reflex</strong></td>
                                     </tr>
                                     <tr class="border-t border-slate-700">
@@ -2391,11 +2396,11 @@
 
                                 <input placeholder="Action Num" style="width: 32%;" id="numActions" type="number">
                                 <br>Attributes:<br>
-                                <input placeholder="Physique" style="width: 32%;" id="physique" type="number">
+                                <input placeholder="Body" style="width: 32%;" id="physique" type="number">
 
-                                <input placeholder="Technique" style="width: 32%;" id="technique" type="number">
+                                <input placeholder="Skill" style="width: 32%;" id="technique" type="number">
 
-                                <input placeholder="Mystique" style="width: 32%;" id="mystique" type="number">
+                                <input placeholder="Mind" style="width: 32%;" id="mystique" type="number">
                                 <br>Defences/Weaknesses:<br>
                                 <input placeholder="Weakness" style="width: 32%;" id="weakness">
 
@@ -2450,9 +2455,9 @@
                                     </div>
                                 </div>
                                 <div class="section-title">Attributes</div>
-                                <div class="stat-line"><span>PHY</span><span id="p_physique">-</span></div>
-                                <div class="stat-line"><span>TEC</span><span id="p_technique">-</span></div>
-                                <div class="stat-line"><span>MYS</span><span id="p_mystique">-</span></div>
+                                <div class="stat-line"><span>BODY</span><span id="p_physique">-</span></div>
+                                <div class="stat-line"><span>SKILL</span><span id="p_technique">-</span></div>
+                                <div class="stat-line"><span>MIND</span><span id="p_mystique">-</span></div>
 
                                 <div class="section-title">Defenses/Weaknesses</div>
                                 <div class="stat-line"><span>Weakness</span><span id="p_weakness">-</span></div>
@@ -2544,7 +2549,7 @@
                         <h3 class="text-xl text-white font-bold mb-3">Attributes</h3>
                         <p class="mb-4 text-sm">
                             NPCs use base Attributes instead of feats:
-                            Physique (Melee), Technique (Ranged), Mystique (Spells).
+                            Bopy (Melee), Skill (Ranged), Mind (Spells).
                         </p>
                         <p class="mb-6 text-sm">
                             Distribute 4 total points.
@@ -2598,9 +2603,9 @@
                         <!-- Spells -->
                         <h3 class="text-xl text-white font-bold mb-3">Spells</h3>
                         <ul class="list-disc ml-6 text-sm mb-4">
-                            <li>Atk. Bonus = Mystique</li>
-                            <li>Dmg. Bonus = From items (lootable)</li>
-                            <li>Spell CS = 5 + Mystique</li>
+                            <li>Atk. Bonus = Mind</li>
+                            <li>Dmg. Bonus = Mind/2</li>
+                            <li>Spell CS = 5 + Mind</li>
                             <li>Number of spells = 0.5 × Health (cantrips included)</li>
                         </ul>
 
@@ -2699,7 +2704,7 @@
                             </ul>
                             <div class="bg-slate-900/60 border border-slate-700 rounded p-3 text-sm">
                                 <strong class="text-white">Unarmored Calculation:</strong><br>
-                                Armor = <strong>6 + Physique</strong><br>
+                                Armor = <strong>6 + Body</strong><br>
                                 Some traits or species may modify this.
                             </div>
                         </div>
@@ -2728,7 +2733,7 @@
                         <div class="grid md:grid-cols-4 gap-4 text-sm">
                             <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
                                 <strong class="text-white block mb-1">Health</strong>
-                                You have Health equal to [Your Level + (Your Physique * Your Level)]
+                                You have Health equal to [Your Level + (Your Brawn * Your Level)]
                             </div>
 
                             <div class="bg-slate-900/40 p-4 rounded border border-slate-700">

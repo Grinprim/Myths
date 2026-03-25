@@ -114,13 +114,13 @@
                     class="card">
                     Proficiency WARNING Your maximum Melee weapon proficiency sum exceeds Might. Adjust your
                     proficiencies
-                    or increase your Might skill.</div>
+                    or increase your Might feat.</div>
                   <div id="proficiency_warning_ranged"
                     style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: 1px solid red;"
                     class="card">
-                    Proficiency WARNING Your maximum Finesse/Firearm weapon proficiency sum exceeds Aim. Adjust your
+                    Proficiency WARNING Your maximum Finesse/Firearm weapon proficiency sum exceeds Finesse. Adjust your
                     proficiencies
-                    or increase your Aim skill.</div>
+                    or increase your Finesse feat.</div>
                   <div class="grid_4">
                     <div id="light_melee"><label for="light_melee">Light Melee</label> <input id="light_melee_input"
                         type="number"></div>
@@ -1151,16 +1151,29 @@
 
     // --- Traits / Spells state ---
     function extractSkillBonuses(text) {
-      const bonuses = {};
-      const bonusRegex = /([+-]\d+)\s*(Might|Brawn|Athletics|Fortitude|Aim|Tinkering|Finesse|Reflex|Spellcraft|Arcana|Insight|Scholarship|Persuasion|Performance|Deception|Intimidation)/gi;
-      let match;
-      while ((match = bonusRegex.exec(text || '')) !== null) {
-        const amount = Number.parseInt(match[1], 10);
-        const skill = match[2];
-        bonuses[skill] = (bonuses[skill] || 0) + (Number.isFinite(amount) ? amount : 0);
-      }
-      return bonuses;
-    }
+  const bonuses = {};
+
+  // Updated skill list
+  const skills = [
+    "Might", "Brawn", "Fortitude",
+    "Finesse", "Reflex", "Tinker",
+    "Arcane", "Spirit", "Scholarship",
+    "Charm", "Insight", "Awareness"
+  ];
+
+  // Build regex dynamically from skill list
+  const bonusRegex = new RegExp(`([+-]?\\d+)\\s*(${skills.join("|")})`, "gi");
+
+  let match;
+  while ((match = bonusRegex.exec(text || "")) !== null) {
+    const amount = parseInt(match[1], 10);
+    const skill = match[2];
+
+    bonuses[skill] = (bonuses[skill] || 0) + (Number.isFinite(amount) ? amount : 0);
+  }
+
+  return bonuses;
+}
 
     function updateTraitPoints() {
       const level = Number.parseInt(document.getElementById('level_input')?.value, 10) || 0;
@@ -1895,8 +1908,8 @@
     }
 
     function proficiency_warning() {
-      const might = parseInt(document.getElementById('Physique_Might').value) || 0;
-      const aim = parseInt(document.getElementById('Technique_Aim').value) || 0;
+      const might = parseInt(document.getElementById('Body_Might').value) || 0;
+      const Finesse = parseInt(document.getElementById('Skill_Finesse').value) || 0;
 
       const melee_sum =
         (parseInt(document.getElementById('light_melee_input').value) || 0) +
@@ -1912,17 +1925,17 @@
         (parseInt(document.getElementById('heavy_firearm_input').value) || 0);
 
       document.getElementById('proficiency_warning_melee').style.display = melee_sum > might ? 'block' : 'none';
-      document.getElementById('proficiency_warning_ranged').style.display = ranged_sum > aim ? 'block' : 'none';
+      document.getElementById('proficiency_warning_ranged').style.display = ranged_sum > Finesse ? 'block' : 'none';
 
       const meleeTracker = document.getElementById('melee_points_tracker');
       const rangedTracker = document.getElementById('ranged_points_tracker');
       if (meleeTracker) meleeTracker.value = `${melee_sum} / ${might}`;
-      if (rangedTracker) rangedTracker.value = `${ranged_sum} / ${aim}`;
+      if (rangedTracker) rangedTracker.value = `${ranged_sum} / ${Finesse}`;
     }
 
     // --- Armor ---
     function armor_proficiency() {
-      const fort = parseInt(document.getElementById('Physique_Fortitude').value) || 0;
+      const fort = parseInt(document.getElementById('Body_Fortitude').value) || 0;
       document.getElementById('light_armor_checkbox').checked = fort >= 2;
       document.getElementById('medium_armor_checkbox').checked = fort >= 3;
       document.getElementById('heavy_armor_checkbox').checked = fort >= 4;
@@ -1998,7 +2011,7 @@
         });
       });
 
-      const fortitude = parseInt(document.getElementById('Physique_Fortitude').value) || 0;
+      const fortitude = parseInt(document.getElementById('Body_Fortitude').value) || 0;
       const armorItems =
         (parseInt(document.getElementById('armor_value').value) || 0) +
         (parseInt(document.getElementById('shield_value').value) || 0) +
@@ -2006,20 +2019,24 @@
       document.getElementById('armor_total').value = 4 + fortitude + armorItems;
 
       const level = parseInt(document.getElementById('level_input').value) || 0;
-      const brawn = parseInt(document.getElementById('Physique_Brawn').value) || 0;
+      const brawn = parseInt(document.getElementById('Body_Brawn').value) || 0;
       const hpBonus = parseInt(document.getElementById('health_bonus')?.value) || 0;
       document.getElementById('health_max').value = level + level * brawn + hpBonus;
+      console.log(level + level * brawn + hpBonus)
+
+      document.getElementById('spell_damage').value = (parseInt(document.getElementById('Mind_Spirit').value)) /2 || 0;
 
       const manaBonus = parseInt(document.getElementById('mana_bonus')?.value) || 0;
       document.getElementById('max_mana').value = level + Math.floor(level / 3) + manaBonus;
 
-      document.getElementById('spell_attack').value = (parseInt(document.getElementById('Mystique_Spellcraft').value) || 0);
-      document.getElementById('spell_dc').value = 5 + (parseInt(document.getElementById('Mystique_Arcana').value) || 0);
+      document.getElementById('spell_attack').value = (parseInt(document.getElementById('Mind_Arcane').value) || 0);
+      document.getElementById('spell_dc').value = 5 + (parseInt(document.getElementById('Mind_Spirit').value) || 0);
 
       const backpackCapacity = parseInt(document.getElementById('backpack_capacity')?.value) || 0;
       document.getElementById('max_weight').value =
-        (parseInt(document.getElementById('Physique_base').value) || 0) +
-        ((parseInt(document.getElementById('Physique_Athletics').value) || 0) * 2) +
+        (parseInt(document.getElementById('Body_Might').value) || 0) +
+        (parseInt(document.getElementById('Body_Brawn').value) || 0) +
+        level +
         backpackCapacity;
 
       updateTraitPoints();
