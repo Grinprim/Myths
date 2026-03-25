@@ -2024,7 +2024,7 @@
       document.getElementById('health_max').value = level + level * brawn + hpBonus;
       console.log(level + level * brawn + hpBonus)
 
-      document.getElementById('spell_damage').value = Math.round((parseInt(document.getElementById('Mind_Spirit').value)) /2) || 0;
+      document.getElementById('spell_damage').value = Math.ceil((parseInt(document.getElementById('Mind_Spirit').value)) /2) || 0;
 
       const manaBonus = parseInt(document.getElementById('mana_bonus')?.value) || 0;
       document.getElementById('max_mana').value = level + Math.floor(level / 3) + manaBonus;
