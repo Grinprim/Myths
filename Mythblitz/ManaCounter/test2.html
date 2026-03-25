@@ -8,122 +8,155 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap');
 
+:root{
+  --glass-border: rgba(255,255,255,0.1);
+  --glass-bg: rgba(15,23,42,0.6);
+}
+
 body {
   font-family: 'Inter', sans-serif;
   margin: 0;
-  color: #fff;
-  background: #153825;
-}
-
-.global-controls {
-  padding: 8px;
-  display: flex;
-  gap: 6px;
-}
-
-/* Center HP controls overlay */
-#hp-controls, #player-controls {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(8px);
-  border-radius: 14px;
-  padding: 10px;
-  display: none; /* hidden by default */
-}
-
-#hp-controls button, #player-controls button {
-  flex: 1;
-  padding: 14px;
-  font-size: 16px;
-}
-
-.global-controls button {
-  flex: 1;
-  padding: 12px;
-  font-size: 14px;
+  color: #cbd5e1;
+  background: radial-gradient(circle at 20% 20%, rgba(16,185,129,0.2), transparent 45%),
+              radial-gradient(circle at 80% 20%, rgba(34,197,94,0.14), transparent 45%),
+              radial-gradient(circle at 50% 80%, rgba(20,184,166,0.12), transparent 45%),
+              #0b1a12;
 }
 
 .container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 1fr;
-  gap: 8px;
-  padding: 8px;
-  height: calc(100vh - 100px);
+  gap: 10px;
+  padding: 10px;
+  height: calc(100vh - 80px);
 }
 
 .player {
-  border-radius: 14px;
+  border-radius: 18px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(6px);
 }
 
 .header {
   text-align: center;
   font-family: 'Cinzel', serif;
-  font-size: 14px;
+  font-size: 13px;
 }
 
-.stat {
-  text-align: center;
-  margin: 6px 0;
+.stat-row {
+  display: inline-grid; /* shrink to content */
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  margin: 0 auto; /* center the whole row */
 }
 
 .value {
-  font-size: 42px;
+  text-align: center;
+  font-size: 36px;
   font-weight: 700;
+  color: #fff;
+  min-width: 64px; /* keeps buttons close */
 }
 
 .label {
-  font-size: 12px;
-  opacity: 0.7;
-}
-
-.controls {
-  display: flex;
-  gap: 6px;
-}
-
-.controls button {
-  flex: 1;
-  padding: 14px;
-  font-size: 18px;
+  text-align: center;
+  font-size: 10px;
+  opacity: 0.6;
 }
 
 button {
-  border: none;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.15);
-  color: white;
+  border: 1px solid var(--glass-border);
+  border-radius: 9px;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  padding: 12px 6px; /* slightly bigger */
+  font-size: 15px;
+  width: 34px; /* slightly wider */
+  flex-shrink: 0;
 }
 
 button:active {
-  background: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.2);
 }
+
+button:active {
+  background: rgba(255,255,255,0.2);
+}
+
+button:active {
+  background: rgba(255,255,255,0.2);
+}
+
+#hp-controls, #player-controls {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  background: var(--glass-bg);
+  padding: 16px;
+  border-radius: 16px;
+  z-index: 1000;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 20px 40px -15px rgba(0,0,0,0.7);
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* prevents scrunching */
+}
+
+#hp-controls button, #player-controls button {
+  width: auto; /* override narrow buttons */
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+/* top toggle buttons */
+body > button {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+
+  width: auto; /* not narrow */
+  padding: 10px 16px;
+  font-size: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 12px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 20px -10px rgba(0,0,0,0.6);
+}
+
+body > button:nth-of-type(1) { top: 10px; }
+body > button:nth-of-type(2) { top: 52px; }
+
 </style>
 </head>
 <body>
 
-<div id="hp-controls" class="global-controls">
+<div id="hp-controls">
   <button onclick="setAllHP(12)">12</button>
   <button onclick="setAllHP(24)">24</button>
   <button onclick="setAllHP(48)">48</button>
 </div>
+<button onclick="toggleHPControls()" style="position:fixed;top:10px;left:50%;transform:translateX(-50%);">HP</button>
 
-<button onclick="toggleHPControls()" style="position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:11;padding:10px 16px;">HP</button>
-
-<div id="player-controls" class="global-controls">
+<div id="player-controls">
   <button onclick="addPlayer()">+ Player</button>
   <button onclick="removePlayer()">- Player</button>
 </div>
-
-<button onclick="togglePlayerControls()" style="position:fixed;top:50px;left:50%;transform:translateX(-50%);z-index:11;padding:10px 16px;">Players</button>
+<button onclick="togglePlayerControls()" style="position:fixed;top:50px;left:50%;transform:translateX(-50%);">Players</button>
 
 <div class="container" id="container"></div>
 
@@ -138,14 +171,7 @@ function randomGradient() {
 
 function createPlayer() {
   var id = playerCount++;
-  var player = {
-    id: id,
-    maxHP: 24,
-    hp: 24,
-    mana: 0,
-    turn: 0,
-    color: randomGradient()
-  };
+  var player = { id, maxHP: 24, hp: 24, mana: 0, turn: 0, color: randomGradient() };
 
   var el = document.createElement("div");
   el.className = "player";
@@ -154,12 +180,30 @@ function createPlayer() {
 
   el.innerHTML =
     '<div class="header">P' + (id + 1) + '</div>' +
-    '<div class="stat"><div class="value" id="hp-' + id + '"></div><div class="label">HP</div></div>' +
-    '<div class="controls"><button onclick="changeHP(' + id + ', -1)">-</button><button onclick="changeHP(' + id + ', 1)">+</button></div>' +
-    '<div class="stat"><div class="value" id="mana-' + id + '"></div><div class="label">Mana</div></div>' +
-    '<div class="controls"><button onclick="changeMana(' + id + ', -1)">-</button><button onclick="changeMana(' + id + ', 1)">+</button></div>' +
-    '<div class="stat"><div class="value" id="turn-' + id + '"></div><div class="label">Turns</div></div>' +
-    '<div class="controls"><button onclick="nextTurn(' + id + ')">Next Turn</button></div>';
+
+    '<div class="stat-row">' +
+      '<button onclick="changeHP(' + id + ',-1)">-</button>' +
+      '<div><div class="value" id="hp-' + id + '"></div><div class="label">HP</div></div>' +
+      '<button onclick="changeHP(' + id + ',1)">+</button>' +
+    '</div>' +
+
+    '<div class="stat-row">' +
+      '<button onclick="changeMana(' + id + ',-1)">-</button>' +
+      '<div><div class="value" id="mana-' + id + '"></div><div class="label">Mana</div></div>' +
+      '<button onclick="changeMana(' + id + ',1)">+</button>' +
+    '</div>' +
+
+    '<div class="stat-row">' +
+      '<button onclick="changeTurn(' + id + ',-1)">-</button>' +
+      '<div><div class="value" id="turn-' + id + '"></div><div class="label">Turns</div></div>' +
+      '<button onclick="changeTurn(' + id + ',1)">+</button>' +
+    '</div>' +
+
+    ' <div class="stat-row">' +
+      '<button onclick="resetPlayer(' + id + ')">⟲</button>' +
+      '<div></div>' +
+      '<button onclick="refillPlayer(' + id + ')">✦</button>' +
+    '</div>';
 
   document.getElementById("container").appendChild(el);
   window['player' + id] = player;
@@ -168,7 +212,7 @@ function createPlayer() {
 
 function update(id) {
   var p = window['player' + id];
-  document.getElementById('hp-' + id).innerText = p.hp;
+  document.getElementById('hp-' + id).innerText = p.hp + '/' + p.maxHP;
   var maxMana = Math.min(12, p.maxHP === 12 ? p.turn * 2 : p.turn);
   document.getElementById('mana-' + id).innerText = p.mana + '/' + maxMana;
   document.getElementById('turn-' + id).innerText = p.turn;
@@ -176,7 +220,7 @@ function update(id) {
 
 function changeHP(id, amount) {
   var p = window['player' + id];
-  p.hp = Math.max(0, p.hp + amount); // No upper limit
+  p.hp = Math.max(0, p.hp + amount);
   update(id);
 }
 
@@ -187,10 +231,24 @@ function changeMana(id, amount) {
   update(id);
 }
 
-function nextTurn(id) {
+function changeTurn(id, amount) {
   var p = window['player' + id];
-  p.turn++;
+  p.turn = Math.max(0, p.turn + amount);
+  update(id);
+}
+
+function resetPlayer(id) {
+  var p = window['player' + id];
+  p.hp = p.maxHP;
+  p.turn = 0;
+  p.mana = 0;
+  update(id);
+}
+
+function refillPlayer(id) {
+  var p = window['player' + id];
   var maxMana = Math.min(12, p.maxHP === 12 ? p.turn * 2 : p.turn);
+  p.mana = maxMana;
   update(id);
 }
 
@@ -205,9 +263,9 @@ function setAllHP(value) {
   }
 }
 
-function addPlayer() {
-  createPlayer();
-}
+function addPlayer() { 
+  if (playerCount < 6)
+  createPlayer(); }
 
 function removePlayer() {
   if (playerCount <= 1) return;
@@ -227,10 +285,7 @@ function togglePlayerControls() {
   el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
 }
 
-createPlayer();
-createPlayer();
-createPlayer();
-createPlayer();
+createPlayer();createPlayer();createPlayer();createPlayer();
 </script>
 
 </body>
