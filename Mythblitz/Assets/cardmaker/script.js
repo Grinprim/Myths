@@ -697,6 +697,9 @@ function wire(){
   }
 
   function collectCardData(){
+    const artScale = artScaleInput ? artScaleInput.value : '1';
+    const artX = artXInput ? artXInput.value : '0';
+    const artY = artYInput ? artYInput.value : '0';
     return {
       id: editingCardId || (cardStorage ? cardStorage.generateId() : `card_${Date.now()}`),
       name: (nameInput.value || '').trim() || 'Unnamed Card',
@@ -724,10 +727,14 @@ function wire(){
         symbol3: symbol3Select.value,
         symbol4: symbol4Select.value,
         symbol5: symbol5Select.value,
-        artScale: artScaleInput.value,
-        artX: artXInput.value,
-        artY: artYInput.value
+        artScale,
+        artX,
+        artY
       },
+      // Keep compatibility with legacy backups that stored transform at top-level.
+      artScale,
+      artX,
+      artY,
       artDataUrl: uploadedArtDataUrl,
       customBorderDataUrl: customBorderURL,
       previewDataUrl: null
@@ -759,9 +766,13 @@ function wire(){
     symbol3Select.value = data.symbol3 || 'Arcane';
     symbol4Select.value = data.symbol4 || 'Arcane';
     symbol5Select.value = data.symbol5 || 'Arcane';
-    artScaleInput.value = data.artScale || '1';
-    artXInput.value = data.artX || '0';
-    artYInput.value = data.artY || '0';
+    const artScaleValue = data.artScale ?? card.artScale ?? (card.artTransform && card.artTransform.scale) ?? '1';
+    const artXValue = data.artX ?? card.artX ?? (card.artTransform && card.artTransform.x) ?? '0';
+    const artYValue = data.artY ?? card.artY ?? (card.artTransform && card.artTransform.y) ?? '0';
+
+    artScaleInput.value = String(artScaleValue);
+    artXInput.value = String(artXValue);
+    artYInput.value = String(artYValue);
 
     uploadedArtDataUrl = card.artDataUrl || null;
     if (uploadedArtDataUrl && artImg) {
@@ -867,6 +878,32 @@ function wire(){
     const end = hasLiveSelection ? descInput.selectionEnd : lastDescSelectionEnd;
     const current = descInput.value || '';
     const selected = current.slice(start, end);
+
+    const hasOuterWrap = Boolean(endToken)
+      && start >= startToken.length
+      && current.slice(start - startToken.length, start) === startToken
+      && current.slice(end, end + endToken.length) === endToken;
+
+    if (hasOuterWrap) {
+      // Selection is already wrapped with this token pair; keep it unchanged.
+      descInput.focus();
+      descInput.setSelectionRange(start, end);
+      rememberDescSelection();
+      return;
+    }
+
+    const selectionAlreadyWrapped = Boolean(endToken)
+      && selected.startsWith(startToken)
+      && selected.endsWith(endToken)
+      && selected.length >= startToken.length + endToken.length;
+
+    if (selectionAlreadyWrapped) {
+      descInput.focus();
+      descInput.setSelectionRange(start, end);
+      rememberDescSelection();
+      return;
+    }
+
     const insertion = `${startToken}${selected}${endToken}`;
 
     descInput.value = `${current.slice(0, start)}${insertion}${current.slice(end)}`;

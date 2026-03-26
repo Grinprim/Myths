@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mythblitz | Multi Print</title>
+  <link rel="icon" type="image/png" href="../img/logo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +36,7 @@
     }
 
     .page {
-      max-width: 1400px;
+      max-width: 1700px;
       margin: 0 auto;
       padding: 28px;
     }
@@ -79,58 +80,119 @@
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
     }
 
     .item {
-      border: 1px solid var(--line);
-      border-radius: 12px;
+      position: relative;
+      border: 1px solid rgba(124, 255, 201, 0.14);
+      border-radius: 14px;
       padding: 10px;
-      background: rgba(0, 0, 0, 0.35);
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 10px;
-      align-items: center;
+      padding-bottom: 42px;
+      background: rgba(0, 0, 0, 0.2);
+      transition: border-color 180ms ease, box-shadow 180ms ease;
     }
 
-    .item img {
-      width: 72px;
+    .cardTile {
+      width: 100%;
+      border: 1px solid rgba(124, 255, 201, 0.25);
+      border-radius: 12px;
+      padding: 0;
+      color: var(--text);
+      background: rgba(0, 0, 0, 0.35);
+      display: block;
+      text-align: left;
+      cursor: pointer;
+      transform-origin: center;
+      transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+    }
+
+    @media (hover: hover) {
+      .cardTile:hover {
+        transform: perspective(900px) rotateX(4deg) rotateY(-5deg) translateY(-5px) scale(1.03);
+        border-color: rgba(123, 255, 199, 0.68);
+        box-shadow: 0 0 0 2px rgba(123, 255, 199, 0.32), 0 16px 24px rgba(2, 10, 7, 0.5);
+      }
+    }
+
+    .item[data-selected="true"] {
+      border-color: rgba(73, 214, 147, 0.72);
+      box-shadow: 0 0 0 2px rgba(73, 214, 147, 0.2);
+    }
+
+    .item[data-selected="true"] .cardTile {
+      border-color: rgba(73, 214, 147, 0.88);
+      box-shadow: inset 0 0 0 2px rgba(73, 214, 147, 0.18);
+    }
+
+    .preview {
+      width: 100%;
       aspect-ratio: 63 / 88;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 11px;
       border: 1px solid rgba(255, 255, 255, 0.15);
       background: #0e1f17;
+      display: block;
     }
 
-    .item h3 {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.2;
-      white-space: nowrap;
+    .qtyPanel {
+      position: absolute;
+      left: 50%;
+      bottom: 6px;
+      transform: translate(-50%, 8px);
+      border: 1px solid rgba(124, 255, 201, 0.34);
+      border-radius: 10px;
+      padding: 0;
+      width: 56px;
+      height: 0;
+      opacity: 0;
       overflow: hidden;
-      text-overflow: ellipsis;
+      transition: height 220ms ease, opacity 180ms ease, transform 180ms ease;
+      background: rgba(10, 27, 20, 0.9);
+      pointer-events: none;
+      display: grid;
+      place-items: center;
     }
 
-    .controls {
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .item[data-selected="true"] .qtyPanel {
+      height: 28px;
+      opacity: 1;
+      transform: translate(-50%, 0);
+      pointer-events: auto;
     }
 
-    .controls label {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    input[type="number"] {
-      width: 72px;
-      border: 1px solid var(--line);
-      background: rgba(0, 0, 0, 0.4);
+    .qtyInput {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: transparent;
       color: var(--text);
-      border-radius: 8px;
-      padding: 6px;
+      border-radius: 10px;
+      padding: 2px 6px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 13px;
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+
+    .qtyInput::-webkit-outer-spin-button,
+    .qtyInput::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .qtyInput:focus {
+      outline: 1px solid rgba(124, 255, 201, 0.58);
+      outline-offset: -1px;
+    }
+
+    .selectionMeta {
+      display: inline-block;
+      margin-top: 6px;
+      color: #bde8d4;
+      font-weight: 600;
     }
 
     .infoBox {
@@ -152,7 +214,46 @@
       background: var(--panel);
     }
 
+    .toastHost {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 90;
+      display: grid;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .toast {
+      border: 1px solid rgba(124, 255, 201, 0.3);
+      background: rgba(8, 26, 19, 0.96);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transform: translateY(8px);
+      animation: toastIn 180ms ease forwards;
+    }
+
+    .toast.error {
+      border-color: rgba(248, 113, 113, 0.55);
+      background: rgba(49, 18, 18, 0.95);
+    }
+
+    @keyframes toastIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     @media (max-width: 1100px) {
+      .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 1000px) {
       .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
 
@@ -176,11 +277,13 @@
     </div>
 
     <div class="infoBox">
-      Layout target: A4 portrait, cards at 63 x 88 mm. Current fit: 3 columns x 3 rows (9 cards per page).
+      Layout: A4 Portrait with cards at 63 x 88 mm.(9 cards per page).
+      <div id="selectionMeta" class="selectionMeta">0 cards selected, 0 total copies.</div>
     </div>
 
     <section id="root"></section>
   </main>
+  <div id="uiToastHost" class="toastHost" aria-live="polite"></div>
 
   <script id="ml-layout" src="../dyn/layout.js" data-base=".." data-root="../.." defer></script>
   <script src="../dyn/card_storage.js"></script>
@@ -190,47 +293,83 @@
     const selectAllBtn = document.getElementById('selectAllBtn');
     const clearBtn = document.getElementById('clearBtn');
     const printBtn = document.getElementById('printBtn');
+    const selectionMeta = document.getElementById('selectionMeta');
+    const toastHost = document.getElementById('uiToastHost');
     let cachedCards = [];
+
+    function showToast(message, kind = 'info', timeout = 2200) {
+      const toast = document.createElement('div');
+      toast.className = `toast ${kind}`;
+      toast.textContent = message;
+      toastHost.appendChild(toast);
+      window.setTimeout(() => {
+        toast.remove();
+      }, timeout);
+    }
+
+    function setItemSelected(item, selected, resetQty = true) {
+      const qty = item.querySelector('.qtyInput');
+      const tile = item.querySelector('.cardTile');
+      item.dataset.selected = selected ? 'true' : 'false';
+      qty.disabled = !selected;
+      tile.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      if (!selected && resetQty) qty.value = '1';
+    }
+
+    function updateSelectionMeta() {
+      let selectedCount = 0;
+      let totalCopies = 0;
+      document.querySelectorAll('.item').forEach((item) => {
+        if (item.dataset.selected !== 'true') return;
+        selectedCount += 1;
+        const qty = Math.max(1, Math.min(999, Number(item.querySelector('.qtyInput').value) || 1));
+        totalCopies += qty;
+      });
+      selectionMeta.textContent = `${selectedCount} cards selected, ${totalCopies} total copies.`;
+    }
 
     function createItem(card) {
       const item = document.createElement('article');
       item.className = 'item';
       item.dataset.id = card.id;
+      item.dataset.selected = 'false';
+
+      const tile = document.createElement('button');
+      tile.type = 'button';
+      tile.className = 'cardTile';
+      tile.setAttribute('aria-pressed', 'false');
 
       const img = document.createElement('img');
+      img.className = 'preview';
       img.src = card.previewDataUrl || card.artDataUrl || '';
       img.alt = card.name || 'Card';
 
-      const body = document.createElement('div');
-      const title = document.createElement('h3');
-      title.textContent = card.name || 'Unnamed Card';
-
-      const controls = document.createElement('div');
-      controls.className = 'controls';
-
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.className = 'card-select';
-
-      const label = document.createElement('label');
-      label.textContent = 'Qty';
+      const qtyPanel = document.createElement('div');
+      qtyPanel.className = 'qtyPanel';
+      qtyPanel.addEventListener('click', (event) => event.stopPropagation());
 
       const qty = document.createElement('input');
       qty.type = 'number';
       qty.min = '1';
       qty.max = '999';
       qty.value = '1';
-      qty.className = 'card-qty';
+      qty.className = 'qtyInput';
       qty.disabled = true;
 
-      checkbox.addEventListener('change', () => {
-        qty.disabled = !checkbox.checked;
-        if (!checkbox.checked) qty.value = '1';
+      tile.addEventListener('click', () => {
+        setItemSelected(item, item.dataset.selected !== 'true', false);
+        updateSelectionMeta();
       });
 
-      controls.append(checkbox, label, qty);
-      body.append(title, controls);
-      item.append(img, body);
+      qty.addEventListener('input', () => {
+        const safe = Math.max(1, Math.min(999, Number(qty.value) || 1));
+        qty.value = String(safe);
+        updateSelectionMeta();
+      });
+
+      tile.append(img);
+      qtyPanel.append(qty);
+      item.append(tile, qtyPanel);
       return item;
     }
 
@@ -253,6 +392,7 @@
 
       root.innerHTML = '';
       root.appendChild(grid);
+      updateSelectionMeta();
     }
 
     function buildPrintQueue() {
@@ -261,10 +401,9 @@
 
       document.querySelectorAll('.item').forEach((item) => {
         const id = item.dataset.id;
-        const checked = item.querySelector('.card-select').checked;
-        if (!checked) return;
+        if (item.dataset.selected !== 'true') return;
 
-        const qtyInput = item.querySelector('.card-qty');
+        const qtyInput = item.querySelector('.qtyInput');
         const quantity = Math.max(1, Math.min(999, Number(qtyInput.value) || 1));
         const card = cardsById.get(id);
         if (!card) return;
@@ -286,7 +425,7 @@
     function generatePdf() {
       const queue = buildPrintQueue();
       if (!queue.length) {
-        alert('Select at least one card to print.');
+        showToast('Select at least one card to print.', 'error');
         return;
       }
 
@@ -323,22 +462,21 @@
         pdf.addImage(source, getImageType(source), x, y, cardW, cardH, undefined, 'FAST');
       });
 
-      pdf.save('mythblitz_multy_print.pdf');
+      pdf.save('mythblitz_multi_print.pdf');
     }
 
     selectAllBtn.addEventListener('click', () => {
       document.querySelectorAll('.item').forEach((item) => {
-        item.querySelector('.card-select').checked = true;
-        item.querySelector('.card-qty').disabled = false;
+        setItemSelected(item, true, false);
       });
+      updateSelectionMeta();
     });
 
     clearBtn.addEventListener('click', () => {
       document.querySelectorAll('.item').forEach((item) => {
-        item.querySelector('.card-select').checked = false;
-        item.querySelector('.card-qty').disabled = true;
-        item.querySelector('.card-qty').value = '1';
+        setItemSelected(item, false, true);
       });
+      updateSelectionMeta();
     });
 
     printBtn.addEventListener('click', generatePdf);

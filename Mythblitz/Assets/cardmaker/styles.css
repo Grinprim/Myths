@@ -554,7 +554,11 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
   overflow-wrap: anywhere;
   font-family: 'Inter', sans-serif;
 }
-.desc strong { font-weight: 700; }
+.desc strong {
+  font-weight: 840;
+  font-size: 1.2em;
+  line-height: 1.05;
+}
 .desc em { font-style: italic; }
 .desc u { text-decoration: underline; }
 

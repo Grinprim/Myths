@@ -7,7 +7,7 @@
 
     const routeMap = {
         home: 'index.html',
-        cardmaker: 'Assets/cardmaker/index.html',
+        cardmaker: 'Assets/cardmaker/card_maker.html',
         gallery: 'Assets/pages/card_gallery.html',
         print: 'Assets/pages/multy_print.html',
         counter: 'ManaCounter/game_counter.html',
