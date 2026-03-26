@@ -185,6 +185,7 @@
     const selectAllBtn = document.getElementById('selectAllBtn');
     const clearBtn = document.getElementById('clearBtn');
     const printBtn = document.getElementById('printBtn');
+    let cachedCards = [];
 
     function createItem(card) {
       const item = document.createElement('article');
@@ -228,13 +229,14 @@
       return item;
     }
 
-    function render() {
+    async function render() {
       if (!storage) {
         root.innerHTML = '<div class="empty">Storage helper was not loaded.</div>';
         return;
       }
 
-      const cards = storage.getAllCards();
+      const cards = await storage.getAllCards();
+      cachedCards = cards;
       if (!cards.length) {
         root.innerHTML = '<div class="empty">No cards found. Save cards from the card maker first.</div>';
         return;
@@ -250,7 +252,7 @@
 
     function buildPrintQueue() {
       const selected = [];
-      const cardsById = new Map(storage.getAllCards().map((card) => [card.id, card]));
+      const cardsById = new Map(cachedCards.map((card) => [card.id, card]));
 
       document.querySelectorAll('.item').forEach((item) => {
         const id = item.dataset.id;
@@ -335,7 +337,10 @@
     });
 
     printBtn.addEventListener('click', generatePdf);
-    render();
+    render().catch((err) => {
+      console.error('Multy Print render failed', err);
+      root.innerHTML = '<div class="empty">Failed to load cards from browser storage.</div>';
+    });
   </script>
 </body>
 </html>

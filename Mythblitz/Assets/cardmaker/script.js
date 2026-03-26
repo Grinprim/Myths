@@ -300,6 +300,40 @@ function wire(){
     });
   }
 
+  async function toOptimizedImageDataUrl(file, maxDimension = 1200, quality = 0.82){
+    const baseDataUrl = await toDataUrl(file);
+    if (!file.type || !file.type.startsWith('image/')) return baseDataUrl;
+    if (file.type === 'image/gif' || file.type === 'image/svg+xml') return baseDataUrl;
+
+    const img = await new Promise((resolve, reject) => {
+      const imageEl = new Image();
+      imageEl.onload = () => resolve(imageEl);
+      imageEl.onerror = reject;
+      imageEl.src = baseDataUrl;
+    });
+
+    const sourceW = img.naturalWidth || img.width;
+    const sourceH = img.naturalHeight || img.height;
+    if (!sourceW || !sourceH) return baseDataUrl;
+
+    const scale = Math.min(1, maxDimension / Math.max(sourceW, sourceH));
+    const targetW = Math.max(1, Math.round(sourceW * scale));
+    const targetH = Math.max(1, Math.round(sourceH * scale));
+
+    if (targetW === sourceW && targetH === sourceH && file.size <= 2_000_000) {
+      return baseDataUrl;
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = targetW;
+    canvas.height = targetH;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return baseDataUrl;
+
+    ctx.drawImage(img, 0, 0, targetW, targetH);
+    return canvas.toDataURL('image/jpeg', quality);
+  }
+
   function updateSaveButtonText(){
     if (!saveCardBtn) return;
     saveCardBtn.textContent = editingCardId ? 'Update Card' : 'Save to Gallery';
@@ -573,7 +607,7 @@ function wire(){
       return;
     }
 
-    uploadedArtDataUrl = await toDataUrl(file);
+    uploadedArtDataUrl = await toOptimizedImageDataUrl(file);
     if (artImg) {
       artImg.src = uploadedArtDataUrl;
       artImg.style.display = 'block';
@@ -641,7 +675,7 @@ function wire(){
         name: nameInput.value,
         mana: manaInput.value,
         manaX: !!manaXInput.checked,
-        explainMana: !!explainManaInput.checked,
+        explainMana: !!(explainManaInput && explainManaInput.checked),
         desc: descInput.value,
         descHeight: descHeightInput.value,
         descHide: !!descHideInput.checked,
@@ -676,7 +710,7 @@ function wire(){
     nameInput.value = data.name || '';
     manaInput.value = data.mana || '0';
     manaXInput.checked = !!data.manaX;
-    explainManaInput.checked = !!data.explainMana;
+    if (explainManaInput) explainManaInput.checked = !!data.explainMana;
     descInput.value = data.desc || '';
     descHeightInput.value = data.descHeight || '125';
     descHideInput.checked = !!data.descHide;
@@ -715,14 +749,19 @@ function wire(){
 
   async function capturePreviewDataUrl(){
     if (!cardEl || !window.htmlToImage) return null;
-    return window.htmlToImage.toJpeg(cardEl, {
-      pixelRatio: 2,
-      quality: 0.92,
-      skipFonts: false,
-      useCORS: true,
-      allowTaint: true,
-      backgroundColor: null
-    });
+    try {
+      return await window.htmlToImage.toJpeg(cardEl, {
+        pixelRatio: 1,
+        quality: 0.8,
+        skipFonts: false,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null
+      });
+    } catch (err) {
+      console.warn('Preview capture failed; saving without preview image.', err);
+      return null;
+    }
   }
 
   async function saveCardToGallery(){
@@ -737,13 +776,13 @@ function wire(){
 
     try {
       const card = collectCardData();
-      const existing = editingCardId ? cardStorage.getCardById(editingCardId) : null;
+      const existing = editingCardId ? await cardStorage.getCardById(editingCardId) : null;
       if (existing && existing.createdAt) {
         card.createdAt = existing.createdAt;
       }
 
       card.previewDataUrl = await capturePreviewDataUrl();
-      cardStorage.upsertCard(card);
+      await cardStorage.upsertCard(card);
 
       editingCardId = card.id;
       updateEditQueryParam(editingCardId);
@@ -751,7 +790,8 @@ function wire(){
       alert('Card saved to gallery.');
     } catch (err) {
       console.error('Save card failed', err);
-      alert('Saving failed. Your browser storage might be full.');
+      const details = err && err.message ? `\n\nDetails: ${err.message}` : '';
+      alert(`Saving failed. Browser storage might be blocked or full.${details}\n\nIf you opened HTML directly from files, try running from localhost.`);
     } finally {
       saveCardBtn.disabled = false;
       saveCardBtn.textContent = previousText;
@@ -759,9 +799,9 @@ function wire(){
     }
   }
 
-  function loadCardFromQuery(){
+  async function loadCardFromQuery(){
     if (!editingCardId || !cardStorage) return;
-    const found = cardStorage.getCardById(editingCardId);
+    const found = await cardStorage.getCardById(editingCardId);
     if (!found) {
       editingCardId = null;
       updateEditQueryParam(null);
@@ -804,7 +844,12 @@ function wire(){
   // Initial Sync
   syncText();
   updateSaveButtonText();
-  loadCardFromQuery();
+  loadCardFromQuery().catch((err) => {
+    console.error('Failed to load card', err);
+    editingCardId = null;
+    updateEditQueryParam(null);
+    updateSaveButtonText();
+  });
 
   // --- LISTENERS ---
   const inputs = [

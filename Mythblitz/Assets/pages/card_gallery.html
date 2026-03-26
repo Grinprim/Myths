@@ -268,19 +268,19 @@
 			const duplicateBtn = document.createElement('button');
 			duplicateBtn.type = 'button';
 			duplicateBtn.textContent = 'Duplicate';
-			duplicateBtn.addEventListener('click', () => {
-				storage.duplicateCard(card.id);
-				render();
+			duplicateBtn.addEventListener('click', async () => {
+				await storage.duplicateCard(card.id);
+				await render();
 			});
 
 			const deleteBtn = document.createElement('button');
 			deleteBtn.type = 'button';
 			deleteBtn.className = 'delete';
 			deleteBtn.textContent = 'Delete';
-			deleteBtn.addEventListener('click', () => {
+			deleteBtn.addEventListener('click', async () => {
 				if (!window.confirm('Delete this card from your gallery?')) return;
-				storage.deleteCardById(card.id);
-				render();
+				await storage.deleteCardById(card.id);
+				await render();
 			});
 
 			menuBtn.addEventListener('click', () => {
@@ -304,14 +304,15 @@
 			return tile;
 		}
 
-		function render() {
+		async function render() {
 			if (!storage) {
 				galleryRoot.innerHTML = '<div class="empty">Storage helper was not loaded.</div>';
 				summaryEl.textContent = '';
 				return;
 			}
 
-			const cards = storage.getAllCards().slice().sort((a, b) => {
+			const loadedCards = await storage.getAllCards();
+			const cards = loadedCards.slice().sort((a, b) => {
 				const aTime = Date.parse(a.updatedAt || a.createdAt || 0);
 				const bTime = Date.parse(b.updatedAt || b.createdAt || 0);
 				return bTime - aTime;
@@ -332,7 +333,10 @@
 		}
 
 		document.addEventListener('click', closeAllMenus);
-		render();
+		render().catch((err) => {
+			console.error('Gallery render failed', err);
+			galleryRoot.innerHTML = '<div class="empty">Failed to load gallery from browser storage.</div>';
+		});
 	</script>
 </body>
 </html>
