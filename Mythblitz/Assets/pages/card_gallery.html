@@ -87,6 +87,29 @@
 			font-size: 13px;
 		}
 
+		.statusNote {
+			margin-bottom: 14px;
+			padding: 9px 12px;
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			background: rgba(11, 23, 18, 0.7);
+			font-size: 13px;
+		}
+
+		.statusNote.error {
+			border-color: rgba(239, 68, 68, 0.5);
+			color: #fecaca;
+		}
+
+		.statusNote.success {
+			border-color: rgba(34, 197, 94, 0.55);
+			color: #bbf7d0;
+		}
+
+		.hiddenInput {
+			display: none;
+		}
+
 		.galleryGrid {
 			display: grid;
 			grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -216,11 +239,15 @@
 			</div>
 			<div class="actions">
 				<a class="btn" href="../cardmaker/index.html">Open Card Maker</a>
+				<button id="exportGalleryBtn" type="button" class="btn">Export Gallery</button>
+				<button id="importGalleryBtn" type="button" class="btn">Import Gallery</button>
 				<a class="btn btnPrimary" href="multy_print.html">Go to Multy Print</a>
 			</div>
 		</div>
 
 		<div id="summary" class="summary"></div>
+		<div id="statusNote" class="statusNote" hidden></div>
+		<input id="importGalleryInput" class="hiddenInput" type="file" accept="application/json,.json" />
 		<section id="galleryRoot"></section>
 	</main>
 
@@ -228,7 +255,130 @@
 	<script>
 		const galleryRoot = document.getElementById('galleryRoot');
 		const summaryEl = document.getElementById('summary');
+		const statusNoteEl = document.getElementById('statusNote');
+		const exportGalleryBtn = document.getElementById('exportGalleryBtn');
+		const importGalleryBtn = document.getElementById('importGalleryBtn');
+		const importGalleryInput = document.getElementById('importGalleryInput');
 		const storage = window.MythblitzCardStorage;
+		const BACKUP_VERSION = 1;
+
+		function showStatus(message, kind = 'success') {
+			if (!statusNoteEl) return;
+			statusNoteEl.hidden = false;
+			statusNoteEl.classList.remove('error', 'success');
+			statusNoteEl.classList.add(kind);
+			statusNoteEl.textContent = message;
+		}
+
+		function hideStatus() {
+			if (!statusNoteEl) return;
+			statusNoteEl.hidden = true;
+			statusNoteEl.textContent = '';
+			statusNoteEl.classList.remove('error', 'success');
+		}
+
+		function normalizeImportedCards(payload) {
+			if (Array.isArray(payload)) {
+				return payload;
+			}
+			if (payload && Array.isArray(payload.cards)) {
+				return payload.cards;
+			}
+			throw new Error('Backup file format is not valid.');
+		}
+
+		function sanitizeCards(cards) {
+			return cards.filter((card) => card && typeof card === 'object' && typeof card.id === 'string' && card.id.trim());
+		}
+
+		function mergeCards(existingCards, importedCards) {
+			const byId = new Map();
+			existingCards.forEach((card) => byId.set(card.id, card));
+			importedCards.forEach((card) => byId.set(card.id, card));
+			return Array.from(byId.values());
+		}
+
+		function makeBackupFileName() {
+			const now = new Date();
+			const stamp = now.toISOString().replace(/[:.]/g, '-');
+			return `mythblitz-gallery-backup-${stamp}.json`;
+		}
+
+		function triggerDownload(fileName, content) {
+			const blob = new Blob([content], { type: 'application/json' });
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = fileName;
+			document.body.appendChild(a);
+			a.click();
+			a.remove();
+			setTimeout(() => URL.revokeObjectURL(url), 0);
+		}
+
+		async function exportGallery() {
+			if (!storage) {
+				showStatus('Storage helper was not loaded, export is unavailable.', 'error');
+				return;
+			}
+
+			const cards = await storage.getAllCards();
+			const payload = {
+				format: 'mythblitz-gallery-backup',
+				version: BACKUP_VERSION,
+				exportedAt: new Date().toISOString(),
+				cards
+			};
+
+			triggerDownload(makeBackupFileName(), JSON.stringify(payload, null, 2));
+			showStatus(`Exported ${cards.length} card${cards.length === 1 ? '' : 's'} to backup file.`, 'success');
+		}
+
+		function readFileAsText(file) {
+			return new Promise((resolve, reject) => {
+				const reader = new FileReader();
+				reader.onload = () => resolve(String(reader.result || ''));
+				reader.onerror = () => reject(reader.error || new Error('Failed reading selected file.'));
+				reader.readAsText(file);
+			});
+		}
+
+		async function importGalleryFromFile(file) {
+			if (!storage) {
+				showStatus('Storage helper was not loaded, import is unavailable.', 'error');
+				return;
+			}
+
+			if (!file) return;
+
+			try {
+				const raw = await readFileAsText(file);
+				const parsed = JSON.parse(raw);
+				const importedCards = sanitizeCards(normalizeImportedCards(parsed));
+
+				if (!importedCards.length) {
+					throw new Error('This backup has no valid cards to import.');
+				}
+
+				const replaceAll = window.confirm('Replace current gallery with imported cards? Click Cancel to merge with your current gallery.');
+				if (replaceAll) {
+					await storage.setAllCards(importedCards);
+					showStatus(`Imported ${importedCards.length} card${importedCards.length === 1 ? '' : 's'} and replaced gallery.`, 'success');
+				} else {
+					const existingCards = await storage.getAllCards();
+					const mergedCards = mergeCards(existingCards, importedCards);
+					await storage.setAllCards(mergedCards);
+					showStatus(`Imported ${importedCards.length} card${importedCards.length === 1 ? '' : 's'} and merged gallery to ${mergedCards.length} total.`, 'success');
+				}
+
+				await render();
+			} catch (err) {
+				console.error('Import failed', err);
+				showStatus(err && err.message ? err.message : 'Import failed. Please use a valid backup JSON file.', 'error');
+			} finally {
+				if (importGalleryInput) importGalleryInput.value = '';
+			}
+		}
 
 		function openEditor(cardId) {
 			window.location.href = `../cardmaker/index.html?edit=${encodeURIComponent(cardId)}`;
@@ -333,9 +483,32 @@
 		}
 
 		document.addEventListener('click', closeAllMenus);
+		if (exportGalleryBtn) {
+			exportGalleryBtn.addEventListener('click', () => {
+				hideStatus();
+				exportGallery().catch((err) => {
+					console.error('Export failed', err);
+					showStatus('Failed to export gallery backup.', 'error');
+				});
+			});
+		}
+
+		if (importGalleryBtn && importGalleryInput) {
+			importGalleryBtn.addEventListener('click', () => {
+				hideStatus();
+				importGalleryInput.click();
+			});
+
+			importGalleryInput.addEventListener('change', () => {
+				const file = importGalleryInput.files && importGalleryInput.files[0];
+				importGalleryFromFile(file);
+			});
+		}
+
 		render().catch((err) => {
 			console.error('Gallery render failed', err);
 			galleryRoot.innerHTML = '<div class="empty">Failed to load gallery from browser storage.</div>';
+			showStatus('Failed to load gallery from browser storage.', 'error');
 		});
 	</script>
 </body>
