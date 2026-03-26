@@ -131,6 +131,21 @@ function formatSignedNumber(n){
   return String(num);
 }
 
+function sanitizeExportFileName(name){
+  const fallback = 'card';
+  const raw = String(name || '').trim();
+  if (!raw) return fallback;
+
+  // Strip characters that are invalid on Windows/macOS/Linux file systems.
+  const sanitized = raw
+    .replace(/[<>:"/\\|?*\u0000-\u001F]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/[. ]+$/g, '');
+
+  return sanitized || fallback;
+}
+
 // Handles simple image previews (Art)
 function setLayerFromFile(inputEl, imgEl){
   if (!inputEl || !imgEl) return;
@@ -1052,8 +1067,10 @@ function setupExportButton() {
         dataUrl = await window.htmlToImage.toPng(cardEl, options);
       }
 
-      const rawName = document.getElementById('nameInput').value || 'card';
-      const fileName = rawName.trim().replace(/[^a-z0-9]/gi, '_').toLowerCase();
+      const nameText = document.getElementById('nameText');
+      const nameInput = document.getElementById('nameInput');
+      const rawName = (nameText && nameText.textContent) || (nameInput && nameInput.value) || 'card';
+      const fileName = sanitizeExportFileName(rawName);
 
       if (format === 'pdf') {
         const { jsPDF } = window.jspdf;
