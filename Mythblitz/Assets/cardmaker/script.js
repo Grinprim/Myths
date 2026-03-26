@@ -1,4 +1,6 @@
 // --- UTILS ---
+const TRANSPARENT_PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
 function setText(id, value){
   const el = document.getElementById(id);
   if (!el) return;
@@ -135,7 +137,7 @@ function setLayerFromFile(inputEl, imgEl){
   const file = inputEl.files && inputEl.files[0];
   if (!file){
     // 1x1 Transparent pixel
-    imgEl.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    imgEl.src = TRANSPARENT_PIXEL;
     imgEl.style.display = 'none';
     return;
   }
@@ -246,7 +248,10 @@ function wire(){
   const nameTextEl = document.getElementById('nameText');
   const tagsTextEl = document.getElementById('tagsText');
   const descTextEl = document.getElementById('descText');
+  const saveCardBtn = document.getElementById('saveCardBtn');
   const descToolButtons = Array.from(document.querySelectorAll('.textToolBtn'));
+  const cardStorage = window.MythblitzCardStorage;
+  const editIdFromUrl = new URLSearchParams(window.location.search).get('edit');
   let lastDescSelectionStart = 0;
   let lastDescSelectionEnd = 0;
 
@@ -282,7 +287,33 @@ function wire(){
   const rarityGem = document.getElementById('rarityGem');
 
   // State
-  let customBorderURL = null; // Stores the object URL of manually uploaded border
+  let customBorderURL = null;
+  let uploadedArtDataUrl = null;
+  let editingCardId = editIdFromUrl || null;
+
+  function toDataUrl(file){
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function updateSaveButtonText(){
+    if (!saveCardBtn) return;
+    saveCardBtn.textContent = editingCardId ? 'Update Card' : 'Save to Gallery';
+  }
+
+  function updateEditQueryParam(id){
+    const url = new URL(window.location.href);
+    if (id) {
+      url.searchParams.set('edit', id);
+    } else {
+      url.searchParams.delete('edit');
+    }
+    window.history.replaceState({}, '', url);
+  }
   
   // --- DRAG LOGIC ---
   let isDraggingArt = false;
@@ -530,14 +561,30 @@ function wire(){
     fitTextToBox(statImgHealthNum);
   }
 
-  function syncArtFile(){
-    setLayerFromFile(artFile, artImg);
+  async function syncArtFile(){
+    const file = artFile.files && artFile.files[0];
+    if (!file) {
+      uploadedArtDataUrl = null;
+      if (artImg) {
+        artImg.src = TRANSPARENT_PIXEL;
+        artImg.style.display = 'none';
+      }
+      syncText();
+      return;
+    }
+
+    uploadedArtDataUrl = await toDataUrl(file);
+    if (artImg) {
+      artImg.src = uploadedArtDataUrl;
+      artImg.style.display = 'block';
+    }
 
     // New uploads start centered in the art frame.
     if (artXInput) artXInput.value = '0';
     if (artYInput) artYInput.value = '0';
     if (artScaleInput) artScaleInput.value = '1';
     syncArtTransform();
+    syncText();
   }
 
   function validateBorderDimensions(file, expectedW, expectedH) {
@@ -574,20 +621,155 @@ function wire(){
       return;
     }
 
-    if (customBorderURL) {
-      URL.revokeObjectURL(customBorderURL);
-    }
-    customBorderURL = URL.createObjectURL(file);
+    customBorderURL = await toDataUrl(file);
     resolveBorder();
   }
 
   function clearCustomBorder() {
-    if (customBorderURL) {
-      URL.revokeObjectURL(customBorderURL);
-    }
     customBorderURL = null;
     if(borderFile) borderFile.value = ''; // Reset input
     resolveBorder();
+  }
+
+  function collectCardData(){
+    return {
+      id: editingCardId || (cardStorage ? cardStorage.generateId() : `card_${Date.now()}`),
+      name: (nameInput.value || '').trim() || 'Unnamed Card',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      form: {
+        name: nameInput.value,
+        mana: manaInput.value,
+        manaX: !!manaXInput.checked,
+        explainMana: !!explainManaInput.checked,
+        desc: descInput.value,
+        descHeight: descHeightInput.value,
+        descHide: !!descHideInput.checked,
+        power: powerInput.value,
+        health: healthInput.value,
+        spellSpeed: spellSpeedSelect.value,
+        landmarkType: landmarkTypeSelect.value,
+        rarity: raritySelect.value,
+        type: typeSelect.value,
+        typeLight: !!typeLightInput.checked,
+        tags: tagsInput.value,
+        symbolCount: symbolCountInput.value,
+        symbol1: symbol1Select.value,
+        symbol2: symbol2Select.value,
+        symbol3: symbol3Select.value,
+        symbol4: symbol4Select.value,
+        symbol5: symbol5Select.value,
+        artScale: artScaleInput.value,
+        artX: artXInput.value,
+        artY: artYInput.value
+      },
+      artDataUrl: uploadedArtDataUrl,
+      customBorderDataUrl: customBorderURL,
+      previewDataUrl: null
+    };
+  }
+
+  function applyCardData(card){
+    if (!card || !card.form) return;
+    const data = card.form;
+
+    nameInput.value = data.name || '';
+    manaInput.value = data.mana || '0';
+    manaXInput.checked = !!data.manaX;
+    explainManaInput.checked = !!data.explainMana;
+    descInput.value = data.desc || '';
+    descHeightInput.value = data.descHeight || '125';
+    descHideInput.checked = !!data.descHide;
+    powerInput.value = data.power || '1';
+    healthInput.value = data.health || '1';
+    spellSpeedSelect.value = data.spellSpeed || 'Slow';
+    landmarkTypeSelect.value = data.landmarkType || 'Passive';
+    raritySelect.value = data.rarity || 'Common';
+    typeSelect.value = data.type || 'Unit';
+    typeLightInput.checked = !!data.typeLight;
+    tagsInput.value = data.tags || '';
+    symbolCountInput.value = data.symbolCount || '1';
+    symbol1Select.value = data.symbol1 || 'Arcane';
+    symbol2Select.value = data.symbol2 || 'Arcane';
+    symbol3Select.value = data.symbol3 || 'Arcane';
+    symbol4Select.value = data.symbol4 || 'Arcane';
+    symbol5Select.value = data.symbol5 || 'Arcane';
+    artScaleInput.value = data.artScale || '1';
+    artXInput.value = data.artX || '0';
+    artYInput.value = data.artY || '0';
+
+    uploadedArtDataUrl = card.artDataUrl || null;
+    if (uploadedArtDataUrl && artImg) {
+      artImg.src = uploadedArtDataUrl;
+      artImg.style.display = 'block';
+    } else if (artImg) {
+      artImg.src = TRANSPARENT_PIXEL;
+      artImg.style.display = 'none';
+    }
+
+    customBorderURL = card.customBorderDataUrl || null;
+    if (!customBorderURL && borderFile) borderFile.value = '';
+
+    syncText();
+  }
+
+  async function capturePreviewDataUrl(){
+    if (!cardEl || !window.htmlToImage) return null;
+    return window.htmlToImage.toJpeg(cardEl, {
+      pixelRatio: 2,
+      quality: 0.92,
+      skipFonts: false,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: null
+    });
+  }
+
+  async function saveCardToGallery(){
+    if (!cardStorage || !saveCardBtn) {
+      alert('Card storage is unavailable on this page.');
+      return;
+    }
+
+    const previousText = saveCardBtn.textContent;
+    saveCardBtn.disabled = true;
+    saveCardBtn.textContent = 'Saving...';
+
+    try {
+      const card = collectCardData();
+      const existing = editingCardId ? cardStorage.getCardById(editingCardId) : null;
+      if (existing && existing.createdAt) {
+        card.createdAt = existing.createdAt;
+      }
+
+      card.previewDataUrl = await capturePreviewDataUrl();
+      cardStorage.upsertCard(card);
+
+      editingCardId = card.id;
+      updateEditQueryParam(editingCardId);
+      updateSaveButtonText();
+      alert('Card saved to gallery.');
+    } catch (err) {
+      console.error('Save card failed', err);
+      alert('Saving failed. Your browser storage might be full.');
+    } finally {
+      saveCardBtn.disabled = false;
+      saveCardBtn.textContent = previousText;
+      updateSaveButtonText();
+    }
+  }
+
+  function loadCardFromQuery(){
+    if (!editingCardId || !cardStorage) return;
+    const found = cardStorage.getCardById(editingCardId);
+    if (!found) {
+      editingCardId = null;
+      updateEditQueryParam(null);
+      updateSaveButtonText();
+      return;
+    }
+    applyCardData(found);
+    updateSaveButtonText();
   }
 
   function rememberDescSelection() {
@@ -621,6 +803,8 @@ function wire(){
 
   // Initial Sync
   syncText();
+  updateSaveButtonText();
+  loadCardFromQuery();
 
   // --- LISTENERS ---
   const inputs = [
@@ -636,7 +820,19 @@ function wire(){
     }
   });
 
-  if(artFile) artFile.addEventListener('change', syncArtFile);
+  if(artFile) {
+    artFile.addEventListener('change', () => {
+      syncArtFile().catch((err) => {
+        console.error('Art upload failed', err);
+        alert('Unable to read that art file.');
+      });
+    });
+  }
+  if (saveCardBtn) {
+    saveCardBtn.addEventListener('click', () => {
+      saveCardToGallery();
+    });
+  }
   
   if(borderFile) borderFile.addEventListener('change', handleCustomBorderUpload);
   if(removeBorderBtn) removeBorderBtn.addEventListener('click', clearCustomBorder);
@@ -671,9 +867,13 @@ function wire(){
     resetBtn.addEventListener('click', () => {
       document.getElementById('cardForm').reset();
       customBorderURL = null;
+      uploadedArtDataUrl = null;
+      editingCardId = null;
+      updateEditQueryParam(null);
+      updateSaveButtonText();
       if(removeBorderBtn) removeBorderBtn.style.display = 'none';
       if(artImg) {
-        artImg.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; 
+        artImg.src = TRANSPARENT_PIXEL;
         artImg.style.display = 'none';
       }
       syncText();

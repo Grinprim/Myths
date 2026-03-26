@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Mythblitz | Card Gallery</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #08130f;
+			--panel: rgba(12, 22, 18, 0.8);
+			--line: rgba(123, 255, 199, 0.2);
+			--text: #d9f5e7;
+			--muted: #8eb6a4;
+			--accent: #22c55e;
+			--danger: #ef4444;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			font-family: 'Inter', sans-serif;
+			color: var(--text);
+			background:
+				radial-gradient(circle at 10% 0%, rgba(34, 197, 94, 0.16), transparent 45%),
+				radial-gradient(circle at 100% 90%, rgba(45, 212, 191, 0.16), transparent 40%),
+				var(--bg);
+		}
+
+		.page {
+			max-width: 1700px;
+			margin: 0 auto;
+			padding: 28px;
+		}
+
+		.topBar {
+			display: flex;
+			gap: 12px;
+			align-items: center;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			margin-bottom: 20px;
+		}
+
+		.titleWrap h1 {
+			margin: 0;
+			font-family: 'Cinzel', serif;
+			font-size: clamp(26px, 4vw, 38px);
+			letter-spacing: 0.06em;
+		}
+
+		.titleWrap p {
+			margin: 6px 0 0;
+			color: var(--muted);
+			font-size: 14px;
+		}
+
+		.actions {
+			display: flex;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+
+		.btn {
+			text-decoration: none;
+			border: 1px solid var(--line);
+			color: var(--text);
+			background: var(--panel);
+			padding: 10px 14px;
+			border-radius: 10px;
+			font-weight: 700;
+			cursor: pointer;
+		}
+
+		.btnPrimary {
+			background: linear-gradient(130deg, #0d261b, #1f7d4c);
+			border-color: rgba(34, 197, 94, 0.55);
+		}
+
+		.summary {
+			margin-bottom: 14px;
+			color: var(--muted);
+			font-size: 13px;
+		}
+
+		.galleryGrid {
+			display: grid;
+			grid-template-columns: repeat(5, minmax(0, 1fr));
+			gap: 14px;
+		}
+
+		.cardTile {
+			position: relative;
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			overflow: hidden;
+			background: rgba(0, 0, 0, 0.35);
+			cursor: pointer;
+			transition: transform 0.16s ease, border-color 0.16s ease;
+		}
+
+		.cardTile:hover {
+			transform: translateY(-2px);
+			border-color: rgba(123, 255, 199, 0.45);
+		}
+
+		.preview {
+			width: 100%;
+			aspect-ratio: 63 / 88;
+			background: #0f1f18;
+			object-fit: cover;
+			display: block;
+		}
+
+		.meta {
+			padding: 10px;
+		}
+
+		.meta h3 {
+			margin: 0;
+			font-size: 14px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.meta p {
+			margin: 6px 0 0;
+			color: var(--muted);
+			font-size: 12px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.menuWrap {
+			position: absolute;
+			top: 8px;
+			right: 8px;
+			z-index: 2;
+		}
+
+		.menuBtn {
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			border: 1px solid rgba(255, 255, 255, 0.45);
+			background: rgba(0, 0, 0, 0.6);
+			color: #fff;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		.menu {
+			position: absolute;
+			right: 0;
+			top: 36px;
+			display: none;
+			min-width: 130px;
+			border-radius: 8px;
+			overflow: hidden;
+			border: 1px solid var(--line);
+			background: #0b1712;
+		}
+
+		.menu.open { display: block; }
+
+		.menu button {
+			width: 100%;
+			text-align: left;
+			border: 0;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+			background: transparent;
+			color: var(--text);
+			padding: 9px 10px;
+			cursor: pointer;
+			font-size: 13px;
+		}
+
+		.menu button:last-child { border-bottom: 0; }
+		.menu button.delete { color: #fca5a5; }
+
+		.empty {
+			border: 1px dashed var(--line);
+			border-radius: 12px;
+			padding: 26px;
+			text-align: center;
+			color: var(--muted);
+			background: var(--panel);
+		}
+
+		@media (max-width: 1300px) {
+			.galleryGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+		}
+
+		@media (max-width: 1000px) {
+			.galleryGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+		}
+
+		@media (max-width: 700px) {
+			.page { padding: 18px; }
+			.galleryGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		}
+	</style>
+</head>
+<body>
+	<main class="page">
+		<div class="topBar">
+			<div class="titleWrap">
+				<h1>Card Gallery</h1>
+				<p>Click a card to edit it again in the card maker.</p>
+			</div>
+			<div class="actions">
+				<a class="btn" href="../cardmaker/index.html">Open Card Maker</a>
+				<a class="btn btnPrimary" href="multy_print.html">Go to Multy Print</a>
+			</div>
+		</div>
+
+		<div id="summary" class="summary"></div>
+		<section id="galleryRoot"></section>
+	</main>
+
+	<script src="../dyn/card_storage.js"></script>
+	<script>
+		const galleryRoot = document.getElementById('galleryRoot');
+		const summaryEl = document.getElementById('summary');
+		const storage = window.MythblitzCardStorage;
+
+		function openEditor(cardId) {
+			window.location.href = `../cardmaker/index.html?edit=${encodeURIComponent(cardId)}`;
+		}
+
+		function closeAllMenus() {
+			document.querySelectorAll('.menu.open').forEach((menu) => menu.classList.remove('open'));
+		}
+
+		function buildCardTile(card) {
+			const tile = document.createElement('article');
+			tile.className = 'cardTile';
+			tile.addEventListener('click', () => openEditor(card.id));
+
+			const img = document.createElement('img');
+			img.className = 'preview';
+			img.alt = card.name || 'Saved card';
+			img.src = card.previewDataUrl || card.artDataUrl || '';
+
+			const menuWrap = document.createElement('div');
+			menuWrap.className = 'menuWrap';
+			menuWrap.addEventListener('click', (event) => event.stopPropagation());
+
+			const menuBtn = document.createElement('button');
+			menuBtn.className = 'menuBtn';
+			menuBtn.type = 'button';
+			menuBtn.textContent = '⋯';
+
+			const menu = document.createElement('div');
+			menu.className = 'menu';
+
+			const editBtn = document.createElement('button');
+			editBtn.type = 'button';
+			editBtn.textContent = 'Edit';
+			editBtn.addEventListener('click', () => openEditor(card.id));
+
+			const duplicateBtn = document.createElement('button');
+			duplicateBtn.type = 'button';
+			duplicateBtn.textContent = 'Duplicate';
+			duplicateBtn.addEventListener('click', () => {
+				storage.duplicateCard(card.id);
+				render();
+			});
+
+			const deleteBtn = document.createElement('button');
+			deleteBtn.type = 'button';
+			deleteBtn.className = 'delete';
+			deleteBtn.textContent = 'Delete';
+			deleteBtn.addEventListener('click', () => {
+				if (!window.confirm('Delete this card from your gallery?')) return;
+				storage.deleteCardById(card.id);
+				render();
+			});
+
+			menuBtn.addEventListener('click', () => {
+				const isOpen = menu.classList.contains('open');
+				closeAllMenus();
+				if (!isOpen) menu.classList.add('open');
+			});
+
+			menu.append(editBtn, duplicateBtn, deleteBtn);
+			menuWrap.append(menuBtn, menu);
+
+			const meta = document.createElement('div');
+			meta.className = 'meta';
+			const title = document.createElement('h3');
+			title.textContent = card.name || 'Unnamed Card';
+			const tags = document.createElement('p');
+			tags.textContent = card.form && card.form.tags ? card.form.tags : 'No tags';
+			meta.append(title, tags);
+
+			tile.append(menuWrap, img, meta);
+			return tile;
+		}
+
+		function render() {
+			if (!storage) {
+				galleryRoot.innerHTML = '<div class="empty">Storage helper was not loaded.</div>';
+				summaryEl.textContent = '';
+				return;
+			}
+
+			const cards = storage.getAllCards().slice().sort((a, b) => {
+				const aTime = Date.parse(a.updatedAt || a.createdAt || 0);
+				const bTime = Date.parse(b.updatedAt || b.createdAt || 0);
+				return bTime - aTime;
+			});
+
+			summaryEl.textContent = `${cards.length} card${cards.length === 1 ? '' : 's'} saved`;
+
+			if (!cards.length) {
+				galleryRoot.innerHTML = '<div class="empty">No cards in your gallery yet. Save one from the card maker.</div>';
+				return;
+			}
+
+			galleryRoot.innerHTML = '';
+			const grid = document.createElement('div');
+			grid.className = 'galleryGrid';
+			cards.forEach((card) => grid.appendChild(buildCardTile(card)));
+			galleryRoot.appendChild(grid);
+		}
+
+		document.addEventListener('click', closeAllMenus);
+		render();
+	</script>
+</body>
+</html>

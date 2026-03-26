@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mythblitz | Multy Print</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #09140f;
+      --panel: rgba(12, 24, 18, 0.82);
+      --line: rgba(124, 255, 201, 0.22);
+      --text: #d7f4e6;
+      --muted: #95b7a8;
+      --accent: #16a34a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(22, 163, 74, 0.2), transparent 45%),
+        radial-gradient(circle at 100% 100%, rgba(20, 184, 166, 0.15), transparent 45%),
+        var(--bg);
+    }
+
+    .page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      letter-spacing: 0.05em;
+    }
+
+    .sub {
+      color: var(--muted);
+      margin: 8px 0 20px;
+      font-size: 14px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: var(--panel);
+      text-decoration: none;
+      padding: 10px 13px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btnPrimary {
+      border-color: rgba(22, 163, 74, 0.65);
+      background: linear-gradient(130deg, #0f2a1d, #1f7a4a);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.35);
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .item img {
+      width: 72px;
+      aspect-ratio: 63 / 88;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #0e1f17;
+    }
+
+    .item h3 {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .controls {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .controls label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    input[type="number"] {
+      width: 72px;
+      border: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 6px;
+    }
+
+    .infoBox {
+      margin: 16px 0;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      color: var(--muted);
+      background: var(--panel);
+      font-size: 13px;
+    }
+
+    .empty {
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--panel);
+    }
+
+    @media (max-width: 1100px) {
+      .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .page { padding: 18px; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>Multy Print</h1>
+    <p class="sub">Select cards and quantity, then export an A4 PDF using 63 x 88 mm card dimensions.</p>
+
+    <div class="toolbar">
+      <a class="btn" href="card_gallery.html">Back to Gallery</a>
+      <button class="btn" type="button" id="selectAllBtn">Select All</button>
+      <button class="btn" type="button" id="clearBtn">Clear</button>
+      <button class="btn btnPrimary" type="button" id="printBtn">Generate PDF</button>
+    </div>
+
+    <div class="infoBox">
+      Layout target: A4 portrait, cards at 63 x 88 mm. Current fit: 3 columns x 3 rows (9 cards per page).
+    </div>
+
+    <section id="root"></section>
+  </main>
+
+  <script src="../dyn/card_storage.js"></script>
+  <script>
+    const storage = window.MythblitzCardStorage;
+    const root = document.getElementById('root');
+    const selectAllBtn = document.getElementById('selectAllBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const printBtn = document.getElementById('printBtn');
+
+    function createItem(card) {
+      const item = document.createElement('article');
+      item.className = 'item';
+      item.dataset.id = card.id;
+
+      const img = document.createElement('img');
+      img.src = card.previewDataUrl || card.artDataUrl || '';
+      img.alt = card.name || 'Card';
+
+      const body = document.createElement('div');
+      const title = document.createElement('h3');
+      title.textContent = card.name || 'Unnamed Card';
+
+      const controls = document.createElement('div');
+      controls.className = 'controls';
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.className = 'card-select';
+
+      const label = document.createElement('label');
+      label.textContent = 'Qty';
+
+      const qty = document.createElement('input');
+      qty.type = 'number';
+      qty.min = '1';
+      qty.max = '999';
+      qty.value = '1';
+      qty.className = 'card-qty';
+      qty.disabled = true;
+
+      checkbox.addEventListener('change', () => {
+        qty.disabled = !checkbox.checked;
+        if (!checkbox.checked) qty.value = '1';
+      });
+
+      controls.append(checkbox, label, qty);
+      body.append(title, controls);
+      item.append(img, body);
+      return item;
+    }
+
+    function render() {
+      if (!storage) {
+        root.innerHTML = '<div class="empty">Storage helper was not loaded.</div>';
+        return;
+      }
+
+      const cards = storage.getAllCards();
+      if (!cards.length) {
+        root.innerHTML = '<div class="empty">No cards found. Save cards from the card maker first.</div>';
+        return;
+      }
+
+      const grid = document.createElement('div');
+      grid.className = 'cards';
+      cards.forEach((card) => grid.appendChild(createItem(card)));
+
+      root.innerHTML = '';
+      root.appendChild(grid);
+    }
+
+    function buildPrintQueue() {
+      const selected = [];
+      const cardsById = new Map(storage.getAllCards().map((card) => [card.id, card]));
+
+      document.querySelectorAll('.item').forEach((item) => {
+        const id = item.dataset.id;
+        const checked = item.querySelector('.card-select').checked;
+        if (!checked) return;
+
+        const qtyInput = item.querySelector('.card-qty');
+        const quantity = Math.max(1, Math.min(999, Number(qtyInput.value) || 1));
+        const card = cardsById.get(id);
+        if (!card) return;
+
+        for (let i = 0; i < quantity; i += 1) {
+          selected.push(card);
+        }
+      });
+
+      return selected;
+    }
+
+    function getImageType(dataUrl) {
+      if (typeof dataUrl !== 'string') return 'JPEG';
+      if (dataUrl.startsWith('data:image/png')) return 'PNG';
+      return 'JPEG';
+    }
+
+    function generatePdf() {
+      const queue = buildPrintQueue();
+      if (!queue.length) {
+        alert('Select at least one card to print.');
+        return;
+      }
+
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+      const pageW = 210;
+      const pageH = 297;
+      const cardW = 63;
+      const cardH = 88;
+      const marginX = 5;
+      const marginY = 10;
+      const gapX = 1;
+      const gapY = 1;
+
+      const columns = Math.floor((pageW - (marginX * 2) + gapX) / (cardW + gapX));
+      const rows = Math.floor((pageH - (marginY * 2) + gapY) / (cardH + gapY));
+      const perPage = columns * rows;
+
+      queue.forEach((card, idx) => {
+        if (idx > 0 && idx % perPage === 0) {
+          pdf.addPage();
+        }
+
+        const pos = idx % perPage;
+        const col = pos % columns;
+        const row = Math.floor(pos / columns);
+        const x = marginX + col * (cardW + gapX);
+        const y = marginY + row * (cardH + gapY);
+
+        const source = card.previewDataUrl || card.artDataUrl;
+        if (!source) return;
+
+        pdf.addImage(source, getImageType(source), x, y, cardW, cardH, undefined, 'FAST');
+      });
+
+      pdf.save('mythblitz_multy_print.pdf');
+    }
+
+    selectAllBtn.addEventListener('click', () => {
+      document.querySelectorAll('.item').forEach((item) => {
+        item.querySelector('.card-select').checked = true;
+        item.querySelector('.card-qty').disabled = false;
+      });
+    });
+
+    clearBtn.addEventListener('click', () => {
+      document.querySelectorAll('.item').forEach((item) => {
+        item.querySelector('.card-select').checked = false;
+        item.querySelector('.card-qty').disabled = true;
+        item.querySelector('.card-qty').value = '1';
+      });
+    });
+
+    printBtn.addEventListener('click', generatePdf);
+    render();
+  </script>
+</body>
+</html>
