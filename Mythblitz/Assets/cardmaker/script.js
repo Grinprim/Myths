@@ -249,6 +249,8 @@ function wire(){
   const tagsTextEl = document.getElementById('tagsText');
   const descTextEl = document.getElementById('descText');
   const saveCardBtn = document.getElementById('saveCardBtn');
+  const updateCardBtn = document.getElementById('updateCardBtn');
+  const toastHost = document.getElementById('uiToastHost');
   const descToolButtons = Array.from(document.querySelectorAll('.textToolBtn'));
   const cardStorage = window.MythblitzCardStorage;
   const editIdFromUrl = new URLSearchParams(window.location.search).get('edit');
@@ -334,9 +336,38 @@ function wire(){
     return canvas.toDataURL('image/jpeg', quality);
   }
 
-  function updateSaveButtonText(){
-    if (!saveCardBtn) return;
-    saveCardBtn.textContent = editingCardId ? 'Update Card' : 'Save to Gallery';
+  function showToast(message, tone = 'success') {
+    if (!toastHost) return;
+    const toast = document.createElement('div');
+    toast.className = `toast ${tone === 'error' ? 'toastError' : 'toastSuccess'}`;
+    toast.textContent = message;
+    toastHost.appendChild(toast);
+
+    requestAnimationFrame(() => {
+      toast.classList.add('show');
+    });
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 240);
+    }, 2600);
+  }
+
+  function updateSaveButtons(){
+    if (saveCardBtn) saveCardBtn.textContent = 'Save to Gallery';
+    if (!updateCardBtn) return;
+    updateCardBtn.classList.toggle('isHidden', !editingCardId);
+  }
+
+  function setSaveButtonsBusy(isBusy, action = 'save') {
+    if (saveCardBtn) {
+      saveCardBtn.disabled = isBusy;
+      saveCardBtn.textContent = isBusy && action === 'save' ? 'Saving...' : 'Save to Gallery';
+    }
+    if (updateCardBtn) {
+      updateCardBtn.disabled = isBusy;
+      updateCardBtn.textContent = isBusy && action === 'update' ? 'Updating...' : 'Update Card';
+    }
   }
 
   function updateEditQueryParam(id){
@@ -651,7 +682,7 @@ function wire(){
 
     if (!isValidSize) {
       if (borderFile) borderFile.value = '';
-      alert(`Custom border must be exactly ${expectedW}x${expectedH} pixels.`);
+      showToast(`Custom border must be exactly ${expectedW}x${expectedH} pixels.`, 'error');
       return;
     }
 
@@ -764,19 +795,27 @@ function wire(){
     }
   }
 
-  async function saveCardToGallery(){
+  async function persistCard(mode = 'save') {
     if (!cardStorage || !saveCardBtn) {
-      alert('Card storage is unavailable on this page.');
+      showToast('Card storage is unavailable on this page.', 'error');
       return;
     }
 
-    const previousText = saveCardBtn.textContent;
-    saveCardBtn.disabled = true;
-    saveCardBtn.textContent = 'Saving...';
+    if (mode === 'update' && !editingCardId) {
+      showToast('No saved card selected to update yet. Save first.', 'error');
+      return;
+    }
+
+    setSaveButtonsBusy(true, mode);
 
     try {
       const card = collectCardData();
-      const existing = editingCardId ? await cardStorage.getCardById(editingCardId) : null;
+      const targetId = mode === 'update' && editingCardId
+        ? editingCardId
+        : (cardStorage ? cardStorage.generateId() : `card_${Date.now()}`);
+      card.id = targetId;
+
+      const existing = await cardStorage.getCardById(targetId);
       if (existing && existing.createdAt) {
         card.createdAt = existing.createdAt;
       }
@@ -786,16 +825,15 @@ function wire(){
 
       editingCardId = card.id;
       updateEditQueryParam(editingCardId);
-      updateSaveButtonText();
-      alert('Card saved to gallery.');
+      updateSaveButtons();
+      showToast(mode === 'update' ? 'Card updated in gallery.' : 'Card saved to gallery.', 'success');
     } catch (err) {
       console.error('Save card failed', err);
-      const details = err && err.message ? `\n\nDetails: ${err.message}` : '';
-      alert(`Saving failed. Browser storage might be blocked or full.${details}\n\nIf you opened HTML directly from files, try running from localhost.`);
+      const details = err && err.message ? ` ${err.message}` : '';
+      showToast(`Saving failed.${details}`, 'error');
     } finally {
-      saveCardBtn.disabled = false;
-      saveCardBtn.textContent = previousText;
-      updateSaveButtonText();
+      setSaveButtonsBusy(false, mode);
+      updateSaveButtons();
     }
   }
 
@@ -805,11 +843,11 @@ function wire(){
     if (!found) {
       editingCardId = null;
       updateEditQueryParam(null);
-      updateSaveButtonText();
+      updateSaveButtons();
       return;
     }
     applyCardData(found);
-    updateSaveButtonText();
+    updateSaveButtons();
   }
 
   function rememberDescSelection() {
@@ -843,12 +881,13 @@ function wire(){
 
   // Initial Sync
   syncText();
-  updateSaveButtonText();
+  updateSaveButtons();
   loadCardFromQuery().catch((err) => {
     console.error('Failed to load card', err);
     editingCardId = null;
     updateEditQueryParam(null);
-    updateSaveButtonText();
+    updateSaveButtons();
+    showToast('Unable to load that card from gallery.', 'error');
   });
 
   // --- LISTENERS ---
@@ -869,13 +908,18 @@ function wire(){
     artFile.addEventListener('change', () => {
       syncArtFile().catch((err) => {
         console.error('Art upload failed', err);
-        alert('Unable to read that art file.');
+        showToast('Unable to read that art file.', 'error');
       });
     });
   }
   if (saveCardBtn) {
     saveCardBtn.addEventListener('click', () => {
-      saveCardToGallery();
+      persistCard('save');
+    });
+  }
+  if (updateCardBtn) {
+    updateCardBtn.addEventListener('click', () => {
+      persistCard('update');
     });
   }
   
@@ -915,13 +959,14 @@ function wire(){
       uploadedArtDataUrl = null;
       editingCardId = null;
       updateEditQueryParam(null);
-      updateSaveButtonText();
+      updateSaveButtons();
       if(removeBorderBtn) removeBorderBtn.style.display = 'none';
       if(artImg) {
         artImg.src = TRANSPARENT_PIXEL;
         artImg.style.display = 'none';
       }
       syncText();
+      showToast('Card form reset.', 'success');
     });
   }
 
@@ -986,7 +1031,18 @@ function setupExportButton() {
       }
     } catch (err) {
       console.error("Export Error:", err);
-      alert("Export failed. If using external images, check console.");
+      const toastHost = document.getElementById('uiToastHost');
+      if (toastHost) {
+        const toast = document.createElement('div');
+        toast.className = 'toast toastError';
+        toast.textContent = 'Export failed. Check browser console for details.';
+        toastHost.appendChild(toast);
+        requestAnimationFrame(() => toast.classList.add('show'));
+        setTimeout(() => {
+          toast.classList.remove('show');
+          setTimeout(() => toast.remove(), 240);
+        }, 2600);
+      }
     } finally {
       exportBtn.textContent = originalText;
       exportBtn.disabled = false;

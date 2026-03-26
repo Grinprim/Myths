@@ -77,11 +77,15 @@
             position: relative;
         }
 
+        .view-section.hidden {
+            display: none !important;
+        }
+
         :root {
             --rules-max-width: 1400px;
             --rules-sidebar-width: 260px;
             --rules-side-pad: 1.5rem;
-            --rules-sidebar-top: calc(9rem + 2cm);
+            --rules-sidebar-top: calc(5rem + 4.5rem + 15px);
         }
 
         .sidebar {
@@ -288,7 +292,7 @@
             </p>
         </header>
 
-        <div
+        <div id="rulesViewTabs"
             class="flex flex-wrap justify-center gap-4 border-b border-slate-800 pb-8 mb-8 sticky top-20 z-30 bg-custom-dark/95 backdrop-blur-sm py-4">
             <button onclick="switchView('view-campaign')"
                 class="tab-btn active px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
@@ -302,7 +306,7 @@
 
         <div id="view-campaign" class="view-section rules-layout">
 
-            <aside class="sidebar hidden lg:block" style="margin-top: 600px;">
+            <aside class="sidebar hidden lg:block">
                 <div class="sidebar-fixed">
                     <div class="mb-8">
                         <p class="text-xs text-slate-500 mb-2">JUMP TO SECTION</p>
@@ -3075,12 +3079,12 @@
         }
 
         function syncSidebarTop() {
-            const title = document.querySelector('#view-campaign #core-section h2');
-            if (!title) return;
+            const tabs = document.getElementById('rulesViewTabs');
+            if (!tabs) return;
             if (!window.matchMedia('(min-width: 1024px)').matches) return;
-            const rect = title.getBoundingClientRect();
-            if (rect.top <= 0) return;
-            document.documentElement.style.setProperty('--rules-sidebar-top', `${Math.round(rect.top)}px`);
+            const rect = tabs.getBoundingClientRect();
+            const sidebarTop = Math.max(80, Math.round(rect.bottom + 15));
+            document.documentElement.style.setProperty('--rules-sidebar-top', `${sidebarTop}px`);
         }
         function updateSidebarActive() {
             const campaignVisible = !document.getElementById('view-campaign').classList.contains('hidden');
@@ -3127,6 +3131,7 @@
                 requestAnimationFrame(updateSidebarActive);
             });
             document.addEventListener('scroll', () => {
+                requestAnimationFrame(syncSidebarTop);
                 requestAnimationFrame(updateSidebarActive);
             }, { passive: true });
 

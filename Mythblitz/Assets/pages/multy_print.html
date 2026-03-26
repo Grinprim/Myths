@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mythblitz | Multy Print</title>
+  <title>Mythblitz | Multi Print</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -22,6 +24,7 @@
 
     body {
       margin: 0;
+      padding-top: 84px;
       font-family: 'Inter', sans-serif;
       color: var(--text);
       min-height: 100vh;
@@ -160,8 +163,9 @@
   </style>
 </head>
 <body>
+  <div id="navbar-placeholder"></div>
   <main class="page">
-    <h1>Multy Print</h1>
+    <h1>Multi Print</h1>
     <p class="sub">Select cards and quantity, then export an A4 PDF using 63 x 88 mm card dimensions.</p>
 
     <div class="toolbar">
@@ -178,6 +182,7 @@
     <section id="root"></section>
   </main>
 
+  <script id="ml-layout" src="../dyn/layout.js" data-base=".." data-root="../.." defer></script>
   <script src="../dyn/card_storage.js"></script>
   <script>
     const storage = window.MythblitzCardStorage;
@@ -338,7 +343,7 @@
 
     printBtn.addEventListener('click', generatePdf);
     render().catch((err) => {
-      console.error('Multy Print render failed', err);
+      console.error('Multi Print render failed', err);
       root.innerHTML = '<div class="empty">Failed to load cards from browser storage.</div>';
     });
   </script>

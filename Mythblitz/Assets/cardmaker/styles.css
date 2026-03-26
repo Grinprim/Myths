@@ -39,6 +39,7 @@ html, body { height: 100%; }
 
 body {
   margin: 0;
+  padding-top: 84px;
   font-family: 'Inter', system-ui, sans-serif;
   background: var(--bg-gradient);
   background-attachment: fixed;
@@ -235,6 +236,24 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
 .hint { margin-top: 8px; color: var(--muted); font-size: 11px; font-style: italic; }
 .actions { display: flex; gap: 12px; margin-top: 8px; }
 
+.cardActions {
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.cardActions .btn {
+  min-height: 42px;
+}
+
+.actionExportField {
+  margin-top: 0;
+  min-width: 190px;
+}
+
 .textTools {
   display: flex;
   flex-wrap: wrap;
@@ -275,6 +294,45 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
 }
 .exportForm { display: flex; align-items: flex-end; justify-content: flex-end; gap: 12px; }
 .exportField { margin-top: 0; min-width: 180px; }
+
+.toastHost {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1200;
+  display: grid;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  min-width: 220px;
+  max-width: 380px;
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  background: rgba(10, 20, 16, 0.92);
+  color: var(--text);
+  padding: 10px 12px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  transform: translateY(8px);
+  opacity: 0;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast.toastError {
+  border-color: rgba(239, 68, 68, 0.58);
+  color: #fecaca;
+}
+
+.toast.toastSuccess {
+  border-color: rgba(34, 197, 94, 0.6);
+  color: #bbf7d0;
+}
 
 /* ================= CARD CONTAINER ================= */
 .card {
@@ -595,4 +653,14 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
   .rowShort4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .row4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .row3 { grid-template-columns: 1fr; }
+  .cardActions {
+    padding: 12px;
+  }
+  .actionExportField {
+    min-width: 0;
+    width: 100%;
+  }
+  .cardActions .btn {
+    width: 100%;
+  }
 }

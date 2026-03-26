@@ -1,18 +1,16 @@
-<nav class="fixed w-full z-50 nav-container">
+<nav class="fixed top-0 left-0 w-full z-50 nav-container">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <div class="flex items-center space-x-4">
             <img src="../img/logo.png" alt="Mythlight" class="h-10 w-auto object-contain" onerror="this.style.display='none'">
-            <span class="text-xl font-bold tracking-widest uppercase fantasy-font nav-logo-text">Mythlight</span>
+            <span class="text-xl font-bold tracking-widest uppercase fantasy-font nav-logo-text">Mythblitz</span>
         </div>
 
         <div id="nav-links" class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-widest">
-            <a href="../index.html" class="nav-link">Home</a>
-            <a href="rules.html" class="nav-link">Rules</a>
-            <a href="species.html" class="nav-link">Species</a>
-            <a href="paths.html" class="nav-link">Paths</a>
-            <a href="traits.html" class="nav-link">Traits</a>
-            <a href="spells.html" class="nav-link">Spells</a>
-            <a href="inventory.html" class="nav-link">Inventory</a>
+            <a href="#" class="nav-link" data-route="home">Home</a>
+            <a href="#" class="nav-link" data-route="cardmaker">Card Maker</a>
+            <a href="#" class="nav-link" data-route="gallery">Gallery</a>
+            <a href="#" class="nav-link" data-route="print">Multi Print</a>
+            <a href="#" class="nav-link" data-route="counter">Mana Counter</a>
         </div>
 
         <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
@@ -24,13 +22,11 @@
 
     <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 w-full overflow-hidden transition-all duration-300">
         <div class="flex flex-col text-sm font-semibold uppercase tracking-widest border-t border-white/5">
-            <a href="../index.html" class="mobile-link">Home</a>
-            <a href="rules.html" class="mobile-link">Rules</a>
-            <a href="species.html" class="mobile-link">Species</a>
-            <a href="paths.html" class="mobile-link">Paths</a>
-            <a href="traits.html" class="mobile-link">Traits</a>
-            <a href="spells.html" class="mobile-link">Spells</a>
-            <a href="inventory.html" class="mobile-link">Inventory</a>
+            <a href="#" class="mobile-link" data-route="home">Home</a>
+            <a href="#" class="mobile-link" data-route="cardmaker">Card Maker</a>
+            <a href="#" class="mobile-link" data-route="gallery">Gallery</a>
+            <a href="#" class="mobile-link" data-route="print">Multi Print</a>
+            <a href="#" class="mobile-link" data-route="counter">Mana Counter</a>
         </div>
     </div>
 </nav>

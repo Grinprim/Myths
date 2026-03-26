@@ -4,16 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mythblitz Card Maker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
   
+  <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
 </head>
 <body>
+  <div id="navbar-placeholder"></div>
   <header class="appHeader">
     <div class="headerContent">
       <h1 class="appTitle">Mythblitz Card Architect</h1>
@@ -204,9 +207,19 @@
           </div>
         </div>
 
-        <div class="actions">
-          <button type="button" id="resetBtn" class="btn btnSecondary">Reset</button>
+        <div class="actions cardActions">
           <button type="button" id="saveCardBtn" class="btn btnPrimary">Save to Gallery</button>
+          <button type="button" id="updateCardBtn" class="btn btnSecondary isHidden">Update Card</button>
+          <button type="button" id="resetBtn" class="btn btnSecondary">Reset</button>
+          <label class="exportField actionExportField">
+            <select id="exportFormat" class="input-dark">
+              <option value="png">PNG (High Res)</option>
+              <option value="jpeg">JPEG</option>
+              <option value="svg">SVG</option>
+              <option value="pdf">PDF (Print)</option>
+            </select>
+          </label>
+          <button type="button" id="exportBtn" class="btn btnSecondary">Download Card</button>
           <a href="../pages/card_gallery.html" class="btn btnSecondary" id="openGalleryBtn">Open Gallery</a>
         </div>
       </form>
@@ -269,22 +282,11 @@
 
         </div> </div>
       
-      <div class="exportBar">
-        <div class="exportForm">
-          <label class="exportField">
-            <select id="exportFormat" class="input-dark">
-              <option value="png">PNG (High Res)</option>
-              <option value="jpeg">JPEG</option>
-              <option value="svg">SVG</option>
-              <option value="pdf">PDF (Print)</option>
-            </select>
-          </label>
-          <button type="button" id="exportBtn" class="btn btnPrimary">Download Card</button>
-        </div>
-      </div>
     </section>
   </main>
+  <div id="uiToastHost" class="toastHost" aria-live="polite"></div>
   
+  <script id="ml-layout" src="../dyn/layout.js" data-base=".." data-root="../.." defer></script>
   <script src="../dyn/card_storage.js"></script>
   <script src="script.js"></script>
 </body>

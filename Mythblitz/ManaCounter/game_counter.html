@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mythblitz | Game Counter</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../Assets/css/styles.css" />
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-bg: rgba(9, 23, 16, 0.72);
+}
+
+body {
+  margin: 0;
+  padding-top: 84px;
+  font-family: 'Inter', sans-serif;
+  color: #d1fae5;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.2), transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.14), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(20, 184, 166, 0.12), transparent 45%),
+    #0b1a12;
+}
+
+.page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 10px 14px 24px;
+}
+
+.toolDock {
+  position: sticky;
+  top: 92px;
+  z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0 12px;
+}
+
+.dockBtn {
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: rgba(8, 24, 16, 0.85);
+  color: #d1fae5;
+  padding: 10px 14px;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+  min-width: 118px;
+  box-shadow: 0 10px 16px -12px rgba(0, 0, 0, 0.7);
+}
+
+.modeLabel {
+  width: 100%;
+  text-align: center;
+  color: #8fb8a4;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.player {
+  position: relative;
+  border-radius: 18px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 14px 26px -14px rgba(0, 0, 0, 0.65), inset 0 0 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+}
+
+.playerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.playerName {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.8);
+}
+
+.themeBtn {
+  border: 1px solid var(--glass-border);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  padding: 0;
+}
+
+.colorPicker {
+  position: absolute;
+  left: 50%;
+  top: 46px;
+  transform: translateX(-50%);
+  display: none;
+  gap: 6px;
+  background: rgba(8, 24, 16, 0.95);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 8px;
+  z-index: 10;
+}
+
+.colorPicker.show {
+  display: flex;
+}
+
+.colorBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.colorBtn img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.statRow {
+  display: grid;
+  grid-template-columns: auto minmax(72px, auto) auto;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+
+.controlBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.28);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.valueBlock {
+  text-align: center;
+}
+
+.valueText {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+.valueLabel {
+  margin-top: 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.setupOverlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(3px);
+  z-index: 1200;
+}
+
+.setupCard {
+  width: min(460px, 100%);
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  background: rgba(7, 20, 14, 0.95);
+  box-shadow: 0 24px 36px -20px rgba(0, 0, 0, 0.75);
+  padding: 18px;
+}
+
+.setupTitle {
+  margin: 0 0 12px;
+  font-family: 'Cinzel', serif;
+  color: #ecfdf5;
+  font-size: 26px;
+}
+
+.setupHelp {
+  margin: 0 0 16px;
+  color: #98b8ab;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.field label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #b7d6c8;
+}
+
+.field select {
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: rgba(15, 23, 42, 0.72);
+  color: #ecfdf5;
+  padding: 10px 12px;
+}
+
+.modeHint {
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: rgba(5, 20, 14, 0.8);
+  border-radius: 10px;
+  padding: 10px;
+  color: #9ec8b7;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.setupActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.startBtn {
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 700;
+  color: #ecfdf5;
+  background: linear-gradient(135deg, #0f5132, #0d7a4d);
+}
+
+@media (max-width: 980px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 76px;
+  }
+
+  .toolDock {
+    top: 80px;
+  }
+
+  .dockBtn {
+    min-width: 46%;
+    font-size: 11px;
+  }
+
+  .playerName {
+    font-size: 18px;
+  }
+
+  .valueText {
+    font-size: 30px;
+  }
+}
+</style>
+</head>
+<body>
+<div id="navbar-placeholder"></div>
+
+<main class="page">
+  <div class="toolDock">
+    <div id="modeLabel" class="modeLabel">Match Mode: -</div>
+    <button type="button" class="dockBtn" id="setupBtn">Game Setup</button>
+    <button type="button" class="dockBtn" id="addPlayerBtn">+ Player</button>
+    <button type="button" class="dockBtn" id="removePlayerBtn">- Player</button>
+    <button type="button" class="dockBtn" id="resetMatchBtn">Reset Match</button>
+  </div>
+
+  <section id="container" class="container"></section>
+</main>
+
+<div id="setupOverlay" class="setupOverlay">
+  <div class="setupCard">
+    <h1 class="setupTitle">Start New Match</h1>
+    <p class="setupHelp">Choose player count and game type before creating counters.</p>
+
+    <div class="field">
+      <label for="playerCountSelect">Player Count</label>
+      <select id="playerCountSelect">
+        <option value="2">2 Players</option>
+        <option value="3">3 Players</option>
+        <option value="4" selected>4 Players</option>
+        <option value="5">5 Players</option>
+        <option value="6">6 Players</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="modeSelect">Game Type</label>
+      <select id="modeSelect">
+        <option value="blitz">Blitz</option>
+        <option value="standard" selected>Standard</option>
+        <option value="chosenLegend">Chosen Legend</option>
+      </select>
+    </div>
+
+    <div id="modeHint" class="modeHint"></div>
+
+    <div class="setupActions">
+      <button type="button" id="startMatchBtn" class="startBtn">Start Match</button>
+    </div>
+  </div>
+</div>
+
+<script id="ml-layout" src="../Assets/dyn/layout.js" data-base="../Assets" data-root=".." defer></script>
+<script>
+const GAME_MODES = {
+  blitz: {
+    label: 'Blitz',
+    hp: 12,
+    manaPerTurn: 2,
+    description: 'Fast mode: 12 HP and 2 mana generated each turn.'
+  },
+  standard: {
+    label: 'Standard',
+    hp: 24,
+    manaPerTurn: 1,
+    description: 'Classic mode: 24 HP and 1 mana generated each turn.'
+  },
+  chosenLegend: {
+    label: 'Chosen Legend',
+    hp: 24,
+    manaPerTurn: 1,
+    description: 'Legend mode: 24 HP and 1 mana generated each turn.'
+  }
+};
+
+const THEMES = [
+  { name: 'arcane', color: 'linear-gradient(135deg, #60a5fa, #1e3a8a)' },
+  { name: 'occult', color: 'linear-gradient(135deg, #4ade80, #14532d)' },
+  { name: 'divine', color: 'linear-gradient(135deg, #fefce8, #fde68a)' },
+  { name: 'cosmic', color: 'linear-gradient(135deg, #c084fc, #4c1d95)' },
+  { name: 'elemental', color: 'linear-gradient(135deg, #f87171, #7f1d1d)' }
+];
+
+const container = document.getElementById('container');
+const setupOverlay = document.getElementById('setupOverlay');
+const playerCountSelect = document.getElementById('playerCountSelect');
+const modeSelect = document.getElementById('modeSelect');
+const modeHint = document.getElementById('modeHint');
+const modeLabel = document.getElementById('modeLabel');
+
+let players = [];
+let currentModeKey = 'standard';
+
+function getMode() {
+  return GAME_MODES[currentModeKey];
+}
+
+function getMaxMana(player) {
+  return Math.max(0, player.turn * getMode().manaPerTurn);
+}
+
+function renderModeHint() {
+  const mode = GAME_MODES[modeSelect.value];
+  modeHint.textContent = mode.description;
+}
+
+function renderModeLabel() {
+  const mode = getMode();
+  modeLabel.textContent = `Match Mode: ${mode.label} | ${mode.hp} HP | ${mode.manaPerTurn} Mana/Turn`;
+}
+
+function updatePlayerCard(player) {
+  const hpEl = document.getElementById(`hp-${player.id}`);
+  const manaEl = document.getElementById(`mana-${player.id}`);
+  const turnEl = document.getElementById(`turn-${player.id}`);
+  if (!hpEl || !manaEl || !turnEl) return;
+
+  const maxMana = getMaxMana(player);
+  if (player.mana > maxMana) player.mana = maxMana;
+
+  hpEl.textContent = `${player.hp}/${player.maxHP}`;
+  manaEl.textContent = `${player.mana}/${maxMana}`;
+  turnEl.textContent = `${player.turn}`;
+}
+
+function togglePicker(id) {
+  const picker = document.getElementById(`picker-${id}`);
+  if (!picker) return;
+  picker.classList.toggle('show');
+}
+
+function applyTheme(id, themeName) {
+  const player = players.find((p) => p.id === id);
+  if (!player) return;
+  const theme = THEMES.find((t) => t.name === themeName) || THEMES[0];
+  player.theme = theme.name;
+
+  const card = document.getElementById(`player-${id}`);
+  if (card) card.style.background = theme.color;
+
+  const picker = document.getElementById(`picker-${id}`);
+  if (picker) picker.classList.remove('show');
+}
+
+function changeHP(id, delta) {
+  const player = players.find((p) => p.id === id);
+  if (!player) return;
+  player.hp = Math.max(0, Math.min(player.maxHP, player.hp + delta));
+  updatePlayerCard(player);
+}
+
+function changeTurn(id, delta) {
+  const player = players.find((p) => p.id === id);
+  if (!player) return;
+  player.turn = Math.max(0, player.turn + delta);
+  updatePlayerCard(player);
+}
+
+function changeMana(id, delta) {
+  const player = players.find((p) => p.id === id);
+  if (!player) return;
+  const maxMana = getMaxMana(player);
+  player.mana = Math.max(0, Math.min(maxMana, player.mana + delta));
+  updatePlayerCard(player);
+}
+
+function resetPlayer(id) {
+  const player = players.find((p) => p.id === id);
+  if (!player) return;
+  player.hp = player.maxHP;
+  player.turn = 0;
+  player.mana = 0;
+  updatePlayerCard(player);
+}
+
+function fillMana(id) {
+  const player = players.find((p) => p.id === id);
+  if (!player) return;
+  player.mana = getMaxMana(player);
+  updatePlayerCard(player);
+}
+
+function buildThemeButtons(playerId) {
+  return THEMES.map((theme) => {
+    return `<button type="button" class="colorBtn" style="background:${theme.color}" onclick="applyTheme(${playerId}, '${theme.name}')">`
+      + `<img src="./img/${theme.name}.png" alt="${theme.name}" onerror="this.style.display='none';this.parentElement.textContent='${theme.name[0].toUpperCase()}'"/>`
+      + `</button>`;
+  }).join('');
+}
+
+function createPlayerCard(player) {
+  const el = document.createElement('article');
+  el.className = 'player';
+  el.id = `player-${player.id}`;
+  el.style.background = player.color;
+
+  el.innerHTML = `
+    <div class="playerHeader">
+      <div class="playerName">Player ${player.id + 1}</div>
+      <button type="button" class="themeBtn" onclick="togglePicker(${player.id})">✦</button>
+      <div id="picker-${player.id}" class="colorPicker">${buildThemeButtons(player.id)}</div>
+    </div>
+
+    <div class="statRow">
+      <button type="button" class="controlBtn" onclick="changeHP(${player.id}, -1)">-</button>
+      <div class="valueBlock">
+        <div class="valueText" id="hp-${player.id}"></div>
+        <div class="valueLabel">HP</div>
+      </div>
+      <button type="button" class="controlBtn" onclick="changeHP(${player.id}, 1)">+</button>
+    </div>
+
+    <div class="statRow">
+      <button type="button" class="controlBtn" onclick="changeMana(${player.id}, -1)">-</button>
+      <div class="valueBlock">
+        <div class="valueText" id="mana-${player.id}"></div>
+        <div class="valueLabel">Mana</div>
+      </div>
+      <button type="button" class="controlBtn" onclick="changeMana(${player.id}, 1)">+</button>
+    </div>
+
+    <div class="statRow">
+      <button type="button" class="controlBtn" onclick="changeTurn(${player.id}, -1)">-</button>
+      <div class="valueBlock">
+        <div class="valueText" id="turn-${player.id}"></div>
+        <div class="valueLabel">Turns</div>
+      </div>
+      <button type="button" class="controlBtn" onclick="changeTurn(${player.id}, 1)">+</button>
+    </div>
+
+    <div class="statRow">
+      <button type="button" class="controlBtn" onclick="resetPlayer(${player.id})">⟲</button>
+      <div class="valueBlock"><div class="valueLabel">Quick</div></div>
+      <button type="button" class="controlBtn" onclick="fillMana(${player.id})">✦</button>
+    </div>
+  `;
+
+  container.appendChild(el);
+  updatePlayerCard(player);
+}
+
+function clearPlayers() {
+  players = [];
+  container.innerHTML = '';
+}
+
+function spawnPlayers(count) {
+  for (let i = 0; i < count; i += 1) {
+    const theme = THEMES[i % THEMES.length];
+    const mode = getMode();
+    const player = {
+      id: i,
+      maxHP: mode.hp,
+      hp: mode.hp,
+      turn: 0,
+      mana: 0,
+      theme: theme.name,
+      color: theme.color
+    };
+    players.push(player);
+    createPlayerCard(player);
+  }
+}
+
+function applyModeToExistingPlayers() {
+  const mode = getMode();
+  players.forEach((player) => {
+    player.maxHP = mode.hp;
+    player.hp = Math.min(player.hp, mode.hp);
+    const maxMana = getMaxMana(player);
+    player.mana = Math.min(player.mana, maxMana);
+    updatePlayerCard(player);
+  });
+}
+
+function openSetup() {
+  renderModeHint();
+  setupOverlay.style.display = 'grid';
+}
+
+function closeSetup() {
+  setupOverlay.style.display = 'none';
+}
+
+function startMatchFromSetup() {
+  currentModeKey = modeSelect.value;
+  const count = Math.max(1, Math.min(6, Number(playerCountSelect.value) || 4));
+  clearPlayers();
+  renderModeLabel();
+  spawnPlayers(count);
+  closeSetup();
+}
+
+function addPlayer() {
+  if (!players.length) {
+    openSetup();
+    return;
+  }
+  if (players.length >= 6) return;
+  const i = players.length;
+  const theme = THEMES[i % THEMES.length];
+  const mode = getMode();
+  const player = {
+    id: i,
+    maxHP: mode.hp,
+    hp: mode.hp,
+    turn: 0,
+    mana: 0,
+    theme: theme.name,
+    color: theme.color
+  };
+  players.push(player);
+  createPlayerCard(player);
+}
+
+function removePlayer() {
+  if (players.length <= 1) return;
+  const removed = players.pop();
+  const el = document.getElementById(`player-${removed.id}`);
+  if (el) el.remove();
+}
+
+function resetMatch() {
+  players.forEach((player) => {
+    player.hp = player.maxHP;
+    player.turn = 0;
+    player.mana = 0;
+    updatePlayerCard(player);
+  });
+}
+
+window.togglePicker = togglePicker;
+window.applyTheme = applyTheme;
+window.changeHP = changeHP;
+window.changeMana = changeMana;
+window.changeTurn = changeTurn;
+window.resetPlayer = resetPlayer;
+window.fillMana = fillMana;
+
+modeSelect.addEventListener('change', renderModeHint);
+document.getElementById('startMatchBtn').addEventListener('click', startMatchFromSetup);
+document.getElementById('setupBtn').addEventListener('click', openSetup);
+document.getElementById('addPlayerBtn').addEventListener('click', addPlayer);
+document.getElementById('removePlayerBtn').addEventListener('click', removePlayer);
+document.getElementById('resetMatchBtn').addEventListener('click', resetMatch);
+
+renderModeLabel();
+openSetup();
+</script>
+</body>
+</html>
