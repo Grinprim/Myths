@@ -373,8 +373,9 @@ const GAME_MODES = {
   blitz: {
     label: 'Blitz',
     hp: 12,
-    manaPerTurn: 2,
-    description: 'Fast mode: 12 HP and 2 mana generated each turn.'
+    manaPerTurn: 1,
+    turnStep: 2,
+    description: 'Fast mode: 12 HP, turns advance by 2, and mana increases by 1 each turn.'
   },
   standard: {
     label: 'Standard',
@@ -413,7 +414,10 @@ function getMode() {
 }
 
 function getMaxMana(player) {
-  return Math.max(0, player.turn * getMode().manaPerTurn);
+  const mode = getMode();
+  const turnStep = mode.turnStep || 1;
+  const manaRate = mode.manaPerTurn || 0;
+  return Math.max(0, Math.floor(player.turn / turnStep) * manaRate);
 }
 
 function renderModeHint() {
@@ -469,7 +473,14 @@ function changeHP(id, delta) {
 function changeTurn(id, delta) {
   const player = players.find((p) => p.id === id);
   if (!player) return;
-  player.turn = Math.max(0, player.turn + delta);
+  const mode = getMode();
+  const turnStep = mode.turnStep || 1;
+  const manaGain = mode.manaPerTurn || 0;
+  player.turn = Math.max(0, player.turn + (delta * turnStep));
+  if (manaGain > 0 && delta > 0) {
+    const maxMana = getMaxMana(player);
+    player.mana = Math.min(maxMana, player.mana + manaGain * delta);
+  }
   updatePlayerCard(player);
 }
 
