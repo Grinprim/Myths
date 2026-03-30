@@ -17,8 +17,21 @@
 <body class="min-h-screen bg-custom-dark text-slate-300">
 
     <div id="navbar-placeholder"></div>
+    
+    <div id="spellsViewTabs"
+            class="flex flex-wrap justify-center gap-4 border-b border-slate-800 pb-8 mb-8 sticky top-20 z-30 bg-custom-dark/95 backdrop-blur-sm py-4">
+            <button onclick="switchView('view-spells')"
+                class="tab-btn active px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+                Spell Lists
+            </button>
+            <button onclick="switchView('view-schools')"
+                class="tab-btn px-6 py-2 border border-slate-700 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+                Spellcasting Schools
+            </button>
+        </div>
 
     <main class="pt-32 pb-20 max-w-7xl mx-auto px-6">
+        <div id="view-spells" class="view-section">
         <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
                 <h1 class="text-5xl font-bold text-white mb-4">Spell Lists</h1>
@@ -118,6 +131,19 @@
                 </section>
             </div>
         </div>
+        </div>
+
+         <div id="view-schools" class="view-section hidden">
+            <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <h1 class="text-5xl font-bold text-white mb-4">Spellcasting Schools</h1>
+                    <p class="text-slate-400 text-lg max-w-2xl flex items-center gap-3">
+                        Delve into the philosophies and techniques behind the magic.
+                    </p>
+                </div>
+            </header>
+        </div>
+
     </main>
     <div id="footer-placeholder"></div>
 
@@ -146,6 +172,17 @@
         let rawSpells = [];
         let rawCantrips = [];
         let activeFilters = { category: null, cost: null };
+
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(section => {
+                if (section.id === viewId) section.classList.remove('hidden');
+                else section.classList.add('hidden');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.getAttribute('onclick').includes(`switchView('${viewId}')`)) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+        }
 
         function toggleDetails(rowId) {
             const row = document.getElementById(rowId);
