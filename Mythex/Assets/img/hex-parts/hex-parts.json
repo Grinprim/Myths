@@ -1,0 +1,10 @@
+{
+  "segments": [
+    "door.png",
+    "wall.png"
+  ],
+  "centers": [
+    "altar.png",
+    "pit.png"
+  ]
+}
