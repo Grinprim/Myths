@@ -8,8 +8,8 @@
       "summary": "Victory is seized through command and unshakable fury.",
       "description": "It's not brutality, it's a calculated risk. You guide your allies with ferocity, into battle no matter how unwinnable. And you always work to come out on top.",
       "bonuses": [
-        "Athletics +1",
-        "Intimidation +1"
+        "Brawn +1",
+        "Charm +1"
       ],
       "feature": {
         "Name": "Commanding Presence",
@@ -68,8 +68,8 @@
       "summary": "Lightning answers your song.",
       "description": "The song of the heavens calls to you, the rumble, crackle and pop of lightning. Electricity courses through your voice, breaking the air you speak through.",
       "bonuses": [
-        "Performance +1",
-        "Aim +1"
+        "Charm +1",
+        "Awareness +1"
       ],
       "feature": {
         "Name": "Voice of Thunder",
@@ -89,7 +89,7 @@
       "description": "Nature is an extension of your body, the creatures who roam it are as much you as you are. You call upon your own pack, you command them, you are the alpha.",
       "bonuses": [
         "Insight +1",
-        "Athletics +1"
+        "Might +1"
       ],
       "feature": {
         "Name": "Alpha Bond",
@@ -129,7 +129,7 @@
       "description": "Shadowblades strike from darkness, eliminating targets before they can react. Within the darkness they find their strength, waiting for the perfect time to strike.",
       "bonuses": [
         "Finesse +1",
-        "Stealth +1"
+        "Finesse +1"
       ],
       "feature": {
         "Name": "Silent Execution",
@@ -148,7 +148,7 @@
       "summary": "Words carve deeper than steel.",
       "description": "You speak such sweet words, people hang on your every word. Such fluent speech is bound to draw even the ones most opposed to you to your side.",
       "bonuses": [
-        "Persuasion +1",
+        "Charm +1",
         "Scholarship +1"
       ],
       "feature": {
@@ -157,7 +157,7 @@
         "Cost": "🗲",
         "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 3] | 3 [lvl 6] | 4 [lvl 9]",
         "Parameters": "",
-        "Description": "Attempt to Charm one intelligent creature for 3 turns, they must roll [Insight] vs [6 + Your Persuasion] to resist. Outside combat, you have advantage on negotiations and deals."
+        "Description": "Attempt to Charm one intelligent creature for 3 turns, they must roll [Insight] vs [6 + Your Charm] to resist. Outside combat, you have advantage on negotiations and deals."
       }
     },
     {
@@ -227,7 +227,7 @@
       "description": "You refuse to fall, fueled by stubborn will and defiance of death itself. Each return from the brink makes you deadlier and harder to finish.",
       "bonuses": [
         "Fortitude +1",
-        "Intimidation +1"
+        "Spirit +1"
       ],
       "feature": {
         "Name": "Undying Will",
@@ -246,7 +246,7 @@
       "summary": "Strength measured in protection.",
       "description": "You command your flock, those who follow you, those who stand beside you. Keep them safe, heal their aches. Bring them peace.",
       "bonuses": [
-        "Persuasion +1",
+        "Charm +1",
         "Insight +1"
       ],
       "feature": {
@@ -306,8 +306,8 @@
       "summary": "You bring the inevitable end.",
       "description": "End them all, bring ruin and death to those who dare stand in your way. Be the executioner, be their final moment.",
       "bonuses": [
-        "Intimidation +1",
-        "Spellcraft +1"
+        "Spirit +1",
+        "Arcane +1"
       ],
       "feature": {
         "Name": "Inevitable End",
@@ -346,7 +346,7 @@
       "summary": "Creation is your weapon.",
       "description": "Your hands blister, you're covered in wood dust and oils. No matter, it is all worth it in the end, your crafts will carry your name louder than any words ever could.",
       "bonuses": [
-        "Tinkering +1",
+        "Tinker +1",
         "Scholarship +1"
       ],
       "feature": {
@@ -367,7 +367,7 @@
       "description": "The smell is unmistakeable, your prey is near, rushing from bush to tree top you see it. It lays unaware of your presence, just how you like it.",
       "bonuses": [
         "Finesse +1",
-        "Aim +1"
+        "Awareness +1"
       ],
       "feature": {
         "Name": "Predator’s Edge",
@@ -386,7 +386,7 @@
       "summary": "Stone knows your name.",
       "description": "Hard work is your blood and soul. You dig and dig to find the beauty from within the earth itself. It's almost comforting, being so deep under the soil others call home.",
       "bonuses": [
-        "Athletics +1",
+        "Might +1",
         "Fortitude +1"
       ],
       "feature": {
@@ -434,7 +434,7 @@
       "summary": "War carried on rhythm and breath.",
       "description": "Your voice cuts through steel and fear alike. Every strike lands in time, every step part of the greater song of battle.",
       "bonuses": [
-        "Performance +1",
+        "Charm +1",
         "Finesse +1"
       ],
       "feature": {
@@ -474,7 +474,7 @@
       "summary": "Every word a wound.",
       "description": "You lace misfortune into your magic, pulling at threads unseen. What remains for those that oppose you is not but sorrow.",
       "bonuses": [
-        "Spellcraft +1",
+        "Arcane +1",
         "Insight +1"
       ],
       "feature": {
@@ -483,7 +483,7 @@
         "Cost": "🗲",
         "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 6] | 3 [lvl 12]",
         "Parameters": "",
-        "Description": "You impose a curse on a creature, they must roll [Fortitude] resisting [6+ Your Spellcraft]. On a failure they suffer -2 Accuracy and -1 Damage for 2 Scenes."
+        "Description": "You impose a curse on a creature, they must roll [Fortitude] resisting [6+ Your Arcane]. On a failure they suffer -2 Accuracy and -1 Damage for 2 Scenes."
       }
     },
     {
@@ -495,7 +495,7 @@
       "description": "You strike, vanish, and strike again. The battlefield is yours to dance across, every opening exploited before it closes.",
       "bonuses": [
         "Reflex +1",
-        "Aim +1"
+        "Awareness +1"
       ],
       "feature": {
         "Name": "Hit and Fade",
@@ -515,7 +515,7 @@
       "description": "You have learned what hides behind ritual and symbol. Power answers, but it never comes without consequence.",
       "bonuses": [
         "Scholarship +1",
-        "Spellcraft +1"
+        "Arcane +1"
       ],
       "feature": {
         "Name": "Forbidden Insight",
@@ -535,7 +535,7 @@
       "description": "Suffering is clarity. Each wound is a lesson, each scar a vow. Through pain, you transcend fear and doubt.",
       "bonuses": [
         "Brawn +1",
-        "Intimidation +1"
+        "Spirit +1"
       ],
       "feature": {
         "Name": "Martyr’s Zeal",
@@ -552,10 +552,10 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "Strike yourself if you dare.",
-      "description": "Polished steel and reflective magic turn aggression inward. Enemies learn quickly that violence aimed at you is rarely theirs alone.",
+      "description": "Polished steel and reflective magic turn aggression inward. Enemies learn quickly that violence Awarenessed at you is rarely theirs alone.",
       "bonuses": [
         "Fortitude +1",
-        "Spellcraft +1"
+        "Arcane +1"
       ],
       "feature": {
         "Name": "Reflected Harm",
@@ -572,7 +572,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "You stand between breath and silence.",
-      "description": "Death follows you closely, but it does not claim what is under your watch. You decide who falls, and when.",
+      "description": "Death follows you closely, but it does not clAwareness what is under your watch. You decide who falls, and when.",
       "bonuses": [
         "Insight +1",
         "Scholarship +1"
@@ -594,7 +594,7 @@
       "summary": "Fast hands, faster judgment.",
       "description": "Every motion is practiced, every shot deliberate. You don’t hesitate—hesitation gets people killed.",
       "bonuses": [
-        "Aim +1",
+        "Awareness +1",
         "Reflex +1"
       ],
       "feature": {
@@ -615,7 +615,7 @@
       "description": "Runes glow faintly beneath your skin and across your gear. Magic is not cast, it is worn.",
       "bonuses": [
         "Arcana +1",
-        "Tinkering +1"
+        "Tinker +1"
       ],
       "feature": {
         "Name": "Living Runes",
@@ -634,8 +634,8 @@
       "summary": "Take what you can, vanish before reprisal.",
       "description": "A thief, a raider, a survivor. You thrive in chaos, moving through battle like a sudden storm.",
       "bonuses": [
-        "Athletics +1",
-        "Stealth +1"
+        "Might +1",
+        "Finesse +1"
       ],
       "feature": {
         "Name": "Plunder Momentum",
@@ -654,7 +654,7 @@
       "summary": "Hope made manifest.",
       "description": "The light in your soul shines 10 fold of daylight, you are the light for those around you. May darkness rot in your wake.",
       "bonuses": [
-        "Persuasion +1",
+        "Charm +1",
         "Reflex +1"
       ],
       "feature": {

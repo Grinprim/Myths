@@ -199,7 +199,11 @@
             }, intervalTime);
 
             function finalizeTrait() {
-                const trait = rawTraits[Math.floor(Math.random() * rawTraits.length)];
+                let trait = rawTraits[Math.floor(Math.random() * rawTraits.length)];
+
+                do {
+                    trait = rawTraits[Math.floor(Math.random() * rawTraits.length)];
+                } while (trait.Cost === "0" || trait.Name === "Empty Slot");
                 
                 nameEl.classList.remove('text-indigo-300', 'shuffling');
                 nameEl.textContent = trait.Name;

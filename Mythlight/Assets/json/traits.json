@@ -1,5 +1,311 @@
 [
   {
+    "Name": "Path: Commanding Presence",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Allies within 2 tiles gain +1 Accuracy and +1 Damage. When you drop an enemy to 0 Health, all nearby allies gain +2 Accuracy for 1 turn.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Perfect Form",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When wielding a single one-handed weapon, gain +2 Accuracy and +1 Damage. If you hit without being hit that round, regain 1 Health.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Sanguine Casting",
+    "Action": "⬖",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Spend up to your level Health to add that much Damage or Healing to your next spell. If the spell kills an enemy, regain half the Health spent.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Path: Voice of Thunder",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Cast a Lightning spell as if it were one level higher. Lightning spells deal 1 Damage targets wthin 2 tiles of the target.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Path: Alpha Bond",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You may control two animal companions simultaneously. Their attacks deal +1 Damage, and both gain +2 Accuracy when within 3 tiles of you.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Unbound Traveler",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "You cannot be ambushed. Movement speed +1 tile; after every combat, recover 3 Health and 3 Mana.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Silent Execution",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While hidden, your first attack deals +2 Damage. While in darkness or dim light, you are considered hidden.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Master Manipulator",
+    "Action": "⬖",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Attempt to Charm one intelligent creature for 3 turns, they must roll [Insight] vs [6 + Your Persuasion] to resist. Outside combat, you have advantage on negotiations and deals.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Path: Unstoppable Mass",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain +2 Armor and +1 Damage when below half Health. You cannot be knocked prone or forcibly moved.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Living Flame",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Fire spells deal +X Damage, you gain resistance to the Burn Condition.",
+    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Path: Glacial Guard",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Ice abilities Slow by 2 and grant you +X Armor for 1 turn per cast.",
+    "Scaling": "Armor X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+  },
+  {
+    "Name": "Path: Undying Will",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When reduced to 0 Health, lose Half your Max Health until your next rest and stand back up with Full Health. You perish if your maximum reaches 0. The first time this triggers each combat gain +X Damage.",
+    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
+  },
+  {
+    "Name": "Path: Guardian’s Call",
+    "Action": "⬖",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Heal all allies within 2 tiles for [Your Level] Health. Uppon activation, gain +1 Armor and +1 Reflex until your next turn.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Path: Foresight",
+    "Action": "⬖",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Predict the next attack or spell within 6 tiles. You or a chosen ally gain +4 Reflex/Armor against it.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+  },
+  {
+    "Name": "Path: Temporal Surge",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Take an additional action this turn. Gain 1 Fatigue at the end of combat.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Path: Inevitable End",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Deal +2 Damage to targets below half Health. When you kill an enemy, nearby foes suffer –2 Accuracy for 1 turn.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Battle-Hardened",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Reroll one failed attack or defense roll. When an ally nearby fails an attack, they gain +2 Accuracy on their next strike.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Path: Master Crafter",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "☀",
+    "Parameters": "",
+    "Description": "Repair or create simple crafts freely (No rolls required). During rest you may imbue 1 item with +1 Damage or +1 Armor until your next rest.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Predator’s Edge",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "The first attack against an ambushed or taunted target deals +2 Damage. Ignore movement penalties from rough terrain.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Deep Delver",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Gain +2 Armor underground or in darkness. Blunt weapons deal +1 Damage and ignore 1 Armor.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Phase Slip",
+    "Action": "⬖",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Teleport up to 4 tiles. Attacks against you have –2 Accuracy until your next turn.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Path: War Chorus",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "After Attacking or Casting each turn, allies within 2 tiles gain +1 Damage on their next Attack. If an ally downs an enemy, regain 1 Mana.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Immovable Guard",
+    "Action": "◇",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "While adjacent to an ally, you may redirect one attack against them to yourself. Gain +2 Armor when doing so.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Lingering Hex",
+    "Action": "⬖",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You impose a curse on a creature, they must roll [Fortitude] resisting [6+ Your Spellcraft]. On a failure they suffer -2 Accuracy and -1 Damage for 2 Scenes.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Path: Hit and Fade",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "After making an attack, you may move 2 tiles without provoking melee attacks. If you change elevation or cover, gain +1 Accuracy on your next attack.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Forbidden Insight",
+    "Action": "⬖",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Learn one passive effect of a creature within 6 tiles. Your next attack or spell against it deals +2 Damage.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Path: Martyr’s Zeal",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Whenever you take Health damage, gain +1 Damage on your next attack. This stacks up to 3 times and resets after the attack.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Reflected Harm",
+    "Action": "◇",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Uppon taking damage; you may reflect half of that damage back at the source.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Path: Last Rites",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Bringing an enemy to 0 Health releases a pulse of healing. You and all allies within 2 tiles are healed for [Half Your Level].",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Quickdraw",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "Your first ranged attack each scene gains +2 Accuracy and ignores cover penalties.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Living Runes",
+    "Action": "⬖",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "Choose Accuracy or Armor; gain +2 to the chosen stat for 2 Scenes.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
+    "Name": "Path: Plunder Momentum",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When you damage an enemy, gain +1 Movement this turn. If the enemy is defeated, gain +1 Damage on your next attack.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Radiant Presence",
+    "Action": "⭘",
+    "Cost": "0",
+    "Symbols": "⧖",
+    "Parameters": "",
+    "Description": "When an ally is healed within 2 tiles they gain 2 points of Mantra.",
+    "Scaling": ""
+  },
+  {
+    "Name": "Path: Mutable Form",
+    "Action": "⬖",
+    "Cost": "0",
+    "Symbols": "🗲",
+    "Parameters": "",
+    "Description": "You reshape your flesh, and adapt; Negative condition effects become reversed for 1 Scene.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+  },
+  {
     "Name": "Heavy Guard",
     "Action":"⭘",
     "Cost": "1",
@@ -59,7 +365,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
-    "Description": "Gain access to Elemental Spellcasting. You learn a number of Elemental spells equal to your Scholarship, choose one element; spells of that element deal +X damage . You learn 2 Elemental cantrips.",
+    "Description": "Gain access to Elemental Spellcasting. You learn a number of Elemental spells equal to your Scholarship, choose one element; spells of that element deal +X damage. You learn 2 Elemental cantrips.",
     "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
   {
@@ -104,7 +410,7 @@
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
-    "Description": "Cook allies a meal during a rest. Eating the meal grants them either +X+1 Accuracy or +X Armor next combat.",
+    "Description": "Cook allies a meal during a rest. Eating the meal grants them either +X +1 Accuracy or +X Armor next combat.",
     "Scaling": "Value X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
   },
   {
@@ -113,7 +419,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Improvised weaponry uses the Highest proficiency tier you have; they deals +1 Damage.",
+    "Description": "Improvised weaponry uses the Highest proficiency tier you have; it deals +1 Damage.",
     "Scaling": ""
   },
   {
@@ -131,7 +437,7 @@
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
-    "Description": "During a rest, create a potion per ally from your known potions list. Learn a number of Potion Recipes equal to [Half Your Level], gain +X to Brewing Related Checks.",
+    "Description": "During a rest, you may attempt to create potions from your known potions list. Learn a number of Potion Recipes equal to [half Your Level], gain +X to Brewing Related Checks.",
     "Scaling": "Bonus X:<br>+0 [lvl 1]<br>+1 [lvl 3]<br>+2 [lvl 6]<br>+3 [lvl 9]<br>+4 [lvl 12]"
   },
   {
@@ -176,7 +482,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Recover +2 Health when resting alone. While no allies are within 2 units, gain +X Accuracy or +Y Armor.",
+    "Description": "Recover +2 Health when resting alone. While no allies are within 2 tiles, gain +X Accuracy or +Y Armor.",
     "Scaling": "Accuracy/Armor X/Y:<br>+2/+1 [lvl 1]<br>+3/+2 [lvl 3]<br>+4/+3 [lvl 6]<br>+5/+4 [lvl 9]"
   },
   {
@@ -185,7 +491,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Performing earns rewards worth atleast 3 gold (Narrators Discretion). Performing in combat grants allies within 5 units +2 Accuracy.",
+    "Description": "Performing earns rewards worth at least 3 gold (Narrator's Discretion). Performing in combat grants allies within 5 tiles +2 Accuracy.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
@@ -194,7 +500,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Light sources you hold never go out. While in its light, gain +1 Insight and +1 Reflex.",
+    "Description": "Light sources you hold never go out. While in its light, gain +1 Awareness and +1 Reflex.",
     "Scaling": ""
   },
   {
@@ -212,7 +518,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Combat Trapper",
-    "Description": "Using [1× Metal - Wire], you can create fences up to 4 Tiles long and 1 Unit tall. Each fence deals Stuns dealing X Lightning Damage when a creature crosses it, loosing 1 durability.. The fence has 1 Durability.",
+    "Description": "Using [1× Metal - Wire], you can create fences up to 4 Tiles long and 1 Unit tall. Each fence deals Stun dealing X Lightning Damage when a creature crosses it, losing 1 durability. The fence has 1 Durability.",
     "Scaling": "Damage X:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
@@ -221,7 +527,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain +X Accuracy against beasts and natural creatures. Gain advantage on Insight, Reflex, and Fortitude checks in natural environments.",
+    "Description": "Gain +X Accuracy against beasts and natural creatures. Gain advantage on Awareness, Reflex, and Fortitude checks in natural environments.",
     "Scaling": "Accuracy X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
   },
   {
@@ -266,7 +572,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "★ Infused Strike",
-    "Description": "You can spend a number of mana equal to your level, add that amount to as Damage to your next attack. Attack counts as magical.",
+    "Description": "You can spend a number of mana equal to your level, add that amount as Damage to your next attack. Attack counts as magical.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
@@ -445,8 +751,8 @@
     "Action":"⭘",
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "You gain the ability to Craft; You start with Trivial Recipes, at each point of Tinkering above 1, increases the known recipe tier. Learn a number of Recipes equal to [Half your Level]",
+    "Parameters": "★ Tinkering",
+    "Description": "You gain the ability to Craft; You start with Trivial Recipes, at each point of Tinkering above 1, increases the known recipe tier. Learn a number of Recipes equal to [half your Level]",
     "Scaling": ""
   },
   {
@@ -482,7 +788,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Constructs/Machines you have deployed can expend one unit of Durability (Fuel) to shock targets within 2 units, dealing 2 Lightning Damage. This counts as an attack by the machine.",
+    "Description": "Constructs/Machines you have deployed can expend one unit of Durability (Fuel) to shock targets within 2 tiles, dealing 2 Lightning Damage. This counts as an attack by the machine.",
     "Scaling": ""
   },
   {
@@ -527,7 +833,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "If your companion is within 10 units, and is injured. You may teleport them to yourself and heal them by [half Your Level] Health",
+    "Description": "If your companion is within 10 tiles, and is injured. You may teleport them to yourself and heal them by [half Your Level] Health",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
@@ -536,7 +842,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "Once per scene",
-    "Description": "Dash into a target within 3 units, dealing 1 Force damage. Damage applies only to enemies.",
+    "Description": "Dash into a target within 3 tiles, dealing 1 Force damage. Damage applies only to enemies.",
     "Scaling": ""
   },
   {
@@ -563,7 +869,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
-    "Description": "The target you dash into is pushed 3 units away in the direction of the dash and takes +1 Force damage.",
+    "Description": "The target you dash into is pushed 3 tiles away in the direction of the dash and takes +1 Force damage.",
     "Scaling": ""
   },
   {
@@ -608,7 +914,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Mechanical Assistant",
-    "Description": "Using [1× Metal - Wire, 1× Wooden - Core], create a flying spell drone that stays within 3 units of you. It counts as a companion with the following stat block: <br><br>| Health/Durability [Your Level] <br>| Armor [6+Your Tinkering] <br>| PHY 0 | TEC 1 | MYS 2 <br>| Traits: <br>- Conduit (1 Durability): You cast a spell from this companions position.",
+    "Description": "Using [1× Metal - Wire, 1× Wooden - Core], create a flying spell drone that stays within 3 tiles of you. It counts as a companion with the following stat block: <br><br>| Health/Durability [Your Level] <br>| Armor [6+Your Tinkering] <br>| PHY 0 | TEC 1 | MYS 2 <br>| Traits: <br>- Conduit (1 Durability): You cast a spell from this companions position.",
     "Scaling": ""
   },
   {
@@ -815,7 +1121,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Explorer",
-    "Description": "Gain advantage on Insight checks when recalling known locations. When resting in a previously visited area, you cannot be ambushed.",
+    "Description": "Gain advantage on Scholarship checks when recalling known locations. When resting in a previously visited area, you cannot be ambushed.",
     "Scaling": ""
   },
   {
@@ -887,8 +1193,8 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Identify tracks and movement signs. Gain +X Insight against hidden or fleeing enemies.",
-    "Scaling": "Insight X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
+    "Description": "Identify tracks and movement signs. Gain +X Awareness against hidden or fleeing enemies.",
+    "Scaling": "Awareness X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
   },
   {
     "Name": "Piercing Shot",
@@ -986,7 +1292,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Reservoir",
-    "Description": "Your companion gains a Mana pool of 4. You may spend its Mana while it is within 6 units of you.",
+    "Description": "Your companion gains a Mana pool of 4. You may spend its Mana while it is within 6 tiles of you.",
     "Scaling": ""
   },
   {
@@ -1031,7 +1337,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Master of Stealth",
-    "Description": "When an enemy moves adjacent, you may react to move 2 tiles without provoking oppertunity attacks. Enemies within 10 tiles suffer stealth penalties equal to your Insight.",
+    "Description": "When an enemy moves adjacent, you may react to move 2 tiles without provoking oppertunity attacks. Enemies within 10 tiles suffer stealth penalties equal to your Awareness.",
     "Scaling": ""
   },
   {
@@ -1139,11 +1445,11 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Combat Trapper",
-    "Description": "Traps you can deploy can be deployed within a range of 5 units.",
+    "Description": "Traps you can deploy can be deployed within a range of 5 tiles.",
     "Scaling": ""
   },
   {
-    "Name": "Guerila Trapper",
+    "Name": "Guerrilla Trapper",
     "Action":"⭘",
     "Cost": "2",
     "Symbols": "☀",
@@ -1197,7 +1503,7 @@
     "Scaling": ""
   },
   {
-    "Name": "Suppresive fire",
+    "Name": "Suppressive fire",
     "Action":"◆",
     "Cost": "2",
     "Symbols": "🗲",
@@ -1206,7 +1512,7 @@
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
-    "Name": "Breserk",
+    "Name": "Berserk",
     "Action":"⭘",
     "Cost": "2",
     "Symbols": "🗲",
@@ -1215,7 +1521,7 @@
     "Scaling": "Damage/Accuracy X/Y:<br>+2/+3 [lvl 1]<br>+3/+4 [lvl 6]<br>+4/+5 [lvl 12]"
   },
   {
-    "Name": "Natural Defences",
+    "Name": "Natural Defenses",
     "Action":"⭘",
     "Cost": "2",
     "Symbols": "⧖",
@@ -1274,7 +1580,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Focus Breaker",
-    "Description": "When a spell is cast within 3 units, you may dispell it. You can only do this before rolls are made.",
+    "Description": "When a spell is cast within 3 tiles, you may dispell it. You can only do this before rolls are made.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -1283,7 +1589,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Move up to 5 units, you ignore terrain penalties, you may pass through 1 obstacle in your way. During movement you may refresh this ability to pass through multiple obstacles, however your movement does not refresh.<br><br><i>Obstacles must not be larger than 1 unit, relative to the direction you are moving through them.</i>",
+    "Description": "Move up to 5 tiles, you ignore terrain penalties, you may pass through 1 obstacle in your way. During movement you may refresh this ability to pass through multiple obstacles, however your movement does not refresh.<br><br><i>Obstacles must not be larger than 1 tile, relative to the direction you are moving through them.</i>",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -1292,7 +1598,7 @@
     "Cost": "",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Heal all allies within 3 units for X Health.",
+    "Description": "Heal all allies within 3 tiles for X Health.",
     "Scaling": "Uses/Health 🗲/X:<br>1/2 [lvl 1]<br>2/3 [lvl 3]<br>3/4 [lvl 6]<br>4/5 [lvl 9]<br>5/6 [lvl 12]"
   },
   {
@@ -1377,7 +1683,7 @@
     "Scaling": ""
   },
   {
-    "Name": "Symbotic Flow",
+    "Name": "Symbiotic Flow",
     "Action":"⭘",
     "Cost": "2",
     "Symbols": "⧖",
@@ -1386,7 +1692,7 @@
     "Scaling": "Damage X/Y:<br>+2/+1 [lvl 1]<br>+3/+2 [lvl 6]<br>+4/+3 [lvl 12]"
   },
   {
-    "Name": "Pheonix Recovery",
+    "Name": "Phoenix Recovery",
     "Action":"⭘",
     "Cost": "2",
     "Symbols": "🗲",
@@ -1482,7 +1788,7 @@
     "Symbols": "⧖",
     "Parameters": "⫘ Occult Apprentice",
     "Description": "Occult Curses/Brands/Marks gain +1 Target.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Master Channeler",
@@ -1626,7 +1932,7 @@
     "Symbols": "⧖",
     "Parameters": "",
     "Description": "You can convert between wooden components freely. When creating crafts mostly consisting of wooded components, you gain advantage.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Combat Carpenter",
@@ -1643,7 +1949,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You attempt to convince creatures targeting you that you are dead. You are knocked prone; affected creatures must roll [Insight] vs [6 + your Deception] to resist; Creatures you have already tricked will gain +3 to the roll.",
+    "Description": "You attempt to convince creatures targeting you that you are dead. You are knocked prone; affected creatures must roll [Insight] vs [6 + your Charm] to resist; Creatures you have already tricked will gain +3 to the roll.",
     "Scaling": ""
   },
   {
@@ -1661,7 +1967,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Outside of combat, you may disguise yourself or allies. Creatures attempting to see through the disguise must roll [Insight] vs [6 + your Performance.]",
+    "Description": "Outside of combat, you may disguise yourself or allies. Creatures attempting to see through the disguise must roll [Insight] vs [6 + your Charm] to resist.",
     "Scaling": ""
   },
   {
@@ -1697,7 +2003,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "You command a creature within 6 units to lay down its arms, it will not act for 2 scenes, or until damaged. It must roll [Insight] vs [6+ Intimidation] to resist.",
+    "Description": "You command a creature within 6 tiles to lay down its arms, it will not act for 2 scenes, or until damaged. It must roll [Insight] vs [6 + your Charm] to resist.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -1742,7 +2048,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "When a creature within 6 units is healed by their ally, you may reduce that healing by (your level + X) and heal yourself for the amount reduced.",
+    "Description": "When a creature within 6 tiles is healed by their ally, you may reduce that healing by (your level + X) and heal yourself for the amount reduced.",
     "Scaling": "Health X:<br>+2 [lvl 1]<br>+4 [lvl 6]<br>+6 [lvl 12]"
   },
   {
@@ -1814,7 +2120,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You fire 3 shots into the sky, these will land and hit 3 random targets within 8 units. They deal 1 Damage, and prioritize Enemies.",
+    "Description": "You fire 3 shots into the sky, these will land and hit 3 random targets within 8 tiles. They deal 1 Damage, and prioritize Enemies.",
     "Scaling": ""
   },
   {
@@ -1895,7 +2201,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "You may spend this reaction at any point. You move to an unocupied space within 3 units, you leave a Target Dummy with 3 Health where you were standing. Any attacks targeting you are redirected to the dummy.",
+    "Description": "You may spend this reaction at any point. You move to an unocupied space within 3 tiles, you leave a Target Dummy with 3 Health where you were standing. Any attacks targeting you are redirected to the dummy.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -1922,7 +2228,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Drain 3 mana from an ally within 6 units, add it to yourself.",
+    "Description": "Drain 3 mana from an ally within 6 tiles, add it to yourself.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -2074,7 +2380,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "When a spell is cast within 8 units, you may counter it; doing so causes you to lose access to a spell you know of your choice until your next rest.",
+    "Description": "When a spell is cast within 8 tiles, you may counter it; doing so causes you to lose access to a spell you know of your choice until your next rest.",
     "Scaling": ""
   },
   {
@@ -2083,7 +2389,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You lose 4 armor, 3 enemies within 8 units have -3 Accuracy until the end of combat.",
+    "Description": "You lose 4 armor, 3 enemies within 8 tiles have -3 Accuracy until the end of combat.",
     "Scaling": ""
   },
   {
@@ -2092,7 +2398,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "When an ally within 8 units casts a spell, you may pay for it with your mana instead.",
+    "Description": "When an ally within 8 tiles casts a spell, you may pay for it with your mana instead.",
     "Scaling": ""
   },
   {
@@ -2228,7 +2534,7 @@
     "Symbols": "⧖",
     "Parameters": "",
     "Description": "While resting you must rest near a heat source. You consume half the amount of rations.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Syphoning Whirlpool",
@@ -2255,7 +2561,7 @@
     "Symbols": "⧖",
     "Parameters": "⫘ Deep Pockets",
     "Description": "When summoning a component; You may pay +2 Mana, and instead gain one Trivial Craft. It will dissapear next rest.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Guillotine",
@@ -2305,11 +2611,11 @@
   {
     "Name": "Evasive Stance",
     "Action":"⭘",
-    "Cost": "1",
+    "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
     "Description": "Gain bonus Armor equal to the amount of Speed over 5.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Snipers Nest",
@@ -2318,7 +2624,7 @@
     "Symbols": "⧖",
     "Parameters": "",
     "Description": "While Prone you have Advantage on Non-Spell Ranged Attacks.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Personal Vendetta",
@@ -2326,8 +2632,8 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Taunt",
-    "Description": "You Taunt a target up to 6 units away. If your weapons range exceeds this amount, use that range instead.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Description": "You Taunt a target up to 6 tiles away. If your weapons range exceeds this amount, use that range instead.",
+    "Scaling": ""
   },
   {
     "Name": "Bloodlust",
@@ -2470,8 +2776,8 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "This trait does not gain uses on a rest. Each time you cast a level 2 Spell you gain 1 use. Make a Ranged attack that uses [Spellcraft] as its bonus, dealing 3 damage to a creature within 6 units.",
-    "Scaling": "Max Uses 🗲:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
+    "Description": "This trait does not gain uses on a rest. Each time you cast a level 2 Spell you gain 1 use. Make a Ranged attack that uses [Spellcraft] as its bonus, dealing 3 damage to a creature within 6 tiles.",
+    "Scaling": "Uses 🗲:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
   },
   {
     "Name": "Hostage",
@@ -2498,7 +2804,7 @@
     "Symbols": "⧖",
     "Parameters": "",
     "Description": "While traveling on tiles an Ally has already walked on this Scene, you gain +3 Movement Speed.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Gracious",
@@ -2525,7 +2831,7 @@
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Spellcasting",
     "Description": "Your Spells no longer cost Mana; You only have 1 Action per turn.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Lead Role",
@@ -2543,7 +2849,7 @@
     "Symbols": "⧖",
     "Parameters": "",
     "Description": "You gain the full benefits of sleep even if you sleep 6 hours or less.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Gardener",
@@ -2552,7 +2858,7 @@
     "Symbols": "⧖",
     "Parameters": "⫘★",
     "Description": "Gain Advantage on checks needed to care for plants.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Merchant",
@@ -2561,7 +2867,7 @@
     "Symbols": "⧖",
     "Parameters": "",
     "Description": "You sell items for 10% more gold, and buy items for 10% less gold (Narators Discretion).",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Sizeable Slash",
@@ -2579,7 +2885,7 @@
     "Symbols": "☀",
     "Parameters": "",
     "Description": "During your rest you may preform a 30 minute ritual; doing so grants you X Grace after the Rest concludes.",
-    "Scaling": "Grace X:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Musician",
@@ -2614,7 +2920,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Cover grants one higher tier of protection. While in cover, gain +2 Accuracy. You may move between covers (min. 3 units apart) as a Free Action.",
+    "Description": "Cover grants one higher tier of protection. While in cover, gain +2 Accuracy. You may move between covers (min. 3 tiles apart) as a Free Action.",
     "Scaling": ""
   },
   {
@@ -2622,7 +2928,7 @@
     "Action":"⭘",
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "⫘ Craftsman",
+    "Parameters": "★ Tinkering",
     "Description": "You gain Access to Combat Crafts; You know a number of Combat Crafts equal to [Half Your Level], the maximum tier of craft depends on the tier unlocked by Craftsman.",
     "Scaling": ""
   },
@@ -2698,8 +3004,8 @@
     "Description": "Cleanse all negative effects and Conditions. Until the end of any turn in which you did not perform a melee attack, you cannot gain negative effects or Conditions.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]"
   }
-  
 ]
+
 
 
 
