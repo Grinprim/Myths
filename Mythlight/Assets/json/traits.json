@@ -315,12 +315,12 @@
     "Scaling": ""
   },
   {
-    "Name": "Traveler’s Endurance",
+    "Name": "Traveler's Endurance",
     "Action":"⭘",
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "+1 Speed; ignore the first level of Fatigue.",
+    "Description": "+1 Speed and you ignore the first level of Fatigue.",
     "Scaling": ""
   },
   {
@@ -329,7 +329,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
-    "Description": "Gain access to Arcane Spellcasting. You learn a number of Arcane spells equal to your Scholarship, and learn 2 Arcane cantrips.",
+    "Description": "Gain access to Arcane Spellcasting. You learn a number of Arcane spells equal to your [Scholarship]. You learn 2 Arcane cantrips.",
     "Scaling": ""
   },
   {
@@ -338,7 +338,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
-    "Description": "Gain access to Divine Spellcasting. You learn a number of Divine spells equal to your Scholarship, and learn 2 Divine cantrips.",
+    "Description": "Gain access to Divine Spellcasting. You learn a number of Divine spells equal to your [Scholarship]. You learn 2 Divine cantrips.",
     "Scaling": ""
   },
   {
@@ -347,7 +347,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
-    "Description": "Gain access to Cosmic Spellcasting. You learn a number of Cosmic spells equal to your Scholarship, you cannot learn spells above level 1. \"Upcasting\" casts spells multiple times instead.",
+    "Description": "Gain access to Cosmic Spellcasting. You learn a number of Cosmic spells equal to your [Scholarship], you cannot learn spells above level 1. \"Upcasting\" casts spells multiple times instead.",
     "Scaling": ""
   },
   {
@@ -356,7 +356,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
-    "Description": "Gain access to Occult Spellcasting. You learn a number of Occult spells equal to your Scholarship, you cannot learn spells above level 2. Spells are always upcast. You learn 2 Occult cantrips.",
+    "Description": "Gain access to Occult Spellcasting. You learn a number of Occult spells equal to your [Scholarship], you cannot learn spells above level 2; Spells are always upcast. You learn 2 Occult cantrips.",
     "Scaling": ""
   },
   {
@@ -365,7 +365,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
-    "Description": "Gain access to Elemental Spellcasting. You learn a number of Elemental spells equal to your Scholarship, choose one element; spells of that element deal +X damage. You learn 2 Elemental cantrips.",
+    "Description": "Gain access to Elemental Spellcasting. You learn a number of Elemental spells equal to your [Scholarship], choose one element; spells of that element deal +X damage. You learn 2 Elemental cantrips.",
     "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
   {
@@ -397,11 +397,11 @@
   },
   {
     "Name": "Minor Channeling",
-    "Action":"⭘",
+    "Action":"⬖",
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Cast one level 1 spell without spending Mana.",
+    "Description": "Cast one level 1 spell without spending Mana. Ignoring attack per turn restrictions",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
@@ -643,7 +643,7 @@
     "Action":"⭘",
     "Cost": "1",
     "Symbols": "⧖ ",
-    "Parameters": "★ Unbound ⫘ Occult Apprentice / Cosmic Novice",
+    "Parameters": "★ Unbound ⫘ Occult Spellcaster / Cosmic Spellcaster",
     "Description": "Occult and Cosmic spells/cantrips gain +1 Range. Learn 1 Occult cantrip and 1 Cosmic spell, bypassing type restrictions.",
     "Scaling": ""
   },

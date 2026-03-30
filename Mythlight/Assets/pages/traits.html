@@ -308,8 +308,11 @@
                 return matchesSearch && matchesSymbol;
             });
 
+            let non_path_traits = rawTraits.filter(t => t.Cost !== "0");
+            let non_path_filtered = filtered.filter(t => t.Cost !== "0");
+
             // Update Counter
-            document.getElementById('trait-counter').textContent = `${filtered.length} / ${rawTraits.length} Traits`;
+            document.getElementById('trait-counter').textContent = `${non_path_filtered.length} / ${non_path_traits.length} Traits`;
 
             filtered.forEach((trait, index) => {
                 const uniqueId = `trait-${trait.Cost}-${index}`;
