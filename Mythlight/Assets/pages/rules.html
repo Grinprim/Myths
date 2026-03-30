@@ -902,16 +902,16 @@
                                     </div>
                                     <div class="bg-slate-900/30 p-2 rounded flex justify-between">
                                         <span>Encumbered (&gt; Limit)</span>
-                                        <span class="text-slate-400">Speed halved. 0 move = disadvantage.</span>
+                                        <span class="text-slate-400">Movement halved. 0 move = disadvantage.</span>
                                     </div>
                                     <div class="bg-slate-900/30 p-2 rounded flex justify-between">
                                         <span>Overencumbered (&gt; 2× Limit)</span>
-                                        <span class="text-slate-400">Speed halved. Disadvantage on
+                                        <span class="text-slate-400">Movement halved. Disadvantage on
                                             Body/Skill checks.</span>
                                     </div>
                                     <div class="bg-slate-900/30 p-2 rounded flex justify-between">
                                         <span>Crushed (&gt; 3× Limit)</span>
-                                        <span class="text-slate-400">Speed 0. Disadvantage on all checks. 1 damage /
+                                        <span class="text-slate-400">Movement 0. Disadvantage on all checks. 1 damage /
                                             10
                                             min.</span>
                                     </div>
@@ -977,9 +977,9 @@
                                 <div class="condition-card"><strong>Firm:</strong> No movement penalties.</div>
                             </li>
                             <li>
-                                <div class="condition-card"><strong>Rough:</strong> Each tile of movement costs 2
+                                <div class="condition-card"><strong>Rough:</strong> Each tile of Movement costs 2
                                     Units
-                                    of speed.</div>
+                                    of Movement.</div>
                             </li>
                             <li>
                                 <div class="condition-card"><strong>Slippery:</strong> You can only move in one
@@ -1477,7 +1477,7 @@
 
                             <div class="condition-card">
                                 <strong class="text-red-400">Chilled</strong>
-                                <p>Your movement speed is halved, it expires at the end of the Scene if it was not
+                                <p>Your Movement is halved, it expires at the end of the Scene if it was not
                                     reapplied.</p>
                             </div>
 
@@ -1508,6 +1508,11 @@
                             <div class="condition-card">
                                 <strong class="text-red-400">Stoned</strong>
                                 <p>While under this condition, you have -2 Reflex and -2 Insight.</p>
+                            </div>
+
+                            <div class="condition-card">
+                                <strong class="text-red-400">Feared</strong>
+                                <p>While you have this condition, you must use atleast one movement action per turn to move away from the creature that fears you.</p>
                             </div>
                         </div>
                         <div class="grid md:grid-cols-3 gap-4 text-sm">
@@ -1550,7 +1555,7 @@
                             <div class="condition-card">
                                 <strong class="text-green-400">Flying</strong>
                                 <p>While you have this condition you are immune to floor hazards, you can move up to
-                                    your speed in any direction, with a fixed height that is specified when the
+                                    your Movement in any direction, with a fixed height that is specified when the
                                     condition is granted.</p>
                             </div>
                         </div>
@@ -1582,7 +1587,7 @@
                             <strong>Medium vehicles</strong> are also considered mounts, while
                             <strong>large vehicles</strong> use full vehicle rules instead.
                             While mounted, the rider and mount <strong>share the same tile</strong>,
-                            and the rider uses the mount’s <strong>Speed</strong>.
+                            and the rider uses the mount’s <strong>Movement</strong>.
                         </p>
                     </div>
 
@@ -1596,8 +1601,8 @@
                         <p class="text-sm text-slate-300 max-w-3xl mt-2">
                             <strong>Mounting</strong> and <strong>dismounting</strong> each cost
                             <strong>1 Action</strong>. While mounted, the rider cannot take
-                            <strong>movement-based actions</strong>; instead, the mount’s movement
-                            fully replaces the rider’s movement. Mount-specific movement traits
+                            <strong>movement-based actions</strong>; instead, the mount’s Movement
+                            fully replaces the rider’s Movement. Mount-specific movement traits
                             may still be used.
                         </p>
                     </div>
@@ -1649,9 +1654,9 @@
                                         <td class="p-2">6 + Rider’s <strong>Reflex</strong></td>
                                     </tr>
                                     <tr class="border-t border-slate-700">
-                                        <td class="p-2">Speed</td>
-                                        <td class="p-2">Speed</td>
-                                        <td class="p-2">Speed</td>
+                                        <td class="p-2">Movement</td>
+                                        <td class="p-2">Movement</td>
+                                        <td class="p-2">Movement</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1717,8 +1722,8 @@
                                         <td class="p-2"><strong>Fixed Value</strong></td>
                                     </tr>
                                     <tr class="border-t border-slate-700">
-                                        <td class="p-2">Speed</td>
-                                        <td class="p-2">Speed</td>
+                                        <td class="p-2">Movement</td>
+                                        <td class="p-2">Movement</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1875,7 +1880,7 @@
                             </tbody>
                         </table>
 
-                        <h3 class="text-xl text-white font-bold mb-3">Example: Modifying Speed (Base 5)</h3>
+                        <h3 class="text-xl text-white font-bold mb-3">Example: Modifying Movement (Base 5)</h3>
 
                         <div class="space-y-4 text-sm mb-6">
 
@@ -1883,7 +1888,7 @@
                                 <strong class="text-indigo-400">1. Paths</strong>
                                 <p>
                                     Path effects apply first.
-                                    Example: “Lose 1 Movement Speed, gain 2 Damage.”
+                                    Example: “Lose 1 Movement Movement, gain 2 Damage.”
                                     5 → 4
                                 </p>
                             </div>
@@ -1902,7 +1907,7 @@
                                 <strong class="text-indigo-400">3. Spells / Items / Crafts</strong>
                                 <p>
                                     Temporary or external modifiers apply after Traits.
-                                    Example: Boots granting +3 Speed.
+                                    Example: Boots granting +3 Movement.
                                     <br>2 → 5
                                 </p>
                             </div>
@@ -2444,7 +2449,7 @@
                                     <div
                                         style="width: 50%; padding: 10px; display: flex; flex-direction: column; justify-content: space-between;">
                                         <div class="section-title">Scores</div>
-                                        <div class="stat-line"><span>Speed</span><span id="p_speed">-</span></div>
+                                        <div class="stat-line"><span>Movement</span><span id="p_speed">-</span></div>
                                         <div class="stat-line"><span>Health ♡</span><span id="p_health">-</span>
                                         </div>
                                         <div class="stat-line"><span>Armor ⛨</span><span id="p_armor">-</span></div>
@@ -2482,8 +2487,8 @@
 
                             </div>
                         </div>
-                        <!-- Speed -->
-                        <h3 class="text-xl text-white font-bold mb-3">Speed</h3>
+                        <!-- Movement -->
+                        <h3 class="text-xl text-white font-bold mb-3">Movement</h3>
                         <p class="mb-6 text-sm">
                             Determines movement in tiles. Follows normal player movement rules.
                             Average ranges: Slow ~3, Moderate ~5, High ~7.
