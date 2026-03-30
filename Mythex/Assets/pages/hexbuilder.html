@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hex Builder</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #cbd5e1;
+            background: radial-gradient(circle at 20% 20%, rgba(107,114,128,0.2), transparent 45%),
+                        radial-gradient(circle at 80% 20%, rgba(156,163,175,0.14), transparent 45%),
+                        radial-gradient(circle at 50% 80%, rgba(100,116,139,0.12), transparent 45%),
+                        #1f2937;
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: rgba(15,23,42,0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 40px;
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px rgba(107,114,128,0.3);
+        }
+
+        .hex-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        #hex-stitch-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            background: rgba(31,41,55,0.3);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            background: rgba(31,41,55,0.8);
+            border: 1px solid rgba(107,114,128,0.3);
+            color: #cbd5e1;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: rgba(107,114,128,0.2);
+            border-color: rgba(107,114,128,0.6);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -5px rgba(0,0,0,0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hex Builder</h1>
+        <div class="hex-container">
+            <div id="hex-stitch-container">
+                <!-- 6 stitched images will be rendered here by JS -->
+            </div>
+        </div>
+        <div class="controls">
+            <button class="btn" onclick="randomizeAllSegments()">Randomize All</button>
+        </div>
+    </div>
+</body>
+<script>
+// List of available hex images (add more as needed)
+const hexImages = [
+    '../img/hex-parts/door.png',
+    '../img/hex-parts/wall.png',
+    // Add more image paths here as you add them to the folder
+];
+
+// Store the current image for each segment (0-5)
+let segmentImages = Array(6).fill(hexImages[0]);
+
+function randomizeAllSegments() {
+    segmentImages = segmentImages.map(() => hexImages[Math.floor(Math.random() * hexImages.length)]);
+    renderHexStitch();
+}
+
+function renderHexStitch() {
+    const container = document.getElementById('hex-stitch-container');
+    container.innerHTML = '';
+    const center = 140; // px, center of container (280/2)
+    const radius = 100; // px, distance from center to image center
+    const imgSize = 120; // px, image size
+    for (let i = 0; i < 6; i++) {
+        const angle = i * 60;
+        // Calculate position for each segment
+        const rad = (angle - 90) * Math.PI / 180;
+        const x = center + radius * Math.cos(rad) - imgSize / 2;
+        const y = center + radius * Math.sin(rad) - imgSize / 2 - 50;
+        const img = document.createElement('img');
+        img.src = segmentImages[i];
+        img.style.position = 'absolute';
+        img.style.left = `${x}px`;
+        img.style.top = `${y}px`;
+        img.style.width = imgSize + 'px';
+        img.style.height = imgSize + 'px';
+        img.style.transform = `rotate(${angle + 180}deg)`;
+        img.style.transformOrigin = '50% 100%'; // bottom center
+        img.style.transition = 'transform 0.3s';
+        img.alt = `Hex segment ${i+1}`;
+        container.appendChild(img);
+    }
+}
+
+// Initial render
+renderHexStitch();
+</script>
+</html>
