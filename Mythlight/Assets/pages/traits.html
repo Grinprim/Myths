@@ -435,6 +435,7 @@
 
             tagSelect.innerHTML = '<option value="">All tags</option>' + sortedTags.map(tag => {
                 const count = countedTags[tag];
+                if (count < 4) return '';
                 return `<option value="${tag}" ${activeTagFilter === tag ? 'selected' : ''}>${tag} (${count})</option>`;
             }).join('');
         }
