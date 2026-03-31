@@ -128,46 +128,69 @@
             border-color: rgba(129, 140, 248, 0.55);
             background-color: rgba(79, 70, 229, 0.22);
         }
+        #school-mobile-modal {
+            transition: opacity 0.25s ease;
+        }
         @media (max-width: 1023px) {
             .spells-legend-sticky { position: static; max-height: none; overflow: visible; }
             .school-card:hover { transform: none; }
             .school-orbit-stage {
                 width: 100%;
-                aspect-ratio: auto;
-                border-radius: 1.5rem;
-                background: none;
+                max-width: 520px;
+                aspect-ratio: 1 / 1;
+                border-radius: 9999px;
+                background: radial-gradient(circle at center, rgba(15, 23, 42, 0.82) 0%, rgba(2, 6, 23, 0.38) 58%, transparent 78%);
                 margin-top: 0;
             }
-            .school-orbit-ring,
             .school-orbit-core {
-                display: none;
+                width: 128px;
+                height: 128px;
             }
             .school-orbit-rotor {
-                position: static;
-                inset: auto;
-                animation: none;
-                display: grid;
-                grid-template-columns: 1fr;
-                gap: 1rem;
+                animation-duration: 58s;
             }
             .orbit-item {
-                position: static;
-                transform: none;
-                margin: 0;
-                width: 100%;
+                --orbit-radius: clamp(120px, 33vw, 170px);
+                width: 96px;
+                margin: -48px 0 0 -48px;
             }
             .orbit-card {
-                animation: none;
+                padding: 0.8rem 0.35rem;
             }
             .orbit-upright {
-                animation: none;
+                width: 100%;
             }
             .orbit-card:hover {
                 transform: none;
             }
             .school-detail-scroll {
-                position: static;
-                margin-top: 1rem;
+                display: none;
+            }
+            .orbit-card img {
+                width: 2.25rem;
+                height: 2.25rem;
+            }
+            .orbit-card h3 {
+                font-size: 0.86rem;
+                margin-top: 0.55rem;
+                line-height: 1.2;
+            }
+        }
+        @media (max-width: 420px) {
+            .school-orbit-stage {
+                max-width: 360px;
+            }
+            .orbit-item {
+                --orbit-radius: clamp(108px, 34vw, 136px);
+                width: 84px;
+                margin: -42px 0 0 -42px;
+            }
+            .school-orbit-core {
+                width: 108px;
+                height: 108px;
+            }
+            .orbit-card h3 {
+                font-size: 0.8rem;
             }
         }
         @media (min-width: 1024px) and (max-width: 1279px) {
@@ -394,6 +417,21 @@
     </main>
     <div id="footer-placeholder"></div>
 
+    <div id="school-mobile-modal" class="fixed inset-0 z-[110] bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closeSchoolModal(event)">
+        <div class="modal-content bg-slate-900 border border-slate-700 p-1 rounded-2xl max-w-md w-full shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden" onclick="event.stopPropagation()">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-60"></div>
+            <div class="p-6 relative z-10 text-center">
+                <button type="button" onclick="closeSchoolModal()" class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors" aria-label="Close school details">✕</button>
+                <p class="text-[10px] uppercase tracking-[0.2em] text-amber-300 font-bold">School Legend</p>
+                <img id="school-mobile-icon" src="" alt="Selected school icon" class="w-14 h-14 rounded-xl object-cover border border-slate-700 bg-slate-900/70 mx-auto mt-4">
+                <h3 id="school-mobile-name" class="text-2xl font-bold text-white mt-3"></h3>
+                <div id="school-mobile-description" class="mt-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+                    ⚠️ Under Reconstruction ⚠️
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="random-spell-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closeRandomSpell(event)">
         <div class="modal-content bg-slate-900 border border-slate-700 p-1 rounded-2xl max-w-lg w-full shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden" onclick="event.stopPropagation()">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50"></div>
@@ -439,7 +477,34 @@
                 if (btn.getAttribute('onclick').includes(`switchView('${viewId}')`)) btn.classList.add('active');
                 else btn.classList.remove('active');
             });
+            if (viewId !== 'view-schools') closeSchoolModal();
             requestAnimationFrame(syncLegendTop);
+        }
+
+        function isMobileSchoolsView() {
+            return window.matchMedia('(max-width: 1023px)').matches;
+        }
+
+        function openSchoolModal(name, iconPath) {
+            const modal = document.getElementById('school-mobile-modal');
+            const icon = document.getElementById('school-mobile-icon');
+            const schoolName = document.getElementById('school-mobile-name');
+            if (!modal || !icon || !schoolName) return;
+
+            icon.src = iconPath;
+            icon.alt = `${name} icon`;
+            schoolName.textContent = name;
+
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSchoolModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            const modal = document.getElementById('school-mobile-modal');
+            if (!modal) return;
+            modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
         }
 
         function showSchoolDetails(name, iconPath) {
@@ -454,9 +519,13 @@
             icon.alt = `${name} icon`;
             schoolName.textContent = name;
 
-            detailScroll.classList.remove('hidden');
-            detailScroll.setAttribute('aria-hidden', 'false');
-            body.classList.remove('hidden');
+            if (isMobileSchoolsView()) {
+                openSchoolModal(name, iconPath);
+            } else {
+                detailScroll.classList.remove('hidden');
+                detailScroll.setAttribute('aria-hidden', 'false');
+                body.classList.remove('hidden');
+            }
 
             document.querySelectorAll('.school-choice').forEach((btn) => {
                 btn.classList.toggle('active', btn.textContent.trim() === name);
@@ -638,6 +707,9 @@
             switchView('view-spells');
             syncLegendTop();
             loadData();
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeSchoolModal();
+            });
         });
         window.addEventListener('resize', syncLegendTop);
         window.addEventListener('scroll', syncLegendTop, { passive: true });
