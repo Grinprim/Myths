@@ -674,14 +674,6 @@
     "Description": "Double Movement until next turn; Movement is halved the following turn.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
-
-
-
-
-  
-
-
-
   {
     "Name": "Focused Strike",
     "Action":"⭘",
@@ -692,12 +684,12 @@
     "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
   {
-    "Name": "Hard Swing / Big Bonk",
-    "Action":"◆",
+    "Name": "Hard Swing",
+    "Action":"⬖",
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Add +2 Damage to a melee attack.",
+    "Description": "Add +2 Damage to your next melee attack.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -706,7 +698,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "+1 to resist Charm, Fear, and Illusion effects.",
+    "Description": "You gain +1 Spirit when resisting spell effects. If the spell is from the a school you have access to, gain +2 Spirit instead.",
     "Scaling": ""
   },
   {
@@ -715,35 +707,35 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Ritualist ⫘ ★ Spellcasting",
-    "Description": "Identifying a used spell grants +1 Spellcraft against that enemy, stacking up to 3 times.",
+    "Description": "You may roll [Scholarship] vs [6 + Caster Scholarship] to identify a spell, on a success, you gain +1 Arcane against its caster. Stacking up to 3 times.",
     "Scaling": ""
   },
   {
-    "Name": "Ritualist's Patience",
+    "Name": "Ritualist's Expertise",
     "Action":"⭘",
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Ritualist ⫘ ★ Spellcasting",
-    "Description": "Ritual spells take half the time and grant +X Arcana on that spell.",
-    "Scaling": "Arcana X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
+    "Description": "Ritual spells take half the time and grant +X Arcane on that spell.",
+    "Scaling": "Arcane X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
   },
   {
     "Name": "Pocket Sand",
     "Action":"◇",
-    "Cost": "1",
+    "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "As a reaction, blind an enemy entering your melee range until their next turn.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+    "Description": "As a reaction, blind a creature entering your melee range until their next turn.",
+    "Scaling": "Uses 🗲:<br>2 [lvl 1]<br>3 [lvl 3]<br>4 [lvl 6]<br>5 [lvl 9]"
   },
   {
     "Name": "Remote Activation",
     "Action":"⭘",
     "Cost": "1",
-    "Symbols": "⧖",
+    "Symbols": "🗲",
     "Parameters": "",
     "Description": "Activate an allied mechanical device, trap, or gadget within 6 tiles as a free action.",
-    "Scaling": ""
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
     "Name": "Reinforced Construction",
@@ -751,7 +743,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Crafts and modifications you create gain +2 Durability.",
+    "Description": "Crafts and modifications you create gain +2 Durability when applicable.",
     "Scaling": ""
   },
   {
@@ -760,7 +752,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Tinkering",
-    "Description": "You gain the ability to Craft; You start with Trivial Recipes, at each point of Tinkering above 1, increases the known recipe tier. Learn a number of Recipes equal to [half your Level]",
+    "Description": "You gain the ability to Craft; You start with Trivial Recipes, for each point of Scholarship above 1, increases the known complexity. You know a number of Recipes equal to half your Level rounded up.",
     "Scaling": ""
   },
   {
@@ -768,7 +760,7 @@
     "Action":"⭘",
     "Cost": "1",
     "Symbols": "☀",
-    "Parameters": "",
+    "Parameters": "⫘ ★ Tinkering",
     "Description": "Repair one trivial or simple craft during a rest without a check. <i>(Requires 1 relevant component)</i>",
     "Scaling": ""
   },
@@ -777,8 +769,8 @@
     "Action":"⬖",
     "Cost": "1",
     "Symbols": "🗲",
-    "Parameters": "",
-    "Description": "Repair a craft to full operation. Each craft can only benefit from this once.",
+    "Parameters": "⫘ ★ Tinkering",
+    "Description": "Attempt to repair a craft to full operation; Roll [Tinker] vs [Craft Complexity]. If you fail you may not attept to repair that craft again until you rest.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
@@ -787,7 +779,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Perform a Tinkering check to disassemble objects into components, crafts that you made grant 2, else grant 1.",
+    "Description": "Attempt to dismantle a craft; Roll [Tinker] vs [Craft Complexity]. On a success, gain 1 random component of the craft. If the craft had required atleast 2 components and you crafted it, gain 2 components instead.",
     "Scaling": ""
   },
   {
@@ -795,8 +787,8 @@
     "Action":"⬖",
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "Constructs/Machines you have deployed can expend one unit of Durability (Fuel) to shock targets within 2 tiles, dealing 2 Lightning Damage. This counts as an attack by the machine.",
+    "Parameters": "⫘ ★ Tinkering",
+    "Description": "Constructs/Machines you have deployed can expend one unit of Durability (Fuel) to shock targets within 2 tiles, dealing [Your Tinker] Lightning Damage. This counts as an attack by the machine.",
     "Scaling": ""
   },
   {
@@ -805,8 +797,8 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "When casting a spell through a spellcasting craft, add +X Damage.",
-    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+    "Description": "When casting a spell through a spellcasting craft, add your Spell damage bonus to the spell's damage.",
+    "Scaling": ""
   },
   {
     "Name": "Spell Interface",
@@ -814,7 +806,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ ★ Spellcasting",
-    "Description": "Once per rest, imbue a spell into a machine or construct, the spell lasts for a day, and will trigger based on a declared condition. <i>(Complexity determines spell level, Trivial = Cantrips, Simple = level 1 etc.)</i>",
+    "Description": "Once per rest, imbue a spell into a machine or construct, the spell lasts for a day, and will trigger based on condition you declared at imbuement. <i>(Complexity determines spell level, Trivial = Cantrips, Simple = level 1 etc.)</i>",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -832,7 +824,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Open simple locks without tools; gain +X Finesse.",
+    "Description": "Open simple locks with advantage; gain +X Finesse.",
     "Scaling": "Finesse X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
   {
@@ -841,7 +833,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "If your companion is within 10 tiles, and is injured. You may teleport them to yourself and heal them by [half Your Level] Health",
+    "Description": "If your companion is within 10 tiles. You may teleport them to yourself and heal them by half Your Level rounded up.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
@@ -849,8 +841,8 @@
     "Action":"⬖",
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "Once per scene",
-    "Description": "Dash into a target within 3 tiles, dealing 1 Force damage. Damage applies only to enemies.",
+    "Parameters": "",
+    "Description": "Dash into a target within 4 tiles, dealing 1 Force damage if it is an enemy.",
     "Scaling": ""
   },
   {
@@ -859,16 +851,25 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
-    "Description": "The target you dash to gains 3 stacks of Slow until your next turn and takes +1 Force damage.",
+    "Description": "The target you dash to gains 3 stacks of Slow until your next turn if it is an enemy.",
     "Scaling": ""
   },
+
+
+
+
+
+
+
+
+
   {
     "Name": "Crushing Impact",
     "Action":"⬖",
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
-    "Description": "The target you dash to takes +1 Force damage. If below half Health, they instead take +2 Force damage.",
+    "Description": "The target you dash to takes +1 Force damage. If they are below half Health, they instead take +2 Force damage.",
     "Scaling": ""
   },
   {
