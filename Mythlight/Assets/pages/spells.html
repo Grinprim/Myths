@@ -31,7 +31,6 @@
             width: min(100%, 660px);
             aspect-ratio: 1 / 1;
             margin: 1rem auto 0;
-            margin-left: 0;
             border-radius: 9999px;
             background: radial-gradient(circle at center, rgba(15, 23, 42, 0.8) 0%, rgba(2, 6, 23, 0.35) 52%, transparent 72%);
         }
@@ -133,6 +132,9 @@
         #school-mobile-modal {
             transition: opacity 0.25s ease;
         }
+        #school-detail-scroll {
+            display: none !important;
+        }
         @media (max-width: 1023px) {
             .spells-legend-sticky { position: static; max-height: none; overflow: visible; }
             .school-card:hover { transform: none; }
@@ -153,11 +155,30 @@
             }
             .orbit-item {
                 --orbit-radius: clamp(120px, 33vw, 170px);
-                width: 96px;
-                margin: -48px 0 0 -48px;
+                width: 92px;
+                margin: -46px 0 0 -46px;
             }
             .orbit-card {
-                padding: 0.8rem 0.35rem;
+                width: 100%;
+                aspect-ratio: 1 / 1;
+                border-radius: 9999px !important;
+                padding: 0.45rem 0.35rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 0.2rem;
+                overflow: hidden;
+            }
+            .orbit-card img {
+                width: 2rem;
+                height: 2rem;
+            }
+            .orbit-card h3 {
+                margin-top: 0 !important;
+                margin-left: 0 !important;
+                font-size: 0.72rem;
+                line-height: 1.05;
             }
             .orbit-upright {
                 width: 100%;
@@ -166,10 +187,24 @@
                 transform: none;
             }
             .school-detail-scroll {
-                position: static;
-                margin-top: 1rem;
-                width: 100%;
-                margin-left: 0;
+                display: none !important;
+            }
+        }
+        @media (max-width: 420px) {
+            .school-orbit-stage {
+                max-width: 360px;
+            }
+            .school-orbit-core {
+                width: 108px;
+                height: 108px;
+            }
+            .orbit-item {
+                --orbit-radius: clamp(108px, 35vw, 138px);
+                width: 84px;
+                margin: -42px 0 0 -42px;
+            }
+            .orbit-card h3 {
+                font-size: 0.66rem;
             }
         }
         @media (min-width: 1024px) and (max-width: 1279px) {
@@ -323,7 +358,7 @@
                 </div>
             </header>
 
-            <section class="grid lg:grid-cols-[minmax(0,1fr)_320px] gap-8 items-start">
+            <section class="grid grid-cols-1 gap-8 items-start justify-items-center">
                 <div class="school-orbit-stage">
                     <div class="school-orbit-ring" aria-hidden="true"></div>
                     <div class="school-orbit-core" aria-hidden="true">
@@ -357,7 +392,7 @@
                             <div class="orbit-upright">
                                 <button type="button" class="school-card school-choice orbit-card school-elemental p-5 w-full text-center" onclick="showSchoolDetails('Elemental', '../sheet/elemental.png')">
                                     <img src="../sheet/elemental.png" alt="Elemental icon" class="w-11 h-11 rounded-lg object-cover mx-auto">
-                                    <h3 class="text-lg font-bold text-white mt-3" style="margin-left: -12%;">Elemental</h3>
+                                    <h3 class="text-lg font-bold text-white mt-3">Elemental</h3>
                                 </button>
                             </div>
                         </article>
@@ -475,19 +510,19 @@
             requestAnimationFrame(syncLegendTop);
         }
 
-        function isMobileSchoolsView() {
-            return window.matchMedia('(max-width: 1023px)').matches;
-        }
-
         function openSchoolModal(name, iconPath) {
             const modal = document.getElementById('school-mobile-modal');
             const icon = document.getElementById('school-mobile-icon');
             const schoolName = document.getElementById('school-mobile-name');
+            const desc = document.getElementById('school-mobile-description');
             if (!modal || !icon || !schoolName) return;
 
             icon.src = iconPath;
             icon.alt = `${name} icon`;
             schoolName.textContent = name;
+            if (desc) {
+                desc.innerHTML = schoolDescriptions[name] || 'No description available.';
+            }
 
             modal.classList.remove('hidden');
             document.body.classList.add('overflow-hidden');
@@ -502,32 +537,11 @@
         }
 
         function showSchoolDetails(name, iconPath) {
-            const detailScroll = document.getElementById('school-detail-scroll');
-            const body = document.getElementById('school-scroll-body');
-            const icon = document.getElementById('school-scroll-icon');
-            const schoolName = document.getElementById('school-scroll-name');
-
-            if (!detailScroll || !body || !icon || !schoolName) return;
-
-            icon.src = iconPath;
-            icon.alt = `${name} icon`;
-            schoolName.textContent = name;
-
-            if (isMobileSchoolsView()) {
-                openSchoolModal(name, iconPath);
-            } else {
-                detailScroll.classList.remove('hidden');
-                detailScroll.setAttribute('aria-hidden', 'false');
-                body.classList.remove('hidden');
-            }
+            openSchoolModal(name, iconPath);
 
             document.querySelectorAll('.school-choice').forEach((btn) => {
                 btn.classList.toggle('active', btn.textContent.trim() === name);
             });
-
-            const description = schoolDescriptions[name] || 'No description available.';
-            const descContainer = document.getElementById('school-scroll-description');
-            if (descContainer) descContainer.innerHTML = description;
         }
 
         function toggleDetails(rowId) {

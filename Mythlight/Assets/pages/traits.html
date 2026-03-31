@@ -15,6 +15,34 @@
         
         /* Shuffling Effect */
         .shuffling { filter: blur(2px); opacity: 0.7; transition: all 0.1s; }
+
+        #tag-filter-select,
+        #search-input {
+            min-height: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            #tag-filter-wrap label,
+            #search-wrap label {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            #tag-filter-wrap label {
+                display: none;
+            }
+            #tag-filter-select {
+                min-height: 2.35rem;
+                font-size: 0.82rem;
+                border-radius: 0.7rem;
+            }
+            #clear-tag-filter {
+                padding-left: 0.65rem;
+                padding-right: 0.65rem;
+                font-size: 0.62rem;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-custom-dark text-slate-300 relative">
@@ -30,8 +58,8 @@
                     <span id="trait-counter" class="text-xs bg-slate-800 text-indigo-300 px-3 py-1 rounded-full border border-slate-700 font-bold uppercase tracking-wider">Loading...</span>
                 </p>
             </div>
-            <div class="flex flex-wrap gap-4 w-full md:w-auto items-end">
-                 <div class="flex gap-2">
+              <div class="flex flex-wrap md:flex-nowrap gap-3 w-full md:w-auto items-center">
+                  <div class="flex gap-2 shrink-0">
                     <button onclick="pickRandomTrait()" class="px-4 py-2 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 rounded-lg text-purple-300 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]">
                         Random
                     </button>
@@ -43,7 +71,17 @@
                     </button>
                 </div>
 
-                <div class="flex flex-col gap-2 w-full md:w-auto md:min-w-[240px]">
+                <div id="tag-filter-wrap" class="flex flex-col gap-2 w-full sm:w-auto md:w-[250px] shrink-0">
+                    <label for="tag-filter-select" class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Tag Filter</label>
+                    <div class="flex items-center gap-2">
+                        <select id="tag-filter-select" class="w-full bg-slate-900/70 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200" onchange="setTagFilter(this.value || null)">
+                            <option value="">All tags</option>
+                        </select>
+                        <button id="clear-tag-filter" onclick="setTagFilter(null)" class="hidden h-[2.5rem] px-3 bg-rose-500/10 border border-rose-500/30 rounded-lg text-[10px] uppercase text-rose-400 font-bold hover:bg-rose-500/20 transition-all">Clear</button>
+                    </div>
+                </div>
+
+                <div id="search-wrap" class="flex flex-col gap-2 w-full md:w-[260px]">
                     <label class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Search Traits</label>
                     <div class="relative">
                         <input type="text" id="search-input" placeholder="Search..." class="search-input w-full pr-10" oninput="renderTraits(); toggleTraitClear();">
@@ -52,16 +90,7 @@
                 </div>
             </div>
         </header>
-        <div id="tag-section" class="w-full">
-                <section class="p-6 rounded-3xl legend-card shadow-2xl">
-                    <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-[0.2em] mb-4">Tag Filters</h3>
-                    <div id="tag-buttons" class="flex flex-wrap gap-3">
-                        <!-- Dynamically generated tag buttons will go here -->
-                    </div>
-                </section>
-            </div>
-            <br>
-            <br>
+
         <div class="flex flex-col lg:flex-row gap-12 items-start">
             
             <aside class="w-full lg:w-80 lg:sticky lg:top-28 z-40">
@@ -164,6 +193,22 @@
         let rawTraits = [];
         let activeSymbolFilter = null;
         let activeTagFilter = null;
+
+        function normalizeTraitTags(trait) {
+            const value = trait.tags ?? trait.Tags ?? trait.tag ?? trait.Tag;
+            if (!value) return [];
+            if (Array.isArray(value)) {
+                return value.map((tag) => String(tag).trim()).filter(Boolean);
+            }
+            if (typeof value === 'string') {
+                return value.split(',').map((tag) => tag.trim()).filter(Boolean);
+            }
+            return [];
+        }
+
+        function hasTag(trait, tag) {
+            return normalizeTraitTags(trait).includes(tag);
+        }
 
         function getTraitPrerequisites(trait) {
             if (!trait || !trait.Parameters || !trait.Parameters.includes('⫘')) return null;
@@ -282,12 +327,26 @@
 
         function setSymbolFilter(symbol) {
             if (symbol === '★' || symbol === '⫘') return;
-            activeSymbolFilter = symbol;
+            activeSymbolFilter = activeSymbolFilter === symbol ? null : symbol;
             document.querySelectorAll('.legend-symbol').forEach(btn => {
-                if (btn.getAttribute('data-symbol') === symbol && symbol !== null) btn.classList.add('active-filter');
+                if (btn.getAttribute('data-symbol') === activeSymbolFilter && activeSymbolFilter !== null) btn.classList.add('active-filter');
                 else btn.classList.remove('active-filter');
             });
-            document.getElementById('clear-filter').classList.toggle('hidden', !symbol);
+            document.getElementById('clear-filter').classList.toggle('hidden', !activeSymbolFilter);
+            renderTraits();
+        }
+
+        function setTagFilter(tag) {
+            activeTagFilter = activeTagFilter === tag ? null : tag;
+
+            const select = document.getElementById('tag-filter-select');
+            if (select) {
+                select.value = activeTagFilter || '';
+            }
+
+            const clearBtn = document.getElementById('clear-tag-filter');
+            if (clearBtn) clearBtn.classList.toggle('hidden', !activeTagFilter);
+
             renderTraits();
         }
 
@@ -316,7 +375,7 @@
             let filtered = rawTraits.filter(trait => {
                 const matchesSearch = trait.Name.toLowerCase().includes(searchTerm) || trait.Description.toLowerCase().includes(searchTerm);
                 const matchesSymbol = !activeSymbolFilter || (trait.Symbols && trait.Symbols.includes(activeSymbolFilter)) || (trait.Action && trait.Action.includes(activeSymbolFilter));
-                const matchesTag = !activeTagFilter || (trait.tags && trait.tags.includes(activeTagFilter));
+                const matchesTag = !activeTagFilter || hasTag(trait, activeTagFilter);
                 return matchesSearch && matchesSymbol && matchesTag;
             });
 
@@ -359,24 +418,24 @@
 
 
         function renderTagButtons() {
-            const tagContainer = document.getElementById('tag-buttons');
-            if (!tagContainer) return;
+            const tagSelect = document.getElementById('tag-filter-select');
+            if (!tagSelect) return;
+
             const allTags = new Set();
             rawTraits.forEach(trait => {
-                if (trait.tags && Array.isArray(trait.tags)) {
-                    trait.tags.forEach(tag => allTags.add(tag));
-                }
-            });
-            const countedTags = {};
-            allTags.forEach(tag => {
-                countedTags[tag] = rawTraits.filter(trait => trait.tags && trait.tags.includes(tag)).length;
+                normalizeTraitTags(trait).forEach(tag => allTags.add(tag));
             });
 
-            const sortedTags = Object.keys(countedTags).sort((a, b) => countedTags[b] - countedTags[a]);
-            tagContainer.innerHTML = sortedTags.map(tag => {
+            const countedTags = {};
+            allTags.forEach(tag => {
+                countedTags[tag] = rawTraits.filter(trait => hasTag(trait, tag)).length;
+            });
+
+            const sortedTags = Object.keys(countedTags).sort((a, b) => a.localeCompare(b));
+
+            tagSelect.innerHTML = '<option value="">All tags</option>' + sortedTags.map(tag => {
                 const count = countedTags[tag];
-                if (count < 4) return '';
-                return `<button class="px-3 py-1 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-slate-300 text-xs font-bold uppercase tracking-wider transition-all ${activeTagFilter === tag ? 'ring-2 ring-indigo-400' : ''}" onclick="setTagFilter('${tag}')">${tag} <span class="ml-1 text-slate-500">(${count})</span></button>`;
+                return `<option value="${tag}" ${activeTagFilter === tag ? 'selected' : ''}>${tag} (${count})</option>`;
             }).join('');
         }
 
