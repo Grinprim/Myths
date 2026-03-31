@@ -52,7 +52,16 @@
                 </div>
             </div>
         </header>
-
+        <div id="tag-section" class="w-full">
+                <section class="p-6 rounded-3xl legend-card shadow-2xl">
+                    <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-[0.2em] mb-4">Tag Filters</h3>
+                    <div id="tag-buttons" class="flex flex-wrap gap-3">
+                        <!-- Dynamically generated tag buttons will go here -->
+                    </div>
+                </section>
+            </div>
+            <br>
+            <br>
         <div class="flex flex-col lg:flex-row gap-12 items-start">
             
             <aside class="w-full lg:w-80 lg:sticky lg:top-28 z-40">
@@ -84,6 +93,7 @@
                     <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-full mt-8 py-3 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 rounded-xl text-indigo-400 text-[10px] font-bold uppercase tracking-widest transition-all">Back to Top</button>
                 </section>
             </aside>
+
             
             <div class="flex-1 w-full space-y-20">
                 <section id="section-1pt" class="scroll-mt-32">
@@ -153,6 +163,7 @@
     <script>
         let rawTraits = [];
         let activeSymbolFilter = null;
+        let activeTagFilter = null;
 
         function getTraitPrerequisites(trait) {
             if (!trait || !trait.Parameters || !trait.Parameters.includes('⫘')) return null;
@@ -305,7 +316,8 @@
             let filtered = rawTraits.filter(trait => {
                 const matchesSearch = trait.Name.toLowerCase().includes(searchTerm) || trait.Description.toLowerCase().includes(searchTerm);
                 const matchesSymbol = !activeSymbolFilter || (trait.Symbols && trait.Symbols.includes(activeSymbolFilter)) || (trait.Action && trait.Action.includes(activeSymbolFilter));
-                return matchesSearch && matchesSymbol;
+                const matchesTag = !activeTagFilter || (trait.tags && trait.tags.includes(activeTagFilter));
+                return matchesSearch && matchesSymbol && matchesTag;
             });
 
             let non_path_traits = rawTraits.filter(t => t.Cost !== "0");
@@ -345,6 +357,29 @@
             toggleTraitClear();
         }
 
+
+        function renderTagButtons() {
+            const tagContainer = document.getElementById('tag-buttons');
+            if (!tagContainer) return;
+            const allTags = new Set();
+            rawTraits.forEach(trait => {
+                if (trait.tags && Array.isArray(trait.tags)) {
+                    trait.tags.forEach(tag => allTags.add(tag));
+                }
+            });
+            const countedTags = {};
+            allTags.forEach(tag => {
+                countedTags[tag] = rawTraits.filter(trait => trait.tags && trait.tags.includes(tag)).length;
+            });
+
+            const sortedTags = Object.keys(countedTags).sort((a, b) => countedTags[b] - countedTags[a]);
+            tagContainer.innerHTML = sortedTags.map(tag => {
+                const count = countedTags[tag];
+                if (count < 4) return '';
+                return `<button class="px-3 py-1 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-slate-300 text-xs font-bold uppercase tracking-wider transition-all ${activeTagFilter === tag ? 'ring-2 ring-indigo-400' : ''}" onclick="setTagFilter('${tag}')">${tag} <span class="ml-1 text-slate-500">(${count})</span></button>`;
+            }).join('');
+        }
+
         async function loadData() {
             try {
                 const res = await fetch('../json/traits.json');
@@ -352,6 +387,7 @@
                 rawTraits = Array.isArray(data) ? data : (data.traits || []);
             } catch (err) {}
             renderTraits();
+            renderTagButtons();
         }
         window.addEventListener('DOMContentLoaded', loadData);
     </script>

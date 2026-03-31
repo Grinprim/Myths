@@ -2,6 +2,7 @@
   {
     "Name": "Path: Commanding Presence",
     "Action": "⭘",
+    "tags": ["Leadership", "Buff", "Combat"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -11,6 +12,7 @@
   {
     "Name": "Path: Perfect Form",
     "Action": "⭘",
+    "tags": ["Combat", "Weapon", "Defense"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -20,6 +22,7 @@
   {
     "Name": "Path: Sanguine Casting",
     "Action": "⬖",
+    "tags": ["Magic", "Sacrifice", "Damage"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -29,6 +32,7 @@
   {
     "Name": "Path: Voice of Thunder",
     "Action": "⭘",
+    "tags": ["Magic", "Lightning", "Damage"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -38,6 +42,7 @@
   {
     "Name": "Path: Alpha Bond",
     "Action": "⭘",
+    "tags": ["Companion", "Buff", "Combat"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -47,6 +52,7 @@
   {
     "Name": "Path: Unbound Traveler",
     "Action": "⭘",
+    "tags": ["Utility", "Movement", "Survival"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -56,6 +62,7 @@
   {
     "Name": "Path: Silent Execution",
     "Action": "⭘",
+    "tags": ["Stealth", "Combat", "Damage"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -65,6 +72,7 @@
   {
     "Name": "Path: Master Manipulator",
     "Action": "⬖",
+    "tags": ["Social", "Charm", "Utility"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -74,6 +82,7 @@
   {
     "Name": "Path: Unstoppable Mass",
     "Action": "⭘",
+    "tags": ["Defense", "Combat", "Resilience"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -83,6 +92,7 @@
   {
     "Name": "Path: Living Flame",
     "Action": "⭘",
+    "tags": ["Magic", "Fire", "Damage"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -92,6 +102,7 @@
   {
     "Name": "Path: Glacial Guard",
     "Action": "⭘",
+    "tags": ["Magic", "Ice", "Defense"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -101,6 +112,7 @@
   {
     "Name": "Path: Undying Will",
     "Action": "⭘",
+    "tags": ["Resilience", "Revival", "Combat"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -110,6 +122,7 @@
   {
     "Name": "Path: Guardian's Call",
     "Action": "⬖",
+    "tags": ["Healing", "Buff", "Magic"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -119,6 +132,7 @@
   {
     "Name": "Path: Foresight",
     "Action": "⬖",
+    "tags": ["Magic", "Defense", "Prediction"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -128,6 +142,7 @@
   {
     "Name": "Path: Temporal Surge",
     "Action": "⭘",
+    "tags": ["Magic", "Action", "Fatigue"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -137,6 +152,7 @@
   {
     "Name": "Path: Inevitable End",
     "Action": "⭘",
+    "tags": ["Combat", "Damage", "Debuff"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -146,6 +162,7 @@
   {
     "Name": "Path: Battle-Hardened",
     "Action": "⭘",
+    "tags": ["Combat", "Reroll", "Buff"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -155,6 +172,7 @@
   {
     "Name": "Path: Master Crafter",
     "Action": "⭘",
+    "tags": ["Crafting", "Utility", "Buff"],
     "Cost": "0",
     "Symbols": "☀",
     "Parameters": "",
@@ -164,6 +182,7 @@
   {
     "Name": "Path: Predator's Edge",
     "Action": "⭘",
+    "tags": ["Combat", "Movement", "Damage"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -173,6 +192,7 @@
   {
     "Name": "Path: Deep Delver",
     "Action": "⭘",
+    "tags": ["Combat", "Environment", "Damage"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -182,6 +202,7 @@
   {
     "Name": "Path: Phase Slip",
     "Action": "⬖",
+    "tags": ["Magic", "Movement", "Defense"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -191,6 +212,7 @@
   {
     "Name": "Path: War Chorus",
     "Action": "⭘",
+    "tags": ["Buff", "Combat", "Damage"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -200,6 +222,7 @@
   {
     "Name": "Path: Immovable Guard",
     "Action": "◇",
+    "tags": ["Defense", "Protection", "Combat"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -209,6 +232,7 @@
   {
     "Name": "Path: Lingering Hex",
     "Action": "⬖",
+    "tags": ["Magic", "Debuff", "Curse"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -218,6 +242,7 @@
   {
     "Name": "Path: Hit and Fade",
     "Action": "⭘",
+    "tags": ["Combat", "Movement", "Accuracy"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -227,6 +252,7 @@
   {
     "Name": "Path: Forbidden Insight",
     "Action": "⬖",
+    "tags": ["Magic", "Information", "Damage"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -236,6 +262,7 @@
   {
     "Name": "Path: Martyr's Zeal",
     "Action": "⭘",
+    "tags": ["Combat", "Damage", "Buff"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -245,6 +272,7 @@
   {
     "Name": "Path: Reflected Harm",
     "Action": "◇",
+    "tags": ["Defense", "Damage", "Reaction"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -254,6 +282,7 @@
   {
     "Name": "Path: Last Rites",
     "Action": "⭘",
+    "tags": ["Combat", "Healing", "Death"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -263,6 +292,7 @@
   {
     "Name": "Path: Quickdraw",
     "Action": "⭘",
+    "tags": ["Combat", "Ranged", "Accuracy"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -272,6 +302,7 @@
   {
     "Name": "Path: Living Runes",
     "Action": "⬖",
+    "tags": ["Magic", "Buff", "Choice"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -281,6 +312,7 @@
   {
     "Name": "Path: Plunder Momentum",
     "Action": "⭘",
+    "tags": ["Combat", "Movement", "Damage"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -290,6 +322,7 @@
   {
     "Name": "Path: Radiant Presence",
     "Action": "⭘",
+    "tags": ["Healing", "Buff", "Mana"],
     "Cost": "0",
     "Symbols": "⧖",
     "Parameters": "",
@@ -299,6 +332,7 @@
   {
     "Name": "Path: Mutable Form",
     "Action": "⬖",
+    "tags": ["Magic", "Defense", "Adaptation"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -308,6 +342,7 @@
   {
     "Name": "Heavy Guard",
     "Action":"⭘",
+    "tags": ["Armor", "Proficiency", "Defense"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": " ⫘ Heavy Armor Proficiency, Shield Proficiency",
@@ -317,6 +352,7 @@
   {
     "Name": "Traveler's Endurance",
     "Action":"⭘",
+    "tags": ["Utility", "Movement", "Fatigue"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -326,6 +362,7 @@
   {
     "Name": "Arcane Spellcaster",
     "Action":"⭘",
+    "tags": ["Magic", "Spellcasting", "Arcane"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
@@ -335,6 +372,7 @@
   {
     "Name": "Divine Spellcaster",
     "Action":"⭘",
+    "tags": ["Magic", "Spellcasting", "Divine"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
@@ -344,6 +382,7 @@
   {
     "Name": "Cosmic Spellcaster",
     "Action":"⭘",
+    "tags": ["Magic", "Spellcasting", "Cosmic"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
@@ -353,6 +392,7 @@
   {
     "Name": "Occult Spellcaster",
     "Action":"⭘",
+    "tags": ["Magic", "Spellcasting", "Occult"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
@@ -362,6 +402,7 @@
   {
     "Name": "Elemental Spellcaster",
     "Action":"⭘",
+    "tags": ["Magic", "Spellcasting", "Elemental"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
@@ -371,6 +412,7 @@
   {
     "Name": "Cantrip Adept",
     "Action":"⭘",
+    "tags": ["Magic", "Cantrips", "Spellcasting"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Spellcasting",
@@ -380,6 +422,7 @@
   {
     "Name": "Quick Reflexes",
     "Action":"◇",
+    "tags": ["Defense", "Reaction", "Damage"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -389,6 +432,7 @@
   {
     "Name": "Cantrip Knowledge",
     "Action":"⭘",
+    "tags": ["Magic", "Cantrips", "Conversion"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Spellcasting",
@@ -398,6 +442,7 @@
   {
     "Name": "Minor Channeling",
     "Action":"⬖",
+    "tags": ["Magic", "Spellcasting", "Mana"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -407,6 +452,7 @@
   {
     "Name": "Chef",
     "Action":"⭘",
+    "tags": ["Utility", "Cooking", "Buff"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -416,6 +462,7 @@
   {
     "Name": "Tavern Brawler",
     "Action":"⭘",
+    "tags": ["Combat", "Improvised", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -425,6 +472,7 @@
   {
     "Name": "Miner",
     "Action":"⭘",
+    "tags": ["Utility", "Mining", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -434,6 +482,7 @@
   {
     "Name": "Brewer",
     "Action":"⭘",
+    "tags": ["Utility", "Brewing", "Potions"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -443,6 +492,7 @@
   {
     "Name": "Fisher",
     "Action":"⭘",
+    "tags": ["Utility", "Fishing", "Healing"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -452,6 +502,7 @@
   {
     "Name": "Storyteller",
     "Action":"⭘",
+    "tags": ["Social", "Storytelling", "Grace"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -461,6 +512,7 @@
   {
     "Name": "Gravedigger",
     "Action":"⭘",
+    "tags": ["Utility", "Death", "Healing"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "★ Death",
@@ -470,6 +522,7 @@
   {
     "Name": "Bardic Drunk",
     "Action":"⭘",
+    "tags": ["Combat", "Condition", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -479,6 +532,7 @@
   {
     "Name": "Hermit",
     "Action":"⭘",
+    "tags": ["Utility", "Solitude", "Buff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -488,6 +542,7 @@
   {
     "Name": "Street Performer",
     "Action":"⬖",
+    "tags": ["Social", "Performance", "Buff"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -497,6 +552,7 @@
   {
     "Name": "Candle Keeper",
     "Action":"⭘",
+    "tags": ["Utility", "Light", "Buff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -506,6 +562,7 @@
   {
     "Name": "Combat Trapper",
     "Action":"⬖",
+    "tags": ["Utility", "Traps", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -515,6 +572,7 @@
   {
     "Name": "Conductive Wiring",
     "Action":"⬖",
+    "tags": ["Utility", "Traps", "Electricity"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Combat Trapper",
@@ -524,6 +582,7 @@
   {
     "Name": "Survivalist",
     "Action":"⭘",
+    "tags": ["Utility", "Survival", "Buff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -533,6 +592,7 @@
   {
     "Name": "Tracer Shot",
     "Action":"⬖",
+    "tags": ["Combat", "Ranged", "Marking"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Any Ranged Proficiency",
@@ -542,6 +602,7 @@
   {
     "Name": "Non-lethal Shot",
     "Action":"◆",
+    "tags": ["Combat", "Ranged", "Non-lethal"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Any Ranged Proficiency",
@@ -551,6 +612,7 @@
   {
     "Name": "Arcane Edge",
     "Action":"⭘",
+    "tags": ["Magic", "Accuracy", "Melee"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -560,6 +622,7 @@
   {
     "Name": "Elemental Draw",
     "Action":"◆",
+    "tags": ["Magic", "Elemental", "Damage"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "★ Infused Strike",
@@ -569,6 +632,7 @@
   {
     "Name": "Mana Slash",
     "Action":"◆",
+    "tags": ["Magic", "Mana", "Damage"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "★ Infused Strike",
@@ -578,6 +642,7 @@
   {
     "Name": "Beast Whisperer",
     "Action":"⭘",
+    "tags": ["Companion", "Animal", "Combat"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Companion",
@@ -587,6 +652,7 @@
   {
     "Name": "Bonded Instinct",
     "Action":"⬖",
+    "tags": ["Companion", "Accuracy", "Combat"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Companion",
@@ -596,6 +662,7 @@
   {
     "Name": "Spirit Bond",
     "Action":"⭘",
+    "tags": ["Companion", "Healing", "Sensing"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": " ⫘ ★ Companion",
@@ -605,6 +672,7 @@
   {
     "Name": "Noble Steed",
     "Action":"⭘",
+    "tags": ["Companion", "Mount", "Defense"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Beast Whisperer",
@@ -614,6 +682,7 @@
   {
     "Name": "Carapace",
     "Action":"⭘",
+    "tags": ["Defense", "Armor", "Unarmored"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -623,6 +692,7 @@
   {
     "Name": "Forgotten History",
     "Action":"⭘",
+    "tags": ["Utility", "Knowledge", "History"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -632,6 +702,7 @@
   {
     "Name": "Weakpoint",
     "Action":"⭘",
+    "tags": ["Combat", "Accuracy", "Debuff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -641,6 +712,7 @@
   {
     "Name": "Ancient Study",
     "Action":"⭘",
+    "tags": ["Magic", "Knowledge", "Cantrips"],
     "Cost": "1",
     "Symbols": "⧖ ",
     "Parameters": "★ Unbound ⫘ Occult Spellcaster / Cosmic Spellcaster",
@@ -650,6 +722,7 @@
   {
     "Name": "Coward's Instinct",
     "Action":"⭘",
+    "tags": ["Combat", "Movement", "Fear"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -659,6 +732,7 @@
   {
     "Name": "Master Of Disguise",
     "Action":"⭘",
+    "tags": ["Social", "Disguise", "Buff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -668,6 +742,7 @@
   {
     "Name": "Leg Day",
     "Action":"⭘",
+    "tags": ["Utility", "Movement", "Fatigue"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -677,6 +752,7 @@
   {
     "Name": "Focused Strike",
     "Action":"⭘",
+    "tags": ["Combat", "Damage", "First Hit"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -686,6 +762,7 @@
   {
     "Name": "Hard Swing",
     "Action":"⬖",
+    "tags": ["Combat", "Damage", "Action"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -695,6 +772,7 @@
   {
     "Name": "Focused Mind",
     "Action":"⭘",
+    "tags": ["Magic", "Resistance", "Spirit"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -704,6 +782,7 @@
   {
     "Name": "Spell Scribe",
     "Action":"⭘",
+    "tags": ["Magic", "Identification", "Arcane"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Ritualist ⫘ ★ Spellcasting",
@@ -713,6 +792,7 @@
   {
     "Name": "Ritualist's Expertise",
     "Action":"⭘",
+    "tags": ["Magic", "Rituals", "Arcane"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Ritualist ⫘ ★ Spellcasting",
@@ -722,6 +802,7 @@
   {
     "Name": "Pocket Sand",
     "Action":"◇",
+    "tags": ["Combat", "Reaction", "Blind"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -731,6 +812,7 @@
   {
     "Name": "Remote Activation",
     "Action":"⭘",
+    "tags": ["Utility", "Activation", "Devices"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -740,6 +822,7 @@
   {
     "Name": "Reinforced Construction",
     "Action":"⭘",
+    "tags": ["Crafting", "Durability", "Utility"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -749,6 +832,7 @@
   {
     "Name": "Craftsman",
     "Action":"⭘",
+    "tags": ["Crafting", "Recipes", "Utility"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Tinkering",
@@ -758,6 +842,7 @@
   {
     "Name": "Gearwright",
     "Action":"⭘",
+    "tags": ["Crafting", "Repair", "Utility"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "⫘ ★ Tinkering",
@@ -767,6 +852,7 @@
   {
     "Name": "Field Mechanic",
     "Action":"⬖",
+    "tags": ["Crafting", "Repair", "Utility"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ ★ Tinkering",
@@ -776,6 +862,7 @@
   {
     "Name": "Scrap Salvager",
     "Action":"⭘",
+    "tags": ["Crafting", "Salvage", "Utility"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -785,6 +872,7 @@
   {
     "Name": "Arc Current",
     "Action":"⬖",
+    "tags": ["Crafting", "Electricity", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Tinkering",
@@ -794,6 +882,7 @@
   {
     "Name": "Charged Conduit",
     "Action":"⭘",
+    "tags": ["Magic", "Crafting", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -803,6 +892,7 @@
   {
     "Name": "Spell Interface",
     "Action":"⭘",
+    "tags": ["Magic", "Crafting", "Automation"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ ★ Spellcasting",
@@ -812,6 +902,7 @@
   {
     "Name": "Relentless Advance",
     "Action":"⭘",
+    "tags": ["Combat", "Movement", "Accuracy"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -821,6 +912,7 @@
   {
     "Name": "Locksmith",
     "Action":"⭘",
+    "tags": ["Utility", "Locks", "Finesse"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -830,6 +922,7 @@
   {
     "Name": "Companion Recall",
     "Action":"⬖",
+    "tags": ["Companion", "Teleport", "Healing"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -839,6 +932,7 @@
   {
     "Name": "Pathmaker",
     "Action":"⬖",
+    "tags": ["Combat", "Movement", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -848,6 +942,7 @@
   {
     "Name": "Crippling Impact",
     "Action":"⬖",
+    "tags": ["Combat", "Movement", "Slow"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
@@ -866,6 +961,7 @@
   {
     "Name": "Crushing Impact",
     "Action":"⬖",
+    "tags": ["Combat", "Damage", "Health"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
@@ -875,6 +971,7 @@
   {
     "Name": "Displacing Impact",
     "Action":"⬖",
+    "tags": ["Combat", "Movement", "Push"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
@@ -884,6 +981,7 @@
   {
     "Name": "Switching Impact",
     "Action":"⬖",
+    "tags": ["Combat", "Movement", "Swap"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
@@ -893,6 +991,7 @@
   {
     "Name": "Guarding Impact",
     "Action":"⬖",
+    "tags": ["Combat", "Defense", "Guard"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
@@ -902,6 +1001,7 @@
   {
     "Name": "Mana Charger",
     "Action":"⭘",
+    "tags": ["Utility", "Mana", "Devices"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -911,6 +1011,7 @@
   {
     "Name": "Mechanical Assistant",
     "Action":"⭘",
+    "tags": ["Companion", "Crafting", "Utility"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Companion",
@@ -920,6 +1021,7 @@
   {
     "Name": "Spell Drone",
     "Action":"⬖",
+    "tags": ["Companion", "Magic", "Conduit"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Mechanical Assistant",
@@ -929,6 +1031,7 @@
   {
     "Name": "Combat Rover",
     "Action":"⬖",
+    "tags": ["Companion", "Combat", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Mechanical Assistant",
@@ -938,6 +1041,7 @@
   {
     "Name": "Dual Wielding",
     "Action":"⭘",
+    "tags": ["Combat", "Weapons", "Proficiency"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Off-hand",
@@ -947,6 +1051,7 @@
   {
     "Name": "Dual Action",
     "Action":"⭘",
+    "tags": ["Combat", "Companion", "Attack"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Double Strike ⫘ Level 6+",
@@ -956,6 +1061,7 @@
   {
     "Name": "Second Strike",
     "Action":"⭘",
+    "tags": ["Combat", "Attack", "Extra"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Double Strike ⫘ Level 6+",
@@ -965,6 +1071,7 @@
   {
     "Name": "Guardian's Oath",
     "Action":"◇",
+    "tags": ["Defense", "Protection", "Damage"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -974,6 +1081,7 @@
   {
     "Name": "Mana Reservoir",
     "Action":"⭘",
+    "tags": ["Magic", "Mana", "Reservoir"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Reservoir",
@@ -983,6 +1091,7 @@
   {
     "Name": "Unyielding Defense",
     "Action":"⭘",
+    "tags": ["Defense", "Armor", "Health"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -992,6 +1101,7 @@
   {
     "Name": "Precision Form",
     "Action":"⭘",
+    "tags": ["Combat", "Damage", "Accuracy"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1001,6 +1111,7 @@
   {
     "Name": "Tactical Awareness",
     "Action":"⭘",
+    "tags": ["Combat", "Accuracy", "Positioning"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1010,6 +1121,7 @@
   {
     "Name": "Enduring Spirit",
     "Action":"⭘",
+    "tags": ["Defense", "Guard", "Health"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1019,6 +1131,7 @@
   {
     "Name": "Steady Aim",
     "Action":"⭘",
+    "tags": ["Combat", "Accuracy", "No Damage"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1028,6 +1141,7 @@
   {
     "Name": "Channel Focus",
     "Action":"⭘",
+    "tags": ["Magic", "Guard", "Spellcasting"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1037,6 +1151,7 @@
   {
     "Name": "Duelist Technique",
     "Action":"⭘",
+    "tags": ["Combat", "Armor", "Reflex"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1046,6 +1161,7 @@
   {
     "Name": "Crushing Blow",
     "Action":"◆",
+    "tags": ["Combat", "Damage", "Movement"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1055,6 +1171,7 @@
   {
     "Name": "Executioner's Edge",
     "Action":"⭘",
+    "tags": ["Combat", "Damage", "Health"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1064,6 +1181,7 @@
   {
     "Name": "Resolute Will",
     "Action":"⭘",
+    "tags": ["Utility", "Condition", "Fortitude"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1073,6 +1191,7 @@
   {
     "Name": "Perfectionist Strike",
     "Action":"◆",
+    "tags": ["Combat", "Damage", "Risk"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1082,6 +1201,7 @@
   {
     "Name": "Focus Breaker",
     "Action":"⭘",
+    "tags": ["Combat", "Mana", "Debuff"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1091,6 +1211,7 @@
   {
     "Name": "Adaptive Guard",
     "Action":"⭘",
+    "tags": ["Defense", "Armor", "Repeated Attack"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Medium Armor Proficiency / Heavy Armor Proficiency",
@@ -1100,6 +1221,7 @@
   {
     "Name": "Blood pact",
     "Action":"◆",
+    "tags": ["Combat", "Damage", "Sacrifice"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1109,6 +1231,7 @@
   {
     "Name": "Blacksmith",
     "Action":"⭘",
+    "tags": ["Crafting", "Repair", "Buff"],
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "",
@@ -1118,6 +1241,7 @@
   {
     "Name": "Treasure Hunter",
     "Action":"⭘",
+    "tags": ["Utility", "Looting", "Movement"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Explorer",
@@ -1127,6 +1251,7 @@
   {
     "Name": "Cartographer",
     "Action":"⭘",
+    "tags": ["Utility", "Knowledge", "Ambush"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Explorer",
@@ -1136,6 +1261,7 @@
   {
     "Name": "Restorative Meditation",
     "Action":"⭘",
+    "tags": ["Magic", "Mana", "Rest"],
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "★ Arcane Recovery",
@@ -1145,6 +1271,7 @@
   {
     "Name": "Focused Conduit",
     "Action":"⭘",
+    "tags": ["Magic", "Mana", "Range"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Manaflux",
@@ -1154,6 +1281,7 @@
   {
     "Name": "Mana Conservation",
     "Action":"⭘",
+    "tags": ["Magic", "Mana", "Counter"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Manaflux",
@@ -1163,6 +1291,7 @@
   {
     "Name": "Mana Flow",
     "Action":"⭘",
+    "tags": ["Magic", "Mana", "Kill"],
     "Cost": "2",
     "Symbols": "⧖ ",
     "Parameters": "⫘ ★ Manaflux",
@@ -1172,6 +1301,7 @@
   {
     "Name": "Spell Specialization",
     "Action":"⭘",
+    "tags": ["Magic", "Spell", "Buff"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1181,6 +1311,7 @@
   {
     "Name": "Aimed Shot",
     "Action":"⬖",
+    "tags": ["Combat", "Ranged", "Accuracy"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1190,6 +1321,7 @@
   {
     "Name": "Quick Reload",
     "Action":"⭘",
+    "tags": ["Combat", "Ranged", "Reload"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "Firearms",
@@ -1199,6 +1331,7 @@
   {
     "Name": "Tracking Expertise",
     "Action":"⭘",
+    "tags": ["Utility", "Tracking", "Awareness"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1208,6 +1341,7 @@
   {
     "Name": "Piercing Shot",
     "Action":"◆",
+    "tags": ["Combat", "Ranged", "Pierce"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1217,6 +1351,7 @@
   {
     "Name": "Sudden Camouflage",
     "Action":"⭘",
+    "tags": ["Combat", "Stealth", "Debuff"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1226,6 +1361,7 @@
   {
     "Name": "Explosive Ammunition",
     "Action":"◆",
+    "tags": ["Combat", "Ranged", "Explosion"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1235,6 +1371,7 @@
   {
     "Name": "Elemental Coating",
     "Action":"⭘",
+    "tags": ["Combat", "Ranged", "Elemental"],
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "",
@@ -1244,6 +1381,7 @@
   {
     "Name": "Bounding Retreat",
     "Action":"⭘",
+    "tags": ["Combat", "Ranged", "Movement"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1253,6 +1391,7 @@
   {
     "Name": "Crippling Shot",
     "Action":"◆",
+    "tags": ["Combat", "Ranged", "Movement"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1262,6 +1401,7 @@
   {
     "Name": "Runic Impact",
     "Action":"⬖",
+    "tags": ["Magic", "Melee", "Spell"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Conduit",
@@ -1271,6 +1411,7 @@
   {
     "Name": "Runic Shot",
     "Action":"⬖",
+    "tags": ["Magic", "Ranged", "Spell"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Conduit",
@@ -1280,6 +1421,7 @@
   {
     "Name": "Ranged Conduit",
     "Action":"◆",
+    "tags": ["Magic", "Ranged", "Cantrip"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "Conduit",
@@ -1289,6 +1431,7 @@
   {
     "Name": "Spirit Conduit",
     "Action":"⭘",
+    "tags": ["Magic", "Companion", "Spellcasting"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Conduit",
@@ -1298,6 +1441,7 @@
   {
     "Name": "Arcane Link",
     "Action":"⭘",
+    "tags": ["Magic", "Companion", "Mana"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Reservoir",
@@ -1307,6 +1451,7 @@
   {
     "Name": "Unseen Strike",
     "Action":"⭘",
+    "tags": ["Combat", "Stealth", "Hit"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1316,6 +1461,7 @@
   {
     "Name": "Quick Cast",
     "Action":"⭘",
+    "tags": ["Magic", "Spellcasting", "Free"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "⫘ ★ Ritualist",
@@ -1325,6 +1471,7 @@
   {
     "Name": "Spontaneous Insight",
     "Action":"⭘",
+    "tags": ["Utility", "Reroll", "Grace"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1334,6 +1481,7 @@
   {
     "Name": "Duelist's Prowess",
     "Action":"◆",
+    "tags": ["Combat", "Weapon", "Critical"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1343,6 +1491,7 @@
   {
     "Name": "Battlefield Awareness",
     "Action":"◇",
+    "tags": ["Combat", "Movement", "Stealth"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Master of Stealth",
@@ -1352,6 +1501,7 @@
   {
     "Name": "Vanishing Act",
     "Action":"◇",
+    "tags": ["Combat", "Reaction", "Movement"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Master of Stealth",
@@ -1361,6 +1511,7 @@
   {
     "Name": "Parry",
     "Action":"◇",
+    "tags": ["Combat", "Defense", "Contest"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1370,6 +1521,7 @@
   {
     "Name": "Braced Stance",
     "Action":"⭘",
+    "tags": ["Combat", "Grappling", "Size"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1379,6 +1531,7 @@
   {
     "Name": "Jury-Rig",
     "Action":"⬖",
+    "tags": ["Crafting", "Repair", "Temporary"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "⫘ Novice Craftsman",
@@ -1397,6 +1550,7 @@
   {
     "Name": "Lucky Fella",
     "Action":"⭘",
+    "tags": ["Utility", "Luck", "Gambling"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1406,6 +1560,7 @@
   {
     "Name": "Carrying Mule",
     "Action":"⭘",
+    "tags": ["Utility", "Encumbrance", "Carrying"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1415,6 +1570,7 @@
   {
     "Name": "Pocket Aces",
     "Action":"⭘",
+    "tags": ["Utility", "Luck", "Advantage"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Lucky Fella",
@@ -1424,6 +1580,7 @@
   {
     "Name": "Compelling Invite",
     "Action":"⬖",
+    "tags": ["Combat", "Taunt", "Area"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Taunt",
@@ -1433,6 +1590,7 @@
   {
     "Name": "Field Medic",
     "Action":"⭘",
+    "tags": ["Utility", "Healing", "Condition"],
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "",
@@ -1442,6 +1600,7 @@
   {
     "Name": "Constructive Trapper",
     "Action":"⬖",
+    "tags": ["Utility", "Traps", "Area"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Combat Trapper",
@@ -1451,6 +1610,7 @@
   {
     "Name": "Deployment Trapper",
     "Action":"⭘",
+    "tags": ["Utility", "Traps", "Range"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Combat Trapper",
@@ -1460,6 +1620,7 @@
   {
     "Name": "Guerrilla Trapper",
     "Action":"⭘",
+    "tags": ["Utility", "Traps", "Rest"],
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "⫘ Combat Trapper",
@@ -1469,6 +1630,7 @@
   {
     "Name": "Explosive Trapper",
     "Action":"⭘",
+    "tags": ["Utility", "Traps", "Explosion"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Combat Trapper",
@@ -1478,6 +1640,7 @@
   {
     "Name": "Binding Trapper",
     "Action":"⭘",
+    "tags": ["Utility", "Traps", "Prone"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Combat Trapper",
@@ -1487,6 +1650,7 @@
   {
     "Name": "Combat Guard",
     "Action":"⭘",
+    "tags": ["Combat", "Taunt", "Guard"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Taunt",
@@ -1496,6 +1660,7 @@
   {
     "Name": "Recovery",
     "Action":"⭘",
+    "tags": ["Utility", "Healing", "Rest"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1505,6 +1670,7 @@
   {
     "Name": "Back to back we stand",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Movement"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1514,6 +1680,7 @@
   {
     "Name": "Suppressive fire",
     "Action":"◆",
+    "tags": ["Combat", "Ranged", "Area"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1523,6 +1690,7 @@
   {
     "Name": "Berserk",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Rage"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "★ Rage",
@@ -1532,6 +1700,7 @@
   {
     "Name": "Natural Defenses",
     "Action":"⭘",
+    "tags": ["Combat", "Resistance", "Rage"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Rage",
@@ -1541,6 +1710,7 @@
   {
     "Name": "Bodyslam",
     "Action":"◆",
+    "tags": ["Combat", "Damage", "Guard"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1550,6 +1720,7 @@
   {
     "Name": "Great Weapon Mastery",
     "Action":"⭘",
+    "tags": ["Combat", "Weapon", "Damage"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Heavy Weapon Proficiency",
@@ -1559,6 +1730,7 @@
   {
     "Name": "Blood Vigor",
     "Action":"⭘",
+    "tags": ["Combat", "Healing", "Kill"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1568,6 +1740,7 @@
   {
     "Name": "Momentum Drive",
     "Action":"⭘",
+    "tags": ["Combat", "Damage", "Stack"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1577,6 +1750,7 @@
   {
     "Name": "Counter Stance",
     "Action":"⭘",
+    "tags": ["Combat", "Damage", "Taunt"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Compelling invite",
@@ -1586,6 +1760,7 @@
   {
     "Name": "Spellbreaker",
     "Action":"◇",
+    "tags": ["Magic", "Dispel", "Reaction"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Focus Breaker",
@@ -1595,6 +1770,7 @@
   {
     "Name": "Ethereal Step",
     "Action":"⬖",
+    "tags": ["Utility", "Movement", "Terrain"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1604,6 +1780,7 @@
   {
     "Name": "Healing Pulse",
     "Action":"⬖",
+    "tags": ["Magic", "Healing", "Area"],
     "Cost": "",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1613,6 +1790,7 @@
   {
     "Name": "Mystical Overload",
     "Action":"⭘",
+    "tags": ["Magic", "Damage", "Sacrifice"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "⫘ ★ Spellcasting & ★ Ritualist",
@@ -1622,6 +1800,7 @@
   {
     "Name": "Spell Echo",
     "Action":"⬖",
+    "tags": ["Magic", "Spellcasting", "Repeat"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "⫘ ★ Spellcasting",
@@ -1631,6 +1810,7 @@
   {
     "Name": "Minor Syphoned Healing",
     "Action":"⭘",
+    "tags": ["Magic", "Healing", "Self"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1640,6 +1820,7 @@
   {
     "Name": "Cursed Cycle",
     "Action":"⭘",
+    "tags": ["Magic", "Curse", "Transfer"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1649,6 +1830,7 @@
   {
     "Name": "Camper's Discipline",
     "Action":"⭘",
+    "tags": ["Combat", "Ranged", "Stationary"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1658,6 +1840,7 @@
   {
     "Name": "Arc Shot",
     "Action":"⭘",
+    "tags": ["Combat", "Ranged", "Cover"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1667,6 +1850,7 @@
   {
     "Name": "Tough",
     "Action":"⭘",
+    "tags": ["Utility", "Health", "Max"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1676,6 +1860,7 @@
   {
     "Name": "Skilled",
     "Action":"⭘",
+    "tags": ["Utility", "Skills", "Points"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1685,6 +1870,7 @@
   {
     "Name": "Mana Sap",
     "Action":"⭘",
+    "tags": ["Magic", "Mana", "Drain"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Focus Breaker",
@@ -1694,6 +1880,7 @@
   {
     "Name": "Symbiotic Flow",
     "Action":"⭘",
+    "tags": ["Magic", "Companion", "Damage"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Companion",
@@ -1703,6 +1890,7 @@
   {
     "Name": "Phoenix Recovery",
     "Action":"⭘",
+    "tags": ["Resilience", "Revival", "Health"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "★ Self-Revive ⫘ Blood Vigor",
@@ -1712,6 +1900,7 @@
   {
     "Name": "Arcane Detonation",
     "Action":"◆",
+    "tags": ["Magic", "Damage", "Area"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "⫘ ★ Spellcasting",
@@ -1721,6 +1910,7 @@
   {
     "Name": "Last stand",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Health"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1730,6 +1920,7 @@
   {
     "Name": "Cantrip Overflow",
     "Action":"⭘",
+    "tags": ["Magic", "Cantrips", "Mana"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1739,6 +1930,7 @@
   {
     "Name": "Elemental Reflection",
     "Action":"⭘",
+    "tags": ["Magic", "Defense", "Elemental"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Elementalist's Spark",
@@ -1748,6 +1940,7 @@
   {
     "Name": "Eternal Discipline",
     "Action":"⭘",
+    "tags": ["Utility", "Uses", "Restore"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1757,6 +1950,7 @@
   {
     "Name": "Eternal Guardian",
     "Action":"⭘",
+    "tags": ["Combat", "Protection", "Revival"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Back to Back we stand",
@@ -1766,6 +1960,7 @@
   {
     "Name": "Arcane Sniper",
     "Action":"⭘",
+    "tags": ["Magic", "Range", "Arcane"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Arcane Student",
@@ -1775,6 +1970,7 @@
   {
     "Name": "Major Syphoned Healing",
     "Action":"⭘",
+    "tags": ["Magic", "Healing", "Extend"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Minor Syphoned Healing",
@@ -1784,6 +1980,7 @@
   {
     "Name": "Cosmic Protection",
     "Action":"⭘",
+    "tags": ["Magic", "Guard", "Cosmic"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Cosmic Novice",
@@ -1793,6 +1990,7 @@
   {
     "Name": "Occult Dominion",
     "Action":"⭘",
+    "tags": ["Magic", "Targets", "Occult"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Occult Apprentice",
@@ -1802,6 +2000,7 @@
   {
     "Name": "Master Channeler",
     "Action":"⭘",
+    "tags": ["Magic", "Mana", "Rest"],
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "⫘ Restorative Meditation",
@@ -1811,6 +2010,7 @@
   {
     "Name": "Darkness Rise",
     "Action":"⭘",
+    "tags": ["Combat", "Zone", "Damage"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1820,6 +2020,7 @@
   {
     "Name": "Second Shot",
     "Action":"⭘",
+    "tags": ["Combat", "Ranged", "Extra"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Double Strike ⫘ Level 6+",
@@ -1829,6 +2030,7 @@
   {
     "Name": "Dead Horizon",
     "Action":"◆",
+    "tags": ["Combat", "Ranged", "Pierce"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "⫘ Piercing Shot",
@@ -1838,6 +2040,7 @@
   {
     "Name": "Eldritch Convergence",
     "Action":"⭘",
+    "tags": ["Combat", "Damage", "Debuff"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1847,6 +2050,7 @@
   {
     "Name": "Enduring Rage",
     "Action":"⭘",
+    "tags": ["Combat", "Guard", "Rage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Breserk",
@@ -1856,6 +2060,7 @@
   {
     "Name": "Workers companion",
     "Action":"⭘",
+    "tags": ["Companion", "Crafting", "Buff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Companion",
@@ -1865,6 +2070,7 @@
   {
     "Name": "Longshot",
     "Action":"⭘",
+    "tags": ["Combat", "Ranged", "Range"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Any Ranged Proficiency",
@@ -1874,6 +2080,7 @@
   {
     "Name": "Enticipation",
     "Action":"◆",
+    "tags": ["Combat", "Guard", "Restraint"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1883,6 +2090,7 @@
   {
     "Name": "Against the odds",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Numbers"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1892,6 +2100,7 @@
   {
     "Name": "Thick skin",
     "Action":"⭘",
+    "tags": ["Combat", "Defense", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1901,6 +2110,7 @@
   {
     "Name": "Twoification",
     "Action":"⬖",
+    "tags": ["Combat", "Buff", "Ally"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1910,6 +2120,7 @@
   {
     "Name": "Sunblessed",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Sunlight"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1919,6 +2130,7 @@
   {
     "Name": "Giant Slayer",
     "Action":"⭘",
+    "tags": ["Combat", "Damage", "Size"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1928,6 +2140,7 @@
   {
     "Name": "Climber",
     "Action":"⭘",
+    "tags": ["Utility", "Movement", "Climbing"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1937,6 +2150,7 @@
   {
     "Name": "Carpenter",
     "Action":"⭘",
+    "tags": ["Utility", "Crafting", "Wood"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1946,6 +2160,7 @@
   {
     "Name": "Combat Carpenter",
     "Action":"⭘",
+    "tags": ["Combat", "Crafting", "Improvised"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Carpenter",
@@ -1955,6 +2170,7 @@
   {
     "Name": "Drama Queen",
     "Action":"⬖",
+    "tags": ["Utility", "Deception", "Performance"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1964,6 +2180,7 @@
   {
     "Name": "Seamstress",
     "Action":"⭘",
+    "tags": ["Utility", "Crafting", "Clothing"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -1973,6 +2190,7 @@
   {
     "Name": "Makeup maid",
     "Action":"⭘",
+    "tags": ["Utility", "Deception", "Disguise"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1982,6 +2200,7 @@
   {
     "Name": "Shumpo",
     "Action":"⭘",
+    "tags": ["Combat", "Movement", "Extra"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1991,6 +2210,7 @@
   {
     "Name": "Fair Strike",
     "Action":"⬖",
+    "tags": ["Combat", "Damage", "Debuff"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2000,6 +2220,7 @@
   {
     "Name": "Fair Fight",
     "Action":"⬖",
+    "tags": ["Combat", "Zone", "Debuff"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Fair Strike",
@@ -2009,6 +2230,7 @@
   {
     "Name": "Commanding Presence",
     "Action":"⬖",
+    "tags": ["Combat", "Control", "Charm"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2018,6 +2240,7 @@
   {
     "Name": "All warmed up",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2027,6 +2250,7 @@
   {
     "Name": "Jeweler",
     "Action":"⭘",
+    "tags": ["Utility", "Crafting", "Jewelry"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -2036,6 +2260,7 @@
   {
     "Name": "Fearsome Sight",
     "Action":"⭘",
+    "tags": ["Combat", "Intimidation", "Fear"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2045,6 +2270,7 @@
   {
     "Name": "Crimson Convergence",
     "Action":"⭘",
+    "tags": ["Combat", "Healing", "Guard"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2054,6 +2280,7 @@
   {
     "Name": "Convenience Fee",
     "Action":"◇",
+    "tags": ["Magic", "Healing", "Sacrifice"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2063,6 +2290,7 @@
   {
     "Name": "Redoubled Valor",
     "Action":"◇",
+    "tags": ["Combat", "Buff", "Ally"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2072,6 +2300,7 @@
   {
     "Name": "Ghost",
     "Action":"⬖",
+    "tags": ["Combat", "Defense", "Evasion"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2081,6 +2310,7 @@
   {
     "Name": "Rush",
     "Action":"⬖",
+    "tags": ["Combat", "Movement", "Initiative"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2090,6 +2320,7 @@
   {
     "Name": "High Guard",
     "Action":"⭘",
+    "tags": ["Combat", "Defense", "Cover"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2099,6 +2330,7 @@
   {
     "Name": "Stone Skin",
     "Action":"⭘",
+    "tags": ["Combat", "Defense", "Earth"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2108,6 +2340,7 @@
   {
     "Name": "Guardian",
     "Action":"⬖",
+    "tags": ["Combat", "Buff", "Guard"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2117,6 +2350,7 @@
   {
     "Name": "Deaths Respite",
     "Action":"⬖",
+    "tags": ["Combat", "Buff", "Death"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2126,6 +2360,7 @@
   {
     "Name": "Make it rain",
     "Action":"⬖",
+    "tags": ["Combat", "Area", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2135,6 +2370,7 @@
   {
     "Name": "Thought out plan",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Planning"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2144,6 +2380,7 @@
   {
     "Name": "Combat Wingman",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Ally"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2153,6 +2390,7 @@
   {
     "Name": "Wingman",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Ally"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Back to back we stand",
@@ -2162,6 +2400,7 @@
   {
     "Name": "Mystic Sacrifice",
     "Action":"⬖",
+    "tags": ["Magic", "Sacrifice", "Mana"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2171,6 +2410,7 @@
   {
     "Name": "Unshakeable",
     "Action":"⬖",
+    "tags": ["Combat", "Buff", "Guard"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2180,6 +2420,7 @@
   {
     "Name": "Transfusion",
     "Action":"⬖",
+    "tags": ["Combat", "Healing", "Sacrifice"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2189,6 +2430,7 @@
   {
     "Name": "Death Lotus",
     "Action":"⬖",
+    "tags": ["Combat", "Area", "Damage"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2198,6 +2440,7 @@
   {
     "Name": "Ruthless Predator",
     "Action":"⭘",
+    "tags": ["Combat", "Damage", "Opportunity"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2207,6 +2450,7 @@
   {
     "Name": "Dummies",
     "Action":"◇",
+    "tags": ["Combat", "Reaction", "Defense"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2216,6 +2460,7 @@
   {
     "Name": "Twin Disciplines",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Choice"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2225,6 +2470,7 @@
   {
     "Name": "Mark of Death",
     "Action":"⬖",
+    "tags": ["Magic", "Debuff", "Transfer"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2234,6 +2480,7 @@
   {
     "Name": "Convenience Tax",
     "Action":"⭘",
+    "tags": ["Magic", "Mana", "Drain"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2243,15 +2490,17 @@
   {
     "Name": "Guaranteed Yield",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Minimum"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
     "Description": "Any Damage or Guard gain with a base value lower than X is increased to X.",
-    "Scaling": "Value 🗲:<br>2 [lvl 1]<br>3 [lvl 6]<br>4 [lvl 12]"
+    "Scaling": "Value X:<br>2 [lvl 1]<br>3 [lvl 6]<br>4 [lvl 12]"
   },
   {
     "Name": "Morning Light",
     "Action":"⬖",
+    "tags": ["Utility", "Buff", "Reset"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2261,6 +2510,7 @@
   {
     "Name": "Pirouette",
     "Action":"◆",
+    "tags": ["Combat", "Damage", "Area"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2270,6 +2520,7 @@
   {
     "Name": "Inhibit",
     "Action":"⬖",
+    "tags": ["Combat", "Debuff", "Proficiency"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2279,6 +2530,7 @@
   {
     "Name": "Overexertion",
     "Action":"⭘",
+    "tags": ["Utility", "Overuse", "Fatigue"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2288,6 +2540,7 @@
   {
     "Name": "Vigor",
     "Action":"⬖",
+    "tags": ["Combat", "Guard", "Sacrifice"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2297,6 +2550,7 @@
   {
     "Name": "Measured Restraint",
     "Action":"⬖",
+    "tags": ["Magic", "Mana", "Sacrifice"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2314,6 +2568,7 @@
   {
     "Name": "Veiled Blessing",
     "Action":"⭘",
+    "tags": ["Combat", "Armor", "Sacrifice"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2323,6 +2578,7 @@
   {
     "Name": "Time Crunch",
     "Action":"⬖",
+    "tags": ["Combat", "Debuff", "Time"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2332,6 +2588,7 @@
   {
     "Name": "One of each",
     "Action":"⭘",
+    "tags": ["Combat", "Damage", "Variety"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2341,6 +2598,7 @@
   {
     "Name": "Toss Me",
     "Action":"⭘",
+    "tags": ["Combat", "Grappling", "Throw"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2350,6 +2608,7 @@
   {
     "Name": "Loaded Dice",
     "Action":"◆",
+    "tags": ["Combat", "Damage", "Grace"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2359,6 +2618,7 @@
   {
     "Name": "Riposte",
     "Action":"◇",
+    "tags": ["Combat", "Reaction", "Counter"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2368,6 +2628,7 @@
   {
     "Name": "Risky Strike",
     "Action":"⬖",
+    "tags": ["Combat", "Damage", "Gold"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2377,6 +2638,7 @@
   {
     "Name": "Rite of Dominance",
     "Action":"⬖",
+    "tags": ["Combat", "Debuff", "Sacrifice"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2386,6 +2648,7 @@
   {
     "Name": "Rite of Negation",
     "Action":"◇",
+    "tags": ["Magic", "Counter", "Sacrifice"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2395,6 +2658,7 @@
   {
     "Name": "Rite of Calling",
     "Action":"⬖",
+    "tags": ["Combat", "Debuff", "Sacrifice"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2404,6 +2668,7 @@
   {
     "Name": "Sharing is caring",
     "Action":"◇",
+    "tags": ["Magic", "Support", "Mana"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2413,6 +2678,7 @@
   {
     "Name": "Catalyst of Aeons",
     "Action":"⬖",
+    "tags": ["Utility", "Repair", "Sacrifice"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2422,6 +2688,7 @@
   {
     "Name": "Intimidating Roar",
     "Action":"⬖",
+    "tags": ["Combat", "Stun", "Area"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2431,6 +2698,7 @@
   {
     "Name": "Take a moment",
     "Action":"⬖",
+    "tags": ["Combat", "Healing", "Reload"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2440,6 +2708,7 @@
   {
     "Name": "Survival Skills",
     "Action":"⭘",
+    "tags": ["Combat", "Guard", "Adaptive"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2449,6 +2718,7 @@
   {
     "Name": "One for All",
     "Action":"⭘",
+    "tags": ["Combat", "Guard", "Shared"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2458,6 +2728,7 @@
   {
     "Name": "All for One",
     "Action":"⭘",
+    "tags": ["Combat", "Guard", "Selfish"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2467,6 +2738,7 @@
   {
     "Name": "Arena's Favorite",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Sacrifice"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2476,6 +2748,7 @@
   {
     "Name": "Crimson Banquet",
     "Action":"⭘",
+    "tags": ["Magic", "Mana", "Sacrifice"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2485,6 +2758,7 @@
   {
     "Name": "Crimson Pact",
     "Action":"⭘",
+    "tags": ["Magic", "Sacrifice", "Mana"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Crimson Banquet",
@@ -2494,6 +2768,7 @@
   {
     "Name": "Light Footed",
     "Action":"⭘",
+    "tags": ["Combat", "Movement", "Footwork"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2503,6 +2778,7 @@
   {
     "Name": "Sojourners",
     "Action": "◇",
+    "tags": ["Utility", "Buff", "Ally"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2512,6 +2788,7 @@
   {
     "Name": "Slam Dunk",
     "Action":"◆",
+    "tags": ["Combat", "Damage", "Mobility"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘",
@@ -2521,6 +2798,7 @@
   {
     "Name": "Return",
     "Action":"⬖",
+    "tags": ["Combat", "Utility", "Recall"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2530,6 +2808,7 @@
   {
     "Name": "Loser's Fallacy",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Risk"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘",
@@ -2539,6 +2818,7 @@
   {
     "Name": "Cold-blooded",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Rest"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2548,6 +2828,7 @@
   {
     "Name": "Syphoning Whirlpool",
     "Action":"◆",
+    "tags": ["Combat", "Damage", "Mana"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2557,6 +2838,7 @@
   {
     "Name": "Deep Pockets",
     "Action":"⬖",
+    "tags": ["Utility", "Crafting", "Mana"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2566,6 +2848,7 @@
   {
     "Name": "Even Deeper Pockets",
     "Action":"⬖",
+    "tags": ["Utility", "Crafting", "Mana"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Deep Pockets",
@@ -2575,6 +2858,7 @@
   {
     "Name": "Guillotine",
     "Action":"⭘",
+    "tags": ["Combat", "Damage", "Execution"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2584,6 +2868,7 @@
   {
     "Name": "Behold the Infinite",
     "Action":"⭘",
+    "tags": ["Magic", "Buff", "Spellcasting"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Spellcasting",
@@ -2593,6 +2878,7 @@
   {
     "Name": "Bodybuilder",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Might"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2602,6 +2888,7 @@
   {
     "Name": "Battle Ready",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Spells"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2611,6 +2898,7 @@
   {
     "Name": "Leg Sweep",
     "Action":"◆",
+    "tags": ["Combat", "Damage", "Control"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2620,6 +2908,7 @@
   {
     "Name": "Evasive Stance",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Evasion"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2629,6 +2918,7 @@
   {
     "Name": "Snipers Nest",
     "Action":"⭘",
+    "tags": ["Combat", "Utility", "Recall"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2638,6 +2928,7 @@
   {
     "Name": "Personal Vendetta",
     "Action":"⬖",
+    "tags": ["Combat", "Buff", "Enemy"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Taunt",
@@ -2647,6 +2938,7 @@
   {
     "Name": "Bloodlust",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Rage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Rage",
@@ -2656,6 +2948,7 @@
   {
     "Name": "Returned Investment",
     "Action":"⭘",
+    "tags": ["Magic", "Buff", "Mana"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2665,6 +2958,7 @@
   {
     "Name": "Bypassed",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Cantrip"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Unbound",
@@ -2674,6 +2968,7 @@
   {
     "Name": "Blindfold Training",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Blind"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2683,6 +2978,7 @@
   {
     "Name": "Steadfast",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Damage Reduction"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2692,6 +2988,7 @@
   {
     "Name": "Bookies Choice",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Cantrip"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2701,6 +2998,7 @@
   {
     "Name": "Strike the Hand",
     "Action":"◆",
+    "tags": ["Combat", "Debuff", "Disarm"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2710,6 +3008,7 @@
   {
     "Name": "High Road",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Mercy"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2719,6 +3018,7 @@
   {
     "Name": "Self Defense",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Taunt"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Taunt",
@@ -2728,6 +3028,7 @@
   {
     "Name": "Lead and Follow",
     "Action":"◇",
+    "tags": ["Combat", "Buff", "Ally"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2737,6 +3038,7 @@
   {
     "Name": "Shield Vault",
     "Action":"⬖",
+    "tags": ["Combat", "Buff", "Shield"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
@@ -2746,6 +3048,7 @@
   {
     "Name": "Sharesies",
     "Action":"⬖",
+    "tags": ["Combat", "Buff", "Proficiency"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2755,6 +3058,7 @@
   {
     "Name": "Patient",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Mana"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2764,6 +3068,7 @@
   {
     "Name": "Reckless",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Rage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Rage",
@@ -2773,6 +3078,7 @@
   {
     "Name": "Disagreeable Aegis",
     "Action":"◇",
+    "tags": ["Combat", "Buff", "Guard"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Shield Proficiency",
@@ -2782,6 +3088,7 @@
   {
     "Name": "Mana Blast",
     "Action":"⬖",
+    "tags": ["Magic", "Damage", "Mana"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2791,6 +3098,7 @@
   {
     "Name": "Hostage",
     "Action":"⭘",
+    "tags": ["Combat", "Debuff", "Grapple"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2800,6 +3108,7 @@
   {
     "Name": "No Restraints",
     "Action":"⭘",
+    "tags": ["Combat", "Debuff", "Disarm"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2809,6 +3118,7 @@
   {
     "Name": "Treaded Ground",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Movement"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2818,6 +3128,7 @@
   {
     "Name": "Gracious",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Mana"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2827,6 +3138,7 @@
   {
     "Name": "Inspirational",
     "Action":"⬖",
+    "tags": ["Combat", "Buff", "Mana"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Gracious",
@@ -2836,6 +3148,7 @@
   {
     "Name": "Artillery Mage",
     "Action":"⭘",
+    "tags": ["Magic", "Buff", "Spellcasting"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Spellcasting",
@@ -2845,6 +3158,7 @@
   {
     "Name": "Lead Role",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Charm"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2854,6 +3168,7 @@
   {
     "Name": "Comfy Sleeper",
     "Action":"⭘",
+    "tags": ["Utility", "Buff", "Rest"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2863,6 +3178,7 @@
   {
     "Name": "Gardener",
     "Action":"⭘",
+    "tags": ["Utility", "Buff", "Nature"],
     "Cost": "",
     "Symbols": "⧖",
     "Parameters": "⫘★",
@@ -2872,6 +3188,7 @@
   {
     "Name": "Merchant",
     "Action":"⭘",
+    "tags": ["Utility", "Buff", "Economics"],
     "Cost": "",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2881,6 +3198,7 @@
   {
     "Name": "Sizeable Slash",
     "Action":"◆",
+    "tags": ["Combat", "Damage", "Melee"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2890,6 +3208,7 @@
   {
     "Name": "Answered Prayer",
     "Action":"⭘",
+    "tags": ["Utility", "Buff", "Rest"],
     "Cost": "",
     "Symbols": "☀",
     "Parameters": "",
@@ -2899,6 +3218,7 @@
   {
     "Name": "Musician",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Support"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2908,6 +3228,7 @@
   {
     "Name": "Sailor",
     "Action": "⭘",
+    "tags": ["Utility", "Buff", "Navigation"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2917,6 +3238,7 @@
   {
     "Name": "Sharp Nose",
     "Action": "⭘",
+    "tags": ["Combat", "Buff", "Senses"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2926,6 +3248,7 @@
   {
     "Name": "Hard Target",
     "Action": "⭘",
+    "tags": ["Combat", "Buff", "Cover"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2935,6 +3258,7 @@
   {
     "Name": "Combat Artisan",
     "Action":"⭘",
+    "tags": ["Combat", "Buff", "Crafting"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Tinkering",
@@ -2944,6 +3268,7 @@
   {
     "Name": "Master Thrower",
     "Action": "⭘",
+    "tags": ["Combat", "Buff", "Throwing"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2953,6 +3278,7 @@
   {
     "Name": "Mind",
     "Action": "⭘",
+    "tags": ["Combat", "Buff", "Mana"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "★ Grace",
@@ -2962,6 +3288,7 @@
   {
     "Name": "Range",
     "Action": "⭘",
+    "tags": ["Combat", "Buff", "Ranged"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Grace",
@@ -2971,6 +3298,7 @@
   {
     "Name": "Dexterity",
     "Action": "⭘",
+    "tags": ["Combat", "Buff", "Dexterity"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Grace",
@@ -2980,6 +3308,7 @@
   {
     "Name": "Haste",
     "Action": "⭘",
+    "tags": ["Combat", "Buff", "Haste"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "★ Grace",
@@ -2989,6 +3318,7 @@
   {
     "Name": "Scroll of a Madman",
     "Action": "⭘",
+    "tags": ["Magic", "Buff", "Scholarship"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2998,6 +3328,7 @@
   {
     "Name": "Soul Slash",
     "Action": "◆",
+    "tags": ["Combat", "Damage", "Soul"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
@@ -3007,6 +3338,7 @@
   {
     "Name": "Unstoppable Force",
     "Action": "⭘",
+    "tags": ["Combat", "Buff", "Rage"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "★ Rage",

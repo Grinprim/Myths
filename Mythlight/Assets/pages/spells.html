@@ -28,9 +28,10 @@
         }
         .school-orbit-stage {
             position: relative;
-            width: min(100%, 960px);
+            width: min(100%, 660px);
             aspect-ratio: 1 / 1;
             margin: 1rem auto 0;
+            margin-left: 0;
             border-radius: 9999px;
             background: radial-gradient(circle at center, rgba(15, 23, 42, 0.8) 0%, rgba(2, 6, 23, 0.35) 52%, transparent 72%);
         }
@@ -40,6 +41,7 @@
             border-radius: 9999px;
             border: 1px dashed rgba(148, 163, 184, 0.25);
             box-shadow: inset 0 0 45px rgba(30, 41, 59, 0.55);
+            animation: orbitSpin 98s linear infinite;
         }
         .school-orbit-core {
             position: absolute;
@@ -66,7 +68,7 @@
             animation: orbitSpin 44s linear infinite;
         }
         .orbit-item {
-            --orbit-radius: clamp(210px, 28vw, 285px);
+            --orbit-radius: clamp(150px, 28vw, 190px);
             position: absolute;
             top: 50%;
             left: 50%;
@@ -83,14 +85,12 @@
             border-color: rgba(129, 140, 248, 0.55);
             box-shadow: 0 18px 36px rgba(2, 6, 23, 0.55);
         }
-        .school-arcane { background-color: rgba(99, 102, 241, 0.35); border-color: rgba(129, 140, 248, 0.55); }
-        .school-divine { background-color: rgba(245, 158, 11, 0.35); border-color: rgba(251, 191, 36, 0.55); }
-        .school-elemental { background-color: rgba(34, 197, 94, 0.35); border-color: rgba(74, 222, 128, 0.55); }
-        .school-occult { background-color: rgba(168, 85, 247, 0.35); border-color: rgba(192, 132, 252, 0.55); }
-        .school-cosmic { background-color: rgba(14, 165, 233, 0.35); border-color: rgba(56, 189, 248, 0.55); }
-        .orbit-upright {
-            width: 100%;
-        }
+        .school-arcane { background-color: rgba(99, 165, 241, 0.35); border-color: rgba(129, 171, 248, 0.55); border-radius: 100%; box-shadow: 0 0 20px rgba(129, 171, 248, 0.35); }
+        .school-divine { background-color: rgba(253, 222, 169, 0.35); border-color: rgba(251, 191, 36, 0.55); border-radius: 100%; box-shadow: 0 0 20px rgba(251, 191, 36, 0.35); }
+        .school-elemental { background-color: rgba(197, 34, 34, 0.35); border-color: rgba(222, 74, 74, 0.55); border-radius: 100%; box-shadow: 0 0 20px rgba(222, 74, 74, 0.35); }
+        .school-occult { background-color: rgba(85, 247, 99, 0.35); border-color: rgba(132, 252, 148, 0.55); border-radius: 100%; box-shadow: 0 0 20px rgba(132, 252, 148, 0.35); }
+        .school-cosmic { background-color: rgba(98, 14, 233, 0.35); border-color: rgba(130, 56, 248, 0.55); border-radius: 100%; box-shadow: 0 0 20px rgba(130, 56, 248, 0.35); }
+        
         @keyframes orbitSpin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -105,6 +105,8 @@
                 radial-gradient(circle at 20% 15%, rgba(255, 236, 188, 0.2), transparent 42%);
             box-shadow: 0 18px 38px rgba(2, 6, 23, 0.45), inset 0 0 0 1px rgba(251, 191, 36, 0.12);
             overflow: hidden;
+            width: 200%;
+            margin-left: -75%;
         }
         .school-detail-scroll::before {
             content: '';
@@ -168,11 +170,17 @@
             .school-detail-scroll {
                 position: static;
                 margin-top: 1rem;
+                width: 100%;
+                margin-left: 0;
             }
         }
         @media (min-width: 1024px) and (max-width: 1279px) {
             .orbit-item {
-                --orbit-radius: clamp(220px, 31vw, 300px);
+                --orbit-radius: clamp(120px, 31vw, 180px);
+            }
+            .school-detail-scroll {
+                width: 100%;
+                margin-left: 0;
             }
         }
     </style>
@@ -242,11 +250,11 @@
                         <div>
                             <p class="text-[10px] text-slate-500 mb-3 uppercase font-bold tracking-wider">Sources</p>
                             <div class="space-y-2">
-                                <button class="filter-btn" onclick="toggleFilter('category', 'Arcane')"><span class="font-bold">Arcane</span><div class="filter-dot"></div></button>
-                                <button class="filter-btn" onclick="toggleFilter('category', 'Divine')"><span class="font-bold">Divine</span><div class="filter-dot"></div></button>
-                                <button class="filter-btn" onclick="toggleFilter('category', 'Occult')"><span class="font-bold">Occult</span><div class="filter-dot"></div></button>
-                                <button class="filter-btn" onclick="toggleFilter('category', 'Cosmic')"><span class="font-bold">Cosmic</span><div class="filter-dot"></div></button>
-                                <button class="filter-btn" onclick="toggleFilter('category', 'Elemental')"><span class="font-bold">Elemental</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('category', 'Arcane')"><span class="font-bold"><img src="../sheet/arcane.png" alt="Arcane" class="w-5 h-5" style="display: inline;"> Arcane</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('category', 'Divine')"><span class="font-bold"><img src="../sheet/divine.png" alt="Divine" class="w-5 h-5" style="display: inline;"> Divine</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('category', 'Occult')"><span class="font-bold"><img src="../sheet/occult.png" alt="Occult" class="w-5 h-5" style="display: inline;"> Occult</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('category', 'Cosmic')"><span class="font-bold"><img src="../sheet/cosmic.png" alt="Cosmic" class="w-5 h-5" style="display: inline;"> Cosmic</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('category', 'Elemental')"><span class="font-bold"><img src="../sheet/elemental.png" alt="Elemental" class="w-5 h-5" style="display: inline;"> Elemental</span><div class="filter-dot"></div></button>
                             </div>
                         </div>
                         <div>
@@ -331,8 +339,8 @@
                     <div class="school-orbit-rotor">
                         <article class="orbit-item" style="--angle: 0deg;">
                             <div class="orbit-upright">
-                                <button type="button" class="school-card school-choice orbit-card school-arcane rounded-3xl border p-5 w-full text-center" onclick="showSchoolDetails('Arcane', '../sheet/arcane.png')">
-                                    <img src="../sheet/arcane.png" alt="Arcane icon" class="w-11 h-11 rounded-lg object-cover border border-slate-700 bg-slate-900/70 mx-auto">
+                                <button type="button" class="school-card school-choice orbit-card school-arcane p-5 w-full text-center" onclick="showSchoolDetails('Arcane', '../sheet/arcane.png')">
+                                    <img src="../sheet/arcane.png" alt="Arcane icon" class="w-11 h-11 rounded-lg object-cover mx-auto">
                                     <h3 class="text-lg font-bold text-white mt-3">Arcane</h3>
                                 </button>
                             </div>
@@ -340,8 +348,8 @@
 
                         <article class="orbit-item" style="--angle: 72deg;">
                             <div class="orbit-upright">
-                                <button type="button" class="school-card school-choice orbit-card school-divine rounded-3xl border p-5 w-full text-center" onclick="showSchoolDetails('Divine', '../sheet/divine.png')">
-                                    <img src="../sheet/divine.png" alt="Divine icon" class="w-11 h-11 rounded-lg object-cover border border-slate-700 bg-slate-900/70 mx-auto">
+                                <button type="button" class="school-card school-choice orbit-card school-divine p-5 w-full text-center" onclick="showSchoolDetails('Divine', '../sheet/divine.png')">
+                                    <img src="../sheet/divine.png" alt="Divine icon" class="w-11 h-11 rounded-lg object-cover mx-auto">
                                     <h3 class="text-lg font-bold text-white mt-3">Divine</h3>
                                 </button>
                             </div>
@@ -349,17 +357,17 @@
 
                         <article class="orbit-item" style="--angle: 144deg;">
                             <div class="orbit-upright">
-                                <button type="button" class="school-card school-choice orbit-card school-elemental rounded-3xl border p-5 w-full text-center" onclick="showSchoolDetails('Elemental', '../sheet/elemental.png')">
-                                    <img src="../sheet/elemental.png" alt="Elemental icon" class="w-11 h-11 rounded-lg object-cover border border-slate-700 bg-slate-900/70 mx-auto">
-                                    <h3 class="text-lg font-bold text-white mt-3">Elemental</h3>
+                                <button type="button" class="school-card school-choice orbit-card school-elemental p-5 w-full text-center" onclick="showSchoolDetails('Elemental', '../sheet/elemental.png')">
+                                    <img src="../sheet/elemental.png" alt="Elemental icon" class="w-11 h-11 rounded-lg object-cover mx-auto">
+                                    <h3 class="text-lg font-bold text-white mt-3" style="margin-left: -12%;">Elemental</h3>
                                 </button>
                             </div>
                         </article>
 
                         <article class="orbit-item" style="--angle: 216deg;">
                             <div class="orbit-upright">
-                                <button type="button" class="school-card school-choice orbit-card school-occult rounded-3xl border p-5 w-full text-center" onclick="showSchoolDetails('Occult', '../sheet/occult.png')">
-                                    <img src="../sheet/occult.png" alt="Occult icon" class="w-11 h-11 rounded-lg object-cover border border-slate-700 bg-slate-900/70 mx-auto">
+                                <button type="button" class="school-card school-choice orbit-card school-occult p-5 w-full text-center" onclick="showSchoolDetails('Occult', '../sheet/occult.png')">
+                                    <img src="../sheet/occult.png" alt="Occult icon" class="w-11 h-11 rounded-lg object-cover mx-auto">
                                     <h3 class="text-lg font-bold text-white mt-3">Occult</h3>
                                 </button>
                             </div>
@@ -367,8 +375,8 @@
 
                         <article class="orbit-item" style="--angle: 288deg;">
                             <div class="orbit-upright">
-                                <button type="button" class="school-card school-choice orbit-card school-cosmic rounded-3xl border p-5 w-full text-center" onclick="showSchoolDetails('Cosmic', '../sheet/cosmic.png')">
-                                    <img src="../sheet/cosmic.png" alt="Cosmic icon" class="w-11 h-11 rounded-lg object-cover border border-slate-700 bg-slate-900/70 mx-auto">
+                                <button type="button" class="school-card school-choice orbit-card school-cosmic p-5 w-full text-center" onclick="showSchoolDetails('Cosmic', '../sheet/cosmic.png')">
+                                    <img src="../sheet/cosmic.png" alt="Cosmic icon" class="w-11 h-11 rounded-lg object-cover mx-auto">
                                     <h3 class="text-lg font-bold text-white mt-3">Cosmic</h3>
                                 </button>
                             </div>
@@ -380,9 +388,9 @@
                     <div class="relative z-10">
                         <p class="text-[10px] uppercase tracking-[0.2em] text-amber-300 font-bold">School Legend</p>
                         <div id="school-scroll-body" class="hidden mt-5">
-                            <img id="school-scroll-icon" src="" alt="Selected school icon" class="w-14 h-14 rounded-xl object-cover border border-slate-700 bg-slate-900/70 mx-auto">
+                            <img id="school-scroll-icon" src="" alt="Selected school icon" class="w-14 h-14 rounded-xl object-cover mx-auto">
                             <h3 id="school-scroll-name" class="text-2xl font-bold text-white text-center mt-3"></h3>
-                            <div id="school-scroll-description" class="mt-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200 text-center">
+                            <div id="school-scroll-description" class="mt-4 rounded-2xl border border-slate-500/30 bg-slate-500/10 px-4 py-3 text-sm text-white text-center">
                                 ⚠️ Under Reconstruction ⚠️
                             </div>
                         </div>
@@ -416,6 +424,17 @@
     </div>
 
     <script>
+
+        const schoolDescriptions = {
+            'Arcane': '<b>Arcane magic</b> is fundamentally similar to <b>mathematics</b>, requiring <b>study</b> and <b>precision</b> to command it to do your will. In exchange for its <b>complexity</b>, it is highly <b>diverse</b> in its applications, ranging from <b>a minor blast</b> to <b>altering fate and outcomes</b>. In addition to its more powerful effects, <b>Arcane magic</b> is commonly used as a <b>utility school</b>, offering many spells that can assist in everyday situations—there is even a spell that can <b>summon a ladder</b>.<br><br> As a <b>spellcaster</b>, the <b>Arcane School</b> grants you access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
+            'Divine': '<b>Divine magic</b>, often a source of <b>faith</b> and <b>stability</b>, can also be a source of <b>great power</b>. As you pledge yourself to <b>Divine magic</b>, you make an <b>oath</b> to act in the name of your <b>deity</b>. Your <b>Divine power</b> manifests as both <b>defensive power</b>, in the form of <b>healing</b> and <b>bolstering allies</b>, and <b>offensive power</b>, through <b>divine smites</b> and <b>sundering the undead</b>.<br><br><b>The Divine School</b> grants you access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
+            'Elemental': '<b>Elemental magic</b> is rooted in the <b>fundamental elements</b> that appear in every facet of the world. Commanding them requires <b>attunement</b> to <b>nature</b>—listen to them and let them flow through you, and you will gain access to one of the most <b>versatile schools of magic</b>. <b>Elemental casters</b> have access to <b>buffs</b>, <b>debuffs</b>, <b>damage</b>, <b>area control</b>, and much more, often promoting a sense of <b>synergy</b> between the elements.<br><br>When you select the <b>Elemental School</b>, you must choose an element from the following: <b>Earth</b>, <b>Nature</b>, <b>Fire</b>, <b>Water</b>, <b>Lightning</b>, <b>Wind</b>, <b>Toxic</b>. While you still retain access to other elements, your <b>chosen element</b> is <b>enhanced</b>. You gain access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
+            'Occult': '<b>Occult magic</b> is a <b>dark</b> and <b>mysterious</b> force, born from one\'s own <b>inner demons</b>—an expression of <b>emotion</b> manifested into <b>power</b>. You exert your <b>will</b> upon others, <b>hexing</b> and <b>cursing</b> them, sacrificing portions of yourself to gain even stronger effects. However, this strength comes at the cost of <b>versatility</b> and <b>utility</b> your body can only handle a limited amount of this type of magic.<br><br>When you begin your journey into the <b>Occult</b>, you will quickly realize how important <b>cantrips</b> are. You only have access to <b>spells</b> from <b>levels 1 to 2</b>, however your spells are far more <b>potent</b> when <b>upcast</b>. As such, you can <b>ONLY cast spells at the highest level</b> you have access to. <b>Scholarship</b> still determines the number of spells you know.',
+            'Cosmic': '<b>Cosmic magic</b> draws power from the <b>cosmos</b>, an ever-<b>expansive</b> force that binds everything together as an <b>interconnected whole</b>. To truly understand it, you must accept your place within the <b>constellation of fate</b>, and in doing so, see it for what it truly is. In <b>Cosmic magic</b>, no spell is inherently <b>powerful</b>; instead, they are designed to be cast as many times as possible in a single moment.<br><br>The <b>Cosmic School</b> grants you access to only <b>level 1 spells</b>, and you cannot <b>upcast</b> them. Instead, you gain access to <b>multicasting</b>, allowing you to spend <b>mana</b> normally used for upcasting to cast multiple instances of a spell. Each spell can target a <b>different target</b> and becomes stronger when <b>multicast</b>, enhancing its effects through repeated casting.'
+        };
+
+
+
         let rawSpells = [];
         let rawCantrips = [];
         let activeFilters = { category: null, cost: null };
@@ -461,6 +480,10 @@
             document.querySelectorAll('.school-choice').forEach((btn) => {
                 btn.classList.toggle('active', btn.textContent.trim() === name);
             });
+
+            const description = schoolDescriptions[name] || 'No description available.';
+            const descContainer = document.getElementById('school-scroll-description');
+            if (descContainer) descContainer.innerHTML = description;
         }
 
         function toggleDetails(rowId) {
@@ -506,7 +529,7 @@
             const rowId = `spell-${item.Cost}-${index}-${type}`;
             return `
             <tr onclick="toggleDetails('${rowId}')" class="expandable-row border-b border-slate-800/50 cursor-pointer hover:bg-slate-800/30">
-                <td class="px-6 py-4 font-bold text-white text-base">${item.Name}</td>
+                <td class="px-6 py-4 font-bold text-white text-base"><img src="../sheet/${item.Category.toLowerCase().replace(' ', '-')}.png" alt="${item.Name}" class="w-5 h-5 inline-block mr-2">${item.Name}</td>
                 <td class="px-6 py-4 text-indigo-300 font-mono text-xs font-bold">${item.Cost} ✦</td>
                 <td class="px-6 py-4"><span class="category-tag">${item.Category || 'Universal'}</span></td>
                 <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${rowId}" class="transition-transform duration-200 inline-block">▼</div></td>
