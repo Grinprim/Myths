@@ -55,7 +55,7 @@
                 <h1 class="text-5xl font-bold text-white mb-4">Traits</h1>
                 <p class="text-slate-400 text-lg max-w-2xl flex items-center gap-3">
                     Character identity and growth.
-                    <span id="trait-counter" class="text-xs bg-slate-800 text-indigo-300 px-3 py-1 rounded-full border border-slate-700 font-bold uppercase tracking-wider">Loading...</span>
+                    <span id="trait-counter" class="text-xs bg-slate-800 text-indigo-300 px-3 py-1 rounded-full border border-slate-700 font-bold uppercase tracking-wider" style="width: 42%;">Loading...</span>
                 </p>
             </div>
               <div class="flex flex-wrap md:flex-nowrap gap-3 w-full md:w-auto items-center">
@@ -387,6 +387,7 @@
 
             filtered.forEach((trait, index) => {
                 const uniqueId = `trait-${trait.Cost}-${index}`;
+                const alphebaticTags = normalizeTraitTags(trait).sort((a, b) => a.localeCompare(b));
                 const row = `
                     <tr onclick="toggleDetails('${uniqueId}')" class="expandable-row border-b border-slate-800/50 cursor-pointer">
                         <td class="px-6 py-4 font-bold text-white text-sm">${trait.Name}</td>
@@ -399,7 +400,10 @@
                                 <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
                                               ${trait.Action ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Action Type: ${trait.Action}</span>` : ''}
                                    ${trait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${trait.Parameters}</span>` : ''}
+                                
                                 </div>
+                                <br>
+                                ${trait.tags ? alphebaticTags.map(tag => `<span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-1 rounded">${tag}</span>`).join(' ') : ''}
                                 <p class="text-slate-300 leading-relaxed text-sm">${trait.Description}</p>
                                 ${trait.Scaling ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800">${trait.Scaling}</div>` : ''}
                             </div>
@@ -423,19 +427,22 @@
 
             const allTags = new Set();
             rawTraits.forEach(trait => {
+                if (trait.Cost === "0") return; // Skip path traits
                 normalizeTraitTags(trait).forEach(tag => allTags.add(tag));
             });
 
             const countedTags = {};
             allTags.forEach(tag => {
                 countedTags[tag] = rawTraits.filter(trait => hasTag(trait, tag)).length;
+        
             });
 
-            const sortedTags = Object.keys(countedTags).sort((a, b) => a.localeCompare(b));
+
+            const sortedTags = Object.keys(countedTags).sort((a, b) => countedTags[b] - countedTags[a] || a.localeCompare(b));
 
             tagSelect.innerHTML = '<option value="">All tags</option>' + sortedTags.map(tag => {
                 const count = countedTags[tag];
-                if (count < 4) return '';
+                if (count < 4) return ''; // Hide tags with less than 4 traits
                 return `<option value="${tag}" ${activeTagFilter === tag ? 'selected' : ''}>${tag} (${count})</option>`;
             }).join('');
         }
