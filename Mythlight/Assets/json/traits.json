@@ -835,7 +835,7 @@
     "tags": ["Crafting", "Utility"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "★ Tinkering",
+    "Parameters": "★ Tinker",
     "Description": "You gain the ability to Craft; You start with Trivial Recipes, for each point of Scholarship above 1, increases the known complexity. You know a number of Recipes equal to half your Level rounded up.",
     "Scaling": ""
   },
@@ -845,7 +845,7 @@
     "tags": ["Crafting", "Repair", "Utility"],
     "Cost": "1",
     "Symbols": "☀",
-    "Parameters": "⫘ ★ Tinkering",
+    "Parameters": "⫘ ★ Tinker",
     "Description": "Repair one trivial or simple craft during a rest without a check. <i>(Requires 1 relevant component)</i>",
     "Scaling": ""
   },
@@ -855,7 +855,7 @@
     "tags": ["Crafting", "Repair", "Utility"],
     "Cost": "1",
     "Symbols": "🗲",
-    "Parameters": "⫘ ★ Tinkering",
+    "Parameters": "⫘ ★ Tinker",
     "Description": "Attempt to repair a craft to full operation; Roll [Tinker] vs [Craft Complexity]. If you fail you may not attept to repair that craft again until you rest.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
@@ -875,7 +875,7 @@
     "tags": ["Crafting", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "⫘ ★ Tinkering",
+    "Parameters": "⫘ ★ Tinker",
     "Description": "Constructs/Machines you have deployed can expend one unit of Durability (Fuel) to shock targets within 2 tiles, dealing [Your Tinker] Lightning Damage. This counts as an attack by the machine.",
     "Scaling": ""
   },
@@ -1004,7 +1004,7 @@
     "tags": ["Utility", "Mana"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "",
+    "Parameters": "⫘ ★ Spellcasting",
     "Description": "You can charge devices or machines that require electrical power using Mana.",
     "Scaling": ""
   },
@@ -1015,7 +1015,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Companion",
-    "Description": "Using [1× Metal - Wire, 1× Metal - Plate], construct a small mechanical assistant. It counts as a companion with the following stat block: <br><br>| Health/Durability [Your Level] <br>| Armor [6+Your Tinkering] <br>| PHY 0 | TEC 1 | MYS 2 <br>| Traits: <br>- Assist: This companion assist you while crafting, smithing, brewing or casting a ritual. It grants you +2 to the relevant rolls.",
+    "Description": "Using [1× Metal - Wire, 1× Metal - Plate], construct a small mechanical assistant. It counts as a companion with the following stat block: <br><br>| Health/Durability [Your Level] <br>| Armor [6+Your Tinker] <br>| BODY 0 | SKILL 1 | MIND 2 <br>| Traits: <br>- Assist: This companion assist you while crafting, smithing, brewing or casting a ritual. It grants you +2 to the relevant rolls.",
     "Scaling": ""
   },
   {
@@ -1025,7 +1025,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Mechanical Assistant",
-    "Description": "Using [1× Metal - Wire, 1× Wooden - Core], create a flying spell drone that stays within 3 tiles of you. It counts as a companion with the following stat block: <br><br>| Health/Durability [Your Level] <br>| Armor [6+Your Tinkering] <br>| PHY 0 | TEC 1 | MYS 2 <br>| Traits: <br>- Conduit (1 Durability): You cast a spell from this companions position.",
+    "Description": "Using [1× Metal - Wire, 1× Wooden - Core], create a flying spell drone that stays within 3 tiles of you. It counts as a companion with the following stat block: <br><br>| Health/Durability [Your Level] <br>| Armor [6+Your Tinker] <br>| BODY 0 | SKILL 1 | MIND 2 <br>| Traits: <br>- Conduit (Costs 1 Durability): You cast a spell from this companions position.",
     "Scaling": ""
   },
   {
@@ -1035,7 +1035,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Mechanical Assistant",
-    "Description": "Using [1× Metal - Wire, 1× Stone - Cut], create a small combat rover, It counts as a companion with the following stat block: <br><br>| Health/Durability [Your Level] <br>| Armor [6+Your Tinkering] <br>| PHY 2 | TEC 1 | MYS 0 <br>| Traits: <br>- Melee Strike: Strike a target within Melee range with [Your Tinkering] Accuracy; It deals [1+ Your Tinkering] Force Damage.",
+    "Description": "Using [1× Metal - Wire, 1× Stone - Cut], create a small combat rover, It counts as a companion with the following stat block: <br><br>| Health/Durability [Your Level] <br>| Armor [6+Your Tinker] <br>| BODY 2 | SKILL 1 | MIND 0 <br>| Traits: <br>- Melee Strike (Costs 1 Durability): Strike a target within Melee range with [2 + Your Tinker] Accuracy; It deals [1+ Your Tinker] Force Damage.",
     "Scaling": ""
   },
   {
@@ -1235,8 +1235,8 @@
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "",
-    "Description": "Repair gear during rest. Restored gear gains +1 Damage or +1 Armor and 3 Durability before expiring. Gain +X Tinkering",
-    "Scaling": "Tinkering X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+    "Description": "Repair gear during rest. Restored gear gains +1 Damage or +1 Armor and 3 Durability before expiring. Gain +X Tinker",
+    "Scaling": "Tinker X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
   {
     "Name": "Treasure Hunter",
@@ -1564,7 +1564,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You gain +5 Maximum Encumberance",
+    "Description": "You have +5 Maximum Encumberance",
     "Scaling": ""
   },
   {
@@ -1644,7 +1644,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Combat Trapper",
-    "Description": "Traps you deploy now knock enemies Prone, they must roll [Reflex] vs [6 + Tinkering] to resist.",
+    "Description": "Traps you deploy now knock enemies Prone, they must roll [Reflex] vs [6 + Tinker] to resist.",
     "Scaling": ""
   },
   {
@@ -1654,7 +1654,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Taunt",
-    "Description": "Taunting enemies grants 1 Guard per enemy taunted. Doubled for enemies larger than you.",
+    "Description": "Taunting enemies grants 1 Guard per enemy taunted. Guard gain is doubled for enemies larger than you.",
     "Scaling": ""
   },
   {
@@ -1753,8 +1753,8 @@
     "tags": ["Melee", "Damage", "Taunt"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "⫘ Compelling invite",
-    "Description": "When Taunted targets strike you, they take X Damage. The Damage type matches your weapons type.",
+    "Parameters": "⫘ ★ Taunt",
+    "Description": "When a Taunted creature strikes you, they take X Damage. The Damage type matches your weapons type.",
     "Scaling": "Damage X:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]<br>5 [lvl 12]"
   },
   {
@@ -1764,7 +1764,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Focus Breaker",
-    "Description": "When a spell is cast within 3 tiles, you may dispell it. You can only do this before rolls are made.",
+    "Description": "When a spell is cast within 3 tiles, you may negate its effects. You can only do this before rolls are made.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -1843,7 +1843,7 @@
     "tags": ["Combat", "Ranged", "Accuracy"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "",
+    "Parameters": "⫘ Any Ranged Proficiency",
     "Description": "When targeting creatures behind partial cover, gain +2 Accuracy",
     "Scaling": ""
   },
@@ -1854,7 +1854,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain +2 Max Health per level.",
+    "Description": "You have +2 Max Health per level.",
     "Scaling": ""
   },
   {
@@ -1864,7 +1864,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain 2 Feat points.",
+    "Description": "You gain 2 Feat points.",
     "Scaling": ""
   },
   {
@@ -1923,7 +1923,7 @@
     "tags": ["Magic", "Cantrips", "Mana"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "",
+    "Parameters": "⫘ ★ Spellcasting",
     "Description": "While at full Mana, your cantrips deal +X Damage.",
     "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
@@ -1933,8 +1933,8 @@
     "tags": ["Magic", "Defense", "Elemental"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "⫘ Elementalist's Spark",
-    "Description": "Spells against you matching your chosen element, suffer a -X Accuracy penalty.",
+    "Parameters": "⫘ Elemental Spellcaster",
+    "Description": "Enemy spells targeting you matching your chosen element, suffer a -X Accuracy penalty.",
     "Scaling": "Accuracy X:<br>-2 [lvl 1]<br>-3 [lvl 3]<br>-4 [lvl 6]<br>-5 [lvl 9]"
   },
   {
@@ -1983,7 +1983,7 @@
     "tags": ["Magic", "Guard", "Cosmic"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "⫘ Cosmic Novice",
+    "Parameters": "⫘ Cosmic Spellcaster",
     "Description": "Each cast of a Cosmic spell grants +1 Guard.",
     "Scaling": ""
   },
@@ -2053,18 +2053,18 @@
     "tags": ["Combat", "Guard", "Rage"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "⫘ Breserk",
-    "Description": "When you enter Rage, gain Guard equal to [Your Level + 2].",
+    "Parameters": "⫘ ★ Rage",
+    "Description": "When you enter Rage, gain Guard equal to your Level + 2.",
     "Scaling": ""
   },
   {
-    "Name": "Workers companion",
+    "Name": "Workers Companion",
     "Action":"⭘",
     "tags": ["Companion", "Crafting", "Buff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Companion",
-    "Description": "Companions each grant +1 Tinkering when brewing, crafting, smithing, medicine, spellcrafting or ritual casting.",
+    "Description": "Companions each grant +1 Tinker when brewing, crafting, smithing, medicine, spellcrafting or ritual casting.",
     "Scaling": ""
   },
   {
@@ -2088,7 +2088,7 @@
     "Scaling": "Guard X:<br>2 [lvl 1]<br>4 [lvl 3]<br>6 [lvl 6]<br>8 [lvl 9]<br>10 [lvl 12]"
   },
   {
-    "Name": "Against the odds",
+    "Name": "Against The Odds",
     "Action":"⭘",
     "tags": ["Combat", "Buff"],
     "Cost": "2",
@@ -2098,13 +2098,13 @@
     "Scaling": ""
   },
   {
-    "Name": "Thick skin",
+    "Name": "Thick Skin",
     "Action":"⭘",
     "tags": ["Combat", "Defense", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "After combat, recover half of your missing hp.",
+    "Description": "After combat, recover half of your missing health.",
     "Scaling": ""
   },
   {
@@ -2124,8 +2124,8 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain +1 Armor while in direct sunlight, lose 1 Armor when in darkness.",
-    "Scaling": ""
+    "Description": "Gain +X Armor while in direct sunlight, -X Armor when in darkness.",
+    "Scaling": "Armor X:<br>+/-1 [lvl 1]<br>+/-2 [lvl 6]<br>+/-3 [lvl 12]"
   },
   {
     "Name": "Giant Slayer",
@@ -2144,7 +2144,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You gain advantage on climbing checks, while not moving and on a wall, you cannot be knocked off.",
+    "Description": "You gain advantage on climbing checks, while not moving and on a wall, you cannot be knocked off it.",
     "Scaling": ""
   },
   {
@@ -2154,7 +2154,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You can convert between wooden components freely. When creating crafts mostly consisting of wooded components, you gain advantage.",
+    "Description": "You can convert between wooden components freely. You gain advantage when crafting with wooden components.",
     "Scaling": ""
   },
   {
@@ -2164,7 +2164,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Carpenter",
-    "Description": "You can use wooden crafting components as weapons; Combine any number of components to create an improvised melee or ranged weapon that deals Force damage equal to the number of components used; ranged weapons have a 6 tile range. It has Durability equal to the number of components used.<br><br><i>Throw an ikea furniture set at them.</i>",
+    "Description": "You can create a improvised melee or finesse weapon from any number of wooden components as an action, it has 1 Durability and deals Blunt damage equaling the number of components used. If it is a thrown finesse weapon it has a range of 5.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -2172,10 +2172,10 @@
     "Action":"⬖",
     "tags": ["Utility"],
     "Cost": "1",
-    "Symbols": "⧖",
+    "Symbols": "🗲",
     "Parameters": "",
-    "Description": "You attempt to convince creatures targeting you that you are dead. You are knocked prone; affected creatures must roll [Insight] vs [6 + your Charm] to resist; Creatures you have already tricked will gain +3 to the roll.",
-    "Scaling": ""
+    "Description": "You attempt to convince creatures targeting you that you are dead. You are knocked prone; affected creatures must roll [Insight] vs [8 + your Charm] to resist; Creatures you have already tricked will gain +2 to the roll.",
+    "Scaling": "Uses 🗲:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
   },
   {
     "Name": "Seamstress",
@@ -2184,11 +2184,11 @@
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
-    "Description": "Using one piece of clothing, you transform it into another piece of clothing or a copy of non-magical equipment you already own.",
+    "Description": "You can convert between cloth components freely. You can use cloth components to copy a peice of clothing or cloth equipment, the copied item has the same stats but looses any prefixes. You can also create 1 rope component from 2 cloth components.",
     "Scaling": ""
   },
   {
-    "Name": "Makeup maid",
+    "Name": "Makeup Maid",
     "Action":"⭘",
     "tags": ["Utility", "Social"],
     "Cost": "1",
@@ -2224,7 +2224,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Fair Strike",
-    "Description": "You create a 3×3 zone you must occupy on cast. Spells cannot be cast within it, and spells from outside cannot target creatures inside. The zone lasts 3 Scenes, or ends immediately if you or the caster leaves the zone.",
+    "Description": "You create a 3×3 zone you must occupy on cast. Spells cannot be cast within it, and spells from outside cannot target creatures inside. The zone lasts 3 Scenes, or ends immediately if you the zone.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -2238,13 +2238,13 @@
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
-    "Name": "All warmed up",
+    "Name": "All Warmed Up",
     "Action":"⭘",
     "tags": ["Combat", "Buff", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "In combat, once you have spent all of your mana for the first time, all of your non-cantrip spells deal +2 damage.",
+    "Description": "After you have spent all of your mana for the first time in combat, your non-cantrip spells gain +2 Damage.",
     "Scaling": ""
   },
   {
@@ -2254,7 +2254,7 @@
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
-    "Description": "During a rest, you can restore a found object and increase its perceived market value. The increase is +X.",
+    "Description": "During a rest, you can restore a found object and increase its perceived market value. The increase is +X Gold.",
     "Scaling": "Value X:<br>+3 [lvl 1]<br>+5 [lvl 6]<br>+8 [lvl 12]"
   },
   {
@@ -2264,7 +2264,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain advantage on Intimidation(Charm) checks.",
+    "Description": "Gain advantage on Intimidation(Charm) checks. On a Midnight impose the Feared Condition on the target.",
     "Scaling": ""
   },
   {
@@ -2314,7 +2314,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "If you haven't acted this scene, swap initiative with a target; on your next turn, you may take only one action.",
+    "Description": "If you haven't acted this scene, swap initiative with a target.",
     "Scaling": ""
   },
   {
@@ -2333,7 +2333,7 @@
     "tags": ["Combat", "Defense"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "",
+    "Parameters": "⫘ Elemental Spellcaster",
     "Description": "Casting Earth spells, or using Earth elemental effects, grants 2 Guard, stacking.",
     "Scaling": ""
   },
@@ -2344,7 +2344,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Grant an ally 5 Guard, it dissipates the first time they or you attack.",
+    "Description": "Grant an ally [4 + your Fortitude] Guard, it dissipates the first time they attack.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]<br>5 [lvl 12]"
   },
   {
@@ -2358,13 +2358,13 @@
     "Scaling": ""
   },
   {
-    "Name": "Make it rain",
+    "Name": "Make It Rain",
     "Action":"⬖",
     "tags": ["Combat", "Area", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "You fire 3 shots into the sky, these will land and hit 3 random targets within 8 tiles. They deal 1 Damage, and prioritize Enemies.",
+    "Parameters": "⫘ Any Ranged Proficiency",
+    "Description": "You fire a number of shots into the sky equal to your highest Ranged Proficiency, these will land and hit 3 random targets within 8 tiles. They deal 1 Damage, and prioritize Enemies.",
     "Scaling": ""
   },
   {
@@ -2459,7 +2459,7 @@
   },
   {
     "Name": "Twin Disciplines",
-    "Action":"⭘",
+    "Action":"⬖",
     "tags": ["Combat", "Buff"],
     "Cost": "1",
     "Symbols": "🗲",
@@ -2504,7 +2504,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "You treat the next Action of a chosen ally, or yourself, as if it were the first action they have taken this combat.",
+    "Description": "Treat the next Action of a chosen ally, or yourself, as if it were the first action they have taken this combat.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -2514,7 +2514,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Deal 1 Damage to all Adjacent creatures. If this is the first action in combat, it deals damage twice.",
+    "Description": "Deal 1 Damage to all Adjacent creatures. If this is the first attack in combat, it deals damage twice.",
     "Scaling": "Uses 🗲:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
   },
   {
@@ -2554,7 +2554,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You lose access to a spell until your next sleep. You replenish Double its Mana cost as Mana.",
+    "Description": "You lose access to a spell of your choice until your next sleep. You replenish Double its Mana cost as Mana.",
     "Scaling": ""
   },
 
@@ -2572,7 +2572,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You can no longer be Healed or gain Guard from allies. Gain +X Armor.",
+    "Description": "You can no longer be Healed or gain Guard from allies. You have +X Armor.",
     "Scaling": "Armor X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
   },
   {
@@ -2586,14 +2586,14 @@
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
-    "Name": "One of each",
+    "Name": "One Of Each",
     "Action":"⭘",
     "tags": ["Combat", "Damage"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
     "Description": "You gain +2 Damage on ALL attacks. You cannot use the same attack multiple times per combat. Lasts until your next rest.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": ""
   },
   {
     "Name": "Toss Me",
@@ -2622,18 +2622,18 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "If you took Guard damage without your Guard being fully depleted, make an attack against the creature that struck you.",
+    "Description": "If you took Guard damage without your Guard being fully depleted, make an attack against the creature that hit you.",
     "Scaling": ""
   },
   {
     "Name": "Risky Strike",
     "Action":"⬖",
     "tags": ["Combat", "Damage", "Gold"],
-    "Cost": "1",
+    "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Make a X Damage Melee or Ranged strike with your weapon, if the target dies you gain X Gold",
-    "Scaling": "Damage/Gold X:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
+    "Description": "Make a X Damage Melee or Ranged strike with your weapon, if the target dies you gain an amount of Gold (Narators discretion)",
+    "Scaling": "Damage X:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
   },
   {
     "Name": "Rite of Dominance",
@@ -2666,12 +2666,12 @@
     "Scaling": ""
   },
   {
-    "Name": "Sharing is caring",
+    "Name": "Sharing Is Caring",
     "Action":"◇",
     "tags": ["Magic", "Mana"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "",
+    "Parameters": "⫘ ★ Spellcasting",
     "Description": "When an ally within 8 tiles casts a spell, you may pay for it with your mana instead.",
     "Scaling": ""
   },
@@ -2751,8 +2751,8 @@
     "tags": ["Magic", "Mana", "Sacrifice"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "All mana costs are reduced by 1. You lose 2 Health, each time you cast a spell.",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "All your mana costs are reduced by 1. You lose 2 Health, each time you cast a spell.",
     "Scaling": ""
   },
   {
@@ -2772,7 +2772,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "If you have traveled at least 8 tiles; You gain +3 Reflex and +1 Armor. For 2 Scenes",
+    "Description": "If you have traveled at least 8 tiles; You gain +3 Reflex and +1 Armor for 2 Scenes",
     "Scaling": ""
   },
   {
@@ -2791,9 +2791,9 @@
     "tags": ["Combat", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "⫘",
-    "Description": "If you climb a wall or jump over an obstacle, you can jump at an enemy and attack with your weapon, doing +X Damage. An ally can also offer a boost to perform this attack.",
-    "Scaling": ""
+    "Parameters": "",
+    "Description": "If you climb a wall or jump over an obstacle, you can jump at an enemy and attack with your weapon; doing +X Damage. An ally can also offer a boost to perform this attack.",
+    "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
   },
   {
     "Name": "Return",
@@ -2811,7 +2811,7 @@
     "tags": ["Combat", "Buff"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "⫘",
+    "Parameters": "",
     "Description": "Single-target Trait Attacks deal bonus damage equal to the granting trait's point cost. This effect stacks.",
     "Scaling": ""
   },
@@ -2882,7 +2882,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You gain +1 to Might and Intimidation(Charm) Checks",
+    "Description": "You gain +1 to Might and Charm.",
     "Scaling": ""
   },
   {
@@ -2942,7 +2942,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Rage",
-    "Description": "While in Rage; You ignore Attack per turn restrictions, however you cannot take any actions that does not deal damage. You lose the ability to dismiss your Rage.",
+    "Description": "While in Rage; You ignore Attack per turn restrictions, however you cannot take any actions that would not deal damage. You lose the ability to dismiss your Rage.",
     "Scaling": ""
   },
   {
@@ -2962,7 +2962,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Unbound",
-    "Description": "You learn 1 cantrip not from your Spellcasting School.",
+    "Description": "You learn 1 cantrip originating from outside your Spellcasting School.",
     "Scaling": ""
   },
   {
@@ -2972,7 +2972,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "The blind condition no longer imposes Disadvantage/Advantage. Instead it becomes a -2/+2 Respectively.",
+    "Description": "The blind condition no longer imposes Disadvantage, instead it becomes a -2. Enemy attacks no longer have Advantage against you, instead it becomes a +2.",
     "Scaling": ""
   },
   {
@@ -2992,11 +2992,11 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Lose Access to Cantrips, gaining Maximum Mana equal to the number of cantrips lost. Future cantrips are also converted.",
+    "Description": "Lose access to Cantrips, gaining Maximum Mana equal to the number of cantrips lost. Future cantrips are also converted.",
     "Scaling": ""
   },
   {
-    "Name": "Strike the Hand",
+    "Name": "Strike The Hand",
     "Action":"◆",
     "tags": ["Melee", "Debuff"],
     "Cost": "1",
@@ -3012,7 +3012,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain 3 Grace at the Start of combat, if you had spared a life last combat.",
+    "Description": "Gain [3+ your Style] Grace at the start of combat, if you had spared a life last combat.",
     "Scaling": ""
   },
   {
@@ -3022,7 +3022,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Taunt",
-    "Description": "Gain +2 Accuracy against creatures Taunted by you.",
+    "Description": "You gain +2 Accuracy against creatures Taunted by you.",
     "Scaling": ""
   },
   {
@@ -3052,7 +3052,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Throw your ally a weapon, if you are proficient with it, they also become proficient with it, until the end of combat.",
+    "Description": "Throw your ally a weapon, if you are proficient with it, they also become proficient with it, matching your level of proficiency, until the end of combat.",
     "Scaling": ""
   },
   {
@@ -3102,7 +3102,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "While grappling a creature you are considered to be behind partial cover.",
+    "Description": "While grappling a creature you are considered to be behind half cover.",
     "Scaling": ""
   },
   {
@@ -3122,7 +3122,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "While traveling on tiles an Ally has already walked on this Scene, you gain +3 Movement.",
+    "Description": "While traveling on tiles an Ally has already traveled on this Scene, you gain +3 Movement.",
     "Scaling": ""
   },
   {
@@ -3132,7 +3132,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You start combat with Grace equal to [Half your Level]",
+    "Description": "You start combat with Grace equal to half your level rounded up.",
     "Scaling": ""
   },
   {
@@ -3141,8 +3141,8 @@
     "tags": ["Combat", "Buff", "Mana"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "⫘ Gracious",
-    "Description": "You can no longer generate Grace, nor can you use it grant bonuses to rolls; You may use 1 Grace point to grant yourself or an ally Advantage.",
+    "Parameters": "",
+    "Description": "You can no longer generate Grace, nor can you use as you normally would; You may use 1 Grace point to grant yourself or an ally Advantage.",
     "Scaling": ""
   },
   {
@@ -3170,7 +3170,7 @@
     "Action":"⭘",
     "tags": ["Utility", "Buff", "Rest"],
     "Cost": "1",
-    "Symbols": "⧖",
+    "Symbols": "☀",
     "Parameters": "",
     "Description": "You gain the full benefits of sleep even if you sleep 6 hours or less.",
     "Scaling": ""
@@ -3203,7 +3203,7 @@
     "Symbols": "🗲",
     "Parameters": "",
     "Description": "You perform a large Slash with your Melee weapon, it deals +1 Damage in a 2 Tile Cone.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
     "Name": "Answered Prayer",
@@ -3222,7 +3222,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You can play your chosen instrument and are proficient with it as an improvised weapon. While playing, allies within hearing range gain either +1 Armor or +2 Accuracy.",
+    "Description": "You can play your chosen instrument and are proficient with it as an improvised weapon. While playing, allies within hearing range gain either [your Charm - 1] Armor or [your Charm] Accuracy.",
     "Scaling": ""
   },
   {
@@ -3232,7 +3232,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You are proficient with maps and compasses. Gain advantage on Scholarship checks regarding ports or islands. You can determine North while viewing any type of sky. You are proficient with driving Water vehicles.",
+    "Description": "You are proficient with maps and compasses. Gain advantage on Scholarship and Awareness checks regarding ports or islands. You can determine North while viewing any type of sky. You are proficient with driving Water vehicles.",
     "Scaling": ""
   },
   {
@@ -3242,7 +3242,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain advantage on checks involving smell (e.g. detecting poison).",
+    "Description": "Gain advantage on checks involving smell such as detecting poison, tracking, identifying substances and alike.",
     "Scaling": ""
   },
   {
@@ -3261,8 +3261,8 @@
     "tags": ["Combat", "Buff", "Crafting"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "★ Tinkering",
-    "Description": "You gain Access to Combat Crafts; You know a number of Combat Crafts equal to [Half Your Level], the maximum tier of craft depends on the tier unlocked by Craftsman.",
+    "Parameters": "★ Tinker",
+    "Description": "You gain Access to Combat Crafts; You know a number of Combat Crafts equal to half your level rounded up. You start with Trivial Recipes, for each point of Scholarship above 1, increases the known complexity.",
     "Scaling": ""
   },
   {
@@ -3276,13 +3276,13 @@
     "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
   {
-    "Name": "Mind",
+    "Name": "Focus",
     "Action": "⭘",
     "tags": ["Combat", "Buff", "Mana"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "★ Grace",
-    "Description": "You may spend X Grace to recharge X Mana.",
+    "Description": "You may spend any amount of Grace to recharge the same amount of Mana.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -3292,7 +3292,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Grace",
-    "Description": "You may spend X Grace to increase the Range of ranged attacks or spells by X.",
+    "Description": "You may spend any amount of Grace to increase the Range of ranged attacks or spells by the same amount.",
     "Scaling": ""
   },
   {
@@ -3302,27 +3302,27 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Grace",
-    "Description": "You may spend X Grace to gain X Speed Stacks.",
+    "Description": "You may spend any amount of Grace to gain the same amount of Speed.",
     "Scaling": ""
   },
   {
-    "Name": "Haste",
+    "Name": "Hasted",
     "Action": "⭘",
     "tags": ["Combat", "Buff"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "★ Grace",
-    "Description": "Spend 6 Grace to gain 1 Haste Stack.",
+    "Description": "Spend 6 Grace to gain 1 Haste.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
-    "Name": "Scroll of a Madman",
+    "Name": "Scroll Of A Madman",
     "Action": "⭘",
     "tags": ["Magic", "Buff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain +3 Scholarship. You permanently gain Madness Conditions.",
+    "Description": "Gain +3 Scholarship. You permanently gain the Madness Conditions.",
     "Scaling": ""
   },
   {
