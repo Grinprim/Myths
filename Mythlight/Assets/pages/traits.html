@@ -73,16 +73,14 @@
 
                 <div id="tag-filter-wrap" class="flex flex-col gap-2 w-full sm:w-auto md:w-[250px] shrink-0">
                     <label for="tag-filter-select" class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Tag Filter</label>
-                    <div class="flex items-center gap-2">
-                        <select id="tag-filter-select" class="w-full bg-slate-900/70 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200" onchange="setTagFilter(this.value || null)">
+                    <div class="flex items-center gap-2" style="display: none;">
+                        <select id="tag-filter-select" class="w-full bg-slate-900/70 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200" onchange="setTagFilter(this.value || null)" style="display: none;">
                             <option value="">All tags</option>
                         </select>
-                        <button id="clear-tag-filter" onclick="setTagFilter(null)" class="hidden h-[2.5rem] px-3 bg-rose-500/10 border border-rose-500/30 rounded-lg text-[10px] uppercase text-rose-400 font-bold hover:bg-rose-500/20 transition-all">Clear</button>
                     </div>
                 </div>
 
                 <div id="search-wrap" class="flex flex-col gap-2 w-full md:w-[260px]">
-                    <label class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Search Traits</label>
                     <div class="relative">
                         <input type="text" id="search-input" placeholder="Search..." class="search-input w-full pr-10" oninput="renderTraits(); toggleTraitClear();">
                         <button id="search-clear" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-200" onclick="clearTraitSearch()">✕</button>
@@ -90,7 +88,17 @@
                 </div>
             </div>
         </header>
+        <div style="display: flex;">
+        <div id="tag-container" class="mb-12 flex flex-wrap gap-3">
 
+        </div>
+        <div id="tag-description-container" class="mb-12 flex flex-wrap gap-6 bg-slate-900/40 rounded-3xl border border-slate-800 p-6 shadow-2xl w-full">
+                <div class="mb-4">
+                        <h4 class="text-sm font-bold text-emerald-400 uppercase tracking-widest">No Tag Selected</h4>
+                        <p class="text-slate-500 text-xs italic">Select a tag to see its description here.</p>
+                    </div>
+        </div>
+        </div>
         <div class="flex flex-col lg:flex-row gap-12 items-start">
             
             <aside class="w-full lg:w-80 lg:sticky lg:top-28 z-40">
@@ -190,6 +198,74 @@
     <div id="footer-placeholder"></div>
 
     <script>
+        const tag_descriptions = {
+            "Accuracy": "Improves accuracy or hit chances.",
+            "Ally": "Affects allies or provides support to companions.",
+            "Arcane": "Involves arcane magic or scholarly spells.",
+            "Area": "Affects multiple targets in an area.",
+            "Buff": "Provides a beneficial effect to the character or allies.",
+            "Cantrips": "Relates to minor, at-will spells.",
+            "Combat": "Enhances offensive or defensive capabilities in combat.",
+            "Companion": "Relates to animal or summoned companions.",
+            "Cosmic": "Involves cosmic, otherworldly, or planar effects.",
+            "Crafting": "Involves creation, crafting, or material manipulation.",
+            "Damage": "Boosts damage dealt or damage-related effects.",
+            "Death": "Involves death, undead, or lethal effects.",
+            "Debuff": "Applies a detrimental effect to enemies or the character.",
+            "Defense": "Improves defensive capabilities or resistance.",
+            "Divine": "Relates to divine, holy, or faith-based effects.",
+            "Elemental": "Relates to elemental forces or damage types.",
+            "Execution": "Provides finishing moves or execution effects.",
+            "Finesse": "Enhances finesse-based attacks or abilities.",
+            "Gold": "Involves currency, wealth, or monetary effects.",
+            "Grace": "Interacts with the Grace resource for various effects.",
+            "Guard": "Provides protective barriers or guard effects.",
+            "Healing": "Restores health or provides healing effects.",
+            "Improvised": "Allows use of improvised tools or weapons.",
+            "Magic": "Involves spellcasting or magical effects.",
+            "Mana": "Interacts with the Mana resource for various effects.",
+            "Melee": "Enhances melee attacks or close combat abilities.",
+            "Movement": "Affects mobility, positioning, or evasion.",
+            "Occult": "Relates to occult, mysterious, or forbidden knowledge.",
+            "Proficiency": "Grants expertise or proficiency in skills/tools.",
+            "Rage": "Interacts with the Rage resource for various effects.",
+            "Ranged": "Enhances ranged attacks or abilities.",
+            "Repair": "Allows repairing items or restoring durability.",
+            "Sacrifice": "Involves sacrificing resources for benefits.",
+            "Senses": "Improves perception or sensory abilities.",
+            "Social": "Enhances social interactions or persuasion.",
+            "Stealth": "Enhances stealth, hiding, or surprise.",
+            "Taunt": "Provokes or taunts enemies.",
+            "Traps": "Involves traps, ambushes, or environmental hazards.",
+            "Uses": "Limits or tracks usage of abilities.",
+            "Utility": "Provides versatile or situational benefits.",
+        };
+
+        function renderTagDescription (tag) {
+            const container = document.getElementById('tag-description-container');
+            if (!container) return;
+
+            const description = tag_descriptions[tag] || "No description available.";
+            const html = `
+                <div class="mb-4">
+                    <h4 class="text-sm font-bold text-emerald-400 uppercase tracking-widest">${tag}</h4>
+                    <p class="text-slate-500 text-xs italic">${description}</p>
+                </div>
+            `;
+            container.innerHTML = html;
+
+            if (!tag) {
+                container.innerHTML = `
+                    <div class="mb-4">
+                        <h4 class="text-sm font-bold text-emerald-400 uppercase tracking-widest">No Tag Selected</h4>
+                        <p class="text-slate-500 text-xs italic">Select a tag to see its description here.</p>
+                    </div>
+                `;
+            }
+            
+        }
+
+
         let rawTraits = [];
         let activeSymbolFilter = null;
         let activeTagFilter = null;
@@ -366,6 +442,9 @@
         }
 
         function renderTraits() {
+
+            renderTagDescription(activeTagFilter);
+
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
             const table1 = document.getElementById('traits-1-point');
             const table2 = document.getElementById('traits-2-point');
@@ -444,6 +523,14 @@
                 const count = countedTags[tag];
                 if (count < 4) return ''; // Hide tags with less than 4 traits
                 return `<option value="${tag}" ${activeTagFilter === tag ? 'selected' : ''}>${tag} (${count})</option>`;
+            }).join('');
+
+            const tagContainer = document.getElementById('tag-container');
+            if (!tagContainer) return;
+
+            tagContainer.innerHTML = sortedTags.map(tag => {
+                const count = countedTags[tag];
+                return `<button onclick="setTagFilter('${tag}')" class="px-3 py-1 rounded-full bg-slate-500/10 border border-slate-500/30 text-slate-300 text-[10px] font-bold uppercase tracking-wider ${activeTagFilter === tag ? 'bg-emerald-500/20 border-emerald-500/50' : 'hover:bg-emerald-500/20 transition-all'}">${tag} (${count})</button>`;
             }).join('');
         }
 
