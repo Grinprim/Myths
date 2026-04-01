@@ -92,12 +92,6 @@
         <div id="tag-container" class="mb-12 flex flex-wrap gap-3">
 
         </div>
-        <div id="tag-description-container" class="mb-12 flex flex-wrap gap-6 bg-slate-900/40 rounded-3xl border border-slate-800 p-6 shadow-2xl w-full">
-                <div class="mb-4">
-                        <h4 class="text-sm font-bold text-emerald-400 uppercase tracking-widest">No Tag Selected</h4>
-                        <p class="text-slate-500 text-xs italic">Select a tag to see its description here.</p>
-                    </div>
-        </div>
         </div>
         <div class="flex flex-col lg:flex-row gap-12 items-start">
             
@@ -198,74 +192,6 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        const tag_descriptions = {
-            "Accuracy": "Improves accuracy or hit chances.",
-            "Ally": "Affects allies or provides support to companions.",
-            "Arcane": "Involves arcane magic or scholarly spells.",
-            "Area": "Affects multiple targets in an area.",
-            "Buff": "Provides a beneficial effect to the character or allies.",
-            "Cantrips": "Relates to minor, at-will spells.",
-            "Combat": "Enhances offensive or defensive capabilities in combat.",
-            "Companion": "Relates to animal or summoned companions.",
-            "Cosmic": "Involves cosmic, otherworldly, or planar effects.",
-            "Crafting": "Involves creation, crafting, or material manipulation.",
-            "Damage": "Boosts damage dealt or damage-related effects.",
-            "Death": "Involves death, undead, or lethal effects.",
-            "Debuff": "Applies a detrimental effect to enemies or the character.",
-            "Defense": "Improves defensive capabilities or resistance.",
-            "Divine": "Relates to divine, holy, or faith-based effects.",
-            "Elemental": "Relates to elemental forces or damage types.",
-            "Execution": "Provides finishing moves or execution effects.",
-            "Finesse": "Enhances finesse-based attacks or abilities.",
-            "Gold": "Involves currency, wealth, or monetary effects.",
-            "Grace": "Interacts with the Grace resource for various effects.",
-            "Guard": "Provides protective barriers or guard effects.",
-            "Healing": "Restores health or provides healing effects.",
-            "Improvised": "Allows use of improvised tools or weapons.",
-            "Magic": "Involves spellcasting or magical effects.",
-            "Mana": "Interacts with the Mana resource for various effects.",
-            "Melee": "Enhances melee attacks or close combat abilities.",
-            "Movement": "Affects mobility, positioning, or evasion.",
-            "Occult": "Relates to occult, mysterious, or forbidden knowledge.",
-            "Proficiency": "Grants expertise or proficiency in skills/tools.",
-            "Rage": "Interacts with the Rage resource for various effects.",
-            "Ranged": "Enhances ranged attacks or abilities.",
-            "Repair": "Allows repairing items or restoring durability.",
-            "Sacrifice": "Involves sacrificing resources for benefits.",
-            "Senses": "Improves perception or sensory abilities.",
-            "Social": "Enhances social interactions or persuasion.",
-            "Stealth": "Enhances stealth, hiding, or surprise.",
-            "Taunt": "Provokes or taunts enemies.",
-            "Traps": "Involves traps, ambushes, or environmental hazards.",
-            "Uses": "Limits or tracks usage of abilities.",
-            "Utility": "Provides versatile or situational benefits.",
-        };
-
-        function renderTagDescription (tag) {
-            const container = document.getElementById('tag-description-container');
-            if (!container) return;
-
-            const description = tag_descriptions[tag] || "No description available.";
-            const html = `
-                <div class="mb-4">
-                    <h4 class="text-sm font-bold text-emerald-400 uppercase tracking-widest">${tag}</h4>
-                    <p class="text-slate-500 text-xs italic">${description}</p>
-                </div>
-            `;
-            container.innerHTML = html;
-
-            if (!tag) {
-                container.innerHTML = `
-                    <div class="mb-4">
-                        <h4 class="text-sm font-bold text-emerald-400 uppercase tracking-widest">No Tag Selected</h4>
-                        <p class="text-slate-500 text-xs italic">Select a tag to see its description here.</p>
-                    </div>
-                `;
-            }
-            
-        }
-
-
         let rawTraits = [];
         let activeSymbolFilter = null;
         let activeTagFilter = null;
@@ -442,8 +368,6 @@
         }
 
         function renderTraits() {
-
-            renderTagDescription(activeTagFilter);
 
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
             const table1 = document.getElementById('traits-1-point');
