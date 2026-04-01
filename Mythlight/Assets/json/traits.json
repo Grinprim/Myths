@@ -571,7 +571,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Using [1× Common Component] you can create a trap in an adjacent unoccupied tile. The trap can activate only once, dealing X damage and applying 3 stacks of Slow to a creature that stepped on the same tile as the trap. Using [1× Rope Component] you can create and throw a Bola. You are proficient with Bolas. Bolas can be thrown up to 6 tiles away doing X damage and applying 3 stacks of Slow to the creature.",
+    "Description": "Using [1× Common Component] you can create a trap in an adjacent unoccupied tile. The trap can activate only once, dealing X Blunt damage and applying 3 stacks of Slow to a creature that stepped on the same tile as the trap. Using [1× Rope Component] you can create and throw a Bola. You are proficient with Bolas as a Finesse(thrown) weapon. Bolas can be thrown up to 6 tiles away doing X Blunt damage and applying 3 stacks of Slow to the creature.",
     "Scaling": "Damage X:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
@@ -1170,7 +1170,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Your next melee attack deals +X Damage and you suffer -Y Movement this turn.",
+    "Description": "You make a melee attack that deals +X Damage and you suffer -Y Movement this turn.",
     "Scaling": "Damage/Movement X/Y:<br>+2/-1 [lvl 1]<br>+3/-2 [lvl 6]<br>+4/-3 [lvl 12]"
   },
   {
@@ -1210,7 +1210,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Damaging a Spellcaster causes them to lose 1 Mana (doubled on Midnights).",
+    "Description": "Damaging a spellcaster causes them to lose 1 Mana (doubled on Midnights).",
     "Scaling": ""
   },
   {
@@ -1224,7 +1224,7 @@
     "Scaling": "Armor X:<br>2 [lvl 1]<br>3 [lvl 6]<br>4 [lvl 12]"
   },
   {
-    "Name": "Blood pact",
+    "Name": "Blood Pact",
     "Action":"◆",
     "tags": ["Combat", "Damage", "Sacrifice"],
     "Cost": "2",
@@ -1240,7 +1240,7 @@
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "",
-    "Description": "Repair gear during rest. Restored gear gains +1 Damage or +1 Armor and 3 Durability before expiring. Gain +X Tinker",
+    "Description": "Repair gear during rest. Restored gear gains +1 Damage or +1 Armor, the Bonus has 3 Durability. Gain +X Tinker",
     "Scaling": "Tinker X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
   {
@@ -1250,13 +1250,13 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Explorer",
-    "Description": "Gain +2 Finesse for looting. Exploring new areas grants +X Movement",
+    "Description": "Gain +2 Finesse for looting. While exploring new areas you have +X Movement.",
     "Scaling": "Movement X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
   },
   {
     "Name": "Cartographer",
     "Action":"⭘",
-    "tags": ["Utility", "Buff"],
+    "tags": ["Utility"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Explorer",
@@ -1269,8 +1269,8 @@
     "tags": ["Magic", "Mana"],
     "Cost": "2",
     "Symbols": "☀",
-    "Parameters": "★ Arcane Recovery",
-    "Description": "During rest recover X Mana.",
+    "Parameters": "★ Arcane Recovery ⫘ ★ Spellcasting",
+    "Description": "During rest recover X Additonal Mana.",
     "Scaling": "Mana X:<br>3 [lvl 1]<br>4 [lvl 3]<br>5 [lvl 6]<br>6 [lvl 9]<br>7 [lvl 12]"
   },
   {
@@ -1279,7 +1279,7 @@
     "tags": ["Magic", "Mana"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "★ Manaflux",
+    "Parameters": "★ Manaflux ⫘ ★ Spellcasting",
     "Description": "Your first spell each combat costs no Mana and gains +2 Range.",
     "Scaling": ""
   },
@@ -1289,8 +1289,8 @@
     "tags": ["Magic", "Mana"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "★ Manaflux",
-    "Description": "When a spell is countered, regain its Mana cost plus 1.",
+    "Parameters": "★ Manaflux ⫘ ★ Spellcasting",
+    "Description": "When one of your spells is countered, regain its Mana cost + 1.",
     "Scaling": ""
   },
   {
@@ -1299,8 +1299,8 @@
     "tags": ["Magic", "Mana", "Death"],
     "Cost": "2",
     "Symbols": "⧖ ",
-    "Parameters": "⫘ ★ Manaflux",
-    "Description": "Slaying an enemy with a spell refunds its Mana cost.",
+    "Parameters": "★ Manaflux ⫘ ★ Spellcasting",
+    "Description": "Defeating an enemy with a spell refunds its Mana cost.",
     "Scaling": ""
   },
   {
@@ -1310,7 +1310,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Choose one known spell; it gains +2 Damage, Range, and Healing. Reduce known/prepared spells by 1. You may change out the chosen spell when you level up.",
+    "Description": "Choose one known spell; it gains +2 Damage, Range, and Healing when applicable. Reduce known spells by 1. You may change out the chosen spells when you level up.",
     "Scaling": ""
   },
   {
@@ -1319,9 +1319,9 @@
     "tags": ["Ranged", "Accuracy"],
     "Cost": "2",
     "Symbols": "🗲",
-    "Parameters": "",
-    "Description": "Gain +2 Accuracy and +1 Damage (+1 Accuracy at levels 6 and 12).",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Parameters": "⫘ Any Ranged Proficiency",
+    "Description": "Make a ranged attack with +X Accuracy and +X-1 Damage.",
+    "Scaling": "Uses/Accuracy 🗲/X:<br>1/2 [lvl 1]<br>2/3 [lvl 6]<br>3/4 [lvl 12]"
   },
   {
     "Name": "Quick Reload",
@@ -1329,7 +1329,7 @@
     "tags": ["Ranged"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "Firearms",
+    "Parameters": "⫘ Any Ranged Proficiency",
     "Description": "Reloading a firearm no longer costs an action. But can still only be done once per turn.",
     "Scaling": ""
   },
@@ -1340,7 +1340,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Freely identify tracks and Movement signs. Gain +X Awareness against hidden or fleeing enemies.",
+    "Description": "You have the ability to freely identify tracks and Movement signs. Gain +X Awareness against hidden or fleeing enemies.",
     "Scaling": "Awareness X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
   },
   {
@@ -1349,7 +1349,7 @@
     "tags": ["Ranged", "Damage"],
     "Cost": "2",
     "Symbols": "🗲",
-    "Parameters": "",
+    "Parameters": "⫘ Any Ranged Proficiency",
     "Description": "Fire through up to two targets in a line. The first target takes +2 Damage. You only need to hit the first target.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
@@ -1360,7 +1360,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Hitting an enemy causes attacks against you to suffer -X Accuracy.",
+    "Description": "Hitting an enemy causes attacks against you to suffer -X Accuracy until your next turn.",
     "Scaling": "Accuracy X:<br>-2 [lvl 1]<br>-3 [lvl 6]<br>-4 [lvl 12]"
   },
   {
@@ -1369,8 +1369,8 @@
     "tags": ["Combat", "Ranged"],
     "Cost": "2",
     "Symbols": "🗲",
-    "Parameters": "",
-    "Description": "Make a Ranged attack that explodes in a 1-tile radius, dealing 1 Damage.",
+    "Parameters": "⫘ Any Ranged Proficiency",
+    "Description": "Make a Ranged attack that explodes in a 1-tile radius, the explosion deals the attack's damage +X to all targets in the area.",
     "Scaling": "Damage/Uses X/🗲:<br>1/1 [lvl 1]<br>2/2 [lvl 3]<br>3/3 [lvl 6]<br>4/4 [lvl 9]<br>5/4 [lvl 12]"
   },
   {
@@ -1380,7 +1380,7 @@
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "",
-    "Description": "Modify one reload of ammunition to deal +X Elemental Damage of a chosen type.",
+    "Description": "During a rest, modify six shots of ammunition to deal +X Elemental Damage of a chosen type.",
     "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
   {
@@ -1390,16 +1390,16 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "After a ranged attack, move 3 tiles without provoking opportunity attacks.",
+    "Description": "After you make a ranged attack, move 3 tiles without provoking opportunity attacks.",
     "Scaling": ""
   },
   {
     "Name": "Crippling Shot",
     "Action":"◆",
     "tags": ["Ranged", "Debuff"],
-    "Cost": "2",
+    "Cost": "1",
     "Symbols": "🗲",
-    "Parameters": "",
+    "Parameters": "⫘ Non-Lethal Shot",
     "Description": "Make a ranged attack that reduces target Movement by 3 tiles for X turns.",
     "Scaling": "Turns/Uses X/🗲:<br>1/1 [lvl 1]<br>2/2 [lvl 3]<br>2/3 [lvl 6]<br>3/4 [lvl 9]"
   },
@@ -1409,7 +1409,7 @@
     "tags": ["Magic", "Melee"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "★ Conduit",
+    "Parameters": "★ Conduit ⫘ ★ Spellcasting",
     "Description": "When you hit with a melee attack, expend 1 Mana to trigger a level 1 spell at the hit's location.",
     "Scaling": ""
   },
@@ -1419,7 +1419,7 @@
     "tags": ["Magic", "Ranged"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "★ Conduit",
+    "Parameters": "★ Conduit ⫘ ★ Spellcasting, Any Ranged Proficiency",
     "Description": "When you hit with a ranged attack, expend 1 Mana to trigger a level 1 spell at the hit's location.",
     "Scaling": ""
   },
@@ -1429,7 +1429,7 @@
     "tags": ["Magic", "Ranged", "Cantrips"],
     "Cost": "2",
     "Symbols": "🗲",
-    "Parameters": "Conduit",
+    "Parameters": "★ Conduit ⫘ ★ Spellcasting, Any Ranged Proficiency",
     "Description": "You may cast cantrips through ranged attacks. On activation, you may instead cast a level 1 spell for free.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
@@ -1439,7 +1439,7 @@
     "tags": ["Magic", "Companion"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "★ Conduit",
+    "Parameters": "★ Conduit ⫘ ★ Spellcasting, ★ Companion",
     "Description": "You may cast spells from your companion's position.",
     "Scaling": ""
   },
@@ -1449,7 +1449,7 @@
     "tags": ["Magic", "Companion", "Mana"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "★ Reservoir",
+    "Parameters": "★ Reservoir ⫘ ★ Spellcasting, ★ Companion",
     "Description": "Your companion gains a Mana pool of 4. You may spend its Mana while it is within 6 tiles of you.",
     "Scaling": ""
   },
@@ -1469,7 +1469,7 @@
     "tags": ["Magic"],
     "Cost": "2",
     "Symbols": "🗲",
-    "Parameters": "⫘ ★ Ritualist",
+    "Parameters": "⫘ ★ Spellcasting",
     "Description": "Cast one spell as a Free Action instead of an Action. <i>(Does not bypass attack limit per turn.)</i>",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
@@ -1478,19 +1478,19 @@
     "Action":"⭘",
     "tags": ["Utility", "Grace"],
     "Cost": "2",
-    "Symbols": "⧖",
+    "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Once per combat, reroll a die on any skill check. You gain only 1 Grace regardless of outcome.",
-    "Scaling": ""
+    "Description": "Reroll a die on any skill check. You gain only 1 Grace regardless of outcome.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
     "Name": "Duelist's Prowess",
-    "Action":"◆",
+    "Action":"⭘",
     "tags": ["Combat", "Buff"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "While wielding a single one-handed weapon, your critical success range expands [⚄⚄,⚄⚅,⚅⚅]. Misses do not consume charges.",
+    "Description": "While wielding a single one-handed weapon, your critical success range expands down to 10. Misses do not consume charges.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -1499,7 +1499,7 @@
     "tags": ["Movement", "Stealth"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "★ Master of Stealth",
+    "Parameters": "★ Awareness",
     "Description": "When an enemy moves adjacent, you may react to move 2 tiles without provoking opportunity attacks. Enemies within 10 tiles suffer stealth penalties equal to your Awareness.",
     "Scaling": ""
   },
@@ -1509,8 +1509,8 @@
     "tags": ["Combat", "Movement"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "★ Master of Stealth",
-    "Description": "When you take damage you may use your reaction to immediately perform an attack with halved Damage (Rounded up) and you move up to 2 tiles. This does not trigger an opportunity attack.",
+    "Parameters": "★ Awareness",
+    "Description": "When you take damage you may use your reaction to immediately perform an attack with halved Damage (Rounded up) and you may move up to 2 tiles. This does not trigger an opportunity attack.",
     "Scaling": ""
   },
   {
@@ -1520,7 +1520,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "When hit by a melee (or ranged at level 6) attack, contest the roll with Athletics. On success, ignore the damage.",
+    "Description": "When hit by a melee (or ranged at level 6) attack, contest the roll with an Reflex check. On success, ignore the damage.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -1539,8 +1539,8 @@
     "tags": ["Crafting", "Utility", "Repair"],
     "Cost": "2",
     "Symbols": "🗲",
-    "Parameters": "⫘ Novice Craftsman",
-    "Description": "Restore a broken craft to 1 Durability for a scene. While active, it gains +2 Damage when applicable.",
+    "Parameters": "⫘ Craftsman",
+    "Description": "Restore a broken craft to 1 Durability for a scene. While active, it gains +2 Damage/Healing when applicable.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
 
@@ -1576,7 +1576,7 @@
     "Name": "Pocket Aces",
     "Action":"⭘",
     "tags": ["Social", "Buff", "Utility"],
-    "Cost": "2",
+    "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Lucky Fella",
     "Description": "You gain advantage on all Gambling / Luck related checks.",
@@ -1594,12 +1594,12 @@
   },
   {
     "Name": "Field Medic",
-    "Action":"⭘",
+    "Action":"◇",
     "tags": ["Utility", "Healing"],
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "",
-    "Description": "Allies resting with you gain double healing, you can remove 1 Condition per ally once per combat.",
+    "Description": "Allies resting with you receive double healing, you can remove 1 Condition per ally once per combat.",
     "Scaling": ""
   },
   {
@@ -1609,7 +1609,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Combat Trapper",
-    "Description": "[2× Common Component]: Create a trapped 2x2 area, it can trap multiple creatures, it will only trigger when a declared condition is met. Trapped creatures take X damage and have their Movement reduced by 3.",
+    "Description": "[2× Common Component]: Create a trapped 2x2 area, it can trap multiple creatures, it will only trigger when a declared condition is met, the conditon is set upon deployment. Trapped creatures take X damage and applies 3 stacks of Slow until your next turn.",
     "Scaling": "Damage X:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
@@ -1639,17 +1639,17 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Combat Trapper",
-    "Description": "Traps you deploy, when triggered, deal +1 Damage  in a 1 unit radius.<br><br><i>Large traps explosions count as a 4x4 square.</i>",
+    "Description": "Traps you deploy may, when triggered, deal +1 Damage in a 1 tile radius.<br><br><i>Large traps explosions count as a 4x4 square.</i>",
     "Scaling": ""
   },
   {
     "Name": "Binding Trapper",
     "Action":"⭘",
-    "tags": ["Utility", "Traps", "Debuff"],
+    "tags": ["Utility", "Traps", "Debuff", "Senses"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Combat Trapper",
-    "Description": "Traps you deploy now knock enemies Prone, they must roll [Reflex] vs [6 + Tinker] to resist.",
+    "Description": "Traps you deploy now knock enemies Prone or Blind them, stated at the time of deployment, they must roll [Reflex] vs [6 + Tinker] to resist.",
     "Scaling": ""
   },
   {
@@ -1673,34 +1673,34 @@
     "Scaling": "Health X:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
-    "Name": "Back to back we stand",
+    "Name": "Back To Back We Stand",
     "Action":"⭘",
     "tags": ["Companion", "Ally", "Buff", "Movement"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Choose an Ally or Companion, this choice can only be changed uppon leveling up.<br><br>While they are within 1 unit of you, gain +1 Accuracy and +1 Armor. Each  1 point of damage they take can be reduced if you take 2 points of damage instead. You gain +2 Movement towards them.",
+    "Description": "Choose an Ally or Companion, this choice can only be changed uppon leveling up.<br><br>While they are within 1 tile of you, gain +1 Accuracy and +1 Armor. Each point of damage they take can be reduced if you double the amount of damage instead. You have +2 Movement while moving towards them.",
     "Scaling": ""
   },
   {
-    "Name": "Suppressive fire",
+    "Name": "Suppressive Fire",
     "Action":"◆",
     "tags": ["Combat", "Ranged", "Area"],
     "Cost": "2",
     "Symbols": "🗲",
-    "Parameters": "",
-    "Description": "Unleash a 4 Unit cone of projectiles. Creatures within it must seek the nearest cover as a reaction, if they do not find any, or do not have a reaction, they take 2 Damage.",
+    "Parameters": "⫘ Any Ranged Proficiency",
+    "Description": "Unleash a 4 Tile cone of projectiles. Creatures within it must seek the nearest cover as a reaction, if they do not find any, or do not have a reaction, they take 2 Damage.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
     "Name": "Berserk",
     "Action":"⭘",
     "tags": ["Melee", "Buff", "Rage"],
-    "Cost": "2",
+    "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "★ Rage",
-    "Description": "You gain the ability to enter a Rage state. In this state you lose 6 Armor, and gain +X Damage and +Y Accuracy. This state lasts until dismissed, unconscious or end of combat.",
-    "Scaling": "Damage/Accuracy X/Y:<br>+2/+3 [lvl 1]<br>+3/+4 [lvl 6]<br>+4/+5 [lvl 12]"
+    "Description": "You gain the ability to enter a Rage state. In this state you lose 6 Armor, and gain +X Damage and +X Accuracy. This state lasts until dismissed, unconscious or end of combat.",
+    "Scaling": "Damage/Accuracy X:<br>+3 [lvl 1]<br>+4 [lvl 6]<br>+5 [lvl 12]"
   },
   {
     "Name": "Natural Defenses",
@@ -1709,7 +1709,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Rage",
-    "Description": "While in Rage, you gain Resistances to Blunt, Slash, Pierce and Cleave damage.",
+    "Description": "While in Rage, you gain Resistances to Blunt, Slash, Pierce and Cleave Damage.",
     "Scaling": ""
   },
   {
@@ -1719,7 +1719,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "You slam your body against a target within melee range. You lose all of your guard, and deal that much damage to the target.",
+    "Description": "You slam your body against a target within melee range. You lose all of your guard, and deal that much Damage to the target.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -1749,7 +1749,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Consecutive hits against the same target grant you +1 Damage, stacking up to +4, Missing or Switching targets resets the Stack.",
+    "Description": "Consecutive hits against the same target grant you +1 Damage, stacking up to +4, missing or switching targets resets the stack.",
     "Scaling": ""
   },
   {
@@ -1779,14 +1779,14 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Move up to 5 tiles, you ignore terrain penalties, you may pass through 1 obstacle in your way. During Movement you may refresh this ability to pass through multiple obstacles, however your Movement does not refresh.<br><br><i>Obstacles must not be larger than 1 tile, relative to the direction you are moving through them.</i>",
+    "Description": "Move up to 5 tiles, you ignore terrain penalties, you may pass through 1 obstructed tile in your way. During Movement you may refresh this ability to pass through multiple tiles, however your Movement does not refresh.<br><br><i>Obstructions must not be larger than 1 tile, relative to the direction you are moving through them.</i>",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
     "Name": "Healing Pulse",
     "Action":"⬖",
     "tags": ["Magic", "Healing", "Area"],
-    "Cost": "",
+    "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
     "Description": "Heal all allies within 3 tiles for X Health.",
@@ -1799,7 +1799,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "⫘ ★ Spellcasting",
-    "Description": "Repeat the last spell cast for free. If no spell was cast, cast a spell for free.",
+    "Description": "Repeat the last spell cast for free.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
@@ -1808,14 +1808,14 @@
     "tags": ["Magic", "Healing"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "",
+    "Parameters": "⫘ ★ Spellcasting",
     "Description": "When you cast a healing or support spell, you or one ally regain X Health",
     "Scaling": "Health X:<br>2 [lvl 1]<br>3 [lvl 3]<br>4 [lvl 6]<br>5 [lvl 9]"
   },
   {
     "Name": "Cursed Cycle",
     "Action":"⭘",
-    "tags": ["Magic", "Debuff", "Death"],
+    "tags": ["Magic", "Debuff", "Death", "Occult"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1828,7 +1828,7 @@
     "tags": ["Ranged", "Damage", "Buff"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "",
+    "Parameters": "⫘ Any Ranged Proficiency",
     "Description": "If you did not move this turn, your next ranged attack gains +X Damage and +Y Accuracy.",
     "Scaling": "Damage/Accuracy X/Y:<br>+1/+2 [lvl 1]<br>+2/+3 [lvl 6]<br>+3/+4 [lvl 12]"
   },
@@ -1878,9 +1878,9 @@
     "tags": ["Magic", "Companion", "Damage"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "⫘ ★ Companion",
-    "Description": "When you cast a spell, your companion's next attack deals +X Damage; when it attacks, your next spell deals +Y Damage",
-    "Scaling": "Damage X/Y:<br>+2/+1 [lvl 1]<br>+3/+2 [lvl 6]<br>+4/+3 [lvl 12]"
+    "Parameters": "⫘ ★ Companion, ★ Spellcasting",
+    "Description": "When you cast a spell, your companion's next attack deals +X Damage; when it attacks, your next spell deals +X-1 Damage",
+    "Scaling": "Damage X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
   },
   {
     "Name": "Phoenix Recovery",
@@ -1903,9 +1903,9 @@
     "Scaling": ""
   },
   {
-    "Name": "Last stand",
+    "Name": "Last Stand",
     "Action":"⭘",
-    "tags": ["Buff", "Healing"],
+    "tags": ["Buff", "Defense", "Damage"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Still Standing",
@@ -1939,7 +1939,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "2 Active trait uses restore automatically after each combat.",
+    "Description": "Two trait uses restore automatically after each combat.",
     "Scaling": ""
   },
   {
@@ -1958,14 +1958,14 @@
     "tags": ["Magic", "Arcane"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "⫘ Arcane Student",
+    "Parameters": "⫘ Arcane Spellcaster",
     "Description": "Arcane spells gain +4 Range.",
     "Scaling": ""
   },
   {
     "Name": "Major Syphoned Healing",
     "Action":"⭘",
-    "tags": ["Magic", "Healing"],
+    "tags": ["Magic", "Healing", "Ally"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Minor Syphoned Healing",
@@ -1988,8 +1988,8 @@
     "tags": ["Magic", "Area", "Occult"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "⫘ Occult Apprentice",
-    "Description": "Occult Curses/Brands/Marks gain +1 Target.",
+    "Parameters": "⫘ Occult Spellcaster",
+    "Description": "Occult Curses, Brands, Marks and Hexes gain +1 Target.",
     "Scaling": ""
   },
   {
@@ -2009,7 +2009,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "After landing 3 Attacks you begin to emit a 1 unit radius Zone of Death.<br><br>Zone of Death: Counts as Rough terrain. Each scene, or when entering the zone, Enemies take X Dark Damage. If the zone has not damaged a target for 2 Scenes, it dissapates.",
+    "Description": "After landing 3 Attacks you begin to emit a 1 tile radius Zone of Death.<br><br>Zone of Death: Counts as Rough terrain. Each scene, or when entering the zone, Enemies take X Dark Damage. If the zone has not damaged a target for 2 Scenes, it dissapates.",
     "Scaling": "Damage X:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]<br>5 [lvl 12]"
   },
   {
@@ -2018,8 +2018,8 @@
     "tags": ["Ranged"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "★ Double Strike ⫘ Level 6+",
-    "Description": "After attacking with a ranged weapon, make another attack without expending an action.",
+    "Parameters": "★ Double Strike ⫘ Level 6+, Any Ranged Proficiency",
+    "Description": "After attacking with a ranged weapon, you may make another attack without expending an action.",
     "Scaling": ""
   },
   {
@@ -2039,7 +2039,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "When you attack a target affected by yours or an allies spell/curse, that attack gains +X Dark Damage.",
+    "Description": "When you attack a target affected by yours or an allies Debuff, that attack deals +X Dark Damage.",
     "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
   },
   {
@@ -2089,7 +2089,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "If enemies outnumber allies within a 5×5 radius, gain Armor equal to the difference. Enemies at least 2 sizes larger than you count as two.",
+    "Description": "If enemies outnumber allies within a 5×5 radius, you gain Armor equal to the difference. Enemies at least 2 sizes larger than you count as two.",
     "Scaling": ""
   },
   {
@@ -2199,7 +2199,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "In combat, rolling a midnight no longer doubles damage; instead, you gain one additional action this turn, which may be used to attack.",
+    "Description": "In combat, rolling a Midnight no longer doubles damage; instead, you gain one stack of Haste, which may be used to attack.",
     "Scaling": ""
   },
   {
@@ -2269,7 +2269,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Healing beyond your max HP is converted into Guard, up to a maximum of 2 + (X × your level).",
+    "Description": "Healing beyond your max HP is converted into Guard, up to a maximum of 2 + (X times your level).",
     "Scaling": "Multiplier X:<br>0.5 [lvl 1]<br>1 [lvl 6]<br>2 [lvl 12]"
   },
   {
@@ -2343,13 +2343,13 @@
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]<br>5 [lvl 12]"
   },
   {
-    "Name": "Deaths Respite",
+    "Name": "Death's Respite",
     "Action":"⬖",
     "tags": ["Ally", "Buff", "Death"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Give yourself or an ally, with the highest current health (Guard included), immunity to death for 1 scene. If they were to drop below 1 Health, they remain at 1 Health",
+    "Description": "Give whichever ally has the highest current health (yourself included), immunity to death for 1 scene. If they were to drop below 1 Health, they remain at 1 Health",
     "Scaling": ""
   },
   {
@@ -2363,11 +2363,11 @@
     "Scaling": ""
   },
   {
-    "Name": "Thought out plan",
+    "Name": "Thought Out Plan",
     "Action":"⭘",
     "tags": ["Buff"],
     "Cost": "2",
-    "Symbols": "🗲",
+    "Symbols": "⧖",
     "Parameters": "",
     "Description": "As long as you have not acted this turn, you may skip it. Next turn you have 3 Actions.",
     "Scaling": ""
@@ -2378,7 +2378,7 @@
     "tags": ["Taunt", "Buff", "Ally"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "",
+    "Parameters": "⫘ ★ Taunt",
     "Description": "Allies have advantage against enemies Taunted by you.",
     "Scaling": ""
   },
@@ -2397,10 +2397,10 @@
     "Action":"⬖",
     "tags": ["Magic", "Sacrifice", "Mana"],
     "Cost": "2",
-    "Symbols": "🗲",
-    "Parameters": "",
-    "Description": "Sacrifice 4 Health to receive 2 Mana",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "Deal 4 Damage to yourself to receive 2 Mana",
+    "Scaling": ""
   },
   {
     "Name": "Unshakeable",
@@ -2428,8 +2428,8 @@
     "tags": ["Taunt", "Area", "Damage"],
     "Cost": "2",
     "Symbols": "🗲",
-    "Parameters": "",
-    "Description": "Deal [Half Your Level] damage in a 1 tile radius around you. Taunted enemies take damage an additional time.",
+    "Parameters": "⫘ ★ Taunt",
+    "Description": "Deal half Your Level rounded up damage in a 1 tile radius around you. Taunted enemies take damage an additional time. The damage type matches your weapon.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -2449,7 +2449,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "You may spend this reaction at any point. You move to an unoccupied space within 3 tiles, you leave a Target Dummy with 3 Health where you were standing. Any attacks targeting you are redirected to the dummy.",
+    "Description": "You may spend this reaction at any point. You move to an unoccupied space within 3 tiles, you leave a Target Dummy with 3 Durability where you were standing. Any attacks targeting you are redirected to the dummy.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -2463,13 +2463,13 @@
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
-    "Name": "Mark of Death",
+    "Name": "Mark Of Death",
     "Action":"⬖",
     "tags": ["Magic", "Debuff"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Transfer any and all negative conditions to a target within 9 tiles. You don't need to see the target, just know of their presence.",
+    "Description": "Transfer any and all negative conditions from yourself to a target within 9 tiles. You don't need to see the target, just know of its presence.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -2478,7 +2478,7 @@
     "tags": ["Magic", "Mana", "Debuff"],
     "Cost": "2",
     "Symbols": "🗲",
-    "Parameters": "",
+    "Parameters": "⫘ ★ Spellcasting",
     "Description": "Drain 3 mana from an ally within 6 tiles, add it to yourself.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
@@ -2489,7 +2489,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Any Damage or Guard gain with a base value lower than X is increased to X.",
+    "Description": "Any Damage, or Guard gain with a base value lower than X is increased to X.",
     "Scaling": "Value X:<br>2 [lvl 1]<br>3 [lvl 6]<br>4 [lvl 12]"
   },
   {
@@ -2593,11 +2593,11 @@
   {
     "Name": "Toss Me",
     "Action":"⭘",
-    "tags": ["Damage", "Ally"],
+    "tags": ["Damage", "Ally", "Finesse"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You can throw a grappled creature at least 1 size smaller than you. They are treated as a ranged weapon you are proficient with, and have a max range of [3+ Your Might Total]. If the thrown creature is an ally, they may make an attack on landing; otherwise, they deal damage equal to [your Might total].",
+    "Description": "You can throw a grappled creature at least 1 size smaller than you. They are treated as a Finesse(thrown) weapon you are proficient with, and have a max range of [3+ Your Might Total]. If the thrown creature is an ally, they may make an attack on landing; otherwise, they deal damage equal to [your Might total].",
     "Scaling": ""
   },
   {
@@ -2627,21 +2627,21 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Make a X Damage Melee, Finesse or Ranged strike with your weapon, if the target dies you gain an amount of Gold (Narators discretion)",
+    "Description": "Make a X Damage Melee, Finesse or Ranged strike with your weapon, if the target dies you gain an amount of Gold. (Narators discretion)",
     "Scaling": "Damage X:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
   },
   {
-    "Name": "Rite of Dominance",
+    "Name": "Rite Of Dominance",
     "Action":"⬖",
     "tags": ["Area", "Debuff", "Sacrifice"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "You lose 4 Health; The next 3 attacks in a 2 tile radius have their damage reduced by 2.",
+    "Description": "Deal 4 Damage to yourself; The next 3 enemy attacks in a 2 tile radius have their damage reduced by 2.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
-    "Name": "Rite of Negation",
+    "Name": "Rite Of Negation",
     "Action":"◇",
     "tags": ["Magic", "Sacrifice"],
     "Cost": "2",
@@ -2651,14 +2651,14 @@
     "Scaling": ""
   },
   {
-    "Name": "Rite of Calling",
+    "Name": "Rite Of Calling",
     "Action":"⬖",
     "tags": ["Debuff", "Sacrifice"],
     "Cost": "2",
-    "Symbols": "⧖",
+    "Symbols": "🗲",
     "Parameters": "",
-    "Description": "You lose 4 armor, 3 enemies within 8 tiles have -3 Accuracy until the end of combat.",
-    "Scaling": ""
+    "Description": "You lose 4 armor, 3 enemies within 8 tiles suffer -3 Accuracy until the end of combat.",
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
     "Name": "Sharing Is Caring",
@@ -2671,13 +2671,13 @@
     "Scaling": ""
   },
   {
-    "Name": "Catalyst of Aeons",
+    "Name": "Catalyst Of Aeons",
     "Action":"⬖",
     "tags": ["Utility", "Repair", "Sacrifice"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You can repair Durability of Crafts or Companions using Mana or Health; Each point of Durability is equal to 4 Mana or, 2 Health.",
+    "Description": "You can repair Durability of Crafts or Craft Companions using Mana or Health; Each point of Durability is equal to 4 Mana or, 2 Health.",
     "Scaling": ""
   },
   {
@@ -2687,17 +2687,17 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "You stun all enemies with their Current Health below [Your Level] within a 3 tile radius.",
+    "Description": "You stun all enemies with their Current Health below [Your Level] within a 6 tile radius.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
-    "Name": "Take a moment",
+    "Name": "Take A Moment",
     "Action":"⬖",
     "tags": ["Ranged", "Healing"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "When you reload a firearm, you recover [Half Your Level] Health",
+    "Parameters": "⫘ Any Ranged Proficiency",
+    "Description": "When you reload a firearm, you recover half Your Level rounded up Health",
     "Scaling": ""
   },
   {
@@ -2711,7 +2711,7 @@
     "Scaling": ""
   },
   {
-    "Name": "One for All",
+    "Name": "One For All",
     "Action":"⭘",
     "tags": ["Ally", "Guard"],
     "Cost": "2",
@@ -2721,13 +2721,13 @@
     "Scaling": ""
   },
   {
-    "Name": "All for One",
+    "Name": "All For One",
     "Action":"⭘",
     "tags": ["Ally", "Guard", "Buff"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Half of any guard gained by your allies is instead given to you.",
+    "Description": "Half of any guard gained by your allies (rounded up) is instead given to you.",
     "Scaling": ""
   },
   {
@@ -2816,8 +2816,8 @@
     "tags": ["Melee", "Damage", "Mana"],
     "Cost": "2",
     "Symbols": "🗲",
-    "Parameters": "",
-    "Description": "You deal 1 Damage to all Adjacent Enemies; You regain Mana equal to the Damage dealt.",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "You deal 1 Force Damage to all Adjacent Enemies; You regain Mana equal to the Damage dealt.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -2826,7 +2826,7 @@
     "tags": ["Utility", "Crafting", "Mana"],
     "Cost": "2",
     "Symbols": "🗲",
-    "Parameters": "",
+    "Parameters": "⫘ ★ Spellcasting",
     "Description": "Spend 2 mana to create one Crafting Component; if unused the Component disappears on your next rest.",
     "Scaling": ""
   },
@@ -2851,14 +2851,14 @@
     "Scaling": ""
   },
   {
-    "Name": "Behold the Infinite",
+    "Name": "Behold The Infinite",
     "Action":"⭘",
     "tags": ["Magic", "Buff", "Grace"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Spellcasting",
-    "Description": "Gain X bonus Spells from your Spellcasting School; These spells can only be cast if you Pay for them using Grace.",
-    "Scaling": "Spells X:<br>2 [lvl 1]<br>3 [lvl 6]<br>4 [lvl 12]"
+    "Description": "Gain 6 bonus Spells from your Spellcasting School; These spells can only be cast if you Pay for them using Grace.",
+    "Scaling": ""
   },
   {
     "Name": "Bodybuilder",
@@ -2897,7 +2897,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain bonus Armor equal to the amount of Movement over 5.",
+    "Description": "You gain bonus Armor equal to the amount of Movement over 5.",
     "Scaling": ""
   },
   {
@@ -2936,8 +2936,8 @@
     "tags": ["Magic", "Buff", "Mana"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "For every turn you do not cast a spell, you reduce the cost of the next spell cast.",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "For every turn you do not cast a spell, you reduce the cost of the next spell cast by 1.",
     "Scaling": ""
   },
   {
@@ -2967,7 +2967,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Reduce all Incoming Damage by 1. (Minimum of 1 damage taken)",
+    "Description": "Reduce all Incoming Damage by 1 (Minimum of 1 Damage taken).",
     "Scaling": ""
   },
   {
@@ -3011,13 +3011,13 @@
     "Scaling": ""
   },
   {
-    "Name": "Lead and Follow",
+    "Name": "Lead And Follow",
     "Action":"◇",
     "tags": ["Combat", "Buff", "Ally"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "When an Ally performs a Trait granted attack action, you may do the same Action against the same target, if you also have that Trait.",
+    "Description": "When you see an Ally perform a Trait granted attack action, you may do the same Action against the same target, if you also have that Trait.",
     "Scaling": ""
   },
   {
@@ -3076,8 +3076,8 @@
     "tags": ["Magic", "Damage", "Mana"],
     "Cost": "2",
     "Symbols": "🗲",
-    "Parameters": "",
-    "Description": "This trait does not gain uses on a rest. Each time you cast a level 2 Spell you gain 1 use. Make a Ranged attack that uses [Spellcraft] as its bonus, dealing 3 damage to a creature within 6 tiles.",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "This trait does not gain uses on a rest. Each time you cast a level 2 Spell you gain 1 use. Make a Ranged attack that uses [Arcane] as its bonus, dealing 3 damage to a creature within 6 tiles.",
     "Scaling": "Uses 🗲:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
   },
   {
@@ -3093,11 +3093,11 @@
   {
     "Name": "No Restraints",
     "Action":"⭘",
-    "tags": ["Combat", "Debuff"],
+    "tags": ["Combat"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Deal Double Damage to Guard.",
+    "Description": "Deal double Damage to Guard.",
     "Scaling": ""
   },
   {
@@ -3147,7 +3147,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain +1 Charm; When you spend grace on an attack roll it deals bonus Damage equal to [Charm]",
+    "Description": "Gain +1 Charm; When you spend grace on an attack roll it deals bonus Damage equal to [your Charm]",
     "Scaling": ""
   },
   {
@@ -3164,9 +3164,9 @@
     "Name": "Gardener",
     "Action":"⭘",
     "tags": ["Utility"],
-    "Cost": "",
+    "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "⫘★",
+    "Parameters": "",
     "Description": "Gain Advantage on checks needed to care for plants.",
     "Scaling": ""
   },
@@ -3174,7 +3174,7 @@
     "Name": "Merchant",
     "Action":"⭘",
     "tags": ["Utility", "Gold"],
-    "Cost": "",
+    "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
     "Description": "You sell items for 10% more gold, and buy items for 10% less gold (Narrator's Discretion).",
@@ -3194,11 +3194,11 @@
     "Name": "Answered Prayer",
     "Action":"⭘",
     "tags": ["Utility", "Grace"],
-    "Cost": "",
+    "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
     "Description": "During your rest you may perform a 30 minute ritual; doing so grants you X Grace after the Rest concludes.",
-    "Scaling": ""
+    "Scaling": "Grace X:<br>3 [lvl 1]<br>5 [lvl 6]<br>7 [lvl 12]"
   },
   {
     "Name": "Musician",
@@ -3237,7 +3237,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Cover grants one higher tier of protection. While in cover, gain +2 Accuracy. You may move between covers (min. 3 tiles apart) as a Free Action.",
+    "Description": "Cover grants one higher tier of protection. While in cover, gain +2 Accuracy. You may move between covers that is at maximum 4 tiles apart as a Free Action.",
     "Scaling": ""
   },
   {
@@ -3313,11 +3313,11 @@
   {
     "Name": "Soul Slash",
     "Action": "◆",
-    "tags": ["Melee", "Damage", "Movement"],
+    "tags": ["Melee", "Damage", "Movement", "Healing"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
-    "Description": "Dash up to 3 tiles. Enemies you pass through take 2 Damage. You heal for the total Damage dealt; excess healing is converted into Guard.",
+    "Description": "Enemies you pass through while dashing take 2 Dark Damage. You heal for the total Damage dealt.",
     "Scaling": ""
   },
   {
@@ -3327,7 +3327,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "★ Rage",
-    "Description": "Cleanse all negative effects and Conditions. Until the end of any turn in which you did not perform a melee attack, you cannot gain negative effects or Conditions.",
+    "Description": "Enter a Rage, while ragining you ignore all negative conditions and effects imposed uppon you. Your Rage ends at the end of a turn in which you did not attack.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]"
   }
 ]
