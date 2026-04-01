@@ -803,11 +803,11 @@
     "Name": "Pocket Sand",
     "Action":"◇",
     "tags": ["Combat", "Reaction", "Senses"],
-    "Cost": "2",
+    "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
     "Description": "As a reaction, blind a creature entering your melee range until their next turn.",
-    "Scaling": "Uses 🗲:<br>2 [lvl 1]<br>3 [lvl 3]<br>4 [lvl 6]<br>5 [lvl 9]"
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
     "Name": "Remote Activation",
@@ -1045,17 +1045,17 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Off-hand",
-    "Description": "You can wield two Light weapons. Off-hand attacks use all applicable modifiers.",
+    "Description": "You can wield two Light weapons, or Medium weapons; if you have atleast 3 points of Medium weapon Proficiency, you can wield two Medium weapons. Off-hand attacks use all applicable modifiers.",
     "Scaling": ""
   },
   {
-    "Name": "Dual Action",
+    "Name": "Assisted Strike",
     "Action":"⭘",
     "tags": ["Combat", "Companion"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "★ Double Strike ⫘ Level 6+",
-    "Description": "Your companion makes a free attack against a target you attacked. ",
+    "Parameters": "★ Double Strike ⫘ Level 6+, ★ Companion",
+    "Description": "Your companion may make a free attack against a target you attacked. ",
     "Scaling": ""
   },
   {
@@ -1075,8 +1075,8 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "When an adjacent ally is attacked, take X damage to reduce that attack's damage by Y.",
-    "Scaling": "Damage/Reduction X/Y:<br>2/3 [lvl 1]<br>3/5 [lvl 3]<br>4/7 [lvl 6]<br>5/9 [lvl 9]"
+    "Description": "When an adjacent ally is attacked, take X damage to reduce that attack's damage by twice that amount.",
+    "Scaling": "Damage X:<br>2 [lvl 1]<br>3 [lvl 3]<br>4 [lvl 6]<br>5 [lvl 9]"
   },
   {
     "Name": "Mana Reservoir",
@@ -1084,7 +1084,7 @@
     "tags": ["Magic", "Mana"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "★ Reservoir",
+    "Parameters": "★ Reservoir ⫘ ★ Spellcasting",
     "Description": "Gain a reservoir of 3 bonus Mana for level 1 spells. Can be used on level 2 spells starting at level 6.",
     "Scaling": ""
   },
@@ -1094,8 +1094,8 @@
     "tags": ["Defense", "Defense"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "When at or below half Health, gain +X Armor.",
+    "Parameters": "★ Still Standing",
+    "Description": "When at or below half Health, gain +X Armor and and +1 Spirit.",
     "Scaling": "Armor X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
   },
   {
@@ -1105,7 +1105,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "When your attack modifiers exceed half (rounded up) of the enemy's Armor, gain +X Damage.",
+    "Description": "If your attack Accuracy exceed half (rounded up) of the enemy's Armor, gain +X Damage.",
     "Scaling": "Damage X:<br>+2 [lvl 1]<br>+3 [lvl 6]<br>+4 [lvl 12]"
   },
   {
@@ -1124,8 +1124,8 @@
     "tags": ["Defense", "Guard"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "When below half Health, gain Guard equal to half your level + X.",
+    "Parameters": "★ Still Standing",
+    "Description": "When below half Health, gain Guard equal to half your level + X and +2 Spirit.",
     "Scaling": "Guard X:<br>+5 [lvl 1]<br>+6 [lvl 3]<br>+7 [lvl 6]<br>+8 [lvl 9]<br>+9 [lvl 12]"
   },
   {
@@ -1135,7 +1135,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "For each scene you do not take damage, gain +1 Accuracy, stacking infinitely. Resets when you get hit.",
+    "Description": "For each scene you did not take damage, you gain +1 Accuracy, stacking infinitely. Resets when you get hit.",
     "Scaling": ""
   },
   {
@@ -1145,7 +1145,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Casting a spell grants Guard equal to half your level. This refreshes but does not stack.",
+    "Description": "Casting a spell grants you Guard equal to half your level rounded up. This refreshes but does not stack.",
     "Scaling": ""
   },
   {
@@ -1154,7 +1154,7 @@
     "tags": ["Combat", "Defense"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "",
+    "Parameters": "★ Off-hand",
     "Description": "While wielding a single one-handed weapon, gain +X Armor and +X Reflex.",
     "Scaling": "Armor & Reflex X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
@@ -1185,7 +1185,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Ignore the first negative condition each rest. Gain +1 Fortitude.",
+    "Description": "Ignore the first negative condition each rest, as long as it is not instantly reapplied. Gain +1 Fortitude.",
     "Scaling": ""
   },
   {
@@ -1195,7 +1195,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "On a hit, deal bonus Damage equal to the half the amount your attack exceeded the target's Armor. On a miss, take Damage equal to half the amount missed by.",
+    "Description": "On a hit, you deal bonus Damage to the target equal to half the amount your attack exceeded the target's Armor. On a miss, take Damage equal to half the amount you missed by.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -1913,8 +1913,8 @@
     "tags": ["Combat", "Buff", "Healing"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "While at or below half Health, gain +2 Damage and +1 Armor.",
+    "Parameters": "★ Still Standing",
+    "Description": "While at or below half Health, gain +2 Damage, +1 Armor and +1 Spirit.",
     "Scaling": ""
   },
   {
