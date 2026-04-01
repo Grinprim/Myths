@@ -347,7 +347,7 @@
   {
     "Name": "Heavy Guard",
     "Action":"⭘",
-    "tags": ["Proficiency", "Defense"],
+    "tags": ["Defense"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": " ⫘ Heavy Armor Proficiency, Shield Proficiency",
@@ -1216,7 +1216,7 @@
   {
     "Name": "Adaptive Guard",
     "Action":"⭘",
-    "tags": ["Defense", "Buff", "Proficiency"],
+    "tags": ["Defense", "Buff" ],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Medium Armor Proficiency / Heavy Armor Proficiency",
@@ -1725,7 +1725,7 @@
   {
     "Name": "Great Weapon Mastery",
     "Action":"⭘",
-    "tags": ["Combat", "Damage", "Proficiency"],
+    "tags": ["Combat", "Damage"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Heavy Weapon Proficiency",
