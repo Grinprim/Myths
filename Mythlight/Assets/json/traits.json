@@ -72,7 +72,7 @@
   {
     "Name": "Path: Master Manipulator",
     "Action": "⬖",
-    "tags": ["Charm", "Utility"],
+    "tags": ["Social", "Utility"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -272,7 +272,7 @@
   {
     "Name": "Path: Reflected Harm",
     "Action": "◇",
-    "tags": ["Defense", "Damage", "Reaction"],
+    "tags": ["Defense", "Damage"],
     "Cost": "0",
     "Symbols": "🗲",
     "Parameters": "",
@@ -372,7 +372,7 @@
   {
     "Name": "Divine Spellcaster",
     "Action":"⭘",
-    "tags": ["Magic"],
+    "tags": ["Magic", "Divine"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
@@ -422,7 +422,7 @@
   {
     "Name": "Quick Reflexes",
     "Action":"◇",
-    "tags": ["Defense", "Reaction"],
+    "tags": ["Defense"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -462,7 +462,7 @@
   {
     "Name": "Tavern Brawler",
     "Action":"⭘",
-    "tags": ["Improvised", "Damage"],
+    "tags": ["Improvised", "Damage", "Proficiency"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -802,7 +802,7 @@
   {
     "Name": "Pocket Sand",
     "Action":"◇",
-    "tags": ["Combat", "Reaction", "Senses"],
+    "tags": ["Combat", "Senses"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1211,7 +1211,7 @@
   {
     "Name": "Adaptive Guard",
     "Action":"⭘",
-    "tags": ["Defense", "Combat"],
+    "tags": ["Defense", "Combat", "Buff", "Proficiency"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ Medium Armor Proficiency / Heavy Armor Proficiency",
@@ -1261,7 +1261,7 @@
   {
     "Name": "Restorative Meditation",
     "Action":"⭘",
-    "tags": ["Magic", "Mana", "Rest"],
+    "tags": ["Magic", "Mana"],
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "★ Arcane Recovery",
@@ -1281,7 +1281,7 @@
   {
     "Name": "Mana Conservation",
     "Action":"⭘",
-    "tags": ["Magic", "Mana", "Counter"],
+    "tags": ["Magic", "Mana"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Manaflux",
@@ -1501,7 +1501,7 @@
   {
     "Name": "Vanishing Act",
     "Action":"◇",
-    "tags": ["Combat", "Reaction", "Movement"],
+    "tags": ["Combat", "Movement"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Master of Stealth",
@@ -1620,7 +1620,7 @@
   {
     "Name": "Guerrilla Trapper",
     "Action":"⭘",
-    "tags": ["Utility", "Traps", "Rest"],
+    "tags": ["Utility", "Traps"],
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "⫘ Combat Trapper",
@@ -1660,7 +1660,7 @@
   {
     "Name": "Recovery",
     "Action":"⭘",
-    "tags": ["Utility", "Healing", "Rest"],
+    "tags": ["Utility", "Healing"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1760,7 +1760,7 @@
   {
     "Name": "Spellbreaker",
     "Action":"◇",
-    "tags": ["Magic", "Reaction"],
+    "tags": ["Magic"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Focus Breaker",
@@ -2000,7 +2000,7 @@
   {
     "Name": "Master Channeler",
     "Action":"⭘",
-    "tags": ["Magic", "Mana", "Rest"],
+    "tags": ["Magic", "Mana"],
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "⫘ Restorative Meditation",
@@ -2230,7 +2230,7 @@
   {
     "Name": "Commanding Presence",
     "Action":"⬖",
-    "tags": ["Combat", "Debuff", "Charm"],
+    "tags": ["Combat", "Debuff", "Social"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2450,7 +2450,7 @@
   {
     "Name": "Dummies",
     "Action":"◇",
-    "tags": ["Combat", "Reaction", "Defense"],
+    "tags": ["Combat", "Defense"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2530,7 +2530,7 @@
   {
     "Name": "Overexertion",
     "Action":"⭘",
-    "tags": ["Utility", "Debuff"],
+    "tags": ["Utility", "Debuff", "Uses"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2618,7 +2618,7 @@
   {
     "Name": "Riposte",
     "Action":"◇",
-    "tags": ["Combat", "Reaction", "Counter"],
+    "tags": ["Combat"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2648,7 +2648,7 @@
   {
     "Name": "Rite of Negation",
     "Action":"◇",
-    "tags": ["Magic", "Counter", "Sacrifice"],
+    "tags": ["Magic", "Sacrifice"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2818,7 +2818,7 @@
   {
     "Name": "Cold-blooded",
     "Action":"⭘",
-    "tags": ["Combat", "Buff", "Rest"],
+    "tags": ["Combat", "Buff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -3158,7 +3158,7 @@
   {
     "Name": "Lead Role",
     "Action":"⭘",
-    "tags": ["Combat", "Buff", "Charm"],
+    "tags": ["Combat", "Buff", "Social"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
@@ -3168,7 +3168,7 @@
   {
     "Name": "Comfy Sleeper",
     "Action":"⭘",
-    "tags": ["Utility", "Buff", "Rest"],
+    "tags": ["Utility", "Buff"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -3208,7 +3208,7 @@
   {
     "Name": "Answered Prayer",
     "Action":"⭘",
-    "tags": ["Utility", "Buff", "Rest"],
+    "tags": ["Utility", "Buff"],
     "Cost": "",
     "Symbols": "☀",
     "Parameters": "",
