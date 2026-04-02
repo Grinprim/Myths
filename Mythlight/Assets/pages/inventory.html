@@ -869,9 +869,10 @@
         const randomFromList = (list) => list[Math.floor(Math.random() * list.length)];
 
         const toTitleCase = (value) => String(value || '')
+            .replace(/([a-z])([A-Z])/g, '$1 $2')
             .split(/[_\s]+/)
             .filter(Boolean)
-            .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
             .join(' ');
 
         const escapeHtml = (value) => String(value || '')
@@ -925,13 +926,21 @@
             return 2;
         }
 
-        function getBaseGearBonuses(categoryKey) {
+        function getBaseGearBonuses(categoryKey, name = '') {
             const key = String(categoryKey || '').toLowerCase();
             if (key.includes('light_armor')) return { armor: 1 };
             if (key.includes('medium_armor')) return { armor: 2 };
             if (key.includes('heavy_armor')) return { armor: 3 };
             if (key.includes('shield')) return { armor: 1 };
-            if (key.includes('backpack') || key.includes('pack')) return { carryCapacity: 4 };
+            if (key.includes('backpack') || key.includes('pack')) {
+                const lowerName = String(name || '').toLowerCase();
+                if (lowerName.includes('satchel')) return { carryCapacity: 3 };
+                if (lowerName.includes('small backpack')) return { carryCapacity: 4 };
+                if (lowerName.includes('standard backpack')) return { carryCapacity: 5 };
+                if (lowerName.includes('large backpack')) return { carryCapacity: 6 };
+                if (lowerName.includes('war pack')) return { carryCapacity: 7 };
+                return { carryCapacity: 4 };
+            }
             return {};
         }
 
@@ -994,6 +1003,18 @@
                 bonuses,
                 summary: summaryParts.length ? summaryParts.join(' | ') : null
             };
+        }
+
+        function applySuperiorBonus(target, statKey, label) {
+            if ((target[statKey] || 0) <= 0) return null;
+            target[statKey] += 1;
+            return `+1 ${label}`;
+        }
+
+        function applyRefinedBonus(target, statKey, label) {
+            if ((target[statKey] || 0) <= 0) return null;
+            target[statKey] += 2;
+            return `+2 ${label}`;
         }
 
         function applyMasterworkBonusByOrder(target, statOrder) {
@@ -1140,7 +1161,11 @@
 
             const rawPrefixes = [...qualityPrefix, ...extraPrefixes];
             const hasMasterwork = rawPrefixes.some(prefix => String(prefix?.name || '').toLowerCase() === 'masterwork');
-            const totalBonuses = { ...getBaseGearBonuses(base.categoryKey) };
+            const hasSuperior = rawPrefixes.some(prefix => String(prefix?.name || '').toLowerCase() === 'superior');
+            const hasRefined = rawPrefixes.some(prefix => String(prefix?.name || '').toLowerCase() === 'refined');
+            const baseBonuses = getBaseGearBonuses(base.categoryKey, base.name);
+            const totalBonuses = { ...baseBonuses };
+            const prefixAddedKeys = [];
             const gearMasterworkOrder = [
                 ['armor', 'Armor'],
                 ['carryCapacity', 'Carry Capacity'],
@@ -1166,6 +1191,7 @@
 
                 const interpretation = interpretGearPrefix(prefix.description);
                 Object.entries(interpretation.bonuses).forEach(([key, value]) => {
+                    if (!(key in totalBonuses)) prefixAddedKeys.push(key);
                     totalBonuses[key] = (totalBonuses[key] || 0) + value;
                 });
 
@@ -1175,6 +1201,9 @@
                 };
             });
 
+            const baseKeys = Object.keys(baseBonuses).filter(k => (baseBonuses[k] || 0) > 0);
+            const superiorRefinedTarget = baseKeys.length > 0 ? baseKeys[0] : (prefixAddedKeys.length > 0 ? prefixAddedKeys[0] : 'armor');
+
             if (hasMasterwork) {
                 const masterworkSummary = applyMasterworkBonusByOrder(totalBonuses, gearMasterworkOrder);
                 const masterworkIndex = prefixes.findIndex(prefix => String(prefix?.name || '').toLowerCase() === 'masterwork');
@@ -1182,6 +1211,28 @@
                     prefixes[masterworkIndex] = {
                         ...prefixes[masterworkIndex],
                         interpretedSummary: masterworkSummary ? `Masterwork: ${masterworkSummary}` : 'Masterwork'
+                    };
+                }
+            }
+
+            if (hasSuperior) {
+                const superiorSummary = applySuperiorBonus(totalBonuses, superiorRefinedTarget, toTitleCase(superiorRefinedTarget));
+                const superiorIndex = prefixes.findIndex(prefix => String(prefix?.name || '').toLowerCase() === 'superior');
+                if (superiorIndex >= 0) {
+                    prefixes[superiorIndex] = {
+                        ...prefixes[superiorIndex],
+                        interpretedSummary: superiorSummary ? `Superior: ${superiorSummary}` : 'Superior'
+                    };
+                }
+            }
+
+            if (hasRefined) {
+                const refinedSummary = applyRefinedBonus(totalBonuses, superiorRefinedTarget, toTitleCase(superiorRefinedTarget));
+                const refinedIndex = prefixes.findIndex(prefix => String(prefix?.name || '').toLowerCase() === 'refined');
+                if (refinedIndex >= 0) {
+                    prefixes[refinedIndex] = {
+                        ...prefixes[refinedIndex],
+                        interpretedSummary: refinedSummary ? `Refined: ${refinedSummary}` : 'Refined'
                     };
                 }
             }
