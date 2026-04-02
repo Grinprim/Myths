@@ -837,14 +837,14 @@
       Body: ["Might", "Brawn", "Fortitude"],
       Skill: ["Finesse", "Reflex", "Tinker"],
       Mind: ["Arcane", "Spirit", "Scholarship"],
-      Style: ["Charm", "Insight", "Awareness"]
+      Style: ["Speech", "Insight", "Awareness"]
     };
 
     const skillsList = [
       "Might", "Brawn", "Fortitude",
       "Finesse", "Reflex", "Tinker",
       "Arcane", "Spirit", "Scholarship",
-      "Charm", "Insight", "Awareness"
+      "Speech", "Insight", "Awareness"
     ];
 
     const skillDescriptions = {
@@ -860,7 +860,7 @@
       Spirit: "Connection to spiritual forces and racial essence (Eldenring).",
       Scholarship: "Academic knowledge and research skills.",
 
-      Charm: "Influencing others through likability and presence.",
+      Speech: "Influencing others through likability and presence.",
       Insight: "Perception of hidden motives and truths.",
       Awareness: "General perception of surroundings and danger."
     };
@@ -1020,10 +1020,9 @@
           row.innerHTML = `
             <div class="skill-row">
               <span onclick="toggleDesc(this)">${skill}</span>
-              <input style="width: 6em;" type="number" class="mod" id="${skill}_mod_user" placeholder="Mod">
-              <input type="number" style="scale: 0.8; border-radius: 0.25rem 5rem 5rem 0.25rem;" class="mod-trait" id="${skill}_mod_trait" placeholder="Trait" readonly>
-              <input type="number" class="total" id="${attr}_${skill}" readonly>
-              <button style="height: 2.99em;" type="button" onclick="rollSkill(this, '${skill}')">Roll</button>
+              <input style="width: 6em; margin-left: 3em;" type="number" class="mod" id="${skill}_mod_user" placeholder="Mod">
+              <input type="number" style="margin-left: 3.5em;" class="total" id="${attr}_${skill}" readonly>
+              <button style="height: 2.99em; margin-left: 3.5em; width: 5em;" type="button" onclick="rollSkill(this, '${skill}')">Roll</button>
             </div>
             <div class="skill-desc">${skillDescriptions[skill] || "No description available."}</div>
             
@@ -1151,30 +1150,6 @@
     }
 
     // --- Traits / Spells state ---
-    function extractSkillBonuses(text) {
-  const bonuses = {};
-
-  // Updated skill list
-  const skills = [
-    "Might", "Brawn", "Fortitude",
-    "Finesse", "Reflex", "Tinker",
-    "Arcane", "Spirit", "Scholarship",
-    "Charm", "Insight", "Awareness"
-  ];
-
-  // Build regex dynamically from skill list
-  const bonusRegex = new RegExp(`([+-]?\\d+)\\s*(${skills.join("|")})`, "gi");
-
-  let match;
-  while ((match = bonusRegex.exec(text || "")) !== null) {
-    const amount = parseInt(match[1], 10);
-    const skill = match[2];
-
-    bonuses[skill] = (bonuses[skill] || 0) + (Number.isFinite(amount) ? amount : 0);
-  }
-
-  return bonuses;
-}
 
     function updateTraitPoints() {
       const level = Number.parseInt(document.getElementById('level_input')?.value, 10) || 0;
@@ -1208,23 +1183,6 @@
       if (remEl) remEl.value = remaining;
     }
 
-    function recalculateTraitSkillBonuses() {
-      const totals = {};
-      for (const skill of skillsList) totals[skill] = 0;
-
-      for (const trait of state.selectedTraits.values()) {
-        const extracted = extractSkillBonuses(trait.Description);
-        for (const [skill, val] of Object.entries(extracted)) totals[skill] += val;
-      }
-
-      for (const skill of skillsList) {
-        const input = document.getElementById(`${skill}_mod_trait`);
-        if (input) input.value = totals[skill] || 0;
-      }
-
-      updateTraitPoints();
-      updateAllDerived();
-    }
 
     function removeCustomTrait(btn) {
       const traitDiv = btn.closest('.trait');
@@ -1241,7 +1199,6 @@
       }
 
       traitDiv.remove();
-      recalculateTraitSkillBonuses();
     }
 
     function traitIdSafe(name) {
@@ -1348,7 +1305,6 @@
       const name = decodeURIComponent(encodedName);
       state.selectedTraits.delete(name);
       renderSelectedTraits();
-      recalculateTraitSkillBonuses();
     }
 
     async function selectTrait() {
@@ -1358,7 +1314,6 @@
       if (state.selectedTraits.has(selected.Name)) return;
       state.selectedTraits.set(selected.Name, selected);
       renderSelectedTraits();
-      recalculateTraitSkillBonuses();
     }
 
     function rollSpell(spellId) {
@@ -1885,7 +1840,6 @@
         });
       }
       renderSelectedTraits();
-      recalculateTraitSkillBonuses();
 
       // --- Restore Spells ---
       state.selectedSpells.clear();
@@ -2076,7 +2030,6 @@
       await setupSpells();
       renderSelectedTraits();
       renderSelectedSpells();
-      recalculateTraitSkillBonuses();
       updateAllDerived();
       document.querySelectorAll('.tab-button').forEach(button => {
         button.classList.toggle('active', button.dataset.tab === 'tab-main');

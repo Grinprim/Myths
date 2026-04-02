@@ -741,8 +741,8 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain +1 Charm and Finesse while disguised or attempting to blend into a crowd.",
-    "Scaling": "Charm & Finesse X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
+    "Description": "Gain +1 Speech and Finesse while disguised or attempting to blend into a crowd.",
+    "Scaling": "Speech & Finesse X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
   {
     "Name": "Leg Day",
@@ -2169,7 +2169,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "You attempt to convince creatures targeting you that you are dead. You are knocked prone; affected creatures must roll [Insight] vs [8 + your Charm] to resist; Creatures you have already tricked will gain +2 to the roll.",
+    "Description": "You attempt to convince creatures targeting you that you are dead. You are knocked prone; affected creatures must roll [Insight] vs [8 + your Speech] to resist; Creatures you have already tricked will gain +2 to the roll.",
     "Scaling": "Uses 🗲:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
   },
   {
@@ -2189,7 +2189,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Outside of combat, you may disguise yourself or allies. Creatures attempting to see through the disguise must roll [Insight] vs [6 + your Charm] to resist.",
+    "Description": "Outside of combat, you may disguise yourself or allies. Creatures attempting to see through the disguise must roll [Insight] vs [6 + your Speech] to resist.",
     "Scaling": ""
   },
   {
@@ -2229,7 +2229,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "You command a creature within 6 tiles to lay down its arms, it will not act for 2 scenes, or until damaged. It must roll [Insight] vs [6 + your Charm] to resist.",
+    "Description": "You command a creature within 6 tiles to lay down its arms, it will not act for 2 scenes, or until damaged. It must roll [Insight] vs [6 + your Speech] to resist.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -2259,7 +2259,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain advantage on Intimidation(Charm) checks. On a Midnight impose the Feared Condition on the target.",
+    "Description": "Gain advantage on Intimidation(Speech) checks. On a Midnight impose the Feared Condition on the target.",
     "Scaling": ""
   },
   {
@@ -2389,7 +2389,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Back to back we stand",
-    "Description": "Your chosen ally/companion gains Advantage on Charm checks.",
+    "Description": "Your chosen ally/companion gains Advantage on Speech checks.",
     "Scaling": ""
   },
   {
@@ -2419,7 +2419,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Deal 3 Damage to yourself, heal a creature other than yourself, by 6 Health.",
+    "Description": "Deal up to 3 Damage to yourself, heal a creature other than yourself, for double that amount.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>3 [lvl 9]"
   },
   {
@@ -2867,7 +2867,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You gain +1 to Might and Charm.",
+    "Description": "You gain +1 to Might and Speech.",
     "Scaling": ""
   },
   {
@@ -3147,7 +3147,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain +1 Charm; When you spend grace on an attack roll it deals bonus Damage equal to [your Charm]",
+    "Description": "Gain +1 Speech; When you spend grace on an attack roll it deals bonus Damage equal to [your Speech]",
     "Scaling": ""
   },
   {
@@ -3207,7 +3207,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You can play your chosen instrument and are proficient with it as an improvised weapon. While playing, allies within hearing range gain either [your Charm - 1] Armor or [your Charm] Accuracy.",
+    "Description": "You can play your chosen instrument and are proficient with it as an improvised weapon. While playing, allies within hearing range gain either [your Speech - 1] Armor or [your Speech] Accuracy.",
     "Scaling": ""
   },
   {
