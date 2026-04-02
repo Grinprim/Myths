@@ -8,6 +8,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <style>
+
+        .active-filter {
+            background-color: rgba(70, 229, 176, 0.2) !important;
+            border-color: rgba(70, 229, 142, 0.3) !important;
+            color: rgb(70, 229, 136) !important;
+        }
+
+
         /* Modal Animation */
         #random-trait-modal { transition: opacity 0.3s ease; }
         .modal-content { animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -195,6 +203,8 @@
         let rawTraits = [];
         let activeSymbolFilter = null;
         let activeTagFilter = null;
+        let traitRowEntries = [];
+        let traitsBuilt = false;
 
         function normalizeTraitTags(trait) {
             const value = trait.tags ?? trait.Tags ?? trait.tag ?? trait.Tag;
@@ -210,6 +220,112 @@
 
         function hasTag(trait, tag) {
             return normalizeTraitTags(trait).includes(tag);
+        }
+
+        function buildTraitRows() {
+            if (traitsBuilt || !rawTraits.length) return;
+
+            const table1 = document.getElementById('traits-1-point');
+            const table2 = document.getElementById('traits-2-point');
+            table1.innerHTML = '';
+            table2.innerHTML = '';
+            traitRowEntries = [];
+
+            rawTraits.forEach((trait, index) => {
+                if (trait.Cost === '0') return;
+
+                const uniqueId = `trait-${trait.Cost}-${index}`;
+                const tags = normalizeTraitTags(trait).sort((a, b) => a.localeCompare(b));
+                const lowercaseName = (trait.Name || '').toLowerCase();
+                const lowercaseDesc = (trait.Description || '').toLowerCase();
+                const symbolBucket = `${trait.Symbols || ''} ${trait.Action || ''}`;
+
+                const summaryRow = document.createElement('tr');
+                summaryRow.className = 'expandable-row border-b border-slate-800/50 cursor-pointer';
+                summaryRow.dataset.traitId = uniqueId;
+                summaryRow.dataset.name = lowercaseName;
+                summaryRow.dataset.description = lowercaseDesc;
+                summaryRow.dataset.tags = tags.join('|');
+                summaryRow.dataset.symbols = symbolBucket;
+                summaryRow.dataset.cost = trait.Cost;
+
+                summaryRow.innerHTML = `
+                    <td class="px-6 py-4 font-bold text-white text-sm">${trait.Name}</td>
+                    <td class="px-6 py-4 font-mono text-xs"><span class="symbol-tag text-indigo-400">${trait.Symbols || trait.Action || '-'}</span></td>
+                    <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${uniqueId}" class="transition-transform duration-200 inline-block">▼</div></td>
+                `;
+                summaryRow.addEventListener('click', () => toggleDetails(uniqueId));
+
+                const detailRow = document.createElement('tr');
+                detailRow.id = uniqueId;
+                detailRow.className = 'hidden bg-slate-900/40';
+                detailRow.dataset.traitId = uniqueId;
+                detailRow.dataset.name = lowercaseName;
+                detailRow.dataset.description = lowercaseDesc;
+                detailRow.dataset.tags = tags.join('|');
+                detailRow.dataset.symbols = symbolBucket;
+                detailRow.dataset.cost = trait.Cost;
+
+                detailRow.innerHTML = `
+                    <td colspan="3" class="px-6 py-6 border-b border-slate-800">
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
+                                ${trait.Action ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Action Type: ${trait.Action}</span>` : ''}
+                                ${trait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${trait.Parameters}</span>` : ''}
+                            </div>
+                            <br>
+                            ${tags.length ? tags.map(tag => `<span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-1 rounded">${tag}</span>`).join(' ') : ''}
+                            <p class="text-slate-300 leading-relaxed text-sm">${trait.Description}</p>
+                            ${trait.Scaling ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800">${trait.Scaling}</div>` : ''}
+                        </div>
+                    </td>
+                `;
+
+                if (trait.Cost === '1') {
+                    table1.appendChild(summaryRow);
+                    table1.appendChild(detailRow);
+                } else if (trait.Cost === '2') {
+                    table2.appendChild(summaryRow);
+                    table2.appendChild(detailRow);
+                }
+
+                traitRowEntries.push({
+                    trait,
+                    summaryRow,
+                    detailRow,
+                    lowerName: lowercaseName,
+                    lowerDesc: lowercaseDesc,
+                    tags,
+                    symbolBucket,
+                    cost: trait.Cost,
+                });
+            });
+
+            traitsBuilt = true;
+        }
+
+        function filterTraitRows() {
+            const searchTerm = document.getElementById('search-input').value.trim().toLowerCase();
+            let visibleCount = 0;
+
+            traitRowEntries.forEach(entry => {
+                const matchesSearch = !searchTerm || entry.lowerName.includes(searchTerm) || entry.lowerDesc.includes(searchTerm);
+                const matchesSymbol = !activeSymbolFilter || (entry.symbolBucket && entry.symbolBucket.includes(activeSymbolFilter));
+                const matchesTag = !activeTagFilter || entry.tags.includes(activeTagFilter);
+                const show = matchesSearch && matchesSymbol && matchesTag;
+
+                entry.summaryRow.style.display = show ? '' : 'none';
+
+                entry.detailRow.classList.add('hidden');
+                const arrow = entry.summaryRow.querySelector(`#arrow-${entry.summaryRow.dataset.traitId}`);
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+
+                if (show) visibleCount += 1;
+            });
+
+            const nonPathTotal = traitRowEntries.length;
+            document.getElementById('trait-counter').textContent = `${visibleCount} / ${nonPathTotal} Traits`;
+            toggleTraitClear();
         }
 
         function getTraitPrerequisites(trait) {
@@ -349,6 +465,11 @@
             const clearBtn = document.getElementById('clear-tag-filter');
             if (clearBtn) clearBtn.classList.toggle('hidden', !activeTagFilter);
 
+            document.getElementById('tag-container').querySelectorAll('button').forEach(btn => {
+                if (btn.id === `tag-${activeTagFilter}` && activeTagFilter !== null) btn.classList.add('active-filter');
+                else btn.classList.remove('active-filter');
+            });
+
             renderTraits();
         }
 
@@ -368,60 +489,12 @@
         }
 
         function renderTraits() {
-
-            const searchTerm = document.getElementById('search-input').value.toLowerCase();
-            const table1 = document.getElementById('traits-1-point');
-            const table2 = document.getElementById('traits-2-point');
-            
-            table1.innerHTML = ''; table2.innerHTML = '';
-
-            let filtered = rawTraits.filter(trait => {
-                const matchesSearch = trait.Name.toLowerCase().includes(searchTerm) || trait.Description.toLowerCase().includes(searchTerm);
-                const matchesSymbol = !activeSymbolFilter || (trait.Symbols && trait.Symbols.includes(activeSymbolFilter)) || (trait.Action && trait.Action.includes(activeSymbolFilter));
-                const matchesTag = !activeTagFilter || hasTag(trait, activeTagFilter);
-                return matchesSearch && matchesSymbol && matchesTag;
-            });
-
-            let non_path_traits = rawTraits.filter(t => t.Cost !== "0");
-            let non_path_filtered = filtered.filter(t => t.Cost !== "0");
-
-            // Update Counter
-            document.getElementById('trait-counter').textContent = `${non_path_filtered.length} / ${non_path_traits.length} Traits`;
-
-            filtered.forEach((trait, index) => {
-                const uniqueId = `trait-${trait.Cost}-${index}`;
-                const alphebaticTags = normalizeTraitTags(trait).sort((a, b) => a.localeCompare(b));
-                const row = `
-                    <tr onclick="toggleDetails('${uniqueId}')" class="expandable-row border-b border-slate-800/50 cursor-pointer">
-                        <td class="px-6 py-4 font-bold text-white text-sm">${trait.Name}</td>
-                        <td class="px-6 py-4 font-mono text-xs"><span class="symbol-tag text-indigo-400">${trait.Symbols || trait.Action || '-'}</span></td>
-                        <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${uniqueId}" class="transition-transform duration-200 inline-block">▼</div></td>
-                    </tr>
-                    <tr id="${uniqueId}" class="hidden bg-slate-900/40">
-                        <td colspan="3" class="px-6 py-6 border-b border-slate-800">
-                             <div class="space-y-4">
-                                <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest">
-                                              ${trait.Action ? `<span class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-1 rounded">Action Type: ${trait.Action}</span>` : ''}
-                                   ${trait.Parameters ? `<span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Params: ${trait.Parameters}</span>` : ''}
-                                
-                                </div>
-                                <br>
-                                ${trait.tags ? alphebaticTags.map(tag => `<span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-1 rounded">${tag}</span>`).join(' ') : ''}
-                                <p class="text-slate-300 leading-relaxed text-sm">${trait.Description}</p>
-                                ${trait.Scaling ? `<div class="text-xs text-amber-500/80 font-mono mt-2 pt-2 border-t border-slate-800">${trait.Scaling}</div>` : ''}
-                            </div>
-                        </td>
-                    </tr>`;
-
-                if (trait.Cost === "1") table1.innerHTML += row;
-                else if (trait.Cost === "2") table2.innerHTML += row;
-            });
-
-            if (table1.innerHTML === '') table1.innerHTML = '<tr><td colspan="3" class="px-6 py-4 text-center text-slate-600 italic">No traits found.</td></tr>';
-            if (table2.innerHTML === '') table2.innerHTML = '<tr><td colspan="3" class="px-6 py-4 text-center text-slate-600 italic">No traits found.</td></tr>';
+            buildTraitRows();
+            filterTraitRows();
+        }
 
             toggleTraitClear();
-        }
+        
 
 
         function renderTagButtons() {
@@ -454,7 +527,7 @@
 
             tagContainer.innerHTML = sortedTags.map(tag => {
                 const count = countedTags[tag];
-                return `<button onclick="setTagFilter('${tag}')" class="px-3 py-1 rounded-full bg-slate-500/10 border border-slate-500/30 text-slate-300 text-[10px] font-bold uppercase tracking-wider ${activeTagFilter === tag ? 'bg-emerald-500/20 border-emerald-500/50' : 'hover:bg-emerald-500/20 transition-all'}">${tag} (${count})</button>`;
+                return `<button onclick="setTagFilter('${tag}')" class="px-3 py-1 rounded-full bg-slate-500/10 border border-slate-500/30 text-slate-300 text-[10px] font-bold uppercase tracking-wider hover:bg-emerald-500/20 transition-all" id="tag-${tag}">${tag} (${count})</button>`;
             }).join('');
         }
 
