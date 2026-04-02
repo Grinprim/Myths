@@ -774,6 +774,10 @@
                                 <p class="text-sm text-slate-400">When you cast a spell you deal bonus damage equal to
                                     <strong>Half your Arcane total</strong></p>
                             </div>
+                            <div>
+                                <strong class="text-white">Ritual Casting</strong>
+                                <p class="text-sm text-slate-400">Certain Spells can be cast as rituals.They cannot be cast during combat, and will take longer to complete. Some may require special components or Arcane checks to preform correctly.</p>
+                            </div>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="data-table text-sm">
@@ -1736,6 +1740,150 @@
                             <strong>non-functional</strong> and acts as a <strong>combat obstacle</strong>.
                         </p>
                     </div>
+                </section>
+
+                <section id="vehicles" class="rule-card space-y-8 scroll-offset-center">
+                    <h2 class="text-3xl text-white font-bold">Vehicle Combat</h2>
+
+                    <p class="text-sm text-slate-400 max-w-3xl">
+                        Vehicles are large, powerful, and often unwieldy. They have their own ruleset to reflect
+                        their unique nature on the battlefield.
+                    </p>
+
+                    <div>
+                        <h3 class="text-xl text-white font-bold mb-3">Vehicle Types</h3>
+                        <p class="text-sm text-slate-300 max-w-3xl">
+                            Vehicles are categorized into three main types based on size, capacity, and complexity: <strong>Medium</strong>, <strong>Big</strong>, and <strong>Large</strong>. Each type has different rules for occupancy, grid space, and combat targeting.
+                        </p>
+                        <br>
+                        <div class="space-y-4">
+                            <div class="condition-card">
+                                <strong class="text-white">Medium Vehicles</strong> (e.g., motorcycle, quadbike)
+                                <p>Designed for 1 person, up to 2 people can ride. Occupies 1x1 tile on the grid. When targeting a medium vehicle, hit the rider as normal (roll against the rider's armor). These can be used as mounts, as mentioned in the previous section.</p>
+                            </div>
+                            <div class="condition-card">
+                                <strong class="text-white">Big Vehicles</strong> (e.g., car, wagon)
+                                <p>Designed for 4 people, up to 5 people can ride. Has 1 modification slot. Occupies 4x4 tiles on the grid. When targeting a big vehicle, hit any rider; roll against the vehicle's armor instead of the person's armor.</p>
+                            </div>
+                            <div class="condition-card">
+                                <strong class="text-white">Large Vehicles</strong> (e.g., tank, truck, train, bigger ships)
+                                <p>Designed for multiple people (5+). Has 2 modification slots. Occupies at least 6 tiles on the grid with a minimum width of 2. When targeting a large vehicle, hit any rider you can see; roll against the vehicle's armor instead of the person's armor.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl text-white font-bold mb-3">Vehicle Stats</h3>
+                        <table class="w-full text-sm text-slate-300 border border-slate-700 rounded-lg mb-6">
+                            <thead class="bg-slate-800 text-slate-200">
+                                <tr>
+                                    <th class="p-2 text-left">Stat</th>
+                                    <th class="p-2 text-left">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2"><strong>Durability</strong></td>
+                                    <td class="p-2">Represents the vehicle's structural integrity. It depletes through damage, and can be restored through repairs.</td>
+                                </tr>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2"><strong>Fuel</strong></td>
+                                    <td class="p-2">
+                                        Represents the vehicle's energy source. Fuel is consumed based on movement and actions taken. Running out of fuel renders the vehicle immobile until refueled.
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2"><strong>Armor</strong></td>
+                                    <td class="p-2">A fixed value that represents how difficult it is to hit the occupants inside the vehicle. Big vehicles have <strong>13</strong> armor, and Large vehicles have <strong>17</strong>.</td>
+                                </tr>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2"><strong>Movement</strong></td>
+                                    <td class="p-2">Determines how many tiles the vehicle can move per turn. This is a fixed value based on the vehicle type but can be modified with upgrades. Medium: 6 tiles, Big: 10 tiles, Large: 8 tiles</td>
+                                </tr>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2"><strong>Capacity</strong></td>
+                                    <td class="p-2">A fixed value representing the maximum weight that can be carried by the vehicle.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl text-white font-bold mb-3">Vehicles as Cover</h3>
+                        <p class="text-sm text-slate-300 max-w-3xl">
+                            Vehicles provide cover based on their size and construction. Medium vehicles offer Partial Cover. Big vehicles offer Half Cover to occupants and can block line of sight. Large vehicles provide Full Cover and may create areas of Total Cover depending on their bulk. Attackers must account for cover penalties when targeting creatures behind or inside vehicles.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl text-white font-bold mb-3">Repairs</h3>
+                        <p class="text-sm text-slate-300 max-w-3xl">
+                            Repairs restore Durability and fix damage. Basic repairs require tools and time (e.g., 1 hour per 10 Durability restored) and may need a successful Crafting or Engineering check. Advanced repairs might require specific parts or magical assistance. Vehicles can be repaired during rests or in safe locations; emergency field repairs are possible but less effective.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl text-white font-bold mb-3">Modifications</h3>
+                        <p class="text-sm text-slate-300 max-w-3xl">
+                            Vehicles can be modified to enhance performance or add features. Each vehicle type has a limited number of modification slots. Modifications require installation time and may cost resources. Examples include:
+                        </p>
+                        <br>
+                        <table class="w-full text-sm text-slate-300 border border-slate-700 rounded-lg">
+                            <thead class="bg-slate-800 text-slate-200">
+                                <tr>
+                                    <th class="p-2 text-left">Modification</th>
+                                    <th class="p-2 text-left">Effect</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2"><strong>Mounted Gun</strong></td>
+                                    <td class="p-2">Adds a fixed weapon that crew can fire as an action, dealing extra damage in combat.</td>
+                                </tr>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2"><strong>Better Engine</strong></td>
+                                    <td class="p-2">Increases movement speed or allows special maneuvers like boosting.</td>
+                                </tr>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2"><strong>Bigger Fuel Tank</strong></td>
+                                    <td class="p-2">Extends Fuel pool, reducing fuel consumption.</td>
+                                </tr>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2"><strong>Music Speakers</strong></td>
+                                    <td class="p-2">Provides buffs to morale or distracts enemies with noise.</td>
+                                </tr>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2"><strong>Shielding</strong></td>
+                                    <td class="p-2">Enhances armor or provides resistance to certain damage types.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl text-white font-bold mb-3">Vehicle Actions</h3>
+                        <table class="w-full text-sm text-slate-300 border border-slate-700 rounded-lg">
+                            <thead class="bg-slate-800 text-slate-200">
+                                <tr>
+                                    <th class="p-2 text-left">Action</th>
+                                    <th class="p-2 text-left">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2"><strong>Move</strong></td>
+                                    <td class="p-2">The vehicle moves up to its Movement speed in tiles. Movement can be in any direction but may be restricted by terrain.</td>
+                                </tr>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2"><strong>Deploy Equipment</strong></td>
+                                    <td class="p-2">Activate a modification, such as deploying spikes, releasing smoke, or using special features. Costs an action and may have cooldowns.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    
                 </section>
 
 
