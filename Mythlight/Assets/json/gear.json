@@ -65,7 +65,7 @@
       { "name": "Refined", "description": "+2 to a Stat" },
       { "name": "Military Grade", "description": "Functionally unbreakable." },
       { "name": "Preserved", "description": "Pristine condition, very high value." },
-      { "name": "Masterwork", "description": "+3 to a Stat, unbreakable." }
+      { "name": "Masterwork", "description": "+2 to a Stat, +1 to Another Stat, unbreakable." }
     ],
     "functional": [
       { "name": "Padded", "description": "+1 Armor" },
