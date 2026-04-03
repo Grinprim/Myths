@@ -110,18 +110,14 @@
                     </div>
                   </div>
 
-                  <div id="proficiency_warning_melee"
-                    style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: 1px solid red;"
-                    class="card">
-                    Proficiency WARNING Your maximum Melee weapon proficiency sum exceeds Might. Adjust your
-                    proficiencies
-                    or increase your Might feat.</div>
-                  <div id="proficiency_warning_ranged"
-                    style="color:red; display:none; background-color: rgba(255, 0, 0, 0.2); border: 1px solid red;"
-                    class="card">
-                    Proficiency WARNING Your maximum Finesse/Ranged weapon proficiency sum exceeds Finesse. Adjust your
-                    proficiencies
-                    or increase your Finesse feat.</div>
+                  <div id="proficiency_warning_melee" class="card proficiency-warning" style="display:none">
+                    <div class="proficiency-warning-header">⚠ Proficiency Warning</div>
+                    <div class="proficiency-warning-text">Your maximum Melee weapon proficiency sum exceeds Might. Adjust your proficiencies or increase your Might attribute.</div>
+                  </div>
+                  <div id="proficiency_warning_ranged" class="card proficiency-warning" style="display:none">
+                    <div class="proficiency-warning-header">⚠ Proficiency Warning</div>
+                    <div class="proficiency-warning-text">Your maximum Finesse/Ranged weapon proficiency sum exceeds Finesse. Adjust your proficiencies or increase your Finesse attribute.</div>
+                  </div>
                   <div class="grid_4">
                     <div id="light_melee"><label for="light_melee">Light Melee</label> <input id="light_melee_input"
                         type="number"></div>
@@ -171,8 +167,9 @@
                 <h2>Defense & Vitals</h2>
               </div>
               <div class="grid">
-                <div><label>Guard</label><input type="number" required id="guard_input"></div>
+                <div><label>Armor Bonus</label><input type="number" id="armor_bonus"></div>
                 <div><label>Armor</label><input type="number" id="armor_total" readonly></div>
+
                 <div><label>Speed</label><input type="number" required id="speed_input"></div>
                 <div><label>Initiative</label><input type="number" required id="initiative_input"></div>
                 <div>
@@ -207,6 +204,7 @@
                   <label>Health Bonus</label>
                   <input type="number" id="health_bonus" placeholder="+HP to Max">
                 </div>
+                <div><label>Guard</label><input type="number" required id="guard_input"></div>
                 <div>
                   <label>Current Health</label>
                   <input type="number" id="health_current" required>
@@ -1970,6 +1968,7 @@
       const armorItems =
         (parseInt(document.getElementById('armor_value').value) || 0) +
         (parseInt(document.getElementById('shield_value').value) || 0) +
+        (parseInt(document.getElementById('armor_bonus').value) || 0) +
         (parseInt(document.getElementById('cloak_value').value) || 0);
       document.getElementById('armor_total').value = 4 + fortitude + armorItems;
 

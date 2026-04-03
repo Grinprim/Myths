@@ -17,14 +17,20 @@ body.sheet *::after {
 body.sheet h1,
 body.sheet h2 {
   font-family: 'Cinzel', serif;
-  color: white;
+  background: linear-gradient(135deg, #ffffff, #e0e7ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.5px;
 }
 
 body.sheet header {
   padding: 2rem;
-  background: rgba(15, 23, 42, 0.9);
-  border-bottom: 1px solid var(--glass-border);
-  
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.9) 100%);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
 .header-actions {
@@ -108,12 +114,56 @@ body.sheet main {
 }
 
 .card {
-  background: rgba(30, 41, 59, 0.4);
-  border: 1px solid var(--glass-border);
-  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.4) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 1.25rem;
   padding: 1.5rem;
   margin-bottom: 2rem;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -1000px;
+  width: 1000px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 16px 48px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.proficiency-warning {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.1) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-left: 4px solid #ef4444;
+  box-shadow: 0 8px 32px rgba(239, 68, 68, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.proficiency-warning-header {
+  color: #fca5a5;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.proficiency-warning-text {
+  color: #fecaca;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .section-title {
@@ -124,21 +174,35 @@ body.sheet main {
 }
 
 .section-number {
-  background: #4f46e5;
-  width: 2rem;
-  height: 2rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  width: 2.5rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 10px;
   font-weight: bold;
+  color: white;
+  box-shadow: 0 8px 16px rgba(99, 102, 241, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 1.1rem;
+  transition: all 300ms ease;
+  position: relative;
+}
+
+.section-number::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+  pointer-events: none;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
-  
 }
 
 /* Allow grid children to shrink without overflowing into adjacent columns */
@@ -182,11 +246,11 @@ input,
 textarea {
   width: 100%;
   padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(99, 102, 241, 0.2);
   background: rgba(15, 23, 42, 0.6);
   color: white;
-  
+  transition: all 200ms ease;
 }
 
 input::placeholder,
@@ -198,8 +262,9 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: rgba(99, 102, 241, 0.6);
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.18);
+  border-color: rgba(99, 102, 241, 0.8);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25), inset 0 0 10px rgba(99, 102, 241, 0.1);
+  transform: scale(1.01);
 }
 
 select {
@@ -212,25 +277,39 @@ select {
 }
 
 button {
-  padding: 0.4rem 0.8rem;
-  border: none;
-  border-radius: 0.5rem;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 1), rgba(139, 92, 246, 1));
+  padding: 0.5rem 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   color: white;
   cursor: pointer;
-  box-shadow: 0 10px 25px -18px rgba(129, 140, 248, 0.8);
-  transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease;
+  box-shadow: 0 10px 32px rgba(99, 102, 241, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
 }
 
 button:hover {
-  filter: brightness(1.08);
-  transform: translateY(-1px);
-  box-shadow: 0 16px 30px -20px rgba(129, 140, 248, 0.95);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
 }
 
 button:active {
-  transform: translateY(0px);
-  filter: brightness(0.98);
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
 }
 
 /* Small UI helpers */
@@ -256,34 +335,71 @@ button:active {
 
 /* Health Bar */
 .health-bar {
-  height: 18px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  height: 22px;
+  background: linear-gradient(90deg, rgba(20, 20, 20, 0.6), rgba(30, 30, 30, 0.4));
+  border-radius: 12px;
   overflow: hidden;
   margin-top: 0.5rem;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  position: relative;
 }
 
 .health-fill {
   height: 100%;
   width: 100%;
-  background: linear-gradient(90deg, #22c55e, #16a34a);
-  transition: width 0.3s;
+  background: linear-gradient(90deg, #10b981 0%, #059669 50%, #047857 100%);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+
+.health-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 3s infinite;
 }
 
 /* Mana Bar */
 .mana-bar {
-  height: 18px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  height: 22px;
+  background: linear-gradient(90deg, rgba(20, 20, 30, 0.6), rgba(30, 30, 40, 0.4));
+  border-radius: 12px;
   overflow: hidden;
   margin-top: 0.5rem;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  position: relative;
 }
 
 .mana-fill {
   height: 100%;
   width: 100%;
-  background: linear-gradient(90deg, #3b82f6, #6366f1);
-  transition: width 0.3s;
+  background: linear-gradient(90deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+
+.mana-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 /* Attributes */
@@ -301,8 +417,17 @@ button:active {
 
 .attribute-card {
   padding: 1rem;
-  border-radius: 0.9rem;
-  box-shadow: 0px 10px 15px 11px rgba(0,0,0,0.1);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  transition: all 300ms ease;
+}
+
+.attribute-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .attribute-header {
@@ -329,21 +454,23 @@ button:active {
 }
 
 .body {
-  background: rgba(220, 38, 38, 0.15);
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.2) 0%, rgba(190, 24, 93, 0.1) 100%);
+  border: 1px solid rgba(220, 38, 38, 0.3);
 }
 
 .skill {
-  background: rgba(59, 246, 96, 0.15);
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(5, 150, 105, 0.1) 100%);
+  border: 1px solid rgba(34, 197, 94, 0.3);
 }
 
 .mind {
-  background: rgba(168, 85, 247, 0.15);
-
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(126, 34, 206, 0.1) 100%);
+  border: 1px solid rgba(168, 85, 247, 0.3);
 }
 
 .style {
-  background: rgba(236, 72, 153, 0.15);
-
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(190, 24, 93, 0.1) 100%);
+  border: 1px solid rgba(236, 72, 153, 0.3);
 }
 
 .skill-row {
@@ -404,36 +531,42 @@ button:active {
 body.sheet input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(15, 23, 42, 0.7);
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1.5px solid rgba(99, 102, 241, 0.4);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6));
   display: inline-grid;
   place-content: center;
   cursor: pointer;
-  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease, box-shadow 120ms ease;
+  transition: all 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(99, 102, 241, 0);
 }
 
 body.sheet input[type="checkbox"]::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
+  content: "✓";
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: white;
   transform: scale(0);
-  transition: transform 120ms ease;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 1), rgba(139, 92, 246, 1));
-  box-shadow: 0 8px 18px -12px rgba(129, 140, 248, 0.9);
+  transition: all 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 body.sheet input[type="checkbox"]:hover {
   border-color: rgba(99, 102, 241, 0.6);
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.14);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 12px rgba(99, 102, 241, 0.3);
+  transform: scale(1.05);
 }
 
 body.sheet input[type="checkbox"]:checked {
-  border-color: rgba(99, 102, 241, 0.85);
-  background: rgba(99, 102, 241, 0.14);
+  border-color: rgba(99, 102, 241, 0.9);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 16px rgba(99, 102, 241, 0.5);
 }
 
 body.sheet input[type="checkbox"]:checked::before {
@@ -456,66 +589,53 @@ body.sheet input[type="checkbox"]:checked::before {
 .grace-picker {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(30, 41, 59, 0.25);
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.2));
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .grace-btn {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: none;
-  border-radius: 0.75rem;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 0.875rem;
   cursor: pointer;
-  box-shadow: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transform: none;
   filter: none;
-  transition: box-shadow 120ms ease, background-color 120ms ease;
+  transition: all 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .grace-btn:hover {
-  background: rgba(99, 102, 241, 0.08);
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
-  transform: none;
-  filter: none;
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px) scale(1.05);
 }
 
 .grace-btn.active {
-  background: rgba(99, 102, 241, 0.14);
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.6);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.15));
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.4), 0 0 0 2px rgba(99, 102, 241, 0.2);
+  transform: scale(1.08);
 }
 
 .grace-btn .die-inline {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
 }
 
 .grace-btn:focus-visible {
   outline: 2px solid rgba(99, 102, 241, 0.8);
   outline-offset: 2px;
-}
-
-/* Prevent global button hover/active effects from impacting Grace */
-.grace-btn:hover,
-.grace-btn:active {
-  box-shadow: none;
-  transform: none;
-  filter: none;
-}
-
-.grace-btn:hover {
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
-}
-
-.grace-btn.active {
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.6);
 }
 
 /* Armor mockup layout */
@@ -525,11 +645,18 @@ body.sheet input[type="checkbox"]:checked::before {
 }
 
 .armor-slot {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.9rem;
-  padding: 0.75rem;
-  background: rgba(30, 41, 59, 0.18);
-  box-shadow: 0px 10px 15px 11px rgba(0,0,0,0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 1rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.3) 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 300ms ease;
+}
+
+.armor-slot:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 .armor-head {
@@ -547,8 +674,6 @@ body.sheet input[type="checkbox"]:checked::before {
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(15, 23, 42, 0.4);
 }
-
-
 
 #inventory_grid {
   margin-bottom: 25px;
@@ -651,7 +776,7 @@ body.sheet input[type="checkbox"]:checked::before {
     border: 1px solid #000 !important;
   }
 
-  /* Don’t print the Grace dice UI; print the numeric value */
+  /* Don't print the Grace dice UI; print the numeric value */
   .grace-picker {
     display: none !important;
   }
@@ -696,7 +821,6 @@ body.sheet input[type="checkbox"]:checked::before {
   }
 }
 
-
 /* Weapons */
 .weapons-list {
   display: grid;
@@ -704,11 +828,18 @@ body.sheet input[type="checkbox"]:checked::before {
 }
 
 .weapon-block {
-  padding: 0.75rem;
-  border-radius: 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(30, 41, 59, 0.18);
-  box-shadow: 0px 10px 15px 11px rgba(0,0,0,0.1);
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.3) 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 300ms ease;
+}
+
+.weapon-block:hover {
+  border-color: rgba(239, 68, 68, 0.4);
+  box-shadow: 0 12px 32px rgba(239, 68, 68, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 .weapon-grid {
@@ -762,24 +893,33 @@ body.sheet input[type="checkbox"]:checked::before {
 
 /* Remove buttons */
 .remove-btn {
-  background: rgba(239, 68, 68, 0.22);
-  border: 1px solid rgba(239, 68, 68, 0.45);
-  box-shadow: 0 10px 25px -18px rgba(239, 68, 68, 0.55);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.2));
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+  transition: all 200ms ease;
 }
 
 .remove-btn:hover {
-  background: rgba(239, 68, 68, 0.35);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.4), rgba(220, 38, 38, 0.3));
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.7);
+  transform: translateY(-2px);
 }
 
 .cast-btn {
-  background: rgba(68, 156, 239, 0.22);
-  border: 1px solid rgba(68, 156, 239, 0.45);
-  box-shadow: 0 10px 25px -18px rgba(68, 156, 239, 0.55);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(37, 99, 235, 0.2));
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  transition: all 200ms ease;
 }
 
 .cast-btn:hover {
-  background: rgba(68, 156, 239, 0.35);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(37, 99, 235, 0.3));
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.7);
+  transform: translateY(-2px);
 }
+
 /* Trait controls */
 .trait-controls {
   display: flex;
@@ -805,12 +945,24 @@ body.sheet input[type="checkbox"]:checked::before {
   top: 11rem;
   width: min(320px, calc(100vw - 2rem));
   z-index: 999;
-  background: linear-gradient(0deg, rgba(99, 101, 241, 0.055) 0%, rgba(15, 23, 42, 0.95) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 1rem;
-  padding: 1rem;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 20px 40px -30px rgba(0, 0, 0, 0.9);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(99, 102, 241, 0.2);
+  animation: float 6s ease-in-out infinite;
+  transition: all 300ms ease;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.roll-widget:hover {
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 50px rgba(99, 102, 241, 0.3);
+  border-color: rgba(99, 102, 241, 0.6);
 }
 
 .roll-widget h3 {
@@ -838,43 +990,50 @@ body.sheet input[type="checkbox"]:checked::before {
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem;
-  background: rgba(30, 41, 59, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.9rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.4) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 1rem;
   margin: 0.75rem 0;
-  min-height: 56px;
+  min-height: 60px;
   flex-wrap: wrap;
-  
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 400ms ease;
 }
 
 .die-inline {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8), 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.5);
   background: linear-gradient(145deg, #f8fafc, #e2e8f0);
   position: relative;
   flex: 0 0 auto;
   animation: none;
+  transition: all 200ms ease;
+}
+
+.die-inline:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.6);
 }
 
 .die-inline.rolling {
-  animation: wiggle 0.35s ease-in-out 0s 2;
+  animation: wiggle 0.6s ease-in-out;
 }
 
 @keyframes wiggle {
-  0% {
-    transform: rotate(0deg) scale(1);
+  0%, 100% {
+    transform: rotate(0deg) translateX(0);
   }
-  30% {
-    transform: rotate(-8deg) scale(1.02);
+  25% {
+    transform: rotate(-2deg) translateX(-2px);
   }
-  60% {
-    transform: rotate(8deg) scale(1.02);
+  50% {
+    transform: rotate(2deg) translateX(2px);
   }
-  100% {
-    transform: rotate(0deg) scale(1);
+  75% {
+    transform: rotate(-1deg) translateX(-1px);
   }
 }
 
@@ -941,24 +1100,34 @@ body.sheet input[type="checkbox"]:checked::before {
   display: flex;
   gap: 0.75rem;
   align-items: center;
-  padding: 0.6rem;
-  border-radius: 0.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(30, 41, 59, 0.25);
+  padding: 0.75rem;
+  border-radius: 0.875rem;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.3));
+  transition: all 200ms ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.legend-item:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.4));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 .legend-symbol-mini {
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
-  font-size: 1.1rem;
-  color: white;
+  border-radius: 10px;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.1));
+  font-size: 1.25rem;
+  color: #e0e7ff;
   flex: 0 0 auto;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 #custom_button {
@@ -973,10 +1142,10 @@ body.sheet input[type="checkbox"]:checked::before {
 
 #tab-selector {
   display: flex;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(15, 23, 42, 0.9);
-  border-bottom: 1px solid var(--glass-border);
-  box-shadow: inset 0px 6px 17px 6px rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.8));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(99, 102, 241, 0.2);
+  backdrop-filter: blur(8px);
 }
 
 .tab-button {
@@ -984,44 +1153,101 @@ body.sheet input[type="checkbox"]:checked::before {
   background: none;
   border: none;
   font-size: 1rem;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0px;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px 8px 0 0;
   cursor: pointer;
+  transition: all 300ms ease;
+  position: relative;
+  font-weight: 500;
+}
+
+.tab-button::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 1.25rem;
+  right: 1.25rem;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border-radius: 3px 3px 0 0;
+  transform: scaleX(0);
+  transition: transform 300ms ease;
 }
 
 .tab-button.active {
-  background: rgba(99, 102, 241, 0.14);
-  box-shadow: inset 0px -2px 0px 0px rgba(99, 102, 241, 1);
+  color: white;
+  background: rgba(99, 102, 241, 0.15);
+}
+
+.tab-button.active::after {
+  transform: scaleX(1);
 }
 
 .tab-button:hover {
-  background: rgba(99, 102, 241, 0.08);
+  background: rgba(99, 102, 241, 0.1);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .roll-history-entry {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.75rem;
   border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  font-size: 0.85rem;
+  transition: all 200ms ease;
+  animation: slideIn 300ms ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 #skill-roll-history{
-  background: rgba(170, 177, 77, 0.18);
+  background: linear-gradient(135deg, rgba(170, 177, 77, 0.25), rgba(132, 135, 50, 0.15));
+  border-color: rgba(170, 177, 77, 0.4);
+}
+
+#skill-roll-history:hover {
+  background: linear-gradient(135deg, rgba(170, 177, 77, 0.35), rgba(132, 135, 50, 0.25));
 }
 
 #attack-roll-history{
-  background: rgba(177, 77, 77, 0.18);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(190, 24, 93, 0.15));
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+#attack-roll-history:hover {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.35), rgba(190, 24, 93, 0.25));
 }
 
 #manual-roll-history{
-  background: rgba(85, 85, 85, 0.18);
+  background: linear-gradient(135deg, rgba(107, 114, 128, 0.25), rgba(75, 85, 99, 0.15));
+  border-color: rgba(107, 114, 128, 0.4);
+}
+
+#manual-roll-history:hover {
+  background: linear-gradient(135deg, rgba(107, 114, 128, 0.35), rgba(75, 85, 99, 0.25));
 }
 
 #spell-roll-history{
-  background: rgba(77, 140, 177, 0.18);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(37, 99, 235, 0.15));
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+#spell-roll-history:hover {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.35), rgba(37, 99, 235, 0.25));
 }
 
 .identity-grid {
@@ -1087,14 +1313,31 @@ body.sheet input[type="checkbox"]:checked::before {
 
 #header_link {
   text-decoration: none;
-
-  color: rgba(255, 255, 255, 0.9);
-  padding: 0.25rem 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
+  transition: all 300ms ease;
+  font-weight: 500;
+  position: relative;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+#header_link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.05));
+  border-radius: 0.75rem;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  z-index: -1;
 }
 
 #header_link:hover {
-  background: rgba(99, 102, 241, 0.3);
-  border-radius: 0.5rem;
+  color: white;
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px);
 }
