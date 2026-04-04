@@ -2309,7 +2309,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "If you haven't acted this scene, swap initiative with a target.",
+    "Description": "If you haven't acted this scene, swap initiative with a target. The target acts immediately, and you act on their original turn.",
     "Scaling": ""
   },
   {
