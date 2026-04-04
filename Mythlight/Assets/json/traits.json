@@ -2219,7 +2219,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Fair Strike",
-    "Description": "You create a 3×3 zone you must occupy on cast. Spells cannot be cast within it, and spells from outside cannot target creatures inside. The zone lasts 3 Scenes, or ends immediately if you the zone.",
+    "Description": "You create a 3×3 zone you must occupy on cast. Spells cannot be cast within it, and spells from outside cannot target creatures inside. The zone lasts 3 Scenes, or ends immediately if you leave the zone.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
