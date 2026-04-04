@@ -5,7 +5,7 @@
         "Name": "Spark",
         "Cost": "0",
         "Type": "Action",
-        "Range": "6 units",
+        "Range": "6 tiles",
         "Description": "Fire a bolt of 1 Lightning Damage.",
         "Upcast": "",
         "Lore": "A spark of inginuity, flickering to your target and giving them a gentle jolt."
@@ -16,8 +16,8 @@
         "Name": "Minor Kinesis",
         "Cost": "0",
         "Type": "Action",
-        "Range": "12 units",
-        "Description": "You make an object levitate and can move it through the air up to 6 units, it remains suspended each turn you recast this spell, cannot be used for combat.",
+        "Range": "12 tiles",
+        "Description": "You make an object levitate and can move it through the air up to 6 tiles, it remains suspended each turn you recast this spell, cannot be used for combat.",
         "Upcast": "",
         "Lore": "To make a stone levitate, the first spell most young casters learn."
     },
@@ -28,7 +28,7 @@
         "Cost": "0",
         "Type": "Reaction",
         "Range": "Self",
-        "Description": "Upon taking melee damage, you may push the creature that injured you away by 3 units.",
+        "Description": "Upon taking melee damage, you may push the creature that injured you away by 3 tiles.",
         "Upcast": "",
         "Lore": "A defensive burst to make some distance."
     },
@@ -49,8 +49,8 @@
         "Name": "Force Nudge",
         "Cost": "0",
         "Type": "Action",
-        "Range": "3 units",
-        "Description": "Attempt to displace a target by 1 unit in any direction to a valid position, they must roll [Fortitude] to resist.",
+        "Range": "3 tiles",
+        "Description": "Attempt to displace a target by 1 tile in any direction to a valid position, they must roll [Fortitude] to resist.",
         "Upcast": "",
         "Lore": "If you ever don't like where someone is standing, give em a lil nudge."
     },
@@ -60,7 +60,7 @@
         "Name": "Sphere of force",
         "Cost": "0",
         "Type": "Reaction",
-        "Range": "8 units, 1 unit radius",
+        "Range": "8 tiles, 1 tile radius",
         "Description": "Command an area to experiance higher gravity, dealing 1 force damage to all creatures in the radius, they must roll [Fortitude] to resist.",
         "Upcast": "",
         "Lore": "Their knees will hurt after that!"
@@ -82,7 +82,7 @@
         "Name": "Arcane Mark",
         "Cost": "0",
         "Type": "Action",
-        "Range": "4 units",
+        "Range": "4 tiles",
         "Description": "Mark a creature, the next spell you cast against that creature, deals +1 Lightning Damage.",
         "Upcast": "",
         "Lore": "A focused mote of magic awaits the next moment of weakness."
@@ -137,7 +137,7 @@
         "Name": "Mind Needle",
         "Cost": "0",
         "Type": "Action",
-        "Range": "6 units",
+        "Range": "6 tiles",
         "Description": "Fire a needle of 2 Pshycic Damage.",
         "Upcast": "",
         "Lore": "A sharp pain through the eye, your mind is left questioning what it just felt."
@@ -159,7 +159,7 @@
         "Name": "Echo Hex",
         "Cost": "0",
         "Type": "Action",
-        "Range": "4 units",
+        "Range": "4 tiles",
         "Description": "You create a hexed Tile, the Hex is invisible, any creature that steps atop it must succeed a [Reflex] check or take 1 Dark Damage, then the tile disapates. You may only have 1 Hex up at a time.",
         "Upcast": "",
         "Lore": "A minor curse placed upon reality, confined to a single moment."
@@ -170,7 +170,7 @@
         "Name": "Reflexive strike",
         "Cost": "0",
         "Type": "Reaction",
-        "Range": "6 units",
+        "Range": "6 tiles",
         "Description": "When a creature casts a spell, attempt to deal 1 Dark Damage to them, they must roll [Reflex] to resist.",
         "Upcast": "",
         "Lore": "Don't let them get away with it."
@@ -181,7 +181,7 @@
         "Name": "Dread Murmur",
         "Cost": "0",
         "Type": "Action",
-        "Range": "Cone 3 units",
+        "Range": "Cone 3 tiles",
         "Description": "Release a cone of dark energy, dealing 1 Dark Damage and [Fearing] all creatures caught in the cone, they must roll [Fortitude] to resist.",
         "Upcast": "",
         "Lore": "A smog of horror, like screaming faces, spews fourth staining all in its way."
@@ -203,7 +203,7 @@
         "Name": "Lingering Glance",
         "Cost": "0",
         "Type": "Action",
-        "Range": "12 Units",
+        "Range": "12 tiles",
         "Description": "You lock eyes with a creature you can see. The next time they take damage before your next turn, they take +1 Psychic Damage. They must roll [Spirit] to resist.",
         "Upcast": "",
         "Lore": "A look that crawls beneath the skin, refusing to be forgotten."
@@ -214,7 +214,7 @@
         "Name": "Fracture Thought",
         "Cost": "0",
         "Type": "Action",
-        "Range": "5 units",
+        "Range": "5 tiles",
         "Description": "You attempt to splinter a creature’s focus, imposing -2 Accuracy on their next spell or attack. They must roll [Spirit] to resist.",
         "Upcast": "",
         "Lore": "A single doubt, driven deep enough, can unravel intent entirely."
@@ -225,7 +225,7 @@
         "Name": "Sacred Glimmer",
         "Cost": "0",
         "Type": "Action",
-        "Range": "5 units",
+        "Range": "5 tiles",
         "Description": "You grant a creature a mote of healing, next time they get healed increase it by 1",
         "Upcast": "",
         "Lore": "A faint light answers even the quietest prayer."
@@ -258,7 +258,7 @@
         "Name": "Hallowed Mark",
         "Cost": "0",
         "Type": "Action",
-        "Range": "6 units",
+        "Range": "6 tiles",
         "Description": "Mark a creature. The next attack made against that creature deals +1 Light Damage.",
         "Upcast": "",
         "Lore": "Light finds those who cannot hide from judgment."
@@ -269,7 +269,7 @@
         "Name": "Mercy Spark",
         "Cost": "0",
         "Type": "Action",
-        "Range": "4 units",
+        "Range": "4 tiles",
         "Description": "Deal 1 Light Damage to a creature, or instead stabilize a creature to 1 Health.",
         "Upcast": "",
         "Lore": "Mercy and punishment share the same flame."
@@ -292,7 +292,7 @@
         "Cost": "0",
         "Type": "Action",
         "Range": "Self",
-        "Description": "You move up to 3 units without provoking reactions.",
+        "Description": "You move up to 3 tiles without provoking reactions.",
         "Upcast": "",
         "Lore": "Where you tread, the faithful path opens."
     },
@@ -302,7 +302,7 @@
         "Name": "Light of Resolve",
         "Cost": "0",
         "Type": "Reaction",
-        "Range": "2 units",
+        "Range": "2 tiles",
         "Description": "When a creature within range fails a roll, grant them +2 to that roll after seeing the result.",
         "Upcast": "",
         "Lore": "Resolve shines brightest at the moment of failure."
@@ -335,7 +335,7 @@
         "Name": "Ember Flick",
         "Cost": "0",
         "Type": "Action",
-        "Range": "5 units",
+        "Range": "5 tiles",
         "Description": "Deal 1 Fire Damage to a creature or ignite a small flammable object.",
         "Upcast": "",
         "Lore": "A flame barely born, yet eager to grow."
@@ -357,8 +357,8 @@
         "Name": "Frost Pulse",
         "Cost": "0",
         "Type": "Action",
-        "Range": "4 units",
-        "Description": "Deal 1 Cold Damage and reduce the target’s movement by 1 unit until their next turn.",
+        "Range": "4 tiles",
+        "Description": "Deal 1 Cold Damage and reduce the target’s movement by 1 tile until their next turn.",
         "Upcast": "",
         "Lore": "Cold does not rush. It claims."
     },
@@ -379,8 +379,8 @@
         "Name": "Gale Nudge",
         "Cost": "0",
         "Type": "Action",
-        "Range": "6 units",
-        "Description": "Push a creature or unsecured object 2 units in a direction of your choice. Creatures may roll [Fortitude] to resist.",
+        "Range": "6 tiles",
+        "Description": "Push a creature or unsecured object 2 tiles in a direction of your choice. Creatures may roll [Fortitude] to resist.",
         "Upcast": "",
         "Lore": "Even the gentlest wind knows where it wants you to go."
     },
@@ -445,8 +445,8 @@
         "Name": "Mana Lance",
         "Cost": "1",
         "Type": "Action",
-        "Range": "7 units",
-        "Description": "Fire a condensed lance of mana, dealing 2 Force Damage to a creature.",
+        "Range": "7 tiles",
+        "Description": "Fire a condensed lance of mana, dealing 1+[your Spell Damage Bonus] Force Damage to a creature.",
         "Upcast": "Increase the damage by +1.",
         "Lore": "Raw mana, sharpened into purpose."
     },
@@ -457,7 +457,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Melee",
-        "Description": "Perform a melee weapon attack that deals +1 Force Damage and ignores 1 point of Armor.",
+        "Description": "Perform a melee weapon attack that deals +1 Force Damage and has +1 Accuracy.",
         "Upcast": "Increase the bonus Force Damage by +1.",
         "Lore": "A precise cut, slipping between reality’s defenses."
     },
@@ -468,8 +468,8 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Self",
-        "Description": "Teleport up to 5 units to a location you can see.",
-        "Upcast": "Increase teleport distance by +2 units.",
+        "Description": "Teleport up to 5 tiles to a location you can see.",
+        "Upcast": "Increase teleport distance by +2 tiles.",
         "Lore": "The space between moments bends to practiced will."
     },
     {
@@ -479,7 +479,7 @@
         "Cost": "1",
         "Type": "Reaction",
         "Range": "Self",
-        "Description": "When you take damage from a spell, reduce the damage by 2.",
+        "Description": "When you take damage from a spell, reduce the damage by [your Spell Damage Bonus].",
         "Upcast": "Reduce damage by an additional +1.",
         "Lore": "Magic diverted is magic denied."
     },
@@ -489,9 +489,9 @@
         "Name": "Mana Snare",
         "Cost": "1",
         "Type": "Action",
-        "Range": "5 units",
-        "Description": "You bind a creature in constricting mana, reducing their movement by 3 units until the end of their next turn. They must roll [Fortitude] to resist.",
-        "Upcast": "Increase the movement reduction by +1 unit.",
+        "Range": "5 tiles",
+        "Description": "You bind a creature in constricting mana, reducing their movement by 3 tiles until the end of their next turn. They must roll [Fortitude] to resist.",
+        "Upcast": "Increase the movement reduction by +1 tile.",
         "Lore": "Mana does not forgive those who struggle blindly."
     },
     {
@@ -500,8 +500,8 @@
         "Name": "Arcane Anchor",
         "Cost": "1",
         "Type": "Action",
-        "Range": "6 units",
-        "Description": "Anchor a creature in place. They cannot be forcibly moved until the start of your next turn. They must roll [Fortitude] to resist.",
+        "Range": "6 tiles",
+        "Description": "Anchor a creature in place. They cannot be forcibly moved until the start of your next turn. They may roll [Fortitude] to resist.",
         "Upcast": "Extend the duration by 1 additional turn.",
         "Lore": "Reality itself grips tight at your command."
     },
@@ -522,8 +522,8 @@
         "Name": "Kinetic Ripple",
         "Cost": "1",
         "Type": "Action",
-        "Range": "Cone 3 units",
-        "Description": "Release a wave of kinetic force, dealing 2 Force Damage and pushing all affected creatures 2 units away. Creatures must roll [Fortitude] to resist.",
+        "Range": "Cone 3 tiles",
+        "Description": "Release a wave of kinetic force, dealing 2 Force Damage and pushing all affected creatures 2+[your Spell Damage Bonus] tiles away. Creatures must roll [Fortitude] to resist.",
         "Upcast": "Increase the damage by +1.",
         "Lore": "A shockwave born from sudden intent."
     },
@@ -545,7 +545,7 @@
         "Cost": "1",
         "Type": "Reaction",
         "Range": "Self",
-        "Description": "When you are hit by an attack or spell, impose -2 Accuracy on that roll.",
+        "Description": "When you are hit by an attack or spell, impose -[your Spell Damage Bonus] Accuracy on that roll.",
         "Upcast": "Increase the Accuracy penalty by -1.",
         "Lore": "Light bends, fate follows."
     },
@@ -555,8 +555,8 @@
         "Name": "Vein Hex",
         "Cost": "1",
         "Type": "Action",
-        "Range": "6 units",
-        "Description": "Curse a creature’s blood, dealing 2 Dark Damage. The next time they take damage before your next turn, they take +1 additional Dark Damage. They must roll [Fortitude] to resist the curse.",
+        "Range": "6 tiles",
+        "Description": "Curse a creature’s blood, dealing [your Spell Damage Bonus] Dark Damage. The next time they take damage before your next turn, they take +1 additional Dark Damage. They must roll [Fortitude] to resist the curse.",
         "Upcast": "Increase the bonus damage by +1.",
         "Lore": "The body remembers what the soul tries to forget."
     },
@@ -567,7 +567,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Sight",
-        "Description": "You tear at a creature’s psyche, dealing 2 Psychic Damage and imposing -2 Spirit until the end of their next turn. They must roll [Spirit] to resist.",
+        "Description": "You tear at a creature’s psyche, dealing 1+[your Spell Damage Bonus] Psychic Damage and imposing -2 Spirit until the end of their next turn. They must roll [Spirit] to resist.",
         "Upcast": "Increase the Psychic Damage by +1.",
         "Lore": "Thought is fragile when pulled from the wrong angle."
     },
@@ -577,8 +577,8 @@
         "Name": "Grasping Doubt",
         "Cost": "1",
         "Type": "Action",
-        "Range": "4 units",
-        "Description": "Manifest spectral hands that reduce a creature’s movement by 2 units and impose -2 Accuracy until the end of their next turn. They must roll [Spirit] to resist.",
+        "Range": "4 tiles",
+        "Description": "Manifest spectral hands that reduce a creature’s movement by 2+[your Spell Damage Bonus] tiles and impose -2 Accuracy until the end of their next turn. They must roll [Spirit] to resist.",
         "Upcast": "Increase the Accuracy penalty by -1.",
         "Lore": "Hesitation clings tighter than chains."
     },
@@ -589,8 +589,8 @@
         "Cost": "1",
         "Type": "Reaction",
         "Range": "Self",
-        "Description": "When you take damage, you may teleport up to 3 units to an unoccupied space you can see, halving the damage.",
-        "Upcast": "Increase the teleport distance by +2 units.",
+        "Description": "When you take damage, you may teleport up to 3+[your Spell Damage Bonus] tiles to an unoccupied space you can see, halving the damage.",
+        "Upcast": "Increase the teleport distance by +2 tiles.",
         "Lore": "Pain is just another doorway."
     },
     {
@@ -599,8 +599,8 @@
         "Name": "Echoing Curse",
         "Cost": "1",
         "Type": "Action",
-        "Range": "5 units",
-        "Description": "Curse a creature. The next time they fail a roll before your next turn, they take 2 Dark Damage.",
+        "Range": "5 tiles",
+        "Description": "Curse a creature. The next time they fail a roll before your next turn, they take [your Spell Damage Bonus] Dark Damage.",
         "Upcast": "Increase the damage by +1.",
         "Lore": "Mistakes linger longer when invited."
     },
@@ -622,7 +622,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Touch",
-        "Description": "Deal 2 Dark Damage to a creature. If the target is [Bleeding], they instead take +1 additional Dark Damage.",
+        "Description": "Deal 2 Dark Damage to a creature. If the target is [Bleeding], they take +[your Spell Damage Bonus] additional Dark Damage.",
         "Upcast": "Increase the base damage by +1.",
         "Lore": "The blood knows secrets the mouth refuses to tell."
     },
@@ -632,8 +632,8 @@
         "Name": "Veil Fracture",
         "Cost": "1",
         "Type": "Action",
-        "Range": "Cone 3 units",
-        "Description": "Shatter the boundary between fear and reality, dealing 2 Dark Damage and [Fearing] all creatures in the cone. Creatures must roll [Spirit] to resist.",
+        "Range": "Cone 3 tiles",
+        "Description": "Shatter the boundary between fear and reality, dealing [your Spell Damage Bonus] Dark Damage and [Fearing] all creatures in the cone. Creatures must roll [Spirit] to resist.",
         "Upcast": "Increase the damage by +1.",
         "Lore": "The veil breaks easiest where terror has already worn it thin."
     },
@@ -643,8 +643,8 @@
         "Name": "Soul Tether",
         "Cost": "1",
         "Type": "Action",
-        "Range": "7 units",
-        "Description": "Bind your soul to a creature. Until the start of your next turn, when they take damage, you regain 1 Health. They must roll [Spirit] to resist.",
+        "Range": "7 tiles",
+        "Description": "Bind your soul to a creature. Until the start of your next turn, when they take damage, you regain 1+[your Spell Healing Bonus] Health. They must roll [Spirit] to resist.",
         "Upcast": "Increase the healing by +1.",
         "Lore": "Suffering shared is suffering diminished."
     },
@@ -654,8 +654,8 @@
         "Name": "Night’s Interruption",
         "Cost": "1",
         "Type": "Reaction",
-        "Range": "6 units",
-        "Description": "When a creature within range casts a spell, impose -2 Accuracy on that spell and deal 1 Psychic Damage. They must roll [Reflex] to resist.",
+        "Range": "6 tiles",
+        "Description": "When a creature within range casts a spell, impose -2 Accuracy on that spell and deal [your Spell Damage Bonus] Psychic Damage. They must roll [Reflex] to resist.",
         "Upcast": "Increase the Psychic Damage by +1.",
         "Lore": "Even darkness dislikes being disturbed."
     },
@@ -665,8 +665,8 @@
         "Name": "Grave Brand",
         "Cost": "2",
         "Type": "Action",
-        "Range": "6 units",
-        "Description": "Brand a creature with a sigil of death, dealing 3 Dark Damage. Until the end of your next turn, the first time that creature takes damage, they take an additional 2 Dark Damage.",
+        "Range": "6 tiles",
+        "Description": "Brand a creature with a sigil of death, dealing 3 Dark Damage. Until the end of your next turn, the first time that creature takes damage, they take an additional [your Spell Damage Bonus] Dark Damage.",
         "Upcast": "Increase the triggered Dark Damage by +1.",
         "Lore": "Once marked, the grave watches closely."
     },
@@ -677,7 +677,7 @@
         "Cost": "2",
         "Type": "Action",
         "Range": "Sight",
-        "Description": "Rip violently through a creature’s thoughts, dealing 3 Psychic Damage and imposing -3 Spirit until the end of their next turn. They must roll [Spirit] to resist the Spirit reduction.",
+        "Description": "Rip violently through a creature’s thoughts, dealing 2+[your Spell Damage Bonus] Psychic Damage and imposing -3 Spirit until the end of their next turn. They must roll [Spirit] to resist.",
         "Upcast": "Increase the Psychic Damage by +1.",
         "Lore": "Some ideas are better left intact."
     },
@@ -687,8 +687,8 @@
         "Name": "Lingering Malice",
         "Cost": "2",
         "Type": "Action",
-        "Range": "5 units",
-        "Description": "Inflict a curse upon a creature for 2 turns. At the start of each of their turns, they take 1 Dark Damage and suffer -1 Accuracy.",
+        "Range": "5 tiles",
+        "Description": "Inflict a curse upon a creature for [your Spell Damage Bonus] turns. At the start of each of their turns, they take 1 Dark Damage and suffer -1 Accuracy.",
         "Upcast": "Extend the duration by +1 turn.",
         "Lore": "Hatred rarely leaves all at once."
     },
@@ -699,8 +699,8 @@
         "Cost": "2",
         "Type": "Reaction",
         "Range": "Self",
-        "Description": "When you would be reduced to 0 Health, instead remain at 1 Health and teleport up to 4 units to a space you can see. This spell then ends.",
-        "Upcast": "Increase the teleport distance by +2 units.",
+        "Description": "When you would be reduced to 0 Health, instead remain at 1+[your Spell Healing Bonus] Health and teleport up to 4 tiles to a space you can see. This spell then ends.",
+        "Upcast": "Increase the teleport distance by +2 tiles.",
         "Lore": "Death reached — then missed."
     },
     {
@@ -709,8 +709,8 @@
         "Name": "Hex Collapse",
         "Cost": "2",
         "Type": "Action",
-        "Range": "Cone 4 units",
-        "Description": "Detonate active curses and hexes in the area. Creatures affected by a curse take 2 Dark Damage, while un-cursed creatures take 1 Dark Damage.",
+        "Range": "Cone 4 tiles",
+        "Description": "Detonate active curses and hexes in the area. Creatures affected by a curse take [your Spell Damage Bonus] Dark Damage, while un-cursed creatures take 1 Dark Damage.",
         "Upcast": "Increase the damage dealt to cursed creatures by +1.",
         "Lore": "All debts come due at once."
     },
@@ -721,7 +721,7 @@
         "Cost": "2",
         "Type": "Passive",
         "Range": "Self",
-        "Description": "Once per turn, when you take damage, your next attack or spell before the end of your next turn deals +2 damage.",
+        "Description": "When you take damage, your next attack or spell before the end of your next turn deals +2 damage.",
         "Upcast": "Increase the bonus damage by +1.",
         "Lore": "Pain sharpens purpose."
     },
@@ -732,7 +732,7 @@
         "Cost": "2",
         "Type": "Action",
         "Range": "Touch",
-        "Description": "Inscribe a sigil of torment on a creature, dealing 2 Dark Damage and imposing [Fearing] until the end of their next turn. They must roll [Fortitude] to resist the fear.",
+        "Description": "Inscribe a sigil of torment on a creature, dealing [your Spell Damage Bonus] Dark Damage and imposing [Fear] until the end of their next turn. They must roll [Fortitude] to resist.",
         "Upcast": "Increase the Dark Damage by +1.",
         "Lore": "Suffering, formalized and signed."
     },
@@ -742,9 +742,9 @@
         "Name": "Veil Sink",
         "Cost": "2",
         "Type": "Action",
-        "Range": "8 units",
-        "Description": "Create a zone of oppressive darkness in a 2-unit radius for 1 turn. Creatures inside the zone suffer -2 Accuracy and take 1 Dark Damage when they enter it.",
-        "Upcast": "Increase the radius by +1 unit.",
+        "Range": "8 tiles",
+        "Description": "Create a zone of oppressive darkness in a 2-tile radius for [your Spell Damage Bonus] turns. Creatures inside the zone suffer -2 Accuracy and take 1 Dark Damage when they enter it.",
+        "Upcast": "Increase the radius by +1 tile.",
         "Lore": "The world grows heavier where the veil thins."
     },
     {
@@ -753,8 +753,8 @@
         "Name": "Soul Fracture",
         "Cost": "2",
         "Type": "Action",
-        "Range": "6 units",
-        "Description": "Shatter part of a creature’s soul, dealing 3 Psychic Damage. The target cannot benefit from healing until the end of their next turn. They must roll [Spirit] to resist the healing suppression.",
+        "Range": "6 tiles",
+        "Description": "Shatter part of a creature’s soul, dealing 3 Psychic Damage. The target cannot benefit from healing until the end of their next turn. They must roll [Spirit] to resist.",
         "Upcast": "Increase either damage type by +1.",
         "Lore": "Not all wounds are meant to close."
     },
@@ -764,7 +764,7 @@
         "Name": "Black Intercession",
         "Cost": "2",
         "Type": "Reaction",
-        "Range": "5 units",
+        "Range": "5 tiles",
         "Description": "When a creature within range would deal damage, reduce that damage by 3 and deal 2 Dark Damage to the source.",
         "Upcast": "Increase the Dark Damage by +1.",
         "Lore": "The dark protects its own — at a price."
@@ -775,7 +775,7 @@
         "Name": "Starlance",
         "Cost": "1",
         "Type": "Action",
-        "Range": "8 units",
+        "Range": "8 tiles",
         "Description": "Hurl a lance of condensed starlight, dealing 2 Light Damage.",
         "Upcast": "When multicasting this spell, each additional cast may target a different creature.",
         "Lore": "A falling star, aimed by will alone."
@@ -787,7 +787,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Self",
-        "Description": "You move up to 4 units, ignoring reactions and difficult terrain.",
+        "Description": "You move up to 4 tiles, ignoring reactions and difficult terrain.",
         "Upcast": "No special multicast bonuses.",
         "Lore": "Space loosens its grip for those who know how to let go."
     },
@@ -797,7 +797,7 @@
         "Name": "Astral Flare",
         "Cost": "1",
         "Type": "Action",
-        "Range": "6 units",
+        "Range": "6 tiles",
         "Description": "A creature you can see takes 2 Light Damage and suffers -2 Accuracy on its next attack.",
         "Upcast": "When multicasting this spell, each additional cast may target a different creature.",
         "Lore": "Light burns brightest where attention wavers."
@@ -809,7 +809,7 @@
         "Cost": "1",
         "Type": "Reaction",
         "Range": "Self",
-        "Description": "When you are targeted by an attack or spell, you may shift 2 units to an unoccupied space you can see.",
+        "Description": "When you are targeted by an attack or spell, you may shift 2 tiles to an unoccupied space you can see.",
         "Upcast": "When multicasting this spell, each additional cast reduces the taken damage by 2.",
         "Lore": "Nothing strikes the same point twice if the stars disagree."
     },
@@ -819,8 +819,8 @@
         "Name": "Gravitic Nudge",
         "Cost": "1",
         "Type": "Action",
-        "Range": "5 units",
-        "Description": "Push or pull a creature 2 units in a direction of your choice. They must roll [Fortitude] to resist.",
+        "Range": "5 tiles",
+        "Description": "Push or pull a creature 2 tiles in a direction of your choice. They must roll [Fortitude] to resist.",
         "Upcast": "When multicasting this spell, the direction may change between each cast.",
         "Lore": "Gravity is merely a suggestion."
     },
@@ -842,7 +842,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Touch",
-        "Description": "Bind yourself to a creature you touch. Until the end of your next turn, whenever either of you moves a unit, the other may move 1 unit as well.",
+        "Description": "Bind yourself to a creature you touch. Until the end of your next turn, whenever either of you moves a tile, the other may move 1 tile as well.",
         "Upcast": "When multicasting this spell, you may bind to an additional creature.",
         "Lore": "All things move together, whether they wish to or not."
     },
@@ -853,7 +853,7 @@
         "Cost": "1",
         "Type": "Reaction",
         "Range": "Self",
-        "Description": "When you would take damage, reduce that damage by 1 and teleport 3 units to a space you can see.",
+        "Description": "When you would take damage, reduce that damage by 1 and teleport 3 tiles to a space you can see.",
         "Upcast": "When multicasting this spell, you may delay the teleport until after another spell resolves this turn.",
         "Lore": "There is always a way around the fall."
     },
@@ -874,8 +874,8 @@
         "Name": "Stellar Pressure",
         "Cost": "1",
         "Type": "Action",
-        "Range": "Cone 3 units",
-        "Description": "Creatures in the cone take 2 Force Damage and are pushed 1 unit away from you. They must roll [Fortitude] to resist.",
+        "Range": "Cone 3 tiles",
+        "Description": "Creatures in the cone take 2 Force Damage and are pushed 1 tile away from you. They must roll [Fortitude] to resist.",
         "Upcast": "When multicasting this spell, you may rotate the cone between casts.",
         "Lore": "The weight of the heavens bears down all at once."
     },
@@ -885,8 +885,8 @@
         "Name": "Light Lance",
         "Cost": "1",
         "Type": "Action",
-        "Range": "7 units",
-        "Description": "Hurl a lance of holy light, dealing 2 Light Damage to a creature you can see.",
+        "Range": "7 tiles",
+        "Description": "Hurl a lance of holy light, dealing 1+[your Spell Damage Bonus] Light Damage to a creature you can see.",
         "Upcast": "Increase the damage by +1.",
         "Lore": "Faith given form, sharp and unwavering."
     },
@@ -896,8 +896,8 @@
         "Name": "Sacred Intercession",
         "Cost": "1",
         "Type": "Reaction",
-        "Range": "5 units",
-        "Description": "When a creature within range would take damage, reduce that damage by 2.",
+        "Range": "5 tiles",
+        "Description": "When a creature within range would take damage, reduce that damage by [your Spell Damage Bonus].",
         "Upcast": "Increase the damage reduction by +1.",
         "Lore": "A hand reaches out before the blow can land."
     },
@@ -918,7 +918,7 @@
         "Name": "Beacon of Resolve",
         "Cost": "1",
         "Type": "Action",
-        "Range": "6 units",
+        "Range": "6 tiles",
         "Description": "Choose a creature you can see. Until the start of your next turn, they gain +2 Accuracy and cannot be [Frightened].",
         "Upcast": "Extend the duration by 1 additional turn.",
         "Lore": "Hope shines brightest when shared."
@@ -929,8 +929,8 @@
         "Name": "Merciful Pulse",
         "Cost": "1",
         "Type": "Action",
-        "Range": "4 units",
-        "Description": "A wave of gentle light heals a creature for 2 Health or deals 2 Light Damage to an undead or fiend.",
+        "Range": "4 tiles",
+        "Description": "A wave of gentle light heals a creature for 2+[your Spell Healing Bonus] Health or deals 2+[your Spell Damage Bonus] Light Damage to an undead or fiend.",
         "Upcast": "Increase the healing or damage by +1.",
         "Lore": "Mercy and judgment flow from the same source."
     },
@@ -952,8 +952,8 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Self",
-        "Description": "A 2 unit radius area around you becomes Hallowed ground, Allies gain +2 Movement, enemies gain -2 Movement.",
-        "Upcast": "Increase the movement by +1 unit.",
+        "Description": "A 2 tile radius area around you becomes Hallowed ground, Allies gain +[your Spell Damage Bonus] Movement, enemies gain -[your Spell Damage Bonus] Movement.",
+        "Upcast": "Increase the movement by +1 tile.",
         "Lore": "Each step leaves a trace of purpose."
     },
     {
@@ -963,7 +963,7 @@
         "Cost": "1",
         "Type": "Reaction",
         "Range": "Self",
-        "Description": "When you are hit by a melee attack, the attacker takes 2 Light Damage.",
+        "Description": "When you are hit by a melee attack, the attacker takes 1+[your Spell Damage Bonus] Light Damage.",
         "Upcast": "Increase the damage by +1.",
         "Lore": "To strike the faithful is to invite the light’s reply."
     },
@@ -985,7 +985,7 @@
         "Cost": "1",
         "Type": "Passive",
         "Range": "Self",
-        "Description": "Each scene you and 1 nearby ally within 3 units recover 1 Health, as long as you are concious.",
+        "Description": "Each scene you and 1 nearby ally within 3 tiles recover [your Spell Damage Bonus] Health, as long as you are concious.",
         "Upcast": "Increase the healing by +1 health.",
         "Lore": "Some prayers are never lowered."
     },
@@ -995,8 +995,8 @@
         "Name": "Storm Bolt",
         "Cost": "1",
         "Type": "Action",
-        "Range": "7 units",
-        "Description": "Hurl a compressed bolt of lightning at a target in range. The target takes 2 Lightning Damage and is briefly jolted, reducing its next movement by 3 units.",
+        "Range": "7 tiles",
+        "Description": "Hurl a compressed bolt of lightning at a target in range. The target takes 1+[your Spell Damage Bonus] Lightning Damage and is briefly jolted, reducing its next movement by 3 tiles.",
         "Upcast": "Level 2+: Increase damage by +1. Level 3+: Jolt also prevents reactions until the start of the target’s next turn.",
         "Lore": "Stormcasters claim lightning remembers the path it takes, striking foes along lines only the sky can see."
     },
@@ -1007,7 +1007,7 @@
         "Cost": "1",
         "Type": "Reaction",
         "Range": "Self",
-        "Description": "When you would take damage, harden your skin with earthen force, reducing the incoming damage by 2.",
+        "Description": "When you would take damage, harden your skin with earthen force, reducing the incoming damage by [your Spell Damage Bonus].",
         "Upcast": "Level 2+: Increase damage reduction by 1. Level 3+: Gain brief resistance to the triggering damage type.",
         "Lore": "Those who trust the earth are never truly unguarded, even when standing alone."
     },
@@ -1018,8 +1018,8 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Self",
-        "Description": "Ignite beneath your feet and instantly move up to 3 units. Enemies within 1 unit of your starting space take 2 Fire damage.",
-        "Upcast": "Level 2+: Increase movement by 2 unit. Level 3+: Leave a burning space behind until the end of the round.",
+        "Description": "Ignite beneath your feet and instantly move up to 3 tiles. Enemies within 1 tile of your starting space take 1+[your Spell Damage Bonus] Fire damage.",
+        "Upcast": "Level 2+: Increase movement by 2 tile. Level 3+: Leave a burning space behind until the end of the round.",
         "Lore": "Fire is impatient by nature, always urging its wielder forward."
     },
     {
@@ -1028,8 +1028,8 @@
         "Name": "Frost Mark",
         "Cost": "1",
         "Type": "Action",
-        "Range": "6 units",
-        "Description": "Mark a creature with chilling runes. Until the end of its next turn, its movement is reduced by 3 units and the next attack against it deals +2 Frost damage.",
+        "Range": "6 tiles",
+        "Description": "Mark a creature with chilling runes. Until the end of its next turn, its movement is reduced by 3 tiles and the next attack against it deals +2 Frost damage.",
         "Upcast": "Level 2+: Increase duration by 1 round. Level 3+: Frost damage bonus applies to all attacks against the target during the duration.",
         "Lore": "Cold remembers every wound, preserving pain like a perfect crystal."
     },
@@ -1039,9 +1039,9 @@
         "Name": "Inferno Pulse",
         "Cost": "1",
         "Type": "Action",
-        "Range": "Cone 3 units",
+        "Range": "Cone 3 tiles",
         "Description": "Release a burst of searing flame in a short cone. Creatures in the area take 2 Fire damage and ignite, taking 1 Fire damage at the start of their next turn. They must roll [Reflex] to resist.",
-        "Upcast": "Level 2+: Increase cone size by 1 unit. Level 3+: Ignite damage increases by 1 and lasts an additional round.",
+        "Upcast": "Level 2+: Increase cone size by 1 tile. Level 3+: Ignite damage increases by 1 and lasts an additional round.",
         "Lore": "Infernos are born not from rage, but from certainty that nothing should remain."
     },
     {
@@ -1073,8 +1073,8 @@
         "Cost": "1",
         "Type": "Reaction",
         "Range": "Self",
-        "Description": "When targeted by a ranged attack, conjure a surge of water that deflects the blow, reducing damage by 2 and pushing the attacker 1 unit.",
-        "Upcast": "Level 2+: Increase damage reduction by 2. Level 3+: Push increases by 2 units.",
+        "Description": "When targeted by a ranged attack, conjure a surge of water that deflects the blow, reducing damage by 2 and pushing the attacker 1 tile.",
+        "Upcast": "Level 2+: Increase damage reduction by 2. Level 3+: Push increases by 2 tiles.",
         "Lore": "Water does not stop an attack—it teaches it where not to land."
     },
     {
@@ -1083,7 +1083,7 @@
         "Name": "Earthquake",
         "Cost": "1",
         "Type": "Action",
-        "Range": "5 units",
+        "Range": "5 tiles",
         "Description": "Cause the ground beneath a creature to rupture. The target takes Earth damage and must choose to either be knocked prone or lose an action on its next turn.",
         "Upcast": "Level 2+: Target suffers both effects. Level 3+: Nearby ground becomes difficult terrain for one round.",
         "Lore": "The earth does not strike swiftly—but when it moves, all must answer."
@@ -1096,7 +1096,7 @@
         "Type": "Passive",
         "Range": "Self",
         "Description": "You attune to elemental currents. You can sense the presence of strong elemental effects, active spells, or elemental creatures within a short distance.",
-        "Upcast": "Level 2+: Increase sensing range to 12 units. Level 3+: You can identify the dominant element and its intensity.",
+        "Upcast": "Level 2+: Increase sensing range to 12 tiles. Level 3+: You can identify the dominant element and its intensity.",
         "Lore": "Aether is the breath between elements, heard only by those who listen."
     },
     {
@@ -1105,8 +1105,8 @@
         "Name": "Infernus",
         "Cost": "1",
         "Type": "Action",
-        "Range": "6 units",
-        "Description": "You create a Tile of Rough Magmatic terrain. Any creature standing on the tile takes 1 damage each creatures turn.",
+        "Range": "6 tiles",
+        "Description": "You create a Tile of Rough Magmatic terrain. Any creature standing on the tile takes [your Spell Damage Bonus] damage each creatures turn.",
         "Upcast": "Level 2+: You can create +1 tile. Level 3+: Creatures must roll [Fortitude] to escape the tile.",
         "Lore": "Aether is the breath between elements, heard only by those who listen."
     },
@@ -1133,7 +1133,7 @@
         "Cost": "2",
         "Type": "Action",
         "Range": "Self",
-        "Description": "Until the start of your next turn, the first time you or an ally within 3 units is targeted by a spell, impose -3 Accuracy on that spell.",
+        "Description": "Until the start of your next turn, the first time you or an ally within 3 tiles is targeted by a spell, impose -3 Accuracy on that spell.",
         "Upcast": "Protect one additional ally.",
         "Lore": "Interference patterns woven with intent."
     },
@@ -1154,8 +1154,8 @@
         "Name": "Lightbearer’s Reckoning",
         "Cost": "2",
         "Type": "Reaction",
-        "Range": "5 units",
-        "Description": "When an ally within range is reduced to 0 Health, they instead remain at 1 Health and emit radiant light. Enemies within 2 units take 2 Light Damage.",
+        "Range": "5 tiles",
+        "Description": "When an ally within range is reduced to 0 Health, they instead remain at [your Spell Healing Bonus] Health and emit radiant light. Enemies within 2 tiles take 2 Light Damage.",
         "Upcast": "Increase the Light Damage by +1.",
         "Lore": "Even falling can become testimony."
     },
@@ -1166,7 +1166,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Sight",
-        "Description": "A creature you can see takes 2 Psychic Damage. Until the end of their next turn, the first time they succeed on a roll, they take 1 Dark Damage.",
+        "Description": "A creature you can see takes 1+[your Spell Damage Bonus] Psychic Damage. Until the end of their next turn, the first time they succeed on a roll, they take 1 Dark Damage.",
         "Upcast": "The Dark damage increases by +1.",
         "Lore": "Victory tastes bitter when the mind is cracked."
     },
@@ -1176,7 +1176,7 @@
         "Name": "Sentence of Stillness",
         "Cost": "2",
         "Type": "Action",
-        "Range": "6 units",
+        "Range": "6 tiles",
         "Description": "Condemn a creature with oppressive silence. They cannot cast spells until the end of their next turn.",
         "Upcast": "",
         "Lore": "Judgment need not be loud to be absolute."
@@ -1187,9 +1187,9 @@
         "Name": "Offset Trajectory",
         "Cost": "1",
         "Type": "Reaction",
-        "Range": "6 units",
-        "Description": "When a ranged attack or spell is made within range, shift either the attacker or the target 1 unit before the roll is resolved.",
-        "Upcast": "When multicasting, each additional cast increases the amount moved by 1 unit.",
+        "Range": "6 tiles",
+        "Description": "When a ranged attack or spell is made within range, shift either the attacker or the target up to [your Spell Damage Bonus] tiles before the roll is resolved.",
+        "Upcast": "When multicasting, each additional cast increases the amount moved by 1 tile.",
         "Lore": "A fraction of a degree decides everything."
     },
     {
@@ -1210,8 +1210,8 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Self",
-        "Description": "Move up to 3 units. Each tile you leave behind becomes scorched terrain; the first creature to enter each tile takes 1 Fire Damage.",
-        "Upcast": "Level 2+: Increase movement by +2 units. Level 3+: Scorched tiles deal +1 damage.",
+        "Description": "Move up to 3 tiles. Each tile you leave behind becomes scorched terrain; the first creature to enter each tile takes 1+[your Spell Damage Bonus] Fire Damage.",
+        "Upcast": "Level 2+: Increase movement by +2 tiles. Level 3+: Scorched tiles deal +1 damage.",
         "Lore": "Fire remembers where you fled."
     },
     {
@@ -1220,8 +1220,8 @@
         "Name": "Cryostatic Lock",
         "Cost": "2",
         "Type": "Action",
-        "Range": "5 units",
-        "Description": "Encapsulate a creature in binding frost. They take 2 Cold Damage and are immobilized until the end of their next turn unless they roll [Fortitude].",
+        "Range": "5 tiles",
+        "Description": "Encapsulate a creature in binding frost. They take 1+[your Spell Damage Bonus] Cold Damage and are immobilized until the end of their next turn unless they roll [Fortitude].",
         "Upcast": "Increase the Cold Damage by +1.",
         "Lore": "Cold does not rush — it waits until escape is forgotten."
     },
@@ -1244,8 +1244,8 @@
         "Name": "Grand Aegis Array",
         "Cost": "4",
         "Type": "Action",
-        "Range": "Self (Aura 4)",
-        "Description": "Until the end of your next turn, allies in range reduce all incoming damage by 6 and cannot be forcibly moved. Each ally may ignore one failed defense roll during the duration.",
+        "Range": "Self (4 tile radius)",
+        "Description": "Until the end of your next turn, allies in range reduce all incoming damage by 4+[your Spell Damage Bonus] and cannot be forcibly moved. Each ally may ignore one failed defense roll during the duration.",
         "Upcast": "",
         "Lore": "The battlefield locks into a single, immovable theorem."
     },
@@ -1255,8 +1255,8 @@
         "Name": "Litany of Restoration",
         "Cost": "3",
         "Type": "Action",
-        "Range": "Aura 3",
-        "Description": "Each ally in range immediately heals 8 Health and removes one negative condition. Until the start of your next turn, the first time each ally would take damage, reduce it by 6.",
+        "Range": "Self (3 tile radius)",
+        "Description": "Each ally in range immediately heals 8+[your Spell Healing Bonus] Health and removes one negative condition. Until the start of your next turn, the first time each ally would take damage, reduce it by 6.",
         "Upcast": "Healing increased by +4 and damage reduction applies twice.",
         "Lore": "Faith spoken aloud becomes shelter."
     },
@@ -1267,7 +1267,7 @@
         "Cost": "4",
         "Type": "Action",
         "Range": "Sight",
-        "Description": "Call down radiant judgment on a creature. They take 8 Light Damage. If this damage reduces them to 0 Health, all allies who can see the target heal 6 Health.",
+        "Description": "Call down radiant judgment on a creature. They take 8+[your Spell Damage Bonus] Light Damage. If this damage reduces them to 0 Health, all allies who can see the target heal 6+[your Spell Healing Bonus] Health.",
         "Upcast": "",
         "Lore": "Mercy waits for those who survive the light."
     },
@@ -1277,8 +1277,8 @@
         "Name": "Stormbound Expanse",
         "Cost": "3",
         "Type": "Action",
-        "Range": "Area (Radius 4)",
-        "Description": "The area becomes a violent lightning field until the end of your next turn. Creatures entering or starting their turn in the area take 4 Lightning Damage and suffer -4 Accuracy.",
+        "Range": "Self (4 tile radius)",
+        "Description": "The area becomes a violent lightning field until the end of your next turn. Creatures entering or starting their turn in the area take 4+[your Spell Damage Bonus] Lightning Damage and suffer -4 Accuracy.",
         "Upcast": "Damage increases by +4 and the area becomes difficult terrain.",
         "Lore": "The storm claims territory, not targets."
     },
@@ -1288,8 +1288,8 @@
         "Name": "Cataclysm Seed",
         "Cost": "4",
         "Type": "Action",
-        "Range": "6 units",
-        "Description": "Plant a volatile elemental core at a point in range. At the start of your next turn, it detonates, dealing 8 damage of an element of your choice to all creatures within 3 units and reshaping the terrain appropriately.",
+        "Range": "6 tiles",
+        "Description": "Plant a volatile elemental core at a point in range. At the start of your next turn, it detonates, dealing 6+[your Spell Damage Bonus] damage of an element of your choice to all creatures within 3 tiles and reshaping the terrain appropriately.",
         "Upcast": "",
         "Lore": "Every disaster begins as something small and patient."
     },
@@ -1302,8 +1302,8 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Self",
-        "Description": "Teleport up to 2 units to an unoccupied space you can see. Until the start of your next turn, you ignore difficult terrain.",
-        "Upcast": "Increase teleport distance by +1 unit per cost.",
+        "Description": "Teleport up to 2 tiles to an unoccupied space you can see. Until the start of your next turn, you ignore difficult terrain.",
+        "Upcast": "Increase teleport distance by +1 tile per cost.",
         "Lore": "Distance is only a suggestion."
     },
     {
@@ -1345,7 +1345,7 @@
         "Name": "Beacon of Vows",
         "Cost": "2",
         "Type": "Action",
-        "Range": "Aura 3",
+        "Range": "Self (3 tile radius)",
         "Description": "Until the end of your next turn, allies in range gain +1 Accuracy while adjacent to another ally.",
         "Upcast": "Extend duration by +1 turn.",
         "Lore": "Faith grows stronger when shared shoulder to shoulder."
@@ -1367,9 +1367,9 @@
         "Name": "Rolling Frost",
         "Cost": "1",
         "Type": "Action",
-        "Range": "4 units",
-        "Description": "Create a moving wave of ice that travels 4 units in a straight line. Creatures hit take 2 Cold Damage and have their movement reduced by 1 unit on their next turn.",
-        "Upcast": "Increase damage by +1 or travel distance by +2 units, per upcast level.",
+        "Range": "4 tiles",
+        "Description": "Create a moving wave of ice that travels 4 tiles in a straight line. Creatures hit take 1+[your Spell Damage Bonus] Cold Damage and have their movement reduced by 1 tile on their next turn.",
+        "Upcast": "Increase damage by +1 or travel distance by +2 tiles, per upcast level.",
         "Lore": "Cold advances without urgency."
     },
     {
@@ -1378,8 +1378,8 @@
         "Name": "Grasping Fault",
         "Cost": "2",
         "Type": "Action",
-        "Range": "5 units",
-        "Description": "Crack the ground beneath a creature. They take 2 Earth Damage and the tile becomes difficult terrain that restrains the first creature entering it each scene.",
+        "Range": "5 tiles",
+        "Description": "Crack the ground beneath a creature. They take 2+[your Spell Damage Bonus] Vibro Damage and the tile becomes difficult terrain that restrains the first creature entering it each scene.",
         "Upcast": "Increase damage by +1.",
         "Lore": "The earth remembers every step taken upon it."
     },
@@ -1389,8 +1389,8 @@
         "Name": "Inferno Spiral",
         "Cost": "3",
         "Type": "Action",
-        "Range": "Area (Radius 3)",
-        "Description": "A whirling firestorm fills the area until the end of your next turn. Creatures entering or starting their turn there take 2 Fire Damage. The area is heavily obscured by smoke.",
+        "Range": "4 tiles (3 tile radius)",
+        "Description": "A whirling firestorm fills the area until the end of your next turn. Creatures entering or starting their turn there take 2+[your Spell Damage Bonus] Fire Damage. The area is heavily obscured by smoke.",
         "Upcast": "Cost 4: Increase damage by +1 and radius by +1.",
         "Lore": "Fire does not explode — it envelops."
     },
@@ -1401,7 +1401,7 @@
         "Cost": "4",
         "Type": "Action",
         "Range": "Sight",
-        "Description": "Massive elemental growth erupts from the ground. Creatures of your choice within 4 units are restrained and take 4 Vibro Damage at the start of their next turn.",
+        "Description": "Massive elemental growth erupts from the ground. Creatures of your choice within 4 tiles are restrained and take 2+[your Spell Damage Bonus] Vibro Damage at the start of their next turn.",
         "Upcast": "",
         "Lore": "The land itself rises to object."
     },
@@ -1412,8 +1412,8 @@
         "Name": "Mana Flick",
         "Cost": "0",
         "Type": "Action",
-        "Range": "5 units",
-        "Description": "Nudge a Small unattended object or magical effect 1 unit in any direction. If used on a spell zone or terrain effect, you may shift its origin by 1 unit instead.",
+        "Range": "5 tiles",
+        "Description": "Nudge a Small unattended object or magical effect 1 tile in any direction. If used on a spell zone or terrain effect, you may shift its origin by 1 tile instead.",
         "Upcast": "",
         "Lore": "Even magic can be poked."
     },
@@ -1434,7 +1434,7 @@
         "Name": "Spark",
         "Cost": "0",
         "Type": "Action",
-        "Range": "4 units",
+        "Range": "4 tiles",
         "Description": "Deal 1 Lightning Damage to a creature or object. If the target is Wet, Metallic, or standing in water, increase the damage to 2.",
         "Upcast": "",
         "Lore": "All storms begin with a thought."
@@ -1445,7 +1445,7 @@
         "Name": "Frost Film",
         "Cost": "0",
         "Type": "Action",
-        "Range": "4 units",
+        "Range": "4 tiles",
         "Description": "Coat a tile or object in slick frost. The next creature entering the tile suffers -1 movement on their next turn.",
         "Upcast": "",
         "Lore": "Cold leaves warnings, not wounds."
@@ -1469,8 +1469,8 @@
         "Name": "Thermal Shock",
         "Cost": "1",
         "Type": "Reaction",
-        "Range": "5 units",
-        "Description": "When a creature affected by Fire takes Cold damage, or a creature affected by Cold takes Fire damage, trigger this spell. The creature takes 2 additional damage and is stunned until the end of their next turn.",
+        "Range": "5 tiles",
+        "Description": "When a creature affected by Fire takes Cold damage, or a creature affected by Cold takes Fire damage, trigger this spell. The creature takes [your Spell Damage Bonus] additional damage and is stunned until the end of their next turn.",
         "Upcast": "Increase the bonus damage by +1.",
         "Lore": "Nature punishes indecision."
     },
@@ -1481,9 +1481,9 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Area (Radius 2)",
-        "Description": "Deal 1 Lightning Damage to all creatures in the area. Creatures that are Wet, Metallic, or standing in water instead take 2 damage.",
+        "Description": "Deal 1+[your Spell Damage Bonus] Lightning Damage to all creatures in the area. Creatures that are Wet, Metallic, or standing in water instead take 2+[your Spell Damage Bonus] damage.",
         "Upcast": "Increase base damage by +1.",
-        "Lore": "Electricity follows opportunity."
+        "Lore": "Electricity follows opporttiley."
     },
     {
         "ID": "EC2-4",
@@ -1491,7 +1491,7 @@
         "Name": "Quench the Flame",
         "Cost": "2",
         "Type": "Action",
-        "Range": "5 units",
+        "Range": "5 tiles",
         "Description": "Extinguish all Fire effects in range. For each Fire effect removed, choose a creature in range to heal 3 Health.",
         "Upcast": "Affect one additional creature per Fire effect removed.",
         "Lore": "Even fire can be taught restraint."
@@ -1502,8 +1502,8 @@
         "Name": "Shatterpoint",
         "Cost": "2",
         "Type": "Action",
-        "Range": "6 units",
-        "Description": "Target a creature affected by Cold or restrained by ice. They take 3 damage. If the effect was Cold-based terrain or immobilization, it is destroyed.",
+        "Range": "6 tiles",
+        "Description": "Target a creature affected by Cold or restrained by ice. They take 2+[your Spell Damage Bonus] damage. If the effect was Cold-based terrain or immobilization, it is destroyed.",
         "Upcast": "Increase damage by +1.",
         "Lore": "Frozen things break cleanly."
     },
@@ -1514,7 +1514,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Self",
-        "Description": "Deploy a magical ladder that can support itself in any orientation, it is 3 units tall. The ladder is dismissed when you reach the top and step off, or when you are not within 10 units of it.",
+        "Description": "Deploy a magical ladder that can support itself in any orientation, it is 3 tiles tall. The ladder is dismissed when you reach the top and step off, or when you are not within 10 tiles of it.",
         "Upcast": "Increase height by +2.",
         "Lore": "Always useful to have one of these around."
     },
@@ -1525,8 +1525,447 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Self",
-        "Description": "You deploy a compact 1 unit workshop, it grants you the benefits of a simple workshop, an apprentice brewers kit, an anvil and a ritualist station.",
+        "Description": "You deploy a compact 1 tile workshop, it grants you the benefits of a simple workshop, an apprentice brewers kit, an anvil and a ritualist station.",
         "Upcast": "The benefits increase by 1 tier.",
         "Lore": "Always useful to have one of these around."
+    },
+    
+
+
+
+
+
+
+
+    
+    {
+        "ID": "EC1-X1",
+        "Category": "Elemental",
+        "Name": "Omnia of the Elements",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "Self",
+        "Description": "Choose an element. For the next 2 scenes, all damage you deal of that element is increased by +1.",
+        "Upcast": "Increase duration by 1 scene.",
+        "Lore": "To commit to one force is to let it flow freely through you."
+    },
+    {
+        "ID": "EC1-X2",
+        "Category": "Elemental",
+        "Name": "Earthen Manifestation",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "Surface, 4 tiles",
+        "Description": "Strike from a surface in a 1x4 line perpendicular to it, dealing 2 Vibro Damage and pushing creatures 1 tile away from the surface.",
+        "Upcast": "Increase damage by +1.",
+        "Lore": "The earth answers best when given direction."
+    },
+    {
+        "ID": "EC1-X3",
+        "Category": "Elemental",
+        "Name": "Elemental Fortification",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "1 tile",
+        "Description": "Create full cover on an adjacent tile. It has durability equal to mana spent +2.",
+        "Upcast": "Increase durability by +2.",
+        "Lore": "Stone and frost both understand protection."
+    },
+    {
+        "ID": "EC2-X4",
+        "Category": "Elemental",
+        "Name": "Heavy Rain",
+        "Cost": "2",
+        "Type": "Action",
+        "Range": "5 tiles",
+        "Description": "Deal 1 Vibro Damage. The target is buried and knocked prone. While buried, they cannot be directly targeted and gain +25 Weight.",
+        "Upcast": "Increase damage by +1.",
+        "Lore": "When the sky falls, the ground answers."
+    },
+    {
+        "ID": "EC0-X1",
+        "Category": "Elemental",
+        "Name": "Stone Cutter",
+        "Cost": "0",
+        "Type": "Action",
+        "Range": "Touch",
+        "Description": "Create a simple component of earth such as a brick or stone tool.",
+        "Upcast": "",
+        "Lore": "All structures begin with a single shaped piece."
+    },
+    {
+        "ID": "EC1-X5",
+        "Category": "Elemental",
+        "Name": "Toughen Up",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "Self",
+        "Description": "Gain +2 Armor for this scene.",
+        "Upcast": "Increase Armor by +1.",
+        "Lore": "The body remembers stone."
+    },
+    {
+        "ID": "EC1-X6",
+        "Category": "Elemental",
+        "Name": "Thorn Embrace",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "7 tiles",
+        "Description": "Disable all non-basic movement of a target for 2 turns unless they roll [Fortitude].",
+        "Upcast": "Increase duration by 1 turn.",
+        "Lore": "Nature does not chase—it binds."
+    },
+    {
+        "ID": "EC1-X7",
+        "Category": "Elemental",
+        "Name": "Forest Blessing",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "5 tiles",
+        "Description": "Heal an ally for 2+[your Spell Damage Bonus] Health.",
+        "Upcast": "Increase healing by +1.",
+        "Lore": "Life returns what it is given."
+    },
+    {
+        "ID": "EC0-X2",
+        "Category": "Elemental",
+        "Name": "Camofoliage",
+        "Cost": "0",
+        "Type": "Action",
+        "Range": "Touch",
+        "Description": "Grant Advantage on stealth checks in natural terrain until used.",
+        "Upcast": "",
+        "Lore": "To hide, become part of the whole."
+    },
+    {
+        "ID": "EC1-X9",
+        "Category": "Elemental",
+        "Name": "Wildfire",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "6 tiles",
+        "Description": "Deal 1 Fire Damage. Each time you cast this in the same combat, increase its damage by +1 (max +5).",
+        "Upcast": "Increase base damage by +1.",
+        "Lore": "Fire learns from itself."
+    },
+    {
+        "ID": "EC1-X10",
+        "Category": "Elemental",
+        "Name": "Wall of Fire",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "4 tiles line",
+        "Description": "Create a 4-tile wall of fire that obscures sight. Creatures passing through take [your Spell Damage Bonus] Fire Damage. Lasts 2 rounds.",
+        "Upcast": "Increase length by +2 tiles.",
+        "Lore": "Fire draws boundaries none wish to cross."
+    },
+    {
+        "ID": "EC1-X11",
+        "Category": "Elemental",
+        "Name": "Flame On",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "Self",
+        "Description": "For 2 scenes, your unarmed strikes deal +1 Fire Damage and attackers take [your Spell Damage Bonus] Fire Damage. Grapplers or Grappled take 2+[your Spell Damage Bonus] Fire Damage.",
+        "Upcast": "Increase duration by 1 scene.",
+        "Lore": "To burn is to exist loudly."
+    },
+    {
+        "ID": "EC1-X12",
+        "Category": "Elemental",
+        "Name": "Soothing Fire",
+        "Cost": "1",
+        "Type": "Passive",
+        "Range": "Self",
+        "Description": "You take no damage from your own fire. When affected by fire, heal 1+[your Spell Damage Bonus] Health per instance.",
+        "Upcast": "Increase healing by +1.",
+        "Lore": "Not all flames consume."
+    },
+    {
+        "ID": "EC1-X13",
+        "Category": "Elemental",
+        "Name": "Chain Lightning",
+        "Cost": "1",
+        "Type": "Passive",
+        "Range": "4 tiles",
+        "Description": "When casting a Lightning spell, you may spend 1 additional mana to hit a second target within 4 tiles.",
+        "Upcast": "Add an additional chain target.",
+        "Lore": "Lightning refuses to end where it begins."
+    },
+    {
+        "ID": "EC1-X14",
+        "Category": "Elemental",
+        "Name": "Bouncing Arc",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "6 tiles",
+        "Description": "Deal 1 Lightning Damage. The spell jumps up to 3 times to the nearest new target within 3 tiles.",
+        "Upcast": "Increase jumps by +1.",
+        "Lore": "Energy seeks the path of least resistance."
+    },
+    {
+        "ID": "EC1-X15",
+        "Category": "Elemental",
+        "Name": "Trial by Lightning",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "Area 3",
+        "Description": "Create a storm. Each turn, strike a random enemy for 1+[your Spell Damage Bonus] Lightning Damage. Costs 1 mana per turn to sustain.",
+        "Upcast": "Each +1 damage adds an additional strike.",
+        "Lore": "The storm judges without bias."
+    },
+    {
+        "ID": "EC1-X16",
+        "Category": "Elemental",
+        "Name": "Show of Force",
+        "Cost": "2",
+        "Type": "Action",
+        "Range": "Line 4",
+        "Description": "Deal 3+[your Spell Damage Bonus] Lightning Damage to all enemies in a line.",
+        "Upcast": "Increase range by +2.",
+        "Lore": "Power announced is power respected."
+    },
+    {
+        "ID": "EC1-X17",
+        "Category": "Elemental",
+        "Name": "Crashing Wave",
+        "Cost": "2",
+        "Type": "Action",
+        "Range": "Cone 6x3",
+        "Description": "Deal 2+[your Spell Damage Bonus] Water Damage. Targets must roll [Fortitude] or be pushed 1 tile, or prone on failure.",
+        "Upcast": "Increase damage by +1.",
+        "Lore": "Water moves everything eventually."
+    },
+    {
+        "ID": "EC1-X18",
+        "Category": "Elemental",
+        "Name": "Formless Blade",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "Melee",
+        "Description": "Deal 2 Water Damage. The target cannot be reduced below 1 Health and becomes Wet.",
+        "Upcast": "Increase damage by +1.",
+        "Lore": "Water cuts without ending."
+    },
+    {
+        "ID": "EC1-X19",
+        "Category": "Elemental",
+        "Name": "Riptide",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "6 tiles",
+        "Description": "A target takes 1 damage per tile moved this turn.",
+        "Upcast": "Increase duration by 1 turn.",
+        "Lore": "Movement has a cost."
+    },
+    {
+        "ID": "EC0-X3",
+        "Category": "Elemental",
+        "Name": "Snowball",
+        "Cost": "0",
+        "Type": "Action",
+        "Range": "6 tiles",
+        "Description": "Apply Chill to a target.",
+        "Upcast": "",
+        "Lore": "Harmless—until it isn’t."
+    },
+    {
+        "ID": "EC0-X4",
+        "Category": "Elemental",
+        "Name": "Slip",
+        "Cost": "0",
+        "Type": "Action",
+        "Range": "5 tiles",
+        "Description": "Create slippery terrain.",
+        "Upcast": "",
+        "Lore": "Ice changes intent."
+    },
+    {
+        "ID": "EC1-X20",
+        "Category": "Elemental",
+        "Name": "Shatter",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "5 tiles",
+        "Description": "Deal 1 Cold Damage, or 2+[your Spell Damage Bonus] if the target is Chilled.",
+        "Upcast": "Increase damage by +1.",
+        "Lore": "Cold preserves—and then breaks."
+    },
+    {
+        "ID": "OC1-X1",
+        "Category": "Occult",
+        "Name": "The List",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "6 units",
+        "Description": "Reduce a target’s movement by 3 units until the end of their next turn. If this spell is applied twice to the same target, they become Immobilized until the end of their next turn. They must roll [Fortitude] to resist.",
+        "Upcast": "Increase movement reduction by +1.",
+        "Lore": "Every name written is a step closer to stillness."
+    },
+    {
+        "ID": "OC1-X2",
+        "Category": "Occult",
+        "Name": "Ancient Malediction",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "6 units",
+        "Description": "Curse a creature. Their next attack deals 2+[your Spell Damage Bonus] less damage (AoE attacks deal 1 less instead). The creature may spend 1 Action to remove this curse.",
+        "Upcast": "Increase damage reduction by +1.",
+        "Lore": "Old curses do not shout—they linger."
+    },
+    {
+        "ID": "OC1-X3",
+        "Category": "Occult",
+        "Name": "Unworthy",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "6 units",
+        "Description": "A creature suffers -3 Accuracy until the end of their next turn. If the target has less mana than you, they instead take 3 Dark Damage.",
+        "Upcast": "Increase damage by +1 or penalty by -1.",
+        "Lore": "Power recognizes its lesser."
+    },
+    {
+        "ID": "OC1-X5",
+        "Category": "Occult",
+        "Name": "Fall!",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "5 units",
+        "Description": "Reduce a creature’s carry capacity to one-third of its current value until the end of their next turn. They must roll [Fortitude] to resist.",
+        "Upcast": "Extend duration by 1 turn.",
+        "Lore": "Weight is not always physical."
+    },
+    {
+        "ID": "DC2-X1",
+        "Category": "Divine",
+        "Name": "Salt and Stitches",
+        "Cost": "2",
+        "Type": "Action",
+        "Range": "Touch",
+        "Description": "Resurrect a creature that died within the last scene for 1 hour. The creature is not under your control. During the final 20 minutes, its movement is halved.",
+        "Upcast": "Extend duration by +30 minutes.",
+        "Lore": "Life can be borrowed—but never owned."
+    },
+    {
+        "ID": "DC1-X1",
+        "Category": "Divine",
+        "Name": "Sown Seeds",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "Aura 3",
+        "Description": "All allies in range who did not attack during the previous scene gain +1 damage on their next attack.",
+        "Upcast": "Increase the bonus damage by +1.",
+        "Lore": "Restraint today becomes strength tomorrow."
+    },
+    {
+        "ID": "DC1-X2",
+        "Category": "Divine",
+        "Name": "Troll Gifts",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "5 units",
+        "Description": "Grant an ally 2+[your Spell Healing Bonus] Guard until the end of the round. If they already have Guard, they instead heal 2+[your Spell Healing Bonus] Health.",
+        "Upcast": "Increase Guard or healing by +1.",
+        "Lore": "Blessings are not always given with grace."
+    },
+    {
+        "ID": "DC2-X2",
+        "Category": "Divine",
+        "Name": "Indestructible",
+        "Cost": "2",
+        "Type": "Reaction",
+        "Range": "5 units",
+        "Description": "When an ally would be reduced to 0 Health, they instead remain at 1 Health.",
+        "Upcast": "Also grant the ally 2 Guard.",
+        "Lore": "Some refuse to fall—not by strength, but by decree."
+    },
+    {
+        "ID": "DC2-X3",
+        "Category": "Divine",
+        "Name": "Starlit Epiphany",
+        "Cost": "2",
+        "Type": "Action",
+        "Range": "Self",
+        "Description": "You regain all mana this turn. At the end of your turn, your mana becomes your previous amount minus 4.",
+        "Upcast": "Reduce the mana loss by 1.",
+        "Lore": "Clarity comes all at once—and leaves just as quickly."
+    },
+    {
+        "ID": "DC1-X3",
+        "Category": "Divine",
+        "Name": "Regain Vigor",
+        "Cost": "2",
+        "Type": "Action",
+        "Range": "5 units",
+        "Description": "Deal 2+[your Spell Damage Bonus] Light Damage. If this is your first action this combat, heal yourself or an ally for the damage dealt.",
+        "Upcast": "Increase damage and healing by +1.",
+        "Lore": "The first light of day restores what was lost."
+    },
+    {
+        "ID": "DC1-X4",
+        "Category": "Divine",
+        "Name": "Affliction",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "Touch",
+        "Description": "Grant yourself or a willing creature +2 Grace until the end of the scene.",
+        "Upcast": "Increase Grace by +1.",
+        "Lore": "Suffering, chosen willingly, becomes power."
+    },
+    {
+        "ID": "AC1-X1",
+        "Category": "Arcane",
+        "Name": "Death Ray",
+        "Cost": "3",
+        "Type": "Action",
+        "Range": "6 units",
+        "Description": "Fire a focused ray dealing 2+[your Spell Damage Bonus] Force Damage. Each time you cast this spell in the same combat, increase its damage by +2 (max 4).",
+        "Upcast": "Increase base damage by +1.",
+        "Lore": "Iteration refines destruction."
+    },
+    {
+        "ID": "AC1-X2",
+        "Category": "Arcane",
+        "Name": "Go Hard",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "6 units",
+        "Description": "Deal 1 Force Damage and gain 1 Guard. Each time you cast this spell in the same combat, track it. On the 4th cast, instead deal 5 Force Damage in a 3x3 area.",
+        "Upcast": "Increase Guard gained by +1.",
+        "Lore": "Commitment escalates consequences."
+    },
+    {
+        "ID": "AC1-X3",
+        "Category": "Arcane",
+        "Name": "Ravenous Flock",
+        "Cost": "3",
+        "Type": "Action",
+        "Range": "6 units",
+        "Description": "Deal 4+[your Spell Damage Bonus] Dark Damage to a creature that is either Immobilized or below half Health. Cannot target creatures that meet neither condition.",
+        "Upcast": "Increase damage by +1.",
+        "Lore": "They gather where weakness shows."
+    },
+    {
+        "ID": "AC2-X1",
+        "Category": "Arcane",
+        "Name": "Spell Thief",
+        "Cost": "2",
+        "Type": "Action",
+        "Range": "Sight",
+        "Description": "Spend 1 additional mana to cast one of the last 3 spells cast by another creature.",
+        "Upcast": "You may choose from the last 5 spells instead.",
+        "Lore": "Why learn when you can take?"
+    },
+    {
+        "ID": "AC1-X4",
+        "Category": "Arcane",
+        "Name": "Nopeify!",
+        "Cost": "1",
+        "Type": "Reaction",
+        "Range": "6 units",
+        "Description": "When a creature casts a cantrip, cancel the spell.",
+        "Upcast": "You may instead impose -4 Accuracy on a non-cantrip spell.",
+        "Lore": "Some magic simply refuses to happen."
     }
+
 ]

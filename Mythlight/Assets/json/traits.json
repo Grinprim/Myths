@@ -2429,7 +2429,7 @@
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "⫘ ★ Taunt",
-    "Description": "Deal half Your Level rounded up damage in a 1 tile radius around you. Taunted enemies take damage an additional time. The damage type matches your weapon.",
+    "Description": "Deal half Your Level rounded up damage in a 1 tile radius around you. Taunted enemies take damage an additional time. Creatures must roll [Reflex] vs [8 + your Finesse or Might] to resist the damage. The damage type matches your weapon.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
