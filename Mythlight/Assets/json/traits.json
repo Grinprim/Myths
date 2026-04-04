@@ -3137,7 +3137,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Spellcasting",
-    "Description": "Your Spells no longer cost Mana; You only have 1 Action per turn.",
+    "Description": "Your Spells no longer cost Mana; But they cost 2 Actions to cast.",
     "Scaling": ""
   },
   {
