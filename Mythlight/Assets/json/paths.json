@@ -9,7 +9,7 @@
       "description": "It's not brutality, it's a calculated risk. You guide your allies with ferocity into battle no matter how unwinnable. And you always work to come out on top.",
       "bonuses": [
         "Brawn +1",
-        "Charm +1"
+        "Speech +1"
       ],
       "feature": {
         "Name": "Commanding Presence",
@@ -68,7 +68,7 @@
       "summary": "Lightning answers your song.",
       "description": "The song of the heavens calls to you, the rumble, crackle and pop of lightning. Electricity courses through your voice, breaking the air you speak through.",
       "bonuses": [
-        "Charm +1",
+        "Speech +1",
         "Awareness +1"
       ],
       "feature": {
@@ -148,7 +148,7 @@
       "summary": "Words carve deeper than steel.",
       "description": "You speak such sweet words, people hang on your every word. Such fluent speech is bound to draw even the ones most opposed to you to your side.",
       "bonuses": [
-        "Charm +1",
+        "Speech +1",
         "Scholarship +1"
       ],
       "feature": {
@@ -157,7 +157,7 @@
         "Cost": "🗲",
         "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 3] | 3 [lvl 6] | 4 [lvl 9]",
         "Parameters": "",
-        "Description": "Attempt to Charm one intelligent creature for 3 turns, they must roll [Insight] vs [6 + Your Charm] to resist. Outside combat, you have advantage on negotiations and deals."
+        "Description": "Attempt to Charm one intelligent creature for 3 turns, they must roll [Insight] vs [6 + Your Speech] to resist. Outside combat, you have advantage on negotiations and deals."
       }
     },
     {
@@ -246,7 +246,7 @@
       "summary": "Strength measured in protection.",
       "description": "You command your flock, those who follow you, those who stand beside you. Keep them safe, heal their aches. Bring them peace.",
       "bonuses": [
-        "Charm +1",
+        "Speech +1",
         "Insight +1"
       ],
       "feature": {
@@ -434,7 +434,7 @@
       "summary": "War carried on rhythm and breath.",
       "description": "Your voice cuts through steel and fear alike. Every strike lands in time, every step part of the greater song of battle.",
       "bonuses": [
-        "Charm +1",
+        "Speech +1",
         "Finesse +1"
       ],
       "feature": {
@@ -654,7 +654,7 @@
       "summary": "Hope made manifest.",
       "description": "The light in your soul shines tenfold brighter than daylight; you are the light for those around you. May darkness rot in your wake.",
       "bonuses": [
-        "Charm +1",
+        "Speech +1",
         "Reflex +1"
       ],
       "feature": {
