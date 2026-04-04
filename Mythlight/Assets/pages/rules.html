@@ -2010,19 +2010,23 @@
                             </thead>
                             <tbody>
                                 <tr class="border-t border-slate-700">
-                                    <td class="p-2">1. Paths</td>
+                                    <td class="p-2">1. Species</td>
+                                    <td class="p-2">Inherent stat modifiers and traits from the character’s species.</td>
+                                </tr>
+                                <tr class="border-t border-slate-700">
+                                    <td class="p-2">2. Paths</td>
                                     <td class="p-2">Path traits that directly modify stats.</td>
                                 </tr>
                                 <tr class="border-t border-slate-700">
-                                    <td class="p-2">2. Traits</td>
+                                    <td class="p-2">3. Traits</td>
                                     <td class="p-2">Character traits that provide bonuses or penalties.</td>
                                 </tr>
                                 <tr class="border-t border-slate-700">
-                                    <td class="p-2">3. Spells / Items / Crafts</td>
+                                    <td class="p-2">4. Spells / Items / Crafts</td>
                                     <td class="p-2">Temporary effects from magic, equipment, or crafted items.</td>
                                 </tr>
                                 <tr class="border-t border-slate-700">
-                                    <td class="p-2">4. Conditions / Battlefield Hazards</td>
+                                    <td class="p-2">5. Conditions / Battlefield Hazards</td>
                                     <td class="p-2">Ongoing effects from conditions or environmental factors.</td>
                                 </tr>
                             </tbody>
@@ -2033,35 +2037,45 @@
                         <div class="space-y-4 text-sm mb-6">
 
                             <div class="condition-card">
-                                <strong class="text-indigo-400">1. Paths</strong>
+                                <strong class="text-green-400">1.Species</strong>
                                 <p>
-                                    Path effects apply first.
+                                    Species modifiers apply first. These are inherent and do not fluctuate.
+                                    Example: A species trait grants +1 Movement.
+                                    5 → 6
+                                </p>
+                            </div>
+
+
+                            <div class="condition-card">
+                                <strong class="text-indigo-400">2. Paths</strong>
+                                <p>
+                                    Path effects apply second.
                                     Example: “Lose 1 Movement Movement, gain 2 Damage.”
-                                    5 → 4
+                                    6 → 5
                                 </p>
                             </div>
 
                             <div class="condition-card">
-                                <strong class="text-indigo-400">2. Traits</strong>
+                                <strong class="text-indigo-400">3. Traits</strong>
                                 <p>
                                     Traits apply next. Direct reductions modify the stat immediately.
                                     If a trait applies stacks (such as Slow), those stacks resolve later
                                     under Conditions.
-                                    <br>4 → 2 (if reduced by 2)
+                                    <br>5 → 3 (if reduced by 2)
                                 </p>
                             </div>
 
                             <div class="condition-card">
-                                <strong class="text-indigo-400">3. Spells / Items / Crafts</strong>
+                                <strong class="text-indigo-400">4. Spells / Items / Crafts</strong>
                                 <p>
                                     Temporary or external modifiers apply after Traits.
                                     Example: Boots granting +3 Movement.
-                                    <br>2 → 5
+                                    <br>3 → 6
                                 </p>
                             </div>
 
                             <div class="condition-card">
-                                <strong class="text-indigo-400">4. Conditions / Battlefield Hazards</strong>
+                                <strong class="text-indigo-400">5. Conditions / Battlefield Hazards</strong>
                                 <p>
                                     Ongoing conditions resolve last.
                                     Example: Rough terrain halves movement when moving through it.

@@ -6,7 +6,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "Victory is seized through command and unshakable fury.",
-      "description": "It's not brutality, it's a calculated risk. You guide your allies with ferocity, into battle no matter how unwinnable. And you always work to come out on top.",
+      "description": "It's not brutality, it's a calculated risk. You guide your allies with ferocity into battle no matter how unwinnable. And you always work to come out on top.",
       "bonuses": [
         "Brawn +1",
         "Charm +1"
@@ -26,7 +26,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "A blade perfected through grace, patience, and lethal precision.",
-      "description": "A Duel is the most honorable of fights, one on one and to the death. You fight with grit and determination to strike down the foe standing across you. One blade, one strike, one kill.",
+      "description": "A Duel is the most honorable of fights, one-on-one and to the death. You fight with grit and determination to strike down the foe standing across you. One blade, one strike, one kill.",
       "bonuses": [
         "Reflex +1",
         "Finesse +1"
@@ -46,7 +46,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "Power carved from flesh and paid for in blood.",
-      "description": "Your body's limits are merely suggestions, push past what is there, break it and reform it, that is your right. Blood is fuel for your magic, and your body will not resist.",
+      "description": "Your body's limits are merely suggestions. Push past what is there, break it and reform it—that is your right. Blood is fuel for your magic, and your body will not resist.",
       "bonuses": [
         "Fortitude +1",
         "Scholarship +1"
@@ -77,7 +77,7 @@
         "Cost": "🗲",
         "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 3] | 3 [lvl 6] | 4 [lvl 9]",
         "Parameters": "",
-        "Description": "Cast a Lightning spell as if it were one level higher. Lightning spells deal 1 Damage targets wthin 2 units of the target."
+        "Description": "Cast a Lightning spell as if it were one level higher. Lightning spells deal 1 Damage targets within 2 units of the target."
       }
     },
     {
@@ -86,7 +86,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "The wild answers your call.",
-      "description": "Nature is an extension of your body, the creatures who roam it are as much you as you are. You call upon your own pack, you command them, you are the alpha.",
+      "description": "Nature is an extension of your body; the creatures who roam it are as much a part of you as you are of them. You call upon your own pack, you command them, you are the alpha.",
       "bonuses": [
         "Insight +1",
         "Might +1"
@@ -106,7 +106,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "The road itself is your home.",
-      "description": "You have traveled, and will keep traveling, there is no path you will not take, no place you will not see. Forever traveling, forever going, that is your calling.",
+      "description": "You have traveled and will keep traveling; there is no path you will not take, no place you will not see. Forever traveling, forever going, that is your calling.",
       "bonuses": [
         "Reflex +1",
         "Fortitude +1"
@@ -204,7 +204,7 @@
       "name": "Path of the Frostwarden",
       "source": "CORE",
       "summary": "The stillness of the glacier’s heart.",
-      "description": "Oh the stillness of ice, the frost that burns your flesh with its seething cold. They will not move unless you permit it.",
+      "description": "Oh, the stillness of ice—the frost that burns your flesh with its seething cold. They will not move unless you permit it.",
       "bonuses": [
         "Fortitude +1",
         "Insight +1"
@@ -235,7 +235,7 @@
         "Cost": "⧖",
         "Symbols": "Damage X:+1 [lvl 1] | +2 [lvl 3] | +3 [lvl 6] | +4 [lvl 9]",
         "Parameters": "",
-        "Description": "When reduced to 0 Health, lose Half your Max Health until your next rest and stand back up with Full Health. You perish if your maximum reaches 0. The first time this triggers each combat gain +X Damage."
+        "Description": "When reduced to 0 Health, lose half your Max Health until your next rest and stand back up with Full Health. You perish if your maximum reaches 0. The first time this triggers each combat gain +X Damage."
       }
     },
     {
@@ -255,7 +255,7 @@
         "Cost": "🗲",
         "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 3] | 3 [lvl 6] | 4 [lvl 9]",
         "Parameters": "",
-        "Description": "Heal all allies within 2 tiles for [Your Level] Health. Uppon activation, gain +1 Armor and +1 Reflex until your next turn."
+        "Description": "Heal all allies within 2 tiles for [Your Level] Health. Upon activation, gain +1 Armor and +1 Reflex until your next turn."
       }
     },
     {
@@ -264,7 +264,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "You read the future like a flickering map.",
-      "description": "Glimpses of all possibilities flashing by, flowing from one second to another, what could possibly happen next? Doesn’t matter if you already know.",
+      "description": "Glimpses of all possibilities flash by, flowing from one second to another. What could possibly happen next? Doesn’t matter if you already know.",
       "bonuses": [
         "Insight +1",
         "Scholarship +1"
@@ -284,7 +284,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "You pull at the seams of time.",
-      "description": "The fabric of reality unfolds at your finger tips, it reverberates like waves through time. It all makes sense to you, infinities upon infinities, at your grasp.",
+      "description": "The fabric of reality unfolds at your fingertips; it reverberates like waves through time. It all makes sense to you, infinities upon infinities, at your grasp.",
       "bonuses": [
         "Arcana +1",
         "Reflex +1"
@@ -324,7 +324,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "Wisdom carved into scar tissue.",
-      "description": "Your knowledge is vast, you have fought many battles, leaving scars all over your flesh. But these scars carry more than pain, they carry experience.",
+      "description": "Your knowledge is vast; you have fought many battles, leaving scars all over your flesh. But these scars carry more than pain, they carry experience.",
       "bonuses": [
         "Fortitude +1",
         "Insight +1"
@@ -355,7 +355,7 @@
         "Cost": "☀",
         "Symbols": "",
         "Parameters": "",
-        "Description": "Repair or create simple crafts freely (No rolls required). During rest you may imbue 1 item with +1 Damage or +1 Armor until your next rest."
+        "Description": "Repair or create simple crafts freely (No rolls required). During rest, you may imbue 1 item with +1 Damage or +1 Armor until your next rest."
       }
     },
     {
@@ -364,7 +364,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "You strike before fear sets in.",
-      "description": "The smell is unmistakeable, your prey is near, rushing from bush to tree top you see it. It lays unaware of your presence, just how you like it.",
+      "description": "The smell is unmistakable; your prey is near. Rushing from bush to treetop, you see it. It lies unaware of your presence, just how you like it.",
       "bonuses": [
         "Finesse +1",
         "Awareness +1"
@@ -472,7 +472,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "Every word a wound.",
-      "description": "You lace misfortune into your magic, pulling at threads unseen. What remains for those that oppose you is not but sorrow.",
+      "description": "You lace misfortune into your magic, pulling at threads unseen. What remains for those that oppose you is naught but sorrow.",
       "bonuses": [
         "Arcane +1",
         "Insight +1"
@@ -552,7 +552,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "Strike yourself if you dare.",
-      "description": "Polished steel and reflective magic turn aggression inward. Enemies learn quickly that violence Awarenessed at you is rarely theirs alone.",
+      "description": "Polished steel and reflective magic turn aggression inward. Enemies learn quickly that violence directed at you is rarely theirs alone.",
       "bonuses": [
         "Fortitude +1",
         "Arcane +1"
@@ -563,7 +563,7 @@
         "Cost": "🗲",
         "Symbols": "Uses 🗲: 1 [lvl 1] | 2 [lvl 6] | 3 [lvl 12]",
         "Parameters": "",
-        "Description": "Uppon taking damage; you may reflect half of that damage back at the source."
+        "Description": "Upon taking damage, you may reflect half of that damage back at the source."
       }
     },
     {
@@ -572,7 +572,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "You stand between breath and silence.",
-      "description": "Death follows you closely, but it does not clAwareness what is under your watch. You decide who falls, and when.",
+      "description": "Death follows you closely, but it does not claim what is under your watch. You decide who falls, and when.",
       "bonuses": [
         "Insight +1",
         "Scholarship +1"
@@ -583,7 +583,7 @@
         "Cost": "⧖",
         "Symbols": "",
         "Parameters": "",
-        "Description": "Bringing an enemy to 0 Health releases a pulse of healing. You and all allies within 2 units are healed for [Half Your Level]."
+        "Description": "Bringing an enemy to 0 Health releases a pulse of healing. You and all allies within 2 units are healed for half your level rounded up."
       }
     },
     {
@@ -652,7 +652,7 @@
       "source": "CORE",
       "source_color": "indigo",
       "summary": "Hope made manifest.",
-      "description": "The light in your soul shines 10 fold of daylight, you are the light for those around you. May darkness rot in your wake.",
+      "description": "The light in your soul shines tenfold brighter than daylight; you are the light for those around you. May darkness rot in your wake.",
       "bonuses": [
         "Charm +1",
         "Reflex +1"
@@ -663,7 +663,7 @@
         "Cost": "⧖",
         "Symbols": "",
         "Parameters": "",
-        "Description": "When an ally is healed within 2 Units they gain 2 points of Mantra."
+        "Description": "When an ally is healed within 2 tiles they gain 2 points of Mantra."
       }
     },
     {
