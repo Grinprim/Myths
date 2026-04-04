@@ -334,6 +334,16 @@ button:active {
   min-width: 112px;
 }
 
+#health_delta {
+  width: 98px;
+  min-width: 98px;
+}
+
+#health_delta ~ button {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+}
+
 /* Health Bar */
 .health-bar {
   height: 22px;
