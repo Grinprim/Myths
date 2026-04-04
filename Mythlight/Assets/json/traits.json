@@ -1679,7 +1679,7 @@
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Choose an Ally or Companion, this choice can only be changed uppon leveling up.<br><br>While they are within 1 tile of you, gain +1 Accuracy and +1 Armor. Each point of damage they take can be reduced if you double the amount of damage instead. You have +2 Movement while moving towards them.",
+    "Description": "Choose an Ally or Companion, this choice can only be changed uppon leveling up.<br><br>While they are within 1 tile of you, gain +1 Accuracy and +1 Armor. Each point of damage they take can be reduced if you take double the amount of damage instead. You have +2 Movement while moving towards them.",
     "Scaling": ""
   },
   {
