@@ -8,126 +8,243 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
+
+<style>
+    /* Custom scrollbar for sidebar */
+    .custom-scrollbar::-webkit-scrollbar  {
+        width: 8px !important;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: rgba(100, 100, 100, 0.5);
+        border-radius: 4px !important;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(100, 100, 100, 0.8) !important;
+    }
+</style>
+
 <body class="bg-custom-dark text-slate-300">
 
-    <div id="navbar-placeholder"></div>
-        
-    <main class="pt-32 pb-20 px-6 max-w-5xl mx-auto">
-        <div class="mb-12 text-center">
-            <h1 class="text-5xl font-bold text-white mb-4">Playable Species</h1>
-            <p class="text-lg text-indigo-300">Choose your lineage and the innate gifts it bestows upon you.</p>
-        </div>
-        
-        <div class="mb-10 max-w-xl mx-auto">
-            <div class="relative">
-                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">🔍</span>
-                <input id="speciesSearch" type="text" placeholder="Search species..." 
-                    class="w-full px-11 py-3 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
-                <button id="speciesSearchClear" type="button" class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-200" onclick="clearSpeciesSearch()">✕</button>
+<div id="navbar-placeholder"></div>
+
+<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-8">
+
+        <!-- Sidebar -->
+        <aside class="bg-slate-900/40 border border-slate-800 rounded-2xl p-4 sticky top-28 h-[calc(100vh-8rem)] flex flex-col custom-scrollbar">
+
+    <!-- Title (fixed) -->
+    <h2 class="text-lg font-bold text-white mb-4 shrink-0">Species</h2>
+
+    <!-- Scrollable list -->
+    <div id="speciesList" class="space-y-6 overflow-y-auto pr-2 custom-scrollbar"></div>
+
+</aside>
+
+        <!-- Content -->
+        <div id="content">
+            <div class="text-center py-12 text-slate-500 animate-pulse">
+                Loading species...
             </div>
         </div>
-        
-        <div id="content" class="space-y-8">
-            <div class="text-center py-12 text-slate-500 animate-pulse">Summoning archives...</div>
-        </div>
-    </main>
 
-    <div id="footer-placeholder"></div>
+    </div>
+</main>
 
-    <script>
-        // 1. Define loadSpecies
-        async function loadSpecies() {
-            try {
-                // Added 'no-cache' to ensure you get the latest JSON edits immediately
-                const response = await fetch('../json/species.json', { cache: 'no-cache' });
-                
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                
-                const data = await response.json();
-                const container = document.getElementById('content');
-                container.innerHTML = '';
-                
-                // robust check for data structure (Array vs Object)
-                const speciesList = Array.isArray(data) ? data : (data.species || []);
-                const attrNames = { B: 'Body', M: 'Mind', SK: 'Skill', ST: 'Style' };
+<div id="footer-placeholder"></div>
 
-                if (speciesList.length === 0) {
-                    container.innerHTML = '<div class="text-center text-slate-500">No species found.</div>';
-                    return;
-                }
+<script>
+let ALL_SPECIES = [];
 
-                speciesList.forEach(species => {
-                    const section = document.createElement('section');
-                    section.className = 'rule-card relative overflow-hidden group p-8 bg-slate-900/40 rounded-3xl border border-slate-800 shadow-xl mb-8 transition-all hover:border-slate-500/30';
-                    section.innerHTML = `
-                        <div class="absolute top-0 left-0 w-1 h-full bg-${species.source_color}-500 opacity-30 group-hover:opacity-100 transition-opacity"></div>
-                        <span class="text-xs font-black bg-${species.source_color}-600 text-white px-2 py-0.5 rounded">${species.source}</span><h2 class="text-3xl text-white font-bold">${species.name}</h2>
-                        <p class="text-indigo-400 italic text-sm mt-1 mb-4">${species.summary || ''}</p>
-                        <div class="space-y-4 text-slate-300 mb-8 leading-relaxed">
-                            ${Array.isArray(species.description) ? species.description.map(p => `<p>${p}</p>`).join('') : `<p>${species.description}</p>`}
+// Load species
+async function loadSpecies() {
+    try {
+        const response = await fetch('../json/species.json', { cache: 'no-cache' });
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+        const data = await response.json();
+        ALL_SPECIES = Array.isArray(data) ? data : (data.species || []);
+
+        renderSidebar();
+
+        // Auto-load first species
+        if (ALL_SPECIES.length) {
+            renderSpecies(ALL_SPECIES[0].name);
+            setActiveButton(ALL_SPECIES[0].name);
+        }
+
+    } catch (err) {
+        console.error(err);
+        document.getElementById('content').innerHTML = `
+            <div class="text-center py-12 text-rose-400">
+                Failed to load species data.
+            </div>`;
+    }
+}
+
+// Sidebar render
+function renderSidebar() {
+    const list = document.getElementById('speciesList');
+    list.innerHTML = '';
+
+    const grouped = {};
+
+    // Group by source
+    ALL_SPECIES.forEach(sp => {
+        if (!grouped[sp.source]) grouped[sp.source] = [];
+        grouped[sp.source].push(sp);
+    });
+
+    Object.entries(grouped).forEach(([source, speciesArr]) => {
+        const block = document.createElement('div');
+
+        block.innerHTML = `
+            <div class="text-xs uppercase text-slate-500 mb-2 font-bold tracking-wide">
+                ${source}
+            </div>
+            <div class="space-y-1">
+                ${speciesArr.map(sp => `
+                    <button 
+                        data-name="${sp.name}"
+                        onclick="handleSpeciesClick(event, '${sp.name}')"
+                        class="species-btn w-full text-left px-3 py-2 rounded-lg hover:bg-slate-800/60 transition text-slate-300 hover:text-white">
+                        ${sp.name}
+                    </button>
+                `).join('')}
+            </div>
+        `;
+
+        list.appendChild(block);
+    });
+}
+
+async function renderSpecies(name) {
+    const slug = name.toLowerCase().replace(/\s+/g, '_');
+    const htmlPath = `species/${slug}.html`;
+
+    const container = document.getElementById('content');
+
+    // Try loading HTML first
+    try {
+        const res = await fetch(htmlPath, { cache: "no-cache" });
+
+        if (res.ok) {
+            const html = await res.text();
+
+            // Extract only <main> content (important!)
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+
+            const main = doc.querySelector("main");
+
+            container.innerHTML = main 
+                ? main.innerHTML 
+                : `<div class="text-red-400">Invalid HTML structure.</div>`;
+
+            return;
+        }
+    } catch (err) {
+        console.warn("HTML load failed, falling back to JSON.");
+    }
+
+    // Fallback to JSON
+    renderSpeciesFromJSON(name);
+}
+
+// Handle click (sets active + render)
+function handleSpeciesClick(event, name) {
+    renderSpecies(name);
+    setActiveButton(name);
+}
+
+// Highlight active species
+function setActiveButton(name) {
+    document.querySelectorAll('.species-btn').forEach(btn => {
+        if (btn.dataset.name === name) {
+            btn.classList.add('bg-slate-800', 'text-white');
+        } else {
+            btn.classList.remove('bg-slate-800', 'text-white');
+        }
+    });
+}
+
+// Render species content
+function renderSpeciesFromJSON(name) {
+    const species = ALL_SPECIES.find(s => s.name === name);
+    if (!species) return;
+
+    const container = document.getElementById('content');
+    const attrNames = { B: 'Body', M: 'Mind', SK: 'Skill', ST: 'Style' };
+
+    container.innerHTML = `
+        <section class="space-y-6">
+
+            <!-- Header -->
+            <div class="border-b border-slate-800 pb-4">
+                <span class="text-xs font-black bg-${species.source_color}-600 text-white px-2 py-1 rounded">
+                    ${species.source}
+                </span>
+                <h1 class="text-4xl font-bold text-white mt-3">${species.name}</h1>
+                <p class="text-indigo-400 italic mt-2">${species.summary || ''}</p>
+            </div>
+
+            <!-- Description -->
+            <div class="space-y-4 text-slate-300 leading-relaxed">
+                ${Array.isArray(species.description)
+                    ? species.description.map(p => `<p>${p}</p>`).join('')
+                    : `<p>${species.description}</p>`}
+            </div>
+
+            <!-- Attributes -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                ${Object.entries(species.attributes || {}).map(([key, val]) => `
+                    <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 text-center">
+                        <div class="text-xs uppercase text-slate-500">${attrNames[key] || key}</div>
+                        <div class="text-lg font-bold ${
+                            val > 0 ? 'text-emerald-400' :
+                            val < 0 ? 'text-rose-400' :
+                            'text-slate-400'
+                        }">
+                            ${val >= 0 ? '+' : ''}${val}
                         </div>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-                            ${Object.entries(species.attributes || {}).map(([key, val]) => `
-                                <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700/50 flex justify-between items-center">
-                                    <span class="text-[10px] font-bold uppercase text-slate-400">${attrNames[key] || key}</span>
-                                    <span class="${val > 0 ? 'text-emerald-400' : (val < 0 ? 'text-rose-400' : 'text-slate-500')} font-mono font-bold">${val >= 0 ? '+' : ''}${val}</span>
-                                </div>
-                            `).join('')}
+                    </div>
+                `).join('')}
+            </div>
+
+            <!-- Traits -->
+            <div class="space-y-4">
+                ${(species.trait || []).map(trait => `
+                    <div class="bg-slate-900/40 border border-slate-800 rounded-xl p-5 hover:bg-slate-900/60 transition">
+                        <div class="flex justify-between items-center mb-2">
+                            <strong class="text-indigo-200">${trait.name}</strong>
+                            <div class="flex gap-2">
+                                <span class="text-xs px-2 py-1 bg-indigo-900/30 border border-indigo-500/20 rounded uppercase">
+                                    ${trait.action}
+                                </span>
+                                <span class="text-xs px-2 py-1 bg-indigo-900/30 border border-indigo-500/20 rounded uppercase">
+                                    ${trait.type}
+                                </span>
+                            </div>
                         </div>
-                        <div class="grid gap-4">
-                            ${(species.trait || []).map(trait => `
-                                <div class="bg-slate-800/20 rounded-xl p-5 border border-slate-700/40 hover:bg-slate-800/40 transition-colors">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <strong class="text-indigo-100">${trait.name}</strong>
-                                        <div><span class="text-[10px] bg-indigo-900/30 text-indigo-300 px-2 py-1 rounded border border-indigo-500/20 uppercase font-bold">${trait.action }</span>
-                                        <span class="text-[10px] bg-indigo-900/30 text-indigo-300 px-2 py-1 rounded border border-indigo-500/20 uppercase font-bold">${trait.type}</span></div>
-                                    </div>
-                                    <p class="text-sm text-slate-400 leading-relaxed">${trait.description}</p>
-                                </div>
-                            `).join('')}
-                        </div>`;
-                    container.appendChild(section);
-                });
-            } catch (err) {
-                console.error("Species Load Error:", err);
-                document.getElementById('content').innerHTML = `
-                    <div class="text-center py-12 text-rose-400">
-                        <p class="font-bold">Failed to load species data.</p>
-                        <p class="text-xs opacity-70 mt-2">${err.message}</p>
-                    </div>`;
-            }
-        }
+                        <p class="text-sm text-slate-400">${trait.description}</p>
+                    </div>
+                `).join('')}
+            </div>
 
-        // 2. Search
-        function toggleSpeciesClear() {
-            const input = document.getElementById('speciesSearch');
-            const clearBtn = document.getElementById('speciesSearchClear');
-            if (!input || !clearBtn) return;
-            clearBtn.classList.toggle('hidden', !input.value);
-        }
+        </section>
+    `;
+}
 
-        function clearSpeciesSearch() {
-            const input = document.getElementById('speciesSearch');
-            if (!input) return;
-            input.value = '';
-            toggleSpeciesClear();
-            const event = new Event('input');
-            input.dispatchEvent(event);
-        }
+// Init
+document.addEventListener("DOMContentLoaded", () => {
+    loadSpecies();
+});
+</script>
 
-        document.getElementById('speciesSearch').addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            document.querySelectorAll('#content section').forEach(card => {
-                card.style.display = card.textContent.toLowerCase().includes(query) ? '' : 'none';
-            });
-            toggleSpeciesClear();
-        });
+<script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
 
-        // 3. Initialize
-        document.addEventListener("DOMContentLoaded", () => {
-            loadSpecies(); 
-        });
-    </script>
-    <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
 </body>
 </html>
