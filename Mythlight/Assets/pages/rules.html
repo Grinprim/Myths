@@ -2721,7 +2721,7 @@
                         <h3 class="text-xl text-white font-bold mb-3">Attributes</h3>
                         <p class="mb-4 text-sm">
                             NPCs use base Attributes instead of feats:
-                            Bopy (Melee), Skill (Ranged), Mind (Spells).
+                            Body (Melee), Skill (Ranged), Mind (Spells).
                         </p>
                         <p class="mb-6 text-sm">
                             Distribute 4 total points.
@@ -3158,7 +3158,7 @@
         }
 
         function updatePreview() {
-            p_name.innerText = name.value || "Creature Name";
+            p_name.innerText = document.getElementById('name').value || "NPC Name";
             p_speed.innerText = speed.value;
             p_health.innerText = health.value;
             p_armor.innerText = armor.value;
