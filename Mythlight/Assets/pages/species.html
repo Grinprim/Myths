@@ -198,7 +198,7 @@ function renderSpeciesFromJSON(name) {
                     : `<p>${species.description}</p>`}
             </div>
 
-            <!-- Attributes -->
+            <!-- Attribute -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 ${Object.entries(species.attributes || {}).map(([key, val]) => `
                     <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 text-center">
@@ -213,6 +213,17 @@ function renderSpeciesFromJSON(name) {
                     </div>
                 `).join('')}
             </div>
+
+            <!-- Feat points -->
+            ${species.feat_points ? `
+                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 text-center">
+                    <div class="text-xs uppercase text-slate-500">Feat Points</div>
+                    <div class="text-lg font-bold text-indigo-400">
+                        ${species.feat_points}
+                    </div>
+                </div>
+            ` : ''}
+
 
             <!-- Traits -->
             <div class="space-y-4">

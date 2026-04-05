@@ -9,12 +9,13 @@
       "Human societies vary from nomadic tribes to skybound empires. What binds them is ambition — an endless drive to build, explore, and outlast. While some races see them as reckless, others admire their resilience; humanity’s strength lies in reinvention."
     ],
     "attributes": { "B": 0, "M": 0, "SK": 0, "ST": 0 },
+    "feat_points": "+2 Feat Points",
     "trait": [
       {
         "name": "Versatile Spirit",
         "action": "⭘",
         "type": "⧖",
-        "description": "Instead of gaining attribute bonuses, you gain 3 Attribute points to distribute however you wish."
+        "description": "Instead of gaining attribute bonuses, you gain 1 Attribute point to distribute however you wish."
       }
     ]
   },
@@ -27,7 +28,8 @@
       "Stocky, sharp-featured, and thick-skinned, the Dinqui resemble gargoyle-like goblinoids with small wings of stone and horn. Their eyes glimmer like polished gems, and their voices carry a gravelly timbre.",
       "Once guardians of ancient temples, the Dinqui now live among ruins and crag cities, carving art from mountain faces. They value endurance, tradition, and community over conquest, measuring worth by what one can craft or protect."
     ],
-    "attributes": { "B": 2, "M": 1, "SK": 0, "ST": -1 },
+    "attributes": { "B": 1, "M": 0, "SK": 0, "ST": 0 },
+    "feat_points": "+2 Mind Feat Points",
     "trait": [
       {
         "name": "Hardening",
@@ -52,7 +54,8 @@
       "Ashten appear as tall, imposing humanoids with horns of varying shape, glowing eyes, and fissured skin that crackles with contained magical energy. Their tones range from obsidian to copper, often veined with light.",
       "Legends claim the Ashten were born when ancient mortals struck bargains with primal forces of fire and aether. Rather than succumbing, they became vessels of both creation and destruction. Today they form disciplined orders and city-fortresses, guided by philosophy rather than faith."
     ],
-    "attributes": { "B": 1, "M": 2, "SK": 0, "ST": 0 },
+    "attributes": { "B": 0, "M": 1, "SK": 0, "ST": 0 },
+    "feat_points": "+2 Body Feat Points",
     "trait": [
       {
         "name": "Aetherblood Surge",
@@ -71,7 +74,8 @@
       "The Khraa are tall, agile humanoids with lithe, muscular builds and four arms — two dominant and two lighter, more dexterous limbs. Their faces resemble either feline or canine ancestry, with expressive ears, slit or bright eyes, and soft fur patterns across the shoulders and arms.",
       "Nomadic hunters and skyborn raiders, the Khraa value motion and freedom above all. Their cities are built high in cliffs or massive canopy networks, and each clan maintains a Path Code — a philosophy blending honor, challenge, and self-expression. They’re fiercely loyal to their kin and quick to laughter or rage."
     ],
-    "attributes": { "B": 2, "M": 0, "SK": 1, "ST": 0 },
+    "attributes": { "B": 1, "M": 0, "SK": 0, "ST": 0 },
+    "feat_points": "+2 Skill Feat Points",
     "trait": [
       {
         "name": "Fourfold Precision",
@@ -90,7 +94,8 @@
       "Eladri are tall and slender with luminescent, fully colored eyes that glow faintly in dim light. Their tails, long and prehensile, express subtle emotion. Their skin shimmers with faint undertones — often silvers, blues, or violets — and their hair tends toward iridescent hues.",
       "Born of stars and dreams, the Eladri believe themselves descended from the echoes of forgotten constellations. They dwell in crystalline cities suspended between dimensions, where light refracts into living color. Their scholars study not only arcane forces, but the geometry of existence itself. Outsiders see them as distant, but their curiosity for mortal emotion often draws them into the wider world."
     ],
-    "attributes": { "B": 0, "M": 2, "SK": 1, "ST": 0 },
+    "attributes": { "B": 0, "M": 1, "SK": 0, "ST": 0 },
+    "feat_points": "+2 Skill Feat Points",
     "trait": [
       {
         "name": "Starlit Anima",
@@ -109,7 +114,8 @@
     "Rokana are small, subterranean humanoids whose bodies carry distinct arthropod features reminiscent of centipedes. Segmented tails or lower bodies, chitinous plating, jointed limbs, and horn- or antenna-like protrusions are common. Their movements are smooth and deliberate, flowing with an unsettling precision well-suited to tunnels, walls, and tight stone passages.",
     "Rokana society is rustic and highly ritualistic, shaped by repetition, tradition, and shared labor. Their homes are carved directly into caverns and fault lines, reinforced with metalwork and stonecraft, and illuminated by carefully maintained light sources. Customs, ceremonies, and daily routines are passed down with little change, providing structure and meaning in the endless dark beneath the surface."
   ],
-  "attributes": { "B": 1, "M": 0, "SK": 1, "ST": 1 },
+  "attributes": { "B": 1, "M": 0, "SK": 0, "ST": 0 },
+  "feat_points": "+1 Skill Feat Point, +1 Style Feat Point",
   "trait": [
     {
       "name": "Natural Climber",
@@ -128,7 +134,8 @@
       "Elves are tall and slender, their movements graceful and deliberate, as though every step is measured against centuries of practice. Sharp, refined features give them an otherworldly beauty, and their eyes often glimmer with hues reminiscent of distant starlight, moonlit leaves, or dawn skies. They mature slowly and live for centuries, sometimes longer, granting them an expansive sense of time that shapes every choice they make.",
       "Elven cultures prize artistry, precision, and restraint in all things. Craftsmanship is treated as a sacred discipline, whether in blade-forging, architecture grown from living trees, or music woven with subtle magic. Perfection is not pursued through speed or excess, but through repetition, balance, and quiet mastery."
     ],
-    "attributes": { "B": 0, "M": 2, "SK": 0, "ST": 1 },
+    "attributes": { "B": 0, "M": 1, "SK": 0, "ST": 0 },
+    "feat_points":"+2 Style Feat Points",
     "trait": [
       {
         "name": "Elegant Arcanum",
@@ -147,7 +154,8 @@
       "Dwarves are short and broad, with dense musculature and powerful frames shaped by generations spent beneath the earth. Their features are rugged and weathered, as though carved from stone, and their voices carry a deep resonance that commands attention. Even at rest, a dwarf’s presence feels solid and immovable, grounded with an unshakable sense of endurance.",
       "Dwarven societies value tradition, craftsmanship, and honor above all else. History is preserved through lineage and labor, with skills and oaths passed carefully from one generation to the next. To a dwarf, a well-made thing is a form of truth—proof of patience, integrity, and respect for the materials of the world."
     ],
-    "attributes": { "B": 2, "M": -1, "SK": 1, "ST": 0 },
+    "attributes": { "B": 1, "M": 0, "SK": 0, "ST": 0 },
+    "feat_points":"+2 Skill Feat Points, -1 Mind Feat Point",
     "trait": [
       {
         "name": "Stone-Enduring",
@@ -166,7 +174,8 @@
       "Orcs are tall and broad-shouldered, their powerful builds marked by dense muscle and battle-hardened frames. Tusks or pronounced canines frame strong jaws, and their skin ranges from ash-gray to deep green, often bearing scars that tell stories of survival and conflict. Their movements are direct and purposeful, and their presence carries an undeniable physical intensity.",
       "Orc cultures are diverse, shaped by environment, clan, and history, but many emphasize strength, resilience, and emotional honesty. Orcs feel deeply and express those feelings without pretense—joy is loud, anger is fierce, and grief is worn openly. Their passions burn hot and fast, fueling decisive action and fierce loyalty to those they call their own."
     ],
-    "attributes": { "B": 2, "M": 0, "SK": 0, "ST": -1 },
+    "attributes": { "B": 1, "M": 0, "SK": 0, "ST": 0 },
+    "feat_points":"+2 Skill Feat Points, -1 Style Feat Point",
     "trait": [
       {
         "name": "Relentless",
@@ -185,7 +194,8 @@
       "Demonkin bear unmistakable signs of their otherworldly heritage—curving horns, barbed tails, slit or glowing eyes, or skin that smolders with faint embers beneath the surface. Their presence often feels charged, as though reality itself reacts subtly to them, and even those with gentle dispositions can appear unsettling to the unprepared.",
       "Feared or mistrusted by many societies, Demonkin learn early to survive scrutiny and suspicion. Some cultivate commanding confidence or fearsome reputations, while others master subtlety, charm, or misdirection. Whether by force of will or careful manipulation of perception, Demonkin quickly learn how to shape how the world sees them."
     ],
-    "attributes": { "B": 0, "M": 1, "SK": 0, "ST": 2 },
+    "attributes": { "B": 0, "M": 0, "SK": 0, "ST": 1 },
+    "feat_points":"+2 Mind Feat Points",
     "trait": [
       {
         "name": "Infernal Pact",
@@ -204,7 +214,8 @@
       "Gnomes are small and sharp-featured, with expressive faces, bright inquisitive eyes, and hands that rarely stay still. Their thoughts race ahead of their words, resulting in rapid speech, half-finished sentences, and sudden leaps of insight. Even at rest, a gnome seems poised on the edge of the next idea.",
       "They are natural tinkerers, illusionists, and scholars, driven by curiosity rather than ambition or acclaim. Discovery itself is their reward, whether that means unraveling an arcane theory, building an improbable device, or poking at mysteries best left unexplored. To a gnome, the joy of learning far outweighs the risks of failure."
     ],
-    "attributes": { "B": -1, "M": 2, "SK": 1, "ST": 0 },
+    "attributes": { "B": 0, "M": 1, "SK": 0, "ST": 0 },
+    "feat_points":"+2 Skill Feat Points, -1 Body Feat Point",
     "trait": [
       {
         "name": "Quick Thinker",
@@ -223,7 +234,8 @@
       "Goblins are small and wiry, with sharp ears, narrow frames, and restless, darting movements. Their eyes are keen and alert, always scanning for opportunity or danger, and their reflexes are honed by lives spent reacting faster than those around them expect.",
       "Often underestimated or dismissed as weak, goblins thrive through cleverness, improvisation, and adaptability. They excel at turning scraps into tools, ambushes into victories, and disasters into narrow escapes. Survival is their greatest talent, and ingenuity is the weapon they wield best."
     ],
-    "attributes": { "B": -1, "M": 0, "SK": 2, "ST": 1 },
+    "attributes": { "B": 0, "M": 0, "SK": 1, "ST": 0 },
+    "feat_points":"+2 Style Feat Points, -1 Body Feat Point",
     "trait": [
       {
         "name": "Low Blow",
@@ -248,7 +260,8 @@
       "Fae appear broadly humanoid, but always with a subtle sense of wrongness that unsettles careful observers. Their beauty may be unnaturally perfect, their eyes may glow or reflect light strangely, and their shadows sometimes move out of sync with their bodies. Even when still, a fae can feel like a creature only *pretending* to follow mortal rules.",
       "Their minds and bodies are deeply bound to magic, contracts, and rigid yet alien codes of conduct. Promises carry tangible weight, names hold power, and unspoken rules shape their behavior as surely as instinct. To a fae, these bindings are not limitations but the natural order of existence."
     ],
-    "attributes": { "B": 0, "M": 2, "SK": -1, "ST": 1 },
+    "attributes": { "B": 0, "M": 0, "SK": 0, "ST": 1 },
+    "feat_points":"+2 Mind Feat Points, -1 Skill Feat Point",
     "trait": [
       {
         "name": "Twinkle",
@@ -273,7 +286,8 @@
       "Lizardfolk are reptilian humanoids, their bodies covered in tough, textured scales that range in color from earthy browns to vibrant greens. Their eyes are sharp with vertical slit pupils, attuned to detect movement and danger in even the dimmest light. Adapted to harsh and unforgiving environments, they move with deliberate caution and efficiency.",
       "Lizardfolk approach life with pragmatic realism, prioritizing survival and practical utility above abstract ideals or emotions. Their decisions are guided by instinct and experience, favoring what works over what is merely honorable or traditional. To them, strength and adaptability are the keys to enduring the challenges of their world."
     ],
-    "attributes": { "B": 1, "M": 0, "SK": 2, "ST": -1 },
+    "attributes": { "B": 0, "M": 0, "SK": 1, "ST": 0 },
+    "feat_points":"+2 Body Feat Points, -1 Style Feat Points",
     "trait": [
       {
         "name": "Natural Armor",
@@ -292,7 +306,8 @@
       "Seraphkin often appear human at first glance but bear unmistakable signs of their divine heritage—glowing eyes that shimmer with inner light, radiant marks tracing sacred patterns across their skin, or an unshakable calm that seems to steady those around them. Their presence carries a subtle but profound sense of grace and authority.",
       "Though gifted, Seraphkin are frequently burdened by the high expectations placed upon them by others—be it to act as mediators, protectors, or symbols of hope. These responsibilities can weigh heavily, shaping their choices and often isolating them from those who cannot understand the weight of their divine calling."
     ],
-    "attributes": { "B": 0, "M": 2, "SK": 0, "ST": 1 },
+    "attributes": { "B": 0, "M": 1, "SK": 0, "ST": 0 },
+    "feat_points":"+2 Style Feat Points",
     "trait": [
       {
         "name": "Radiant Soul",
@@ -311,7 +326,8 @@
       "Constructs are created rather than born, forged from metal, stone, wood, or other materials and brought to life through arcane enchantments or intricate mechanical designs. Their forms range from crude and utilitarian to exquisitely detailed, each movement powered by gears, magic, or a blend of both.",
       "Despite their artificial origins, constructs often wrestle with questions of self and purpose. Many seek to define an identity that transcends their original function, striving to understand what it means to be more than mere tools or machines in a world that may never fully accept them as alive."
     ],
-    "attributes": { "B": 2, "M": 0, "SK": 2, "ST": -2 },
+    "attributes": { "B": 1, "M": 0, "SK": 0, "ST": 0 },
+    "feat_points":"+2 Body Feat Points, -1 Style Feat Points",
     "trait": [
       {
         "name": "Artificial Body",
