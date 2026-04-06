@@ -367,7 +367,7 @@
   {
     "Name": "Arcane Spellcaster",
     "Action":"⭘",
-    "tags": ["Magic", "Arcane"],
+    "tags": ["Magic", "Arcane", "Cantrips"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
@@ -377,7 +377,7 @@
   {
     "Name": "Divine Spellcaster",
     "Action":"⭘",
-    "tags": ["Magic", "Divine"],
+    "tags": ["Magic", "Divine", "Cantrips"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
@@ -397,7 +397,7 @@
   {
     "Name": "Occult Spellcaster",
     "Action":"⭘",
-    "tags": ["Magic", "Occult"],
+    "tags": ["Magic", "Occult", "Cantrips"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
@@ -407,7 +407,7 @@
   {
     "Name": "Elemental Spellcaster",
     "Action":"⭘",
-    "tags": ["Magic", "Elemental"],
+    "tags": ["Magic", "Elemental", "Cantrips"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Spellcasting",
@@ -437,7 +437,7 @@
   {
     "Name": "Cantrip Knowledge",
     "Action":"⭘",
-    "tags": ["Magic", "Cantrips"],
+    "tags": ["Magic", "Cantrips", "Mana"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Spellcasting",
@@ -457,7 +457,7 @@
   {
     "Name": "Chef",
     "Action":"⭘",
-    "tags": ["Utility", "Buff"],
+    "tags": ["Utility", "Buff", "Ally", "Defense"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -477,7 +477,7 @@
   {
     "Name": "Miner",
     "Action":"⭘",
-    "tags": ["Utility", "Damage"],
+    "tags": ["Utility", "Damage", "Debuff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -487,7 +487,7 @@
   {
     "Name": "Brewer",
     "Action":"⭘",
-    "tags": ["Utility"],
+    "tags": ["Utility", "Crafting"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -507,7 +507,7 @@
   {
     "Name": "Storyteller",
     "Action":"⭘",
-    "tags": ["Social", "Grace", "Buff"],
+    "tags": ["Social", "Grace", "Ally", "Feats"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -517,7 +517,7 @@
   {
     "Name": "Gravedigger",
     "Action":"⭘",
-    "tags": ["Utility", "Death", "Healing", "Grace"],
+    "tags": ["Utility", "Death", "Healing", "Grace", "Ally"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "★ Death",
@@ -527,7 +527,7 @@
   {
     "Name": "Bardic Drunk",
     "Action":"⭘",
-    "tags": ["Debuff", "Damage", "Buff"],
+    "tags": ["Damage", "Sacrifice"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -537,7 +537,7 @@
   {
     "Name": "Hermit",
     "Action":"⭘",
-    "tags": ["Utility", "Buff"],
+    "tags": ["Utility", "Healing", "Accuracy", "Defense"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -547,11 +547,11 @@
   {
     "Name": "Street Performer",
     "Action":"⬖",
-    "tags": ["Social", "Buff", "Gold"],
+    "tags": ["Social", "Accuracy", "Gold", "Ally"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Performing earns rewards worth at least 3 gold (Narrator's Discretion), does not consume uses. Performing in combat grants allies within 5 tiles +2 Accuracy.",
+    "Description": "Performing in public earns rewards worth at least 3 gold (Narrator's Discretion), does not consume uses. Performing in combat grants allies within 5 tiles +2 Accuracy.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
@@ -567,17 +567,17 @@
   {
     "Name": "Combat Trapper",
     "Action":"⬖",
-    "tags": ["Utility", "Traps", "Damage"],
+    "tags": ["Utility", "Traps", "Crafting", "Debuff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Using [1× Common Component] you can create a trap in an adjacent unoccupied tile. The trap can activate only once, dealing X Blunt damage and applying 3 stacks of Slow to a creature that stepped on the same tile as the trap. Using [1× Rope Component] you can create and throw a Bola. You are proficient with Bolas as a Finesse(thrown) weapon. Bolas can be thrown up to 6 tiles away doing X Blunt damage and applying 3 stacks of Slow to the creature.",
+    "Description": "Using [1× Common Component] you can create a trap in an adjacent unoccupied tile. The trap can activate only once, dealing X Blunt damage and applying 3 stacks of Slow to a creature that stepped on the same tile as the trap.<br>Using [1× Rope Component] you can create and throw a Bola. You are proficient with Bolas as a Finesse(thrown) weapon. Bolas can be thrown up to 6 tiles away doing X Blunt damage and applying 3 stacks of Slow to the creature.",
     "Scaling": "Damage X:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
     "Name": "Conductive Wiring",
     "Action":"⬖",
-    "tags": ["Utility", "Traps"],
+    "tags": ["Utility", "Traps", "Debuff", "Crafting"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Combat Trapper",
@@ -587,17 +587,17 @@
   {
     "Name": "Survivalist",
     "Action":"⭘",
-    "tags": ["Utility", "Buff"],
+    "tags": ["Utility", "Buff", "Accuracy"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain +X Accuracy against beasts and natural creatures. Gain +X on Awareness, Reflex, and Fortitude checks in natural environments.",
+    "Description": "Gain +X Accuracy against beasts and natural creatures. Gain +X on Awareness, Reflex, and Fortitude checks against natural environments.",
     "Scaling": "Accuracy X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
   },
   {
     "Name": "Tracer Shot",
     "Action":"⬖",
-    "tags": ["Ranged", "Buff", "Accuracy"],
+    "tags": ["Ranged", "Ally", "Accuracy"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Any Ranged Proficiency",
@@ -621,7 +621,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Melee spell effects have +X Accuracy",
+    "Description": "Melee spell effects have +X Accuracy.",
     "Scaling": "Accuracy X:<br>+2 [lvl 1]<br>+3 [lvl 3]<br>+4 [lvl 6]<br>+5 [lvl 9]"
   },
   {
@@ -656,7 +656,7 @@
   },
   {
     "Name": "Bonded Instinct",
-    "Action":"⬖",
+    "Action":"⭘",
     "tags": ["Companion", "Accuracy"],
     "Cost": "1",
     "Symbols": "⧖",
@@ -667,7 +667,7 @@
   {
     "Name": "Spirit Bond",
     "Action":"⭘",
-    "tags": ["Companion", "Healing"],
+    "tags": ["Companion", "Healing", "Senses"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": " ⫘ ★ Companion",
@@ -677,15 +677,15 @@
   {
     "Name": "Noble Steed",
     "Action":"⭘",
-    "tags": ["Companion", "Defense"],
+    "tags": ["Companion", "Defense", "Guard", "Movement"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Beast Whisperer",
-    "Description": "While riding your companion, gain +2 Armor. First damage you or your mount take each combat grants Guard equal to mount's Movement.",
+    "Description": "While riding your companion, gain +2 Armor. First damage you or your mount takes each combat grants Guard equal to mount's Movement.",
     "Scaling": ""
   },
   {
-    "Name": "Carapace",
+    "Name": "Gumption",
     "Action":"⭘",
     "tags": ["Defense"],
     "Cost": "1",
@@ -707,7 +707,7 @@
   {
     "Name": "Weakpoint",
     "Action":"⭘",
-    "tags": ["Combat", "Accuracy", "Buff"],
+    "tags": ["Combat", "Accuracy"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -715,7 +715,7 @@
     "Scaling": "Accuracy X:<br>+2 [lvl 1]<br>+3 [lvl 3]<br>+4 [lvl 6]<br>+5 [lvl 9]"
   },
   {
-    "Name": "Ancient Study",
+    "Name": "Secrets Of The Cosmos",
     "Action":"⭘",
     "tags": ["Magic", "Cantrips", "Occult", "Cosmic"],
     "Cost": "1",
@@ -747,11 +747,11 @@
   {
     "Name": "Leg Day",
     "Action":"⭘",
-    "tags": ["Utility", "Movement"],
+    "tags": ["Utility", "Movement", "Debuff"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Double Movement until next turn; Movement is halved the following turn.",
+    "Description": "Double your Movement until next turn; your Movement is halved the following turn.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
@@ -761,7 +761,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "The first melee hit you make each scene gains +X Damage.",
+    "Description": "The first melee strike you make each scene gains +X Damage.",
     "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
   {
@@ -781,7 +781,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You gain +1 Spirit when resisting spell effects. If the spell is from the a school you have access to, gain +2 Spirit instead.",
+    "Description": "You gain +1 Spirit when resisting spell effects. If the spell is from a school you have access to, gain +2 Spirit instead.",
     "Scaling": ""
   },
   {
@@ -807,7 +807,7 @@
   {
     "Name": "Pocket Sand",
     "Action":"◇",
-    "tags": ["Melee", "Senses"],
+    "tags": ["Melee", "Senses", "Debuff"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -827,7 +827,7 @@
   {
     "Name": "Reinforced Construction",
     "Action":"⭘",
-    "tags": ["Crafting", "Utility"],
+    "tags": ["Crafting", "Utility", "Repair"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -877,7 +877,7 @@
   {
     "Name": "Arc Current",
     "Action":"⬖",
-    "tags": ["Crafting", "Damage"],
+    "tags": ["Crafting", "Damage", "Companion"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Tinker",
@@ -890,14 +890,14 @@
     "tags": ["Magic", "Crafting"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "",
+    "Parameters": "⫘ ★ Spellcasting",
     "Description": "When casting a spell through a spellcasting craft, add your Spell damage bonus to the spell's damage.",
     "Scaling": ""
   },
   {
     "Name": "Spell Interface",
     "Action":"⭘",
-    "tags": ["Magic", "Crafting"],
+    "tags": ["Magic", "Crafting", "Traps"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ ★ Spellcasting",
@@ -907,7 +907,7 @@
   {
     "Name": "Relentless Advance",
     "Action":"⭘",
-    "tags": ["Melee", "Movement", "Accuracy"],
+    "tags": ["Melee", "Accuracy"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -917,7 +917,7 @@
   {
     "Name": "Locksmith",
     "Action":"⭘",
-    "tags": ["Utility"],
+    "tags": ["Utility", "Feats"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -930,7 +930,7 @@
     "tags": ["Companion", "Healing"],
     "Cost": "1",
     "Symbols": "🗲",
-    "Parameters": "",
+    "Parameters": "⫘ ★ Companion",
     "Description": "If your companion is within 10 tiles. You may teleport them to yourself and heal them by half Your Level rounded up.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
