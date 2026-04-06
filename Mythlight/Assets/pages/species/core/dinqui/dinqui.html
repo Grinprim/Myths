@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mythlight RPG | Dinqui</title>
+    <link rel="icon" type="image/svg+xml" href="../../../../img/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../../css/styles.css">
+    <style>
+        .species-page {
+            position: relative;
+        }
+
+        .species-page::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.14), transparent 45%),
+                        radial-gradient(circle at 80% 75%, rgba(239, 68, 68, 0.08), transparent 40%);
+            z-index: 0;
+        }
+
+        .species-page > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .species-page header h1 {
+            text-shadow: 0 8px 22px rgba(2, 6, 23, 0.65);
+        }
+
+        .species-page section {
+            box-shadow: 0 16px 38px rgba(2, 6, 23, 0.28);
+            transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+        }
+
+        .species-page section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 44px rgba(2, 6, 23, 0.35);
+            border-color: rgba(129, 140, 248, 0.3) !important;
+        }
+
+        .species-page img {
+            box-shadow: 0 12px 26px rgba(2, 6, 23, 0.42);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        @media (max-width: 900px) {
+            .species-page div[style*='display:flex;gap:2rem;align-items:flex-start'] {
+                flex-direction: column;
+            }
+
+            .species-page img {
+                width: min(100%, 380px) !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-custom-dark text-slate-300 relative">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="species-page"
+        style="padding-top:8rem;padding-bottom:5rem;max-width:1100px;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem;">
+
+        <header style="margin-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:1.5rem;">
+            <h1 style="font-size:3.5rem;font-weight:800;color:white;letter-spacing:0.05em;">Dinqui</h1>
+            <h2 style="font-size:1.4rem;color:#a5b4fc;margin-top:0.5rem;font-weight:500;">Source: CORE</h2>
+        </header>
+
+        <div style="display:flex;flex-direction:column;gap:3rem;">
+            <section
+                style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
+                <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Overview</h3>
+                <p style="opacity:0.85;margin-bottom:0.8rem;">Stocky, sharp-featured, and thick-skinned, the Dinqui resemble gargoyle-like goblinoids with small wings of stone and horn. Their eyes glimmer like polished gems, and their voices carry a gravelly timbre.</p>
+            </section>
+
+            <section
+                style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
+                <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Appearance</h3>
+                <div style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:3rem;">
+                    <p style="opacity:0.85;margin-bottom:0.8rem;">Stocky, sharp-featured, and thick-skinned, the Dinqui resemble gargoyle-like goblinoids with small wings of stone and horn. Their eyes glimmer like polished gems, and their voices carry a gravelly timbre.</p>
+                </div>
+            </section>
+
+            <section class="lore"
+                style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
+                <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Culture</h3>
+                <p style="opacity:0.85;margin-bottom:0.8rem;">Once guardians of ancient temples, the Dinqui now live among ruins and crag cities, carving art from mountain faces. They value endurance, tradition, and community over conquest, measuring worth by what one can craft or protect.</p>
+            </section>
+
+            <section
+                style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
+                <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Stats</h3>
+                <div style="opacity:0.9;margin-bottom:1.5rem;">| <b>Size:</b> Small | <b>Height:</b> Avg. 0.6 Units<br>| <b>Speed:</b> 5 Tiles<br>| <b>Lifespan:</b> 100-120 Years<br>| <b>Languages:</b> Common</div>
+                <div style="opacity:0.9;margin-bottom:1.5rem;">
+                    <strong>Attributes:</strong> Body 1, Mind 0, Skill 0, Style 0<br><br>
+                    <strong>Feat Points:</strong> +2 Mind Feat Points
+                </div>
+            </section>
+
+            <section
+                style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
+                <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Traits</h3>
+                <p style="margin-bottom:1rem;opacity:0.85;">When creating your character, choose one of the following:</p>
+                <div style="display:flex;flex-direction:column;gap:0.8rem;">
+                    <div
+                        style="background:rgba(15,23,42,0.6);border:1px solid rgba(30,41,59,0.8);border-radius:12px;padding:1rem;">
+                        <div
+                            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">
+                            <strong style="color:#c7d2fe;">Hardening</strong>
+                            <div style="display:flex;gap:0.4rem;">
+                                <span
+                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">&#226;&#173;</span>
+                                <span
+                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">&#226;&#167;–</span>
+                            </div>
+                        </div>
+                        <p style="font-size:0.85rem;color:#94a3b8;">Whenever you reach half health, you gain Guard equal to your Fortitude. This effect refreshes upon reaching full health.</p>
+                    </div>
+                    <div
+                        style="background:rgba(15,23,42,0.6);border:1px solid rgba(30,41,59,0.8);border-radius:12px;padding:1rem;">
+                        <div
+                            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">
+                            <strong style="color:#c7d2fe;">Flight</strong>
+                            <div style="display:flex;gap:0.4rem;">
+                                <span
+                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">&#226;&#173;</span>
+                                <span
+                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">&#226;&#167;–</span>
+                            </div>
+                        </div>
+                        <p style="font-size:0.85rem;color:#94a3b8;">Using your gargoyle wings, you can fly, ignoring floor hazards and moving freely up to 8 units above the ground. Your flight distance in any direction is limited by your Movement Speed.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../../../dyn/species_nav.js" defer></script>
+    <script id="ml-layout" src="../../../../dyn/layout.js" data-base="../../../.." defer></script>
+</body>
+
+</html>

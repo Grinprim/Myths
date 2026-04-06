@@ -4,7 +4,36 @@
 
     const buildPath = (file) => `${basePath}/dyn/${file}`;
 
+    const NAV_ROUTES = {
+        home: '../index.html',
+        rules: 'pages/rules.html',
+        species: 'pages/species.html',
+        paths: 'pages/paths.html',
+        traits: 'pages/traits.html',
+        spells: 'pages/spells.html',
+        inventory: 'pages/inventory.html',
+        'character-sheet': 'pages/sheet/character_sheet.html',
+    };
+
+    const applyNavbarRoutes = () => {
+        const links = document.querySelectorAll('[data-nav-route]');
+        links.forEach((link) => {
+            const route = link.getAttribute('data-nav-route');
+            const target = route ? NAV_ROUTES[route] : null;
+            if (target) {
+                link.setAttribute('href', `${basePath}/${target}`);
+            }
+        });
+
+        const logo = document.querySelector('[data-nav-logo]');
+        if (logo) {
+            logo.setAttribute('src', `${basePath}/img/logo.png`);
+        }
+    };
+
     const initNavbar = () => {
+        applyNavbarRoutes();
+
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         const links = document.querySelectorAll('.nav-link, .mobile-link');

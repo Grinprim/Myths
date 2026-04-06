@@ -24,40 +24,288 @@
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background-color: rgba(100, 100, 100, 0.8) !important;
     }
+
+    .species-legacy-stats b {
+        color: #e2e8f0;
+        font-weight: 700;
+    }
+
+    .species-legacy-stats {
+        line-height: 1.55;
+    }
+
+    .species-key-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .species-key-item {
+        font-size: 0.95rem;
+        line-height: 1.45;
+        color: #cbd5e1;
+    }
+
+    .species-key-item::before {
+        content: '| ';
+        color: #818cf8;
+    }
 </style>
 
 <body class="bg-custom-dark text-slate-300">
 
 <div id="navbar-placeholder"></div>
 
-<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-8">
-
-        <!-- Sidebar -->
-        <aside class="bg-slate-900/40 border border-slate-800 rounded-2xl p-4 sticky top-28 h-[calc(100vh-8rem)] flex flex-col custom-scrollbar">
-
-    <!-- Title (fixed) -->
-    <h2 class="text-lg font-bold text-white mb-4 shrink-0">Species</h2>
-
-    <!-- Scrollable list -->
-    <div id="speciesList" class="space-y-6 overflow-y-auto pr-2 custom-scrollbar"></div>
-
-</aside>
-
-        <!-- Content -->
-        <div id="content">
-            <div class="text-center py-12 text-slate-500 animate-pulse">
-                Loading species...
+<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto space-y-8">
+    <section class="bg-slate-900/40 border border-slate-800 rounded-2xl p-5 md:p-6">
+        <div class="flex flex-col gap-5">
+            <div class="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-white tracking-wide">Species Archive</h1>
+                    <p class="text-sm text-slate-400 mt-1">Browse species by source, then open a full profile.</p>
+                </div>
+                <div id="sourceTabs" class="flex flex-wrap gap-2"></div>
             </div>
-        </div>
 
-    </div>
+            <div id="speciesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </div>
+    </section>
+
+    <section id="content" class="hidden bg-slate-900/30 border border-slate-800 rounded-2xl p-5 md:p-6">
+        <div class="text-center py-12 text-slate-500">
+            No species page found. Showing JSON fallback...
+        </div>
+    </section>
 </main>
 
 <div id="footer-placeholder"></div>
 
 <script>
 let ALL_SPECIES = [];
+let SPECIES_META = [];
+let ACTIVE_SOURCE = 'All';
+let ACTIVE_SPECIES = null;
+
+function slugify(name) {
+    return String(name || '').toLowerCase().replace(/\s+/g, '_');
+}
+
+function stripHtml(text) {
+    return String(text || '')
+        .replace(/<br\s*\/?\s*>/gi, ' ')
+        .replace(/<[^>]*>/g, '')
+        .replace(/&nbsp;/gi, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function truncateWords(text, maxWords = 15) {
+    const words = stripHtml(text).split(' ').filter(Boolean);
+    if (!words.length) return 'No lore available...';
+    return words.length > maxWords
+        ? `${words.slice(0, maxWords).join(' ')}...`
+        : `${words.join(' ')}...`;
+}
+
+function resolveAssetPath(rawPath, htmlPath) {
+    if (!rawPath) return '';
+    const value = String(rawPath).trim();
+    if (!value) return '';
+    if (/^(https?:|data:|blob:)/i.test(value)) return value;
+
+    try {
+        const htmlRelative = new URL(value, new URL(htmlPath, window.location.href)).href;
+        return htmlRelative;
+    } catch {
+        try {
+            return new URL(value, window.location.href).href;
+        } catch {
+            return value;
+        }
+    }
+}
+
+function getHtmlCandidates(name, source) {
+    const slug = slugify(name);
+    const sourceKey = String(source || '').toUpperCase();
+
+    if (sourceKey === 'CORE') {
+        return [
+            `species/core/${slug}/${slug}.html`,
+            `species/${slug}/${slug}.html`,
+            `species/${slug}.html`
+        ];
+    }
+
+    if (sourceKey === 'FAIRYTALE') {
+        return [
+            `species/fairytale/${slug}/${slug}.html`,
+            `species/${slug}/${slug}.html`,
+            `species/${slug}.html`
+        ];
+    }
+
+    return [
+        `species/core/${slug}/${slug}.html`,
+        `species/fairytale/${slug}/${slug}.html`,
+        `species/${slug}/${slug}.html`,
+        `species/${slug}.html`
+    ];
+}
+
+async function fetchSpeciesHtmlData(species) {
+    const candidates = getHtmlCandidates(species?.name, species?.source);
+
+    for (const path of candidates) {
+        try {
+            const res = await fetch(path, { cache: 'no-cache' });
+            if (!res.ok) continue;
+
+            const html = await res.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const main = doc.querySelector('main');
+
+            if (!main) continue;
+
+            const loreNode = doc.querySelector('.lore');
+            const loreParagraph = loreNode ? loreNode.querySelector('p') : null;
+            const loreText = loreParagraph
+                ? loreParagraph.textContent
+                : (loreNode ? loreNode.textContent : '');
+
+            const chooserNode = Array.from(doc.querySelectorAll('p, div')).find((el) =>
+                /when creating your character,\s*choose/i.test(stripHtml(el.textContent || ''))
+            );
+            const chooserScope = chooserNode ? (chooserNode.closest('section') || chooserNode.parentElement) : null;
+            const choiceTraits = chooserScope
+                ? Array.from(chooserScope.querySelectorAll('strong'))
+                    .map((el) => stripHtml(el.textContent || ''))
+                    .filter((label) => label && label.length <= 48)
+                    .filter((label) => !/^(stats|base|attribute|feat points?|action|passive|active|reaction|free action|appearance|culture|subspecies)$/i.test(label))
+                    .filter((label) => !/[✦◆◇⬖⭘☀🗲⧖]/.test(label))
+                    .filter((label) => !/^(size|height|speed|lifespan|languages):/i.test(label))
+                    .filter((label, idx, arr) => arr.indexOf(label) === idx)
+                : [];
+
+            const imageNode = doc.querySelector('main img');
+            const rawImage = imageNode ? imageNode.getAttribute('src') : '';
+            const image = resolveAssetPath(rawImage, path);
+
+            return {
+                path,
+                mainHtml: main.innerHTML,
+                loreText,
+                choiceTraits,
+                image
+            };
+        } catch (err) {
+            console.warn(`Failed loading ${path}`, err);
+        }
+    }
+
+    return null;
+}
+
+function buildStatsPreview(species) {
+    const raw = Array.isArray(species.description) ? species.description[0] : '';
+    const cleaned = stripHtml(raw)
+        .split('|')
+        .map(part => part.trim())
+        .filter(Boolean)
+        .join(' | ');
+    return cleaned || 'Stats unavailable';
+}
+
+function buildStatsFields(species) {
+    const raw = Array.isArray(species.description) ? species.description[0] : '';
+    const normalized = String(raw)
+        .replace(/<br\s*\/?\s*>/gi, '|')
+        .replace(/<\/??b>/gi, '');
+
+    const fields = stripHtml(normalized)
+        .split('|')
+        .map(part => part.trim())
+        .filter(Boolean);
+
+    return fields.length ? fields : ['Stats unavailable'];
+}
+
+function buildLegacyStatsHtml(species) {
+    const raw = Array.isArray(species.description) ? species.description[0] : '';
+    if (!raw) return 'Stats unavailable';
+    return String(raw)
+        .replace(/<b>/gi, '<b>')
+        .replace(/<\/b>/gi, '</b>')
+        .replace(/<br\s*\/?\s*>/gi, '<br>')
+        .trim();
+}
+
+function getAttributeSummary(species) {
+    const map = { B: 'Body', M: 'Mind', SK: 'Skill', ST: 'Style' };
+    const entries = Object.entries(species.attributes || {})
+        .filter(([, value]) => Number(value) !== 0)
+        .map(([key, value]) => `${map[key] || key} ${Number(value) > 0 ? '+' : ''}${value}`);
+
+    if (!entries.length) return 'Attribute: Flexible';
+    return `Attribute: ${entries.join(', ')}`;
+}
+
+function getTraitChoiceSummary(species, htmlData) {
+    const htmlChoices = Array.isArray(htmlData?.choiceTraits) ? htmlData.choiceTraits : [];
+    if (htmlChoices.length) {
+        return `Trait Choice: choose 1 of ${htmlChoices.length}`;
+    }
+
+    const jsonChoices = Array.isArray(species.trait) ? species.trait.map((t) => t?.name).filter(Boolean) : [];
+    if (jsonChoices.length) {
+        return `Trait Choice: choose 1 of ${jsonChoices.length}`;
+    }
+
+    return 'Trait Choice: Unavailable';
+}
+
+function buildKeyStats(species, htmlData) {
+    const feat = species.feat_points ? `Feat Points: ${species.feat_points}` : 'Feat Points: Unknown';
+    return [
+        getAttributeSummary(species),
+        feat,
+        getTraitChoiceSummary(species, htmlData),
+    ];
+}
+
+function fallbackLoreFromJson(species) {
+    if (Array.isArray(species.description)) {
+        return species.description[2] || species.description[1] || species.description[0] || '';
+    }
+    return species.description || '';
+}
+
+function getInitials(name) {
+    return String(name || '').trim().charAt(0).toUpperCase() || '?';
+}
+
+async function buildSpeciesMeta() {
+    const entries = await Promise.all(
+        ALL_SPECIES.map(async (species) => {
+            const htmlData = await fetchSpeciesHtmlData(species);
+            const loreSeed = htmlData?.loreText || fallbackLoreFromJson(species);
+
+            return {
+                ...species,
+                htmlData,
+                statsPreview: buildStatsPreview(species),
+                statsFields: buildStatsFields(species),
+                legacyStatsHtml: buildLegacyStatsHtml(species),
+                keyStats: buildKeyStats(species, htmlData),
+                lorePreview: truncateWords(loreSeed, 28),
+                image: htmlData?.image || ''
+            };
+        })
+    );
+
+    SPECIES_META = entries;
+}
 
 // Load species
 async function loadSpecies() {
@@ -68,12 +316,14 @@ async function loadSpecies() {
         const data = await response.json();
         ALL_SPECIES = Array.isArray(data) ? data : (data.species || []);
 
-        renderSidebar();
+        await buildSpeciesMeta();
+        renderSourceTabs();
+        renderSpeciesGrid();
 
-        // Auto-load first species
-        if (ALL_SPECIES.length) {
-            renderSpecies(ALL_SPECIES[0].name);
-            setActiveButton(ALL_SPECIES[0].name);
+        // Set an initial active item for highlight only.
+        if (SPECIES_META.length) {
+            ACTIVE_SPECIES = SPECIES_META[0].name;
+            renderSpeciesGrid();
         }
 
     } catch (err) {
@@ -85,90 +335,135 @@ async function loadSpecies() {
     }
 }
 
-// Sidebar render
-function renderSidebar() {
-    const list = document.getElementById('speciesList');
-    list.innerHTML = '';
+function renderSourceTabs() {
+    const tabs = document.getElementById('sourceTabs');
+    const sources = ['All', ...new Set(SPECIES_META.map(sp => sp.source).filter(Boolean))];
 
-    const grouped = {};
-
-    // Group by source
-    ALL_SPECIES.forEach(sp => {
-        if (!grouped[sp.source]) grouped[sp.source] = [];
-        grouped[sp.source].push(sp);
-    });
-
-    Object.entries(grouped).forEach(([source, speciesArr]) => {
-        const block = document.createElement('div');
-
-        block.innerHTML = `
-            <div class="text-xs uppercase text-slate-500 mb-2 font-bold tracking-wide">
+    tabs.innerHTML = sources.map(source => {
+        const isActive = source === ACTIVE_SOURCE;
+        return `
+            <button
+                type="button"
+                data-source="${source}"
+                class="source-tab px-3 py-1.5 rounded-lg border transition text-xs font-semibold tracking-wide uppercase ${
+                    isActive
+                        ? 'bg-indigo-600/70 border-indigo-400/70 text-white'
+                        : 'bg-slate-900/60 border-slate-700 text-slate-300 hover:bg-slate-800'
+                }"
+            >
                 ${source}
-            </div>
-            <div class="space-y-1">
-                ${speciesArr.map(sp => `
-                    <button 
-                        data-name="${sp.name}"
-                        onclick="handleSpeciesClick(event, '${sp.name}')"
-                        class="species-btn w-full text-left px-3 py-2 rounded-lg hover:bg-slate-800/60 transition text-slate-300 hover:text-white">
-                        ${sp.name}
-                    </button>
-                `).join('')}
+            </button>
+        `;
+    }).join('');
+
+    tabs.querySelectorAll('.source-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+            ACTIVE_SOURCE = btn.dataset.source || 'All';
+            renderSourceTabs();
+            renderSpeciesGrid();
+
+            const filtered = getFilteredSpecies();
+            if (!filtered.some(sp => sp.name === ACTIVE_SPECIES) && filtered.length) {
+                selectSpecies(filtered[0].name, false);
+            }
+        });
+    });
+}
+
+function getFilteredSpecies() {
+    if (ACTIVE_SOURCE === 'All') return SPECIES_META;
+    return SPECIES_META.filter(sp => sp.source === ACTIVE_SOURCE);
+}
+
+function renderSpeciesGrid() {
+    const grid = document.getElementById('speciesGrid');
+    const filtered = getFilteredSpecies();
+
+    if (!filtered.length) {
+        grid.innerHTML = `
+            <div class="col-span-full text-center text-slate-500 py-8">
+                No species found in this source.
             </div>
         `;
-
-        list.appendChild(block);
-    });
-}
-
-async function renderSpecies(name) {
-    const slug = name.toLowerCase().replace(/\s+/g, '_');
-    const htmlPath = `species/${slug}.html`;
-
-    const container = document.getElementById('content');
-
-    // Try loading HTML first
-    try {
-        const res = await fetch(htmlPath, { cache: "no-cache" });
-
-        if (res.ok) {
-            const html = await res.text();
-
-            // Extract only <main> content (important!)
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, "text/html");
-
-            const main = doc.querySelector("main");
-
-            container.innerHTML = main 
-                ? main.innerHTML 
-                : `<div class="text-red-400">Invalid HTML structure.</div>`;
-
-            return;
-        }
-    } catch (err) {
-        console.warn("HTML load failed, falling back to JSON.");
+        return;
     }
 
-    // Fallback to JSON
-    renderSpeciesFromJSON(name);
-}
+    grid.innerHTML = filtered.map(sp => {
+        const selected = sp.name === ACTIVE_SPECIES;
+        const fallbackLetter = getInitials(sp.name);
+        const imageBlock = sp.image
+            ? `<img src="${sp.image}" alt="${sp.name}" class="species-image w-full h-full object-cover" data-letter="${fallbackLetter}">`
+            : `<div class="w-full h-full flex items-center justify-center text-2xl font-black text-slate-300">${fallbackLetter}</div>`;
 
-// Handle click (sets active + render)
-function handleSpeciesClick(event, name) {
-    renderSpecies(name);
-    setActiveButton(name);
-}
+        return `
+            <button
+                type="button"
+                data-name="${sp.name}"
+                class="species-card text-left rounded-xl overflow-hidden border transition ${
+                    selected
+                        ? 'border-indigo-400/80 bg-slate-900/90 ring-1 ring-indigo-400/80'
+                        : 'border-slate-700 bg-slate-900/50 hover:border-slate-500 hover:bg-slate-900/80'
+                }"
+            >
+                <div class="h-52 bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden">
+                    ${imageBlock}
+                </div>
+                <div class="p-4 space-y-2.5">
+                    <div class="flex items-center justify-between gap-3">
+                        <h3 class="text-white font-bold text-4xl">${sp.name}</h3>
+                        <span class="text-[10px] uppercase tracking-wide px-2 py-1 rounded border border-slate-600 text-slate-300">${sp.source || 'Unknown'}</span>
+                    </div>
+                    <div class="text-sm text-slate-300/95 leading-relaxed">
+                        <div class="species-legacy-stats">${sp.legacyStatsHtml || sp.statsPreview}</div>
+                    </div>
+                    <ul class="species-key-list">
+                        ${(sp.keyStats || []).map(stat => `
+                            <li class="species-key-item">${stat}</li>
+                        `).join('')}
+                    </ul>
+                    <p class="text-[1.02rem] text-indigo-100/90 leading-relaxed">${sp.lorePreview}</p>
+                </div>
+            </button>
+        `;
+    }).join('');
 
-// Highlight active species
-function setActiveButton(name) {
-    document.querySelectorAll('.species-btn').forEach(btn => {
-        if (btn.dataset.name === name) {
-            btn.classList.add('bg-slate-800', 'text-white');
-        } else {
-            btn.classList.remove('bg-slate-800', 'text-white');
-        }
+    grid.querySelectorAll('.species-image').forEach(img => {
+        img.addEventListener('error', () => {
+            const letter = img.getAttribute('data-letter') || '?';
+            img.outerHTML = `<div class="w-full h-full flex items-center justify-center text-2xl font-black text-slate-300">${letter}</div>`;
+        }, { once: true });
     });
+
+    grid.querySelectorAll('.species-card').forEach(card => {
+        card.addEventListener('click', () => {
+            selectSpecies(card.dataset.name || '');
+        });
+    });
+}
+
+function selectSpecies(name, openPage = true) {
+    if (!name) return;
+    ACTIVE_SPECIES = name;
+    renderSpeciesGrid();
+    if (openPage) {
+        openSpeciesPage(name);
+    }
+}
+
+async function openSpeciesPage(name) {
+    const container = document.getElementById('content');
+    const speciesMeta = SPECIES_META.find(sp => sp.name === name);
+
+    if (speciesMeta?.htmlData?.path) {
+        container.classList.add('hidden');
+        window.location.href = speciesMeta.htmlData.path;
+        return;
+    }
+
+    // Fallback to JSON when no species HTML page exists.
+    container.parentElement?.classList.remove('hidden');
+    renderSpeciesFromJSON(name);
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // Render species content

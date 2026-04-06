@@ -1,19 +1,19 @@
 <nav class="fixed w-full z-50 nav-container">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <div class="flex items-center space-x-4">
-            <img src="../img/logo.png" alt="Mythlight" class="h-10 w-auto object-contain" onerror="this.style.display='none'">
+            <img src="../img/logo.png" alt="Mythlight" class="h-10 w-auto object-contain" data-nav-logo onerror="this.style.display='none'">
             <span class="text-xl font-bold tracking-widest uppercase fantasy-font nav-logo-text">Mythlight</span>
         </div>
 
         <div id="nav-links" class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-widest">
-            <a style="padding-top:5px;" href="../../index.html" class="nav-link">Home</a>
-            <a style="padding-top:5px;" href="rules.html" class="nav-link">Rules</a>
-            <a style="padding-top:5px;" href="species.html" class="nav-link">Species</a>
-            <a style="padding-top:5px;" href="paths.html" class="nav-link">Paths</a>
-            <a style="padding-top:5px;" href="traits.html" class="nav-link">Traits</a>
-            <a style="padding-top:5px;" href="spells.html" class="nav-link">Spells</a>
-            <a style="padding-top:5px;" href="inventory.html" class="nav-link">Inventory</a>
-            <a style="background: linear-gradient(270deg, rgba(99, 102, 241, 0.2), rgba(255, 255, 255, 0)); border-radius: 0.5rem; height: 2em; padding-top:5px;" href="../sheet/character_sheet.html" class="nav-link">Character Sheet ➤ </a>
+            <a style="padding-top:5px;" href="../../index.html" class="nav-link" data-nav-route="home">Home</a>
+            <a style="padding-top:5px;" href="rules.html" class="nav-link" data-nav-route="rules">Rules</a>
+            <a style="padding-top:5px;" href="species.html" class="nav-link" data-nav-route="species">Species</a>
+            <a style="padding-top:5px;" href="paths.html" class="nav-link" data-nav-route="paths">Paths</a>
+            <a style="padding-top:5px;" href="traits.html" class="nav-link" data-nav-route="traits">Traits</a>
+            <a style="padding-top:5px;" href="spells.html" class="nav-link" data-nav-route="spells">Spells</a>
+            <a style="padding-top:5px;" href="inventory.html" class="nav-link" data-nav-route="inventory">Inventory</a>
+            <a style="background: linear-gradient(270deg, rgba(99, 102, 241, 0.2), rgba(255, 255, 255, 0)); border-radius: 0.5rem; height: 2em; padding-top:5px;" href="../sheet/character_sheet.html" class="nav-link" data-nav-route="character-sheet">Character Sheet ➤ </a>
         </div>
 
         <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
@@ -25,14 +25,14 @@
 
     <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 w-full overflow-hidden transition-all duration-300">
         <div class="flex flex-col text-sm font-semibold uppercase tracking-widest border-t border-white/5">
-            <a href="../../index.html" class="mobile-link">Home</a>
-            <a href="rules.html" class="mobile-link">Rules</a>
-            <a href="species.html" class="mobile-link">Species</a>
-            <a href="paths.html" class="mobile-link">Paths</a>
-            <a href="traits.html" class="mobile-link">Traits</a>
-            <a href="spells.html" class="mobile-link">Spells</a>
-            <a href="inventory.html" class="mobile-link">Inventory</a>
-            <a style="background: linear-gradient(270deg, rgba(99, 102, 241, 0.2), rgba(255, 255, 255, 0));" href="../sheet/character_sheet.html" class="mobile-link">Character Sheet ➤</a>
+            <a href="../../index.html" class="mobile-link" data-nav-route="home">Home</a>
+            <a href="rules.html" class="mobile-link" data-nav-route="rules">Rules</a>
+            <a href="species.html" class="mobile-link" data-nav-route="species">Species</a>
+            <a href="paths.html" class="mobile-link" data-nav-route="paths">Paths</a>
+            <a href="traits.html" class="mobile-link" data-nav-route="traits">Traits</a>
+            <a href="spells.html" class="mobile-link" data-nav-route="spells">Spells</a>
+            <a href="inventory.html" class="mobile-link" data-nav-route="inventory">Inventory</a>
+            <a style="background: linear-gradient(270deg, rgba(99, 102, 241, 0.2), rgba(255, 255, 255, 0));" href="../sheet/character_sheet.html" class="mobile-link" data-nav-route="character-sheet">Character Sheet ➤</a>
         </div>
     </div>
 </nav>
