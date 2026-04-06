@@ -19,11 +19,11 @@
             inset: 0;
             pointer-events: none;
             background: radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.14), transparent 45%),
-                        radial-gradient(circle at 80% 75%, rgba(239, 68, 68, 0.08), transparent 40%);
+                radial-gradient(circle at 80% 75%, rgba(239, 68, 68, 0.08), transparent 40%);
             z-index: 0;
         }
 
-        .species-page > * {
+        .species-page>* {
             position: relative;
             z-index: 1;
         }
@@ -67,48 +67,158 @@
     <main class="species-page"
         style="padding-top:8rem;padding-bottom:5rem;max-width:1100px;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem;">
 
+        <!-- HEADER -->
         <header style="margin-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:1.5rem;">
             <h1 style="font-size:3.5rem;font-weight:800;color:white;letter-spacing:0.05em;">Eladri</h1>
-            <h2 style="font-size:1.4rem;color:#a5b4fc;margin-top:0.5rem;font-weight:500;">Source: CORE</h2>
+            <h2 style="font-size:1.4rem;color:#a5b4fc;margin-top:0.5rem;font-weight:500;">Children of the Stars</h2>
         </header>
 
         <div style="display:flex;flex-direction:column;gap:3rem;">
+
+            <!-- OVERVIEW -->
             <section
                 style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
                 <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Overview</h3>
-                <p style="opacity:0.85;margin-bottom:0.8rem;">Eladri are tall and slender with luminescent, fully colored eyes that glow faintly in dim light. Their tails, long and prehensile, express subtle emotion. Their skin shimmers with faint undertones â€” often silvers, blues, or violets â€” and their hair tends toward iridescent hues.</p>
+                <p style="opacity:0.85;margin-bottom:0.8rem;">
+                    The Eladri are an ancient people, who have lived upon this world longer than any other race. They
+                    owe this to their immortal lives; while not unkillable, they can live virtually forever, ceasing
+                    to age once they reach maturity.
+                </p>
+                <p style="opacity:0.85;">
+                    They seek knowledge and wish to understand the world before them, whether they live in the mortal
+                    planes or in the infinite sea of the cosmos aboard the Astral Cities.
+                </p>
             </section>
 
+            <!-- APPEARANCE -->
             <section
                 style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
                 <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Appearance</h3>
-                <div style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:1.2rem;">
+                <p style="opacity:0.85;margin-bottom:0.8rem;">
+                    They are medium in stature, slightly shorter than an average human, and possess a presence that
+                    feels faintly luminous. All Eladri share several defining traits, despite cultural division. Their
+                    skin is always vibrant, hues of twilight blues, deep violets, molten golds, rose quartz pinks,
+                    nebula greens, or silvered lavender.<br>
+                    Their ears are elongated and slope slightly downward. While their eyes are enlarged and fully
+                    saturated in color, iris and sclera blending into a single field, their eyes are often compared to
+                    gemstones due to this.<br>
+                    In addition, every Eladri bears a tail, long and expressive, usually tapering with a soft tuft of
+                    hair at the tip. Their tails are often used in communication, as they react expressively to the
+                    emotions that the Eladri exhibit.<br>
+                    Their hair textures vary wildly, from straight silken hair to tight spirals and curls. White hair is
+                    common among many lineages, but so too are deep midnight blacks, blues, and rare metallic hues as
+                    well.
+
+                </p>
+                <h4 style="color:#c7d2fe;margin-bottom:0.5rem;">Wild Eladri — Fallen Stars</h4>
+                <div style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:3rem;">
                     <img src="wild_eladri.png" style="width:280px;border-radius:12px;flex-shrink:0;">
-                    <p style="opacity:0.85;margin-bottom:0.8rem;">Eladri are tall and slender with luminescent, fully colored eyes that glow faintly in dim light. Their tails, long and prehensile, express subtle emotion. Their skin shimmers with faint undertones â€” often silvers, blues, or violets â€” and their hair tends toward iridescent hues.</p>
+                    <p style="opacity:0.85;margin-bottom:0.8rem;">
+                        Wild Eladri are instantly recognizable by their horns; branching, deer-like antlers that grow
+                        naturally from their skulls. These horns are semi-crystalline living structures, faintly
+                        translucent at the tips. Within them shimmer star-like motes that glow softly in darkness,
+                        resembling the night sky.<br>
+                        No two horn sets are identical. Some curve elegantly backward like crescent moons; others spread
+                        wide and intricate like the branches of fate. Small charms, chains, and carved runes are often
+                        woven into them. Breaking a horn is a profound trauma, both physically and spiritually.
+
+                    </p>
+                </div>
+                <h4 style="color:#c7d2fe;margin-bottom:0.5rem;">Astral Eladri — Shining Stars</h4>
+                <div style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:3rem;">
+                    <img src="eladri2.png" style="width:280px;border-radius:12px;flex-shrink:0;">
+                    <p style="opacity:0.85;margin-bottom:0.8rem;">
+                        Astral Eladri lack horns. Instead, their defining feature is a dusting of star freckles
+                        scattered across their cheeks, temples, shoulders, and sometimes down their tails. These
+                        freckles shimmer faintly like constellations in the night sky and subtly brighten when they
+                        channel magic. They often wear clothing that highlights their markings, while still being quaint
+                        and composed.<br>
+                        No two sets of markings are the same, they are a reflection of the personality, wild and
+                        erratic, or calm and composed. They are usually silver, or white in color, although rarely they
+                        can come in almost any color.
+
+                    </p>
                 </div>
             </section>
 
+            <!-- CULTURE -->
             <section class="lore"
                 style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
                 <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Culture</h3>
-                <p style="opacity:0.85;margin-bottom:0.8rem;">Born of stars and dreams, the Eladri believe themselves descended from the echoes of forgotten constellations. They dwell in crystalline cities suspended between dimensions, where light refracts into living color. Their scholars study not only arcane forces, but the geometry of existence itself. Outsiders see them as distant, but their curiosity for mortal emotion often draws them into the wider world.</p>
+                <p style="opacity:0.85;margin-bottom:0.8rem;">
+                    Eladri culture revolves around knowledge and scholarship, they are often researchers, scholars,
+                    mages or other professions that seek knowledge. Raised to study and record the cosmos from a young
+                    age, they form a bond with the stars, treating them as an extension of their own family.
+                    They will often consult the cosmos on daily tasks, or invite it to dine with them symbolically, by
+                    resting a plate of food on the window sill. Rumors say that sometimes the food does go missing,
+                    though no one is quite sure where it goes.<br><br>
+
+                    Eladri live virtually forever, thus certain things like birthdays become rather obsolete, their
+                    perception of time is rather skewed, they will often not notice long stretches of time as such.
+                    Years feel like hours, months like minutes, to an Eladri, a long wait could mean the downfall of an
+                    entire civilization.<br>
+                    Due to this immortality, they often do not enter romantic relationships with mortals, not that they
+                    could make children with them anyway, as Eladri physiology is incompatible with most other races.
+
+                </p>
+                <h4 style="color:#c7d2fe;margin-bottom:0.5rem;">Wild Eladri — Fallen Stars</h4>
+                <p style="opacity:0.85;margin-bottom:0.8rem;">
+                    Wild Eladri live alongside mortals, as they separated themselves from their Astral brethren long
+                    ago. They embraced the mortal world, finding their comfort in the advent of mortal knowledge. Due to
+                    this, they often find themselves as scholars, mages and librarians, tending to vast archives for
+                    years, though always leaving time to explore more of the world.<br>
+                    Traditions have become less important to them, as they have learned from the mortals around them to
+                    cherish life as it comes, seeing pleasure in the moment instead of following rigid traditions from
+                    times long gone. Though some of this behaviour still peeks through, they still are connected to the
+                    Cosmos afterall.<br>
+                    They will often form tight knit communities in settlements, finding comfort in others like
+                    themselves, creating almost a mini Astral City. The atmosphere of these communities is often rather
+                    ethereal. The sky is filled with stars, regardless of time of day, the smell of Eladran food
+                    permeates the air. It is a true reflection of their heritage.
+
+                </p>
+                <h4 style="color:#c7d2fe;margin-bottom:0.5rem;">Astral Eladri — Shining Stars</h4>
+                <p style="opacity:0.85;">
+                    Astral culture is far more rigid, organized and structured. They are a reflection of their
+                    traditions, studying the cosmos, cataloging their discoveries and working tirelessly to store as
+                    much knowledge as possible.<br>
+                    Downtime involves meditation, tea, peace and reading. However there are the more rowdy, that still
+                    wish to be expressive in their nature. Art, Sports, Showmanship and Writing are all present in the
+                    cities. While rigid, the culture is still free, you are your own individual, while working for a
+                    greater purpose.<br>
+                    Astral cities are a reflection of ancient Eladri culture, high peaks and towers surrounded by an
+                    eternal night sky. The Eladri who dwell there reflect the same endurance. They live without the
+                    erosion of age, dedicating centuries to study, refinement, and contribution. What others might call
+                    monotony, they experience as life.
+
+                </p>
             </section>
 
+            <!-- STATS / SUBSPECIES -->
             <section
                 style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
-                <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Stats</h3>
-                <div style="opacity:0.9;margin-bottom:1.5rem;">| <b>Size:</b> Medium | <b>Height:</b> Avg. 1.1 Units<br>| <b>Speed:</b> 5 Tiles<br>| <b>Lifespan:</b> Infinite<br>| <b>Languages:</b> Common, Eladren</div>
+                <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Stats & Subspecies</h3>
+
+                <!-- Wild Eladri -->
+                <h4 style="color:#c7d2fe;margin-bottom:0.5rem;">Wild Eladri — Fallen Stars</h4>
+
                 <div style="opacity:0.9;margin-bottom:1.5rem;">
-                    <strong>Attributes:</strong> Body 0, Mind 1, Skill 0, Style 0<br><br>
-                    <strong>Feat Points:</strong> +2 Skill Feat Points
+                    <strong>Base</strong><br>
+                    Size: Medium · Height: 1.1 units · Speed: 5 tiles · Lifespan: Infinite<br><br>
+                    Languages: Common, Eldar<br><br>
+                    Attribute:
+                    <span
+                        style="font-size:0.75rem;padding:0.3rem 0.6rem;border-radius:999px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);">+1
+                        Mind</span>
+                    <br><br>
+                    Feat Points:
+                    <span
+                        style="font-size:0.75rem;padding:0.3rem 0.6rem;border-radius:999px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);">+2
+                        Skill Feat Points</span>
                 </div>
-            </section>
-
-            <section
-                style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
-                <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Traits</h3>
-                <p style="margin-bottom:1rem;opacity:0.85;">When creating your character, choose one of the following:</p>
-                <div style="display:flex;flex-direction:column;gap:0.8rem;">
+                <p style="margin-bottom:1rem;opacity:0.85;">When creating your character, choose one of the following:
+                </p>
+                <div style="display:flex;flex-direction:column;gap:0.8rem;margin-bottom:1.5rem;">
                     <div
                         style="background:rgba(15,23,42,0.6);border:1px solid rgba(30,41,59,0.8);border-radius:12px;padding:1rem;">
                         <div
@@ -116,15 +226,99 @@
                             <strong style="color:#c7d2fe;">Starlit Anima</strong>
                             <div style="display:flex;gap:0.4rem;">
                                 <span
-                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">&#226;&#172;–</span>
+                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">ACTION
+                                    ⬖</span>
                                 <span
-                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">&#226;&#167;–</span>
+                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">PASSIVE
+                                    ⧖</span>
                             </div>
                         </div>
-                        <p style="font-size:0.85rem;color:#94a3b8;">You may spend 1 Mana to gain +2 Reflex or +2 Accuracy for 2 Scenes.</p>
+                        <p style="font-size:0.85rem;color:#94a3b8;">Spend 1 Mana to gain +2 Reflex or +2 Accuracy for 2
+                            Scenes.</p>
+                    </div>
+                    <div
+                        style="background:rgba(15,23,42,0.6);border:1px solid rgba(30,41,59,0.8);border-radius:12px;padding:1rem;">
+                        <div
+                            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">
+                            <strong style="color:#c7d2fe;">Mortal Knowledge</strong>
+                            <div style="display:flex;gap:0.4rem;">
+                                <span
+                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">ACTION
+                                    ⬖</span>
+                                <span
+                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">ACTIVE
+                                    🗲</span>
+                            </div>
+                        </div>
+                        <p style="font-size:0.85rem;color:#94a3b8;">Spend X Mana to gain +X on a check.</p>
+                        <p style="font-size:0.85rem;color:#faffb5;">
+                            Uses 🗲: Uses 🗲: 1 [lvl 1] 2 [lvl 3] 3 [lvl 6] 4 [lvl 9]
+                        </p>
                     </div>
                 </div>
+                
+                <!-- Astral Eladri -->
+                <h4 style="color:#c7d2fe;margin-bottom:0.5rem;">Astral Eladri — Shining Stars</h4>
+                <p style="opacity:0.85;margin-bottom:1rem;">Marked by shimmering star-freckles that glow when channeling
+                    magic.</p>
+
+                <div style="opacity:0.9;margin-bottom:1.5rem;">
+                    <strong>Base</strong><br>
+                    Size: Medium · Height: 1.1 units · Speed: 5 tiles · Lifespan: Infinite<br><br>
+                    Languages: Common, Eldar<br><br>
+                    Attribute:
+                    <span
+                        style="font-size:0.75rem;padding:0.3rem 0.6rem;border-radius:999px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);">+1
+                        Mind</span>
+                    <br><br>
+                    Feat Points:
+                    <span
+                        style="font-size:0.75rem;padding:0.3rem 0.6rem;border-radius:999px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);">+2
+                        Style Feat Points</span>
+                </div>
+                <p style="margin-bottom:1rem;opacity:0.85;">When creating your character, choose one of the following:
+                </p>
+                <div style="display:flex;flex-direction:column;gap:0.8rem;">
+                    <div
+                        style="background:rgba(15,23,42,0.6);border:1px solid rgba(30,41,59,0.8);border-radius:12px;padding:1rem;">
+                        <div
+                            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">
+                            <strong style="color:#c7d2fe;">Starlit Knowledge</strong>
+                            <div style="display:flex;gap:0.4rem;">
+                                <span
+                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">ACTION
+                                    ⬖</span>
+                                <span
+                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">PASSIVE
+                                    ⧖</span>
+                            </div>
+                        </div>
+                        <p style="font-size:0.85rem;color:#94a3b8;">Spend 1 Mana to gain +2 Arcana or +2 Accuracy for 2
+                            Scenes.</p>
+                    </div>
+                    <div
+                        style="background:rgba(15,23,42,0.6);border:1px solid rgba(30,41,59,0.8);border-radius:12px;padding:1rem;">
+                        <div
+                            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">
+                            <strong style="color:#c7d2fe;">Astral Knowledge</strong>
+                            <div style="display:flex;gap:0.4rem;">
+                                <span
+                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">REACTION
+                                    ◇</span>
+                                <span
+                                    style="font-size:0.65rem;padding:0.2rem 0.4rem;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);border-radius:6px;">ACTIVE
+                                    🗲</span>
+                            </div>
+                        </div>
+                        <p style="font-size:0.85rem;color:#94a3b8;">When receiving an Accuracy bonus, you can instead gain Mana equal to half that amount. (rounded up)</p>
+                        <p style="font-size:0.85rem;color:#faffb5;">
+                            Uses 🗲: Uses 🗲: 2 [lvl 1] 4 [lvl 6] 6 [lvl 12]
+                        </p>
+                    </div>
+                </div>
+
             </section>
+
         </div>
     </main>
 
