@@ -436,12 +436,23 @@
         }
 
         function expandAllTraits(shouldExpand) {
-            document.querySelectorAll('tr[id^="trait-"]').forEach(row => {
-                shouldExpand ? row.classList.remove('hidden') : row.classList.add('hidden');
-                const arrow = document.getElementById(`arrow-${row.id}`);
-                if(arrow) arrow.style.transform = shouldExpand ? 'rotate(180deg)' : 'rotate(0deg)';
-            });
+    traitRowEntries.forEach(entry => {
+        const isVisible = entry.summaryRow.style.display !== 'none';
+
+        if (!isVisible) return; // Skip filtered-out traits
+
+        if (shouldExpand) {
+            entry.detailRow.classList.remove('hidden');
+        } else {
+            entry.detailRow.classList.add('hidden');
         }
+
+        const arrow = entry.summaryRow.querySelector(`#arrow-${entry.summaryRow.dataset.traitId}`);
+        if (arrow) {
+            arrow.style.transform = shouldExpand ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+    });
+}
 
         function setSymbolFilter(symbol) {
             if (symbol === '★' || symbol === '⫘') return;
