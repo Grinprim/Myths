@@ -980,7 +980,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
-    "Description": "The target you dash into is pushed 3 tiles away in the direction of the dash and takes +1 Force damage.",
+    "Description": "The target you dash into is pushed 3 tiles away in the direction of the dash.",
     "Scaling": ""
   },
   {
@@ -990,7 +990,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
-    "Description": "The target you dash to is swapped with your original position. If the target is an ally, they gain Guard equal to your level.",
+    "Description": "The target you dash to is swapped with your original position.",
     "Scaling": ""
   },
   {
@@ -1001,16 +1001,6 @@
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
     "Description": "If you dash onto an ally, they gain Guard equal to your level; otherwise, you gain the Guard.",
-    "Scaling": ""
-  },
-  {
-    "Name": "Mana Charger",
-    "Action":"⭘",
-    "tags": ["Utility", "Mana"],
-    "Cost": "1",
-    "Symbols": "⧖",
-    "Parameters": "⫘ ★ Spellcasting",
-    "Description": "You can charge devices or machines that require electrical power using Mana.",
     "Scaling": ""
   },
   {
@@ -1036,7 +1026,7 @@
   {
     "Name": "Combat Rover",
     "Action":"⬖",
-    "tags": ["Companion", "Combat", "Damage"],
+    "tags": ["Companion", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Mechanical Assistant",
@@ -1400,7 +1390,7 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Non-Lethal Shot",
-    "Description": "Make a ranged attack that reduces target Movement by 3 tiles for X turns.",
+    "Description": "Make a ranged attack that that applies 3 Stacks of Slow to the target for X turns.",
     "Scaling": "Turns/Uses X/🗲:<br>1/1 [lvl 1]<br>2/2 [lvl 3]<br>2/3 [lvl 6]<br>3/4 [lvl 9]"
   },
   {
@@ -1555,7 +1545,7 @@
   {
     "Name": "Lucky Fella",
     "Action":"⭘",
-    "tags": ["Social", "Buff", "Utility"],
+    "tags": ["Social", "Utility"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1575,17 +1565,17 @@
   {
     "Name": "Pocket Aces",
     "Action":"⭘",
-    "tags": ["Social", "Buff", "Utility"],
+    "tags": ["Social", "Utility"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Lucky Fella",
-    "Description": "You gain advantage on all Gambling / Luck related checks.",
+    "Description": "You gain Advantage on all Gambling / Luck related checks.",
     "Scaling": ""
   },
   {
     "Name": "Compelling Invite",
     "Action":"⬖",
-    "tags": ["Combat", "Taunt", "Area"],
+    "tags": ["Taunt", "Area"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Taunt",
@@ -1655,7 +1645,7 @@
   {
     "Name": "Combat Guard",
     "Action":"⭘",
-    "tags": ["Combat", "Taunt", "Guard"],
+    "tags": ["Taunt", "Guard"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Taunt",
@@ -1695,7 +1685,7 @@
   {
     "Name": "Berserk",
     "Action":"⭘",
-    "tags": ["Melee", "Buff", "Rage"],
+    "tags": ["Combat", "Sacrifice", "Rage"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "★ Rage",
@@ -1755,7 +1745,7 @@
   {
     "Name": "Counter Stance",
     "Action":"⭘",
-    "tags": ["Melee", "Damage", "Taunt"],
+    "tags": ["Damage", "Taunt"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Taunt",
@@ -1785,7 +1775,7 @@
   {
     "Name": "Healing Pulse",
     "Action":"⬖",
-    "tags": ["Magic", "Healing", "Area"],
+    "tags": ["Healing", "Area", "Ally"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -1835,7 +1825,7 @@
   {
     "Name": "Arc Shot",
     "Action":"⭘",
-    "tags": ["Combat", "Ranged", "Accuracy"],
+    "tags": ["Ranged", "Accuracy"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Any Ranged Proficiency",
@@ -1845,17 +1835,17 @@
   {
     "Name": "Tough",
     "Action":"⭘",
-    "tags": ["Utility", "Healing"],
+    "tags": ["Defense"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You have +2 Max Health per level.",
+    "Description": "You have bonus Max Health, equal to your trait point maximum",
     "Scaling": ""
   },
   {
     "Name": "Feat Forward",
     "Action":"⭘",
-    "tags": ["Utility"],
+    "tags": ["Feats"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1868,7 +1858,7 @@
     "tags": ["Magic", "Mana"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "⫘ Focus Breaker",
+    "Parameters": "⫘ Focus Breaker, ★ Spellcasting",
     "Description": "Mana you drain from Spellcasters replenishes your Mana.",
     "Scaling": ""
   },
@@ -1913,9 +1903,9 @@
     "Scaling": ""
   },
   {
-    "Name": "Cantrip Overflow",
+    "Name": "Overflow",
     "Action":"⭘",
-    "tags": ["Magic", "Cantrips", "Mana"],
+    "tags": ["Magic", "Cantrips", "Mana", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Spellcasting",
@@ -1945,7 +1935,7 @@
   {
     "Name": "Eternal Guardian",
     "Action":"⭘",
-    "tags": ["Companion", "Ally", "Healing"],
+    "tags": ["Companion", "Ally", "Healing", "Defense"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Back to Back we stand",
@@ -2055,11 +2045,11 @@
   {
     "Name": "Workers Companion",
     "Action":"⭘",
-    "tags": ["Companion", "Crafting", "Buff"],
+    "tags": ["Companion", "Crafting"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Companion",
-    "Description": "Companions each grant +1 Tinker when brewing, crafting, smithing, medicine, spellcrafting or ritual casting.",
+    "Description": "Companions each grant +1 Tinker when brewing, crafting, smithing, medicine, cooking or ritual casting.",
     "Scaling": ""
   },
   {
@@ -2095,7 +2085,7 @@
   {
     "Name": "Thick Skin",
     "Action":"⭘",
-    "tags": ["Defense"],
+    "tags": ["Healing"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2115,7 +2105,7 @@
   {
     "Name": "Sunblessed",
     "Action":"⭘",
-    "tags": ["Buff"],
+    "tags": ["Defense", "Sacrifice"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2125,7 +2115,7 @@
   {
     "Name": "Giant Slayer",
     "Action":"⭘",
-    "tags": ["Combat", "Damage", "Accuracy"],
+    "tags": ["Damage", "Accuracy"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2154,12 +2144,12 @@
   },
   {
     "Name": "Combat Carpenter",
-    "Action":"⭘",
-    "tags": ["Finesse", "Melee", "Crafting", "Improvised"],
+    "Action":"⬖",
+    "tags": ["Finesse", "Melee", "Crafting", "Improvised", "Damage"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Carpenter",
-    "Description": "You can create a improvised melee or finesse weapon from any number of wooden components as an action, it has 1 Durability and deals Blunt damage equaling the number of components used. If it is a thrown finesse weapon it has a range of 5.",
+    "Description": "You can create an improvised melee or finesse weapon from any number of wooden components as an action, it has 1 Durability and deals Blunt damage equaling the number of components used. If it is a thrown finesse weapon it has a range of 5.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -2185,7 +2175,7 @@
   {
     "Name": "Makeup Maid",
     "Action":"⭘",
-    "tags": ["Utility", "Social"],
+    "tags": ["Utility", "Social", "Ally"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2215,11 +2205,11 @@
   {
     "Name": "Fair Fight",
     "Action":"⬖",
-    "tags": ["Combat", "Area", "Debuff"],
+    "tags": ["Area", "Debuff", "Magic"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "⫘ Fair Strike",
-    "Description": "You create a 3×3 zone you must occupy on cast. Spells cannot be cast within it, and spells from outside cannot target creatures inside. The zone lasts 3 Scenes, or ends immediately if you leave the zone.",
+    "Description": "You create a 3×3 zone you must occupy on cast. Cantrips and Spells cannot be cast within it, and spells or cantrips from outside cannot target creatures inside. The zone lasts 3 Scenes, or ends immediately if you leave the zone.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
@@ -2235,7 +2225,7 @@
   {
     "Name": "All Warmed Up",
     "Action":"⭘",
-    "tags": ["Magic", "Buff", "Damage"],
+    "tags": ["Magic", "Mana", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2325,7 +2315,7 @@
   {
     "Name": "Stone Skin",
     "Action":"⭘",
-    "tags": ["Defense"],
+    "tags": ["Guard", "Elemental", "Magic"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Elemental Spellcaster",
@@ -2335,7 +2325,7 @@
   {
     "Name": "Guardian",
     "Action":"⬖",
-    "tags": ["Ally", "Buff", "Guard"],
+    "tags": ["Ally", "Guard"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2359,7 +2349,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Any Ranged Proficiency",
-    "Description": "You fire a number of shots into the sky equal to your highest Ranged Proficiency, these will land and hit 3 random targets within 8 tiles. They deal 1 Damage, and prioritize Enemies.",
+    "Description": "You fire a number of shots into the sky equal to your highest Ranged Proficiency, these will land and hit random targets within 8 tiles. They deal 1 Damage, and prioritize Enemies.",
     "Scaling": ""
   },
   {
@@ -2385,7 +2375,7 @@
   {
     "Name": "Wingman",
     "Action":"⭘",
-    "tags": ["Social", "Buff", "Ally"],
+    "tags": ["Social", "Buff", "Ally", "Companion"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Back to back we stand",
@@ -2405,7 +2395,7 @@
   {
     "Name": "Unshakeable",
     "Action":"⬖",
-    "tags": ["Defense", "Buff", "Guard"],
+    "tags": ["Defense", "Sacrifice", "Guard"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2420,22 +2410,22 @@
     "Symbols": "🗲",
     "Parameters": "",
     "Description": "Deal up to 3 Damage to yourself, heal a creature other than yourself, for double that amount.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>3 [lvl 9]"
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
-    "Name": "Death Lotus",
+    "Name": "Blade Spin",
     "Action":"⬖",
     "tags": ["Taunt", "Area", "Damage"],
     "Cost": "2",
     "Symbols": "🗲",
     "Parameters": "⫘ ★ Taunt",
-    "Description": "Deal half Your Level rounded up damage in a 1 tile radius around you. Taunted enemies take damage an additional time. Creatures must roll [Reflex] vs [8 + your Finesse or Might] to resist the damage. The damage type matches your weapon.",
+    "Description": "Deal half Your Level rounded up damage in a 1 tile radius around you. Taunted enemies take damage an additional time. Creatures must roll [Reflex] vs [8 + your Weapon Proficiency] to resist the damage. The damage type matches your weapon.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
     "Name": "Ruthless Predator",
     "Action":"⭘",
-    "tags": ["Combat", "Damage"],
+    "tags": ["Melee", "Damage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2453,14 +2443,14 @@
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
-    "Name": "Twin Disciplines",
+    "Name": "Mirror Disciplines",
     "Action":"⬖",
-    "tags": ["Accuracy", "Defense", "Buff"],
+    "tags": ["Accuracy", "Defense"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
     "Description": "You gain either +2 Armor or +2 Accuracy until your next turn.",
-    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
+    "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
     "Name": "Mark Of Death",
@@ -2495,7 +2485,7 @@
   {
     "Name": "Morning Light",
     "Action":"⬖",
-    "tags": ["Utility", "Buff"],
+    "tags": ["Combat", "Buff"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2509,11 +2499,11 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "Deal 1 Damage to all Adjacent creatures. If this is the first attack in combat, it deals damage twice.",
+    "Description": "Deal 1 Damage to all Adjacent creatures. If this is your first attack in combat, it deals damage twice. Creatures must roll [Reflex] vs [6 + your Weapon Proficiency] to resist. The damage type matches your weapon.",
     "Scaling": "Uses 🗲:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
   },
   {
-    "Name": "Inhibit",
+    "Name": "Reluctance",
     "Action":"⬖",
     "tags": ["Debuff", "Proficiency"],
     "Cost": "1",
@@ -2548,7 +2538,7 @@
     "tags": ["Magic", "Mana", "Sacrifice"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "",
+    "Parameters": "⫘ ★ Spellcasting",
     "Description": "You lose access to a spell of your choice until your next sleep. You replenish Double its Mana cost as Mana.",
     "Scaling": ""
   },

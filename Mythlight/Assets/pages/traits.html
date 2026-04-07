@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/styles.css">
     <style>
-
         .active-filter {
             background-color: rgba(70, 229, 176, 0.2) !important;
             border-color: rgba(70, 229, 142, 0.3) !important;
@@ -17,12 +17,32 @@
 
 
         /* Modal Animation */
-        #random-trait-modal { transition: opacity 0.3s ease; }
-        .modal-content { animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes modalPop { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        
+        #random-trait-modal {
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalPop {
+            0% {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
         /* Shuffling Effect */
-        .shuffling { filter: blur(2px); opacity: 0.7; transition: all 0.1s; }
+        .shuffling {
+            filter: blur(2px);
+            opacity: 0.7;
+            transition: all 0.1s;
+        }
 
         #tag-filter-select,
         #search-input {
@@ -30,6 +50,7 @@
         }
 
         @media (min-width: 768px) {
+
             #tag-filter-wrap label,
             #search-wrap label {
                 display: none;
@@ -40,11 +61,13 @@
             #tag-filter-wrap label {
                 display: none;
             }
+
             #tag-filter-select {
                 min-height: 2.35rem;
                 font-size: 0.82rem;
                 border-radius: 0.7rem;
             }
+
             #clear-tag-filter {
                 padding-left: 0.65rem;
                 padding-right: 0.65rem;
@@ -53,6 +76,7 @@
         }
     </style>
 </head>
+
 <body class="min-h-screen bg-custom-dark text-slate-300 relative">
 
     <div id="navbar-placeholder"></div>
@@ -63,26 +87,34 @@
                 <h1 class="text-5xl font-bold text-white mb-4">Traits</h1>
                 <p class="text-slate-400 text-lg max-w-2xl flex items-center gap-3">
                     Character identity and growth.
-                    <span id="trait-counter" class="text-xs bg-slate-800 text-indigo-300 px-3 py-1 rounded-full border border-slate-700 font-bold uppercase tracking-wider" style="width: 42%;">Loading...</span>
+                    <span id="trait-counter"
+                        class="text-xs bg-slate-800 text-indigo-300 px-3 py-1 rounded-full border border-slate-700 font-bold uppercase tracking-wider"
+                        style="width: 42%;">Loading...</span>
                 </p>
             </div>
-              <div class="flex flex-wrap md:flex-nowrap gap-3 w-full md:w-auto items-center">
-                  <div class="flex gap-2 shrink-0">
-                    <button onclick="pickRandomTrait()" class="px-4 py-2 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 rounded-lg text-purple-300 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+            <div class="flex flex-wrap md:flex-nowrap gap-3 w-full md:w-auto items-center">
+                <div class="flex gap-2 shrink-0">
+                    <button onclick="pickRandomTrait()"
+                        class="px-4 py-2 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 rounded-lg text-purple-300 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]">
                         Random
                     </button>
-                    <button onclick="expandAllTraits(true)" class="px-4 py-2 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 rounded-lg text-indigo-300 text-xs font-bold uppercase tracking-wider transition-all">
+                    <button onclick="expandAllTraits(true)"
+                        class="px-4 py-2 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 rounded-lg text-indigo-300 text-xs font-bold uppercase tracking-wider transition-all">
                         Expand All
                     </button>
-                    <button onclick="expandAllTraits(false)" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-slate-300 text-xs font-bold uppercase tracking-wider transition-all">
+                    <button onclick="expandAllTraits(false)"
+                        class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-slate-300 text-xs font-bold uppercase tracking-wider transition-all">
                         Collapse All
                     </button>
                 </div>
 
                 <div id="tag-filter-wrap" class="flex flex-col gap-2 w-full sm:w-auto md:w-[250px] shrink-0">
-                    <label for="tag-filter-select" class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Tag Filter</label>
+                    <label for="tag-filter-select"
+                        class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Tag Filter</label>
                     <div class="flex items-center gap-2" style="display: none;">
-                        <select id="tag-filter-select" class="w-full bg-slate-900/70 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200" onchange="setTagFilter(this.value || null)" style="display: none;">
+                        <select id="tag-filter-select"
+                            class="w-full bg-slate-900/70 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200"
+                            onchange="setTagFilter(this.value || null)" style="display: none;">
                             <option value="">All tags</option>
                         </select>
                     </div>
@@ -90,19 +122,22 @@
 
                 <div id="search-wrap" class="flex flex-col gap-2 w-full md:w-[260px]">
                     <div class="relative">
-                        <input type="text" id="search-input" placeholder="Search..." class="search-input w-full pr-10" oninput="renderTraits(); toggleTraitClear();">
-                        <button id="search-clear" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-200" onclick="clearTraitSearch()">✕</button>
+                        <input type="text" id="search-input" placeholder="Search..." class="search-input w-full pr-10"
+                            oninput="renderTraits(); toggleTraitClear();">
+                        <button id="search-clear" type="button"
+                            class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-200"
+                            onclick="clearTraitSearch()">✕</button>
                     </div>
                 </div>
             </div>
         </header>
         <div style="display: flex;">
-        <div id="tag-container" class="mb-12 flex flex-wrap gap-3">
+            <div id="tag-container" class="mb-12 flex flex-wrap gap-3">
 
-        </div>
+            </div>
         </div>
         <div class="flex flex-col lg:flex-row gap-12 items-start">
-            
+
             <aside class="w-full lg:w-80 lg:sticky lg:top-28 z-40">
                 <section class="p-6 rounded-3xl legend-card shadow-2xl">
                     <div class="mb-6 flex justify-between items-start">
@@ -110,40 +145,109 @@
                             <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-[0.2em]">Trait Legend</h3>
                             <p class="text-[10px] text-slate-400 mt-1 italic">Interactive icons filter traits.</p>
                         </div>
-                        <button id="clear-filter" onclick="setSymbolFilter(null)" class="hidden text-[10px] uppercase text-rose-400 font-bold hover:underline">Clear</button>
+                        <button id="clear-filter" onclick="setSymbolFilter(null)"
+                            class="hidden text-[10px] uppercase text-rose-400 font-bold hover:underline">Clear</button>
                     </div>
-                    
+
                     <div class="space-y-5">
                         <p class="text-[10px] text-slate-500 mt-1 uppercase font-bold">Types</p>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('⧖')"><div class="legend-symbol text-blue-400 clickable" data-symbol="⧖">⧖</div><div><div class="text-white font-bold text-sm group-hover:text-indigo-300">Passive</div><div class="text-slate-500 text-[10px] italic">Always active.</div></div></div>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('☀')"><div class="legend-symbol text-amber-400 clickable" data-symbol="☀">☀</div><div><div class="text-white font-bold text-sm group-hover:text-indigo-300">Rest-Based</div><div class="text-slate-500 text-[10px] italic">Useable during a rest.</div></div></div>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('🗲')"><div class="legend-symbol text-indigo-400 clickable" data-symbol="🗲">🗲</div><div><div class="text-white font-bold text-sm group-hover:text-indigo-300">Active</div><div class="text-slate-500 text-[10px] italic">Has limited uses per rest.</div></div></div>
-                        
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('⧖')">
+                            <div class="legend-symbol text-blue-400 clickable" data-symbol="⧖">⧖</div>
+                            <div>
+                                <div class="text-white font-bold text-sm group-hover:text-indigo-300">Passive</div>
+                                <div class="text-slate-500 text-[10px] italic">Always active.</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('☀')">
+                            <div class="legend-symbol text-amber-400 clickable" data-symbol="☀">☀</div>
+                            <div>
+                                <div class="text-white font-bold text-sm group-hover:text-indigo-300">Rest-Based</div>
+                                <div class="text-slate-500 text-[10px] italic">Useable during a rest.</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('🗲')">
+                            <div class="legend-symbol text-indigo-400 clickable" data-symbol="🗲">🗲</div>
+                            <div>
+                                <div class="text-white font-bold text-sm group-hover:text-indigo-300">Active</div>
+                                <div class="text-slate-500 text-[10px] italic">Has limited uses per rest.</div>
+                            </div>
+                        </div>
+
                         <p class="text-[10px] text-slate-500 mt-1 uppercase font-bold">Tags</p>
-                        <div class="flex items-center opacity-80"><div class="legend-symbol text-rose-400" data-symbol="★">★</div><div><div class="text-white font-bold text-sm">Unique</div><div class="text-slate-500 text-[10px] italic">Cannot be alongside uniques of the same type.</div></div></div>
-                        <div class="flex items-center opacity-80"><div class="legend-symbol text-emerald-400" data-symbol="⫘">⫘</div><div><div class="text-white font-bold text-sm">Linked</div><div class="text-slate-500 text-[10px] italic">Prerequisite trait required.</div></div></div>
+                        <div class="flex items-center opacity-80">
+                            <div class="legend-symbol text-rose-400" data-symbol="★">★</div>
+                            <div>
+                                <div class="text-white font-bold text-sm">Unique</div>
+                                <div class="text-slate-500 text-[10px] italic">Cannot be alongside uniques of the same
+                                    type.</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center opacity-80">
+                            <div class="legend-symbol text-emerald-400" data-symbol="⫘">⫘</div>
+                            <div>
+                                <div class="text-white font-bold text-sm">Linked</div>
+                                <div class="text-slate-500 text-[10px] italic">Prerequisite trait required.</div>
+                            </div>
+                        </div>
 
                         <p class="text-[10px] text-slate-500 mt-1 uppercase font-bold">Action Types</p>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('⭘')"><div class="legend-symbol text-white clickable" data-symbol="⭘">⭘</div><div><div class="text-white font-bold text-sm group-hover:text-indigo-300">Free Action</div><div class="text-slate-500 text-[10px] italic">Does not impact action economy.</div></div></div>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('◇')"><div class="legend-symbol text-white clickable" data-symbol="◇">◇</div><div><div class="text-white font-bold text-sm group-hover:text-indigo-300">Reaction</div><div class="text-slate-500 text-[10px] italic">1 per scene, condition-based.</div></div></div>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('⬖')"><div class="legend-symbol text-white clickable" data-symbol="⬖">⬖</div><div><div class="text-white font-bold text-sm group-hover:text-indigo-300">Action</div><div class="text-slate-500 text-[10px] italic">Uses 1 of 2 actions per scene.</div></div></div>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('◆')"><div class="legend-symbol text-white clickable" data-symbol="◆">◆</div><div><div class="text-white font-bold text-sm group-hover:text-indigo-300">Attack Action</div><div class="text-slate-500 text-[10px] italic">Once per turn limit.</div></div></div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('⭘')">
+                            <div class="legend-symbol text-white clickable" data-symbol="⭘">⭘</div>
+                            <div>
+                                <div class="text-white font-bold text-sm group-hover:text-indigo-300">Free Action</div>
+                                <div class="text-slate-500 text-[10px] italic">Does not impact action economy.</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('◇')">
+                            <div class="legend-symbol text-white clickable" data-symbol="◇">◇</div>
+                            <div>
+                                <div class="text-white font-bold text-sm group-hover:text-indigo-300">Reaction</div>
+                                <div class="text-slate-500 text-[10px] italic">1 per scene, condition-based.</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('⬖')">
+                            <div class="legend-symbol text-white clickable" data-symbol="⬖">⬖</div>
+                            <div>
+                                <div class="text-white font-bold text-sm group-hover:text-indigo-300">Action</div>
+                                <div class="text-slate-500 text-[10px] italic">Uses 1 of 2 actions per scene.</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('◆')">
+                            <div class="legend-symbol text-white clickable" data-symbol="◆">◆</div>
+                            <div>
+                                <div class="text-white font-bold text-sm group-hover:text-indigo-300">Attack Action
+                                </div>
+                                <div class="text-slate-500 text-[10px] italic">Once per turn limit.</div>
+                            </div>
+                        </div>
                     </div>
-                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-full mt-8 py-3 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 rounded-xl text-indigo-400 text-[10px] font-bold uppercase tracking-widest transition-all">Back to Top</button>
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                        class="w-full mt-8 py-3 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 rounded-xl text-indigo-400 text-[10px] font-bold uppercase tracking-widest transition-all">Back
+                        to Top</button>
                 </section>
             </aside>
 
-            
+
             <div class="flex-1 w-full space-y-20">
                 <section id="section-1pt" class="scroll-mt-32">
                     <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-4">
-                        Minor Traits 
-                        <span class="text-xs uppercase bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full border border-indigo-500/30 whitespace-nowrap">1 Point</span>
+                        Minor Traits
+                        <span
+                            class="text-xs uppercase bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full border border-indigo-500/30 whitespace-nowrap">1
+                            Point</span>
                     </h2>
-                    <div id="t1-wrapper" class="bg-slate-900/40 rounded-3xl border border-slate-800 overflow-hidden shadow-2xl transition-all duration-300">
+                    <div id="t1-wrapper"
+                        class="bg-slate-900/40 rounded-3xl border border-slate-800 overflow-hidden shadow-2xl transition-all duration-300">
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse min-w-[300px]">
-                                <thead><tr class="text-xs uppercase tracking-widest text-slate-500 border-b border-slate-800"><th class="px-6 py-4 font-bold w-1/2">Name</th><th class="px-6 py-4 font-bold w-1/4">Symbols</th><th class="px-6 py-4 font-bold text-right w-1/4">Expand</th></tr></thead>
+                                <thead>
+                                    <tr
+                                        class="text-xs uppercase tracking-widest text-slate-500 border-b border-slate-800">
+                                        <th class="px-6 py-4 font-bold w-1/2">Name</th>
+                                        <th class="px-6 py-4 font-bold w-1/4">Symbols</th>
+                                        <th class="px-6 py-4 font-bold text-right w-1/4">Expand</th>
+                                    </tr>
+                                </thead>
                                 <tbody id="traits-1-point"></tbody>
                             </table>
                         </div>
@@ -152,13 +256,23 @@
 
                 <section id="section-2pt" class="scroll-mt-32">
                     <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-4">
-                        Major Traits 
-                        <span class="text-xs uppercase bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full border border-amber-500/30 whitespace-nowrap">2 Points</span>
+                        Major Traits
+                        <span
+                            class="text-xs uppercase bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full border border-amber-500/30 whitespace-nowrap">2
+                            Points</span>
                     </h2>
-                    <div id="t2-wrapper" class="bg-slate-900/40 rounded-3xl border border-slate-800 overflow-hidden shadow-2xl transition-all duration-300">
-                         <div class="overflow-x-auto">
+                    <div id="t2-wrapper"
+                        class="bg-slate-900/40 rounded-3xl border border-slate-800 overflow-hidden shadow-2xl transition-all duration-300">
+                        <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse min-w-[300px]">
-                                <thead><tr class="text-xs uppercase tracking-widest text-slate-500 border-b border-slate-800"><th class="px-6 py-4 font-bold w-1/2">Name</th><th class="px-6 py-4 font-bold w-1/4">Symbols</th><th class="px-6 py-4 font-bold text-right w-1/4">Expand</th></tr></thead>
+                                <thead>
+                                    <tr
+                                        class="text-xs uppercase tracking-widest text-slate-500 border-b border-slate-800">
+                                        <th class="px-6 py-4 font-bold w-1/2">Name</th>
+                                        <th class="px-6 py-4 font-bold w-1/4">Symbols</th>
+                                        <th class="px-6 py-4 font-bold text-right w-1/4">Expand</th>
+                                    </tr>
+                                </thead>
                                 <tbody id="traits-2-point"></tbody>
                             </table>
                         </div>
@@ -168,29 +282,39 @@
         </div>
     </main>
 
-    <div id="random-trait-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closeRandomModal(event)">
-        <div class="modal-content bg-slate-900 border border-slate-700 p-1 rounded-2xl max-w-lg w-full shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden" onclick="event.stopPropagation()">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50"></div>
-            
+    <div id="random-trait-modal"
+        class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4"
+        onclick="closeRandomModal(event)">
+        <div class="modal-content bg-slate-900 border border-slate-700 p-1 rounded-2xl max-w-lg w-full shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden"
+            onclick="event.stopPropagation()">
+            <div
+                class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50">
+            </div>
+
             <div class="p-8 relative z-10">
-                <button onclick="closeRandomModal()" class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">✕</button>
-                
+                <button onclick="closeRandomModal()"
+                    class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">✕</button>
+
                 <div class="text-center mb-6">
-                    <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-[0.2em]">Random Discovery</span>
-                    <h3 id="rand-name" class="text-4xl font-bold text-white mt-3 mb-4 transition-all duration-100">Trait Name</h3>
-                    
+                    <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-[0.2em]">Random
+                        Discovery</span>
+                    <h3 id="rand-name" class="text-4xl font-bold text-white mt-3 mb-4 transition-all duration-100">Trait
+                        Name</h3>
+
                     <div id="rand-meta" class="flex flex-wrap justify-center gap-2">
-                        </div>
+                    </div>
                 </div>
 
                 <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700/50 shadow-inner">
                     <div id="rand-desc" class="text-slate-300 leading-relaxed text-sm">
-                        </div>
-                    <div id="rand-scaling" class="hidden mt-4 pt-4 border-t border-slate-700/50 text-xs text-amber-500/90 font-mono">
-                        </div>
+                    </div>
+                    <div id="rand-scaling"
+                        class="hidden mt-4 pt-4 border-t border-slate-700/50 text-xs text-amber-500/90 font-mono">
+                    </div>
                 </div>
 
-                <button onclick="pickRandomTrait()" class="w-full mt-6 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold uppercase tracking-widest text-xs transition-all shadow-lg hover:shadow-indigo-500/25 border border-indigo-400/20">
+                <button onclick="pickRandomTrait()"
+                    class="w-full mt-6 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold uppercase tracking-widest text-xs transition-all shadow-lg hover:shadow-indigo-500/25 border border-indigo-400/20">
                     Roll Again
                 </button>
             </div>
@@ -340,14 +464,14 @@
 
         // --- Improved Random Trait Logic ---
         function pickRandomTrait() {
-            if(!rawTraits.length) return;
-            
+            if (!rawTraits.length) return;
+
             const modal = document.getElementById('random-trait-modal');
             const nameEl = document.getElementById('rand-name');
             const descEl = document.getElementById('rand-desc');
             const metaEl = document.getElementById('rand-meta');
             const scalingEl = document.getElementById('rand-scaling');
-            
+
             modal.classList.remove('hidden');
 
             // "Shuffle" Animation Effect
@@ -366,7 +490,7 @@
                 nameEl.textContent = randomTemp.Name;
                 shuffleCount++;
 
-                if(shuffleCount >= maxShuffles) {
+                if (shuffleCount >= maxShuffles) {
                     clearInterval(shuffleInterval);
                     finalizeTrait();
                 }
@@ -378,10 +502,10 @@
                 do {
                     trait = rawTraits[Math.floor(Math.random() * rawTraits.length)];
                 } while (trait.Cost === "0" || trait.Name === "Empty Slot");
-                
+
                 nameEl.classList.remove('text-indigo-300', 'shuffling');
                 nameEl.textContent = trait.Name;
-                
+
                 const prereqText = getTraitPrerequisites(trait);
 
                 // USE INNERHTML to parse <b>, <i>, <br>
@@ -392,18 +516,18 @@
 
                 // Build Meta Badges
                 let badges = ``;
-                
+
                 // Cost Badge
                 const costColor = trait.Cost === "1" ? "indigo" : "amber";
                 badges += `<span class="px-3 py-1 rounded-full bg-${costColor}-500/10 border border-${costColor}-500/30 text-${costColor}-300 text-[10px] font-bold uppercase tracking-wider">${trait.Cost} Point</span>`;
 
                 // Action Badge
-                if(trait.Action && trait.Action !== "-") {
+                if (trait.Action && trait.Action !== "-") {
                     badges += `<span class="px-3 py-1 rounded-full bg-slate-700 border border-slate-600 text-slate-300 text-[10px] font-bold uppercase tracking-wider">${trait.Action}</span>`;
                 }
 
                 // Symbol Badge
-                if(trait.Symbols && trait.Symbols !== "-") {
+                if (trait.Symbols && trait.Symbols !== "-") {
                     badges += `<span class="px-3 py-1 rounded-full bg-slate-700 border border-slate-600 text-indigo-300 text-[10px] font-mono">${trait.Symbols}</span>`;
                 }
 
@@ -414,7 +538,7 @@
                 metaEl.innerHTML = badges;
 
                 // Scaling Logic
-                if(trait.Scaling) {
+                if (trait.Scaling) {
                     scalingEl.innerHTML = `<strong class="text-amber-400 block mb-1">Scaling:</strong> ${trait.Scaling}`;
                     scalingEl.classList.remove('hidden');
                 } else {
@@ -432,27 +556,27 @@
             const row = document.getElementById(rowId);
             row.classList.toggle('hidden');
             const arrow = document.getElementById(`arrow-${rowId}`);
-            if(arrow) arrow.style.transform = row.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+            if (arrow) arrow.style.transform = row.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
         }
 
         function expandAllTraits(shouldExpand) {
-    traitRowEntries.forEach(entry => {
-        const isVisible = entry.summaryRow.style.display !== 'none';
+            traitRowEntries.forEach(entry => {
+                const isVisible = entry.summaryRow.style.display !== 'none';
 
-        if (!isVisible) return; // Skip filtered-out traits
+                if (!isVisible) return; // Skip filtered-out traits
 
-        if (shouldExpand) {
-            entry.detailRow.classList.remove('hidden');
-        } else {
-            entry.detailRow.classList.add('hidden');
+                if (shouldExpand) {
+                    entry.detailRow.classList.remove('hidden');
+                } else {
+                    entry.detailRow.classList.add('hidden');
+                }
+
+                const arrow = entry.summaryRow.querySelector(`#arrow-${entry.summaryRow.dataset.traitId}`);
+                if (arrow) {
+                    arrow.style.transform = shouldExpand ? 'rotate(180deg)' : 'rotate(0deg)';
+                }
+            });
         }
-
-        const arrow = entry.summaryRow.querySelector(`#arrow-${entry.summaryRow.dataset.traitId}`);
-        if (arrow) {
-            arrow.style.transform = shouldExpand ? 'rotate(180deg)' : 'rotate(0deg)';
-        }
-    });
-}
 
         function setSymbolFilter(symbol) {
             if (symbol === '★' || symbol === '⫘') return;
@@ -504,8 +628,8 @@
             filterTraitRows();
         }
 
-            toggleTraitClear();
-        
+        toggleTraitClear();
+
 
 
         function renderTagButtons() {
@@ -521,7 +645,7 @@
             const countedTags = {};
             allTags.forEach(tag => {
                 countedTags[tag] = rawTraits.filter(trait => hasTag(trait, tag)).length;
-        
+
             });
 
 
@@ -547,7 +671,7 @@
                 const res = await fetch('../json/traits.json');
                 const data = await res.json();
                 rawTraits = Array.isArray(data) ? data : (data.traits || []);
-            } catch (err) {}
+            } catch (err) { }
             renderTraits();
             renderTagButtons();
         }
@@ -555,4 +679,5 @@
     </script>
     <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
 </body>
+
 </html>

@@ -203,6 +203,7 @@
       "id": "frostwarden",
       "name": "Path of the Frostwarden",
       "source": "CORE",
+      "source_color": "indigo",
       "summary": "The stillness of the glacier’s heart.",
       "description": "Oh, the stillness of ice—the frost that burns your flesh with its seething cold. They will not move unless you permit it.",
       "bonuses": [
