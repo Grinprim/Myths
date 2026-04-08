@@ -24,12 +24,12 @@
     "source": "CORE",
     "source_color": "indigo",
     "description": [
-      "| <b>Size:</b> Small | <b>Height:</b> Avg. 0.6 Units<br>| <b>Speed:</b> 5 Tiles<br>| <b>Lifespan:</b> 100-120 Years<br>| <b>Languages:</b> Common",
+      "| <b>Size:</b> Small | <b>Height:</b> Avg. 0.8 Units<br>| <b>Speed:</b> 5 Tiles<br>| <b>Lifespan:</b> 100-120 Years<br>| <b>Languages:</b> Common",
       "Stocky, sharp-featured, and thick-skinned, the Dinqui resemble gargoyle-like goblinoids with small wings of stone and horn. Their eyes glimmer like polished gems, and their voices carry a gravelly timbre.",
       "Once guardians of ancient temples, the Dinqui now live among ruins and crag cities, carving art from mountain faces. They value endurance, tradition, and community over conquest, measuring worth by what one can craft or protect."
     ],
     "attributes": { "B": 1, "M": 0, "SK": 0, "ST": 0 },
-    "feat_points": "+2 Mind Feat Points",
+    "feat_points": "+2 Skill Feat Points",
     "trait": [
       {
         "name": "Hardening",
