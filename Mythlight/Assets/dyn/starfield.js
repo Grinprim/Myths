@@ -7,6 +7,7 @@
     let stars = [];
     const starCount = 550;
     const mouse = { x: null, y: null, radius: 200 };
+    const clickBurstEnabled = canvas.dataset.clickBurst !== 'off';
 
     const colors = [
         'rgba(165, 180, 252, ',
@@ -31,22 +32,24 @@
         mouse.y = null;
     });
 
-    header.addEventListener('click', (event) => {
-        const rect = header.getBoundingClientRect();
-        const clickX = event.clientX - rect.left;
-        const clickY = event.clientY - rect.top;
+    if (clickBurstEnabled) {
+        header.addEventListener('click', (event) => {
+            const rect = header.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const clickY = event.clientY - rect.top;
 
-        stars.forEach((star) => {
-            const dx = star.x - clickX;
-            const dy = star.y - clickY;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance < 400) {
-                const force = (400 - distance) / 8;
-                star.vx = (dx / distance) * force;
-                star.vy = (dy / distance) * force;
-            }
+            stars.forEach((star) => {
+                const dx = star.x - clickX;
+                const dy = star.y - clickY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 400) {
+                    const force = (400 - distance) / 8;
+                    star.vx = (dx / distance) * force;
+                    star.vy = (dy / distance) * force;
+                }
+            });
         });
-    });
+    }
 
     class Star {
         constructor() {
