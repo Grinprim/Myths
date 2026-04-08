@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Interactive Timeline</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Sora:wght@300;400;600&display=swap');
+
+		:root {
+			--sky-1: #2a1212;
+			--sky-2: #3b1717;
+			--sky-3: #5a2423;
+			--text: #4b3a38;
+			--muted: #7a6764;
+			--panel: rgba(255, 248, 247, 0.8);
+			--line-shadow: rgba(65, 28, 26, 0.17);
+			--node-size: 102px;
+			--node-border: 6px;
+			--node-font: 2rem;
+			--connector-len: 110px;
+			--event-width: 250px;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html,
+		body {
+			margin: 0;
+			min-height: 100%;
+		}
+
+		body {
+			font-family: 'Sora', sans-serif;
+			color: var(--text);
+			background: linear-gradient(165deg, #180909 0%, #291010 40%, #3a1515 72%, #4c1d1c 100%);
+			overflow-x: hidden;
+		}
+
+		.timeline-page {
+			position: relative;
+			min-height: 100vh;
+			padding: clamp(2rem, 4vw, 3.5rem) 1rem;
+			overflow: hidden;
+			isolation: isolate;
+		}
+
+		#smokeCanvas {
+			position: absolute;
+			inset: 0;
+			z-index: -1;
+			pointer-events: none;
+		}
+
+		.timeline-page::before,
+		.timeline-page::after {
+			content: '';
+			position: absolute;
+			pointer-events: none;
+			z-index: -2;
+			filter: blur(44px);
+		}
+
+		.timeline-page::before {
+			inset: -20% 55% 50% -15%;
+			background: linear-gradient(140deg, rgba(196, 73, 66, 0.34), rgba(196, 73, 66, 0));
+		}
+
+		.timeline-page::after {
+			inset: 56% -12% -24% 56%;
+			background: linear-gradient(160deg, rgba(120, 34, 32, 0.22), rgba(120, 34, 32, 0));
+		}
+
+		.shell {
+			position: relative;
+			z-index: 2;
+			width: min(1220px, calc(100vw - 2rem));
+			margin: 0 auto;
+			background: transparent;
+			border: 1px solid transparent;
+			border-radius: 28px;
+			box-shadow: none;
+			backdrop-filter: none;
+			padding: clamp(1.2rem, 3vw, 2rem);
+		}
+
+		.title {
+			margin: 0 0 0.35rem;
+			text-align: center;
+			font-family: 'Rajdhani', sans-serif;
+			font-size: clamp(1.8rem, 2.8vw, 2.9rem);
+			letter-spacing: 0.07em;
+			color: #ffe9e6;
+			text-shadow: 0 10px 24px rgba(0, 0, 0, 0.36);
+			text-transform: uppercase;
+		}
+
+		.subtitle {
+			margin: 0 auto clamp(1.5rem, 2.8vw, 2.2rem);
+			max-width: 58ch;
+			text-align: center;
+			color: #f0c9c3;
+			font-size: clamp(0.92rem, 1.2vw, 1rem);
+			line-height: 1.65;
+			text-shadow: 0 6px 16px rgba(0, 0, 0, 0.26);
+		}
+
+		.timeline {
+			position: relative;
+			height: 500px;
+			padding: 0 1rem;
+		}
+
+		.line {
+			position: absolute;
+			left: 2%;
+			right: 2%;
+			top: 50%;
+			transform: translateY(-50%);
+			height: 20px;
+			border-radius: 999px;
+			clip-path: polygon(1.8% 0, 98.2% 0, 100% 50%, 98.2% 100%, 1.8% 100%, 0 50%);
+			box-shadow: inset 0 -3px 8px rgba(0, 0, 0, 0.24), inset 0 2px 5px rgba(255, 185, 172, 0.18), 0 9px 30px -14px var(--line-shadow);
+			border: 1px solid rgba(255, 196, 186, 0.22);
+			background: linear-gradient(
+				90deg,
+				#a32924 0 12%,
+				#cc3b31 12% 28%,
+				#90231f 28% 46%,
+				#731c1c 46% 64%,
+				#8d2623 64% 82%,
+				#4f1618 82% 100%
+			);
+			background-image:
+				linear-gradient(
+					90deg,
+					#a32924 0 12%,
+					#cc3b31 12% 28%,
+					#90231f 28% 46%,
+					#731c1c 46% 64%,
+					#8d2623 64% 82%,
+					#4f1618 82% 100%
+				),
+				repeating-linear-gradient(
+					-65deg,
+					rgba(255, 206, 195, 0.09) 0 12px,
+					rgba(78, 18, 17, 0.07) 12px 24px
+				);
+			overflow: hidden;
+			animation: timelineBreathe 8.2s ease-in-out infinite;
+		}
+
+		.line::before {
+			content: '';
+			position: absolute;
+			inset: -18px;
+			border-radius: 999px;
+			background: radial-gradient(circle at center, rgba(255, 198, 188, 0.26), rgba(255, 198, 188, 0));
+			z-index: -1;
+			animation: lineAura 10.5s ease-in-out infinite;
+		}
+
+		@keyframes timelineBreathe {
+			0%,
+			100% {
+				box-shadow: inset 0 -3px 8px rgba(0, 0, 0, 0.22), inset 0 2px 5px rgba(255, 185, 172, 0.14), 0 10px 28px -14px rgba(41, 11, 11, 0.56);
+			}
+			50% {
+				box-shadow: inset 0 -3px 8px rgba(0, 0, 0, 0.22), inset 0 2px 5px rgba(255, 185, 172, 0.24), 0 20px 50px -18px rgba(255, 174, 160, 0.64);
+			}
+		}
+
+		@keyframes lineAura {
+			0%,
+			100% {
+				opacity: 0.4;
+				transform: scale(0.98);
+			}
+			50% {
+				opacity: 1;
+				transform: scale(1.03);
+			}
+		}
+
+
+
+		.events {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			position: relative;
+		}
+
+		.event {
+			position: absolute;
+			left: var(--x);
+			top: 50%;
+			transform: translate(-50%, -50%);
+			width: min(var(--event-width), 32vw);
+			text-align: center;
+		}
+
+		.event.top {
+			--dir: -1;
+		}
+
+		.event.bottom {
+			--dir: 1;
+		}
+
+		.connector {
+			position: absolute;
+			left: 50%;
+			width: 3px;
+			background: var(--c);
+			border-radius: 3px;
+			transform: translateX(-50%);
+			box-shadow: 0 0 12px color-mix(in srgb, var(--c), white 45%);
+		}
+
+		.event.top .connector {
+			bottom: 50%;
+			height: var(--connector-len);
+		}
+
+		.event.bottom .connector {
+			top: 50%;
+			height: var(--connector-len);
+		}
+
+		.event::after {
+			content: '';
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 0;
+			height: 0;
+			border-left: 16px solid transparent;
+			border-right: 16px solid transparent;
+		}
+
+		.event.top::after {
+			bottom: calc(50% - 1px);
+			border-bottom: 16px solid var(--c);
+		}
+
+		.event.bottom::after {
+			top: calc(50% - 1px);
+			border-top: 16px solid var(--c);
+		}
+
+		.node-btn {
+			width: var(--node-size);
+			height: var(--node-size);
+			border-radius: 50%;
+			border: var(--node-border) solid var(--c);
+			background: rgba(255, 255, 255, 0.9);
+			color: color-mix(in srgb, var(--c), #4f2f2c 16%);
+			font-family: 'Rajdhani', sans-serif;
+			font-size: var(--node-font);
+			line-height: 1;
+			letter-spacing: 0.02em;
+			cursor: pointer;
+			transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+			box-shadow: 0 8px 20px -14px rgba(0, 0, 0, 0.6), 0 0 0 0 color-mix(in srgb, var(--c), white 34%);
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			display: grid;
+			place-items: center;
+			animation: nodeGlow 5.8s ease-in-out infinite;
+		}
+
+		.event.top .node-btn {
+			bottom: calc(50% + var(--connector-len));
+		}
+
+		.event.bottom .node-btn {
+			top: calc(50% + var(--connector-len));
+		}
+
+		.node-btn::before {
+			content: '';
+			position: absolute;
+			inset: -12px;
+			border-radius: 50%;
+			border: 2px solid color-mix(in srgb, var(--c), white 38%);
+			opacity: 0;
+			transform: scale(0.86);
+			transition: opacity 220ms ease, transform 220ms ease;
+		}
+
+		.node-btn::after {
+			content: '';
+			position: absolute;
+			inset: -18px;
+			border-radius: 50%;
+			border: 1px dashed color-mix(in srgb, var(--c), white 42%);
+			opacity: 0.48;
+			transform: scale(0.92);
+			animation: nodeOrbit 7.4s linear infinite;
+		}
+
+		.node-btn:hover,
+		.node-btn:focus-visible {
+			transform: translateX(-50%) translateY(calc(var(--dir) * -5px)) scale(1.05);
+			box-shadow: 0 16px 26px -15px color-mix(in srgb, var(--c), black 68%);
+			background: #ffffff;
+			outline: none;
+		}
+
+		.node-btn:hover::before,
+		.node-btn:focus-visible::before {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		.node-btn:hover::after,
+		.node-btn:focus-visible::after {
+			opacity: 0.9;
+		}
+
+		.pulse {
+			animation: pulse 2.4s infinite ease-in-out;
+		}
+
+		@keyframes pulse {
+			0% {
+				box-shadow: 0 0 0 0 color-mix(in srgb, var(--c), white 40%);
+			}
+			70% {
+				box-shadow: 0 0 0 16px transparent;
+			}
+			100% {
+				box-shadow: 0 0 0 0 transparent;
+			}
+		}
+
+		@keyframes nodeGlow {
+			0%,
+			100% {
+				box-shadow: 0 8px 20px -14px rgba(0, 0, 0, 0.6), 0 0 0 0 color-mix(in srgb, var(--c), white 34%);
+			}
+			50% {
+				box-shadow: 0 18px 30px -16px rgba(0, 0, 0, 0.68), 0 0 0 14px transparent;
+			}
+		}
+
+		@keyframes nodeOrbit {
+			0% {
+				transform: scale(0.92) rotate(0deg);
+			}
+			100% {
+				transform: scale(1.04) rotate(360deg);
+			}
+		}
+
+		.info {
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			width: min(220px, 30vw);
+		}
+
+		.event.top .info {
+			top: calc(50% + 12px);
+		}
+
+		.event.bottom .info {
+			bottom: calc(50% + 12px);
+		}
+
+		.mini-title {
+			margin: 0;
+			font-family: 'Rajdhani', sans-serif;
+			letter-spacing: 0.04em;
+			text-transform: uppercase;
+			font-size: 1.9rem;
+			color: #ffe0dc;
+			text-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+		}
+
+		.mini-rule {
+			width: 62px;
+			height: 3px;
+			border-radius: 3px;
+			background: var(--c);
+			margin: 0.5rem auto 0.72rem;
+			opacity: 0.9;
+		}
+
+		.mini-copy {
+			margin: 0;
+			font-size: 0.79rem;
+			line-height: 1.55;
+			color: #f0c8c2;
+			text-shadow: 0 5px 12px rgba(0, 0, 0, 0.24);
+		}
+
+		.hint {
+			text-align: center;
+			margin: 1.4rem 0 0.2rem;
+			color: #f3cbc5;
+			font-size: 0.82rem;
+			letter-spacing: 0.03em;
+			text-transform: uppercase;
+		}
+
+		.modal {
+			position: fixed;
+			inset: 0;
+			display: grid;
+			place-items: center;
+			padding: 1rem;
+			background: rgba(40, 14, 13, 0.42);
+			backdrop-filter: blur(4px);
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 180ms ease;
+			z-index: 20;
+		}
+
+		.modal.open {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		.modal-card {
+			width: min(680px, 92vw);
+			border-radius: 22px;
+			background: linear-gradient(165deg, rgba(255, 255, 255, 0.97), rgba(250, 236, 234, 0.95));
+			border: 1px solid rgba(255, 255, 255, 0.8);
+			box-shadow: 0 30px 58px -28px rgba(44, 15, 13, 0.55);
+			padding: clamp(1.1rem, 2.8vw, 1.8rem);
+			transform: translateY(10px) scale(0.98);
+			transition: transform 180ms ease;
+		}
+
+		.modal.open .modal-card {
+			transform: translateY(0) scale(1);
+		}
+
+		.modal-head {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+			margin-bottom: 0.8rem;
+		}
+
+		.modal-year {
+			font-family: 'Rajdhani', sans-serif;
+			font-size: clamp(2rem, 5vw, 2.7rem);
+			margin: 0;
+			color: var(--active, #7c2f2a);
+			letter-spacing: 0.03em;
+		}
+
+		.modal-close {
+			border: 0;
+			background: #f5e5e2;
+			color: #6f3430;
+			width: 42px;
+			height: 42px;
+			border-radius: 12px;
+			cursor: pointer;
+			font-size: 1.2rem;
+			transition: background-color 160ms ease, transform 160ms ease;
+		}
+
+		.modal-close:hover,
+		.modal-close:focus-visible {
+			background: #edd5d1;
+			transform: translateY(-2px);
+			outline: none;
+		}
+
+		.modal-title {
+			margin: 0 0 0.48rem;
+			font-size: clamp(1.05rem, 2.7vw, 1.5rem);
+			letter-spacing: 0.03em;
+			text-transform: uppercase;
+			color: #5a332f;
+		}
+
+		.modal-copy {
+			margin: 0;
+			font-size: 0.95rem;
+			line-height: 1.72;
+			color: #6c4a45;
+			white-space: pre-line;
+		}
+
+		@media (max-width: 980px) {
+			.timeline {
+				height: auto;
+				padding: 0;
+			}
+
+			.line {
+				left: 50%;
+				right: auto;
+				width: 11px;
+				height: calc(100% - 2rem);
+				top: 1rem;
+				transform: translateX(-50%);
+				clip-path: polygon(0 1.8%, 50% 0, 100% 1.8%, 100% 98.2%, 50% 100%, 0 98.2%);
+				background: linear-gradient(
+					180deg,
+					#c43a2f 0 16.6%,
+					#d84a39 16.6% 33.2%,
+					#b7322d 33.2% 49.8%,
+					#9d2a2a 49.8% 66.4%,
+					#7f2424 66.4% 83%,
+					#5f1f20 83% 100%
+				);
+			}
+
+			.events {
+				display: grid;
+				gap: 2.2rem;
+				padding: 1rem 0.4rem;
+			}
+
+			.event {
+				position: relative;
+				left: auto;
+				top: auto;
+				transform: none;
+				width: 100%;
+				min-height: 138px;
+				padding-left: 56%;
+				text-align: left;
+			}
+
+			.event:nth-child(even) {
+				padding-left: 0;
+				padding-right: 56%;
+				text-align: right;
+			}
+
+			.connector {
+				width: 74px;
+				height: 3px;
+				top: 52%;
+				left: calc(50% + 7px);
+				transform: none;
+			}
+
+			.event:nth-child(even) .connector {
+				left: auto;
+				right: calc(50% + 7px);
+			}
+
+			.event::after {
+				top: 52%;
+				left: calc(50% + 7px);
+				transform: translateY(-50%);
+				border-top: 12px solid transparent;
+				border-bottom: 12px solid transparent;
+				border-left: 12px solid var(--c);
+				border-right: 0;
+			}
+
+			.event:nth-child(even)::after {
+				left: auto;
+				right: calc(50% + 7px);
+				border-left: 0;
+				border-right: 12px solid var(--c);
+			}
+
+			.node-btn {
+				position: absolute;
+				left: calc(50% + 88px);
+				top: 12px;
+				transform: none;
+				width: 88px;
+				height: 88px;
+				font-size: 1.7rem;
+			}
+
+			.event:nth-child(even) .node-btn {
+				left: auto;
+				right: calc(50% + 88px);
+			}
+
+			.node-btn:hover,
+			.node-btn:focus-visible {
+				transform: translateY(-4px) scale(1.04);
+			}
+
+			.info {
+				position: static;
+				transform: none;
+				width: min(330px, 92%);
+				margin-top: 10px;
+			}
+
+			.mini-copy {
+				font-size: 0.86rem;
+			}
+		}
+
+		@media (max-width: 680px) {
+			.shell {
+				border-radius: 20px;
+				width: calc(100vw - 1rem);
+				padding: 1rem 0.85rem;
+			}
+
+			.event,
+			.event:nth-child(even) {
+				padding-left: 54%;
+				padding-right: 0;
+				text-align: left;
+			}
+
+			.event:nth-child(even) .connector,
+			.event .connector {
+				left: calc(50% + 7px);
+				right: auto;
+			}
+
+			.event:nth-child(even)::after,
+			.event::after {
+				left: calc(50% + 7px);
+				right: auto;
+				border-right: 0;
+				border-left: 12px solid var(--c);
+			}
+
+			.event:nth-child(even) .node-btn,
+			.event .node-btn {
+				left: calc(50% + 82px);
+				right: auto;
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.timeline-page::before,
+			.timeline-page::after {
+				filter: blur(28px);
+			}
+
+			.line,
+			.line::before,
+			.pulse,
+			.node-btn,
+			.node-btn::after {
+				animation: none !important;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main id="hero-header" class="timeline-page">
+		<canvas id="smokeCanvas" aria-hidden="true"></canvas>
+
+		<section class="shell" aria-label="Project timeline">
+			<h1 class="title">Journey Timeline</h1>
+			<p class="subtitle">Each year marker is interactive. Hover for a glow effect, then click a circle to read the full story segment in a popup panel.</p>
+
+			<div class="timeline">
+				<div class="line" aria-hidden="true"></div>
+
+				<ul id="eventsList" class="events"></ul>
+			</div>
+		</section>
+	</main>
+
+	<aside id="timelineModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalYear" aria-describedby="modalCopy">
+		<div class="modal-card" role="document">
+			<div class="modal-head">
+				<h2 id="modalYear" class="modal-year">0000</h2>
+				<button id="closeModal" class="modal-close" type="button" aria-label="Close popup">✕</button>
+			</div>
+			<h3 id="modalTitle" class="modal-title">Milestone title</h3>
+			<p id="modalCopy" class="modal-copy">Milestone details.</p>
+		</div>
+	</aside>
+
+	<script>
+		(() => {
+			const canvas = document.getElementById('smokeCanvas');
+			const header = document.getElementById('hero-header');
+			const lineEl = document.querySelector('.line');
+			const eventsList = document.getElementById('eventsList');
+			const titleEl = document.querySelector('.title');
+			const subtitleEl = document.querySelector('.subtitle');
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+			if (!canvas || !header || !lineEl || !eventsList || reduceMotion.matches) return;
+
+			const ctx = canvas.getContext('2d');
+			let branches = [];
+			let dust = [];
+			let emitters = [];
+			let nextBranchId = 1;
+			// Debug options
+            const DEBUG = {
+				splitChancePerGrowth: 2,
+				doubleSplitChance: 1,
+				growthSpeed: 1.25,
+				maxSplitsPerBranch: 10,
+				maxBranches: 180,
+				turnMin: 8,
+				turnMax: 14
+			};
+			const CM_TO_PX = 37.8;
+			const MIN_BRANCH_LENGTH = 3 * CM_TO_PX;
+			const MAX_BRANCH_LENGTH = 15 * CM_TO_PX;
+			const SPEED_MULT = DEBUG.growthSpeed;
+			const MAX_DUST = 900;
+			const EVENT_COLORS = ['#c43a2f', '#d84a39', '#b7322d', '#9d2a2a', '#7f2424', '#5f1f20'];
+			const TIMELINE_JSON = './test.json';
+
+			const FALLBACK_DATA = {
+				title: 'Journey Timeline',
+				subtitle: 'Each year marker is interactive. Hover for a glow effect, then click a circle to read the full story segment in a popup panel.',
+				segments: [
+					{
+						year: '01',
+						title: 'Lorem Ipsum One',
+						miniTitle: 'Lorem Start',
+						summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+						details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut lacus sed est sodales facilisis. Vestibulum feugiat augue non sapien accumsan, a finibus orci vehicula.',
+						side: 'top'
+					},
+					{
+						year: '02',
+						title: 'Lorem Ipsum Two',
+						miniTitle: 'Lorem Middle',
+						summary: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+						details: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+						side: 'bottom'
+					},
+					{
+						year: '03',
+						title: 'Lorem Ipsum Three',
+						miniTitle: 'Lorem End',
+						summary: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.',
+						details: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
+						side: 'top'
+					}
+				]
+			};
+
+			const isNarrow = () => window.innerWidth < 980;
+
+			const relRect = (el) => {
+				const box = el.getBoundingClientRect();
+				const host = header.getBoundingClientRect();
+				return {
+					left: box.left - host.left,
+					top: box.top - host.top,
+					width: box.width,
+					height: box.height,
+					right: box.right - host.left,
+					bottom: box.bottom - host.top
+				};
+			};
+
+			const clamp01 = (value) => Math.min(1, Math.max(0, value));
+
+			const getBubbleStopRatios = (lineBox) => {
+				const nodes = Array.from(eventsList.querySelectorAll('.node-btn'));
+				if (!nodes.length) return [0, 1];
+
+				const rawStops = nodes.map((node) => {
+					const box = relRect(node);
+					if (isNarrow()) {
+						const centerY = box.top + (box.height / 2);
+						return clamp01((centerY - lineBox.top) / Math.max(1, lineBox.height));
+					}
+					const centerX = box.left + (box.width / 2);
+					return clamp01((centerX - lineBox.left) / Math.max(1, lineBox.width));
+				}).sort((a, b) => a - b);
+
+				const deduped = [];
+				rawStops.forEach((ratio) => {
+					if (!deduped.length || Math.abs(ratio - deduped[deduped.length - 1]) > 0.004) {
+						deduped.push(ratio);
+					}
+				});
+
+				return deduped.length ? deduped : [0, 1];
+			};
+
+			const buildSpawnRatios = (bubbleStops) => {
+				const edgeInset = 0.024;
+				const clampedStops = bubbleStops
+					.map((v) => clamp01(v))
+					.filter((v) => v > edgeInset && v < (1 - edgeInset));
+				const anchors = [edgeInset, ...clampedStops, 1 - edgeInset].sort((a, b) => a - b);
+				const spawn = [edgeInset, 1 - edgeInset];
+
+				for (let i = 0; i < anchors.length - 1; i++) {
+					const a = anchors[i];
+					const b = anchors[i + 1];
+					const gap = b - a;
+					if (gap <= 0.01) continue;
+					spawn.push(a + (gap / 3));
+					spawn.push(a + ((2 * gap) / 3));
+				}
+
+				return spawn
+					.map((v) => clamp01(v))
+					.sort((a, b) => a - b)
+					.filter((v, i, arr) => i === 0 || Math.abs(v - arr[i - 1]) > 0.002);
+			};
+
+			const escapeHtml = (text) => String(text ?? '')
+				.replaceAll('&', '&amp;')
+				.replaceAll('<', '&lt;')
+				.replaceAll('>', '&gt;')
+				.replaceAll('"', '&quot;')
+				.replaceAll("'", '&#39;');
+
+			const buildXPercent = (index, total) => {
+				if (total <= 1) return 50;
+				let min = 9;
+				let max = 92;
+				if (total >= 10) {
+					min = 6;
+					max = 95;
+				}
+				if (total >= 14) {
+					min = 4;
+					max = 97;
+				}
+				return min + ((index / (total - 1)) * (max - min));
+			};
+
+			const applyDensityLayout = (segmentCount) => {
+				const extra = Math.max(0, segmentCount - 6);
+				const nodeSize = Math.max(58, 102 - (extra * 4));
+				const border = Math.max(3, Math.round(nodeSize * 0.058));
+				const font = Math.max(1.05, nodeSize / 51);
+				const connectorLen = Math.max(64, 110 - (extra * 3));
+				const eventWidth = Math.max(140, 250 - (extra * 8));
+
+				document.documentElement.style.setProperty('--node-size', `${nodeSize}px`);
+				document.documentElement.style.setProperty('--node-border', `${border}px`);
+				document.documentElement.style.setProperty('--node-font', `${font.toFixed(2)}rem`);
+				document.documentElement.style.setProperty('--connector-len', `${connectorLen}px`);
+				document.documentElement.style.setProperty('--event-width', `${eventWidth}px`);
+			};
+
+			const renderTimeline = (data) => {
+				const segments = Array.isArray(data?.segments) ? data.segments : [];
+				if (titleEl && data?.title) titleEl.textContent = data.title;
+				if (subtitleEl && data?.subtitle) subtitleEl.textContent = data.subtitle;
+				applyDensityLayout(segments.length);
+
+				if (!segments.length) {
+					eventsList.innerHTML = '';
+					return;
+				}
+
+				eventsList.innerHTML = segments.map((segment, idx) => {
+					const side = segment.side === 'bottom' ? 'bottom' : (segment.side === 'top' ? 'top' : (idx % 2 === 0 ? 'top' : 'bottom'));
+					const color = segment.color || EVENT_COLORS[idx % EVENT_COLORS.length];
+					const year = escapeHtml(segment.year ?? `${idx + 1}`);
+					const title = escapeHtml(segment.title || `Milestone ${idx + 1}`);
+					const miniTitle = escapeHtml(segment.miniTitle || title);
+					const summary = escapeHtml(segment.summary || 'Lorem ipsum dolor sit amet.');
+					const details = escapeHtml(segment.details || summary);
+					const pulseClass = idx % 2 === 0 ? ' pulse' : '';
+					const xPct = buildXPercent(idx, segments.length).toFixed(2);
+
+					return `
+						<li class="event ${side}" style="--x: ${xPct}%; --c: ${color};">
+							<span class="connector" aria-hidden="true"></span>
+							<button class="node-btn${pulseClass}" data-year="${year}" data-title="${title}" data-copy="${details}" type="button">${year}</button>
+							<div class="info">
+								<h2 class="mini-title">${miniTitle}</h2>
+								<div class="mini-rule"></div>
+								<p class="mini-copy">${summary}</p>
+							</div>
+						</li>
+					`;
+				}).join('');
+			};
+
+			const loadTimelineData = async () => {
+				try {
+					const response = await fetch(TIMELINE_JSON, { cache: 'no-store' });
+					if (!response.ok) throw new Error(`Failed to load ${TIMELINE_JSON}`);
+					const data = await response.json();
+					renderTimeline(data);
+				} catch {
+					renderTimeline(FALLBACK_DATA);
+				}
+			};
+
+			const resize = () => {
+				canvas.width = header.offsetWidth;
+				canvas.height = header.offsetHeight;
+				updateEmitters();
+				seedBranches();
+				seedDust();
+			};
+
+			const updateEmitters = () => {
+				emitters = [];
+				const lineBox = relRect(lineEl);
+				const lineCenterY = lineBox.top + (lineBox.height / 2);
+				const spawnRatios = buildSpawnRatios(getBubbleStopRatios(lineBox));
+
+				if (isNarrow()) {
+					for (let i = 0; i < spawnRatios.length; i++) {
+						const y = lineBox.top + (lineBox.height * spawnRatios[i]);
+						emitters.push({ x: lineBox.left + (lineBox.width / 2), y, nx: -1, ny: 0, idx: emitters.length });
+						emitters[emitters.length - 1].side = 'neg';
+						emitters.push({ x: lineBox.left + (lineBox.width / 2), y, nx: 1, ny: 0, idx: emitters.length });
+						emitters[emitters.length - 1].side = 'pos';
+					}
+				} else {
+					for (let i = 0; i < spawnRatios.length; i++) {
+						const x = lineBox.left + (lineBox.width * spawnRatios[i]);
+						emitters.push({ x, y: lineCenterY, nx: 0, ny: -1, idx: emitters.length });
+						emitters[emitters.length - 1].side = 'neg';
+						emitters.push({ x, y: lineCenterY, nx: 0, ny: 1, idx: emitters.length });
+						emitters[emitters.length - 1].side = 'pos';
+					}
+				}
+			};
+
+			const chooseEmitterForRoot = () => {
+				if (!emitters.length) return null;
+
+				const roots = branches.filter((b) => b.alive && b.parentId == null);
+				const occByEmitter = new Map();
+				const sideCount = { neg: 0, pos: 0 };
+
+				roots.forEach((root) => {
+					const idx = root.emitterIdx ?? 0;
+					occByEmitter.set(idx, (occByEmitter.get(idx) || 0) + 1);
+					const e = emitters[idx];
+					if (e && (e.side === 'neg' || e.side === 'pos')) {
+						sideCount[e.side] += 1;
+					}
+				});
+
+				const weighted = [];
+				let total = 0;
+
+				emitters.forEach((e, idx) => {
+					const occ = occByEmitter.get(idx) || 0;
+					let w = 1 / (1 + (occ * 2.8));
+					if (occ > 0) w *= 0.45;
+
+					const thisSide = e.side === 'pos' ? 'pos' : 'neg';
+					const otherSide = thisSide === 'pos' ? 'neg' : 'pos';
+					if (sideCount[thisSide] > sideCount[otherSide]) {
+						const diff = sideCount[thisSide] - sideCount[otherSide];
+						w *= Math.max(0.12, 1 - (diff * 0.22));
+					}
+
+					weighted.push({ idx, w });
+					total += w;
+				});
+
+				if (total <= 0) return emitters[Math.floor(Math.random() * emitters.length)];
+
+				let roll = Math.random() * total;
+				for (const item of weighted) {
+					roll -= item.w;
+					if (roll <= 0) return emitters[item.idx];
+				}
+
+				return emitters[weighted[weighted.length - 1].idx];
+			};
+
+			const seedDust = () => {
+				dust = [];
+				for (let i = 0; i < 260; i++) {
+					dust.push({
+						x: Math.random() * canvas.width,
+						y: Math.random() * canvas.height,
+						vx: (Math.random() - 0.5) * 0.12,
+						vy: (Math.random() - 0.5) * 0.12,
+						size: Math.random() * 1.6 + 0.5,
+						alpha: Math.random() * 0.35 + 0.18,
+						kind: Math.random() > 0.35 ? 'light' : 'dark'
+					});
+				}
+			};
+
+			const emitDustBurst = (x, y, kind = 'dark', count = 4) => {
+				for (let i = 0; i < count; i++) {
+					if (dust.length >= MAX_DUST) break;
+					dust.push({
+						x,
+						y,
+						vx: (Math.random() - 0.5) * 0.9,
+						vy: (Math.random() - 0.5) * 0.9,
+						size: Math.random() * 1.9 + 0.55,
+						alpha: Math.random() * 0.42 + 0.2,
+						kind
+					});
+				}
+			};
+
+			const emitGrowthDustTo = (x, y, count = 2) => {
+				for (let i = 0; i < count; i++) {
+					if (dust.length >= MAX_DUST) break;
+					const ang = Math.random() * Math.PI * 2;
+					const r = 24 + Math.random() * 56;
+					const sx = x + Math.cos(ang) * r;
+					const sy = y + Math.sin(ang) * r;
+					const dx = x - sx;
+					const dy = y - sy;
+					const dist = Math.hypot(dx, dy) || 1;
+					dust.push({
+						x: sx,
+						y: sy,
+						vx: (dx / dist) * (0.35 + Math.random() * 0.35),
+						vy: (dy / dist) * (0.35 + Math.random() * 0.35),
+						size: 0.6 + Math.random() * 1.4,
+						alpha: 0.22 + Math.random() * 0.35,
+						kind: 'light'
+					});
+				}
+			};
+
+			class Branch {
+				constructor(root, options = {}) {
+					this.id = nextBranchId++;
+					this.parentId = options.parentId ?? null;
+					this.attachIndex = options.attachIndex ?? 0;
+					this.emitterIdx = options.emitterIdx ?? null;
+					this.alive = true;
+					this.root = { ...root };
+					this.points = [{ x: root.x, y: root.y }];
+					this.depth = options.depth ?? 0;
+					this.state = 'growing';
+					this.seed = Math.random() * 1000;
+					this.targetLength = MIN_BRANCH_LENGTH + (Math.random() * (MAX_BRANCH_LENGTH - MIN_BRANCH_LENGTH));
+					this.growEvery = Math.max(3, Math.floor((16 + Math.random() * 22) / SPEED_MULT));
+					this.shrinkEvery = Math.max(2, Math.floor((11 + Math.random() * 20) / SPEED_MULT));
+					this.timer = 0;
+					this.step = (1.9 + Math.random() * 1.8) * SPEED_MULT;
+					this.baseAngle = Math.atan2(root.ny, root.nx);
+					this.heading = this.baseAngle;
+					this.turnEvery = DEBUG.turnMin + Math.floor(Math.random() * (DEBUG.turnMax - DEBUG.turnMin + 1));
+					this.turnTimer = 0;
+					this.jitter = (Math.random() - 0.5) * 0.16;
+					this.switchChance = 0.0022 + Math.random() * 0.0032;
+					this.currentLength = 0;
+					this.splitQuota = Math.max(0, DEBUG.maxSplitsPerBranch - this.depth);
+					this.lengthScaleBoost = options.lengthScaleBoost ?? 1;
+					this.targetLength *= this.lengthScaleBoost;
+					this.waitTicks = 0;
+				}
+
+				anchorTo(root) {
+					this.root = { ...root };
+					if (!this.points.length) {
+						this.points.push({ x: root.x, y: root.y });
+					} else {
+						this.points[0].x = root.x;
+						this.points[0].y = root.y;
+					}
+				}
+
+				addTipPoint() {
+					const tip = this.points[this.points.length - 1];
+					const t = this.points.length;
+					this.turnTimer += 1;
+					if (this.turnTimer >= this.turnEvery) {
+						this.turnTimer = 0;
+						const turns = [-0.9, -0.55, -0.28, 0.28, 0.55, 0.9];
+						this.heading += turns[Math.floor(Math.random() * turns.length)] * 0.26;
+						this.turnEvery = DEBUG.turnMin + Math.floor(Math.random() * (DEBUG.turnMax - DEBUG.turnMin + 1));
+					}
+
+					const bend = Math.sin((t * 0.45) + this.seed) * 0.22 + this.jitter + ((Math.random() - 0.5) * 0.16);
+					let angle = this.heading + bend;
+
+					let repelX = 0;
+					let repelY = 0;
+					for (const other of branches) {
+						if (!other.alive || other.id === this.id || other.points.length < 2) continue;
+						for (let i = 1; i < other.points.length; i += 2) {
+							const p = other.points[i];
+							const dx = tip.x - p.x;
+							const dy = tip.y - p.y;
+							const dist = Math.hypot(dx, dy);
+							if (dist > 0 && dist < 32) {
+								const force = (32 - dist) / 32;
+								repelX += (dx / dist) * force;
+								repelY += (dy / dist) * force;
+							}
+						}
+					}
+					if (repelX !== 0 || repelY !== 0) {
+						angle = Math.atan2(Math.sin(angle) + (repelY * 0.7), Math.cos(angle) + (repelX * 0.7));
+					}
+
+					const nx = tip.x + Math.cos(angle) * this.step;
+					const ny = tip.y + Math.sin(angle) * this.step;
+					this.currentLength += Math.hypot(nx - tip.x, ny - tip.y);
+					this.points.push({ x: nx, y: ny });
+				}
+
+				update({ hasChildren = false, forceShrink = false } = {}) {
+					const children = [];
+					if (forceShrink) {
+						this.state = 'shrinking';
+						this.waitTicks = 0;
+					}
+
+					if (this.waitTicks > 0) {
+						this.waitTicks -= 1;
+						return children;
+					}
+					this.timer += 1;
+
+					if (this.state === 'growing') {
+						if (this.timer >= this.growEvery) {
+							this.timer = 0;
+							if (this.currentLength < this.targetLength) {
+								this.addTipPoint();
+								const tipForDust = this.points[this.points.length - 1];
+								emitGrowthDustTo(tipForDust.x, tipForDust.y, 2 + (Math.random() < 0.22 ? 1 : 0));
+
+								if (this.splitQuota > 0 && this.points.length > 9 && Math.random() < (DEBUG.splitChancePerGrowth + this.depth * 0.01)) {
+									const tip = this.points[this.points.length - 1];
+									const splitCount = Math.random() < DEBUG.doubleSplitChance ? 2 : 1;
+									for (let s = 0; s < splitCount; s++) {
+										const splitAng = this.heading + ((Math.random() < 0.5 ? -1 : 1) * (0.62 + Math.random() * 0.72));
+										const child = new Branch(
+											{ x: tip.x, y: tip.y, nx: Math.cos(splitAng), ny: Math.sin(splitAng) },
+											{
+												parentId: this.id,
+												attachIndex: this.points.length - 1,
+												depth: this.depth + 1,
+												lengthScaleBoost: 0.55 + Math.random() * 0.3
+											}
+										);
+										child.step *= 0.86;
+										child.switchChance *= 1.25;
+										children.push(child);
+									}
+									this.splitQuota -= 1;
+								}
+							}
+						}
+
+						if (this.currentLength >= this.targetLength && Math.random() < this.switchChance) {
+							this.waitTicks = 24 + Math.floor(Math.random() * 64);
+							this.state = 'shrinking';
+						}
+					} else if (this.timer >= this.shrinkEvery) {
+						this.timer = 0;
+						if (hasChildren) {
+							this.waitTicks = 6;
+							return children;
+						}
+						if (this.points.length > 1) {
+							const last = this.points[this.points.length - 1];
+							const prev = this.points[this.points.length - 2];
+							this.currentLength = Math.max(0, this.currentLength - Math.hypot(last.x - prev.x, last.y - prev.y));
+							emitDustBurst(last.x, last.y, 'dark', 5);
+							this.points.pop();
+						}
+
+						if (this.points.length <= 2) {
+							if (this.parentId != null) {
+								this.alive = false;
+							} else {
+								this.waitTicks = 32 + Math.floor(Math.random() * 90);
+								this.state = 'growing';
+								this.currentLength = 0;
+								this.targetLength = MIN_BRANCH_LENGTH + (Math.random() * (MAX_BRANCH_LENGTH - MIN_BRANCH_LENGTH));
+								this.growEvery = Math.max(3, Math.floor((17 + Math.random() * 24) / SPEED_MULT));
+								this.shrinkEvery = Math.max(2, Math.floor((12 + Math.random() * 22) / SPEED_MULT));
+								this.switchChance = 0.0015 + Math.random() * 0.003;
+								this.heading = this.baseAngle;
+								this.splitQuota = 3;
+							}
+						}
+					}
+
+					return children;
+				}
+
+				draw() {
+					if (this.points.length < 2) return;
+
+					const lengthScale = Math.max(
+						0,
+						Math.min(1, (this.currentLength - MIN_BRANCH_LENGTH) / (MAX_BRANCH_LENGTH - MIN_BRANCH_LENGTH))
+					);
+					const maxWidth = 2.6 + (lengthScale * 13.5);
+					ctx.lineCap = 'round';
+					ctx.lineJoin = 'round';
+
+					for (let i = 1; i < this.points.length; i++) {
+						const p0 = this.points[i - 1];
+						const p1 = this.points[i];
+						const t = i / this.points.length;
+						const width = Math.max(0.32, maxWidth * (1 - t));
+						const color = this.state === 'growing'
+							? `rgba(255, 246, 242, ${0.42 - t * 0.28})`
+							: `rgba(18, 8, 8, ${0.55 - t * 0.34})`;
+
+						ctx.strokeStyle = color;
+						ctx.lineWidth = width;
+						ctx.beginPath();
+						ctx.moveTo(p0.x, p0.y);
+						ctx.lineTo(p1.x, p1.y);
+						ctx.stroke();
+
+						if (i % 6 === 0 && i < this.points.length - 3) {
+							const dx = p1.x - p0.x;
+							const dy = p1.y - p0.y;
+							const ang = Math.atan2(dy, dx) + ((i % 8 === 0) ? -1.05 : 1.05);
+							const twig = (4.8 + (lengthScale * 6.6)) * (1 - t);
+							ctx.strokeStyle = this.state === 'growing'
+								? `rgba(245, 236, 230, ${0.22 - t * 0.16})`
+								: `rgba(14, 6, 6, ${0.28 - t * 0.18})`;
+							ctx.lineWidth = Math.max(0.24, width * 0.45);
+							ctx.beginPath();
+							ctx.moveTo(p1.x, p1.y);
+							ctx.lineTo(p1.x + Math.cos(ang) * twig, p1.y + Math.sin(ang) * twig);
+							ctx.stroke();
+						}
+					}
+				}
+			}
+
+			const seedBranches = () => {
+				branches = [];
+				if (!emitters.length) return;
+
+				const branchCount = Math.min(isNarrow() ? 12 : 16, emitters.length);
+				for (let i = 0; i < branchCount; i++) {
+					const emitter = chooseEmitterForRoot() || emitters[i % emitters.length];
+					branches.push(new Branch(emitter, { emitterIdx: emitter.idx }));
+				}
+			};
+
+			const replenishRoots = () => {
+				if (!emitters.length) return;
+				const desiredRoots = Math.min(isNarrow() ? 12 : 16, emitters.length);
+				const aliveRoots = branches.filter((b) => b.alive && b.parentId == null).length;
+
+				if (aliveRoots >= desiredRoots) return;
+
+				for (let i = aliveRoots; i < desiredRoots; i++) {
+					const emitter = chooseEmitterForRoot() || emitters[i % emitters.length];
+					branches.push(new Branch(emitter, { emitterIdx: emitter.idx }));
+				}
+			};
+
+			const resolveCollisions = () => {
+				for (let i = 0; i < branches.length; i++) {
+					const a = branches[i];
+					if (!a || !a.alive || a.points.length < 2) continue;
+					const at = a.points[a.points.length - 1];
+
+					for (let j = i + 1; j < branches.length; j++) {
+						const b = branches[j];
+						if (!b || !b.alive || b.points.length < 2) continue;
+						const bt = b.points[b.points.length - 1];
+						const d = Math.hypot(at.x - bt.x, at.y - bt.y);
+						if (d < 10) {
+							const keepA = a.currentLength >= b.currentLength;
+							const winner = keepA ? a : b;
+							const loser = keepA ? b : a;
+							winner.targetLength = Math.min(MAX_BRANCH_LENGTH, winner.targetLength + (loser.currentLength * 0.28));
+							emitDustBurst(bt.x, bt.y, 'dark', 7);
+							loser.alive = false;
+						}
+					}
+				}
+			};
+
+			const updateDust = () => {
+				const growTips = [];
+				const shrinkTips = [];
+				for (const branch of branches) {
+					if (!branch.alive || branch.points.length < 2) continue;
+					const tip = branch.points[branch.points.length - 1];
+					if (branch.state === 'growing') growTips.push(tip);
+					else shrinkTips.push(tip);
+				}
+
+				for (let i = dust.length - 1; i >= 0; i--) {
+					const p = dust[i];
+
+					if (p.kind === 'light' && growTips.length) {
+						let best = null;
+						let bestD = 1e9;
+						for (const tip of growTips) {
+							const d = Math.hypot(tip.x - p.x, tip.y - p.y);
+							if (d < bestD) {
+								bestD = d;
+								best = tip;
+							}
+						}
+						if (best && bestD < 170) {
+							const dx = best.x - p.x;
+							const dy = best.y - p.y;
+							const inv = 1 / (bestD || 1);
+							p.vx += dx * inv * 0.03;
+							p.vy += dy * inv * 0.03;
+							if (bestD < 4.5) {
+								dust.splice(i, 1);
+								continue;
+							}
+						}
+					}
+
+					if (p.kind === 'dark' && shrinkTips.length) {
+						for (const tip of shrinkTips) {
+							const dx = p.x - tip.x;
+							const dy = p.y - tip.y;
+							const d = Math.hypot(dx, dy);
+							if (d > 0 && d < 120) {
+								const force = (120 - d) / 120;
+								p.vx += (dx / d) * force * 0.045;
+								p.vy += (dy / d) * force * 0.045;
+							}
+						}
+					}
+
+					p.x += p.vx;
+					p.y += p.vy;
+					p.vx *= 0.985;
+					p.vy *= 0.985;
+					p.alpha *= 0.998;
+
+					if (p.x < -20 || p.y < -20 || p.x > canvas.width + 20 || p.y > canvas.height + 20 || p.alpha < 0.04) {
+						dust.splice(i, 1);
+					}
+				}
+			};
+
+			const drawDust = () => {
+				dust.forEach((p) => {
+					ctx.fillStyle = p.kind === 'dark'
+						? `rgba(16, 8, 8, ${p.alpha})`
+						: `rgba(255, 243, 236, ${p.alpha})`;
+					ctx.beginPath();
+					ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+					ctx.fill();
+				});
+			};
+
+			const draw = () => {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				replenishRoots();
+
+				const branchById = new Map();
+				const childrenCountByParent = new Map();
+				branches.forEach((b) => {
+					if (!b.alive) return;
+					branchById.set(b.id, b);
+					if (b.parentId != null) {
+						childrenCountByParent.set(b.parentId, (childrenCountByParent.get(b.parentId) || 0) + 1);
+					}
+				});
+
+				const forcedShrinkIds = new Set();
+				for (const b of branches) {
+					if (b.alive && b.state === 'shrinking') forcedShrinkIds.add(b.id);
+				}
+				let expanded = true;
+				while (expanded) {
+					expanded = false;
+					for (const b of branches) {
+						if (!b.alive || b.parentId == null) continue;
+						if (forcedShrinkIds.has(b.parentId) && !forcedShrinkIds.has(b.id)) {
+							forcedShrinkIds.add(b.id);
+							expanded = true;
+						}
+					}
+				}
+
+				const newChildren = [];
+				for (const branch of branches) {
+					if (!branch.alive) continue;
+
+					if (branch.parentId == null) {
+						const root = emitters[branch.emitterIdx % emitters.length];
+						if (root) branch.anchorTo(root);
+					} else {
+						const parent = branchById.get(branch.parentId);
+						if (!parent || !parent.alive || parent.points.length - 1 < branch.attachIndex) {
+							branch.alive = false;
+							continue;
+						}
+						branch.anchorTo(parent.points[branch.attachIndex]);
+					}
+
+					const children = branch.update({
+						hasChildren: (childrenCountByParent.get(branch.id) || 0) > 0,
+						forceShrink: forcedShrinkIds.has(branch.id) && branch.parentId != null
+					});
+					if (children.length) newChildren.push(...children);
+				}
+
+				if (newChildren.length) branches.push(...newChildren);
+
+				resolveCollisions();
+				branches = branches.filter((b) => b.alive);
+				if (branches.length === 0) {
+					seedBranches();
+					seedDust();
+				}
+				if (branches.length > DEBUG.maxBranches) {
+					branches.splice(0, branches.length - DEBUG.maxBranches);
+				}
+
+				branches.forEach((branch) => branch.draw());
+
+				updateDust();
+				drawDust();
+				requestAnimationFrame(draw);
+			};
+
+			const start = async () => {
+				await loadTimelineData();
+				resize();
+				draw();
+			};
+
+			window.addEventListener('resize', resize);
+			start();
+		})();
+
+		(() => {
+			const eventsList = document.getElementById('eventsList');
+			const modal = document.getElementById('timelineModal');
+			const closeBtn = document.getElementById('closeModal');
+			const modalYear = document.getElementById('modalYear');
+			const modalTitle = document.getElementById('modalTitle');
+			const modalCopy = document.getElementById('modalCopy');
+
+			if (!eventsList || !modal || !closeBtn || !modalYear || !modalTitle || !modalCopy) return;
+
+			let activeBtn = null;
+
+			const openModal = (button) => {
+				activeBtn = button;
+				modalYear.textContent = button.dataset.year || '0000';
+				modalTitle.textContent = button.dataset.title || 'Milestone';
+				modalCopy.textContent = button.dataset.copy || 'No additional details.';
+				modal.style.setProperty('--active', getComputedStyle(button).borderColor);
+
+				modal.classList.add('open');
+				modal.setAttribute('aria-hidden', 'false');
+				closeBtn.focus();
+			};
+
+			const closeModal = () => {
+				modal.classList.remove('open');
+				modal.setAttribute('aria-hidden', 'true');
+				if (activeBtn) {
+					activeBtn.focus();
+				}
+			};
+
+			eventsList.addEventListener('click', (event) => {
+				const button = event.target.closest('.node-btn');
+				if (!button) return;
+				openModal(button);
+			});
+
+			closeBtn.addEventListener('click', closeModal);
+
+			modal.addEventListener('click', (event) => {
+				if (event.target === modal) closeModal();
+			});
+
+			document.addEventListener('keydown', (event) => {
+				if (event.key === 'Escape' && modal.classList.contains('open')) {
+					closeModal();
+				}
+			});
+		})();
+	</script>
+</body>
+</html>

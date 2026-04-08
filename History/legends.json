@@ -1,0 +1,69 @@
+{
+	"title": "Journey Timeline",
+	"subtitle": "Each year marker is interactive. Hover for a glow effect, then click a circle to read the full story segment in a popup panel.",
+	"segments": [
+		{
+			"year": "01",
+			"title": "Lorem Ipsum Alpha",
+			"miniTitle": "Alpha Stage",
+			"summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+			"details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.",
+			"side": "top",
+			"color": "#c43a2f"
+		},
+		{
+			"year": "02",
+			"title": "Lorem Ipsum Beta",
+			"miniTitle": "Beta Stage",
+			"summary": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			"details": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+			"side": "bottom",
+			"color": "#d84a39"
+		},
+		{
+			"year": "03",
+			"title": "Lorem Ipsum Gamma",
+			"miniTitle": "Gamma Stage",
+			"summary": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+			"details": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.",
+			"side": "top",
+			"color": "#b7322d"
+		},
+		{
+			"year": "04",
+			"title": "Lorem Ipsum Delta",
+			"miniTitle": "Delta Stage",
+			"summary": "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+			"details": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.",
+			"side": "bottom",
+			"color": "#9d2a2a"
+		},
+		{
+			"year": "05",
+			"title": "Lorem Ipsum Epsilon",
+			"miniTitle": "Epsilon Stage",
+			"summary": "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
+			"details": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur blandit tempus porttitor.",
+			"side": "top",
+			"color": "#7f2424"
+		},
+		{
+			"year": "06",
+			"title": "Lorem Ipsum Zeta",
+			"miniTitle": "Zeta Stage",
+			"summary": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
+			"details": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla quis lorem ut libero malesuada feugiat. Pellentesque in ipsum id orci porta dapibus.",
+			"side": "bottom",
+			"color": "#5f1f20"
+		},
+		{
+			"year": "08",
+			"title": "Lorem Ipsum Zeta",
+			"miniTitle": "Zeta Stage",
+			"summary": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
+			"details": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla quis lorem ut libero malesuada feugiat. Pellentesque in ipsum id orci porta dapibus.",
+			"side": "top",
+			"color": "#5f1f20"
+		}
+	]
+}
