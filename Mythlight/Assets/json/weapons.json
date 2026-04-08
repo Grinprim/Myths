@@ -2,87 +2,113 @@
   "categories": {
     "light": [
       { "name": "Dagger", "damage_type": "pierce" },
-      { "name": "Whip", "damage_type": "slash" },
-      { "name": "Meteor Hammer", "damage_type": "blunt" },
-      { "name": "Cane", "damage_type": "blunt" },
-      { "name": "Staff", "damage_type": "blunt" },
       { "name": "Dirk", "damage_type": "pierce" },
       { "name": "Razor", "damage_type": "slash" },
-      { "name": "Baton", "damage_type": "blunt" },
-      { "name": "Katar", "damage_type": "pierce" },
       { "name": "Sai", "damage_type": "pierce" },
-      { "name": "Tonfa", "damage_type": "blunt" },
+      { "name": "Katar", "damage_type": "pierce" },
+      { "name": "Punch Dagger", "damage_type": "pierce" },
+      { "name": "Baton", "damage_type": "blunt" },
       { "name": "Sickle", "damage_type": "slash" },
-      { "name": "Punch Dagger", "damage_type": "pierce" }
+      { "name": "Tonfa", "damage_type": "blunt" },
+      { "name": "Meteor Hammer", "damage_type": "blunt" },
+      { "name": "Cestus", "damage_type": "blunt" },
+      { "name": "Knuckle Dusters", "damage_type": "blunt" }
     ],
+
     "medium": [
       { "name": "Shortsword", "damage_type": "pierce" },
-      { "name": "Axe", "damage_type": "slash" },
-      { "name": "Mace", "damage_type": "blunt" },
-      { "name": "Spear", "damage_type": "pierce" },
-      { "name": "Warhammer", "damage_type": "blunt" },
-      { "name": "Flail", "damage_type": "blunt" },
+      { "name": "Longsword", "damage_type": "slash" },
       { "name": "Rapier", "damage_type": "pierce" },
-      { "name": "Cleaver", "damage_type": "slash" },
-      { "name": "Club", "damage_type": "blunt" },
-      { "name": "Falchion", "damage_type": "slash" },
-      { "name": "Morningstar", "damage_type": "pierce" },
       { "name": "Scimitar", "damage_type": "slash" },
+      { "name": "Falchion", "damage_type": "slash" },
+      { "name": "Axe", "damage_type": "slash" },
+      { "name": "Battle Axe", "damage_type": "slash" },
+      { "name": "Mace", "damage_type": "blunt" },
+      { "name": "Morningstar", "damage_type": "pierce" },
+      { "name": "Warhammer", "damage_type": "blunt" },
+      { "name": "Spear", "damage_type": "pierce" },
       { "name": "Pick", "damage_type": "pierce" },
-      { "name": "Trident", "damage_type": "pierce" }
+      { "name": "Club", "damage_type": "blunt" },
+      { "name": "Quarterstaff", "damage_type": "blunt" }
     ],
+
     "heavy": [
       { "name": "Greatsword", "damage_type": "cleave" },
       { "name": "Greataxe", "damage_type": "cleave" },
       { "name": "Maul", "damage_type": "blunt" },
+      { "name": "Greatclub", "damage_type": "blunt" },
+      { "name": "Executioner Sword", "damage_type": "cleave" },
+      { "name": "War Scythe", "damage_type": "cleave" },
       { "name": "Halberd", "damage_type": "cleave" },
       { "name": "Poleaxe", "damage_type": "cleave" },
       { "name": "Glaive", "damage_type": "cleave" },
-      { "name": "Executioner Sword", "damage_type": "cleave" },
-      { "name": "War Scythe", "damage_type": "cleave" },
-      { "name": "Greatclub", "damage_type": "blunt" }
+      { "name": "Pike", "damage_type": "pierce" },
+      { "name": "Lance", "damage_type": "pierce" },
+      { "name": "Zweihander", "damage_type": "cleave" }
     ],
+
     "ranged_light": [
-      { "name": "Shortbow", "damage_type": "pierce" },
       { "name": "Sling", "damage_type": "blunt" },
-      { "name": "Throwing Knives", "damage_type": "pierce" },
+      { "name": "Shortbow", "damage_type": "pierce" },
       { "name": "Hand Crossbow", "damage_type": "pierce" },
-      { "name": "Throwing Axe", "damage_type": "slash" },
-      { "name": "Darts", "damage_type": "pierce" },
-      { "name": "Javelin", "damage_type": "pierce" },
-      { "name": "Chakram", "damage_type": "slash" },
-      { "name": "Boomerang", "damage_type": "blunt" },
-      { "name": "Throwing Hammer", "damage_type": "blunt" },
-      { "name": "Shuriken", "damage_type": "pierce" }
-    ],
-    "ranged_heavy": [
-      { "name": "Longbow", "damage_type": "pierce" },
-      { "name": "Crossbow", "damage_type": "pierce" },
-      { "name": "Heavy Crossbow", "damage_type": "pierce" },
-      { "name": "Greatbow", "damage_type": "pierce" },
-      { "name": "Arbalest", "damage_type": "pierce" },
-      { "name": "Repeating Crossbow", "damage_type": "pierce" },
-      { "name": "Ballista (Portable)", "damage_type": "pierce" }
-    ],
-    "firearms_light": [
+      { "name": "Blowgun", "damage_type": "pierce" },
       { "name": "Pistol", "damage_type": "pierce" },
       { "name": "Revolver", "damage_type": "pierce" },
-      { "name": "Derringer", "damage_type": "pierce" },
-      { "name": "Semi-Auto Pistol", "damage_type": "pierce" },
-      { "name": "Machine Pistol", "damage_type": "pierce" },
-      { "name": "Pepperbox", "damage_type": "pierce" }
+      { "name": "Semi-Auto Pistol", "damage_type": "pierce" }
     ],
-    "firearms_heavy": [
+
+    "ranged_medium": [
+      { "name": "Longbow", "damage_type": "pierce" },
+      { "name": "Crossbow", "damage_type": "pierce" },
+      { "name": "Repeating Crossbow", "damage_type": "pierce" },
       { "name": "Rifle", "damage_type": "pierce" },
-      { "name": "Shotgun", "damage_type": "cleave" },
-      { "name": "Blunderbuss", "damage_type": "cleave" },
-      { "name": "Musket", "damage_type": "pierce" },
       { "name": "Lever-Action Rifle", "damage_type": "pierce" },
+      { "name": "Shotgun", "damage_type": "cleave" },
       { "name": "Bolt-Action Rifle", "damage_type": "pierce" },
-      { "name": "Double-Barrel Shotgun", "damage_type": "cleave" },
-      { "name": "Automatic Rifle", "damage_type": "pierce" },
+      { "name": "Musket", "damage_type": "pierce" }
+    ],
+
+    "ranged_heavy": [
+      { "name": "Heavy Crossbow", "damage_type": "pierce" },
+      { "name": "Arbalest", "damage_type": "pierce" },
+      { "name": "Greatbow", "damage_type": "pierce" },
+      { "name": "Ballista (Portable)", "damage_type": "pierce" },
       { "name": "Sniper Rifle", "damage_type": "pierce" },
+      { "name": "Double-Barrel Shotgun", "damage_type": "cleave" },
+      { "name": "Blunderbuss", "damage_type": "cleave" },
+      { "name": "Automatic Rifle", "damage_type": "pierce" },
       { "name": "Light Machine Gun", "damage_type": "pierce" }
+    ],
+
+    "finesse_light": [
+      { "name": "Stiletto", "damage_type": "pierce" },
+      { "name": "Needle Knife", "damage_type": "pierce" },
+      { "name": "Palm Dagger", "damage_type": "pierce" },
+      { "name": "Garrote", "damage_type": "pierce" },
+      { "name": "Hidden Blade", "damage_type": "pierce" },
+      { "name": "Throwing Knives", "damage_type": "pierce" },
+      { "name": "Darts", "damage_type": "pierce" },
+      { "name": "Shuriken", "damage_type": "pierce" }
+    ],
+
+    "finesse_medium": [
+      { "name": "Estoc", "damage_type": "pierce" },
+      { "name": "Smallsword", "damage_type": "pierce" },
+      { "name": "Sabre", "damage_type": "slash" },
+      { "name": "Dueling Sword", "damage_type": "pierce" },
+      { "name": "Javelin", "damage_type": "pierce" },
+      { "name": "Throwing Axe", "damage_type": "slash" },
+      { "name": "Chakram", "damage_type": "slash" },
+      { "name": "Cane", "damage_type": "blunt" },
+      { "name": "Whip", "damage_type": "slash" }
+    ],
+
+    "finesse_heavy": [
+      { "name": "Chain Whip", "damage_type": "slash" },
+      { "name": "Weighted Chain", "damage_type": "blunt" },
+      { "name": "Rope Dart", "damage_type": "pierce" },
+      { "name": "Flail", "damage_type": "blunt" },
+      { "name": "Trident", "damage_type": "pierce" }
     ]
   },
   "prefixes": {
