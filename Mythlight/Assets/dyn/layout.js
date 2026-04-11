@@ -12,7 +12,7 @@
         traits: 'pages/traits.html',
         spells: 'pages/spells.html',
         inventory: 'pages/inventory.html',
-        'character-sheet': 'pages/sheet/character_sheet.html',
+        'character-sheet': 'sheet/character_sheet.html',
     };
 
     const applyNavbarRoutes = () => {
