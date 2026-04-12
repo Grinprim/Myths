@@ -457,7 +457,7 @@
   {
     "Name": "Chef",
     "Action":"⭘",
-    "tags": ["Utility", "Buff", "Ally", "Defense"],
+    "tags": ["Utility", "Buff", "Ally", "Defense", "Profession"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -477,7 +477,7 @@
   {
     "Name": "Miner",
     "Action":"⭘",
-    "tags": ["Utility", "Damage", "Debuff"],
+    "tags": ["Utility", "Damage", "Debuff", "Profession"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -487,7 +487,7 @@
   {
     "Name": "Brewer",
     "Action":"⭘",
-    "tags": ["Utility", "Crafting"],
+    "tags": ["Utility", "Crafting", "Profession"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -497,7 +497,7 @@
   {
     "Name": "Fisher",
     "Action":"⭘",
-    "tags": ["Utility", "Healing", "Gold"],
+    "tags": ["Utility", "Healing", "Gold", "Profession"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -517,7 +517,7 @@
   {
     "Name": "Gravedigger",
     "Action":"⭘",
-    "tags": ["Utility", "Death", "Healing", "Grace", "Ally"],
+    "tags": ["Utility", "Death", "Healing", "Grace", "Ally", "Profession"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "★ Death",
@@ -547,7 +547,7 @@
   {
     "Name": "Street Performer",
     "Action":"⬖",
-    "tags": ["Social", "Accuracy", "Gold", "Ally"],
+    "tags": ["Social", "Accuracy", "Gold", "Ally", "Profession"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -557,7 +557,7 @@
   {
     "Name": "Candle Keeper",
     "Action":"⭘",
-    "tags": ["Utility", "Buff"],
+    "tags": ["Utility", "Buff", "Profession"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -837,7 +837,7 @@
   {
     "Name": "Craftsman",
     "Action":"⭘",
-    "tags": ["Crafting", "Utility"],
+    "tags": ["Crafting", "Utility", "Profession"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Tinker",
@@ -867,7 +867,7 @@
   {
     "Name": "Scrap Salvager",
     "Action":"⭘",
-    "tags": ["Crafting", "Utility"],
+    "tags": ["Crafting", "Utility", "Profession"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -917,7 +917,7 @@
   {
     "Name": "Locksmith",
     "Action":"⭘",
-    "tags": ["Utility", "Feats"],
+    "tags": ["Utility", "Feats", "Profession"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -1226,7 +1226,7 @@
   {
     "Name": "Blacksmith",
     "Action":"⭘",
-    "tags": ["Crafting", "Repair", "Buff"],
+    "tags": ["Crafting", "Repair", "Buff", "Profession"],
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "",
@@ -1246,7 +1246,7 @@
   {
     "Name": "Cartographer",
     "Action":"⭘",
-    "tags": ["Utility"],
+    "tags": ["Utility", "Profession"],
     "Cost": "2",
     "Symbols": "⧖",
     "Parameters": "★ Explorer",
@@ -1585,7 +1585,7 @@
   {
     "Name": "Field Medic",
     "Action":"◇",
-    "tags": ["Utility", "Healing"],
+    "tags": ["Utility", "Healing", "Profession"],
     "Cost": "2",
     "Symbols": "☀",
     "Parameters": "",
@@ -1685,7 +1685,7 @@
   {
     "Name": "Berserk",
     "Action":"⭘",
-    "tags": ["Combat", "Sacrifice", "Rage"],
+    "tags": ["Combat", "Rage"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "★ Rage",
@@ -2135,7 +2135,7 @@
   {
     "Name": "Carpenter",
     "Action":"⭘",
-    "tags": ["Utility", "Crafting"],
+    "tags": ["Utility", "Crafting", "Profession"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2165,7 +2165,7 @@
   {
     "Name": "Seamstress",
     "Action":"⭘",
-    "tags": ["Utility", "Crafting"],
+    "tags": ["Utility", "Crafting", "Profession"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -2175,7 +2175,7 @@
   {
     "Name": "Makeup Maid",
     "Action":"⭘",
-    "tags": ["Utility", "Social", "Ally"],
+    "tags": ["Utility", "Social", "Ally", "Profession"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2235,7 +2235,7 @@
   {
     "Name": "Jeweler",
     "Action":"⭘",
-    "tags": ["Utility", "Crafting", "Gold"],
+    "tags": ["Utility", "Crafting", "Gold", "Profession"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -2573,7 +2573,7 @@
   {
     "Name": "One Of Each",
     "Action":"⭘",
-    "tags": ["Combat", "Damage"],
+    "tags": ["Combat", "Damage", "Sacrifice"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2603,7 +2603,7 @@
   {
     "Name": "Riposte",
     "Action":"◇",
-    "tags": ["Combat"],
+    "tags": ["Combat", "Guard"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2657,7 +2657,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Spellcasting",
-    "Description": "When an ally within 8 tiles casts a spell, you may pay for it with your mana instead.",
+    "Description": "When an ally within 8 tiles casts a spell, you may pay for it with your Mana instead.",
     "Scaling": ""
   },
   {
@@ -2697,7 +2697,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "At the start of each Scene you gain Guard equal to the number of times you were hit last Scene.",
+    "Description": "At the start of each Scene you gain Guard equal to the number of times you were attacked last Scene.",
     "Scaling": ""
   },
   {
@@ -2721,9 +2721,9 @@
     "Scaling": ""
   },
   {
-    "Name": "Arena's Favorite",
+    "Name": "All Out",
     "Action":"⭘",
-    "tags": ["Accuracy", "Buff", "Sacrifice"],
+    "tags": ["Accuracy", "Sacrifice"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
@@ -2731,7 +2731,7 @@
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
-    "Name": "Crimson Banquet",
+    "Name": "Mana Burn",
     "Action":"⭘",
     "tags": ["Magic", "Mana", "Sacrifice"],
     "Cost": "1",
@@ -2741,23 +2741,23 @@
     "Scaling": ""
   },
   {
-    "Name": "Crimson Pact",
+    "Name": "Boiling Blood",
     "Action":"⭘",
     "tags": ["Magic", "Sacrifice", "Mana"],
     "Cost": "2",
     "Symbols": "⧖",
-    "Parameters": "⫘ Crimson Banquet",
-    "Description": "Spells cost no mana, instead pay [Double the Spell level] as Health. Crimson Banquet no longer has an effect.",
+    "Parameters": "⫘ Mana Burn",
+    "Description": "Spells cost no mana, instead pay [Double the Spell level] as Health. Mana Burn no longer has an effect.",
     "Scaling": ""
   },
   {
     "Name": "Light Footed",
     "Action":"⭘",
-    "tags": ["Movement", "Buff"],
+    "tags": ["Movement", "Defense"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "If you have traveled at least 8 tiles; You gain +3 Reflex and +1 Armor for 2 Scenes",
+    "Description": "If you have traveled at least 8 tiles; You gain +3 Reflex and +3 Armor for 2 Scenes",
     "Scaling": ""
   },
   {
@@ -2777,17 +2777,17 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "If you climb a wall or jump over an obstacle, you can jump at an enemy and attack with your weapon; doing +X Damage. An ally can also offer a boost to perform this attack.",
+    "Description": "If you climb a wall or jump over an obstacle, you can jump at an enemy and attack with your weapon; doing +X Damage. An ally can also offer a boost, as a reaction, to perform this attack.",
     "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 3]<br>+3 [lvl 6]<br>+4 [lvl 9]"
   },
   {
     "Name": "Return",
-    "Action":"⬖",
+    "Action":"⭘",
     "tags": ["Utility", "Finesse"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Return an object you threw within 6 tile to your hand.",
+    "Description": "Finesse(thrown) weapons return to your hand at the end of your turn.",
     "Scaling": ""
   },
   {
@@ -2853,7 +2853,7 @@
   {
     "Name": "Bodybuilder",
     "Action":"⭘",
-    "tags": ["Combat", "Buff", "Social"],
+    "tags": ["Feats", "Social"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2893,7 +2893,7 @@
   {
     "Name": "Snipers Nest",
     "Action":"⭘",
-    "tags": ["Debuff", "Utility", "Ranged"],
+    "tags": ["Sacrifice", "Ranged", "Buff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -2903,7 +2903,7 @@
   {
     "Name": "Personal Vendetta",
     "Action":"⬖",
-    "tags": ["Ranged", "Buff", "Taunt"],
+    "tags": ["Ranged", "Taunt"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Taunt",
@@ -2913,7 +2913,7 @@
   {
     "Name": "Bloodlust",
     "Action":"⭘",
-    "tags": ["Buff", "Rage"],
+    "tags": ["Rage", "Combat"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Rage",
@@ -2933,21 +2933,21 @@
   {
     "Name": "Bypassed",
     "Action":"⭘",
-    "tags": ["Magic", "Buff", "Cantrips"],
+    "tags": ["Magic", "Cantrips"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Unbound",
-    "Description": "You learn 1 cantrip originating from outside your Spellcasting School.",
+    "Description": "You learn 1 cantrip originating from outside your Spellcasting School. (If you have no Spellcasting School, you can choose any cantrip.)",
     "Scaling": ""
   },
   {
     "Name": "Blindfold Training",
     "Action":"⭘",
-    "tags": ["Combat", "Buff", "Senses"],
+    "tags": ["Buff", "Debuff", "Senses"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "The blind condition no longer imposes Disadvantage, instead it becomes a -2. Enemy attacks no longer have Advantage against you, instead it becomes a +2.",
+    "Description": "The blind condition no longer imposes Disadvantage, instead it becomes a -2; Enemy attacks no longer have Advantage against you, instead it becomes a +2.",
     "Scaling": ""
   },
   {
@@ -2966,8 +2966,8 @@
     "tags": ["Mana", "Cantrips", "Sacrifice"],
     "Cost": "1",
     "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "Lose access to Cantrips, gaining Maximum Mana equal to the number of cantrips lost. Future cantrips are also converted.",
+    "Parameters": "⫘ ★ Spellcasting",
+    "Description": "Lose access to cantrips, gaining Maximum Mana equal to the number of cantrips lost. Future cantrips are also converted.",
     "Scaling": ""
   },
   {
@@ -2983,17 +2983,17 @@
   {
     "Name": "High Road",
     "Action":"⭘",
-    "tags": ["Social", "Buff", "Grace"],
+    "tags": ["Grace", "Death"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain [3+ your Style] Grace at the start of combat, if you had spared a life last combat.",
+    "Description": "Gain [3+ your Spirit] Grace at the start of combat, if you had spared a life last combat.",
     "Scaling": ""
   },
   {
     "Name": "Self Defense",
     "Action":"⭘",
-    "tags": ["Combat", "Buff", "Taunt"],
+    "tags": ["Accuracy", "Taunt"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Taunt",
@@ -3011,9 +3011,9 @@
     "Scaling": ""
   },
   {
-    "Name": "Shield Vault",
+    "Name": "Blunt Impact",
     "Action":"⬖",
-    "tags": ["Combat", "Debuff", "Movement"],
+    "tags": ["Debuff", "Movement"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Impact ⫘ Pathmaker",
@@ -3023,7 +3023,7 @@
   {
     "Name": "Sharesies",
     "Action":"⬖",
-    "tags": ["Combat", "Buff", "Proficiency"],
+    "tags": ["Combat", "Ally", "Proficiency"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -3043,7 +3043,7 @@
   {
     "Name": "Reckless",
     "Action":"⭘",
-    "tags": ["Melee", "Buff", "Rage"],
+    "tags": ["Melee", "Damage", "Rage"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ ★ Rage",
@@ -3071,13 +3071,13 @@
     "Scaling": "Uses 🗲:<br>2 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
   },
   {
-    "Name": "Hostage",
+    "Name": "Hostage Taker",
     "Action":"⭘",
-    "tags": ["Combat", "Debuff"],
+    "tags": ["Debuff"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "While grappling a creature you are considered to be behind half cover.",
+    "Description": "While grappling a creature attacks no longer have Advantage against you.",
     "Scaling": ""
   },
   {
@@ -3093,7 +3093,7 @@
   {
     "Name": "Treaded Ground",
     "Action":"⭘",
-    "tags": ["Ally", "Buff", "Movement"],
+    "tags": ["Ally", "Movement"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -3103,7 +3103,7 @@
   {
     "Name": "Gracious",
     "Action":"⭘",
-    "tags": ["Buff", "Grace"],
+    "tags": ["Grace"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
@@ -3141,9 +3141,9 @@
     "Scaling": ""
   },
   {
-    "Name": "Comfy Sleeper",
+    "Name": "Comfy Napper",
     "Action":"⭘",
-    "tags": ["Utility", "Healing", "Mana"],
+    "tags": ["Utility", "Healing", "Mana", "Debuff", "Uses"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
@@ -3153,61 +3153,61 @@
   {
     "Name": "Gardener",
     "Action":"⭘",
-    "tags": ["Utility"],
+    "tags": ["Buff", "Utility","Profession"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain Advantage on checks needed to care for plants.",
+    "Description": "Gain Advantage on checks needed to care for or identify plants.",
     "Scaling": ""
   },
   {
     "Name": "Merchant",
     "Action":"⭘",
-    "tags": ["Utility", "Gold"],
+    "tags": ["Utility", "Gold", "Buff", "Profession"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You sell items for 10% more gold, and buy items for 10% less gold (Narrator's Discretion).",
+    "Description": "While negotiating the price of an item, you gain advantage on the check.",
     "Scaling": ""
   },
   {
-    "Name": "Sizeable Slash",
+    "Name": "Sizeable Swing",
     "Action":"◆",
     "tags": ["Melee", "Damage", "Area"],
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "",
-    "Description": "You perform a large Slash with your Melee weapon, it deals +1 Damage in a 2 Tile Cone.",
+    "Description": "You perform a large Swing with your Melee weapon, it deals +1 Damage in a 2 Tile Cone. Creatures in the area must roll [Reflex] vs [6 + your Weapon Proficiency] to resist. The damage type matches your weapon.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 3]<br>3 [lvl 6]<br>4 [lvl 9]"
   },
   {
     "Name": "Answered Prayer",
     "Action":"⭘",
-    "tags": ["Utility", "Grace"],
+    "tags": ["Utility", "Grace", "Divine"],
     "Cost": "1",
     "Symbols": "☀",
     "Parameters": "",
     "Description": "During your rest you may perform a 30 minute ritual; doing so grants you X Grace after the Rest concludes.",
-    "Scaling": "Grace X:<br>3 [lvl 1]<br>5 [lvl 6]<br>7 [lvl 12]"
+    "Scaling": "Grace X:<br>3 [lvl 1]<br>4 [lvl 6]<br>6 [lvl 12]"
   },
   {
     "Name": "Musician",
     "Action":"⭘",
-    "tags": ["Combat", "Buff"],
+    "tags": ["Area", "Accuracy", "Ally", "Defense", "Improvised", "Profession"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You can play your chosen instrument and are proficient with it as an improvised weapon. While playing, allies within hearing range gain either [your Speech - 1] Armor or [your Speech] Accuracy.",
+    "Description": "You can play your chosen instrument and are proficient with it as an improvised weapon using your highest weapon proficiency, if it is used as a thrown or ranged weapon, it has 6 units of range. While playing, allies within hearing range gain either [your Speech - 1] Armor or [your Speech] Accuracy.",
     "Scaling": ""
   },
   {
     "Name": "Sailor",
     "Action": "⭘",
-    "tags": ["Utility"],
+    "tags": ["Utility", "Buff", "Damage", "Profession"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "You are proficient with maps and compasses. Gain advantage on Scholarship and Awareness checks regarding ports or islands. You can determine North while viewing any type of sky. You are proficient with driving Water vehicles.",
+    "Description": "You deal +1 Damage to water-based creatures. Gain advantage on Scholarship and Awareness checks regarding ports, sailing or islands. You can determine North while viewing any type of sky.",
     "Scaling": ""
   },
   {
@@ -3237,17 +3237,17 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Tinker",
-    "Description": "You gain Access to Combat Crafts; You know a number of Combat Crafts equal to half your level rounded up. You start with Trivial Recipes, for each point of Scholarship above 1, increases the known complexity.",
+    "Description": "You gain Access to Combat Crafts, which you can craft in the middle of combat; You know a number of Combat Crafts equal to half your level rounded up. You start with Trivial Recipes, for each point of Scholarship above 1, increases the known complexity.",
     "Scaling": ""
   },
   {
     "Name": "Master Thrower",
     "Action": "⭘",
-    "tags": ["Finesse", "Damage"],
+    "tags": ["Finesse", "Damage", "Improvised"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Any throwable item you use deals +X Damage.",
+    "Description": "Any throwable item you use deals +X Damage. Improvised thrown weapons now use your highest finesse weapon proficiency.",
     "Scaling": "Damage X:<br>+1 [lvl 1]<br>+2 [lvl 6]<br>+3 [lvl 12]"
   },
   {
@@ -3263,7 +3263,7 @@
   {
     "Name": "Range",
     "Action": "⭘",
-    "tags": ["Grace", "Ranged", "Finesse"],
+    "tags": ["Grace", "Ranged", "Finesse", "Magic"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Grace",
@@ -3277,7 +3277,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "★ Grace",
-    "Description": "You may spend any amount of Grace to gain the same amount of Speed.",
+    "Description": "You may spend any amount of Grace to gain the same amount of Speed stacks.",
     "Scaling": ""
   },
   {
@@ -3287,17 +3287,17 @@
     "Cost": "1",
     "Symbols": "🗲",
     "Parameters": "★ Grace",
-    "Description": "Spend 6 Grace to gain 1 Haste.",
+    "Description": "Spend 6 Grace to gain 1 Haste stack.",
     "Scaling": "Uses 🗲:<br>1 [lvl 1]<br>2 [lvl 6]<br>3 [lvl 12]"
   },
   {
     "Name": "Scroll Of A Madman",
     "Action": "⭘",
-    "tags": ["Magic", "Debuff"],
+    "tags": ["Sacrifice", "Feats"],
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "",
-    "Description": "Gain +3 Scholarship. You permanently gain the Madness Conditions.",
+    "Description": "Gain +3 Scholarship. You permanently gain the Madness Condition.",
     "Scaling": ""
   },
   {
