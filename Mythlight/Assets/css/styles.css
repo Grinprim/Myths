@@ -78,7 +78,7 @@ body {
         1450px 550px white,
         550px 950px white;
 
-    animation: drift3 40s linear infinite;
+
 }
 
 .stars.layer2 {
@@ -97,7 +97,7 @@ body {
         480px 780px white,
         1380px 680px white;
 
-    animation: drift3 40s linear infinite;
+
 }
 
 .stars.layer3 {
@@ -119,7 +119,7 @@ body {
         200px 200px white,
         800px 850px white;
 
-    animation: drift3 40s linear infinite;
+
 }
 
 @keyframes drift1 {
