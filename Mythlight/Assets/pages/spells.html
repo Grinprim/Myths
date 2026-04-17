@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -220,7 +220,7 @@
 </head>
 <body class="min-h-screen bg-custom-dark text-slate-300">
 
-    <div id="navbar-placeholder"></div>
+    <div id="navbar-placeholder"></div>\n    <div class="cosmos">\n        <div class="nebula"></div>\n\n        <div class="stars layer1"></div>\n        <div class="stars layer2"></div>\n        <div class="stars layer3"></div>\n\n        <div class="shooting-star s1"></div>\n        <div class="shooting-star s2"></div>\n        <div class="shooting-star s3"></div>\n    </div>
 
     <main class="pt-32 pb-20 max-w-7xl mx-auto px-6">
         <header class="text-center mb-8 max-w-4xl mx-auto">
@@ -263,7 +263,7 @@
                     <label class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Search</label>
                     <div class="relative">
                         <input type="text" id="search-input" placeholder="Name or Effect..." class="search-input w-full pr-10" oninput="renderMagic(); toggleSpellClear();">
-                        <button id="search-clear" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-200" onclick="clearSpellSearch()">✕</button>
+                        <button id="search-clear" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-200" onclick="clearSpellSearch()">âœ•</button>
                     </div>
                 </div>
             </div>
@@ -293,11 +293,11 @@
                         <div>
                             <p class="text-[10px] text-slate-500 mb-3 uppercase font-bold tracking-wider">Mana Cost</p>
                             <div class="space-y-2">
-                                <button class="filter-btn" onclick="toggleFilter('cost', '0')"><span class="flex items-center gap-2"><span class="text-amber-400">0 ✦</span> <span class="text-xs font-normal text-slate-400">(Cantrip)</span></span><div class="filter-dot"></div></button>
-                                <button class="filter-btn" onclick="toggleFilter('cost', '1')"><span class="text-indigo-300">1 ✦</span><div class="filter-dot"></div></button>
-                                <button class="filter-btn" onclick="toggleFilter('cost', '2')"><span class="text-indigo-300">2 ✦</span><div class="filter-dot"></div></button>
-                                <button class="filter-btn" onclick="toggleFilter('cost', '3')"><span class="text-indigo-300">3 ✦</span><div class="filter-dot"></div></button>
-                                <button class="filter-btn" onclick="toggleFilter('cost', '4')"><span class="text-indigo-300">4 ✦</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost', '0')"><span class="flex items-center gap-2"><span class="text-amber-400">0 âœ¦</span> <span class="text-xs font-normal text-slate-400">(Cantrip)</span></span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost', '1')"><span class="text-indigo-300">1 âœ¦</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost', '2')"><span class="text-indigo-300">2 âœ¦</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost', '3')"><span class="text-indigo-300">3 âœ¦</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost', '4')"><span class="text-indigo-300">4 âœ¦</span><div class="filter-dot"></div></button>
                             </div>
                         </div>
                     </div>
@@ -424,7 +424,7 @@
                             <img id="school-scroll-icon" src="" alt="Selected school icon" class="w-14 h-14 rounded-xl object-cover mx-auto">
                             <h3 id="school-scroll-name" class="text-2xl font-bold text-white text-center mt-3"></h3>
                             <div id="school-scroll-description" class="mt-4 rounded-2xl border border-slate-500/30 bg-slate-500/10 px-4 py-3 text-sm text-white text-center">
-                                ⚠️ Under Reconstruction ⚠️
+                                âš ï¸ Under Reconstruction âš ï¸
                             </div>
                         </div>
                     </div>
@@ -439,12 +439,12 @@
         <div class="modal-content bg-slate-900 border border-slate-700 p-1 rounded-2xl max-w-md w-full shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden" onclick="event.stopPropagation()">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-60"></div>
             <div class="p-6 relative z-10 text-center">
-                <button type="button" onclick="closeSchoolModal()" class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors" aria-label="Close school details">✕</button>
+                <button type="button" onclick="closeSchoolModal()" class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors" aria-label="Close school details">âœ•</button>
                 <p class="text-[10px] uppercase tracking-[0.2em] text-amber-300 font-bold">School Legend</p>
                 <img id="school-mobile-icon" src="" alt="Selected school icon" class="w-14 h-14 rounded-xl object-cover mx-auto mt-4">
                 <h3 id="school-mobile-name" class="text-2xl font-bold text-white mt-3"></h3>
                 <div id="school-mobile-description" class="mt-4 rounded-2xl border border-slate-500/30 bg-slate-500/10 px-4 py-3 text-sm text-white text-center">
-                    ⚠️ Under Reconstruction ⚠️
+                    âš ï¸ Under Reconstruction âš ï¸
                 </div>
             </div>
         </div>
@@ -454,7 +454,7 @@
         <div class="modal-content bg-slate-900 border border-slate-700 p-1 rounded-2xl max-w-lg w-full shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden" onclick="event.stopPropagation()">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50"></div>
             <div class="p-8 relative z-10">
-                <button onclick="closeRandomSpell()" class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">✕</button>
+                <button onclick="closeRandomSpell()" class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">âœ•</button>
                 <div class="text-center mb-6">
                     <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-[0.2em]">Random Discovery</span>
                     <h3 id="rand-spell-name" class="text-4xl font-bold text-white mt-3 mb-4">Spell Name</h3>
@@ -474,10 +474,10 @@
     <script>
 
         const schoolDescriptions = {
-            'Arcane': '<b>Arcane magic</b> is fundamentally similar to <b>mathematics</b>, requiring <b>study</b> and <b>precision</b> to command it to do your will. In exchange for its <b>complexity</b>, it is highly <b>diverse</b> in its applications, ranging from <b>a minor blast</b> to <b>altering fate and outcomes</b>. In addition to its more powerful effects, <b>Arcane magic</b> is commonly used as a <b>utility school</b>, offering many spells that can assist in everyday situations—there is even a spell that can <b>summon a ladder</b>.<br><br> As a <b>spellcaster</b>, the <b>Arcane School</b> grants you access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
+            'Arcane': '<b>Arcane magic</b> is fundamentally similar to <b>mathematics</b>, requiring <b>study</b> and <b>precision</b> to command it to do your will. In exchange for its <b>complexity</b>, it is highly <b>diverse</b> in its applications, ranging from <b>a minor blast</b> to <b>altering fate and outcomes</b>. In addition to its more powerful effects, <b>Arcane magic</b> is commonly used as a <b>utility school</b>, offering many spells that can assist in everyday situationsâ€”there is even a spell that can <b>summon a ladder</b>.<br><br> As a <b>spellcaster</b>, the <b>Arcane School</b> grants you access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
             'Divine': '<b>Divine magic</b>, often a source of <b>faith</b> and <b>stability</b>, can also be a source of <b>great power</b>. As you pledge yourself to <b>Divine magic</b>, you make an <b>oath</b> to act in the name of your <b>deity</b>. Your <b>Divine power</b> manifests as both <b>defensive power</b>, in the form of <b>healing</b> and <b>bolstering allies</b>, and <b>offensive power</b>, through <b>divine smites</b> and <b>sundering the undead</b>.<br><br><b>The Divine School</b> grants you access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
-            'Elemental': '<b>Elemental magic</b> is rooted in the <b>fundamental elements</b> that appear in every facet of the world. Commanding them requires <b>attunement</b> to <b>nature</b>—listen to them and let them flow through you, and you will gain access to one of the most <b>versatile schools of magic</b>. <b>Elemental casters</b> have access to <b>buffs</b>, <b>debuffs</b>, <b>damage</b>, <b>area control</b>, and much more, often promoting a sense of <b>synergy</b> between the elements.<br><br>When you select the <b>Elemental School</b>, you must choose an element from the following: <b>Earth</b>, <b>Nature</b>, <b>Fire</b>, <b>Water</b>, <b>Lightning</b>, <b>Wind</b>, <b>Toxic</b>. While you still retain access to other elements, your <b>chosen element</b> is <b>enhanced</b>. You gain access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
-            'Occult': '<b>Occult magic</b> is a <b>dark</b> and <b>mysterious</b> force, born from one\'s own <b>inner demons</b>—an expression of <b>emotion</b> manifested into <b>power</b>. You exert your <b>will</b> upon others, <b>hexing</b> and <b>cursing</b> them, sacrificing portions of yourself to gain even stronger effects. However, this strength comes at the cost of <b>versatility</b> and <b>utility</b> your body can only handle a limited amount of this type of magic.<br><br>When you begin your journey into the <b>Occult</b>, you will quickly realize how important <b>cantrips</b> are. You only have access to <b>spells</b> from <b>levels 1 to 2</b>, however your spells are far more <b>potent</b> when <b>upcast</b>. As such, you can <b>ONLY cast spells at the highest level</b> you have access to. <b>Scholarship</b> still determines the number of spells you know.',
+            'Elemental': '<b>Elemental magic</b> is rooted in the <b>fundamental elements</b> that appear in every facet of the world. Commanding them requires <b>attunement</b> to <b>nature</b>â€”listen to them and let them flow through you, and you will gain access to one of the most <b>versatile schools of magic</b>. <b>Elemental casters</b> have access to <b>buffs</b>, <b>debuffs</b>, <b>damage</b>, <b>area control</b>, and much more, often promoting a sense of <b>synergy</b> between the elements.<br><br>When you select the <b>Elemental School</b>, you must choose an element from the following: <b>Earth</b>, <b>Nature</b>, <b>Fire</b>, <b>Water</b>, <b>Lightning</b>, <b>Wind</b>, <b>Toxic</b>. While you still retain access to other elements, your <b>chosen element</b> is <b>enhanced</b>. You gain access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
+            'Occult': '<b>Occult magic</b> is a <b>dark</b> and <b>mysterious</b> force, born from one\'s own <b>inner demons</b>â€”an expression of <b>emotion</b> manifested into <b>power</b>. You exert your <b>will</b> upon others, <b>hexing</b> and <b>cursing</b> them, sacrificing portions of yourself to gain even stronger effects. However, this strength comes at the cost of <b>versatility</b> and <b>utility</b> your body can only handle a limited amount of this type of magic.<br><br>When you begin your journey into the <b>Occult</b>, you will quickly realize how important <b>cantrips</b> are. You only have access to <b>spells</b> from <b>levels 1 to 2</b>, however your spells are far more <b>potent</b> when <b>upcast</b>. As such, you can <b>ONLY cast spells at the highest level</b> you have access to. <b>Scholarship</b> still determines the number of spells you know.',
             'Cosmic': '<b>Cosmic magic</b> draws power from the <b>cosmos</b>, an ever-<b>expansive</b> force that binds everything together as an <b>interconnected whole</b>. To truly understand it, you must accept your place within the <b>constellation of fate</b>, and in doing so, see it for what it truly is. In <b>Cosmic magic</b>, no spell is inherently <b>powerful</b>; instead, they are designed to be cast as many times as possible in a single moment.<br><br>The <b>Cosmic School</b> grants you access to only <b>level 1 spells</b>, and you cannot <b>upcast</b> them. Instead, you gain access to <b>multicasting</b>, allowing you to spend <b>mana</b> normally used for upcasting to cast multiple instances of a spell. Each spell can target a <b>different target</b> and becomes stronger when <b>multicast</b>, enhancing its effects through repeated casting.'
         };
 
@@ -588,14 +588,14 @@
             return `
             <tr onclick="toggleDetails('${rowId}')" class="expandable-row border-b border-slate-800/50 cursor-pointer hover:bg-slate-800/30">
                 <td class="px-6 py-4 font-bold text-white text-base"><img src="../sheet/${item.Category.toLowerCase().replace(' ', '-')}.png" alt="${item.Name}" class="w-5 h-5 inline-block mr-2">${item.Name}</td>
-                <td class="px-6 py-4 text-indigo-300 font-mono text-xs font-bold">${item.Cost} ✦</td>
+                <td class="px-6 py-4 text-indigo-300 font-mono text-xs font-bold">${item.Cost} âœ¦</td>
                 <td class="px-6 py-4"><span class="category-tag">${item.Category || 'Universal'}</span></td>
-                <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${rowId}" class="transition-transform duration-200 inline-block">▼</div></td>
+                <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${rowId}" class="transition-transform duration-200 inline-block">â–¼</div></td>
             </tr>
             <tr id="${rowId}" class="hidden bg-slate-900/40"><td colspan="4" class="px-6 py-6 border-b border-slate-800"><div class="space-y-4">
                     <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest"><span class="text-white font-bold bg-slate-700/50 px-2 py-1 rounded">Type: ${item.Type || '-'}</span><span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${item.Range || 'Self'}</span></div>
                     <p class="text-slate-300 text-sm leading-relaxed">${item.Description}</p>
-                    ${item.Upcast ? `<div class="text-indigo-300 text-xs p-2 bg-indigo-900/20 rounded border border-indigo-500/20"><span class="font-bold">✚ Upcast:</span> ${item.Upcast}</div>` : ''}
+                    ${item.Upcast ? `<div class="text-indigo-300 text-xs p-2 bg-indigo-900/20 rounded border border-indigo-500/20"><span class="font-bold">âœš Upcast:</span> ${item.Upcast}</div>` : ''}
                     <div class="text-slate-500 italic text-[11px] border-l-2 border-slate-700 pl-3">${item.Lore || ''}</div>
             </div></td></tr>`;
         }
@@ -729,3 +729,5 @@
     <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
 </body>
 </html>
+
+

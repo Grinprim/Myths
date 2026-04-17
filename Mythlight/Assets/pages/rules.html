@@ -10,10 +10,212 @@
     <link rel="stylesheet" href="../css/styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
+        body {
+            margin: 0;
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            overflow-x: hidden;
+        }
+
+        .cosmos {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* =========================
+   NEBULA GLOW
+========================= */
+        .nebula {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+
+            background:
+                radial-gradient(circle at 30% 40%, rgba(99, 102, 241, 0.25), transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(168, 85, 247, 0.2), transparent 45%),
+                radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.15), transparent 40%);
+
+            filter: blur(80px);
+            animation: driftNebula 120s linear infinite;
+        }
+
+        @keyframes driftNebula {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(-10%, -10%) scale(1.1);
+            }
+        }
+
+        /* =========================
+   PARALLAX STAR LAYERS
+========================= */
+        .stars {
+            position: absolute;
+            inset: 0;
+            background-repeat: repeat;
+        }
+
+        .stars.layer1 {
+            width: 2px;
+            height: 2px;
+            background: white;
+
+            box-shadow:
+                250px 150px white,
+                650px 320px white,
+                1050px 480px white,
+                450px 720px white,
+                1350px 280px white,
+                850px 650px white,
+                1450px 550px white,
+                550px 950px white;
+
+            animation: drift3 40s linear infinite;
+        }
+
+        .stars.layer2 {
+            width: 2px;
+            height: 2px;
+            background: white;
+
+            box-shadow:
+                180px 420px white,
+                720px 180px white,
+                980px 620px white,
+                380px 880px white,
+                1580px 320px white,
+                780px 580px white,
+                1180px 420px white,
+                480px 780px white,
+                1380px 680px white;
+
+            animation: drift3 40s linear infinite;
+        }
+
+        .stars.layer3 {
+            width: 2px;
+            height: 2px;
+            background: white;
+
+            box-shadow:
+                120px 340px white,
+                560px 120px white,
+                900px 700px white,
+                300px 800px white,
+                1500px 200px white,
+                700px 500px white,
+                1100px 300px white,
+                400px 600px white,
+                1300px 900px white,
+                1700px 400px white,
+                200px 200px white,
+                800px 850px white;
+
+            animation: drift3 40s linear infinite;
+        }
+
+        @keyframes drift1 {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(300px);
+            }
+        }
+
+        @keyframes drift2 {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(600px);
+            }
+        }
+
+        @keyframes drift3 {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(900px);
+            }
+        }
+
+        /* =========================
+   SHOOTING STARS
+========================= */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            box-shadow: 0 0 6px white;
+            opacity: 0;
+
+            transform: rotate(-35deg);
+        }
+
+        .shooting-star::after {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, white, transparent);
+        }
+
+        @keyframes shoot {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0) rotate(-35deg);
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-800px, 400px) rotate(-35deg);
+            }
+        }
+
+        /* Multiple shooting stars */
+        .s1 {
+            top: 20%;
+            left: 80%;
+            animation: shoot 6s linear infinite;
+            animation-delay: 2s;
+        }
+
+        .s2 {
+            top: 40%;
+            left: 60%;
+            animation: shoot 8s linear infinite;
+            animation-delay: 5s;
+        }
+
+        .s3 {
+            top: 10%;
+            left: 50%;
+            animation: shoot 7s linear infinite;
+            animation-delay: 8s;
+        }
+
+
+
+
         .map-tile {
-            width: 32px;
-            height: 32px;
-            border: 1px solid #334155;
+            border: 1px solid #1e293b;
+            box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.6);
         }
 
         .map-tile.center {
@@ -30,49 +232,172 @@
 
         /* Reusable Card Components */
         .condition-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid #334155;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(100, 116, 139, 0.45);
             padding: 12px;
-            border-radius: 10px;
+            border-radius: 14px;
         }
 
         .rule-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid #334155;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.75));
+            border: 1px solid rgba(99, 102, 241, 0.18);
+            padding: 1.75rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 50px -35px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
         }
 
-        /* Text Highlighting */
-        .correct {
-            color: rgb(204, 255, 110);
+        .rule-card h2,
+        .rule-card h3,
+        .rule-card h4 {
+            color: #eef2ff;
         }
 
-        .wrong {
-            color: rgb(255, 110, 110);
+        .rule-card p,
+        .rule-card ul,
+        .rule-card li {
+            line-height: 1.75;
         }
 
-        .notice {
-            color: rgb(255, 216, 110);
+        .rule-card ul {
+            margin-top: 0.75rem;
+            margin-bottom: 0;
         }
 
-        .notice_blue {
-            color: rgb(110, 255, 241);
+        .rule-card li {
+            margin-bottom: 0.55rem;
         }
 
-        /* Tab Active State */
+        .eyebrow {
+            display: inline-flex;
+            font-size: 0.75rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #a5b4fc;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #818cf8, #6366f1);
+            color: #ffffff;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+            font-size: 1rem;
+        }
+
+        .rule-summary {
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(129, 140, 248, 0.25);
+            padding: 1.25rem;
+            border-radius: 1rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .rule-summary p {
+            margin: 0;
+            color: #cbd5e1;
+        }
+
+        .rule-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .rule-tile {
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 1rem;
+            border-radius: 1rem;
+        }
+
+        .rule-tile strong {
+            display: block;
+            color: #c7d2fe;
+            margin-bottom: 0.5rem;
+        }
+
+        .rule-tip {
+            background: rgba(56, 189, 248, 0.12);
+            padding: 1rem 1.25rem;
+            border-radius: 1rem;
+            position: relative;
+        }
+
+        .rule-tip::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 2px solid #38bdf8;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .tab-btn {
+            transition: all 0.25s ease;
+        }
+
         .tab-btn.active {
             background-color: rgba(99, 102, 241, 0.2);
             border-color: #6366f1;
-            color: white;
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.12);
         }
 
-        /* Sidebar Layout */
+        .tab-btn:hover {
+            transform: translateY(-1px);
+            background-color: rgba(99, 102, 241, 0.12);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-number {
+            display: none !important;
+        }
+
+        .section-header+.rule-card {
+            margin-top: 0;
+            padding-top: 1rem;
+        }
+
+        .rule-card {
+            position: relative;
+            overflow: visible;
+        }
+
+        .rule-card:hover {
+            transform: translateY(-2px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 25px 60px -30px rgba(0, 0, 0, 0.9);
+        }
+
         .rules-layout {
             display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 4rem;
-            max-width: 1400px;
+            grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
+            gap: 3.5rem;
+            width: min(100%, 1800px);
+            max-width: 1800px;
             margin: 0 auto;
             position: relative;
         }
@@ -81,9 +406,20 @@
             display: none !important;
         }
 
+        body {
+            overflow-x: hidden;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            width: min(100%, 1800px);
+            margin-inline: auto;
+        }
+
         :root {
-            --rules-max-width: 1400px;
-            --rules-sidebar-width: 260px;
+            --rules-max-width: 1800px;
+            --rules-sidebar-width: 300px;
             --rules-side-pad: 1.5rem;
             --rules-sidebar-top: calc(5rem + 4.5rem + 15px);
         }
@@ -143,6 +479,14 @@
             }
         }
 
+        .rule-card h1 {
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
         /* FORM */
         .builder {
             width: 350px;
@@ -161,6 +505,18 @@
             background: #0f172a;
             color: white;
         }
+
+        .rule-card p,
+        .rule-card ul,
+        .rule-card li {
+            line-height: 1.75;
+        }
+
+        .eyebrow {
+            opacity: 0.7;
+            font-weight: 600;
+        }
+
 
         .builder label {
             font-size: 13px;
@@ -281,9 +637,22 @@
 
 <body class="bg-custom-dark text-slate-300">
 
-    <div id="navbar-placeholder"></div>
 
-    <main class="pt-32 pb-20 px-6 max-w-[1600px] mx-auto">
+
+    <div id="navbar-placeholder"></div>
+    <div class="cosmos">
+        <div class="nebula"></div>
+
+        <div class="stars layer1"></div>
+        <div class="stars layer2"></div>
+        <div class="stars layer3"></div>
+
+        <div class="shooting-star s1"></div>
+        <div class="shooting-star s2"></div>
+        <div class="shooting-star s3"></div>
+    </div>
+
+    <main class="pt-32 pb-20 px-6 max-w-[1800px] mx-auto">
 
         <header class="text-center mb-8 max-w-4xl mx-auto">
             <h1 class="text-5xl font-bold text-white mb-4">Game Rules</h1>
@@ -585,63 +954,63 @@
                         </div>
                 </div>
                 </section>
+                <div id="origin" class="scroll-offset-center">
+                    <div class="section-header">
+                        <span class="section-number">06</span>
+                        Health & Guard
+                    </div>
+                    <section id="damage" class="rule-card space-y-4">
+                        <p>Outlined here are rules for managing your characters vitality.</p>
+                        <div class="grid md:grid-cols-3 gap-4 text-sm">
+                            <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+                                <strong class="text-white block mb-1">Health</strong>
+                                <p>Health represents a creature’s ability to remain functional in combat.</p>
+                                <p>Player Health is determined by: <br><span class="font-mono text-indigo-300">Health =
+                                        Level + (Brawn Modifier × Level)</span></p>
+                            </div>
 
-                <div class="section-header">
-                    <span class="section-number">06</span>
-                    Health & Guard
+                            <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+                                <strong class="text-white block mb-1">Guard</strong>
+                                <p>Temporary Health. Always lost <strong>before Health</strong>. Guard cannot be healed
+                                    once
+                                    lost; it must be regained by traits or external effects.</p>
+                            </div>
+
+                            <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+                                <strong class="text-white block mb-1">Death</strong>
+                                <p>At <strong>0 Health</strong>, you are unconscious. While unconscious, only
+                                    <strong>Final
+                                        Blows</strong> can harm you; you can resist <strong>4 Final Blows</strong>
+                                    before
+                                    dying. Narrator rulings may adjust this.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="rule-card">
+                            <div class="grid md:grid-cols-2 gap-6 text-sm">
+                                <div>
+                                    <h4 class="text-white font-bold mb-2">Rest (>10 mins)</h4>
+                                    <p>Regain Health equal to your Level for a short rest. Longer rests heal more —
+                                        typically equal to your Level per hour up to 4 × Level. Rests may also replenish
+                                        certain resources depending on traits.</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold mb-2">Sleep (8 hrs)</h4>
+                                    <p>Full recovery of Health and Mana. Replenish charged trait uses and remove 1 point
+                                        of
+                                        Fatigue. Sleeping less than 6 hours gives partial benefit as determined by the
+                                        Narrator.</p>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-slate-700">
+                                <p class="text-xs text-red-400"><strong>Fatigue:</strong> -2 penalty to all rolls per
+                                    level
+                                    (stacking). Level 6 without sleep is fatal.</p>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <section id="damage" class="rule-card space-y-4">
-                    <div class="grid md:grid-cols-3 gap-4 text-sm">
-                        <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
-                            <strong class="text-white block mb-1">Health</strong>
-                            <p>Health represents a creature’s ability to remain functional in combat.</p>
-                            <p>Player Health is determined by: <br><span class="font-mono text-indigo-300">Health =
-                                    Level + (Brawn Modifier × Level)</span></p>
-                        </div>
-
-                        <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
-                            <strong class="text-white block mb-1">Guard</strong>
-                            <p>Temporary Health. Always lost <strong>before Health</strong>. Guard cannot be healed
-                                once
-                                lost; it must be regained by traits or external effects.</p>
-                        </div>
-
-                        <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
-                            <strong class="text-white block mb-1">Death</strong>
-                            <p>At <strong>0 Health</strong>, you are unconscious. While unconscious, only
-                                <strong>Final
-                                    Blows</strong> can harm you; you can resist <strong>4 Final Blows</strong>
-                                before
-                                dying. Narrator rulings may adjust this.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="rule-card">
-                        <div class="grid md:grid-cols-2 gap-6 text-sm">
-                            <div>
-                                <h4 class="text-white font-bold mb-2">Rest (>10 mins)</h4>
-                                <p>Regain Health equal to your Level for a short rest. Longer rests heal more —
-                                    typically equal to your Level per hour up to 4 × Level. Rests may also replenish
-                                    certain resources depending on traits.</p>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold mb-2">Sleep (8 hrs)</h4>
-                                <p>Full recovery of Health and Mana. Replenish charged trait uses and remove 1 point
-                                    of
-                                    Fatigue. Sleeping less than 6 hours gives partial benefit as determined by the
-                                    Narrator.</p>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-slate-700">
-                            <p class="text-xs text-red-400"><strong>Fatigue:</strong> -2 penalty to all rolls per
-                                level
-                                (stacking). Level 6 without sleep is fatal.</p>
-                        </div>
-                    </div>
-                </section>
-
                 <section id="progression" class="scroll-offset-center">
                     <div class="section-header">
                         <span class="section-number">07</span>
@@ -959,7 +1328,9 @@
                                 <li class="wrong"> ✘ Diagonal movement does not skip over tiles.</li>
                             </ul>
                             <br>
-                            <p>Certain types of movement are declared as a Dash, the range of these is sepcified in thier source. Dashes ignore oppertunity attacks and terrain movement penalties. Dashes are not availaible without a strictly declared source.</p>
+                            <p>Certain types of movement are declared as a Dash, the range of these is sepcified in
+                                thier source. Dashes ignore oppertunity attacks and terrain movement penalties. Dashes
+                                are not availaible without a strictly declared source.</p>
                         </div>
 
                         <div class="bg-slate-900/40 border border-slate-700 rounded-lg p-4 text-xs text-slate-400">
@@ -979,8 +1350,8 @@
                                     occupied.</li>
                             </ul>
                             <br>
-                            
-                           
+
+
                         </div>
 
                         <div class="bg-slate-900/40 border border-slate-700 rounded-lg p-4 text-xs text-slate-400">
@@ -1071,7 +1442,8 @@
                                 <strong>[Might]</strong> check. Upon a sucess you both gain the restrained condition,
                                 until you let go or the creature breaks free. The grappled creature can attempt to break
                                 free as an action on any of its turns, when it does so, you may contest its
-                                <strong>[Might]</strong> check.</p>
+                                <strong>[Might]</strong> check.
+                            </p>
                             <br>
                             <p>Grappling a creature <strong>larger</strong> than you imposes <strong class="wrong">1
                                     disadvantage</strong> per size class, grappling a creature <strong>smaller</strong>
@@ -1464,14 +1836,16 @@
 
                             <div class="condition-card">
                                 <strong class="text-red-400">Prone</strong>
-                                <p>Your movement becomes 0, non-ranged attacks against you have advantage, and standing up
+                                <p>Your movement becomes 0, non-ranged attacks against you have advantage, and standing
+                                    up
                                     costs
                                     1 action. While prone you cannot dash.</p>
                             </div>
 
                             <div class="condition-card">
                                 <strong class="text-red-400">Restrained</strong>
-                                <p>Your movement becomes 0, attacks against you have advantage, you cannot attack. Ending this
+                                <p>Your movement becomes 0, attacks against you have advantage, you cannot attack.
+                                    Ending this
                                     condition
                                     depends on the type of restraints, though usually a [Might] check is
                                     required.
@@ -2909,7 +3283,9 @@
                         <div class="rule-card h-full">
                             <h4 class="text-lg text-white font-bold mb-2">1. Choose a Species</h4>
                             <p class="text-sm text-slate-400">
-                                Pick a single species. You will only use the Species Attribute bonus, not the feat point bonus. Species also provide your base movement, a trait and other minor character statistics.
+                                Pick a single species. You will only use the Species Attribute bonus, not the feat point
+                                bonus. Species also provide your base movement, a trait and other minor character
+                                statistics.
                             </p>
                         </div>
 
@@ -2934,7 +3310,8 @@
                             <ul class="list-disc ml-5 text-sm space-y-2 text-slate-400">
                                 <li>No Feats are used in One Shots</li>
                                 <li>Base Attributes are used directly for rolls</li>
-                                <li>You have 4 attribute points to assign, you may assign a maximum of 2 in any single Attribute.</li>
+                                <li>You have 4 attribute points to assign, you may assign a maximum of 2 in any single
+                                    Attribute.</li>
                                 <li>Core Attributes<ul class="list-disc ml-5 text-sm space-y-2 text-slate-400">
                                         <li>Body</li>
                                         <li>Skill</li>

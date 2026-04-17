@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -54,9 +54,7 @@
 
 <body class="bg-custom-dark text-slate-300">
 
-<div id="navbar-placeholder"></div>
-
-<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto space-y-8">
+    <div id="navbar-placeholder"></div>\n    <div class="cosmos">\n        <div class="nebula"></div>\n\n        <div class="stars layer1"></div>\n        <div class="stars layer2"></div>\n        <div class="stars layer3"></div>\n\n        <div class="shooting-star s1"></div>\n        <div class="shooting-star s2"></div>\n        <div class="shooting-star s3"></div>\n    </div>\n\n<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto space-y-8">
     <section class="bg-slate-900/40 border border-slate-800 rounded-2xl p-5 md:p-6">
         <div class="flex flex-col gap-5">
             <div class="flex flex-wrap items-end justify-between gap-3">
@@ -183,7 +181,7 @@ async function fetchSpeciesHtmlData(species) {
                     .map((el) => stripHtml(el.textContent || ''))
                     .filter((label) => label && label.length <= 48)
                     .filter((label) => !/^(stats|base|attribute|feat points?|action|passive|active|reaction|free action|appearance|culture|subspecies)$/i.test(label))
-                    .filter((label) => !/[✦◆◇⬖⭘☀🗲⧖]/.test(label))
+                    .filter((label) => !/[âœ¦â—†â—‡â¬–â­˜â˜€ðŸ—²â§–]/.test(label))
                     .filter((label) => !/^(size|height|speed|lifespan|languages):/i.test(label))
                     .filter((label, idx, arr) => arr.indexOf(label) === idx)
                 : [];
@@ -554,3 +552,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+

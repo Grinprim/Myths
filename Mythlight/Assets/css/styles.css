@@ -15,12 +15,167 @@ body {
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
     color: #cbd5e1;
+    overflow-x: hidden;
     /* Added radial gradient background */
     background: radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);
     background-attachment: fixed;
     /* Keeps gradient fixed while scrolling */
     min-height: 100vh;
 }
+
+.cosmos {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* =========================
+   NEBULA GLOW
+========================= */
+.nebula {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+
+    background:
+        radial-gradient(circle at 30% 40%, rgba(99,102,241,0.25), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(168,85,247,0.2), transparent 45%),
+        radial-gradient(circle at 50% 20%, rgba(56,189,248,0.15), transparent 40%);
+
+    filter: blur(80px);
+    animation: driftNebula 120s linear infinite;
+}
+
+@keyframes driftNebula {
+    from { transform: translate(0,0) scale(1); }
+    to { transform: translate(-10%, -10%) scale(1.1); }
+}
+
+/* =========================
+   PARALLAX STAR LAYERS
+========================= */
+.stars {
+    position: absolute;
+    inset: 0;
+    background-repeat: repeat;
+}
+
+.stars.layer1 {
+    width: 2px;
+    height: 2px;
+    background: white;
+
+    box-shadow:
+        250px 150px white,
+        650px 320px white,
+        1050px 480px white,
+        450px 720px white,
+        1350px 280px white,
+        850px 650px white,
+        1450px 550px white,
+        550px 950px white;
+
+    animation: drift3 40s linear infinite;
+}
+
+.stars.layer2 {
+    width: 2px;
+    height: 2px;
+    background: white;
+
+    box-shadow:
+        180px 420px white,
+        720px 180px white,
+        980px 620px white,
+        380px 880px white,
+        1580px 320px white,
+        780px 580px white,
+        1180px 420px white,
+        480px 780px white,
+        1380px 680px white;
+
+    animation: drift3 40s linear infinite;
+}
+
+.stars.layer3 {
+    width: 2px;
+    height: 2px;
+    background: white;
+
+    box-shadow:
+        120px 340px white,
+        560px 120px white,
+        900px 700px white,
+        300px 800px white,
+        1500px 200px white,
+        700px 500px white,
+        1100px 300px white,
+        400px 600px white,
+        1300px 900px white,
+        1700px 400px white,
+        200px 200px white,
+        800px 850px white;
+
+    animation: drift3 40s linear infinite;
+}
+
+@keyframes drift1 {
+    from { transform: translateY(0); }
+    to { transform: translateY(300px); }
+}
+
+@keyframes drift2 {
+    from { transform: translateY(0); }
+    to { transform: translateY(600px); }
+}
+
+@keyframes drift3 {
+    from { transform: translateY(0); }
+    to { transform: translateY(900px); }
+}
+
+/* =========================
+   SHOOTING STARS
+========================= */
+.shooting-star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    box-shadow: 0 0 6px white;
+    opacity: 0;
+    transform: rotate(-35deg);
+}
+
+.shooting-star::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, white, transparent);
+}
+
+@keyframes shoot {
+    0% {
+        opacity: 0;
+        transform: translate(0,0) rotate(-35deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-800px, 400px) rotate(-35deg);
+    }
+}
+
+/* Multiple shooting stars */
+.s1 { top: 20%; left: 80%; animation: shoot 6s linear infinite; animation-delay: 2s; }
+.s2 { top: 40%; left: 60%; animation: shoot 8s linear infinite; animation-delay: 5s; }
+.s3 { top: 10%; left: 50%; animation: shoot 7s linear infinite; animation-delay: 8s; }
 
 h1,
 h2,
