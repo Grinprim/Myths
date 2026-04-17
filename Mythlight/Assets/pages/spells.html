@@ -293,11 +293,11 @@
                         <div>
                             <p class="text-[10px] text-slate-500 mb-3 uppercase font-bold tracking-wider">Mana Cost</p>
                             <div class="space-y-2">
-                                <button class="filter-btn" onclick="toggleFilter('cost', '0')"><span class="flex items-center gap-2"><span class="text-amber-400">0 âœ¦</span> <span class="text-xs font-normal text-slate-400">(Cantrip)</span></span><div class="filter-dot"></div></button>
-                                <button class="filter-btn" onclick="toggleFilter('cost', '1')"><span class="text-indigo-300">1 âœ¦</span><div class="filter-dot"></div></button>
-                                <button class="filter-btn" onclick="toggleFilter('cost', '2')"><span class="text-indigo-300">2 âœ¦</span><div class="filter-dot"></div></button>
-                                <button class="filter-btn" onclick="toggleFilter('cost', '3')"><span class="text-indigo-300">3 âœ¦</span><div class="filter-dot"></div></button>
-                                <button class="filter-btn" onclick="toggleFilter('cost', '4')"><span class="text-indigo-300">4 âœ¦</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost', '0')"><span class="flex items-center gap-2"><span class="text-amber-400">0 ✦</span> <span class="text-xs font-normal text-slate-400">(Cantrip)</span></span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost', '1')"><span class="text-indigo-300">1 ✦</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost', '2')"><span class="text-indigo-300">2 ✦</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost', '3')"><span class="text-indigo-300">3 ✦</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost', '4')"><span class="text-indigo-300">4 ✦</span><div class="filter-dot"></div></button>
                             </div>
                         </div>
                     </div>
@@ -588,9 +588,9 @@
             return `
             <tr onclick="toggleDetails('${rowId}')" class="expandable-row border-b border-slate-800/50 cursor-pointer hover:bg-slate-800/30">
                 <td class="px-6 py-4 font-bold text-white text-base"><img src="../sheet/${item.Category.toLowerCase().replace(' ', '-')}.png" alt="${item.Name}" class="w-5 h-5 inline-block mr-2">${item.Name}</td>
-                <td class="px-6 py-4 text-indigo-300 font-mono text-xs font-bold">${item.Cost} âœ¦</td>
+                <td class="px-6 py-4 text-indigo-300 font-mono text-xs font-bold">${item.Cost} ✦</td>
                 <td class="px-6 py-4"><span class="category-tag">${item.Category || 'Universal'}</span></td>
-                <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${rowId}" class="transition-transform duration-200 inline-block">â–¼</div></td>
+                <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${rowId}" class="transition-transform duration-200 inline-block">▼</div></td>
             </tr>
             <tr id="${rowId}" class="hidden bg-slate-900/40"><td colspan="4" class="px-6 py-6 border-b border-slate-800"><div class="space-y-4">
                     <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest"><span class="text-white font-bold bg-slate-700/50 px-2 py-1 rounded">Type: ${item.Type || '-'}</span><span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${item.Range || 'Self'}</span></div>

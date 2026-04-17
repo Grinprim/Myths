@@ -126,7 +126,7 @@
                             oninput="renderTraits(); toggleTraitClear();">
                         <button id="search-clear" type="button"
                             class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-200"
-                            onclick="clearTraitSearch()">âœ•</button>
+                            onclick="clearTraitSearch()">✖</button>
                     </div>
                 </div>
             </div>
@@ -151,22 +151,22 @@
 
                     <div class="space-y-5">
                         <p class="text-[10px] text-slate-500 mt-1 uppercase font-bold">Types</p>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('â§–')">
-                            <div class="legend-symbol text-blue-400 clickable" data-symbol="â§–">â§–</div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('⧖')">
+                            <div class="legend-symbol text-blue-400 clickable" data-symbol="⧖">⧖</div>
                             <div>
                                 <div class="text-white font-bold text-sm group-hover:text-indigo-300">Passive</div>
                                 <div class="text-slate-500 text-[10px] italic">Always active.</div>
                             </div>
                         </div>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('â˜€')">
-                            <div class="legend-symbol text-amber-400 clickable" data-symbol="â˜€">â˜€</div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('☀')">
+                            <div class="legend-symbol text-amber-400 clickable" data-symbol="☀">☀</div>
                             <div>
                                 <div class="text-white font-bold text-sm group-hover:text-indigo-300">Rest-Based</div>
                                 <div class="text-slate-500 text-[10px] italic">Useable during a rest.</div>
                             </div>
                         </div>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('ðŸ—²')">
-                            <div class="legend-symbol text-indigo-400 clickable" data-symbol="ðŸ—²">ðŸ—²</div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('🗲')">
+                            <div class="legend-symbol text-indigo-400 clickable" data-symbol="🗲">🗲</div>
                             <div>
                                 <div class="text-white font-bold text-sm group-hover:text-indigo-300">Active</div>
                                 <div class="text-slate-500 text-[10px] italic">Has limited uses per rest.</div>
@@ -175,7 +175,7 @@
 
                         <p class="text-[10px] text-slate-500 mt-1 uppercase font-bold">Tags</p>
                         <div class="flex items-center opacity-80">
-                            <div class="legend-symbol text-rose-400" data-symbol="â˜…">â˜…</div>
+                            <div class="legend-symbol text-rose-400" data-symbol="★">★</div>
                             <div>
                                 <div class="text-white font-bold text-sm">Unique</div>
                                 <div class="text-slate-500 text-[10px] italic">Cannot be alongside uniques of the same
@@ -183,7 +183,7 @@
                             </div>
                         </div>
                         <div class="flex items-center opacity-80">
-                            <div class="legend-symbol text-emerald-400" data-symbol="â«˜">â«˜</div>
+                            <div class="legend-symbol text-emerald-400" data-symbol="⫘">⫘</div>
                             <div>
                                 <div class="text-white font-bold text-sm">Linked</div>
                                 <div class="text-slate-500 text-[10px] italic">Prerequisite trait required.</div>
@@ -191,29 +191,29 @@
                         </div>
 
                         <p class="text-[10px] text-slate-500 mt-1 uppercase font-bold">Action Types</p>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('â­˜')">
-                            <div class="legend-symbol text-white clickable" data-symbol="â­˜">â­˜</div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('⭘')">
+                            <div class="legend-symbol text-white clickable" data-symbol="⭘">⭘</div>
                             <div>
                                 <div class="text-white font-bold text-sm group-hover:text-indigo-300">Free Action</div>
                                 <div class="text-slate-500 text-[10px] italic">Does not impact action economy.</div>
                             </div>
                         </div>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('â—‡')">
-                            <div class="legend-symbol text-white clickable" data-symbol="â—‡">â—‡</div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('◇')">
+                            <div class="legend-symbol text-white clickable" data-symbol="◇">◇</div>
                             <div>
                                 <div class="text-white font-bold text-sm group-hover:text-indigo-300">Reaction</div>
                                 <div class="text-slate-500 text-[10px] italic">1 per scene, condition-based.</div>
                             </div>
                         </div>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('â¬–')">
-                            <div class="legend-symbol text-white clickable" data-symbol="â¬–">â¬–</div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('⬖')">
+                            <div class="legend-symbol text-white clickable" data-symbol="⬖">⬖</div>
                             <div>
                                 <div class="text-white font-bold text-sm group-hover:text-indigo-300">Action</div>
                                 <div class="text-slate-500 text-[10px] italic">Uses 1 of 2 actions per scene.</div>
                             </div>
                         </div>
-                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('â—†')">
-                            <div class="legend-symbol text-white clickable" data-symbol="â—†">â—†</div>
+                        <div class="flex items-center group cursor-pointer" onclick="setSymbolFilter('◆')">
+                            <div class="legend-symbol text-white clickable" data-symbol="◆">◆</div>
                             <div>
                                 <div class="text-white font-bold text-sm group-hover:text-indigo-300">Attack Action
                                 </div>
@@ -293,7 +293,7 @@
 
             <div class="p-8 relative z-10">
                 <button onclick="closeRandomModal()"
-                    class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">âœ•</button>
+                    class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">✖</button>
 
                 <div class="text-center mb-6">
                     <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-[0.2em]">Random
@@ -376,7 +376,7 @@
                 summaryRow.innerHTML = `
                     <td class="px-6 py-4 font-bold text-white text-sm">${trait.Name}</td>
                     <td class="px-6 py-4 font-mono text-xs"><span class="symbol-tag text-indigo-400">${trait.Symbols || trait.Action || '-'}</span></td>
-                    <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${uniqueId}" class="transition-transform duration-200 inline-block">â–¼</div></td>
+                    <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${uniqueId}" class="transition-transform duration-200 inline-block">▼</div></td>
                 `;
                 summaryRow.addEventListener('click', () => toggleDetails(uniqueId));
 
@@ -453,11 +453,11 @@
         }
 
         function getTraitPrerequisites(trait) {
-            if (!trait || !trait.Parameters || !trait.Parameters.includes('â«˜')) return null;
+            if (!trait || !trait.Parameters || !trait.Parameters.includes('⫘')) return null;
             const prereqs = trait.Parameters
-                .split('â«˜')
+                .split('⫘')
                 .slice(1)
-                .map((part) => part.replace(/â˜…/g, '').trim())
+                .map((part) => part.replace(/★/g, '').trim())
                 .filter(Boolean);
             return prereqs.length ? prereqs.join(', ') : null;
         }
@@ -579,7 +579,7 @@
         }
 
         function setSymbolFilter(symbol) {
-            if (symbol === 'â˜…' || symbol === 'â«˜') return;
+            if (symbol === '★' || symbol === '⫘') return;
             activeSymbolFilter = activeSymbolFilter === symbol ? null : symbol;
             document.querySelectorAll('.legend-symbol').forEach(btn => {
                 if (btn.getAttribute('data-symbol') === activeSymbolFilter && activeSymbolFilter !== null) btn.classList.add('active-filter');

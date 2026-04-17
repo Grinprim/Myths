@@ -14,6 +14,11 @@
             background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
             overflow-x: hidden;
         }
+        .rule-card:hover {
+            transform: translateY(-2px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 25px 60px -30px rgba(0, 0, 0, 0.9);
+        }
         .row td {
             text-align: center;
             padding: 8px;
@@ -235,7 +240,7 @@
                     <h3 class="text-xl text-indigo-400 font-bold uppercase tracking-widest flex items-center justify-between cursor-pointer"
                         onclick="togglePrefixGrid()">
                         Weapon Prefixes
-                        <span id="prefix-arrow" class="transition-transform duration-200 inline-block">â–¼</span>
+                        <span id="prefix-arrow" class="transition-transform duration-200 inline-block">▼</span>
                     </h3>
                     <!-- Grid is hidden by default -->
                     <div id="prefix-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 hidden">
@@ -294,7 +299,7 @@
                     <h3 class="text-xl text-indigo-400 font-bold uppercase tracking-widest flex items-center justify-between cursor-pointer"
                         onclick="toggleGearPrefixGrid()">
                         Gear Prefixes
-                        <span id="gear-prefix-arrow" class="transition-transform duration-200 inline-block">â–¼</span>
+                        <span id="gear-prefix-arrow" class="transition-transform duration-200 inline-block">▼</span>
                     </h3>
 
                     <div id="gear-prefix-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 hidden">
@@ -1509,7 +1514,7 @@
                 <td class="px-6 py-4 font-bold text-white text-base">${item.Name}</td>
                 <td class="px-6 py-4 text-indigo-300 font-mono text-xs font-bold">${item.Material}</td>
                 <td class="px-6 py-4"><span class="category-tag">${item.Category || 'Artisan'}</span></td>
-                <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${rowId}" class="transition-transform duration-200 inline-block">â–¼</div></td>
+                <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${rowId}" class="transition-transform duration-200 inline-block">▼</div></td>
             </tr>
             <tr id="${rowId}" class="hidden bg-slate-900/40"><td colspan="4" class="px-6 py-6 border-b border-slate-800"><div class="space-y-4">
                     <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest"><span class="text-white font-bold bg-slate-700/50 px-2 py-1 rounded">Type: ${item.Type || '-'}</span><span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${item.Range || 'Self'}</span></div>
