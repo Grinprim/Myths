@@ -91,73 +91,68 @@
               </div>
               <div class="attribute-grid" id="attributes"></div>
             </div>
-
-            <div class="card section-7">
+            <div class="card section-6">
               <div class="section-title">
-                <div class="section-number">7</div>
-                <h2>Proficiencies</h2>
+                <div class="section-number">6</div>
+                <h2>Armor</h2>
               </div>
-              <div id="proficiencies_section" style="display: block">
-                <div class="grid_2"><label>Weapons</label>
-                  <div class="grid" style="margin-top: 1rem">
-                    <div>
-                      <label>Might Proficiency Points (Used / Max)</label>
-                      <input type="text" id="melee_points_tracker" readonly placeholder="0 / 0">
+              <div class="armor-slots">
+                <div class="armor-slot">
+                  <div class="armor-head">
+                    <img class="armor-icon" src="../img/armor.png" aria-hidden="true">
+                    <div class="armor-name">
+                      <label>Armor Name</label>
+                      <input type="text" id="armor_name" placeholder="Name">
                     </div>
-                    <div>
-                      <label>Finesse/Ranged Proficiency Points (Used / Max)</label>
-                      <input type="text" id="ranged_points_tracker" readonly placeholder="0 / 0">
+                    <div class="armor-value">
+                      <label>Defense</label>
+                      <input type="number" id="armor_value" placeholder="0">
                     </div>
                   </div>
-
-                  <div id="proficiency_warning_melee" class="card proficiency-warning" style="display:none">
-                    <div class="proficiency-warning-header">⚠ Proficiency Warning</div>
-                    <div class="proficiency-warning-text">Your maximum Might weapon proficiency sum exceeds Might. Adjust your proficiencies or increase your Might attribute.</div>
+                  <div class="armor-notes">
+                    <label>Notes</label>
+                    <textarea id="armor_notes" rows="4" placeholder="" style="resize: none;"></textarea>
                   </div>
-                  <div id="proficiency_warning_ranged" class="card proficiency-warning" style="display:none">
-                    <div class="proficiency-warning-header">⚠ Proficiency Warning</div>
-                    <div class="proficiency-warning-text">Your maximum Finesse/Ranged weapon proficiency sum exceeds Finesse. Adjust your proficiencies or increase your Finesse attribute.</div>
-                  </div>
-                  <div class="grid_4">
-                    <div id="light_melee"><label for="light_melee">Light Might</label> <input id="light_melee_input"
-                        type="number"></div>
-                    <div id="medium_melee"><label for="medium_melee">Medium Might</label> <input id="medium_melee_input"
-                        type="number"></div>
-                    <div id="heavy_melee"><label for="heavy_melee">Heavy Might</label> <input id="heavy_melee_input"
-                        type="number"></div>
-                    <div id="light_ranged"><label for="light_ranged">Light Finesse</label> <input id="light_ranged_input"
-                        type="number"></div>
-                    <div id="medium_ranged"><label for="medium_ranged">Medium Finesse</label> <input
-                        id="medium_ranged_input" type="number"></div>
-                    <div id="heavy_ranged"><label for="heavy_ranged">Heavy Finesse</label> <input id="heavy_ranged_input"
-                        type="number"></div>
-                    <div id="light_firearm"><label for="light_firearm">Light Ranged</label> <input
-                        id="light_firearm_input" type="number"></div>
-                    <div id="medium_firearm"><label for="medium_firearm">Medium Ranged</label> <input
-                        id="medium_firearm_input" type="number"></div>
-                    <div id="heavy_firearm"><label for="heavy_firearm">Heavy Ranged</label> <input
-                        id="heavy_firearm_input" type="number"></div>
-                  </div>
-                  <label>Armor</label>
-                  <div>
-                    <div id="light_armor"><input id="light_armor_checkbox" type="checkbox"><label
-                        for="light_armor_checkbox">Light Armor</label> </div>
-                    <div id="medium_armor"> <input id="medium_armor_checkbox" type="checkbox"><label
-                        for="medium_armor_checkbox">Medium Armor</label></div>
-                    <div id="heavy_armor"><input id="heavy_armor_checkbox" type="checkbox"><label
-                        for="heavy_armor_checkbox">Heavy Armor</label> </div>
-                    <div id="shields"><input id="shields_checkbox" type="checkbox"><label
-                        for="shields_checkbox">Shields</label> </div>
-                  </div>
-                  <div><label>Tools</label><textarea rows="5" placeholder="List your tools here..."
-                      style="resize: none;" id="tools_textarea"></textarea></div>
-                  <div><label>Languages</label><textarea rows="5" placeholder="List your languages here..."
-                      style="resize: none;" id="languages_textarea"></textarea></div>
                 </div>
 
+                <div class="armor-slot">
+                  <div class="armor-head">
+                    <img class="armor-icon" src="../img/shield.png" aria-hidden="true">
+                    <div class="armor-name">
+                      <label>Shield Name</label>
+                      <input type="text" id="shield_name" placeholder="Name">
+                    </div>
+                    <div class="armor-value">
+                      <label>Defense</label>
+                      <input type="number" id="shield_value" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="armor-notes">
+                    <label>Notes</label>
+                    <textarea id="shield_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                  </div>
+                </div>
 
+                <div class="armor-slot">
+                  <div class="armor-head">
+                    <img class="armor-icon" src="../img/cloak.png" aria-hidden="true">
+                    <div class="armor-name">
+                      <label>Cloak Name</label>
+                      <input type="text" id="cloak_name" placeholder="Name">
+                    </div>
+                    <div class="armor-value">
+                      <label>Defense</label>
+                      <input type="number" id="cloak_value" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="armor-notes">
+                    <label>Notes</label>
+                    <textarea id="cloak_notes" rows="4" placeholder="" style="resize: none;"></textarea>
+                  </div>
+                </div>
               </div>
             </div>
+          
           </div>
 
           <div class="sheet-col sheet-right">
@@ -245,22 +240,7 @@
                     </div>
                     <div>
                       <label>Attack</label>
-                      <input type="number" id="attack_1" placeholder="Atk" readonly>
-                    </div>
-                    <div>
-                      <label>Type</label>
-                      <select id="proficiency_selector">
-                        <option value="None">None</option>
-                        <option value="Light_Melee">Light Might</option>
-                        <option value="Medium_Melee">Medium Might</option>
-                        <option value="Heavy_Melee">Heavy Might</option>
-                        <option value="Light_Ranged">Light Finesse</option>
-                        <option value="Medium_Ranged">Medium Finesse</option>
-                        <option value="Heavy_Ranged">Heavy Finesse</option>
-                        <option value="Light_Firearm">Light Ranged</option>
-                        <option value="Medium_Firearm">Medium Ranged</option>
-                        <option value="Heavy_Firearm">Heavy Ranged</option>
-                      </select>
+                      <input type="number" id="attack_1" placeholder="Atk">
                     </div>
                     <div class="weapon-actions">
                       <button style="height: 3.18em;" type="button" onclick="rollAttack(this)">Attack!</button>
@@ -284,23 +264,9 @@
                     </div>
                     <div>
                       <label>Attack</label>
-                      <input type="number" id="attack_2" placeholder="Atk" readonly>
+                      <input type="number" id="attack_2" placeholder="Atk">
                     </div>
-                    <div>
-                      <label>Type</label>
-                      <select id="proficiency_selector_2">
-                        <option value="None">None</option>
-                        <option value="Light_Melee">Light Might</option>
-                        <option value="Medium_Melee">Medium Might</option>
-                        <option value="Heavy_Melee">Heavy Might</option>
-                        <option value="Light_Ranged">Light Finesse</option>
-                        <option value="Medium_Ranged">Medium Finesse</option>
-                        <option value="Heavy_Ranged">Heavy Finesse</option>
-                        <option value="Light_Firearm">Light Ranged</option>
-                        <option value="Medium_Firearm">Medium Ranged</option>
-                        <option value="Heavy_Firearm">Heavy Ranged</option>
-                      </select>
-                    </div>
+                    
                     <div class="weapon-actions">
                       <button style="height: 3.18em;" type="button" onclick="rollAttack(this)">Attack!</button>
                     </div>
@@ -323,23 +289,9 @@
                     </div>
                     <div>
                       <label>Attack</label>
-                      <input type="number" id="attack_3" placeholder="Atk" readonly>
+                      <input type="number" id="attack_3" placeholder="Atk">
                     </div>
-                    <div>
-                      <label>Type</label>
-                      <select id="proficiency_selector_3">
-                        <option value="None">None</option>
-                        <option value="Light_Melee">Light Might</option>
-                        <option value="Medium_Melee">Medium Might</option>
-                        <option value="Heavy_Melee">Heavy Might</option>
-                        <option value="Light_Ranged">Light Finesse</option>
-                        <option value="Medium_Ranged">Medium Finesse</option>
-                        <option value="Heavy_Ranged">Heavy Finesse</option>
-                        <option value="Light_Firearm">Light Ranged</option>
-                        <option value="Medium_Firearm">Medium Ranged</option>
-                        <option value="Heavy_Firearm">Heavy Ranged</option>
-                      </select>
-                    </div>
+                    
                     <div class="weapon-actions">
                       <button style="height: 3.18em;" type="button" onclick="rollAttack(this)">Attack!</button>
                     </div>
@@ -363,67 +315,7 @@
                 style="resize: vertical"></textarea>
             </div>
 
-            <div class="card section-6">
-              <div class="section-title">
-                <div class="section-number">6</div>
-                <h2>Armor</h2>
-              </div>
-              <div class="armor-slots">
-                <div class="armor-slot">
-                  <div class="armor-head">
-                    <img class="armor-icon" src="../img/armor.png" aria-hidden="true">
-                    <div class="armor-name">
-                      <label>Armor Name</label>
-                      <input type="text" id="armor_name" placeholder="Name">
-                    </div>
-                    <div class="armor-value">
-                      <label>Defense</label>
-                      <input type="number" id="armor_value" placeholder="0">
-                    </div>
-                  </div>
-                  <div class="armor-notes">
-                    <label>Notes</label>
-                    <textarea id="armor_notes" rows="4" placeholder="" style="resize: none;"></textarea>
-                  </div>
-                </div>
-
-                <div class="armor-slot">
-                  <div class="armor-head">
-                    <img class="armor-icon" src="../img/shield.png" aria-hidden="true">
-                    <div class="armor-name">
-                      <label>Shield Name</label>
-                      <input type="text" id="shield_name" placeholder="Name">
-                    </div>
-                    <div class="armor-value">
-                      <label>Defense</label>
-                      <input type="number" id="shield_value" placeholder="0">
-                    </div>
-                  </div>
-                  <div class="armor-notes">
-                    <label>Notes</label>
-                    <textarea id="shield_notes" rows="4" placeholder="" style="resize: none;"></textarea>
-                  </div>
-                </div>
-
-                <div class="armor-slot">
-                  <div class="armor-head">
-                    <img class="armor-icon" src="../img/cloak.png" aria-hidden="true">
-                    <div class="armor-name">
-                      <label>Cloak Name</label>
-                      <input type="text" id="cloak_name" placeholder="Name">
-                    </div>
-                    <div class="armor-value">
-                      <label>Defense</label>
-                      <input type="number" id="cloak_value" placeholder="0">
-                    </div>
-                  </div>
-                  <div class="armor-notes">
-                    <label>Notes</label>
-                    <textarea id="cloak_notes" rows="4" placeholder="" style="resize: none;"></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
 
         </div>
@@ -1653,31 +1545,6 @@
     }
 
     // --- Proficiencies ---
-    function proficiency_assignment() {
-      const weapons = ['proficiency_selector', 'proficiency_selector_2', 'proficiency_selector_3'];
-      const attacks = ['attack_1', 'attack_2', 'attack_3'];
-
-      const proficiencyMap = {
-        "Light_Melee": "light_melee_input",
-        "Medium_Melee": "medium_melee_input",
-        "Heavy_Melee": "heavy_melee_input",
-        "Light_Ranged": "light_ranged_input",
-        "Medium_Ranged": "medium_ranged_input",
-        "Heavy_Ranged": "heavy_ranged_input",
-        "Light_Firearm": "light_firearm_input",
-        "Medium_Firearm": "medium_firearm_input",
-        "Heavy_Firearm": "heavy_firearm_input"
-      };
-
-      weapons.forEach((w, i) => {
-        const el = document.getElementById(w);
-        if (!el) return;
-        const val = el.value;
-        if (proficiencyMap[val]) {
-          document.getElementById(attacks[i]).value = document.getElementById(proficiencyMap[val]).value || 0;
-        }
-      });
-    }
 
     function exportToPDF() {
       window.print();
@@ -1851,39 +1718,11 @@
 
       // --- Trigger recalculations ---
       updateAllDerived?.();
-      proficiency_assignment?.();
-      proficiency_warning?.();
       updateManaBar?.();
       updateHealthBar?.();
       loadCustomEntries();
 
       alert("Character successfully loaded!");
-    }
-
-    function proficiency_warning() {
-      const might = parseInt(document.getElementById('Body_Might').value) || 0;
-      const Finesse = parseInt(document.getElementById('Skill_Finesse').value) || 0;
-
-      const melee_sum =
-        (parseInt(document.getElementById('light_melee_input').value) || 0) +
-        (parseInt(document.getElementById('medium_melee_input').value) || 0) +
-        (parseInt(document.getElementById('heavy_melee_input').value) || 0);
-
-      const ranged_sum =
-        (parseInt(document.getElementById('light_ranged_input').value) || 0) +
-        (parseInt(document.getElementById('medium_ranged_input').value) || 0) +
-        (parseInt(document.getElementById('heavy_ranged_input').value) || 0) +
-        (parseInt(document.getElementById('light_firearm_input').value) || 0) +
-        (parseInt(document.getElementById('medium_firearm_input').value) || 0) +
-        (parseInt(document.getElementById('heavy_firearm_input').value) || 0);
-
-      document.getElementById('proficiency_warning_melee').style.display = melee_sum > might ? 'block' : 'none';
-      document.getElementById('proficiency_warning_ranged').style.display = ranged_sum > Finesse ? 'block' : 'none';
-
-      const meleeTracker = document.getElementById('melee_points_tracker');
-      const rangedTracker = document.getElementById('ranged_points_tracker');
-      if (meleeTracker) meleeTracker.value = `${melee_sum} / ${might}`;
-      if (rangedTracker) rangedTracker.value = `${ranged_sum} / ${Finesse}`;
     }
 
     // --- Armor ---
@@ -1893,6 +1732,16 @@
       document.getElementById('medium_armor_checkbox').checked = fort >= 3;
       document.getElementById('heavy_armor_checkbox').checked = fort >= 4;
       document.getElementById('shields_checkbox').checked = fort >= 1;
+    }
+    function weapon_proficiency() {
+      const finesse = parseInt(document.getElementById('Skill_Finesse').value) || 0;
+      const might = parseInt(document.getElementById('Body_Might').value) || 0;
+      document.getElementById('light_melee_checkbox').checked = might >= 1;
+      document.getElementById('medium_melee_checkbox').checked = might >= 2;
+      document.getElementById('heavy_melee_checkbox').checked = might >= 3;
+      document.getElementById('light_ranged_checkbox').checked = finesse >= 1;
+      document.getElementById('medium_ranged_checkbox').checked = finesse >= 2;
+      document.getElementById('heavy_ranged_checkbox').checked = finesse >= 3;
     }
 
     // --- Health ---
@@ -1998,11 +1847,10 @@
       updateHealthBar();
       updateManaBar();
       armor_proficiency();
-      proficiency_warning();
-      proficiency_assignment();
       inventory_extra_slots();
       weight_update();
       encumberance_update();
+      weapon_proficiency();
     }
 
     function historyCleaning() {

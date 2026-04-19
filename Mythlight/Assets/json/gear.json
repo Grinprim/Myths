@@ -1,25 +1,23 @@
 {
   "categories": {
     "light_armor": [
+      "Buckler",
       "Cloth Armor",
       "Padded Armor",
       "Leather Armor"
     ],
     "medium_armor": [
+      "Shield",
       "Hide Armor",
       "Studded Armor",
       "Chain Shirt",
       "Scale Armor"
     ],
     "heavy_armor": [
+      "Tower Shield",
       "Chainmail",
       "Splint Armor",
       "Plate Armor"
-    ],
-    "shields": [
-      "Light Shield",
-      "Heavy Shield",
-      "Tower Shield"
     ],
     "backpacks": [
       "Satchel",
