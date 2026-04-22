@@ -1833,16 +1833,6 @@
     "Scaling": ""
   },
   {
-    "Name": "Tough",
-    "Action":"⭘",
-    "tags": ["Defense"],
-    "Cost": "1",
-    "Symbols": "⧖",
-    "Parameters": "",
-    "Description": "You have bonus Max Health, equal to your trait point maximum",
-    "Scaling": ""
-  },
-  {
     "Name": "Feat Forward",
     "Action":"⭘",
     "tags": ["Feats"],

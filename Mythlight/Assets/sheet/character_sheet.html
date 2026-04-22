@@ -1824,7 +1824,7 @@
       const level = parseInt(document.getElementById('level_input').value) || 0;
       const brawn = parseInt(document.getElementById('Body_Brawn').value) || 0;
       const hpBonus = parseInt(document.getElementById('health_bonus')?.value) || 0;
-      document.getElementById('health_max').value = level + level * brawn + hpBonus;
+      document.getElementById('health_max').value = (4 + brawn) + (level - 1) * (2 + brawn) + hpBonus;
       console.log(level + level * brawn + hpBonus)
 
       document.getElementById('spell_damage').value = Math.ceil((parseInt(document.getElementById('Mind_Spirit').value)) /2) || 0;

@@ -209,17 +209,6 @@
         "Lore": "A look that crawls beneath the skin, refusing to be forgotten."
     },
     {
-        "ID": "OC0-10",
-        "Category": "Occult",
-        "Name": "Fracture Thought",
-        "Cost": "0",
-        "Type": "Action",
-        "Range": "5 tiles",
-        "Description": "You attempt to splinter a creature’s focus, imposing -2 Accuracy on their next spell or attack. They must roll [Spirit] to resist.",
-        "Upcast": "",
-        "Lore": "A single doubt, driven deep enough, can unravel intent entirely."
-    },
-    {
         "ID": "DC0-1",
         "Category": "Divine",
         "Name": "Sacred Glimmer",
