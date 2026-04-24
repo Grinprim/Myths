@@ -946,6 +946,14 @@
             return 2;
         }
 
+        function proficiencyFromCategoryKey(categoryKey) {
+            const key = String(categoryKey || '').toLowerCase();
+            if (key.includes('light')) return 1;
+            if (key.includes('medium')) return 2;
+            if (key.includes('heavy')) return 3;
+            return 2;
+        }
+
         function getBaseGearBonuses(categoryKey, name = '') {
             const key = String(categoryKey || '').toLowerCase();
             if (key.includes('light_armor')) return { armor: 1 };
@@ -1299,6 +1307,7 @@
         <span class="px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-200 text-xs font-bold uppercase tracking-wide">
             ${result.categoryLabel}
         </span>
+        <span class="px-4 py-1.5 rounded-full bg-slate-500/10 border border-slate-500/30 text-slate-200 text-xs font-bold uppercase tracking-wide">Requires ${proficiencyFromCategoryKey(result.category)} Fortitude</span>
         ${statBadges}
     `;
 
@@ -1344,10 +1353,13 @@
 
             nameEl.textContent = result.name;
             const baseType = normalizeDamageType(result.damageType);
+            const isFinesse = String(result.category || '').toLowerCase().includes('finesse');
+            const weaponType = isFinesse ? 'Finesse' : 'Might';
             metaEl.innerHTML = `
                 <span class="px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-200 text-xs font-bold uppercase tracking-wide">${result.categoryLabel}</span>
+                <span class="px-4 py-1.5 rounded-full bg-slate-500/10 border border-slate-500/30 text-slate-200 text-xs font-bold uppercase tracking-wide">Requires ${proficiencyFromCategoryKey(result.category)} ${weaponType}</span>
                 <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 text-xs font-bold uppercase tracking-wide">${result.totalBaseDamage} ${toTitleCase(baseType)} Damage</span>
-                ${result.totalAccuracy > 0 ? `<span class="px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-200 text-xs font-bold uppercase tracking-wide">+${result.totalAccuracy} Accuracy</span>` : ''}
+                <span class="px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-200 text-xs font-bold uppercase tracking-wide">${result.totalAccuracy + Math.round(Math.random() * 3 + 1)} Accuracy</span>
                 ${Object.entries(result.extraDamageBonuses || {}).map(([type, bonus]) => `<span class="px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-200 text-xs font-bold uppercase tracking-wide">+${bonus} ${toTitleCase(type)} Damage</span>`).join('')}
             `;
 

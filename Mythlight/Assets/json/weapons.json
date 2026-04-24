@@ -47,39 +47,6 @@
       { "name": "Zweihander", "damage_type": "cleave" }
     ],
 
-    "ranged_light": [
-      { "name": "Sling", "damage_type": "blunt" },
-      { "name": "Shortbow", "damage_type": "pierce" },
-      { "name": "Hand Crossbow", "damage_type": "pierce" },
-      { "name": "Blowgun", "damage_type": "pierce" },
-      { "name": "Pistol", "damage_type": "pierce" },
-      { "name": "Revolver", "damage_type": "pierce" },
-      { "name": "Semi-Auto Pistol", "damage_type": "pierce" }
-    ],
-
-    "ranged_medium": [
-      { "name": "Longbow", "damage_type": "pierce" },
-      { "name": "Crossbow", "damage_type": "pierce" },
-      { "name": "Repeating Crossbow", "damage_type": "pierce" },
-      { "name": "Rifle", "damage_type": "pierce" },
-      { "name": "Lever-Action Rifle", "damage_type": "pierce" },
-      { "name": "Shotgun", "damage_type": "cleave" },
-      { "name": "Bolt-Action Rifle", "damage_type": "pierce" },
-      { "name": "Musket", "damage_type": "pierce" }
-    ],
-
-    "ranged_heavy": [
-      { "name": "Heavy Crossbow", "damage_type": "pierce" },
-      { "name": "Arbalest", "damage_type": "pierce" },
-      { "name": "Greatbow", "damage_type": "pierce" },
-      { "name": "Ballista (Portable)", "damage_type": "pierce" },
-      { "name": "Sniper Rifle", "damage_type": "pierce" },
-      { "name": "Double-Barrel Shotgun", "damage_type": "cleave" },
-      { "name": "Blunderbuss", "damage_type": "cleave" },
-      { "name": "Automatic Rifle", "damage_type": "pierce" },
-      { "name": "Light Machine Gun", "damage_type": "pierce" }
-    ],
-
     "finesse_light": [
       { "name": "Stiletto", "damage_type": "pierce" },
       { "name": "Needle Knife", "damage_type": "pierce" },
@@ -88,7 +55,14 @@
       { "name": "Hidden Blade", "damage_type": "pierce" },
       { "name": "Throwing Knives", "damage_type": "pierce" },
       { "name": "Darts", "damage_type": "pierce" },
-      { "name": "Shuriken", "damage_type": "pierce" }
+      { "name": "Shuriken", "damage_type": "pierce" },
+      { "name": "Sling", "damage_type": "blunt" },
+      { "name": "Shortbow", "damage_type": "pierce" },
+      { "name": "Hand Crossbow", "damage_type": "pierce" },
+      { "name": "Blowgun", "damage_type": "pierce" },
+      { "name": "Pistol", "damage_type": "pierce" },
+      { "name": "Revolver", "damage_type": "pierce" },
+      { "name": "Semi-Auto Pistol", "damage_type": "pierce" }
     ],
 
     "finesse_medium": [
@@ -100,7 +74,15 @@
       { "name": "Throwing Axe", "damage_type": "slash" },
       { "name": "Chakram", "damage_type": "slash" },
       { "name": "Cane", "damage_type": "blunt" },
-      { "name": "Whip", "damage_type": "slash" }
+      { "name": "Whip", "damage_type": "slash" },
+      { "name": "Longbow", "damage_type": "pierce" },
+      { "name": "Crossbow", "damage_type": "pierce" },
+      { "name": "Repeating Crossbow", "damage_type": "pierce" },
+      { "name": "Rifle", "damage_type": "pierce" },
+      { "name": "Lever-Action Rifle", "damage_type": "pierce" },
+      { "name": "Shotgun", "damage_type": "cleave" },
+      { "name": "Bolt-Action Rifle", "damage_type": "pierce" },
+      { "name": "Musket", "damage_type": "pierce" }
     ],
 
     "finesse_heavy": [
@@ -108,7 +90,16 @@
       { "name": "Weighted Chain", "damage_type": "blunt" },
       { "name": "Rope Dart", "damage_type": "pierce" },
       { "name": "Flail", "damage_type": "blunt" },
-      { "name": "Trident", "damage_type": "pierce" }
+      { "name": "Trident", "damage_type": "pierce" },
+      { "name": "Heavy Crossbow", "damage_type": "pierce" },
+      { "name": "Arbalest", "damage_type": "pierce" },
+      { "name": "Greatbow", "damage_type": "pierce" },
+      { "name": "Ballista (Portable)", "damage_type": "pierce" },
+      { "name": "Sniper Rifle", "damage_type": "pierce" },
+      { "name": "Double-Barrel Shotgun", "damage_type": "cleave" },
+      { "name": "Blunderbuss", "damage_type": "cleave" },
+      { "name": "Automatic Rifle", "damage_type": "pierce" },
+      { "name": "Light Machine Gun", "damage_type": "pierce" }
     ]
   },
   "prefixes": {
