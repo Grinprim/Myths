@@ -121,7 +121,7 @@ h1, h2, h3, .appTitle { font-family: 'Cinzel', serif; color: var(--text-bright);
   box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
 }
 textarea { resize: vertical; min-height: 80px; }
-#descInput { min-height: 50px; }
+#descInput { min-height: 150px; }
 
 .checkboxField {
   gap: 10px;
@@ -345,7 +345,7 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
   --tagsGap: 6px;
   --statsBottom: 10px;
   --tagsBottomHidden: 65px;
-  --rarityGemYAdjust: 2px;
+  --rarityGemYAdjust: 0px;
   border-radius: var(--radius);
   overflow: hidden;
   background: #121925; /* Keep dark base */
@@ -555,12 +555,28 @@ input[type="file"]::file-selector-button:hover { background: var(--accent); }
   font-family: 'Inter', sans-serif;
 }
 .desc strong {
-  font-weight: 840;
-  font-size: 1.2em;
+  font-weight: 700;
+  font-size: 12px;
   line-height: 1.05;
 }
 .desc em { font-style: italic; }
 .desc u { text-decoration: underline; }
+
+.tapSymbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.05em;
+  height: 1.05em;
+  margin: 0 0.1em;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #f8fafc;
+  font-size: 0.78em;
+  line-height: 1;
+  vertical-align: -0.08em;
+}
 
 /* Stat numbers at the bottom of the card */
 .stats {

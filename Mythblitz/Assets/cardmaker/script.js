@@ -25,6 +25,7 @@ function escapeHtml(value){
 function renderDescriptionText(raw){
   let html = escapeHtml(raw);
   html = html
+    .replace(/\[size=(\d+(?:\.\d+)?)(?:px)?\](.*?)\[\/size\]/gis, '<span style="font-size:$1px;">$2</span>')
     .replace(/\[b\](.*?)\[\/b\]/gis, '<strong>$1</strong>')
     .replace(/\[i\](.*?)\[\/i\]/gis, '<em>$1</em>')
     .replace(/\[u\](.*?)\[\/u\]/gis, '<u>$1</u>')
@@ -34,6 +35,7 @@ function renderDescriptionText(raw){
     .replace(/\[b\]/gi, '<strong>')
     .replace(/\[i\]/gi, '<em>')
     .replace(/\[u\]/gi, '<u>')
+    .replace(/\[tap\]/gi, '<span class="tapSymbol" aria-label="tap symbol">↷</span>')
     .replace(/\[br\]/gi, '<br>')
     .replace(/\n/g, '<br>');
   return html;
@@ -931,6 +933,24 @@ function wire(){
     syncText();
   }
 
+  function applySizeTextTool(){
+    if (!descInput) return;
+
+    const currentSelection = document.activeElement === descInput
+      && typeof descInput.selectionStart === 'number'
+      && typeof descInput.selectionEnd === 'number'
+      ? descInput.value.slice(descInput.selectionStart, descInput.selectionEnd)
+      : '';
+    const suggestedSize = currentSelection ? '' : '18';
+    const raw = window.prompt('Enter text size in px', suggestedSize);
+    if (raw === null) return;
+
+    const size = Number(String(raw).replace(/px$/i, '').trim());
+    if (!Number.isFinite(size) || size <= 0) return;
+
+    applyTextTool(`[size=${size}]`, '[/size]');
+  }
+
   // Initial Sync
   syncText();
   updateSaveButtons();
@@ -994,8 +1014,11 @@ function wire(){
       const insert = btn.dataset.insert;
       const wrapStart = btn.dataset.wrapStart;
       const wrapEnd = btn.dataset.wrapEnd || '';
+      const isSizeTool = btn.dataset.sizeTool === 'true';
 
-      if (insert) {
+      if (isSizeTool) {
+        applySizeTextTool();
+      } else if (insert) {
         applyTextTool(insert, '');
       } else if (wrapStart) {
         applyTextTool(wrapStart, wrapEnd);
