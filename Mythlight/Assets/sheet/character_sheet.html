@@ -1636,7 +1636,7 @@
       custom.traits = [];
       custom.spells = [];
 
-      function loadCustomEntries() {
+      function loadCustomEntries(data) {
         if (data.custom) {
           if (data.custom.traits) {
             data.custom.traits.forEach(trait => {
@@ -1649,8 +1649,9 @@
             });
           }
         }
+        
       }
-
+      loadCustomEntries(data);
       // --- Restore Inventory ---
 
       function restoreSimpleSlots(containerId, items) {
@@ -1720,7 +1721,7 @@
       updateAllDerived?.();
       updateManaBar?.();
       updateHealthBar?.();
-      loadCustomEntries();
+      loadCustomEntries(data);
 
       alert("Character successfully loaded!");
     }
