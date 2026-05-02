@@ -1636,6 +1636,9 @@
       custom.traits = [];
       custom.spells = [];
 
+      document.getElementById('custom_traits').innerHTML = '';
+      document.getElementById('custom_spells').innerHTML = '';
+
       function loadCustomEntries(data) {
         if (data.custom) {
           if (data.custom.traits) {
