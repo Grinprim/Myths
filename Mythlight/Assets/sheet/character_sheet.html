@@ -1636,10 +1636,11 @@
       custom.traits = [];
       custom.spells = [];
 
-      document.getElementById('custom_traits').innerHTML = '';
-      document.getElementById('custom_spells').innerHTML = '';
+      
 
       function loadCustomEntries(data) {
+        document.getElementById('custom_traits').innerHTML = '';
+        document.getElementById('custom_spells').innerHTML = '';
         if (data.custom) {
           if (data.custom.traits) {
             data.custom.traits.forEach(trait => {
@@ -1727,25 +1728,6 @@
       loadCustomEntries(data);
 
       alert("Character successfully loaded!");
-    }
-
-    // --- Armor ---
-    function armor_proficiency() {
-      const fort = parseInt(document.getElementById('Body_Fortitude').value) || 0;
-      document.getElementById('light_armor_checkbox').checked = fort >= 2;
-      document.getElementById('medium_armor_checkbox').checked = fort >= 3;
-      document.getElementById('heavy_armor_checkbox').checked = fort >= 4;
-      document.getElementById('shields_checkbox').checked = fort >= 1;
-    }
-    function weapon_proficiency() {
-      const finesse = parseInt(document.getElementById('Skill_Finesse').value) || 0;
-      const might = parseInt(document.getElementById('Body_Might').value) || 0;
-      document.getElementById('light_melee_checkbox').checked = might >= 1;
-      document.getElementById('medium_melee_checkbox').checked = might >= 2;
-      document.getElementById('heavy_melee_checkbox').checked = might >= 3;
-      document.getElementById('light_ranged_checkbox').checked = finesse >= 1;
-      document.getElementById('medium_ranged_checkbox').checked = finesse >= 2;
-      document.getElementById('heavy_ranged_checkbox').checked = finesse >= 3;
     }
 
     // --- Health ---
@@ -1850,11 +1832,9 @@
       clampVitals();
       updateHealthBar();
       updateManaBar();
-      armor_proficiency();
       inventory_extra_slots();
       weight_update();
       encumberance_update();
-      weapon_proficiency();
     }
 
     function historyCleaning() {
@@ -1871,6 +1851,7 @@
     document.addEventListener('input', function () {
       updateAllDerived();
       updateTraitPoints();
+      inventory_extra_slots();
     });
 
     // --- Initialize ---
