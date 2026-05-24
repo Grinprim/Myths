@@ -1,69 +1,123 @@
 {
-	"title": "Journey Timeline",
-	"subtitle": "Each year marker is interactive. Hover for a glow effect, then click a circle to read the full story segment in a popup panel.",
-	"segments": [
-		{
-			"year": "01",
-			"title": "Lorem Ipsum Alpha",
-			"miniTitle": "Alpha Stage",
-			"summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-			"details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.",
-			"side": "top",
-			"color": "#c43a2f"
-		},
-		{
-			"year": "02",
-			"title": "Lorem Ipsum Beta",
-			"miniTitle": "Beta Stage",
-			"summary": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-			"details": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
-			"side": "bottom",
-			"color": "#d84a39"
-		},
-		{
-			"year": "03",
-			"title": "Lorem Ipsum Gamma",
-			"miniTitle": "Gamma Stage",
-			"summary": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-			"details": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.",
-			"side": "top",
-			"color": "#b7322d"
-		},
-		{
-			"year": "04",
-			"title": "Lorem Ipsum Delta",
-			"miniTitle": "Delta Stage",
-			"summary": "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
-			"details": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.",
-			"side": "bottom",
-			"color": "#9d2a2a"
-		},
-		{
-			"year": "05",
-			"title": "Lorem Ipsum Epsilon",
-			"miniTitle": "Epsilon Stage",
-			"summary": "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
-			"details": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur blandit tempus porttitor.",
-			"side": "top",
-			"color": "#7f2424"
-		},
-		{
-			"year": "06",
-			"title": "Lorem Ipsum Zeta",
-			"miniTitle": "Zeta Stage",
-			"summary": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
-			"details": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla quis lorem ut libero malesuada feugiat. Pellentesque in ipsum id orci porta dapibus.",
-			"side": "bottom",
-			"color": "#5f1f20"
-		},
-		{
-			"year": "08",
-			"title": "Lorem Ipsum Zeta",
-			"miniTitle": "Zeta Stage",
-			"summary": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
-			"details": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla quis lorem ut libero malesuada feugiat. Pellentesque in ipsum id orci porta dapibus.",
-			"side": "top",
-			"color": "#5f1f20"
-		}
-	]
+  "title": "Journey Timeline",
+  "subtitle": "The complete chronology of creation, divine conflict, and mortal civilization.",
+  "segments": [
+    {
+      "year": "10000 B.W.C",
+      "title": "The Great Creation",
+      "miniTitle": "Great Creation",
+      "summary": "The Kawanot and Eladri are created by the Primordials Athon and Xanu, establishing the first immortal races.",
+      "details": "The immortal races, the Kawanot and Eladri, were created by the primordials Athon and Xanu respectively. A world was forged for them to inhabit eternally. Yet from the beginning, a disparity emerged. The Eladri, blessed with a deep connection to the stars and cosmic magic, appeared favored in the eyes of creation, while the Kawanot were left to rely solely upon themselves.",
+      "side": "top",
+      "color": "#c43a2f"
+    },
+    {
+      "year": "10000–5000 B.W.C",
+      "title": "Era of Immortal Peace",
+      "miniTitle": "Millennia of Coexistence",
+      "summary": "Kawanot and Eladri coexist peacefully while developing science and magic separately.",
+      "details": "Despite this imbalance, the Kawanot and Eladri coexisted peacefully for millennia. The Kawanot devoted themselves to material sciences, engineering, and the pursuit of knowledge, while the Eladri embraced magic and communion with the heavens above. Both races contributed to the rich tapestry of their world, each finding their own path to greatness. However, the Kawanot's growing resentment toward their perceived inferiority planted the seeds of future conflict.",
+      "side": "bottom",
+      "color": "#c43a2f"
+    },
+    {
+      "year": "5000 B.W.C",
+      "title": "Evolution of Mortal Races",
+      "miniTitle": "Rise of Mortals",
+      "summary": "Ambient magic triggers the emergence of mortal races across the world.",
+      "details": "During this age of peace, loose ambient magic began intertwining with inert matter across the world, igniting rapid evolution among lesser creatures. From this phenomenon arose the first mortal races: Humans, the Rokana, and the Khraa.",
+      "side": "top",
+      "color": "#c43a2f"
+    },
+    {
+      "year": "4750 B.W.C",
+      "title": "Creation of the Dinqui",
+      "miniTitle": "Forged Servants",
+      "summary": "The Kawanot create the Dinqui, a stonefolk race built for labor and service.",
+      "details": "Inspired by the emergence of mortal life, the Kawanot sought to prove their own greatness through creation. Through mastery of stonecraft and arcane science, they forged the Dinqui, a race of stonefolk designed to serve as loyal attendants and laborers.",
+      "side": "bottom",
+      "color": "#c43a2f"
+    },
+    {
+      "year": "4300 B.W.C",
+      "title": "Descent of the Wild Lights",
+      "miniTitle": "Divine Intervention",
+      "summary": "Celestial entities known as Wild Lights descend and bond with mortal hosts.",
+      "details": "The Wild Lights descended upon the world as a gift from Omos, sent to guide and protect creation from a looming catastrophe yet unknown. These celestial entities chose mortal hosts to carry their power. Once again, the Kawanot found themselves overlooked, deepening their resentment toward the gods and primordials.",
+      "side": "top",
+      "color": "#c43a2f"
+    },
+    {
+      "year": "4300–100 B.W.C",
+      "title": "Rising Tensions",
+      "miniTitle": "Growing Resentment",
+      "summary": "The Kawanot grow bitter as divine recognition continues to elude them.",
+      "details": "An era of unrest followed. The Kawanot grew bitter toward the divine forces that continually ignored their accomplishments. Though they had mastered science, achieved great advancement, and even created life, they remained unacknowledged by the higher powers they longed to reach.",
+      "side": "bottom",
+      "color": "#c43a2f"
+    },
+    {
+      "year": "100 B.W.C",
+      "title": "Birth of the Gorgon",
+      "miniTitle": "Fall of the Kawanot",
+      "summary": "The Kawanot invoke a power beyond the primordials and are transformed.",
+      "details": "In a final desperate attempt to contact the primordials and earn their recognition, the Kawanot performed a great invocation. An answer came — but not from the beings they sought. Instead, the Great Serpent, apostle of the Void, responded. It bestowed upon them a terrible gift: transformation into the monstrous Gorgon.",
+      "side": "top",
+      "color": "#c43a2f"
+    },
+    {
+      "year": "0 A.W.C",
+      "title": "The War of Creation",
+      "miniTitle": "Aspect Intervention",
+      "summary": "The Gorgon attempt to bring the Void Serpent into the world, triggering divine war.",
+      "details": "The newly formed Gorgon embraced worship of the Serpent and sought to summon their void-born god into the world, bringing about the end of the known age. In response, the Aspects intervened, fulfilling the prophecy foretold centuries before. Though they succeeded in crushing the majority of the Gorgon forces, the Aspects chose not to exterminate them entirely. Whether out of mercy, preservation, or fear of what total destruction might unleash, remnants of the Gorgon endured.",
+      "side": "bottom",
+      "color": "#c43a2f"
+    },
+    {
+      "year": "0–1000 A.W.C",
+      "title": "The Great Fallout",
+      "miniTitle": "Aftermath of War",
+      "summary": "Worlds fracture politically and culturally after the Aspect War.",
+      "details": "In the aftermath of the Great Aspect War, tensions across the world remained high. Though the Gorgon threat had been driven back, distrust and fear lingered among all peoples. The Eladri, believing that mortal influence and worldly ambition had contributed to the corruption of the Kawanot, began distancing themselves from the younger races.<br><br> As the centuries passed, most peoples withdrew into their own lands and cultures. Kingdoms, city-states, and isolated sects began to form across the world, marking the first true age of civilization after the war.",
+      "side": "top",
+      "color": "#c43a2f"
+    },
+    {
+      "year": "1000 A.W.C",
+      "title": "The Fall of North Star",
+      "miniTitle": "The Fall of the North Star",
+      "summary": "A failed celestial ritual leads to mass death and the exile of horned Eladri.",
+      "details": "During the final years of the Great Fallout, paranoia and suspicion spread among the Eladri. One radical sect sought to end the Gorgon threat permanently by drawing forbidden power directly from the heavens themselves. Through a catastrophic ritual, they unleashed celestial magic capable of petrifying the Gorgon, turning entire hosts of them to stone. The victory came at a terrible cost. Countless Eladri perished in the ritual, and those who survived were forever changed.<br><br>Fearful of what they had become, the greater Eladri civilization severed ties with them entirely. As the sect of Eladri all had horns, other horned Eladri became known as the Wild Eladri, exiled from the Astral Cities and forced to live among mortals. In turn, the Astral Eladri withdrew from the world altogether, relocating their celestial cities into another realm to prevent such corruption from ever taking root again.",
+      "side": "bottom",
+      "color": "#c43a2f"
+    },
+    {
+      "year": "1000–1500 A.W.C",
+      "title": "The Settling of Mortals",
+      "miniTitle": "Age of Expansion",
+      "summary": "Mortal races establish nations and stabilize after divine withdrawal.",
+      "details": "With the departure of the Astral Eladri, the mortal races entered a new age of expansion and settlement. Humans, Khraa, Dinqui, and the exiled Wild Eladri established new nations and territories across the world.<br><br>Though this era was not one of peace, it was an age of ambition and growth. Kingdoms rose and collapsed in rapid succession as borders shifted through conquest, diplomacy, and rebellion. Yet despite frequent conflicts between rulers, everyday life gradually stabilized compared to the chaos of the centuries before.",
+      "side": "top",
+      "color": "#c43a2f"
+    },
+    {
+      "year": "1500–1940 A.W.C",
+      "title": "The Industrial Era",
+      "miniTitle": "Magic Meets Machine",
+      "summary": "Industrial and magical advancement reshape civilization.",
+      "details": "As nations matured, a period of rapid industrial and magical advancement began. Innovations in engineering and spellcraft transformed society. Spell-powered engines, arcane machinery, and mechanical inventions dramatically improved transportation, labor, medicine, and communication.<br><br>For the first time in history, magic and technology advanced side by side.<br><br>However, not all nations progressed equally. Differences in industrial power, magical knowledge, and access to resources created growing political tensions. Rivalries intensified as nations competed for influence, territory, and dominance, laying the foundation for an inevitable global conflict.",
+      "side": "bottom",
+      "color": "#c43a2f"
+    },
+    {
+      "year": "1940–1960 A.W.C",
+      "title": "The Great War",
+      "miniTitle": "Twenty-Year War",
+      "summary": "A global war erupts, introducing devastating Black Magic.",
+      "details": "Known also as the Twenty-Year War, the Great War was a devastating conflict fought primarily between the Kingdom of Aldfell and the Etheria Republic. What began as political and territorial disputes escalated into one of the bloodiest wars in recorded history.<br><br>The war reshaped the world through unprecedented destruction and suffering. During the conflict, the terrifying discipline known as Black Magic was discovered and weaponized. Unlike traditional forms of magic, Black Magic excelled purely in death and devastation, capable of annihilating entire armies and regions with horrifying efficiency.<br><br>The emergence of Black Magic became the turning point of the war and ultimately forced its conclusion.<br><br>Though peace was eventually achieved, the scars left behind never fully healed. Entire generations were traumatized by the conflict, and the trust between Aldfell and Etheria was shattered beyond repair. Even decades later, the memory of the Great War continued to shape politics, culture, and fear throughout the world.",
+      "side": "top",
+      "color": "#c43a2f"
+    }
+  ]
 }
