@@ -1,0 +1,145 @@
+{
+  "melee": {
+    "one_handed_pierce": [
+      { "name": "Dagger", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Dirk", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Sai", "damage_type": "pierce", "damage": 1, "accuracy": 2, "requires": ["might", "finesse"] },
+      { "name": "Katar", "damage_type": "pierce", "damage": 1, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Punch Dagger", "damage_type": "pierce", "damage": 1, "accuracy": 2, "requires": ["might"] },
+      { "name": "Stiletto", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Needle Knife", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Palm Dagger", "damage_type": "pierce", "damage": 1, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Estoc", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["finesse"] }
+    ],
+    "one_handed_slash": [
+      { "name": "Razor", "damage_type": "slash", "damage": 1, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Sickle", "damage_type": "slash", "damage": 1, "accuracy": 2, "requires": ["might"] },
+      { "name": "Hatchet", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might"] },
+      { "name": "Smallsword", "damage_type": "slash", "damage": 1, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Sabre", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Dueling Sword", "damage_type": "slash", "damage": 2, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Chakram", "damage_type": "slash", "damage": 1, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Whip", "damage_type": "slash", "damage": 1, "accuracy": 2, "requires": ["might", "finesse"] },
+      { "name": "Chain Whip", "damage_type": "slash", "damage": 2, "accuracy": 1, "requires": ["might", "finesse"] }
+    ],
+    "one_handed_blunt": [
+      { "name": "Baton", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Mace", "damage_type": "blunt", "damage": 2, "accuracy": 2, "requires": ["might"] },
+      { "name": "Flail", "damage_type": "blunt", "damage": 2, "accuracy": 1, "requires": ["might"] },
+      { "name": "Tonfa", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["might", "finesse"] },
+      { "name": "Meteor Hammer", "damage_type": "blunt", "damage": 2, "accuracy": 1, "requires": ["might"] },
+      { "name": "Cestus", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["might"] },
+      { "name": "Cane", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["finesse"] }
+    ],
+    "two_handed_pierce": [
+      { "name": "Rapier", "damage_type": "pierce", "damage": 2, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Morningstar Mace", "damage_type": "pierce", "damage": 3, "accuracy": 1, "requires": ["might"] },
+      { "name": "Morningstar Flail", "damage_type": "pierce", "damage": 3, "accuracy": 1, "requires": ["might"] },
+      { "name": "Spear", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["might"] },
+      { "name": "Pick", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["might"] },
+      { "name": "Billhook", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["might"] },
+      { "name": "Pike", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["might"] },
+      { "name": "Lance", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": ["might"] },
+      { "name": "Trident", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["might", "finesse"] }
+    ],
+    "two_handed_slash": [
+      { "name": "Arming Sword", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might"] },
+      { "name": "Longsword", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might"] },
+      { "name": "Scimitar", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might", "finesse"] },
+      { "name": "Falchion", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might"] },
+      { "name": "Katana", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might", "finesse"] },
+      { "name": "Axe", "damage_type": "slash", "damage": 2, "accuracy": 1, "requires": ["might"] },
+      { "name": "Battle Axe", "damage_type": "slash", "damage": 3, "accuracy": 1, "requires": ["might"] },
+      { "name": "Greatsword", "damage_type": "slash", "damage": 3, "accuracy": 2, "requires": ["might"] },
+      { "name": "Greataxe", "damage_type": "slash", "damage": 3, "accuracy": 1, "requires": ["might"] },
+      { "name": "Halberd", "damage_type": "slash", "damage": 3, "accuracy": 2, "requires": ["might"] },
+      { "name": "Poleaxe", "damage_type": "slash", "damage": 3, "accuracy": 2, "requires": ["might"] },
+      { "name": "Glaive", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might"] }
+    ],
+    "two_handed_blunt": [
+      { "name": "Great Mace", "damage_type": "blunt", "damage": 3, "accuracy": 1, "requires": ["might"] },
+      { "name": "Warhammer", "damage_type": "blunt", "damage": 3, "accuracy": 1, "requires": ["might"] },
+      { "name": "Club", "damage_type": "blunt", "damage": 1, "accuracy": 1, "requires": ["might"] },
+      { "name": "Quarterstaff", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["might", "finesse"] },
+      { "name": "Maul", "damage_type": "blunt", "damage": 3, "accuracy": 1, "requires": ["might"] },
+      { "name": "Greatclub", "damage_type": "blunt", "damage": 2, "accuracy": 1, "requires": ["might"] },
+      { "name": "Weighted Chain", "damage_type": "blunt", "damage": 2, "accuracy": 1, "requires": ["might"] }
+    ],
+    "free_handed": [
+      { "name": "Knuckle Dusters", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["might"] },
+      { "name": "Artificial Claws", "damage_type": "slash", "damage": 1, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Garrote", "damage_type": "pierce", "damage": 2, "accuracy": 3, "requires": ["finesse"] }
+    ]
+  },
+  "ranged": {
+    "one_handed_pierce_ranged": [
+      { "name": "Pistol", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Throwing Knife", "damage_type": "pierce", "damage": 1, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Hand Crossbow", "damage_type": "pierce", "damage": 2, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Blowgun", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Darts", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Rope Dart", "damage_type": "pierce", "damage": 1, "accuracy": 2, "requires": ["finesse"] }
+    ],
+    "one_handed_slash_ranged": [
+      { "name": "Shuriken", "damage_type": "slash", "damage": 1, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Throwing Axe", "damage_type": "slash", "damage": 1, "accuracy": 2, "requires": ["finesse"] }
+    ],
+    "one_handed_blunt_ranged": [
+      { "name": "Slingshot", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Sling", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["finesse"] }
+    ],
+    "two_handed_pierce_ranged": [
+      { "name": "Musket", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Rifle", "damage_type": "pierce", "damage": 3, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Harpoon Gun", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Crossbow", "damage_type": "pierce", "damage": 2, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Shortbow", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Longbow", "damage_type": "pierce", "damage": 2, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Javelin", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Repeating Crossbow", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Lever-Action Rifle", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Shotgun", "damage_type": "pierce", "damage": 3, "accuracy": 1, "requires": ["finesse"] },
+      { "name": "Bolt-Action Rifle", "damage_type": "pierce", "damage": 3, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Sniper Rifle", "damage_type": "pierce", "damage": 3, "accuracy": 3, "requires": ["finesse"] },
+      { "name": "Double-Barrel Shotgun", "damage_type": "pierce", "damage": 3, "accuracy": 1, "requires": ["finesse"] },
+      { "name": "Automatic Rifle", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": ["finesse"] },
+      { "name": "Light Machine Gun", "damage_type": "pierce", "damage": 3, "accuracy": 1, "requires": ["finesse"] }
+    ],
+    "two_handed_blunt_ranged": [
+      { "name": "Blunderbuss", "damage_type": "blunt", "damage": 2, "accuracy": 1, "requires": ["finesse"] }
+    ]
+  },
+  "special": {
+    "deployable_utility": [
+      { "name": "Deployable Mounted Turret", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": [] },
+      { "name": "Arbalest", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": [] },
+      { "name": "Ballista (Portable)", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": [] },
+      { "name": "Brewing Stand (Portable)", "damage_type": "none", "damage": 0, "accuracy": 0, "requires": [] },
+      { "name": "Bear Trap", "damage_type": "blunt", "damage": 2, "accuracy": 2, "requires": [] },
+      { "name": "Fox Trap", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": [] },
+      { "name": "Med Kit", "damage_type": "none", "damage": 0, "accuracy": 0, "requires": [] },
+      { "name": "Tank of Gas", "damage_type": "pierce", "damage": 2, "accuracy": 1, "requires": [] }
+    ]
+  },
+  "armor": {
+    "body_armor": [
+      { "name": "Light Leather Armor Set", "damage_type": "none", "damage": 0, "accuracy": 0, "requires": [] },
+      { "name": "Gambeson", "damage_type": "none", "damage": 0, "accuracy": 0, "requires": [] },
+      { "name": "Chainmail", "damage_type": "none", "damage": 0, "accuracy": 0, "requires": [] },
+      { "name": "Plate", "damage_type": "none", "damage": 0, "accuracy": 0, "requires": [] }
+    ],
+    "shields": [
+      { "name": "Buckler", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["might"] },
+      { "name": "Tower Shield", "damage_type": "blunt", "damage": 1, "accuracy": 1, "requires": ["might"] },
+      { "name": "Door Shield", "damage_type": "blunt", "damage": 1, "accuracy": 1, "requires": ["might"] },
+      { "name": "Aegis", "damage_type": "blunt", "damage": 2, "accuracy": 1, "requires": ["might"] },
+      { "name": "Kite Shield", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["might"] },
+      { "name": "Heater Shield", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["might"] }
+    ],
+    "accessories": [
+      { "name": "Utility Belt", "damage_type": "none", "damage": 0, "accuracy": 0, "requires": [] },
+      { "name": "Backpack", "damage_type": "none", "damage": 0, "accuracy": 0, "requires": [] },
+      { "name": "Trinket/Necklace", "damage_type": "none", "damage": 0, "accuracy": 0, "requires": [] }
+    ]
+  }
+}
