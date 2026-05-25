@@ -670,7 +670,8 @@
 		if (!isNarrow()) {
 			const minSpacing = evW + 28;
 			const natural = window.innerWidth;
-			const innerW = Math.max(natural, count * minSpacing);
+			const edgePad = Math.ceil(evW / 2) + 16;
+			const innerW = Math.max(natural, count * minSpacing + edgePad * 2);
 			const inner = document.getElementById('timelineInner');
 			if (inner) inner.style.width = `${innerW}px`;
 			return innerW;
@@ -694,7 +695,10 @@
 				const min = 8, max = 92;
 				return `${(min + (i / (total - 1 || 1)) * (max - min)).toFixed(2)}%`;
 			}
-			const pad = 60;
+			// Pad by half the event-width so the first/last pill is never clipped.
+			// evW is already set on --event-width; read it back so pad stays in sync.
+			const evW = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--event-width')) || 220;
+			const pad = Math.ceil(evW / 2) + 16;   // half pill + small breathing room
 			if (total <= 1) return `${W/2}px`;
 			return `${(pad + (i / (total - 1)) * (W - pad * 2)).toFixed(1)}px`;
 		};
