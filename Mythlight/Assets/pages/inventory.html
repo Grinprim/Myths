@@ -339,17 +339,19 @@
                     </div>
 
                     <!-- Arsenal Table -->
-                    <div class="bg-slate-900/40 rounded-2xl border border-slate-800 overflow-hidden">
-                        <div class="overflow-x-auto">
+                    <div class="bg-slate-900/40 rounded-2xl border border-slate-800 overflow-visible">
+                        <div class="overflow-visible">
                             <table class="w-full text-left text-sm min-w-[600px]">
                                 <thead class="bg-slate-800 border-b border-slate-700">
                                     <tr>
                                         <th class="px-4 py-3 font-bold text-indigo-400">Name</th>
                                         <th class="px-4 py-3 font-bold text-indigo-400">Category</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400">Range</th>
                                         <th class="px-4 py-3 font-bold text-indigo-400">Damage Type</th>
                                         <th class="px-4 py-3 font-bold text-indigo-400 text-center">Damage</th>
                                         <th class="px-4 py-3 font-bold text-indigo-400 text-center">Accuracy</th>
                                         <th class="px-4 py-3 font-bold text-indigo-400">Requires</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400 text-right">Trait</th>
                                     </tr>
                                 </thead>
                                 <tbody id="arsenal-table-body">
@@ -1795,71 +1797,22 @@
 
 
 
-
-
-
-
-        // ========== ARSENAL BROWSER (REFINED + AUTO REQUIREMENTS) ==========
+// ---------- GLOBAL STATE ----------
 
 const ArsenalState = {
-    data: null,
+    data: [],
+
     filters: {
         category: 'all',
         damage: 'all',
-        hand: 'all'
+        hand: 'all',
+        trait: 'all'
     }
 };
 
-async function loadArsenalData() {
-    try {
-        const res = await fetch('../json/arsenal.json');
-        const raw = await res.json();
 
-        ArsenalState.data = normalizeArsenal(raw);
 
-        updateFiltersUI();
-        renderArsenalTable();
-
-    } catch (e) {
-        console.error("Failed to load arsenal data:", e);
-        document.getElementById('arsenal-table-body').innerHTML =
-            '<tr><td colspan="6" class="px-4 py-8 text-center text-red-400">Error loading arsenal data</td></tr>';
-    }
-}
-
-// ---------- NORMALIZATION ----------
-
-function normalizeArsenal(data) {
-    const weapons = [];
-
-    const pushItems = (type, obj) => {
-        if (!obj) return;
-
-        Object.entries(obj).forEach(([category, items]) => {
-            items.forEach(item => {
-                weapons.push({
-                    ...item,
-                    type,
-                    category,
-                    categoryLabel: formatCategoryLabel(category),
-                    hand: extractHandType(category)
-                });
-            });
-        });
-    };
-
-    pushItems('melee', data.melee);
-    pushItems('ranged', data.ranged);
-    pushItems('special', data.special);
-
-    if (data.armor) {
-        pushItems('armor', data.armor);
-    }
-
-    return weapons;
-}
-
-// ---------- AUTO REQUIREMENTS (NEW CORE LOGIC) ----------
+ // ---------- AUTO REQUIREMENTS ----------
 
 function computeRequirements(weapon) {
     const dmg = Number(weapon.damage) || 0;
@@ -1873,38 +1826,94 @@ function computeRequirements(weapon) {
     let might = 0;
     let finesse = 0;
 
-    // ONLY MIGHT
     if (hasMight && !hasFinesse) {
         might = dmg;
     }
-
-    // ONLY FINESSE
     else if (hasFinesse && !hasMight) {
         finesse = dmg;
     }
-
-    // BOTH → SPLIT
     else if (hasMight && hasFinesse) {
         might = Math.floor(dmg / 2);
         finesse = Math.ceil(dmg / 2);
     }
-
-    // fallback (if requires missing or empty)
     else {
         might = Math.floor(dmg / 2);
         finesse = Math.ceil(dmg / 2);
     }
 
     const out = [];
+
     if (might > 0) out.push(`Might ${might}`);
     if (finesse > 0) out.push(`Finesse ${finesse}`);
 
     return out;
 }
 
+// ---------- NORMALIZE JSON ----------
+
+function normalizeArsenalData(rawData) {
+
+    // TRAIT LOOKUP
+    const traitMap = {};
+
+    (rawData.traits || []).forEach(trait => {
+        traitMap[trait.id] = trait;
+    });
+
+    const weapons = [];
+
+    Object.entries(rawData).forEach(([sectionKey, section]) => {
+
+        // skip traits array
+        if (sectionKey === 'traits') return;
+
+        Object.entries(section).forEach(([categoryKey, items]) => {
+
+            items.forEach(item => {
+
+                weapons.push({
+                    ...item,
+
+                    section: sectionKey,
+                    type: categoryKey,
+                    hand: extractHandType(categoryKey),
+
+                    // attach full trait object
+                    traitData: traitMap[item.trait] || null
+                });
+
+            });
+
+        });
+
+    });
+
+    return weapons;
+}
+
+// ---------- LOAD DATA ----------
+
+async function loadArsenalData() {
+
+    try {
+
+        const response = await fetch('../json/arsenal.json');
+        const rawData = await response.json();
+
+        ArsenalState.data = normalizeArsenalData(rawData);
+
+        updateFiltersUI();
+        renderArsenalTable();
+
+    } catch (err) {
+        console.error('Failed loading arsenal data:', err);
+    }
+}
+
 // ---------- FILTER SYSTEM ----------
 
 function setFilter(type, value) {
+
     ArsenalState.filters[type] = value;
 
     if (type === 'category') {
@@ -1923,14 +1932,31 @@ function setFilter(type, value) {
 // ---------- FILTERED DATA ----------
 
 function getFilteredWeapons() {
+
     if (!ArsenalState.data) return [];
 
     return ArsenalState.data.filter(w => {
+
         const f = ArsenalState.filters;
 
-        if (f.category !== 'all' && w.type !== f.category) return false;
-        if (f.damage !== 'all' && w.damage_type !== f.damage) return false;
-        if (f.hand !== 'all' && w.hand !== f.hand) return false;
+        if (f.category !== 'all' && w.type !== f.category) {
+            return false;
+        }
+
+        if (f.damage !== 'all' && w.damage_type !== f.damage) {
+            return false;
+        }
+
+        if (f.hand !== 'all' && w.hand !== f.hand) {
+            return false;
+        }
+
+        // OPTIONAL TRAIT FILTER
+        if (f.trait && f.trait !== 'all') {
+            if (!w.traitData || w.traitData.Name !== f.trait) {
+                return false;
+            }
+        }
 
         return true;
     });
@@ -1945,8 +1971,11 @@ function updateFiltersUI() {
 }
 
 function updateCategoryUI() {
+
     document.querySelectorAll('.arsenal-category-btn').forEach(btn => {
-        const active = btn.dataset.category === ArsenalState.filters.category;
+
+        const active =
+            btn.dataset.category === ArsenalState.filters.category;
 
         btn.classList.toggle('active', active);
         btn.classList.toggle('bg-indigo-600/20', active);
@@ -1954,20 +1983,30 @@ function updateCategoryUI() {
         btn.classList.toggle('text-indigo-300', active);
 
         btn.classList.toggle('border-slate-700', !active);
+
     });
 }
 
 function updateDamageFilters() {
+
     const weapons = ArsenalState.data || [];
 
-    const pool = ArsenalState.filters.category === 'all'
-        ? weapons
-        : weapons.filter(w => w.type === ArsenalState.filters.category);
+    const pool =
+        ArsenalState.filters.category === 'all'
+            ? weapons
+            : weapons.filter(
+                w => w.type === ArsenalState.filters.category
+            );
 
-    const types = [...new Set(pool.map(w => w.damage_type))];
+    const types = [
+        ...new Set(pool.map(w => w.damage_type))
+    ];
 
-    const container = document.getElementById('damage-filter-container');
-    const box = document.getElementById('damage-filter-buttons');
+    const container =
+        document.getElementById('damage-filter-container');
+
+    const box =
+        document.getElementById('damage-filter-buttons');
 
     if (!types.length) {
         container.classList.add('hidden');
@@ -1978,16 +2017,25 @@ function updateDamageFilters() {
 
     box.innerHTML = [
         createFilterButton('damage', 'all', 'All'),
-        ...types.map(t => createFilterButton('damage', t, t))
+        ...types.map(t =>
+            createFilterButton('damage', t, t)
+        )
     ].join('');
 }
 
 function updateHandFilters() {
-    const weapons = getFilteredWeapons();
-    const hands = [...new Set(weapons.map(w => w.hand))];
 
-    const container = document.getElementById('hand-filter-container');
-    const box = document.getElementById('hand-filter-buttons');
+    const weapons = getFilteredWeapons();
+
+    const hands = [
+        ...new Set(weapons.map(w => w.hand))
+    ];
+
+    const container =
+        document.getElementById('hand-filter-container');
+
+    const box =
+        document.getElementById('hand-filter-buttons');
 
     if (!hands.length) {
         container.classList.add('hidden');
@@ -1998,101 +2046,261 @@ function updateHandFilters() {
 
     box.innerHTML = [
         createFilterButton('hand', 'all', 'All'),
-        ...hands.map(h => createFilterButton('hand', h, formatHandLabel(h)))
+        ...hands.map(h =>
+            createFilterButton(
+                'hand',
+                h,
+                formatHandLabel(h)
+            )
+        )
     ].join('');
 }
 
 // ---------- BUTTON FACTORY ----------
 
 function createFilterButton(type, value, label) {
-    const active = ArsenalState.filters[type] === value;
+
+    const active =
+        ArsenalState.filters[type] === value;
 
     return `
-        <button onclick="setFilter('${type}', '${value}')"
-            class="px-4 py-2 border rounded-lg text-sm font-bold uppercase tracking-widest transition-all
-            ${active
-                ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-300'
-                : 'border-slate-700 hover:border-slate-600 hover:bg-slate-800/50 text-slate-300'}">
+        <button
+            onclick="setFilter('${type}', '${value}')"
+            class="
+                px-4 py-2
+                border rounded-lg
+                text-sm font-bold uppercase tracking-widest
+                transition-all
+
+                ${active
+                    ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-300'
+                    : 'border-slate-700 hover:border-slate-600 hover:bg-slate-800/50 text-slate-300'}
+            ">
+
             ${label}
+
         </button>
+    `;
+}
+
+// ---------- TRAIT RENDER ----------
+
+function renderTrait(trait) {
+
+    if (!trait) {
+        return `<span class="text-slate-600">-</span>`;
+    }
+
+    return `
+        <div class="group relative">
+
+            <div class="
+                inline-flex items-center gap-2
+                px-2 py-1 rounded-lg
+                bg-violet-500/10
+                border border-violet-500/20
+                text-violet-300
+                text-xs font-bold uppercase tracking-wider
+            ">
+
+                <span>${trait.Action}</span>
+                <span>${trait.Name}</span>
+
+            </div>
+
+            <div class="
+                absolute left-0 top-full mt-2 z-50
+                w-72 p-3 rounded-xl
+                bg-slate-900
+                border border-slate-700
+                shadow-2xl shadow-black/50
+
+                opacity-0 invisible
+                group-hover:opacity-100
+                group-hover:visible
+
+                transition-all duration-150
+            ">
+
+                <div class="flex items-center gap-2 mb-2">
+
+                    <span class="text-violet-300 font-bold">
+                        ${trait.Action}
+                    </span>
+
+                    <span class="text-white font-bold">
+                        ${trait.Name}
+                    </span>
+
+                    <span class="text-slate-500 text-xs">
+                        ${trait.Symbols}
+                    </span>
+
+                </div>
+
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    ${trait.Description}
+                </p>
+
+            </div>
+
+        </div>
     `;
 }
 
 // ---------- TABLE RENDER ----------
 
 function renderArsenalTable() {
+
     const weapons = getFilteredWeapons();
 
-    const tbody = document.getElementById('arsenal-table-body');
-    const countDiv = document.getElementById('arsenal-result-count');
+    const tbody =
+        document.getElementById('arsenal-table-body');
+
+    const countDiv =
+        document.getElementById('arsenal-result-count');
 
     if (!weapons.length) {
+
         tbody.innerHTML = `
             <tr>
-                <td colspan="6" class="px-4 py-8 text-center text-slate-400">
+                <td colspan="8"
+                    class="
+                        px-4 py-8
+                        text-center
+                        text-slate-400
+                    ">
+
                     No weapons match your filters
+
                 </td>
-            </tr>`;
+            </tr>
+        `;
+
         countDiv.textContent = '0 items';
+
         return;
     }
 
     tbody.innerHTML = weapons.map(w => {
 
-        // ---------- AUTO REQUIREMENTS USED HERE ----------
-        const requires = computeRequirements(w).length
-            ? computeRequirements(w).join(' + ')
-            : '-';
+        const requires =
+            computeRequirements(w).length
+                ? computeRequirements(w).join(' + ')
+                : '-';
 
-        const damageStars = '★'.repeat(w.damage || 0) + '☆'.repeat(3 - (w.damage || 0));
-        const accuracyStars = '★'.repeat(w.accuracy || 0) + '☆'.repeat(3 - (w.accuracy || 0));
+        const damageStars =
+            '★'.repeat(w.damage || 0) +
+            '☆'.repeat(3 - (w.damage || 0));
+
+        const accuracyStars =
+            '★'.repeat(w.accuracy || 0) +
+            '☆'.repeat(3 - (w.accuracy || 0));
 
         return `
-            <tr class="border-b border-slate-700/50 hover:bg-slate-800/30 transition-colors">
-                <td class="px-4 py-3 font-bold text-white">${w.name}</td>
-                <td class="px-4 py-3 text-slate-400 text-sm">${w.type}</td>
+            <tr class="
+                border-b border-slate-700/50
+                hover:bg-slate-800/30
+                transition-colors
+            ">
+
+                <td class="px-4 py-3 font-bold text-white">
+                    ${w.name}
+                </td>
+
+                <td class="px-4 py-3 text-slate-400 text-sm">
+                    ${formatCategoryLabel(w.type)}
+                </td>
+
+                <td class="px-4 py-3 text-slate-400 text-sm">
+                    ${w.range || 'N/A'}
+                </td>
+
                 <td class="px-4 py-3">
-                    <span class="inline-block px-2 py-1 bg-slate-700/50 rounded text-xs font-bold uppercase text-slate-300">
+                    <span class="
+                        inline-block
+                        px-2 py-1
+                        bg-slate-700/50
+                        rounded
+                        text-xs font-bold uppercase
+                        text-slate-300
+                    ">
                         ${w.damage_type}
                     </span>
                 </td>
-                <td class="px-4 py-3 text-center text-amber-400">${damageStars}</td>
-                <td class="px-4 py-3 text-center text-cyan-400">${accuracyStars}</td>
-                <td class="px-4 py-3 text-slate-400 text-sm">${requires}</td>
+
+                <td class="px-4 py-3 text-center text-amber-400">
+                    ${damageStars}
+                </td>
+
+                <td class="px-4 py-3 text-center text-cyan-400">
+                    ${accuracyStars}
+                </td>
+
+                <td class="px-4 py-3 text-slate-400 text-sm">
+                    ${requires}
+                </td>
+
+                <td class="px-4 py-3">
+                    ${renderTrait(w.traitData)}
+                </td>
+
             </tr>
         `;
+
     }).join('');
 
-    countDiv.textContent = `${weapons.length} item${weapons.length !== 1 ? 's' : ''}`;
+    countDiv.textContent =
+        `${weapons.length} item${weapons.length !== 1 ? 's' : ''}`;
 }
 
 // ---------- HELPERS ----------
 
 function extractHandType(category) {
-    if (category.includes('free')) return 'free';
-    if (category.includes('one_handed')) return 'one-handed';
-    if (category.includes('two_handed')) return 'two-handed';
+
+    if (category.includes('free')) {
+        return 'free';
+    }
+
+    if (category.includes('one_handed')) {
+        return 'one-handed';
+    }
+
+    if (category.includes('two_handed')) {
+        return 'two-handed';
+    }
+
     return 'other';
 }
 
 function formatCategoryLabel(category) {
+
     return category
         .replace(/_/g, ' ')
         .split(' ')
-        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+        .map(w =>
+            w.charAt(0).toUpperCase() + w.slice(1)
+        )
         .join(' ');
 }
 
 function formatHandLabel(hand) {
-    if (hand === 'free') return 'Free-Handed';
+
+    if (hand === 'free') {
+        return 'Free-Handed';
+    }
+
     return hand.charAt(0).toUpperCase() + hand.slice(1);
 }
 
 // ---------- INIT ----------
 
-document.addEventListener('DOMContentLoaded', loadArsenalData);
+document.addEventListener(
+    'DOMContentLoaded',
+    loadArsenalData
+);
 
-// ---------- COMPATIBILITY WRAPPERS (KEEP HTML WORKING) ----------
+// ---------- COMPATIBILITY WRAPPERS ----------
 
 function setArsenalCategory(category) {
     setFilter('category', category);

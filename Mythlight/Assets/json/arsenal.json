@@ -1,111 +1,113 @@
 {
   "melee": {
     "one_handed_pierce": [
-      { "name": "Rapier", "damage_type": "pierce", "damage": 2, "accuracy": 3, "requires": ["finesse"], "trait": 6 },
-      { "name": "Dagger", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 1 },
-      { "name": "Dirk", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 2  },
-      { "name": "Sai", "damage_type": "pierce", "damage": 1, "accuracy": 2, "requires": ["might", "finesse"], "trait": 3  },
-      { "name": "Katar", "damage_type": "pierce", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 1  },
-      { "name": "Punch Dagger", "damage_type": "pierce", "damage": 1, "accuracy": 2, "requires": ["might"], "trait": 1 },
-      { "name": "Stiletto", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 2  },
-      { "name": "Needle Knife", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 7  },
-      { "name": "Palm Dagger", "damage_type": "pierce", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 1 },
-      { "name": "Estoc", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["finesse"] , "trait": 3 }
+      { "name": "Rapier", "damage_type": "pierce","range": "melee", "damage": 2, "accuracy": 3, "requires": ["finesse"], "trait": 6 },
+      { "name": "Dagger", "damage_type": "pierce","range": "melee", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 1 },
+      { "name": "Dirk", "damage_type": "pierce","range": "melee", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 2  },
+      { "name": "Sai", "damage_type": "pierce","range": "melee", "damage": 1, "accuracy": 2, "requires": ["might", "finesse"], "trait": 3  },
+      { "name": "Katar", "damage_type": "pierce","range": "melee", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 1  },
+      { "name": "Punch Dagger", "damage_type": "pierce","range": "melee", "damage": 1, "accuracy": 2, "requires": ["might"], "trait": 1 },
+      { "name": "Stiletto", "damage_type": "pierce","range": "melee", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 2  },
+      { "name": "Needle Knife", "damage_type": "pierce","range": "melee", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 7  },
+      { "name": "Palm Dagger", "damage_type": "pierce","range": "melee", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 1 },
+      { "name": "Estoc", "damage_type": "pierce","range": "melee", "damage": 2, "accuracy": 2, "requires": ["finesse"] , "trait": 3 }
     ],
     "one_handed_slash": [
-      { "name": "Arming Sword", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 2 },
-      { "name": "Razor", "damage_type": "slash", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 1  },
-      { "name": "Falchion", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 1 },
-      { "name": "Sickle", "damage_type": "slash", "damage": 1, "accuracy": 2, "requires": ["might"], "trait": 10 },
-      { "name": "Hatchet", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 5 },
-      { "name": "Smallsword", "damage_type": "slash", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 6 },
-      { "name": "Sabre", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["finesse"], "trait": 6 },
-      { "name": "Dueling Sword", "damage_type": "slash", "damage": 2, "accuracy": 3, "requires": ["finesse"], "trait": 7 },
-      { "name": "Chakram", "damage_type": "slash", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 4 },
-      { "name": "Whip", "damage_type": "slash", "damage": 1, "accuracy": 2, "requires": ["might", "finesse"], "trait": 3 },
-      { "name": "Chain Whip", "damage_type": "slash", "damage": 2, "accuracy": 1, "requires": ["might", "finesse"], "trait": 3 }
+      { "name": "Arming Sword", "damage_type": "slash","range": "melee", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 2 },
+      { "name": "Razor", "damage_type": "slash","range": "melee", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 1  },
+      { "name": "Falchion", "damage_type": "slash","range": "melee", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 1 },
+      { "name": "Sickle", "damage_type": "slash","range": "melee", "damage": 1, "accuracy": 2, "requires": ["might"], "trait": 10 },
+      { "name": "Hatchet", "damage_type": "slash","range": "melee", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 5 },
+      { "name": "Smallsword", "damage_type": "slash","range": "melee", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 6 },
+      { "name": "Sabre", "damage_type": "slash","range": "melee", "damage": 2, "accuracy": 2, "requires": ["finesse"], "trait": 6 },
+      { "name": "Dueling Sword", "damage_type": "slash","range": "melee", "damage": 2, "accuracy": 3, "requires": ["finesse"], "trait": 7 },
+      { "name": "Chakram", "damage_type": "slash","range": "melee", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 4 },
+      { "name": "Whip", "damage_type": "slash","range": "melee", "damage": 1, "accuracy": 2, "requires": ["might", "finesse"], "trait": 3 },
+      { "name": "Chain Whip", "damage_type": "slash","range": "melee", "damage": 2, "accuracy": 1, "requires": ["might", "finesse"], "trait": 3 }
     ],
     "one_handed_blunt": [
-      { "name": "Baton", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 4 },
-      { "name": "Mace", "damage_type": "blunt", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 2 },
-      { "name": "Flail", "damage_type": "blunt", "damage": 2, "accuracy": 1, "requires": ["might"], "trait": 3 },
-      { "name": "Tonfa", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["might", "finesse"], "trait": 9 },
-      { "name": "Meteor Hammer", "damage_type": "blunt", "damage": 2, "accuracy": 1, "requires": ["might"], "trait": 5 },
-      { "name": "Cane", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 7 }
+      { "name": "Baton", "damage_type": "blunt","range": "melee", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 4 },
+      { "name": "Mace", "damage_type": "blunt","range": "melee", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 2 },
+      { "name": "Flail", "damage_type": "blunt","range": "melee", "damage": 2, "accuracy": 1, "requires": ["might"], "trait": 3 },
+      { "name": "Tonfa", "damage_type": "blunt","range": "melee", "damage": 1, "accuracy": 2, "requires": ["might", "finesse"], "trait": 9 },
+      { "name": "Meteor Hammer", "damage_type": "blunt","range": "melee", "damage": 2, "accuracy": 1, "requires": ["might"], "trait": 5 },
+      { "name": "Cane", "damage_type": "blunt","range": "melee", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 7 }
     ],
     "two_handed_pierce": [
-      { "name": "Morningstar Mace", "damage_type": "pierce", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 5 },
-      { "name": "Morningstar Flail", "damage_type": "pierce", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 4 },
-      { "name": "Spear", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 8 },
-      { "name": "Pick", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 5 },
-      { "name": "Billhook", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 10 },
-      { "name": "Pike", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 8 },
-      { "name": "Lance", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": ["might"], "trait": 11 },
-      { "name": "Trident", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["might", "finesse"], "trait": 6 }
+      { "name": "Morningstar Mace", "damage_type": "pierce","range": "melee", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 5 },
+      { "name": "Morningstar Flail", "damage_type": "pierce","range": "melee", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 4 },
+      { "name": "Spear", "damage_type": "pierce", "damage": 2,"range": "melee", "accuracy": 2, "requires": ["might"], "trait": 8 },
+      { "name": "Pick", "damage_type": "pierce", "damage": 2,"range": "melee", "accuracy": 2, "requires": ["might"], "trait": 5 },
+      { "name": "Billhook", "damage_type": "pierce", "damage": 2,"range": "melee", "accuracy": 2, "requires": ["might"], "trait": 10 },
+      { "name": "Pike", "damage_type": "pierce", "damage": 2,"range": "melee", "accuracy": 2, "requires": ["might"], "trait": 8 },
+      { "name": "Lance", "damage_type": "pierce", "damage": 3,"range": "melee", "accuracy": 2, "requires": ["might"], "trait": 11 },
+      { "name": "Trident", "damage_type": "pierce", "damage": 2,"range": "melee", "accuracy": 2, "requires": ["might", "finesse"], "trait": 6 }
     ],
     "two_handed_slash": [
-      { "name": "Longsword", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 12 },
-      { "name": "Katana", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might", "finesse"], "trait": 1},
-      { "name": "Axe", "damage_type": "slash", "damage": 2, "accuracy": 1, "requires": ["might"], "trait": 12 },
-      { "name": "Battle Axe", "damage_type": "slash", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 14 },
-      { "name": "Greatsword", "damage_type": "slash", "damage": 3, "accuracy": 2, "requires": ["might"], "trait": 13 },
-      { "name": "Zweihander", "damage_type": "slash", "damage": 3, "accuracy": 2, "requires": ["might"], "trait": 14 },
-      { "name": "Greataxe", "damage_type": "slash", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 13 },
-      { "name": "Halberd", "damage_type": "slash", "damage": 3, "accuracy": 2, "requires": ["might"], "trait": 14 },
-      { "name": "Poleaxe", "damage_type": "slash", "damage": 3, "accuracy": 2, "requires": ["might"], "trait": 11 },
-      { "name": "Glaive", "damage_type": "slash", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 8 }
+      { "name": "Longsword", "damage_type": "slash","range": "melee", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 12 },
+      { "name": "Katana", "damage_type": "slash","range": "melee", "damage": 2, "accuracy": 2, "requires": ["might", "finesse"], "trait": 1},
+      { "name": "Axe", "damage_type": "slash","range": "melee", "damage": 2, "accuracy": 1, "requires": ["might"], "trait": 12 },
+      { "name": "Battle Axe", "damage_type": "slash","range": "melee", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 14 },
+      { "name": "Greatsword", "damage_type": "slash","range": "melee", "damage": 3, "accuracy": 2, "requires": ["might"], "trait": 13 },
+      { "name": "Zweihander", "damage_type": "slash","range": "melee", "damage": 3, "accuracy": 2, "requires": ["might"], "trait": 14 },
+      { "name": "Greataxe", "damage_type": "slash","range": "melee", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 13 },
+      { "name": "Halberd", "damage_type": "slash","range": "melee", "damage": 3, "accuracy": 2, "requires": ["might"], "trait": 14 },
+      { "name": "Poleaxe", "damage_type": "slash","range": "melee", "damage": 3, "accuracy": 2, "requires": ["might"], "trait": 11 },
+      { "name": "Glaive", "damage_type": "slash","range": "melee", "damage": 2, "accuracy": 2, "requires": ["might"], "trait": 8 }
     ],
     "two_handed_blunt": [
-      { "name": "Great Mace", "damage_type": "blunt", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 13 },
-      { "name": "Warhammer", "damage_type": "blunt", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 13 },
-      { "name": "Club", "damage_type": "blunt", "damage": 1, "accuracy": 1, "requires": ["might"], "trait": 9 },
-      { "name": "Quarterstaff", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["might", "finesse"], "trait": 4 },
-      { "name": "Maul", "damage_type": "blunt", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 15 },
-      { "name": "Greatclub", "damage_type": "blunt", "damage": 2, "accuracy": 1, "requires": ["might"], "trait": 15 },
-      { "name": "Weighted Chain", "damage_type": "blunt", "damage": 2, "accuracy": 1, "requires": ["might"], "trait": 10 }
+      { "name": "Great Mace", "damage_type": "blunt","range": "melee", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 13 },
+      { "name": "Warhammer", "damage_type": "blunt","range": "melee", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 13 },
+      { "name": "Club", "damage_type": "blunt","range": "melee", "damage": 1, "accuracy": 1, "requires": ["might"], "trait": 9 },
+      { "name": "Quarterstaff", "damage_type": "blunt","range": "melee", "damage": 1, "accuracy": 2, "requires": ["might", "finesse"], "trait": 4 },
+      { "name": "Maul", "damage_type": "blunt","range": "melee", "damage": 3, "accuracy": 1, "requires": ["might"], "trait": 15 },
+      { "name": "Greatclub", "damage_type": "blunt","range": "melee", "damage": 2, "accuracy": 1, "requires": ["might"], "trait": 15 },
+      { "name": "Weighted Chain", "damage_type": "blunt","range": "melee", "damage": 2, "accuracy": 1, "requires": ["might"], "trait": 10 }
     ],
     "free_handed": [
-      { "name": "Knuckle Dusters", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["might"], "trait": 2 },
-      { "name": "Artificial Claws", "damage_type": "slash", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 8 },
-      { "name": "Cestus", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["might"], "trait": 9 }
+      { "name": "Knuckle Dusters", "damage_type": "blunt","range": "melee", "damage": 1, "accuracy": 2, "requires": ["might"], "trait": 2 },
+      { "name": "Artificial Claws", "damage_type": "slash","range": "melee", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 8 },
+      { "name": "Cestus", "damage_type": "blunt","range": "melee", "damage": 1, "accuracy": 2, "requires": ["might"], "trait": 9 }
     ]
   },
   "ranged": {
     "one_handed_pierce_ranged": [
-      { "name": "Pistol", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["finesse"] },
-      { "name": "Throwing Knife", "damage_type": "pierce", "damage": 1, "accuracy": 2, "requires": ["finesse"] },
-      { "name": "Hand Crossbow", "damage_type": "pierce", "damage": 2, "accuracy": 3, "requires": ["finesse"] },
-      { "name": "Blowgun", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": ["finesse"] },
-      { "name": "Darts", "damage_type": "pierce", "damage": 1, "accuracy": 3, "requires": ["finesse"] },
-      { "name": "Rope Dart", "damage_type": "pierce", "damage": 1, "accuracy": 2, "requires": ["finesse"] }
+      { "name": "Pistol", "damage_type": "pierce","range": "6 tiles", "damage": 2, "accuracy": 2, "requires": ["finesse"], "trait": 0 },
+      { "name": "Throwing Knife", "damage_type": "pierce","range": "5 tiles", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 1 },
+      { "name": "Hand Crossbow", "damage_type": "pierce","range": "6 tiles", "damage": 2, "accuracy": 3, "requires": ["finesse"], "trait": 0 },
+      { "name": "Blowgun", "damage_type": "pierce","range": "4 tiles", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 16 },
+      { "name": "Darts", "damage_type": "pierce","range": "3 tiles", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 17 },
+      { "name": "Rope Dart", "damage_type": "pierce","range": "4 tiles", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 10 }
     ],
     "one_handed_slash_ranged": [
-      { "name": "Shuriken", "damage_type": "slash", "damage": 1, "accuracy": 3, "requires": ["finesse"] },
-      { "name": "Throwing Axe", "damage_type": "slash", "damage": 1, "accuracy": 2, "requires": ["finesse"] }
+      { "name": "Shuriken", "damage_type": "slash","range": "6 tiles", "damage": 1, "accuracy": 3, "requires": ["finesse"], "trait": 1 },
+      { "name": "Throwing Axe", "damage_type": "slash","range": "5 tiles", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 5 }
     ],
     "one_handed_blunt_ranged": [
-      { "name": "Slingshot", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["finesse"] },
-      { "name": "Sling", "damage_type": "blunt", "damage": 1, "accuracy": 2, "requires": ["finesse"] }
+      { "name": "Slingshot", "damage_type": "blunt","range": "6 tiles", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 0 },
+      { "name": "Sling", "damage_type": "blunt","range": "6 tiles", "damage": 1, "accuracy": 2, "requires": ["finesse"], "trait": 0 }
     ],
     "two_handed_pierce_ranged": [
-      { "name": "Musket", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": ["finesse"] },
-      { "name": "Rifle", "damage_type": "pierce", "damage": 3, "accuracy": 3, "requires": ["finesse"] },
-      { "name": "Harpoon Gun", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": ["finesse"] },
-      { "name": "Crossbow", "damage_type": "pierce", "damage": 2, "accuracy": 3, "requires": ["finesse"] },
-      { "name": "Shortbow", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["finesse"] },
-      { "name": "Longbow", "damage_type": "pierce", "damage": 2, "accuracy": 3, "requires": ["finesse"] },
-      { "name": "Javelin", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["finesse"] },
-      { "name": "Repeating Crossbow", "damage_type": "pierce", "damage": 2, "accuracy": 2, "requires": ["finesse"] },
-      { "name": "Lever-Action Rifle", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": ["finesse"] },
-      { "name": "Shotgun", "damage_type": "pierce", "damage": 3, "accuracy": 1, "requires": ["finesse"] },
-      { "name": "Bolt-Action Rifle", "damage_type": "pierce", "damage": 3, "accuracy": 3, "requires": ["finesse"] },
-      { "name": "Sniper Rifle", "damage_type": "pierce", "damage": 3, "accuracy": 3, "requires": ["finesse"] },
-      { "name": "Double-Barrel Shotgun", "damage_type": "pierce", "damage": 3, "accuracy": 1, "requires": ["finesse"] },
-      { "name": "Automatic Rifle", "damage_type": "pierce", "damage": 3, "accuracy": 2, "requires": ["finesse"] },
-      { "name": "Light Machine Gun", "damage_type": "pierce", "damage": 3, "accuracy": 1, "requires": ["finesse"] }
+      { "name": "Musket", "damage_type": "pierce","range": "6 tiles", "damage": 3, "accuracy": 2, "requires": ["finesse"], "trait": 0 },
+      { "name": "Rifle", "damage_type": "pierce","range": "8 tiles", "damage": 3, "accuracy": 3, "requires": ["finesse"], "trait": 0 },
+      { "name": "Harpoon Gun", "damage_type": "pierce","range": "5 tiles", "damage": 3, "accuracy": 2, "requires": ["finesse"], "trait": 10 },
+      { "name": "Crossbow", "damage_type": "pierce","range": "6 tiles", "damage": 2, "accuracy": 3, "requires": ["finesse"], "trait": 0 },
+      { "name": "Shortbow", "damage_type": "pierce","range": "6 tiles", "damage": 2, "accuracy": 2, "requires": ["finesse"], "trait": 0 },
+      { "name": "Longbow", "damage_type": "pierce","range": "8 tiles", "damage": 2, "accuracy": 3, "requires": ["finesse"],"trait": 0 },
+      { "name": "Javelin", "damage_type": "pierce","range": "6 tiles", "damage": 2, "accuracy": 2, "requires": ["finesse"], "trait": 0 },
+      { "name": "Repeating Crossbow", "damage_type": "pierce","range": "6 tiles", "damage": 2, "accuracy": 2, "requires": ["finesse"], "trait": 0 },
+      { "name": "Lever-Action Rifle", "damage_type": "pierce","range": "8 tiles", "damage": 3, "accuracy": 2, "requires": ["finesse"], "trait": 0 },
+      
+      { "name": "Bolt-Action Rifle", "damage_type": "pierce","range": "8 tiles", "damage": 3, "accuracy": 3, "requires": ["finesse"], "trait": 0 },
+      { "name": "Sniper Rifle", "damage_type": "pierce","range": "12 tiles", "damage": 3, "accuracy": 3, "requires": ["finesse"], "trait": 0 },
+      
+      { "name": "Automatic Rifle", "damage_type": "pierce","range": "5 tiles", "damage": 3, "accuracy": 2, "requires": ["finesse"], "trait": 0 },
+      { "name": "Light Machine Gun", "damage_type": "pierce","range": "4 tiles", "damage": 3, "accuracy": 1, "requires": ["finesse"], "trait": 0 }
     ],
     "two_handed_blunt_ranged": [
-      { "name": "Blunderbuss", "damage_type": "blunt", "damage": 2, "accuracy": 1, "requires": ["finesse"] }
+      { "name": "Blunderbuss", "damage_type": "blunt", "damage": 2, "accuracy": 1, "requires": ["finesse"], "trait": 0 },
+      { "name": "Shotgun", "damage_type": "blunt","range": "2 tiles", "damage": 3, "accuracy": 1, "requires": ["finesse"], "trait": 0 },
+      { "name": "Double-Barrel Shotgun", "damage_type": "blunt","range": "2 tiles", "damage": 3, "accuracy": 1, "requires": ["finesse"], "trait": 0 }
     ]
   },
   "special": {
@@ -142,21 +144,23 @@
     ]
   },
   "traits": [
-    { "id": 1, "name": "Puncture", "description": "Succesful attacks with this weapon inflict 1 bleed." },
-    { "id": 2, "name": "Weakpoint", "description": "This weapon has +1 Accuracy on the first attack each turn." },
-    { "id": 3, "name": "Disarm", "description": "You may attempt to disarm a target within melee range, they must roll [Might] vs [6+ your Might] to resist."},
-    { "id": 4, "name": "Trip", "description": "You may attempt to knock a target within melee range prone, they must roll [Reflex] vs [6+ your Might] to resist."},
-    { "id": 5, "name": "Cleave", "description": "Succesful attacks with this weapon inflict 1 compromised, once per turn." },
-    { "id": 6, "name": "Parry", "description": "As a reaction, you may parry an attack that would strike you. You must roll [Reflex] vs the attack roll to succeed. A parried attack has no effect."},
-    { "id": 7, "name": "Lunge", "description": "You may dash 1 tile when you take the Attack action with this weapon. (This movement can be used to get into position for a melee attack.)" },
-    { "id": 8, "name": "Reach", "description": "This weapon can be used to make melee attacks against targets within 2 tiles." },
-    { "id": 9, "name": "Block", "description": "As a reaction, you may block an attack that would strike you. Doing so reduces the damage taken by 1." },
-    { "id": 10, "name": "Hook", "description": "You may attempt to pull a target within 2 tiles 1 tile closer to you, they must roll [Reflex] vs [6+ your Might] to resist." },
-    { "id": 11, "name": "Charge", "description": "You may dash 2 tiles when you take the Attack action with this weapon. (This movement can be used to get into position for a melee attack.)" },
-    { "id": 12, "name": "Versatile", "description": "You may weild this weapon with one or both hands. If weilded with 1 hand only, it has -1 Accuracy." },
-    { "id": 13, "name": "Brutal", "description": "You may expend an extra action to deal +2 damage with this weapon." },
-    { "id": 14, "name": "Sweep", "description": "You may make a sweeping attack that hits all enemies in a 2 tile cone. They must roll [Reflex] vs the attack roll to resist." },
-    { "id": 15, "name": "Crush", "description": "Succesful attacks with this weapon inflict 2 compromised, once per turn." }
+  { "id": 1, "Name": "Puncture", "Action": "⭘", "Symbols": "⧖", "Description": "Successful attacks with this weapon inflict 1 bleed." },
+  { "id": 2, "Name": "Weakpoint", "Action": "⭘", "Symbols": "⧖", "Description": "This weapon has +1 Accuracy on the first attack each turn." },
+  { "id": 3, "Name": "Disarm", "Action": "◆", "Symbols": "⧖", "Description": "You may attempt to disarm a target within melee range, they must roll [Might] vs [6+ your Might] to resist." },
+  { "id": 4, "Name": "Trip", "Action": "◆", "Symbols": "⧖", "Description": "You may attempt to knock a target within melee range prone, they must roll [Reflex] vs [6+ your Might] to resist." },
+  { "id": 5, "Name": "Cleave", "Action": "⭘", "Symbols": "⧖", "Description": "Successful attacks with this weapon inflict 1 compromised, once per turn." },
+  { "id": 6, "Name": "Parry", "Action": "◇", "Symbols": "⧖", "Description": "As a reaction, you may parry an attack that would strike you. You must roll [Reflex] vs the attack roll to succeed. A parried attack has no effect." },
+  { "id": 7, "Name": "Lunge", "Action": "⬖", "Symbols": "⧖", "Description": "You may dash 1 tile when you take the Attack action with this weapon. (This movement can be used to get into position for a melee attack.)" },
+  { "id": 8, "Name": "Reach", "Action": "⭘", "Symbols": "⧖", "Description": "This weapon can be used to make melee attacks against targets within 2 tiles." },
+  { "id": 9, "Name": "Block", "Action": "◇", "Symbols": "⧖", "Description": "As a reaction, you may block an attack that would strike you. Doing so reduces the damage taken by 1." },
+  { "id": 10, "Name": "Hook", "Action": "⬖", "Symbols": "⧖", "Description": "You may attempt to pull a target within 2 tiles 1 tile closer to you, they must roll [Reflex] vs [6+ your Might] to resist." },
+  { "id": 11, "Name": "Charge", "Action": "⬖", "Symbols": "⧖", "Description": "You may dash 2 tiles when you take the Attack action with this weapon. (This movement can be used to get into position for a melee attack.)" },
+  { "id": 12, "Name": "Versatile", "Action": "⭘", "Symbols": "⧖", "Description": "You may wield this weapon with one or both hands. If wielded with 1 hand only, it has -1 Accuracy." },
+  { "id": 13, "Name": "Brutal", "Action": "⬖", "Symbols": "⧖", "Description": "You may expend an extra action to deal +2 damage with this weapon." },
+  { "id": 14, "Name": "Sweep", "Action": "◆", "Symbols": "⧖", "Description": "You may make a sweeping attack that hits all enemies in a 2 tile cone. They must roll [Reflex] vs the attack roll to resist." },
+  { "id": 15, "Name": "Crush", "Action": "⭘", "Symbols": "⧖", "Description": "Successful attacks with this weapon inflict 2 compromised, once per turn." },
+  { "id": 16, "Name": "Poison", "Action": "⭘", "Symbols": "⧖", "Description": "Successful attacks with this weapon inflict 1 poison." },
+  { "id": 17, "Name": "Bullseye", "Action": "⭘", "Symbols": "⧖", "Description": "Hitting 2 attacks guarantees a critical hit on your next attack." }
   ]
     
 }
