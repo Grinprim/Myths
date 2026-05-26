@@ -305,8 +305,79 @@
                     <div id="gear-prefix-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 hidden">
                     </div>
                 </div>
+
+                <div class="flex items-center gap-4 mb-2">
+                    <h2 class="text-2xl text-white font-bold">Arsenal Browser</h2>
+                    <div class="h-px bg-slate-700 flex-1"></div>
+                </div>
+
+                <div class="rule-card space-y-6">
+                    <p class="text-sm text-slate-400">Browse all available weapons, armor, and gear with detailed statistics and requirements.</p>
+
+                    <!-- Category Filter (Always Visible) -->
+                    <div class="space-y-3">
+                        <label class="text-xs uppercase tracking-widest text-slate-400 font-bold">Category</label>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="setArsenalCategory('all')" class="arsenal-category-btn active px-4 py-2 border border-indigo-500/50 rounded-lg text-sm font-bold uppercase tracking-widest bg-indigo-600/20 text-indigo-300 hover:bg-indigo-600/40 transition-all" data-category="all">All Items</button>
+                            <button onclick="setArsenalCategory('melee')" class="arsenal-category-btn px-4 py-2 border border-slate-700 rounded-lg text-sm font-bold uppercase tracking-widest hover:border-slate-600 hover:bg-slate-800/50 transition-all" data-category="melee">Melee</button>
+                            <button onclick="setArsenalCategory('ranged')" class="arsenal-category-btn px-4 py-2 border border-slate-700 rounded-lg text-sm font-bold uppercase tracking-widest hover:border-slate-600 hover:bg-slate-800/50 transition-all" data-category="ranged">Ranged</button>
+                            <button onclick="setArsenalCategory('special')" class="arsenal-category-btn px-4 py-2 border border-slate-700 rounded-lg text-sm font-bold uppercase tracking-widest hover:border-slate-600 hover:bg-slate-800/50 transition-all" data-category="special">Utility</button>
+                            <button onclick="setArsenalCategory('armor')" class="arsenal-category-btn px-4 py-2 border border-slate-700 rounded-lg text-sm font-bold uppercase tracking-widest hover:border-slate-600 hover:bg-slate-800/50 transition-all" data-category="armor">Armor</button>
+                        </div>
+                    </div>
+
+                    <!-- Damage Type Filter (Appears when category selected) -->
+                    <div id="damage-filter-container" class="space-y-3 hidden">
+                        <label class="text-xs uppercase tracking-widest text-slate-400 font-bold">Damage Type</label>
+                        <div class="flex flex-wrap gap-2" id="damage-filter-buttons"></div>
+                    </div>
+
+                    <!-- Hand Filter (Appears when damage type selected) -->
+                    <div id="hand-filter-container" class="space-y-3 hidden">
+                        <label class="text-xs uppercase tracking-widest text-slate-400 font-bold">Hand Configuration</label>
+                        <div class="flex flex-wrap gap-2" id="hand-filter-buttons"></div>
+                    </div>
+
+                    <!-- Arsenal Table -->
+                    <div class="bg-slate-900/40 rounded-2xl border border-slate-800 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm min-w-[600px]">
+                                <thead class="bg-slate-800 border-b border-slate-700">
+                                    <tr>
+                                        <th class="px-4 py-3 font-bold text-indigo-400">Name</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400">Category</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400">Damage Type</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400 text-center">Damage</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400 text-center">Accuracy</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400">Requires</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="arsenal-table-body">
+                                    <tr>
+                                        <td colspan="6" class="px-4 py-8 text-center text-slate-400">Loading arsenal data...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="arsenal-result-count" class="text-sm text-slate-400 text-center mt-4"></div>
+                </div>
             </section>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div id="view-crafting" class="view-section hidden space-y-8">
             <div class="text-center space-y-4 mb-8">
@@ -1719,6 +1790,321 @@
         document.addEventListener('DOMContentLoaded', populatePrefixGrid);
         document.addEventListener('DOMContentLoaded', populateGearPrefixGrid);
         document.addEventListener('DOMContentLoaded', loadData);
+
+
+
+
+
+
+
+
+
+        // ========== ARSENAL BROWSER (REFINED + AUTO REQUIREMENTS) ==========
+
+const ArsenalState = {
+    data: null,
+    filters: {
+        category: 'all',
+        damage: 'all',
+        hand: 'all'
+    }
+};
+
+async function loadArsenalData() {
+    try {
+        const res = await fetch('../json/arsenal.json');
+        const raw = await res.json();
+
+        ArsenalState.data = normalizeArsenal(raw);
+
+        updateFiltersUI();
+        renderArsenalTable();
+
+    } catch (e) {
+        console.error("Failed to load arsenal data:", e);
+        document.getElementById('arsenal-table-body').innerHTML =
+            '<tr><td colspan="6" class="px-4 py-8 text-center text-red-400">Error loading arsenal data</td></tr>';
+    }
+}
+
+// ---------- NORMALIZATION ----------
+
+function normalizeArsenal(data) {
+    const weapons = [];
+
+    const pushItems = (type, obj) => {
+        if (!obj) return;
+
+        Object.entries(obj).forEach(([category, items]) => {
+            items.forEach(item => {
+                weapons.push({
+                    ...item,
+                    type,
+                    category,
+                    categoryLabel: formatCategoryLabel(category),
+                    hand: extractHandType(category)
+                });
+            });
+        });
+    };
+
+    pushItems('melee', data.melee);
+    pushItems('ranged', data.ranged);
+    pushItems('special', data.special);
+
+    if (data.armor) {
+        pushItems('armor', data.armor);
+    }
+
+    return weapons;
+}
+
+// ---------- AUTO REQUIREMENTS (NEW CORE LOGIC) ----------
+
+function computeRequirements(weapon) {
+    const dmg = Number(weapon.damage) || 0;
+    if (dmg <= 0) return [];
+
+    const req = weapon.requires || [];
+
+    const hasMight = req.includes("might");
+    const hasFinesse = req.includes("finesse");
+
+    let might = 0;
+    let finesse = 0;
+
+    // ONLY MIGHT
+    if (hasMight && !hasFinesse) {
+        might = dmg;
+    }
+
+    // ONLY FINESSE
+    else if (hasFinesse && !hasMight) {
+        finesse = dmg;
+    }
+
+    // BOTH → SPLIT
+    else if (hasMight && hasFinesse) {
+        might = Math.floor(dmg / 2);
+        finesse = Math.ceil(dmg / 2);
+    }
+
+    // fallback (if requires missing or empty)
+    else {
+        might = Math.floor(dmg / 2);
+        finesse = Math.ceil(dmg / 2);
+    }
+
+    const out = [];
+    if (might > 0) out.push(`Might ${might}`);
+    if (finesse > 0) out.push(`Finesse ${finesse}`);
+
+    return out;
+}
+
+// ---------- FILTER SYSTEM ----------
+
+function setFilter(type, value) {
+    ArsenalState.filters[type] = value;
+
+    if (type === 'category') {
+        ArsenalState.filters.damage = 'all';
+        ArsenalState.filters.hand = 'all';
+    }
+
+    if (type === 'damage') {
+        ArsenalState.filters.hand = 'all';
+    }
+
+    updateFiltersUI();
+    renderArsenalTable();
+}
+
+// ---------- FILTERED DATA ----------
+
+function getFilteredWeapons() {
+    if (!ArsenalState.data) return [];
+
+    return ArsenalState.data.filter(w => {
+        const f = ArsenalState.filters;
+
+        if (f.category !== 'all' && w.type !== f.category) return false;
+        if (f.damage !== 'all' && w.damage_type !== f.damage) return false;
+        if (f.hand !== 'all' && w.hand !== f.hand) return false;
+
+        return true;
+    });
+}
+
+// ---------- UI UPDATES ----------
+
+function updateFiltersUI() {
+    updateCategoryUI();
+    updateDamageFilters();
+    updateHandFilters();
+}
+
+function updateCategoryUI() {
+    document.querySelectorAll('.arsenal-category-btn').forEach(btn => {
+        const active = btn.dataset.category === ArsenalState.filters.category;
+
+        btn.classList.toggle('active', active);
+        btn.classList.toggle('bg-indigo-600/20', active);
+        btn.classList.toggle('border-indigo-500/50', active);
+        btn.classList.toggle('text-indigo-300', active);
+
+        btn.classList.toggle('border-slate-700', !active);
+    });
+}
+
+function updateDamageFilters() {
+    const weapons = ArsenalState.data || [];
+
+    const pool = ArsenalState.filters.category === 'all'
+        ? weapons
+        : weapons.filter(w => w.type === ArsenalState.filters.category);
+
+    const types = [...new Set(pool.map(w => w.damage_type))];
+
+    const container = document.getElementById('damage-filter-container');
+    const box = document.getElementById('damage-filter-buttons');
+
+    if (!types.length) {
+        container.classList.add('hidden');
+        return;
+    }
+
+    container.classList.remove('hidden');
+
+    box.innerHTML = [
+        createFilterButton('damage', 'all', 'All'),
+        ...types.map(t => createFilterButton('damage', t, t))
+    ].join('');
+}
+
+function updateHandFilters() {
+    const weapons = getFilteredWeapons();
+    const hands = [...new Set(weapons.map(w => w.hand))];
+
+    const container = document.getElementById('hand-filter-container');
+    const box = document.getElementById('hand-filter-buttons');
+
+    if (!hands.length) {
+        container.classList.add('hidden');
+        return;
+    }
+
+    container.classList.remove('hidden');
+
+    box.innerHTML = [
+        createFilterButton('hand', 'all', 'All'),
+        ...hands.map(h => createFilterButton('hand', h, formatHandLabel(h)))
+    ].join('');
+}
+
+// ---------- BUTTON FACTORY ----------
+
+function createFilterButton(type, value, label) {
+    const active = ArsenalState.filters[type] === value;
+
+    return `
+        <button onclick="setFilter('${type}', '${value}')"
+            class="px-4 py-2 border rounded-lg text-sm font-bold uppercase tracking-widest transition-all
+            ${active
+                ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-300'
+                : 'border-slate-700 hover:border-slate-600 hover:bg-slate-800/50 text-slate-300'}">
+            ${label}
+        </button>
+    `;
+}
+
+// ---------- TABLE RENDER ----------
+
+function renderArsenalTable() {
+    const weapons = getFilteredWeapons();
+
+    const tbody = document.getElementById('arsenal-table-body');
+    const countDiv = document.getElementById('arsenal-result-count');
+
+    if (!weapons.length) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="6" class="px-4 py-8 text-center text-slate-400">
+                    No weapons match your filters
+                </td>
+            </tr>`;
+        countDiv.textContent = '0 items';
+        return;
+    }
+
+    tbody.innerHTML = weapons.map(w => {
+
+        // ---------- AUTO REQUIREMENTS USED HERE ----------
+        const requires = computeRequirements(w).length
+            ? computeRequirements(w).join(' + ')
+            : '-';
+
+        const damageStars = '★'.repeat(w.damage || 0) + '☆'.repeat(3 - (w.damage || 0));
+        const accuracyStars = '★'.repeat(w.accuracy || 0) + '☆'.repeat(3 - (w.accuracy || 0));
+
+        return `
+            <tr class="border-b border-slate-700/50 hover:bg-slate-800/30 transition-colors">
+                <td class="px-4 py-3 font-bold text-white">${w.name}</td>
+                <td class="px-4 py-3 text-slate-400 text-sm">${w.type}</td>
+                <td class="px-4 py-3">
+                    <span class="inline-block px-2 py-1 bg-slate-700/50 rounded text-xs font-bold uppercase text-slate-300">
+                        ${w.damage_type}
+                    </span>
+                </td>
+                <td class="px-4 py-3 text-center text-amber-400">${damageStars}</td>
+                <td class="px-4 py-3 text-center text-cyan-400">${accuracyStars}</td>
+                <td class="px-4 py-3 text-slate-400 text-sm">${requires}</td>
+            </tr>
+        `;
+    }).join('');
+
+    countDiv.textContent = `${weapons.length} item${weapons.length !== 1 ? 's' : ''}`;
+}
+
+// ---------- HELPERS ----------
+
+function extractHandType(category) {
+    if (category.includes('free')) return 'free';
+    if (category.includes('one_handed')) return 'one-handed';
+    if (category.includes('two_handed')) return 'two-handed';
+    return 'other';
+}
+
+function formatCategoryLabel(category) {
+    return category
+        .replace(/_/g, ' ')
+        .split(' ')
+        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(' ');
+}
+
+function formatHandLabel(hand) {
+    if (hand === 'free') return 'Free-Handed';
+    return hand.charAt(0).toUpperCase() + hand.slice(1);
+}
+
+// ---------- INIT ----------
+
+document.addEventListener('DOMContentLoaded', loadArsenalData);
+
+// ---------- COMPATIBILITY WRAPPERS (KEEP HTML WORKING) ----------
+
+function setArsenalCategory(category) {
+    setFilter('category', category);
+}
+
+function setArsenalDamage(damageType) {
+    setFilter('damage', damageType);
+}
+
+function setArsenalHand(handType) {
+    setFilter('hand', handType);
+}
     </script>
     <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
 </body>

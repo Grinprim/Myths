@@ -297,24 +297,13 @@
         "Lore": "Resolve shines brightest at the moment of failure."
     },
     {
-        "ID": "DC0-9",
-        "Category": "Divine",
-        "Name": "Sanctum Whisper",
-        "Cost": "0",
-        "Type": "Action",
-        "Range": "Sight",
-        "Description": "You sense the presence of celestials, fiends, or consecrated areas within range.",
-        "Upcast": "",
-        "Lore": "The divine speaks softly, but never without purpose."
-    },
-    {
         "ID": "DC0-10",
         "Category": "Divine",
         "Name": "Blessed Vigil",
         "Cost": "0",
         "Type": "Passive",
         "Range": "Self",
-        "Description": "Your total health increases by 2",
+        "Description": "Your total health increases by 1 per player level.",
         "Upcast": "",
         "Lore": "Faith never truly sleeps."
     },
@@ -354,7 +343,7 @@
     {
         "ID": "EC0-4",
         "Category": "Elemental",
-        "Name": "Stone Skin",
+        "Name": "Tread the Earth",
         "Cost": "0",
         "Type": "Passive",
         "Range": "Self",
@@ -413,7 +402,7 @@
         "Cost": "0",
         "Type": "Action",
         "Range": "Sight",
-        "Description": "You sense the movement of creatures behind cover or in obscured areas until the start of your next turn.",
+        "Description": "You sense the movement and location of creatures behind cover or in obscured areas until the start of your next turn.",
         "Upcast": "",
         "Lore": "Air shifts. Water trembles. Nothing moves unseen."
     },
@@ -523,7 +512,7 @@
         "Cost": "1",
         "Type": "Action",
         "Range": "Touch",
-        "Description": "A creature you touch has their next spell cost +1 mana. They must roll [Spirit] to resist.",
+        "Description": "You magically lock a door, chest, or other container. It cannot be opened without a successful [Arcana] check against your Spell DC. The lock lasts at maximum 24 hours.",
         "Upcast": "Affects the next additional spell the creature casts.",
         "Lore": "Knowledge remains — access does not."
     },
@@ -537,17 +526,6 @@
         "Description": "When you are hit by an attack or spell, impose -[your Spell Damage Bonus] Accuracy on that roll.",
         "Upcast": "Increase the Accuracy penalty by -1.",
         "Lore": "Light bends, fate follows."
-    },
-    {
-        "ID": "OC1-1",
-        "Category": "Occult",
-        "Name": "Vein Hex",
-        "Cost": "1",
-        "Type": "Action",
-        "Range": "6 tiles",
-        "Description": "Curse a creature’s blood, dealing [your Spell Damage Bonus] Dark Damage. The next time they take damage before your next turn, they take +1 additional Dark Damage. They must roll [Fortitude] to resist the curse.",
-        "Upcast": "Increase the bonus damage by +1.",
-        "Lore": "The body remembers what the soul tries to forget."
     },
     {
         "ID": "OC1-2",
@@ -1435,7 +1413,7 @@
         "Cost": "0",
         "Type": "Action",
         "Range": "4 tiles",
-        "Description": "Coat a tile or object in slick frost. The next creature entering the tile suffers -1 movement on their next turn.",
+        "Description": "Coat a tile in slick frost. The next creature entering the tile will fall prone they must roll [Reflex] to resist.",
         "Upcast": "",
         "Lore": "Cold leaves warnings, not wounds."
     },
@@ -1446,7 +1424,7 @@
         "Cost": "0",
         "Type": "Action",
         "Range": "Touch",
-        "Description": "Deal 1 Fire Damage. If the target is affected by Cold or Ice, remove that effect before dealing damage.",
+        "Description": "Deal 1 Fire Damage. If the target is affected by the Chilled Condition, remove that effect before dealing damage.",
         "Upcast": "",
         "Lore": "Fire resolves disputes quickly."
     },
