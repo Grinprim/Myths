@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "info": {
+    "name": "Garrick",
+    "species": "Elf",
+    "age": 112,
+    "level": 5,
+    "avatar_data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..." 
+  },
+  "vitals": { "armor": 0, "speed": 0, "max_hp": 0, "current_hp": 0, "max_mana": 0, "current_mana": 0, "exhaustion": 0, "final_blows": 0, "grace": 0 },
+  "attributes": {
+    "body": { "base": 0, "might_mod": 0, "brawn_mod": 0, "fortitude_mod": 0 },
+    "skill": { "base": 0, "finesse_mod": 0, "reflex_mod": 0, "tinker_mod": 0 },
+    "mind": { "base": 0, "arcane_mod": 0, "spirit_mod": 0, "scholarship_mod": 0 },
+    "style": { "base": 0, "speech_mod": 0, "insight_mod": 0, "awareness_mod": 0 }
+  },
+  "equipment": {
+    "armor_slot": { "name": "", "defense": null, "notes": "" },
+    "shield_slot": { "name": "", "defense": null, "notes": "" },
+    "cloak_slot": { "name": "", "defense": null, "notes": "" },
+    "weapons": []
+  },
+  "notes": "",
+  "traits": [],
+  "spells": [],
+  "custom_traits": [],
+  "custom_spells": []
+}
