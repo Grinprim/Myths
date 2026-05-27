@@ -91,6 +91,134 @@
 			font-size: 13px;
 		}
 
+		.toolbar {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 10px;
+			margin-bottom: 16px;
+		}
+
+		.control {
+			display: grid;
+			gap: 6px;
+		}
+
+		.control label {
+			font-size: 12px;
+			letter-spacing: 0.04em;
+			text-transform: uppercase;
+			color: var(--muted);
+		}
+
+		.select,
+		.input {
+			width: 100%;
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			padding: 10px;
+			background: rgba(8, 18, 14, 0.8);
+			color: var(--text);
+		}
+
+		.iconBtn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			padding: 10px 12px;
+			background: rgba(8, 18, 14, 0.8);
+			color: var(--text);
+			font-size: 15px;
+			cursor: pointer;
+		}
+
+		.folderSection {
+			margin-bottom: 18px;
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			background: rgba(8, 18, 14, 0.35);
+			overflow: hidden;
+		}
+
+		.folderHeader {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+			padding: 10px 12px;
+			cursor: pointer;
+			background: rgba(8, 18, 14, 0.75);
+			border: 0;
+			width: 100%;
+			color: var(--text);
+			text-align: left;
+		}
+
+		.folderTitle {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			font-weight: 700;
+		}
+
+		.folderMeta {
+			color: var(--muted);
+			font-size: 12px;
+		}
+
+		.folderBody {
+			padding: 12px;
+		}
+
+		.customFolderTools {
+			display: grid;
+			gap: 10px;
+			margin: 0 0 16px;
+			padding: 10px;
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			background: rgba(8, 18, 14, 0.45);
+		}
+
+		.customFolderTools[hidden] {
+			display: none;
+		}
+
+		.folderCreateRow {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			gap: 8px;
+		}
+
+		.folderPills {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		.folderPill {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 7px 10px;
+			border-radius: 999px;
+			background: rgba(5, 12, 10, 0.75);
+			border: 1px solid var(--line);
+			font-size: 12px;
+			color: var(--text);
+		}
+
+		.folderPill button {
+			border: 0;
+			border-radius: 999px;
+			padding: 2px 6px;
+			background: rgba(239, 68, 68, 0.2);
+			color: #fecaca;
+			cursor: pointer;
+			font-size: 11px;
+		}
+
 		.hiddenInput {
 			display: none;
 		}
@@ -266,11 +394,14 @@
 
 		@media (max-width: 1000px) {
 			.galleryGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+			.toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 		}
 
 		@media (max-width: 700px) {
 			.page { padding: 18px; }
 			.galleryGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+			.toolbar { grid-template-columns: 1fr; }
+			.folderCreateRow { grid-template-columns: 1fr; }
 		}
 	</style>
 </head>
@@ -291,6 +422,46 @@
 		</div>
 
 		<div id="summary" class="summary"></div>
+		<div class="toolbar">
+			<div class="control">
+				<label for="folderModeSelect">Folder Mode</label>
+				<select id="folderModeSelect" class="select">
+					<option value="none">None (Flat Grid)</option>
+					<option value="custom">Custom Folders</option>
+					<option value="rarity">Rarity</option>
+					<option value="type">Type</option>
+					<option value="tag">Tags</option>
+					<option value="nameInitial">Name Initial</option>
+				</select>
+			</div>
+			<div class="control">
+				<label for="sortBySelect">Order By</label>
+				<select id="sortBySelect" class="select">
+					<option value="updatedAt">Last Updated</option>
+					<option value="createdAt">Created Time</option>
+					<option value="rarity">Rarity Symbol</option>
+					<option value="name">Name</option>
+					<option value="tags">Tags</option>
+					<option value="type">Type</option>
+					<option value="mana">Mana</option>
+				</select>
+			</div>
+			<div class="control">
+				<label for="sortDirectionBtn">Direction</label>
+				<button id="sortDirectionBtn" type="button" class="iconBtn" title="Toggle ascending or descending order">↓ Desc</button>
+			</div>
+			<div class="control">
+				<label for="searchInput">Filter</label>
+				<input id="searchInput" class="input" type="search" placeholder="Search name, tags, type, rarity" />
+			</div>
+		</div>
+		<div id="customFolderTools" class="customFolderTools">
+			<div class="folderCreateRow">
+				<input id="newFolderNameInput" class="input" type="text" maxlength="40" placeholder="Create folder (example: Deck 1)" />
+				<button id="createFolderBtn" type="button" class="btn">Create Folder</button>
+			</div>
+			<div id="folderPills" class="folderPills"></div>
+		</div>
 		<input id="importGalleryInput" class="hiddenInput" type="file" accept="application/json,.json" />
 		<section id="galleryRoot"></section>
 	</main>
@@ -305,8 +476,319 @@
 		const exportGalleryBtn = document.getElementById('exportGalleryBtn');
 		const importGalleryBtn = document.getElementById('importGalleryBtn');
 		const importGalleryInput = document.getElementById('importGalleryInput');
+		const folderModeSelect = document.getElementById('folderModeSelect');
+		const sortBySelect = document.getElementById('sortBySelect');
+		const sortDirectionBtn = document.getElementById('sortDirectionBtn');
+		const searchInput = document.getElementById('searchInput');
+		const customFolderTools = document.getElementById('customFolderTools');
+		const newFolderNameInput = document.getElementById('newFolderNameInput');
+		const createFolderBtn = document.getElementById('createFolderBtn');
+		const folderPills = document.getElementById('folderPills');
 		const storage = window.MythblitzCardStorage;
 		const BACKUP_VERSION = 1;
+		const UI_STATE_KEY = 'mythblitz.gallery.ui.v1';
+		const FOLDERS_KEY = 'mythblitz.gallery.folders.v1';
+		const folderOpenState = Object.create(null);
+		let uiState = loadUiState();
+		let customFolders = loadCustomFolders();
+
+		function loadUiState() {
+			try {
+				const parsed = JSON.parse(localStorage.getItem(UI_STATE_KEY) || '{}');
+				return {
+					folderMode: parsed.folderMode || 'none',
+					sortBy: parsed.sortBy || 'updatedAt',
+					sortDirection: parsed.sortDirection === 'asc' ? 'asc' : 'desc',
+					search: typeof parsed.search === 'string' ? parsed.search : ''
+				};
+			} catch (_err) {
+				return {
+					folderMode: 'none',
+					sortBy: 'updatedAt',
+					sortDirection: 'desc',
+					search: ''
+				};
+			}
+		}
+
+		function saveUiState() {
+			localStorage.setItem(UI_STATE_KEY, JSON.stringify(uiState));
+		}
+
+		function loadCustomFolders() {
+			try {
+				const parsed = JSON.parse(localStorage.getItem(FOLDERS_KEY) || '[]');
+				if (!Array.isArray(parsed)) return [];
+				return parsed
+					.filter((folder) => folder && typeof folder.id === 'string' && typeof folder.name === 'string')
+					.map((folder) => ({
+						id: folder.id,
+						name: folder.name.trim()
+					}))
+					.filter((folder) => folder.id && folder.name);
+			} catch (_err) {
+				return [];
+			}
+		}
+
+		function saveCustomFolders() {
+			localStorage.setItem(FOLDERS_KEY, JSON.stringify(customFolders));
+		}
+
+		function generateFolderId() {
+			return `folder_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+		}
+
+		function getFolderById(folderId) {
+			return customFolders.find((folder) => folder.id === folderId) || null;
+		}
+
+		function getFolderNameForCard(card) {
+			const folder = getFolderById(card.folderId);
+			return folder ? folder.name : 'Unassigned';
+		}
+
+		function normalizeFolderName(value) {
+			return String(value || '').trim().replace(/\s+/g, ' ').slice(0, 40);
+		}
+
+		function updateSortDirectionButton() {
+			if (!sortDirectionBtn) return;
+			sortDirectionBtn.textContent = uiState.sortDirection === 'asc' ? '↑ Asc' : '↓ Desc';
+		}
+
+		function getCardForm(card) {
+			return (card && card.form && typeof card.form === 'object') ? card.form : {};
+		}
+
+		function splitTags(value) {
+			return String(value || '')
+				.split(',')
+				.map((part) => part.trim())
+				.filter(Boolean);
+		}
+
+		function getRarityRank(value) {
+			const rarity = String(value || '').trim();
+			const order = {
+				Common: 1,
+				Uncommon: 2,
+				Rare: 3,
+				Epic: 4,
+				Legendary: 5,
+				'Alt Art': 6
+			};
+			return order[rarity] || 999;
+		}
+
+		function getCardSortValue(card, sortBy) {
+			const form = getCardForm(card);
+			switch (sortBy) {
+				case 'name':
+					return String(card.name || form.name || '').toLowerCase();
+				case 'tags':
+					return splitTags(form.tags).join(' ').toLowerCase();
+				case 'type':
+					return String(form.type || '').toLowerCase();
+				case 'mana':
+					return Number.parseInt(form.mana || 0, 10) || 0;
+				case 'rarity':
+					return getRarityRank(form.rarity);
+				case 'createdAt':
+					return Date.parse(card.createdAt || 0) || 0;
+				case 'updatedAt':
+				default:
+					return Date.parse(card.updatedAt || card.createdAt || 0) || 0;
+			}
+		}
+
+		function compareCards(a, b) {
+			const direction = uiState.sortDirection === 'asc' ? 1 : -1;
+			const aValue = getCardSortValue(a, uiState.sortBy);
+			const bValue = getCardSortValue(b, uiState.sortBy);
+
+			if (typeof aValue === 'number' && typeof bValue === 'number') {
+				if (aValue !== bValue) return (aValue - bValue) * direction;
+			} else {
+				const textCompare = String(aValue).localeCompare(String(bValue));
+				if (textCompare !== 0) return textCompare * direction;
+			}
+
+			const fallbackA = String(a.name || '').toLowerCase();
+			const fallbackB = String(b.name || '').toLowerCase();
+			return fallbackA.localeCompare(fallbackB);
+		}
+
+		function getFolderKeysForCard(card) {
+			const form = getCardForm(card);
+			switch (uiState.folderMode) {
+				case 'custom':
+					return [getFolderNameForCard(card)];
+				case 'rarity':
+					return [String(form.rarity || 'Unknown')];
+				case 'type':
+					return [String(form.type || 'Unknown')];
+				case 'tag': {
+					const tags = splitTags(form.tags);
+					return tags.length ? tags : ['No Tag'];
+				}
+				case 'nameInitial': {
+					const label = String(card.name || form.name || '').trim();
+					const initial = label ? label[0].toUpperCase() : '#';
+					return [/^[A-Z]$/.test(initial) ? initial : '#'];
+				}
+				case 'none':
+				default:
+					return ['All Cards'];
+			}
+		}
+
+		function buildGroupedCards(cards) {
+			const grouped = new Map();
+			cards.forEach((card) => {
+				getFolderKeysForCard(card).forEach((key) => {
+					if (!grouped.has(key)) grouped.set(key, []);
+					grouped.get(key).push(card);
+				});
+			});
+
+			const groups = Array.from(grouped.entries()).map(([name, list]) => ({
+				name,
+				cards: list.slice().sort(compareCards)
+			}));
+
+			if (uiState.folderMode === 'custom') {
+				const rank = new Map(customFolders.map((folder, index) => [folder.name, index]));
+				groups.sort((a, b) => {
+					const aRank = rank.has(a.name) ? rank.get(a.name) : Number.MAX_SAFE_INTEGER;
+					const bRank = rank.has(b.name) ? rank.get(b.name) : Number.MAX_SAFE_INTEGER;
+					if (aRank !== bRank) return aRank - bRank;
+					return a.name.localeCompare(b.name);
+				});
+			} else {
+				groups.sort((a, b) => a.name.localeCompare(b.name));
+			}
+			return groups;
+		}
+
+		async function assignCardToFolder(card, folderId) {
+			const nextCard = {
+				...card,
+				folderId: folderId || '',
+				updatedAt: new Date().toISOString()
+			};
+			await storage.upsertCard(nextCard);
+			showToast(folderId ? 'Card moved to folder.' : 'Card removed from folder.', 'success');
+			await render();
+		}
+
+		async function chooseFolderForCard(card) {
+			if (!customFolders.length) {
+				showToast('Create at least one folder first.', 'error');
+				return;
+			}
+
+			const actions = [{ label: 'Cancel', value: '__cancel__' }, { label: 'Unassigned', value: '' }];
+			customFolders.forEach((folder) => {
+				actions.push({ label: folder.name, value: folder.id });
+			});
+
+			const selected = await showChoiceModal({
+				title: 'Move Card To Folder',
+				message: 'Choose which folder this card should be in.',
+				actions
+			});
+
+			if (selected === '__cancel__' || selected === null) return;
+			await assignCardToFolder(card, selected);
+		}
+
+		async function removeFolder(folderId) {
+			const folder = getFolderById(folderId);
+			if (!folder) return;
+
+			const confirm = await showChoiceModal({
+				title: 'Delete Folder',
+				message: `Delete "${folder.name}"? Cards in it will become unassigned.`,
+				actions: [
+					{ label: 'Cancel', value: false },
+					{ label: 'Delete Folder', value: true, primary: true }
+				]
+			});
+
+			if (confirm !== true) return;
+
+			const cards = await storage.getAllCards();
+			const nextCards = cards.map((card) => {
+				if (card.folderId !== folderId) return card;
+				return {
+					...card,
+					folderId: '',
+					updatedAt: new Date().toISOString()
+				};
+			});
+
+			customFolders = customFolders.filter((item) => item.id !== folderId);
+			saveCustomFolders();
+			await storage.setAllCards(nextCards);
+			showToast('Folder deleted.', 'success');
+			await render();
+		}
+
+		function renderCustomFolderTools(allCards) {
+			if (!customFolderTools || !folderPills) return;
+			customFolderTools.hidden = false;
+
+			folderPills.innerHTML = '';
+			if (uiState.folderMode !== 'custom') {
+				const hint = document.createElement('div');
+				hint.className = 'folderMeta';
+				hint.textContent = 'Folders are ready. Switch Folder Mode to "Custom Folders" to view grouped folders.';
+				folderPills.appendChild(hint);
+			}
+
+			if (!customFolders.length) {
+				const empty = document.createElement('div');
+				empty.className = 'folderMeta';
+				empty.textContent = 'No folders yet. Create one, then move cards into it from the card menu.';
+				folderPills.appendChild(empty);
+				return;
+			}
+
+			customFolders.forEach((folder) => {
+				const count = allCards.filter((card) => card.folderId === folder.id).length;
+				const pill = document.createElement('div');
+				pill.className = 'folderPill';
+				pill.textContent = `${folder.name} (${count})`;
+
+				const removeBtn = document.createElement('button');
+				removeBtn.type = 'button';
+				removeBtn.textContent = 'x';
+				removeBtn.title = `Delete ${folder.name}`;
+				removeBtn.addEventListener('click', (event) => {
+					event.stopPropagation();
+					removeFolder(folder.id);
+				});
+
+				pill.appendChild(removeBtn);
+				folderPills.appendChild(pill);
+			});
+		}
+
+		function matchesSearch(card, searchTerm) {
+			if (!searchTerm) return true;
+			const form = getCardForm(card);
+			const haystack = [
+				card.name,
+				form.name,
+				form.tags,
+				form.type,
+				form.rarity
+			]
+				.map((value) => String(value || '').toLowerCase())
+				.join(' ');
+			return haystack.includes(searchTerm);
+		}
 
 		function showToast(message, kind = 'success') {
 			if (!toastHost) return;
@@ -558,6 +1040,13 @@
 				await render();
 			});
 
+			const folderBtn = document.createElement('button');
+			folderBtn.type = 'button';
+			folderBtn.textContent = 'Move Folder';
+			folderBtn.addEventListener('click', async () => {
+				await chooseFolderForCard(card);
+			});
+
 			const deleteBtn = document.createElement('button');
 			deleteBtn.type = 'button';
 			deleteBtn.className = 'delete';
@@ -575,7 +1064,7 @@
 				if (!isOpen) menu.classList.add('open');
 			});
 
-			menu.append(editBtn, duplicateBtn, deleteBtn);
+			menu.append(editBtn, duplicateBtn, folderBtn, deleteBtn);
 			menuWrap.append(menuBtn, menu);
 
 			tile.append(menuWrap, img);
@@ -590,24 +1079,73 @@
 			}
 
 			const loadedCards = await storage.getAllCards();
-			const cards = loadedCards.slice().sort((a, b) => {
-				const aTime = Date.parse(a.updatedAt || a.createdAt || 0);
-				const bTime = Date.parse(b.updatedAt || b.createdAt || 0);
-				return bTime - aTime;
-			});
+			const searchTerm = String(uiState.search || '').trim().toLowerCase();
+			const cards = loadedCards.filter((card) => matchesSearch(card, searchTerm));
+			renderCustomFolderTools(loadedCards);
 
-			summaryEl.textContent = `${cards.length} card${cards.length === 1 ? '' : 's'} saved`;
+			summaryEl.textContent = `${cards.length} card${cards.length === 1 ? '' : 's'} shown (${loadedCards.length} total)`;
 
 			if (!cards.length) {
-				galleryRoot.innerHTML = '<div class="empty">No cards in your gallery yet. Save one from the card maker.</div>';
+				galleryRoot.innerHTML = searchTerm
+					? '<div class="empty">No cards match this filter.</div>'
+					: '<div class="empty">No cards in your gallery yet. Save one from the card maker.</div>';
 				return;
 			}
 
 			galleryRoot.innerHTML = '';
-			const grid = document.createElement('div');
-			grid.className = 'galleryGrid';
-			cards.forEach((card) => grid.appendChild(buildCardTile(card)));
-			galleryRoot.appendChild(grid);
+
+			if (uiState.folderMode === 'none') {
+				const grid = document.createElement('div');
+				grid.className = 'galleryGrid';
+				cards.slice().sort(compareCards).forEach((card) => grid.appendChild(buildCardTile(card)));
+				galleryRoot.appendChild(grid);
+				return;
+			}
+
+			const groups = buildGroupedCards(cards);
+			groups.forEach((group) => {
+				const section = document.createElement('section');
+				section.className = 'folderSection';
+
+				const header = document.createElement('button');
+				header.type = 'button';
+				header.className = 'folderHeader';
+
+				const title = document.createElement('span');
+				title.className = 'folderTitle';
+				const caret = document.createElement('span');
+				caret.textContent = folderOpenState[group.name] === false ? '▸' : '▾';
+				const label = document.createElement('span');
+				label.textContent = group.name;
+				title.append(caret, label);
+
+				const meta = document.createElement('span');
+				meta.className = 'folderMeta';
+				meta.textContent = `${group.cards.length} card${group.cards.length === 1 ? '' : 's'}`;
+
+				header.append(title, meta);
+
+				const body = document.createElement('div');
+				body.className = 'folderBody';
+				if (folderOpenState[group.name] === false) {
+					body.hidden = true;
+				}
+
+				const grid = document.createElement('div');
+				grid.className = 'galleryGrid';
+				group.cards.forEach((card) => grid.appendChild(buildCardTile(card)));
+				body.appendChild(grid);
+
+				header.addEventListener('click', () => {
+					const isClosed = body.hidden;
+					body.hidden = !isClosed;
+					folderOpenState[group.name] = isClosed;
+					caret.textContent = isClosed ? '▾' : '▸';
+				});
+
+				section.append(header, body);
+				galleryRoot.appendChild(section);
+			});
 		}
 
 		document.addEventListener('click', closeAllMenus);
@@ -628,6 +1166,73 @@
 			importGalleryInput.addEventListener('change', () => {
 				const file = importGalleryInput.files && importGalleryInput.files[0];
 				importGalleryFromFile(file);
+			});
+		}
+
+		if (folderModeSelect) {
+			folderModeSelect.value = uiState.folderMode;
+			folderModeSelect.addEventListener('change', () => {
+				uiState.folderMode = folderModeSelect.value;
+				saveUiState();
+				render();
+			});
+		}
+
+		if (createFolderBtn && newFolderNameInput) {
+			createFolderBtn.addEventListener('click', async () => {
+				const name = normalizeFolderName(newFolderNameInput.value);
+				if (!name) {
+					showToast('Enter a folder name first.', 'error');
+					return;
+				}
+
+				if (customFolders.some((folder) => folder.name.toLowerCase() === name.toLowerCase())) {
+					showToast('That folder already exists.', 'error');
+					return;
+				}
+
+				customFolders.push({ id: generateFolderId(), name });
+				uiState.folderMode = 'custom';
+				if (folderModeSelect) folderModeSelect.value = 'custom';
+				saveUiState();
+				saveCustomFolders();
+				newFolderNameInput.value = '';
+				showToast('Folder created.', 'success');
+				await render();
+			});
+
+			newFolderNameInput.addEventListener('keydown', (event) => {
+				if (event.key !== 'Enter') return;
+				event.preventDefault();
+				createFolderBtn.click();
+			});
+		}
+
+		if (sortBySelect) {
+			sortBySelect.value = uiState.sortBy;
+			sortBySelect.addEventListener('change', () => {
+				uiState.sortBy = sortBySelect.value;
+				saveUiState();
+				render();
+			});
+		}
+
+		if (sortDirectionBtn) {
+			updateSortDirectionButton();
+			sortDirectionBtn.addEventListener('click', () => {
+				uiState.sortDirection = uiState.sortDirection === 'asc' ? 'desc' : 'asc';
+				updateSortDirectionButton();
+				saveUiState();
+				render();
+			});
+		}
+
+		if (searchInput) {
+			searchInput.value = uiState.search;
+			searchInput.addEventListener('input', () => {
+				uiState.search = searchInput.value;
+				saveUiState();
+				render();
 			});
 		}
 
