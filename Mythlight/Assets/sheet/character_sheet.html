@@ -10,6 +10,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="./hell.css">
+  <link rel="stylesheet" href="../css/rules-visual.css">
 </head>
 
 <body class="sheet">
@@ -17,10 +18,10 @@
     <source src="./dice.mp3" type="audio/mpeg">
   </audio>
   <header>
-    <div style="display:flex; align-items: center; gap: 0.5rem;">
+    <div class="header-inner">
       <img src="../img/logo.png" alt="Mythlight Logo" style="height: 5rem;">
       <h1>Mythlight Character Sheet</h1>
-      <div class="header-links no-print" style="width: 100%; border-radius: 5px;">
+      <div class="header-links no-print">
         <a href="../pages/rules.html" id="header_link">Rules</a>
         <a href="../pages/species.html" id="header_link">Species</a>
         <a href="../pages/paths.html" id="header_link">Paths</a>
@@ -42,7 +43,7 @@
     </div>
 
   </header>
-  <div style="display: flex; justify-content: center; width: 100%; flex-wrap: wrap;" id="tab-selector">
+  <div id="tab-selector" class="tab-selector">
     <button class="tab-button" data-tab="tab-main" onclick="switchTab(this)">Main</button>
     <button class="tab-button" data-tab="tab-inventory" onclick="switchTab(this)">Inventory</button>
     <button class="tab-button" data-tab="tab-traits" onclick="switchTab(this)">Traits</button>
@@ -325,17 +326,10 @@
           <div class="section-title" style="cursor: pointer;">
             <div class="section-number">8</div>
             <h2>Inventory</h2> <button id="inventory_button" type="button" onclick="toggle_inventory()">Close</button>
-            <div class="muted-label encumberance" id="encumberance_label_1"
-              style="font-size: .85rem; margin-left: 1rem; display: inline; color: #99ff9e;">Non-encumbered</div>
-            <div class="muted-label encumberance" id="encumberance_label_2"
-              style="font-size: .85rem; margin-left: 1rem; display: none; color: #fffd99;">Encumbered (> Max Weight)
-            </div>
-            <div class="muted-label encumberance" id="encumberance_label_3"
-              style="font-size: .85rem; margin-left: 1rem; display: none; color: #ffb999;">Overencumbered (> 2× Max
-              Weight)</div>
-            <div class="muted-label encumberance" id="encumberance_label_4"
-              style="font-size: .85rem; margin-left: 1rem; display: none; color: #ff9999;">Crushed (> 3× Max Weight)
-            </div>
+            <div class="muted-label encumberance enc-1" id="encumberance_label_1">Non-encumbered</div>
+            <div class="muted-label encumberance enc-2" id="encumberance_label_2">Encumbered (> Max Weight)</div>
+            <div class="muted-label encumberance enc-3" id="encumberance_label_3">Overencumbered (> 2× Max Weight)</div>
+            <div class="muted-label encumberance enc-4" id="encumberance_label_4">Crushed (> 3× Max Weight)</div>
           </div>
           <div class="card">
             <div style="display:flex; gap:.5rem; flex-wrap: wrap; align-items: end">
@@ -671,8 +665,8 @@
       <div class="card" id="roll_history"></div>
     </div>
   </div>
-  <footer style="text-align: center; padding: 1rem; font-size: 0.85rem; color: #c5c5c577;">
-    <hr style="border: 0.5px solid #c5c5c577; margin-bottom: 0.5rem; box-shadow: 0 0 5px #c5c5c577;">
+  <footer class="sheet-footer">
+    <hr class="sheet-footer-hr">
     <p>Edition 4.0.2</p>
     <div>Character Sheet by Grinprim & ScuttleCrab</div>
   </footer>

@@ -7,61 +7,280 @@
     <link rel="icon" type="image/svg+xml" href="../img/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/rules-visual.css">
 </head>
 
 <style>
-    /* Custom scrollbar for sidebar */
-    .custom-scrollbar::-webkit-scrollbar  {
-        width: 8px !important;
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+        --ink:        #e8e4dc;
+        --ink-dim:    #9a9488;
+        --ink-faint:  #5a5650;
+        --gold:       #c9a84c;
+        --gold-dim:   rgba(201,168,76,0.18);
+        --gold-line:  rgba(201,168,76,0.30);
+        --indigo:     #818cf8;
+        --indigo-dim: rgba(129,140,248,0.12);
+        --red:        #f87171;
+        --sky:        #67e8f9;
+        --void:       #060a14;
+        --surface-0:  rgba(255,255,255,0.025);
+        --surface-1:  rgba(255,255,255,0.045);
+        --border:     rgba(255,255,255,0.07);
+        --border-gold: rgba(201,168,76,0.25);
     }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        background: #060a14 !important;
+        color: var(--ink);
+        font-family: 'Crimson Pro', serif;
+        font-size: 17px;
+        line-height: 1.75;
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, h5 {
+        font-family: 'Cinzel', serif;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: var(--ink);
+        line-height: 1.25;
+    }
+
+    strong {
+        color: #d8d2c8;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px !important;
+    }
+
     .custom-scrollbar::-webkit-scrollbar-track {
         background: transparent !important;
     }
+
     .custom-scrollbar::-webkit-scrollbar-thumb {
-        background-color: rgba(100, 100, 100, 0.5);
-        border-radius: 4px !important;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(100, 100, 100, 0.8) !important;
+        background: var(--border-gold);
     }
 
     .species-legacy-stats b {
-        color: #e2e8f0;
+        color: var(--ink);
         font-weight: 700;
     }
 
     .species-legacy-stats {
-        line-height: 1.55;
+        line-height: 1.7;
+        color: #c8c0b0;
+        font-size: 0.92rem;
     }
 
     .species-key-list {
         margin: 0;
         padding: 0;
         list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
     }
 
     .species-key-item {
-        font-size: 0.95rem;
+        font-size: 0.72rem;
         line-height: 1.45;
-        color: #cbd5e1;
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-family: 'JetBrains Mono', monospace;
     }
 
     .species-key-item::before {
-        content: '| ';
-        color: #818cf8;
+        content: '— ';
+        color: var(--gold);
+    }
+
+    .species-shell {
+        border-top: 1px solid var(--border);
+        padding-top: 2rem;
+    }
+
+    .species-panel {
+        background: transparent;
+        border: none;
+        border-top: 1px solid var(--border);
+        border-radius: 0;
+        padding: 2rem 0;
+        position: relative;
+    }
+
+    .species-panel::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 80px;
+        height: 1px;
+        background: var(--gold-line);
+    }
+
+    .species-title {
+        font-size: clamp(2.6rem, 5vw, 4.5rem);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+
+    .species-subtitle {
+        font-family: 'JetBrains Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--gold);
+        font-size: 0.7rem;
+    }
+
+    .species-card {
+        border-radius: 0 !important;
+        background: transparent !important;
+        border: 1px solid var(--border) !important;
+        overflow: hidden;
+        transition: all 0.25s ease;
+        position: relative;
+    }
+
+    .species-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 1px solid transparent;
+        pointer-events: none;
+        transition: border-color 0.25s ease;
+    }
+
+    .species-card:hover {
+        border-color: var(--gold-line) !important;
+        background: rgba(255,255,255,0.015) !important;
+        transform: translateY(-2px);
+    }
+
+    .species-card:hover::after {
+        border-color: rgba(201,168,76,0.15);
+    }
+
+    .species-card.active-card {
+        border-color: var(--gold-line) !important;
+        background: rgba(255,255,255,0.03) !important;
+        box-shadow: inset 0 0 0 1px rgba(201,168,76,0.1);
+    }
+
+    .species-image-wrap {
+        height: 260px;
+        overflow: hidden;
+        border-bottom: 1px solid var(--border);
+        background:
+            radial-gradient(circle at top, rgba(99,102,241,0.18), transparent 60%),
+            rgba(255,255,255,0.015);
+    }
+
+    .species-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        filter: saturate(0.9) contrast(1.02);
+    }
+
+    .species-card:hover .species-image {
+        transform: scale(1.03);
+    }
+
+    .species-content {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .species-source {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+        border: 1px solid var(--gold-line);
+        padding: 0.45rem 0.75rem;
+    }
+
+    .species-lore {
+        color: #c8c0b0;
+        font-size: 1rem;
+        line-height: 1.75;
+    }
+
+    .source-tab {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--ink-dim);
+        padding: 0.6rem 1.4rem;
+        border: 1px solid var(--border);
+        border-radius: 0 !important;
+        background: transparent;
+        transition: all 0.25s ease;
+    }
+
+    .source-tab:hover {
+        border-color: var(--gold-line);
+        color: var(--ink);
+    }
+
+    .source-tab.active {
+        background: var(--gold-dim);
+        border-color: var(--gold-line);
+        color: var(--ink);
+    }
+
+    #content {
+        border-radius: 0 !important;
+        background: transparent !important;
+        border-top: 1px solid var(--border) !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+        padding-inline: 0 !important;
+    }
+
+    ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--border-gold);
     }
 </style>
 
 <body class="bg-custom-dark text-slate-300">
 
-    <div id="navbar-placeholder"></div>\n    <div class="cosmos">\n        <div class="nebula"></div>\n\n        <div class="stars layer1"></div>\n        <div class="stars layer2"></div>\n        <div class="stars layer3"></div>\n\n        <div class="shooting-star s1"></div>\n        <div class="shooting-star s2"></div>\n        <div class="shooting-star s3"></div>\n    </div>\n\n<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto space-y-8">
-    <section class="bg-slate-900/40 border border-slate-800 rounded-2xl p-5 md:p-6">
+    <div id="navbar-placeholder"></div>\n    <div class="cosmos">\n        <div class="nebula"></div>\n\n        <div class="stars layer1"></div>\n        <div class="stars layer2"></div>\n        <div class="stars layer3"></div>\n\n        <div class="shooting-star s1"></div>\n        <div class="shooting-star s2"></div>\n        <div class="shooting-star s3"></div>\n    </div>\n\n<main class="pt-32 pb-24 px-6 max-w-[1800px] mx-auto species-shell space-y-16">
+    <section class="species-panel">
         <div class="flex flex-col gap-5">
             <div class="flex flex-wrap items-end justify-between gap-3">
                 <div>
-                    <h1 class="text-2xl md:text-3xl font-bold text-white tracking-wide">Species Archive</h1>
-                    <p class="text-sm text-slate-400 mt-1">Browse species by source, then open a full profile.</p>
-                </div>
+    <div class="species-subtitle mb-3">Mythlight Reference</div>
+    <h1 class="species-title text-white">Species Archive</h1>
+    <p class="text-lg text-indigo-300 max-w-2xl">
+        Browse species by source and explore their cultures, origins, traits and lore.
+    </p>
+</div>
                 <div id="sourceTabs" class="flex flex-wrap gap-2"></div>
             </div>
 
@@ -343,11 +562,7 @@ function renderSourceTabs() {
             <button
                 type="button"
                 data-source="${source}"
-                class="source-tab px-3 py-1.5 rounded-lg border transition text-xs font-semibold tracking-wide uppercase ${
-                    isActive
-                        ? 'bg-indigo-600/70 border-indigo-400/70 text-white'
-                        : 'bg-slate-900/60 border-slate-700 text-slate-300 hover:bg-slate-800'
-                }"
+                class="source-tab ${isActive ? 'active' : ''}"
             >
                 ${source}
             </button>
@@ -394,35 +609,43 @@ function renderSpeciesGrid() {
             : `<div class="w-full h-full flex items-center justify-center text-2xl font-black text-slate-300">${fallbackLetter}</div>`;
 
         return `
-            <button
-                type="button"
-                data-name="${sp.name}"
-                class="species-card text-left rounded-xl overflow-hidden border transition ${
-                    selected
-                        ? 'border-indigo-400/80 bg-slate-900/90 ring-1 ring-indigo-400/80'
-                        : 'border-slate-700 bg-slate-900/50 hover:border-slate-500 hover:bg-slate-900/80'
-                }"
-            >
-                <div class="h-52 bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden">
-                    ${imageBlock}
+    <button
+        type="button"
+        data-name="${sp.name}"
+        class="species-card text-left ${selected ? 'active-card' : ''}"
+    >
+        <div class="species-image-wrap">
+            ${imageBlock}
+        </div>
+
+        <div class="species-content">
+            <div class="flex items-start justify-between gap-4">
+                <div>
+                    <div class="species-subtitle mb-2">Species Profile</div>
+                    <h3 class="text-white font-bold text-5xl leading-none">${sp.name}</h3>
                 </div>
-                <div class="p-4 space-y-2.5">
-                    <div class="flex items-center justify-between gap-3">
-                        <h3 class="text-white font-bold text-4xl">${sp.name}</h3>
-                        <span class="text-[10px] uppercase tracking-wide px-2 py-1 rounded border border-slate-600 text-slate-300">${sp.source || 'Unknown'}</span>
-                    </div>
-                    <div class="text-sm text-slate-300/95 leading-relaxed">
-                        <div class="species-legacy-stats">${sp.legacyStatsHtml || sp.statsPreview}</div>
-                    </div>
-                    <ul class="species-key-list">
-                        ${(sp.keyStats || []).map(stat => `
-                            <li class="species-key-item">${stat}</li>
-                        `).join('')}
-                    </ul>
-                    <p class="text-[1.02rem] text-indigo-100/90 leading-relaxed">${sp.lorePreview}</p>
-                </div>
-            </button>
-        `;
+
+                <span class="species-source">
+                    ${sp.source || 'Unknown'}
+                </span>
+            </div>
+
+            <div class="species-legacy-stats">
+                ${sp.legacyStatsHtml || sp.statsPreview}
+            </div>
+
+            <ul class="species-key-list">
+                ${(sp.keyStats || []).map(stat => `
+                    <li class="species-key-item">${stat}</li>
+                `).join('')}
+            </ul>
+
+            <p class="species-lore">
+                ${sp.lorePreview}
+            </p>
+        </div>
+    </button>
+`;
     }).join('');
 
     grid.querySelectorAll('.species-image').forEach(img => {
@@ -476,16 +699,14 @@ function renderSpeciesFromJSON(name) {
         <section class="space-y-6">
 
             <!-- Header -->
-            <div class="border-b border-slate-800 pb-4">
-                <span class="text-xs font-black bg-${species.source_color}-600 text-white px-2 py-1 rounded">
-                    ${species.source}
-                </span>
-                <h1 class="text-4xl font-bold text-white mt-3">${species.name}</h1>
+            <div class="border-b border-slate-800 pb-4 species-panel">
+                <span class="species-source">${species.source}</span>
+                <h1 class="species-title mt-3">${species.name}</h1>
                 <p class="text-indigo-400 italic mt-2">${species.summary || ''}</p>
             </div>
 
             <!-- Description -->
-            <div class="space-y-4 text-slate-300 leading-relaxed">
+            <div class="space-y-4 species-lore">
                 ${Array.isArray(species.description)
                     ? species.description.map(p => `<p>${p}</p>`).join('')
                     : `<p>${species.description}</p>`}
@@ -494,7 +715,7 @@ function renderSpeciesFromJSON(name) {
             <!-- Attribute -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 ${Object.entries(species.attributes || {}).map(([key, val]) => `
-                    <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 text-center">
+                    <div class="species-card p-4 text-center" style="border-left:4px solid var(--gold);">
                         <div class="text-xs uppercase text-slate-500">${attrNames[key] || key}</div>
                         <div class="text-lg font-bold ${
                             val > 0 ? 'text-emerald-400' :
@@ -509,7 +730,7 @@ function renderSpeciesFromJSON(name) {
 
             <!-- Feat points -->
             ${species.feat_points ? `
-                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 text-center">
+                <div class="species-card p-4 text-center" style="border-left:4px solid var(--gold);">
                     <div class="text-xs uppercase text-slate-500">Feat Points</div>
                     <div class="text-lg font-bold text-indigo-400">
                         ${species.feat_points}
@@ -521,19 +742,15 @@ function renderSpeciesFromJSON(name) {
             <!-- Traits -->
             <div class="space-y-4">
                 ${(species.trait || []).map(trait => `
-                    <div class="bg-slate-900/40 border border-slate-800 rounded-xl p-5 hover:bg-slate-900/60 transition">
+                    <div class="species-card p-5">
                         <div class="flex justify-between items-center mb-2">
                             <strong class="text-indigo-200">${trait.name}</strong>
                             <div class="flex gap-2">
-                                <span class="text-xs px-2 py-1 bg-indigo-900/30 border border-indigo-500/20 rounded uppercase">
-                                    ${trait.action}
-                                </span>
-                                <span class="text-xs px-2 py-1 bg-indigo-900/30 border border-indigo-500/20 rounded uppercase">
-                                    ${trait.type}
-                                </span>
+                                <span class="text-xs px-2 py-1 border" style="border-color:var(--border);color:var(--ink-dim);text-transform:uppercase;font-size:0.65rem;">${trait.action}</span>
+                                <span class="text-xs px-2 py-1 border" style="border-color:var(--border);color:var(--ink-dim);text-transform:uppercase;font-size:0.65rem;">${trait.type}</span>
                             </div>
                         </div>
-                        <p class="text-sm text-slate-400">${trait.description}</p>
+                        <p class="text-sm" style="color:var(--ink-dim);">${trait.description}</p>
                     </div>
                 `).join('')}
             </div>

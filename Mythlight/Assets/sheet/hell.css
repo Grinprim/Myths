@@ -33,6 +33,29 @@ body.sheet header {
   position: relative;
 }
 
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-links {
+  width: 100%;
+  border-radius: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.tab-selector {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
 .header-actions {
   margin-top: 0.75rem;
   display: flex;
@@ -318,6 +341,16 @@ button:active {
   opacity: 0.8;
 }
 
+/* Encumbrance status labels (moved from inline styles) */
+.encumberance {
+  font-size: .85rem;
+  margin-left: 1rem;
+}
+.enc-1 { display: inline; color: #99ff9e; }
+.enc-2 { display: none; color: #fffd99; }
+.enc-3 { display: none; color: #ffb999; }
+.enc-4 { display: none; color: #ff9999; }
+
 .inline-row {
   display: flex;
   gap: 0.5rem;
@@ -411,6 +444,19 @@ button:active {
 @keyframes shimmer {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
+}
+
+/* Footer moved from inline styles */
+.sheet-footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: rgba(197,197,197,0.47);
+}
+.sheet-footer-hr {
+  border: 0.5px solid rgba(197,197,197,0.47);
+  margin-bottom: 0.5rem;
+  box-shadow: 0 0 5px rgba(197,197,197,0.47);
 }
 
 /* Attributes */

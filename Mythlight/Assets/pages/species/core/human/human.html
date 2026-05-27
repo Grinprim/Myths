@@ -8,36 +8,34 @@
     <link rel="icon" type="image/svg+xml" href="../../../../img/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../../../css/styles.css">
+    <link rel="stylesheet" href="../../../../css/rules-visual.css">
     <style>
+        /* Unified species visual: no bubbles, no rounded corners, gold accents */
         .species-page { position: relative; }
         .species-page::before {
             content: '';
             position: fixed;
             inset: 0;
             pointer-events: none;
-            background: radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.14), transparent 45%),
-                        radial-gradient(circle at 80% 75%, rgba(239, 68, 68, 0.08), transparent 40%);
+            background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent 35%);
             z-index: 0;
         }
         .species-page > * { position: relative; z-index: 1; }
-        .species-page header h1 { text-shadow: 0 8px 22px rgba(2, 6, 23, 0.65); }
+        .species-page header h1 { text-shadow: 0 6px 18px rgba(0,0,0,0.6); color: var(--ink); }
+        .species-page header h2 { color: var(--indigo); }
+        .species-page header { border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; padding-bottom: 1rem; }
+
         .species-page section {
-            box-shadow: 0 16px 38px rgba(2, 6, 23, 0.28);
-            transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--gold);
+            border-radius: 0;
+            padding: 1.6rem;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+            transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
         }
-        .species-page section:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 44px rgba(2, 6, 23, 0.35);
-            border-color: rgba(129, 140, 248, 0.3) !important;
-        }
-        .species-page img {
-            box-shadow: 0 12px 26px rgba(2, 6, 23, 0.42);
-            border: 1px solid rgba(148, 163, 184, 0.25);
-        }
-        @media (max-width: 900px) {
-            .species-page div[style*='display:flex;gap:2rem;align-items:flex-start'] { flex-direction: column; }
-            .species-page img { width: min(100%, 380px) !important; }
-        }
+        
+        @media (max-width: 900px) { .species-page div[style*='display:flex;gap:2rem;align-items:flex-start'] { flex-direction: column; } .species-page img { width: min(100%, 380px) !important; } }
     </style>
 </head>
 
@@ -57,7 +55,7 @@
         <div style="display:flex;flex-direction:column;gap:3rem;">
 
             <!-- OVERVIEW -->
-            <section style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
+            <section class="lore">
                 <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Overview</h3>
                 <p style="opacity:0.85;margin-bottom:0.8rem;">
                     Humans are the most common species, they live virtually anywhere. They evolved long ago, as one of the first mortal species. Their adaptability and drive was their main standout, where others could not live, humans found a way.
@@ -65,7 +63,7 @@
             </section>
 
             <!-- APPEARANCE -->
-            <section style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
+            <section class="lore">
 
                 <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Appearance</h3>
                 <div style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:3rem;">
@@ -83,8 +81,7 @@
             </section>
 
             <!-- CULTURE -->
-            <section class="lore"
-                style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
+            <section class="lore">
                 <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Culture</h3>
                 <p style="opacity:0.85;margin-bottom:0.8rem;">
                     Humans have a rather diverse culture, however due to their sheer number, they are also the primary cultural provider for many regions. Most empires are made by humans for humans, and others simply flock to it.
@@ -101,7 +98,7 @@
             </section>
 
             <!-- STATS -->
-            <section style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;">
+            <section class="lore">
                 <h3 style="font-size:1.6rem;font-weight:700;color:white;margin-bottom:1rem;">Stats</h3>
 
                 <div style="opacity:0.9;margin-bottom:1.5rem;">
