@@ -427,7 +427,7 @@
     "Name": "Charging Resonant",
     "Tier": "Hard",
     "Aspects": ["Charge", "Charge", "Charge"],
-    "Effect": "Remove Slow. Gain +1 Reaction, +4 Reflex, +3 Range, +2 Aim, +2 Finesse, +2 Tinkering, +2 Movement for 2 scenes."
+    "Effect": "Remove Slow. Gain +1 Reaction, +4 Reflex, +3 Range, +2 Finesse, +2 Tinkering, +2 Movement for 2 scenes."
   },
   {
     "Name": "Dranolavs",
@@ -523,7 +523,7 @@
   {
     "Name": "Fantomanarum",
     "Tier": "Hard",
-    "Aspects": ["Flux", "Flux", "Flux"],
+    "Aspects": ["Flux", "Flux", "Arcane"],
     "Effect": "Become a ghost for 1 hour; body remains behind."
   },
   {
