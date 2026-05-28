@@ -10,46 +10,420 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/rules-visual.css">
     <style>
-        body {
-            margin: 0;
-            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
-            overflow-x: hidden;
-        }
-        .row td {
-            text-align: center;
-            padding: 8px;
-        }
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
 
-        .row {
-            border-bottom: 1px solid #282e40;
-        }
+    :root {
+        --ink: #e8e4dc; --ink-dim: #9a9488; --ink-faint: #5a5650;
+        --gold: #c9a84c; --gold-dim: rgba(201,168,76,0.18); --gold-line: rgba(201,168,76,0.30);
+        --indigo: #818cf8; --indigo-dim: rgba(129,140,248,0.12);
+        --red: #f87171; --sky: #67e8f9; --void: #060a14;
+        --surface-0: rgba(255,255,255,0.025); --surface-1: rgba(255,255,255,0.045);
+        --border: rgba(255,255,255,0.07); --border-gold: rgba(201,168,76,0.25);
+    }
 
-        table {
-            width: 100%;
-        }
-        
-        .tab-btn {
-            background-color: transparent;
-            border-color: #374151;
-            color: #cbd5e1;
-            font-family: 'Inter', sans-serif;
-        }
-        /* Tab Active State */
-        .tab-btn.active {
-            background-color: rgba(218, 165, 32, 0.129);
-            border-color: gold;
-            border-width: 5px solid;
-            color: white;
-        }
+    *, *::before, *::after { box-sizing: border-box; }
 
-        .weapon-roll.shuffling {
-            filter: blur(1px);
-            opacity: 0.8;
-        }
-    </style>
+    body {
+        margin: 0;
+        background: #060a14 !important;
+        color: var(--ink);
+        font-family: 'Crimson Pro', Georgia, serif;
+        font-size: 17px;
+        line-height: 1.75;
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, h5 {
+        font-family: 'Cinzel', serif;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        line-height: 1.2;
+        color: var(--ink);
+    }
+
+    strong, b { color: #f3ede2; }
+
+    /* ── Tabs ──────────────────────────────── */
+    .tab-btn {
+        font-family: 'JetBrains Mono', monospace !important;
+        font-size: 0.7rem !important;
+        letter-spacing: 0.15em !important;
+        text-transform: uppercase !important;
+        color: var(--ink-dim);
+        border: 1px solid var(--border) !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        transition: all 0.22s ease;
+        padding: 0.55rem 1.75rem;
+        cursor: pointer;
+    }
+
+    .tab-btn:hover {
+        border-color: var(--gold-line) !important;
+        color: var(--ink);
+        background: rgba(255,255,255,0.02) !important;
+    }
+
+    .tab-btn.active {
+        background: var(--gold-dim) !important;
+        border-color: var(--gold-line) !important;
+        color: var(--ink) !important;
+    }
+
+    /* ── Rule cards — flat, open ───────────── */
+    .rule-card {
+        background: transparent !important;
+        border: none !important;
+        border-top: 1px solid var(--border) !important;
+        border-radius: 0 !important;
+        padding: 1.75rem 0 !important;
+        margin-bottom: 0 !important;
+        backdrop-filter: none !important;
+    }
+
+    .rule-card.border-l-4 {
+        border-left: 3px solid !important;
+        border-top: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+        padding-left: 1.5rem !important;
+        margin: 0.5rem 0 !important;
+        background: var(--surface-0) !important;
+        padding-top: 1.1rem !important;
+        padding-bottom: 1.1rem !important;
+    }
+
+    /* ── Section dividers ──────────────────── */
+    .section-divider {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        margin: 2.5rem 0 1.5rem;
+    }
+
+    .section-divider h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--ink);
+        white-space: nowrap;
+    }
+
+    .section-divider .line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+    }
+
+    /* ── Sub-section headers ───────────────── */
+    .subsection-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--gold-line);
+        margin-bottom: 1rem;
+    }
+
+    /* ── Damage type tiles ─────────────────── */
+    .dmg-tile {
+        border-left: 3px solid;
+        background: var(--surface-0);
+        padding: 0.85rem 1rem;
+        transition: background 0.2s;
+    }
+
+    .dmg-tile:hover { background: var(--surface-1); }
+
+    .dmg-tile strong {
+        display: block;
+        font-family: 'Cinzel', serif;
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .dmg-tile span {
+        font-size: 0.78rem;
+        color: var(--ink-dim);
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── Generator result panel ────────────── */
+    .gen-panel {
+        background: var(--surface-0);
+        border: 1px solid var(--border-gold);
+        padding: 1.5rem;
+    }
+
+    .gen-panel .eyebrow {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.4rem;
+    }
+
+    .gen-panel h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin: 0 0 0.75rem;
+    }
+
+    /* ── Prefix toggle section ─────────────── */
+    .prefix-toggle-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.75rem;
+        margin-bottom: 0;
+    }
+
+    .prefix-toggle-header h3 {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin: 0;
+    }
+
+    .prefix-toggle-header:hover h3 { color: var(--ink); }
+
+    /* ── Prefix cards ──────────────────────── */
+    .prefix-card {
+        background: var(--surface-0);
+        border: 1px solid var(--border);
+        padding: 0.85rem 1rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+    }
+
+    .prefix-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        margin-top: 7px;
+        flex-shrink: 0;
+    }
+
+    /* ── Arsenal table wrapper ─────────────── */
+    .arsenal-wrapper {
+        border: 1px solid var(--border);
+        overflow: visible;
+    }
+
+    .arsenal-wrapper table thead tr {
+        background: var(--surface-1);
+        border-bottom: 1px solid var(--gold-line);
+    }
+
+    .arsenal-wrapper table thead th {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding: 0.65rem 1rem;
+    }
+
+    .arsenal-wrapper table tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+    }
+
+    .arsenal-wrapper table tbody tr:hover { background: var(--surface-0); }
+
+    .arsenal-wrapper table tbody td {
+        padding: 0.6rem 1rem;
+        font-size: 0.88rem;
+        color: #c0b8a8;
+    }
+
+    /* ── Arsenal category / filter buttons ─── */
+    .arsenal-category-btn {
+        font-family: 'JetBrains Mono', monospace !important;
+        font-size: 0.65rem !important;
+        letter-spacing: 0.12em !important;
+        text-transform: uppercase !important;
+        border-radius: 0 !important;
+        border: 1px solid var(--border) !important;
+        background: transparent !important;
+        color: var(--ink-dim) !important;
+        padding: 0.4rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .arsenal-category-btn:hover {
+        border-color: var(--border-gold) !important;
+        color: var(--ink) !important;
+        background: var(--surface-0) !important;
+    }
+
+    .arsenal-category-btn.active {
+        border-color: var(--gold-line) !important;
+        color: var(--gold) !important;
+        background: var(--gold-dim) !important;
+    }
+
+    /* ── Tables (crafting / brewing inline) ── */
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+    }
+
+    .data-table th {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding: 0.6rem 1rem;
+        border-bottom: 1px solid var(--gold-line);
+        text-align: left;
+    }
+
+    .data-table td {
+        padding: 0.55rem 1rem;
+        border-bottom: 1px solid var(--border);
+        color: #c0b8a8;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: var(--surface-0); }
+
+    /* Generic table inside crafting/brewing sections */
+    table { width: 100%; border-collapse: collapse; }
+
+    table th {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding: 0.6rem 1rem;
+        border-bottom: 1px solid var(--gold-line);
+        text-align: left;
+        font-weight: 500;
+    }
+
+    table td {
+        padding: 0.55rem 1rem;
+        border-bottom: 1px solid var(--border);
+        color: #c0b8a8;
+        font-size: 0.9rem;
+    }
+
+    table tr:last-child td { border-bottom: none; }
+    table tr:hover td { background: var(--surface-0); }
+    table thead tr { background: var(--surface-1); }
+
+    .row td { text-align: center; }
+    .row { border-bottom: 1px solid var(--border); }
+
+    /* ── Expandable rows ───────────────────── */
+    .expandable-row { cursor: pointer; transition: background 0.18s; }
+    .expandable-row:hover { background: var(--surface-0) !important; }
+
+    /* ── Category tag ──────────────────────── */
+    .category-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--gold);
+        border: 1px solid var(--gold-line);
+        padding: 2px 8px;
+        background: var(--gold-dim);
+    }
+
+    /* ── Tag badge ─────────────────────────── */
+    .tag-badge {
+        display: inline-block;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        color: #a5b4fc;
+        border: 1px solid rgba(129,140,248,0.2);
+        background: var(--indigo-dim);
+        padding: 2px 7px;
+        margin-right: 4px;
+        margin-bottom: 3px;
+    }
+
+    /* ── Inputs / selects ──────────────────── */
+    .search-input, .select-dark, input[type="number"], select {
+        background: var(--surface-1) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 0 !important;
+        color: var(--ink) !important;
+        font-family: 'Crimson Pro', serif !important;
+        padding: 0.6rem 0.9rem !important;
+        outline: none;
+        transition: border-color 0.2s;
+        width: 100%;
+    }
+
+    .search-input:focus, .select-dark:focus, input[type="number"]:focus, select:focus {
+        border-color: var(--gold) !important;
+    }
+
+    /* ── Details/summary (crafting & brewing) ─ */
+    details.rule-card > summary {
+        font-family: 'Cinzel', serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--ink);
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 1.25rem;
+    }
+
+    details.rule-card > summary::-webkit-details-marker { display: none; }
+    details.rule-card > summary::after {
+        content: '▼';
+        font-size: 0.7rem;
+        color: var(--ink-faint);
+        transition: transform 0.2s;
+    }
+    details.rule-card[open] > summary::after { transform: rotate(180deg); }
+    details.rule-card > summary:hover { color: var(--gold); }
+
+    /* ── Shuffling animation ───────────────── */
+    .weapon-roll.shuffling { filter: blur(1px); opacity: 0.8; }
+
+    /* ── Scrollbar ─────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-gold); }
+
+    /* ── View toggle ───────────────────────── */
+    .view-section.hidden { display: none !important; }
+
+    /* ── Trait tooltip override ────────────── */
+    .group\/trait:hover .trait-tooltip { opacity: 1; visibility: visible; }
+
+
+
+
+    
+</style>
 </head>
 
-<body class="bg-custom-dark text-slate-300">
+<body class="text-slate-300" style="background:#060a14;">
 
     <div id="navbar-placeholder"></div>
     <div class="cosmos">
@@ -73,7 +447,7 @@
         </header>
 
         <div id="inventoryViewTabs"
-            class="flex flex-wrap justify-center gap-4 border-t border-b border-white/10 py-6 mb-16 sticky top-20 z-30 bg-[#060a14]/90 backdrop-blur-md">
+            class="flex flex-wrap justify-center gap-4 py-5 mb-12 sticky top-20 z-30 backdrop-blur-md" style="background:rgba(6,10,20,0.95); border-top:1px solid var(--border); border-bottom:1px solid var(--border-gold);">
             <button onclick="switchView('view-equipment')"
                 class="tab-btn active px-6 py-2 border border-slate-700 rounded-none text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
                 Equipment
@@ -96,19 +470,19 @@
 
             <div>
                 <h3
-                    class="text-xl text-indigo-400 font-bold mb-6 uppercase tracking-widest border-b border-slate-800 pb-2">
+                    class="subsection-label">
                     Physical Damage Types</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div
                         class="rule-card p-5 border-l-4 border-l-red-500 hover:bg-slate-800/50 transition-colors group">
                         <strong
-                            class="text-white block mb-2 text-lg group-hover:text-red-400 transition-colors">Puncture</strong><span
+                            class="text-white block mb-2 text-lg group-hover:text-red-400 transition-colors">Pierce</strong><span
                             class="text-xs text-slate-400 leading-relaxed">Piercing (Knives, Rapiers)</span>
                     </div>
                     <div
-                        class="rule-card p-5 border-l-4 border-l-rose-500 hover:bg-slate-800/50 transition-colors group">
+                        class="rule-card p-5 border-l-4 border-l-orange-500 hover:bg-slate-800/50 transition-colors group">
                         <strong
-                            class="text-white block mb-2 text-lg group-hover:text-rose-400 transition-colors">Slash</strong><span
+                            class="text-white block mb-2 text-lg group-hover:text-orange-400 transition-colors">Slash</strong><span
                             class="text-xs text-slate-400 leading-relaxed">Cutting (Swords, Sabers)</span>
                     </div>
                     <div
@@ -117,18 +491,12 @@
                             class="text-white block mb-2 text-lg group-hover:text-slate-300 transition-colors">Blunt</strong><span
                             class="text-xs text-slate-400 leading-relaxed">Crushing (Hammers, Clubs)</span>
                     </div>
-                    <div
-                        class="rule-card p-5 border-l-4 border-l-orange-500 hover:bg-slate-800/50 transition-colors group">
-                        <strong
-                            class="text-white block mb-2 text-lg group-hover:text-orange-400 transition-colors">Cleave</strong><span
-                            class="text-xs text-slate-400 leading-relaxed">Chopping (Axes)</span>
-                    </div>
                 </div>
             </div>
 
             <div>
                 <h3
-                    class="text-xl text-indigo-400 font-bold mb-6 uppercase tracking-widest border-b border-slate-800 pb-2">
+                    class="subsection-label">
                     Elemental Damage Types</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                     <div
@@ -197,9 +565,9 @@
 
 
             <section class="space-y-6">
-                <div class="flex items-center gap-4 mb-2">
-                    <h2 class="text-2xl text-white font-bold">Random Weapon Generator</h2>
-                    <div class="h-px bg-slate-700 flex-1"></div>
+                <div class="section-divider">
+                    <h2>Random Weapon Generator</h2>
+                    <div style="flex:1; height:1px; background:var(--border);"></div>
                 </div>
 
                 <div class="rule-card space-y-6">
@@ -226,13 +594,12 @@
                             </select>
                         </label>
                         <button onclick="pickRandomWeapon()"
-                            class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold uppercase tracking-widest border border-indigo-400/30 transition-all">Roll
-                            Weapon</button>
+                            class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-widest border border-indigo-400/30 transition-all" style="border-radius:0;">Roll Weapon</button>
                     </div>
 
                     <div id="weapon-roll"
-                        class="weapon-roll bg-slate-900/50 border border-slate-700 rounded-2xl p-6 space-y-3 transition-all duration-100">
-                        <div class="text-[10px] uppercase tracking-[0.2em] text-indigo-400 font-bold">Generated Weapon
+                        class="weapon-roll gen-panel space-y-3 transition-all duration-100">
+                        <div class="eyebrow">Generated Weapon
                         </div>
                         <h3 id="weapon-name" class="text-3xl text-white font-bold">-</h3>
                         <div id="weapon-meta" class="flex flex-wrap gap-2"></div>
@@ -240,8 +607,7 @@
                     </div>
                 </div>
                 <div class="mb-6 border-b border-slate-800 pb-2">
-                    <h3 class="text-xl text-indigo-400 font-bold uppercase tracking-widest flex items-center justify-between cursor-pointer"
-                        onclick="togglePrefixGrid()">
+                    <h3 class="prefix-toggle-header" onclick="togglePrefixGrid()">
                         Weapon Prefixes
                         <span id="prefix-arrow" class="transition-transform duration-200 inline-block">▼</span>
                     </h3>
@@ -250,9 +616,9 @@
                     </div>
                 </div>
 
-                <div class="flex items-center gap-4 mb-2">
-                    <h2 class="text-2xl text-white font-bold">Random Gear Generator</h2>
-                    <div class="h-px bg-slate-700 flex-1"></div>
+                <div class="section-divider">
+                    <h2>Random Gear Generator</h2>
+                    <div style="flex:1; height:1px; background:var(--border);"></div>
                 </div>
 
                 <div class="rule-card space-y-6">
@@ -283,14 +649,12 @@
                         </label>
 
                         <button onclick="pickRandomGear()"
-                            class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold uppercase tracking-widest border border-indigo-400/30 transition-all">
-                            Roll Gear
-                        </button>
+                            class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-widest border border-indigo-400/30 transition-all" style="border-radius:0;">Roll Gear</button>
                     </div>
 
                     <div id="gear-roll"
-                        class="bg-slate-900/50 border border-slate-700 rounded-2xl p-6 space-y-3 transition-all duration-100">
-                        <div class="text-[10px] uppercase tracking-[0.2em] text-indigo-400 font-bold">Generated Gear
+                        class="gen-panel space-y-3 transition-all duration-100">
+                        <div class="eyebrow">Generated Gear
                         </div>
                         <h3 id="gear-name" class="text-3xl text-white font-bold">-</h3>
                         <div id="gear-meta" class="flex flex-wrap gap-2"></div>
@@ -299,8 +663,7 @@
                 </div>
 
                 <div class="mb-6 border-b border-slate-800 pb-2">
-                    <h3 class="text-xl text-indigo-400 font-bold uppercase tracking-widest flex items-center justify-between cursor-pointer"
-                        onclick="toggleGearPrefixGrid()">
+                    <h3 class="prefix-toggle-header" onclick="toggleGearPrefixGrid()">
                         Gear Prefixes
                         <span id="gear-prefix-arrow" class="transition-transform duration-200 inline-block">▼</span>
                     </h3>
@@ -309,25 +672,15 @@
                     </div>
                 </div>
 
-                <div class="flex items-center gap-4 mb-2">
-                    <h2 class="text-2xl text-white font-bold">Arsenal Browser</h2>
-                    <div class="h-px bg-slate-700 flex-1"></div>
+                <div class="section-divider">
+                    <h2>Arsenal Browser</h2>
+                    <div style="flex:1; height:1px; background:var(--border);"></div>
                 </div>
 
                 <div class="rule-card space-y-6">
                     <p class="text-sm text-slate-400">Browse all available weapons, armor, and gear with detailed statistics and requirements.</p>
 
                     <!-- Category Filter (Always Visible) -->
-                    <div class="space-y-3">
-                        <label class="text-xs uppercase tracking-widest text-slate-400 font-bold">Category</label>
-                        <div class="flex flex-wrap gap-2">
-                            <button onclick="setArsenalCategory('all')" class="arsenal-category-btn active px-4 py-2 border border-indigo-500/50 rounded-lg text-sm font-bold uppercase tracking-widest bg-indigo-600/20 text-indigo-300 hover:bg-indigo-600/40 transition-all" data-category="all">All Items</button>
-                            <button onclick="setArsenalCategory('melee')" class="arsenal-category-btn px-4 py-2 border border-slate-700 rounded-lg text-sm font-bold uppercase tracking-widest hover:border-slate-600 hover:bg-slate-800/50 transition-all" data-category="melee">Melee</button>
-                            <button onclick="setArsenalCategory('ranged')" class="arsenal-category-btn px-4 py-2 border border-slate-700 rounded-lg text-sm font-bold uppercase tracking-widest hover:border-slate-600 hover:bg-slate-800/50 transition-all" data-category="ranged">Ranged</button>
-                            <button onclick="setArsenalCategory('special')" class="arsenal-category-btn px-4 py-2 border border-slate-700 rounded-lg text-sm font-bold uppercase tracking-widest hover:border-slate-600 hover:bg-slate-800/50 transition-all" data-category="special">Utility</button>
-                            <button onclick="setArsenalCategory('armor')" class="arsenal-category-btn px-4 py-2 border border-slate-700 rounded-lg text-sm font-bold uppercase tracking-widest hover:border-slate-600 hover:bg-slate-800/50 transition-all" data-category="armor">Armor</button>
-                        </div>
-                    </div>
 
                     <!-- Damage Type Filter (Appears when category selected) -->
                     <div id="damage-filter-container" class="space-y-3 hidden">
@@ -342,9 +695,8 @@
                     </div>
 
                     <!-- Arsenal Table -->
-                    <div class="bg-slate-900/40 rounded-2xl border border-slate-800 overflow-visible">
-                        <div class="overflow-visible">
-                            <table class="w-full text-left text-sm min-w-[600px]">
+                    <div class="arsenal-wrapper overflow-visible">
+                        <table class="w-full text-left text-sm min-w-[600px]">
                                 <thead class="bg-slate-800 border-b border-slate-700">
                                     <tr>
                                         <th class="px-4 py-3 font-bold text-indigo-400">Name</th>
@@ -363,7 +715,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
                     </div>
 
                     <div id="arsenal-result-count" class="text-sm text-slate-400 text-center mt-4"></div>
@@ -520,9 +871,9 @@
                 <div class="space-y-8 mt-6">
                     <div>
                         <h3
-                            class="text-lg text-orange-400 font-bold mb-4 uppercase tracking-widest border-b border-slate-800 pb-2">
+                            class="subsection-label" style="color:var(--gold);">
                             Crafts</h3>
-                        <div class="bg-slate-900/40 rounded-3xl border border-slate-800 overflow-hidden shadow-xl">
+                        <div class="arsenal-wrapper">
                             <div class="overflow-x-auto">
                                 <table class="w-full text-left border-collapse min-w-[300px]">
                                     <thead>
@@ -548,7 +899,7 @@
                     <span>Recipes</span>
                 </summary>
 
-                <div class="flex items-center gap-3 my-6 bg-slate-900/40 p-3 rounded-lg border border-slate-700 w-fit">
+                <div class="flex items-center gap-3 my-6 w-fit" style="background:var(--surface-0); border:1px solid var(--border); padding:0.6rem 1rem;">
                     <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Filter Tier:</label>
                     <select id="tierFilter" onchange="filterCrafting()" class="select-dark text-sm">
                         <option value="all">All Tiers</option>
@@ -1706,11 +2057,11 @@
                     const pool = data.prefixes[key] || [];
                     pool.forEach(prefix => {
                         cards.push(`
-                    <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-700/50 hover:border-indigo-500/30 transition-all hover:bg-slate-900/50 flex items-start gap-3">
-                        <div class="mt-1 w-2 h-2 rounded-full bg-${color}-500 shadow-[0_0_8px_rgba(${shadow},0.6)]"></div>
+                    <div class="prefix-card">
+                        <div class="prefix-dot" style="background:var(--${color === 'emerald' ? 'sky' : 'gold'});"></div>
                         <div>
-                            <strong class="text-${color}-300 block text-sm mb-1 uppercase tracking-wider">${prefix.name}</strong>
-                            <p class="text-slate-400 text-xs">${prefix.description}</p>
+                            <strong style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--${color === 'emerald' ? 'sky' : 'gold'}); margin-bottom:0.3rem;">${prefix.name}</strong>
+                            <p style="font-size:0.85rem; color:var(--ink-dim); margin:0;">${prefix.description}</p>
                         </div>
                     </div>
                 `);
@@ -1741,11 +2092,11 @@
                     const pool = data.prefixes[key] || [];
                     pool.forEach(prefix => {
                         cards.push(`
-                    <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-700/50 hover:border-indigo-500/30 transition-all hover:bg-slate-900/50 flex items-start gap-3">
-                        <div class="mt-1 w-2 h-2 rounded-full bg-${color}-500 shadow-[0_0_8px_rgba(${shadow},0.6)]"></div>
+                    <div class="prefix-card">
+                        <div class="prefix-dot" style="background:var(--${color === 'emerald' ? 'sky' : 'gold'});"></div>
                         <div>
-                            <strong class="text-${color}-300 block text-sm mb-1 uppercase tracking-wider">${prefix.name}</strong>
-                            <p class="text-slate-400 text-xs">${prefix.description}</p>
+                            <strong style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--${color === 'emerald' ? 'sky' : 'gold'}); margin-bottom:0.3rem;">${prefix.name}</strong>
+                            <p style="font-size:0.85rem; color:var(--ink-dim); margin:0;">${prefix.description}</p>
                         </div>
                     </div>
                 `);
@@ -2071,14 +2422,19 @@ function createFilterButton(type, value, label) {
             onclick="setFilter('${type}', '${value}')"
             class="
                 px-4 py-2
-                border rounded-lg
+                border rounded-none
                 text-sm font-bold uppercase tracking-widest
                 transition-all
-
-                ${active
-                    ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-300'
-                    : 'border-slate-700 hover:border-slate-600 hover:bg-slate-800/50 text-slate-300'}
-            ">
+            "
+            style="
+            ${active
+                    ? 'background-color: rgba(201,168,76,0.14); #c9a84c; color: #c9a84c;'
+                    : 'border-color: rgba(148,163,184,0.5); color: rgb(148 163 184);'}
+            
+            "
+            
+            
+            >
 
             ${label}
 

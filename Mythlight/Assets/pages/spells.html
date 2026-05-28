@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,237 +7,450 @@
     <link rel="icon" type="image/svg+xml" href="../img/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/rules-visual.css">
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
 
     :root {
-        --spells-legend-top: 9rem;
+        --tab-h: 0px; /* updated by JS */
+        --nav-h: 5rem;
+        --legend-top: calc(var(--nav-h) + var(--tab-h) + 1.5rem);
 
         --ink: #e8e4dc;
         --ink-dim: #9a9488;
         --ink-faint: #5a5650;
-
         --gold: #c9a84c;
-        --gold-dim: rgba(201, 168, 76, 0.12);
-        --gold-line: rgba(201, 168, 76, 0.24);
-
+        --gold-dim: rgba(201,168,76,0.14);
+        --gold-line: rgba(201,168,76,0.26);
         --indigo: #818cf8;
-
-        --surface-0: rgba(255, 255, 255, 0.025);
-        --surface-1: rgba(255, 255, 255, 0.045);
-
-        --border: rgba(255, 255, 255, 0.07);
-        --border-strong: rgba(255, 255, 255, 0.12);
-
+        --indigo-dim: rgba(129,140,248,0.12);
+        --red: #f87171;
+        --sky: #67e8f9;
         --void: #060a14;
+        --surface-0: rgba(255,255,255,0.025);
+        --surface-1: rgba(255,255,255,0.045);
+        --border: rgba(255,255,255,0.07);
+        --border-gold: rgba(201,168,76,0.25);
     }
+
+    *, *::before, *::after { box-sizing: border-box; }
 
     body {
+        margin: 0;
         background: #060a14 !important;
         color: var(--ink);
-        font-family: 'Crimson Pro', serif;
+        font-family: 'Crimson Pro', Georgia, serif;
+        font-size: 17px;
         line-height: 1.75;
+        overflow-x: hidden;
+        min-height: 100vh;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5 {
+    h1, h2, h3, h4, h5 {
         font-family: 'Cinzel', serif;
+        font-weight: 600;
         letter-spacing: 0.02em;
-        line-height: 1.15;
-        color: white;
+        line-height: 1.2;
+        color: var(--ink);
     }
 
-    strong,
-    b {
-        color: #f3ede2;
-    }
+    strong, b { color: #f3ede2; }
+    a { color: var(--indigo); text-decoration: none; }
 
-    /* -------------------------------- */
-    /* TABS */
-    /* -------------------------------- */
+    /* ── Tabs ──────────────────────────────── */
+    #spellsViewTabs {
+        position: sticky;
+        top: var(--nav-h);
+        z-index: 40;
+        background: rgba(6,10,20,0.96);
+        backdrop-filter: blur(14px);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border-gold);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        padding: 0.85rem 1.5rem;
+    }
 
     .tab-btn {
-        border-radius: 0 !important;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-dim);
         border: 1px solid var(--border);
         background: transparent;
-        color: var(--ink-dim);
-        font-family: 'JetBrains Mono', monospace;
-        letter-spacing: 0.14em;
-        font-size: 0.7rem;
+        padding: 0.5rem 1.75rem;
+        cursor: pointer;
         transition: all 0.22s ease;
+        border-radius: 0;
     }
 
     .tab-btn:hover {
         border-color: var(--gold-line);
-        color: white;
-        background: rgba(255, 255, 255, 0.02);
+        color: var(--ink);
+        background: rgba(255,255,255,0.02);
     }
 
     .tab-btn.active {
         background: var(--gold-dim) !important;
         border-color: var(--gold-line) !important;
-        color: white !important;
+        color: var(--ink) !important;
     }
 
-    /* -------------------------------- */
-    /* PANELS */
-    /* -------------------------------- */
+    /* ── View sections ─────────────────────── */
+    .top-view-section.hidden { display: none !important; }
 
-    .legend-card,
-    #cantrips-wrapper,
-    #spells-wrapper,
-    .modal-content {
-        background: rgba(255, 255, 255, 0.025) !important;
-        border: 1px solid var(--border) !important;
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        backdrop-filter: blur(10px);
+    /* ── Grimoire layout ───────────────────── */
+    .grimoire-layout {
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+        gap: 3.5rem;
+        align-items: start;
+    }
+
+    @media (max-width: 1023px) {
+        .grimoire-layout { grid-template-columns: 1fr; }
+        .legend-sticky { position: static !important; max-height: none !important; }
+    }
+
+    /* ── Sticky legend sidebar ─────────────── */
+    .legend-sticky {
+        position: sticky;
+        top: var(--legend-top);
+        max-height: calc(100vh - var(--legend-top) - 1rem);
+        overflow-y: auto;
+    }
+
+    .legend-sticky::-webkit-scrollbar { width: 2px; }
+    .legend-sticky::-webkit-scrollbar-track { background: transparent; }
+    .legend-sticky::-webkit-scrollbar-thumb { background: var(--border-gold); }
+
+    /* ── Legend card ───────────────────────── */
+    .legend-card {
+        background: var(--surface-1);
+        border: 1px solid var(--border-gold);
+        padding: 1.5rem;
         position: relative;
     }
 
-    .legend-card::before,
-    #cantrips-wrapper::before,
-    #spells-wrapper::before {
+    .legend-card::before {
         content: '';
         display: block;
-        width: 90px;
+        width: 60px;
         height: 1px;
         background: var(--gold-line);
+        margin-bottom: 1.25rem;
     }
 
-    /* -------------------------------- */
-    /* FILTERS */
-    /* -------------------------------- */
-
+    /* ── Filter buttons ────────────────────── */
     .filter-btn {
-        border-radius: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: var(--surface-0);
         border: 1px solid transparent;
-        transition: all 0.2s ease;
+        padding: 0.45rem 0.75rem;
+        border-radius: 0;
+        cursor: pointer;
+        transition: all 0.18s;
+        font-family: 'Crimson Pro', serif;
+        font-size: 0.92rem;
+        color: var(--ink-dim);
     }
 
-    .filter-btn:hover,
-    .filter-btn.active {
+    .filter-btn:hover, .filter-btn.active {
         border-color: var(--gold-line);
-        background: rgba(255, 255, 255, 0.03);
+        background: var(--gold-dim);
+        color: var(--ink);
     }
 
-    /* -------------------------------- */
-    /* TABLES */
-    /* -------------------------------- */
+    .filter-btn .filter-dot {
+        width: 5px; height: 5px;
+        border-radius: 50%;
+        background: var(--ink-faint);
+        flex-shrink: 0;
+        transition: background 0.18s;
+    }
+
+    .filter-btn.active .filter-dot {
+        background: var(--gold);
+        box-shadow: 0 0 4px rgba(201,168,76,0.5);
+    }
+
+    /* ── Section label ─────────────────────── */
+    .legend-section-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        margin-bottom: 0.6rem;
+        display: block;
+    }
+
+    /* ── Spell table wrappers ──────────────── */
+    .spell-section-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        padding-top: 2rem;
+        margin-bottom: 1.25rem;
+        border-top: 1px solid var(--border);
+    }
+
+    .spell-section-header h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0;
+    }
+
+    .spell-badge {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border: 1px solid;
+    }
+
+    .spell-badge.mana-zero {
+        color: #fbbf24;
+        border-color: rgba(251,191,36,0.25);
+        background: rgba(251,191,36,0.08);
+    }
+
+    .spell-badge.mana-plus {
+        color: var(--indigo);
+        border-color: rgba(129,140,248,0.25);
+        background: var(--indigo-dim);
+    }
+
+    .spell-count-badge {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        color: var(--ink-dim);
+        border: 1px solid var(--border);
+        padding: 2px 8px;
+        background: var(--surface-0);
+    }
+
+    /* ── Table panels ──────────────────────── */
+    #cantrips-wrapper, #spells-wrapper {
+        background: var(--surface-0);
+        border: 1px solid var(--border);
+    }
+
+    #cantrips-wrapper::before, #spells-wrapper::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, var(--gold-line), transparent 60%);
+    }
+
+    table { width: 100%; border-collapse: collapse; }
 
     table thead tr {
-        border-bottom: 1px solid var(--border) !important;
+        background: var(--surface-1);
+        border-bottom: 1px solid var(--border);
     }
 
-    table th {
+    table thead th {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.65rem;
-        color: var(--ink-dim);
+        font-size: 0.62rem;
         letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
     }
 
     .expandable-row {
-        transition: background 0.18s ease;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        transition: background 0.15s;
     }
 
-    .expandable-row:hover {
-        background: rgba(255, 255, 255, 0.03) !important;
+    .expandable-row:hover { background: var(--surface-0); }
+
+    .expandable-row td { padding: 0.7rem 1.5rem; }
+
+    .spell-detail-row td {
+        padding: 1.25rem 1.5rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        background: rgba(255,255,255,0.012);
     }
 
+    /* ── Category tag ──────────────────────── */
     .category-tag {
-        border: 1px solid var(--gold-line);
-        padding: 0.35rem 0.65rem;
-        font-size: 0.65rem;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
         font-family: 'JetBrains Mono', monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
         color: var(--gold);
+        border: 1px solid var(--gold-line);
+        padding: 2px 8px;
+        background: var(--gold-dim);
     }
 
-    /* -------------------------------- */
-    /* INPUTS */
-    /* -------------------------------- */
+    /* ── Spell detail inner ────────────────── */
+    .spell-meta-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 0.75rem;
+    }
 
-    .search-input {
-        background: rgba(255, 255, 255, 0.03);
+    .spell-meta-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 2px 8px;
         border: 1px solid var(--border);
-        border-radius: 0 !important;
-        padding: 0.85rem 1rem;
-        color: white;
+        background: var(--surface-0);
+        color: var(--ink-dim);
     }
 
-    .search-input:focus {
+    .upcast-block {
+        margin-top: 0.75rem;
+        padding: 0.6rem 0.85rem;
+        border-left: 2px solid var(--indigo);
+        background: var(--indigo-dim);
+        font-size: 0.85rem;
+        color: #a5b4fc;
+    }
+
+    .lore-line {
+        margin-top: 0.6rem;
+        font-style: italic;
+        font-size: 0.82rem;
+        color: var(--ink-faint);
+        border-left: 1px solid var(--border);
+        padding-left: 0.75rem;
+    }
+
+    /* ── Search input ──────────────────────── */
+    .search-input {
+        background: var(--surface-1);
+        border: 1px solid var(--border);
+        border-radius: 0;
+        padding: 0.65rem 2.5rem 0.65rem 1rem;
+        color: var(--ink);
+        font-family: 'Crimson Pro', serif;
+        font-size: 0.95rem;
         outline: none;
-        border-color: var(--gold-line);
-        background: rgba(255, 255, 255, 0.04);
+        width: 100%;
+        transition: border-color 0.2s;
     }
 
-    /* -------------------------------- */
-    /* ORBITAL SYSTEM */
-    /* -------------------------------- */
+    .search-input:focus { border-color: var(--gold); }
+    .search-input::placeholder { color: var(--ink-faint); }
 
+    /* ── Control buttons ───────────────────── */
+    .ctrl-btn {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--border);
+        background: var(--surface-0);
+        color: var(--ink-dim);
+        cursor: pointer;
+        border-radius: 0;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+
+    .ctrl-btn:hover { border-color: var(--gold-line); color: var(--ink); background: var(--surface-1); }
+    .ctrl-btn.accent { border-color: rgba(168,85,247,0.3); color: #c084fc; background: rgba(168,85,247,0.06); }
+    .ctrl-btn.accent:hover { background: rgba(168,85,247,0.12); }
+
+    /* ── Modals ────────────────────────────── */
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background: rgba(0,0,0,0.88);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+    }
+
+    .modal-box {
+        background: var(--void);
+        border: 1px solid var(--border-gold);
+        max-width: 520px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .modal-box::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--gold-line), transparent);
+    }
+
+    .modal-inner { padding: 2rem; }
+
+    .modal-close {
+        position: absolute;
+        top: 1rem; right: 1rem;
+        background: none;
+        border: none;
+        color: var(--ink-faint);
+        font-size: 1rem;
+        cursor: pointer;
+        transition: color 0.2s;
+        line-height: 1;
+    }
+    .modal-close:hover { color: var(--ink); }
+
+    /* ── Orbit ─────────────────────────────── */
     .school-orbit-stage {
         position: relative;
         width: min(100%, 760px);
         aspect-ratio: 1 / 1;
         margin: 3rem auto 0;
-
         display: flex;
         align-items: center;
         justify-content: center;
-
         overflow: visible;
-
-        background:
-            radial-gradient(
-                circle at center,
-                rgba(255,255,255,0.03) 0%,
-                rgba(255,255,255,0.015) 42%,
-                transparent 72%
-            );
+        background: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.015) 42%, transparent 72%);
     }
 
     .school-orbit-ring {
         position: absolute;
         inset: 12%;
         border-radius: 9999px;
-        border: 1px dashed rgba(201,168,76,0.18);
-
+        border: 1px dashed var(--gold-line);
         animation: orbitSpin 98s linear infinite;
     }
 
     .school-orbit-core {
         position: absolute;
-        top: 50%;
-        left: 50%;
+        top: 50%; left: 50%;
         transform: translate(-50%, -50%);
-
-        width: 240px;
-        height: 240px;
-
+        width: 240px; height: 240px;
         border-radius: 9999px;
-
-        border: 1px solid rgba(201,168,76,0.24);
-
-        background:
-            radial-gradient(
-                circle at center,
-                rgba(255,255,255,0.04),
-                rgba(255,255,255,0.015)
-            );
-
-        box-shadow:
-            0 0 50px rgba(201,168,76,0.08),
-            inset 0 0 40px rgba(255,255,255,0.02);
-
+        border: 1px solid var(--border-gold);
+        background: radial-gradient(circle at center, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+        box-shadow: 0 0 50px rgba(201,168,76,0.08), inset 0 0 40px rgba(255,255,255,0.02);
         display: flex;
         align-items: center;
         justify-content: center;
-
         z-index: 5;
     }
 
@@ -250,302 +462,109 @@
 
     .orbit-item {
         --orbit-radius: 290px;
-
         position: absolute;
-        top: 50%;
-        left: 50%;
-
-        width: 140px;
-        height: 140px;
-
-        margin-left: -70px;
-        margin-top: -70px;
-
-        transform:
-            rotate(var(--angle))
-            translateY(calc(var(--orbit-radius) * -1));
-
+        top: 50%; left: 50%;
+        width: 140px; height: 140px;
+        margin-left: -70px; margin-top: -70px;
+        transform: rotate(var(--angle)) translateY(calc(var(--orbit-radius) * -1));
         transform-origin: center center;
     }
 
     .orbit-upright {
-        width: 100%;
-        height: 100%;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
+        width: 100%; height: 100%;
+        display: flex; align-items: center; justify-content: center;
         transform: rotate(calc(var(--angle) * -1));
     }
 
     .orbit-card {
-        width: 100%;
-        height: 100%;
-
+        width: 100%; height: 100%;
         border-radius: 9999px !important;
-
         border: 1px solid rgba(255,255,255,0.08);
-
-        background:
-            linear-gradient(
-                to bottom,
-                rgba(255,255,255,0.04),
-                rgba(255,255,255,0.015)
-            );
-
+        background: linear-gradient(to bottom, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
         backdrop-filter: blur(8px);
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
         padding: 1rem;
-
-        transition:
-            transform 0.25s ease,
-            border-color 0.25s ease,
-            background 0.25s ease;
-
+        transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
         overflow: hidden;
+        cursor: pointer;
     }
 
     .orbit-card:hover {
         transform: scale(1.06);
-
-        border-color: rgba(201,168,76,0.32);
-
-        background:
-            linear-gradient(
-                to bottom,
-                rgba(255,255,255,0.07),
-                rgba(255,255,255,0.03)
-            );
+        border-color: var(--gold-line);
+        background: linear-gradient(to bottom, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
     }
 
-    .orbit-card img {
-        width: 46px;
-        height: 46px;
-        object-fit: contain;
-        margin-bottom: 0.8rem;
-    }
+    .orbit-card img { width: 46px; height: 46px; object-fit: contain; margin-bottom: 0.8rem; }
+    .orbit-card h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: white; margin: 0; line-height: 1.1; }
 
-    .orbit-card h3 {
-        font-family: 'Cinzel', serif;
-        font-size: 0.95rem;
-        color: white;
-        margin: 0;
-        line-height: 1.1;
-    }
-
-    /* -------------------------------- */
-    /* SCHOOL COLORS */
-    /* -------------------------------- */
-
-    .school-arcane {
-        background: rgba(99,165,241,0.08);
-        border-color: rgba(99,165,241,0.18);
-    }
-
-    .school-divine {
-        background: rgba(251,191,36,0.08);
-        border-color: rgba(251,191,36,0.18);
-    }
-
-    .school-elemental {
-        background: rgba(239,68,68,0.08);
-        border-color: rgba(239,68,68,0.18);
-    }
-
-    .school-occult {
-        background: rgba(74,222,128,0.08);
-        border-color: rgba(74,222,128,0.18);
-    }
-
-    .school-cosmic {
-        background: rgba(139,92,246,0.08);
-        border-color: rgba(139,92,246,0.18);
-    }
-
-    /* -------------------------------- */
-    /* SCHOOL DETAIL */
-    /* -------------------------------- */
-
-    .school-detail-scroll {
-        border-radius: 0 !important;
-        border: 1px solid var(--border);
-
-        background:
-            linear-gradient(
-                to bottom,
-                rgba(255,255,255,0.04),
-                rgba(255,255,255,0.015)
-            );
-
-        box-shadow: none !important;
-    }
+    .school-arcane  { background: rgba(99,165,241,0.08); border-color: rgba(99,165,241,0.18); }
+    .school-divine  { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.18); }
+    .school-elemental { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.18); }
+    .school-occult  { background: rgba(74,222,128,0.08); border-color: rgba(74,222,128,0.18); }
+    .school-cosmic  { background: rgba(139,92,246,0.08); border-color: rgba(139,92,246,0.18); }
 
     .school-choice.active {
-        border-color: var(--gold-line);
-        background: rgba(255,255,255,0.04);
+        border-color: var(--gold-line) !important;
+        background: rgba(255,255,255,0.06) !important;
     }
-
-    /* -------------------------------- */
-    /* MODALS */
-    /* -------------------------------- */
-
-    .modal-content {
-        background:
-            linear-gradient(
-                to bottom,
-                rgba(255,255,255,0.04),
-                rgba(255,255,255,0.015)
-            ) !important;
-    }
-
-    /* -------------------------------- */
-    /* ANIMATIONS */
-    /* -------------------------------- */
 
     @keyframes orbitSpin {
-        from {
-            transform: rotate(0deg);
-        }
-
-        to {
-            transform: rotate(360deg);
-        }
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
     }
 
-    /* -------------------------------- */
-    /* SCROLLBARS */
-    /* -------------------------------- */
+    /* ── Shuffling ─────────────────────────── */
+    .shuffling { filter: blur(2px); opacity: 0.7; transition: all 0.1s; }
 
-    ::-webkit-scrollbar {
-        width: 5px;
-        height: 5px;
-    }
+    /* ── Scrollbar ─────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-gold); }
 
-    ::-webkit-scrollbar-thumb {
-        background: rgba(201,168,76,0.25);
-    }
-
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
-
-    /* -------------------------------- */
-    /* RESPONSIVE */
-    /* -------------------------------- */
-
+    /* ── Responsive orbit ──────────────────── */
     @media (max-width: 1024px) {
-
-        .school-orbit-stage {
-            width: 100%;
-            max-width: 520px;
-        }
-
-        .school-orbit-core {
-            width: 160px;
-            height: 160px;
-        }
-
-        .orbit-item {
-            --orbit-radius: 190px;
-
-            width: 100px;
-            height: 100px;
-
-            margin-left: -50px;
-            margin-top: -50px;
-        }
-
-        .orbit-card img {
-            width: 34px;
-            height: 34px;
-        }
-
-        .orbit-card h3 {
-            font-size: 0.72rem;
-        }
+        .school-orbit-stage { width: 100%; max-width: 520px; }
+        .school-orbit-core { width: 160px; height: 160px; }
+        .orbit-item { --orbit-radius: 190px; width: 100px; height: 100px; margin-left: -50px; margin-top: -50px; }
+        .orbit-card img { width: 34px; height: 34px; }
+        .orbit-card h3 { font-size: 0.72rem; }
     }
 
     @media (max-width: 640px) {
-
-        .school-orbit-stage {
-            max-width: 360px;
-        }
-
-        .school-orbit-core {
-            width: 120px;
-            height: 120px;
-        }
-
-        .orbit-item {
-    --orbit-radius: clamp(180px, 28vw, 260px);
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    width: 140px;
-    height: 140px;
-
-    margin: -70px 0 0 -70px;
-
-    transform:
-        rotate(var(--angle))
-        translateY(calc(var(--orbit-radius) * -1));
-
-    transform-origin: center;
-}
-
-.orbit-upright {
-    width: 100%;
-    height: 100%;
-
-    /* Counter rotation */
-    transform: rotate(calc(var(--angle) * -1));
-}
-
-        .orbit-card {
-            padding: 0.5rem;
-        }
-
-        .orbit-card img {
-            width: 26px;
-            height: 26px;
-            margin-bottom: 0.4rem;
-        }
-
-        .orbit-card h3 {
-            font-size: 0.58rem;
-        }
+        .school-orbit-stage { max-width: 360px; }
+        .school-orbit-core { width: 120px; height: 120px; }
+        .orbit-item { --orbit-radius: 148px; width: 92px; height: 92px; margin-left: -46px; margin-top: -46px; }
+        .orbit-card img { width: 26px; height: 26px; margin-bottom: 0.35rem; }
+        .orbit-card h3 { font-size: 0.6rem; }
+        .orbit-card { padding: 0.5rem; }
     }
-</style>
+    </style>
 </head>
 
-<body class="min-h-screen bg-custom-dark text-slate-300">
+<body class="min-h-screen text-slate-300" style="background:#060a14;">
 
-    <div id="navbar-placeholder"></div>\n <div class="cosmos">\n <div class="nebula"></div>\n\n <div
-            class="stars layer1"></div>\n <div class="stars layer2"></div>\n <div class="stars layer3"></div>\n\n <div
-            class="shooting-star s1"></div>\n <div class="shooting-star s2"></div>\n <div class="shooting-star s3">
-        </div>\n </div>
+    <div id="navbar-placeholder"></div>
+    <div class="cosmos">
+        <div class="nebula"></div>
+        <div class="stars layer1"></div>
+        <div class="stars layer2"></div>
+        <div class="stars layer3"></div>
+        <div class="shooting-star s1"></div>
+        <div class="shooting-star s2"></div>
+        <div class="shooting-star s3"></div>
+    </div>
 
-    <main class="pt-32 pb-24 max-w-[1800px] mx-auto px-6 space-y-20">
-        <header class="text-center mb-8 max-w-4xl mx-auto">
-            <div class="text-[10px] uppercase tracking-[0.24em] text-amber-300 font-bold mb-4">
-                Mythlight Reference
-            </div>
+    <main class="pt-32 pb-24 max-w-[1800px] mx-auto px-6">
 
-            <h1 class="text-7xl md:text-8xl font-bold text-white leading-none mb-6">
-                Spells
-            </h1>
-            <p class="text-lg text-indigo-300">Browse spell lists and explore the schools that shape Mythlight magic.
-            </p>
+        <header class="text-center mb-12 max-w-3xl mx-auto">
+            <p style="font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); opacity:0.8; margin-bottom:1rem;">Mythlight Reference</p>
+            <h1 style="font-family:'Cinzel',serif; font-size:clamp(3.5rem,8vw,6rem); font-weight:700; color:var(--ink); line-height:1; margin-bottom:1.25rem; letter-spacing:0.03em;">Spells</h1>
+            <p style="color:var(--ink-dim); font-size:1rem;">Browse spell lists and explore the schools that shape Mythlight magic.</p>
         </header>
 
+        <!-- ── Tab bar ── -->
         <div id="spellsViewTabs"
             class="flex flex-wrap justify-center gap-4 border-t border-b border-white/10 py-6 mb-16 sticky top-20 z-30 bg-[#060a14]/90 backdrop-blur-md">
             <button onclick="switchView('view-spells')"
@@ -558,150 +577,107 @@
             </button>
         </div>
 
-        <div id="view-spells" class="top-view-section">
-            <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <!-- ══════════════════════════════════════ -->
+        <!-- VIEW: SPELLS                           -->
+        <!-- ══════════════════════════════════════ -->
+        <div id="view-spells" class="top-view-section pt-12">
+
+            <header style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:1.5rem; margin-bottom:2.5rem;">
                 <div>
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-indigo-400 font-bold mb-2">Mythlight Reference
-                    </p>
-                    <h2 class="text-5xl font-bold text-white mb-4">Spell Lists</h2>
-                    <p class="text-slate-400 text-lg max-w-2xl flex items-center gap-3">
+                    <p style="font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--indigo); margin-bottom:0.4rem;">Mythlight Reference</p>
+                    <h2 style="font-family:'Cinzel',serif; font-size:2.5rem; font-weight:700; color:var(--ink); margin:0 0 0.5rem;">Spell Lists</h2>
+                    <p style="color:var(--ink-dim); font-size:0.95rem; display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
                         Browse the arcane, divine, and elemental arts.
-                        <span id="magic-counter"
-                            class="text-xs bg-slate-800 text-indigo-300 px-3 py-1 rounded-none border border-slate-700 font-bold uppercase tracking-wider">Loading...</span>
+                        <span id="magic-counter" style="font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.1em; color:var(--indigo); border:1px solid var(--border); padding:2px 10px; background:var(--surface-0);">Loading...</span>
                     </p>
                 </div>
-
-                <div id="standard-controls" class="flex flex-wrap gap-4 w-full md:w-auto items-end">
-                    <div class="flex gap-2">
-                        <button onclick="pickRandomSpell()"
-                            class="px-4 py-2 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 rounded-lg text-purple-300 text-xs font-bold uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]">
-                            Random
-                        </button>
-                        <button onclick="expandAllMagic(true)"
-                            class="px-4 py-2 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 rounded-lg text-indigo-300 text-xs font-bold uppercase tracking-wider transition-all">Expand
-                            All</button>
-                        <button onclick="expandAllMagic(false)"
-                            class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-slate-300 text-xs font-bold uppercase tracking-wider transition-all">Collapse
-                            All</button>
-                    </div>
-                    <div class="flex flex-col gap-2 w-full md:w-auto md:min-w-[240px]">
-                        <label
-                            class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Search</label>
-                        <div class="relative">
-                            <input type="text" id="search-input" placeholder="Name or Effect..."
-                                class="search-input w-full pr-10" oninput="renderMagic(); toggleSpellClear();">
-                            <button id="search-clear" type="button"
-                                class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-200"
-                                onclick="clearSpellSearch()">✖</button>
-                        </div>
+                <div style="display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;">
+                    <button onclick="pickRandomSpell()" class="ctrl-btn accent">&#x2684; Random</button>
+                    <button onclick="expandAllMagic(true)" class="ctrl-btn">Expand All</button>
+                    <button onclick="expandAllMagic(false)" class="ctrl-btn">Collapse</button>
+                    <div style="position:relative; min-width:220px;">
+                        <input type="text" id="search-input" placeholder="Name or effect..." class="search-input" oninput="renderMagic(); toggleSpellClear();">
+                        <button id="search-clear" type="button" onclick="clearSpellSearch()" class="hidden" style="position:absolute; right:0.75rem; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink-faint); cursor:pointer; font-size:0.8rem;">&#x2715;</button>
                     </div>
                 </div>
             </header>
 
-            <div id="view-grimoire" class="flex flex-col lg:flex-row gap-12 items-start relative">
-                <aside class="w-full lg:w-80 z-20 self-start spells-legend-sticky">
-                    <section id="legend-box" class="p-6 rounded-none legend-card shadow-2xl">
-                        <div class="mb-6 flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-[0.2em]">Spell Legend
-                                </h3>
-                                <p class="text-[10px] text-slate-400 mt-1 italic">Interactive filters narrow displayed
-                                    magic.</p>
-                            </div>
-                            <button id="clear-filter" onclick="clearFilters()"
-                                class="hidden text-[10px] uppercase text-rose-400 font-bold hover:underline">Clear</button>
-                        </div>
-                        <div id="legend-content" class="space-y-5">
-                            <div>
-                                <p class="text-[10px] text-slate-500 mb-3 uppercase font-bold tracking-wider">Sources
-                                </p>
-                                <div class="space-y-2">
-                                    <button class="filter-btn" onclick="toggleFilter('category', 'Arcane')"><span
-                                            class="font-bold"><img src="../sheet/arcane.png" alt="Arcane"
-                                                class="w-5 h-5" style="display: inline;"> Arcane</span>
-                                        <div class="filter-dot"></div>
-                                    </button>
-                                    <button class="filter-btn" onclick="toggleFilter('category', 'Divine')"><span
-                                            class="font-bold"><img src="../sheet/divine.png" alt="Divine"
-                                                class="w-5 h-5" style="display: inline;"> Divine</span>
-                                        <div class="filter-dot"></div>
-                                    </button>
-                                    <button class="filter-btn" onclick="toggleFilter('category', 'Occult')"><span
-                                            class="font-bold"><img src="../sheet/occult.png" alt="Occult"
-                                                class="w-5 h-5" style="display: inline;"> Occult</span>
-                                        <div class="filter-dot"></div>
-                                    </button>
-                                    <button class="filter-btn" onclick="toggleFilter('category', 'Cosmic')"><span
-                                            class="font-bold"><img src="../sheet/cosmic.png" alt="Cosmic"
-                                                class="w-5 h-5" style="display: inline;"> Cosmic</span>
-                                        <div class="filter-dot"></div>
-                                    </button>
-                                    <button class="filter-btn" onclick="toggleFilter('category', 'Elemental')"><span
-                                            class="font-bold"><img src="../sheet/elemental.png" alt="Elemental"
-                                                class="w-5 h-5" style="display: inline;"> Elemental</span>
-                                        <div class="filter-dot"></div>
-                                    </button>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="text-[10px] text-slate-500 mb-3 uppercase font-bold tracking-wider">Mana Cost
-                                </p>
-                                <div class="space-y-2">
-                                    <button class="filter-btn" onclick="toggleFilter('cost', '0')"><span
-                                            class="flex items-center gap-2"><span class="text-amber-400">0 ✦</span>
-                                            <span class="text-xs font-normal text-slate-400">(Cantrip)</span></span>
-                                        <div class="filter-dot"></div>
-                                    </button>
-                                    <button class="filter-btn" onclick="toggleFilter('cost', '1')"><span
-                                            class="text-indigo-300">1 ✦</span>
-                                        <div class="filter-dot"></div>
-                                    </button>
-                                    <button class="filter-btn" onclick="toggleFilter('cost', '2')"><span
-                                            class="text-indigo-300">2 ✦</span>
-                                        <div class="filter-dot"></div>
-                                    </button>
-                                    <button class="filter-btn" onclick="toggleFilter('cost', '3')"><span
-                                            class="text-indigo-300">3 ✦</span>
-                                        <div class="filter-dot"></div>
-                                    </button>
-                                    <button class="filter-btn" onclick="toggleFilter('cost', '4')"><span
-                                            class="text-indigo-300">4 ✦</span>
-                                        <div class="filter-dot"></div>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                            class="w-full mt-8 py-3 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 rounded-none text-indigo-400 text-[10px] font-bold uppercase tracking-widest transition-all">Back
-                            to Top</button>
-                    </section>
+            <!-- Grimoire: sidebar + tables -->
+            <div class="grimoire-layout">
 
+                <!-- Sticky legend sidebar -->
+                <aside class="legend-sticky">
+                    <section class="legend-card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.25rem;">
+                            <div>
+                                <p style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin:0 0 0.25rem;">Spell Legend</p>
+                                <p style="font-size:0.8rem; color:var(--ink-faint); font-style:italic; margin:0;">Filters narrow displayed magic.</p>
+                            </div>
+                            <button id="clear-filter" onclick="clearFilters()" class="hidden" style="font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--red); background:none; border:none; cursor:pointer;">Clear</button>
+                        </div>
+
+                        <div style="margin-bottom:1.25rem;">
+                            <span class="legend-section-label">Sources</span>
+                            <div style="display:flex; flex-direction:column; gap:0.3rem;">
+                                <button class="filter-btn" onclick="toggleFilter('category','Arcane')">
+                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../sheet/arcane.png" style="width:16px;height:16px;"> Arcane</span>
+                                    <div class="filter-dot"></div>
+                                </button>
+                                <button class="filter-btn" onclick="toggleFilter('category','Divine')">
+                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../sheet/divine.png" style="width:16px;height:16px;"> Divine</span>
+                                    <div class="filter-dot"></div>
+                                </button>
+                                <button class="filter-btn" onclick="toggleFilter('category','Occult')">
+                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../sheet/occult.png" style="width:16px;height:16px;"> Occult</span>
+                                    <div class="filter-dot"></div>
+                                </button>
+                                <button class="filter-btn" onclick="toggleFilter('category','Cosmic')">
+                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../sheet/cosmic.png" style="width:16px;height:16px;"> Cosmic</span>
+                                    <div class="filter-dot"></div>
+                                </button>
+                                <button class="filter-btn" onclick="toggleFilter('category','Elemental')">
+                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../sheet/elemental.png" style="width:16px;height:16px;"> Elemental</span>
+                                    <div class="filter-dot"></div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom:1.5rem;">
+                            <span class="legend-section-label">Mana Cost</span>
+                            <div style="display:flex; flex-direction:column; gap:0.3rem;">
+                                <button class="filter-btn" onclick="toggleFilter('cost','0')">
+                                    <span style="display:flex; align-items:center; gap:0.5rem;"><span style="color:#fbbf24;">0 ✦</span><span style="font-size:0.8rem; color:var(--ink-faint);">(Cantrip)</span></span>
+                                    <div class="filter-dot"></div>
+                                </button>
+                                <button class="filter-btn" onclick="toggleFilter('cost','1')"><span style="color:var(--indigo);">1 ✦</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost','2')"><span style="color:var(--indigo);">2 ✦</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost','3')"><span style="color:var(--indigo);">3 ✦</span><div class="filter-dot"></div></button>
+                                <button class="filter-btn" onclick="toggleFilter('cost','4')"><span style="color:var(--indigo);">4 ✦</span><div class="filter-dot"></div></button>
+                            </div>
+                        </div>
+
+                        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="width:100%; padding:0.6rem; background:var(--surface-0); border:1px solid var(--border); font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-faint); cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold-line)';this.style.color='var(--ink)';" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--ink-faint)';">&#8679; Back to Top</button>
+                    </section>
                 </aside>
 
-                <div class="flex-1 w-full space-y-24">
+                <!-- Spell tables -->
+                <div style="min-width:0; display:flex; flex-direction:column; gap:3rem;">
 
                     <section id="section-cantrips">
-                        <div class="flex items-center justify-between gap-6 mb-8 border-t border-white/10 pt-8">
-                            <div class="flex items-center gap-4">
-                                <h2 class="text-3xl font-bold text-white">Cantrips</h2>
-                                <span
-                                    class="px-4 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase rounded-none">0
-                                    Mana</span>
-                                <span id="cantrip-counter"
-                                    class="text-xs bg-slate-800 text-amber-300 px-3 py-1 rounded-none border border-slate-700 font-bold uppercase tracking-wider">0</span>
-                            </div>
+                        <div class="spell-section-header">
+                            <h2>Cantrips</h2>
+                            <span class="spell-badge mana-zero">0 Mana</span>
+                            <span id="cantrip-counter" class="spell-count-badge">0</span>
                         </div>
-                        <div id="cantrips-wrapper"
-                            class="bg-slate-900/30 rounded-none border border-slate-800 shadow-xl overflow-hidden">
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left border-collapse min-w-[300px]">
+                        <div id="cantrips-wrapper">
+                            <div style="overflow-x:auto;">
+                                <table style="min-width:300px;">
                                     <thead>
-                                        <tr
-                                            class="text-xs uppercase tracking-widest text-slate-500 border-b border-slate-800">
-                                            <th class="px-6 py-5 font-bold w-2/5">Name</th>
-                                            <th class="px-6 py-5 font-bold w-1/5">Cost</th>
-                                            <th class="px-6 py-5 font-bold w-1/5">Category</th>
-                                            <th class="px-6 py-5 font-bold w-1/5 text-right">Expand</th>
+                                        <tr>
+                                            <th style="width:45%;">Name</th>
+                                            <th style="width:15%;">Cost</th>
+                                            <th style="width:25%;">Source</th>
+                                            <th style="width:15%; text-align:right;">&#9656;</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cantrips-body"></tbody>
@@ -711,27 +687,20 @@
                     </section>
 
                     <section id="section-spells">
-                        <div class="flex items-center justify-between gap-6 mb-8 border-t border-white/10 pt-8">
-                            <div class="flex items-center gap-4">
-                                <h2 class="text-3xl font-bold text-white">Spells</h2>
-                                <span
-                                    class="px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold uppercase rounded-none">1+
-                                    Mana</span>
-                                <span id="spell-counter"
-                                    class="text-xs bg-slate-800 text-indigo-300 px-3 py-1 rounded-none border border-slate-700 font-bold uppercase tracking-wider">0</span>
-                            </div>
+                        <div class="spell-section-header">
+                            <h2>Spells</h2>
+                            <span class="spell-badge mana-plus">1+ Mana</span>
+                            <span id="spell-counter" class="spell-count-badge">0</span>
                         </div>
-                        <div id="spells-wrapper"
-                            class="bg-slate-900/30 rounded-none border border-slate-800 shadow-xl overflow-hidden">
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left border-collapse min-w-[300px]">
+                        <div id="spells-wrapper">
+                            <div style="overflow-x:auto;">
+                                <table style="min-width:300px;">
                                     <thead>
-                                        <tr
-                                            class="text-xs uppercase tracking-widest text-slate-500 border-b border-slate-800">
-                                            <th class="px-6 py-5 font-bold w-2/5">Name</th>
-                                            <th class="px-6 py-5 font-bold w-1/5">Cost</th>
-                                            <th class="px-6 py-5 font-bold w-1/5">Category</th>
-                                            <th class="px-6 py-5 font-bold w-1/5 text-right">Expand</th>
+                                        <tr>
+                                            <th style="width:45%;">Name</th>
+                                            <th style="width:15%;">Cost</th>
+                                            <th style="width:25%;">Source</th>
+                                            <th style="width:15%; text-align:right;">&#9656;</th>
                                         </tr>
                                     </thead>
                                     <tbody id="spells-body"></tbody>
@@ -739,434 +708,326 @@
                             </div>
                         </div>
                     </section>
+
                 </div>
             </div>
         </div>
 
-        <div id="view-schools" class="top-view-section hidden">
-            <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <div>
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-indigo-400 font-bold mb-2">Mythlight Reference
-                    </p>
-                    <h2 class="text-6xl font-bold text-white mb-4 leading-none">Spellcasting Schools</h2>
-                    <p class="text-slate-400 text-lg max-w-2xl flex items-center gap-3">
-                        Delve into the philosophies and techniques behind the magic.
-                    </p>
-                </div>
+        <!-- ══════════════════════════════════════ -->
+        <!-- VIEW: SCHOOLS                          -->
+        <!-- ══════════════════════════════════════ -->
+        <div id="view-schools" class="top-view-section hidden pt-12">
+            <header style="margin-bottom:2.5rem;">
+                <p style="font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--indigo); margin-bottom:0.4rem;">Mythlight Reference</p>
+                <h2 style="font-family:'Cinzel',serif; font-size:2.5rem; font-weight:700; color:var(--ink); margin:0 0 0.5rem;">Spellcasting Schools</h2>
+                <p style="color:var(--ink-dim);">Delve into the philosophies and techniques behind the magic.</p>
             </header>
 
-            <section class="grid grid-cols-1 gap-8 items-start justify-items-center">
-                <div class="school-orbit-stage">
-                    <div class="school-orbit-ring" aria-hidden="true"></div>
-                    <div class="school-orbit-core" aria-hidden="true">
-                        <div class="absolute inset-0 bg-indigo-500/20 rounded-none blur-3xl animate-pulse"></div>
-                        <div
-                            class="absolute inset-0 border-2 border-dashed border-indigo-500/30 rounded-none animate-[spin_15s_linear_infinite]">
-                        </div>
-                        <div
-                            class="absolute inset-8 border border-indigo-400/20 rounded-none animate-[spin_10s_linear_infinite_reverse]">
-                        </div>
-                        <img src="../img/logo.png" alt="Mythlight logo"
-                            class="relative z-10 h-[78%] w-[78%] object-contain animate-float drop-shadow-[0_0_25px_rgba(99,102,241,0.8)]">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-transparent rounded-none opacity-50">
-                        </div>
-                    </div>
-
-                    <div class="school-orbit-rotor">
-                        <article class="orbit-item" style="--angle: 0deg;">
-                            <div class="orbit-upright" style="--angle: 72deg;">
-                                <button type="button"
-                                    class="school-card school-choice orbit-card school-arcane p-5 w-full text-center"
-                                    onclick="showSchoolDetails('Arcane', '../sheet/arcane.png')">
-                                    <img src="../sheet/arcane.png" alt="Arcane icon"
-                                        class="w-11 h-11 rounded-lg object-cover mx-auto">
-                                    <h3 class="text-lg font-bold text-white mt-3">Arcane</h3>
-                                </button>
-                            </div>
-                        </article>
-
-                        <article class="orbit-item" style="--angle: 72deg;">
-                            <div class="orbit-upright" style="--angle: 72deg;">
-                                <button type="button"
-                                    class="school-card school-choice orbit-card school-divine p-5 w-full text-center"
-                                    onclick="showSchoolDetails('Divine', '../sheet/divine.png')">
-                                    <img src="../sheet/divine.png" alt="Divine icon"
-                                        class="w-11 h-11 rounded-lg object-cover mx-auto">
-                                    <h3 class="text-lg font-bold text-white mt-3">Divine</h3>
-                                </button>
-                            </div>
-                        </article>
-
-                        <article class="orbit-item" style="--angle: 144deg;">
-                            <div class="orbit-upright" style="--angle: 72deg;">
-                                <button type="button"
-                                    class="school-card school-choice orbit-card school-elemental p-5 w-full text-center"
-                                    onclick="showSchoolDetails('Elemental', '../sheet/elemental.png')">
-                                    <img src="../sheet/elemental.png" alt="Elemental icon"
-                                        class="w-11 h-11 rounded-lg object-cover mx-auto">
-                                    <h3 class="text-lg font-bold text-white mt-3" style="margin-left: -10px;">Elemental
-                                    </h3>
-                                </button>
-                            </div>
-                        </article>
-
-                        <article class="orbit-item" style="--angle: 216deg;">
-                            <div class="orbit-upright" style="--angle: 72deg;">
-                                <button type="button"
-                                    class="school-card school-choice orbit-card school-occult p-5 w-full text-center"
-                                    onclick="showSchoolDetails('Occult', '../sheet/occult.png')">
-                                    <img src="../sheet/occult.png" alt="Occult icon"
-                                        class="w-11 h-11 rounded-lg object-cover mx-auto">
-                                    <h3 class="text-lg font-bold text-white mt-3">Occult</h3>
-                                </button>
-                            </div>
-                        </article>
-
-                        <article class="orbit-item" style="--angle: 288deg;">
-                            <div class="orbit-upright" style="--angle: 72deg;">
-                                <button type="button"
-                                    class="school-card school-choice orbit-card school-cosmic p-5 w-full text-center"
-                                    onclick="showSchoolDetails('Cosmic', '../sheet/cosmic.png')">
-                                    <img src="../sheet/cosmic.png" alt="Cosmic icon"
-                                        class="w-11 h-11 rounded-lg object-cover mx-auto">
-                                    <h3 class="text-lg font-bold text-white mt-3">Cosmic</h3>
-                                </button>
-                            </div>
-                        </article>
-                    </div>
+            <div class="school-orbit-stage">
+                <div class="school-orbit-ring" aria-hidden="true"></div>
+                <div class="school-orbit-core" aria-hidden="true">
+                    <div style="position:absolute;inset:0;background:rgba(129,140,248,0.12);border-radius:9999px;filter:blur(40px);animation:pulse 3s ease-in-out infinite;"></div>
+                    <img src="../img/logo.png" alt="Mythlight logo" style="position:relative;z-index:10;width:72%;height:72%;object-fit:contain;filter:drop-shadow(0 0 20px rgba(201,168,76,0.4));">
                 </div>
-
-                <aside id="school-detail-scroll" class="school-detail-scroll p-6 z-20 hidden" aria-hidden="true">
-                    <div class="relative z-10">
-                        <p class="text-[10px] uppercase tracking-[0.2em] text-amber-300 font-bold">School Legend</p>
-                        <div id="school-scroll-body" class="hidden mt-5">
-                            <img id="school-scroll-icon" src="" alt="Selected school icon"
-                                class="w-14 h-14 rounded-none object-cover mx-auto">
-                            <h3 id="school-scroll-name" class="text-2xl font-bold text-white text-center mt-3"></h3>
-                            <div id="school-scroll-description"
-                                class="mt-4 rounded-none border border-slate-500/30 bg-slate-500/10 px-4 py-3 text-sm text-white text-center">
-                                âš ï¸ Under Reconstruction âš ï¸
-                            </div>
+                <div class="school-orbit-rotor">
+                    <article class="orbit-item" style="--angle:0deg;">
+                        <div class="orbit-upright" style="--angle:0deg;">
+                            <button type="button" class="school-card school-choice orbit-card school-arcane" onclick="showSchoolDetails('Arcane','../sheet/arcane.png')">
+                                <img src="../sheet/arcane.png" alt="Arcane"><h3>Arcane</h3>
+                            </button>
                         </div>
-                    </div>
-                </aside>
-            </section>
+                    </article>
+                    <article class="orbit-item" style="--angle:72deg;">
+                        <div class="orbit-upright" style="--angle:72deg;">
+                            <button type="button" class="school-card school-choice orbit-card school-divine" onclick="showSchoolDetails('Divine','../sheet/divine.png')">
+                                <img src="../sheet/divine.png" alt="Divine"><h3>Divine</h3>
+                            </button>
+                        </div>
+                    </article>
+                    <article class="orbit-item" style="--angle:144deg;">
+                        <div class="orbit-upright" style="--angle:144deg;">
+                            <button type="button" class="school-card school-choice orbit-card school-elemental" onclick="showSchoolDetails('Elemental','../sheet/elemental.png')">
+                                <img src="../sheet/elemental.png" alt="Elemental"><h3>Elemental</h3>
+                            </button>
+                        </div>
+                    </article>
+                    <article class="orbit-item" style="--angle:216deg;">
+                        <div class="orbit-upright" style="--angle:216deg;">
+                            <button type="button" class="school-card school-choice orbit-card school-occult" onclick="showSchoolDetails('Occult','../sheet/occult.png')">
+                                <img src="../sheet/occult.png" alt="Occult"><h3>Occult</h3>
+                            </button>
+                        </div>
+                    </article>
+                    <article class="orbit-item" style="--angle:288deg;">
+                        <div class="orbit-upright" style="--angle:288deg;">
+                            <button type="button" class="school-card school-choice orbit-card school-cosmic" onclick="showSchoolDetails('Cosmic','../sheet/cosmic.png')">
+                                <img src="../sheet/cosmic.png" alt="Cosmic"><h3>Cosmic</h3>
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </div>
         </div>
 
     </main>
+
     <div id="footer-placeholder"></div>
 
-    <div id="school-mobile-modal"
-        class="fixed inset-0 z-[110] bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4"
-        onclick="closeSchoolModal(event)">
-        <div class="modal-content bg-slate-900 border border-slate-700 p-1 rounded-none max-w-md w-full shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden"
-            onclick="event.stopPropagation()">
-            <div
-                class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-60">
-            </div>
-            <div class="p-6 relative z-10 text-center">
-                <button type="button" onclick="closeSchoolModal()"
-                    class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors"
-                    aria-label="Close school details">✖</button>
-                <p class="text-[10px] uppercase tracking-[0.2em] text-amber-300 font-bold">School Legend</p>
-                <img id="school-mobile-icon" src="" alt="Selected school icon"
-                    class="w-14 h-14 rounded-none object-cover mx-auto mt-4">
-                <h3 id="school-mobile-name" class="text-2xl font-bold text-white mt-3"></h3>
-                <div id="school-mobile-description"
-                    class="mt-4 rounded-none border border-slate-500/30 bg-slate-500/10 px-4 py-3 text-sm text-white text-center">
-                    âš ï¸ Under Reconstruction âš ï¸
-                </div>
+    <!-- School modal -->
+    <div id="school-mobile-modal" class="modal-overlay hidden" onclick="closeSchoolModal(event)">
+        <div class="modal-box" style="max-width:440px;" onclick="event.stopPropagation()">
+            <button onclick="closeSchoolModal()" class="modal-close">&#x2715;</button>
+            <div class="modal-inner" style="text-align:center;">
+                <p style="font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">School</p>
+                <img id="school-mobile-icon" src="" style="width:56px;height:56px;object-fit:contain;margin:0 auto 1rem;">
+                <h3 id="school-mobile-name" style="font-family:'Cinzel',serif; font-size:1.6rem; color:var(--ink); margin-bottom:1rem;"></h3>
+                <div id="school-mobile-description" style="font-size:0.9rem; color:var(--ink-dim); line-height:1.8; text-align:left; border-left:2px solid var(--gold-line); padding-left:1rem;"></div>
             </div>
         </div>
     </div>
 
-    <div id="random-spell-modal"
-        class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4"
-        onclick="closeRandomSpell(event)">
-        <div class="modal-content bg-slate-900 border border-slate-700 p-1 rounded-none max-w-lg w-full shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden"
-            onclick="event.stopPropagation()">
-            <div
-                class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50">
-            </div>
-            <div class="p-8 relative z-10">
-                <button onclick="closeRandomSpell()"
-                    class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">✖</button>
-                <div class="text-center mb-6">
-                    <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-[0.2em]">Random
-                        Discovery</span>
-                    <h3 id="rand-spell-name" class="text-4xl font-bold text-white mt-3 mb-4">Spell Name</h3>
-                    <div id="rand-spell-meta" class="flex flex-wrap justify-center gap-2"></div>
+    <!-- Random spell modal -->
+    <div id="random-spell-modal" class="modal-overlay hidden" onclick="closeRandomSpell(event)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button onclick="closeRandomSpell()" class="modal-close">&#x2715;</button>
+            <div class="modal-inner">
+                <div style="text-align:center; margin-bottom:1.5rem;">
+                    <p style="font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--indigo); margin-bottom:0.75rem;">Random Discovery</p>
+                    <h3 id="rand-spell-name" style="font-family:'Cinzel',serif; font-size:2rem; color:var(--ink); margin-bottom:1rem;">Spell Name</h3>
+                    <div id="rand-spell-meta" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.4rem;"></div>
                 </div>
-                <div class="bg-slate-800/50 p-6 rounded-none border border-slate-700/50 shadow-inner">
-                    <div id="rand-spell-desc" class="text-slate-300 leading-relaxed text-sm"></div>
-                    <div id="rand-spell-upcast"
-                        class="hidden mt-4 pt-4 border-t border-slate-700/50 text-xs text-indigo-300"></div>
+                <div style="background:var(--surface-0); border:1px solid var(--border); padding:1.25rem;">
+                    <div id="rand-spell-desc" style="font-size:0.92rem; color:var(--ink-dim); line-height:1.75;"></div>
+                    <div id="rand-spell-upcast" class="hidden upcast-block" style="margin-top:0.75rem;"></div>
                 </div>
-                <button onclick="pickRandomSpell()"
-                    class="w-full mt-6 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-none font-bold uppercase tracking-widest text-xs transition-all shadow-lg hover:shadow-indigo-500/25 border border-indigo-400/20">
-                    Roll Again
-                </button>
+                <button onclick="pickRandomSpell()" style="width:100%; margin-top:1rem; padding:0.75rem; background:rgba(129,140,248,0.12); border:1px solid rgba(129,140,248,0.3); font-family:'JetBrains Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--indigo); cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='rgba(129,140,248,0.2)';" onmouseout="this.style.background='rgba(129,140,248,0.12)';">Roll Again</button>
             </div>
         </div>
     </div>
 
     <script>
+    const schoolDescriptions = {
+        'Arcane': '<b>Arcane magic</b> is fundamentally similar to <b>mathematics</b>, requiring <b>study</b> and <b>precision</b> to command it to do your will. In exchange for its <b>complexity</b>, it is highly <b>diverse</b> in its applications, ranging from <b>a minor blast</b> to <b>altering fate and outcomes</b>. In addition to its more powerful effects, <b>Arcane magic</b> is commonly used as a <b>utility school</b>, offering many spells that can assist in everyday situations.<br><br>As a <b>spellcaster</b>, the <b>Arcane School</b> grants you access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
+        'Divine': '<b>Divine magic</b>, often a source of <b>faith</b> and <b>stability</b>, can also be a source of <b>great power</b>. As you pledge yourself to <b>Divine magic</b>, you make an <b>oath</b> to act in the name of your <b>deity</b>. Your <b>Divine power</b> manifests as both <b>defensive power</b>, in the form of <b>healing</b> and <b>bolstering allies</b>, and <b>offensive power</b>, through <b>divine smites</b> and <b>sundering the undead</b>.<br><br><b>The Divine School</b> grants you access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
+        'Elemental': '<b>Elemental magic</b> is rooted in the <b>fundamental elements</b> that appear in every facet of the world. Commanding them requires <b>attunement</b> to <b>nature</b> — listen to them and let them flow through you, and you will gain access to one of the most <b>versatile schools of magic</b>. <b>Elemental casters</b> have access to <b>buffs</b>, <b>debuffs</b>, <b>damage</b>, <b>area control</b>, and much more.<br><br>When you select the <b>Elemental School</b>, you choose an element: <b>Earth</b>, <b>Nature</b>, <b>Fire</b>, <b>Water</b>, <b>Lightning</b>, <b>Wind</b>, <b>Toxic</b>. Your chosen element is <b>enhanced</b>. You gain access to <b>spells levels 1 to 4</b> plus <b>cantrips</b>.',
+        'Occult': '<b>Occult magic</b> is a <b>dark</b> and <b>mysterious</b> force, born from one\'s own <b>inner demons</b>, an expression of <b>emotion</b> manifested into <b>power</b>. You exert your <b>will</b> upon others, <b>hexing</b> and <b>cursing</b> them, sacrificing portions of yourself to gain even stronger effects.<br><br>You only have access to <b>spells levels 1 to 2</b>, however your spells are far more <b>potent</b> when <b>upcast</b>. As such, you can <b>only cast spells at the highest level</b> you have access to.',
+        'Cosmic': '<b>Cosmic magic</b> draws power from the <b>cosmos</b>, an ever-expansive force that binds everything together. In <b>Cosmic magic</b>, no spell is inherently <b>powerful</b> — they are designed to be cast as many times as possible in a single moment.<br><br>The <b>Cosmic School</b> grants access to only <b>level 1 spells</b>, and you cannot <b>upcast</b>. Instead you gain <b>multicasting</b> — spend mana normally used for upcasting to cast multiple instances of a spell, each targeting a different target.'
+    };
 
-        const schoolDescriptions = {
-            'Arcane': '<b>Arcane magic</b> is fundamentally similar to <b>mathematics</b>, requiring <b>study</b> and <b>precision</b> to command it to do your will. In exchange for its <b>complexity</b>, it is highly <b>diverse</b> in its applications, ranging from <b>a minor blast</b> to <b>altering fate and outcomes</b>. In addition to its more powerful effects, <b>Arcane magic</b> is commonly used as a <b>utility school</b>, offering many spells that can assist in everyday situationsâ€”there is even a spell that can <b>summon a ladder</b>.<br><br> As a <b>spellcaster</b>, the <b>Arcane School</b> grants you access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
-            'Divine': '<b>Divine magic</b>, often a source of <b>faith</b> and <b>stability</b>, can also be a source of <b>great power</b>. As you pledge yourself to <b>Divine magic</b>, you make an <b>oath</b> to act in the name of your <b>deity</b>. Your <b>Divine power</b> manifests as both <b>defensive power</b>, in the form of <b>healing</b> and <b>bolstering allies</b>, and <b>offensive power</b>, through <b>divine smites</b> and <b>sundering the undead</b>.<br><br><b>The Divine School</b> grants you access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
-            'Elemental': '<b>Elemental magic</b> is rooted in the <b>fundamental elements</b> that appear in every facet of the world. Commanding them requires <b>attunement</b> to <b>nature</b>â€”listen to them and let them flow through you, and you will gain access to one of the most <b>versatile schools of magic</b>. <b>Elemental casters</b> have access to <b>buffs</b>, <b>debuffs</b>, <b>damage</b>, <b>area control</b>, and much more, often promoting a sense of <b>synergy</b> between the elements.<br><br>When you select the <b>Elemental School</b>, you must choose an element from the following: <b>Earth</b>, <b>Nature</b>, <b>Fire</b>, <b>Water</b>, <b>Lightning</b>, <b>Wind</b>, <b>Toxic</b>. While you still retain access to other elements, your <b>chosen element</b> is <b>enhanced</b>. You gain access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
-            'Occult': '<b>Occult magic</b> is a <b>dark</b> and <b>mysterious</b> force, born from one\'s own <b>inner demons</b>, an expression of <b>emotion</b> manifested into <b>power</b>. You exert your <b>will</b> upon others, <b>hexing</b> and <b>cursing</b> them, sacrificing portions of yourself to gain even stronger effects. However, this strength comes at the cost of <b>versatility</b> and <b>utility</b> your body can only handle a limited amount of this type of magic.<br><br>When you begin your journey into the <b>Occult</b>, you will quickly realize how important <b>cantrips</b> are. You only have access to <b>spells</b> from <b>levels 1 to 2</b>, however your spells are far more <b>potent</b> when <b>upcast</b>. As such, you can <b>ONLY cast spells at the highest level</b> you have access to. <b>Scholarship</b> still determines the number of spells you know.',
-            'Cosmic': '<b>Cosmic magic</b> draws power from the <b>cosmos</b>, an ever-<b>expansive</b> force that binds everything together as an <b>interconnected whole</b>. To truly understand it, you must accept your place within the <b>constellation of fate</b>, and in doing so, see it for what it truly is. In <b>Cosmic magic</b>, no spell is inherently <b>powerful</b>; instead, they are designed to be cast as many times as possible in a single moment.<br><br>The <b>Cosmic School</b> grants you access to only <b>level 1 spells</b>, and you cannot <b>upcast</b> them. Instead, you gain access to <b>multicasting</b>, allowing you to spend <b>mana</b> normally used for upcasting to cast multiple instances of a spell. Each spell can target a <b>different target</b> and becomes stronger when <b>multicast</b>, enhancing its effects through repeated casting.'
+    let rawSpells = [];
+    let rawCantrips = [];
+    let activeFilters = { category: null, cost: null };
+
+    function updateLegendTop() {
+        const tabs = document.getElementById('spellsViewTabs');
+        if (!tabs) return;
+        const h = tabs.getBoundingClientRect().height;
+        document.documentElement.style.setProperty('--tab-h', Math.round(h) + 'px');
+    }
+
+    function switchView(viewId) {
+        document.querySelectorAll('.top-view-section').forEach(s => {
+            s.classList.toggle('hidden', s.id !== viewId);
+        });
+        document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+            const ids = ['view-spells', 'view-schools'];
+            btn.classList.toggle('active', ids[i] === viewId);
+        });
+        if (viewId !== 'view-schools') closeSchoolModal();
+        requestAnimationFrame(updateLegendTop);
+    }
+
+    function openSchoolModal(name, iconPath) {
+        const modal = document.getElementById('school-mobile-modal');
+        document.getElementById('school-mobile-icon').src = iconPath;
+        document.getElementById('school-mobile-name').textContent = name;
+        document.getElementById('school-mobile-description').innerHTML = schoolDescriptions[name] || 'No description available.';
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSchoolModal(event) {
+        if (event && event.target !== event.currentTarget) return;
+        document.getElementById('school-mobile-modal').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    function showSchoolDetails(name, iconPath) {
+        openSchoolModal(name, iconPath);
+        document.querySelectorAll('.school-choice').forEach(btn => {
+            btn.classList.toggle('active', btn.querySelector('h3')?.textContent?.trim() === name);
+        });
+    }
+
+    function toggleDetails(rowId) {
+        const row = document.getElementById(rowId);
+        if (!row) return;
+        row.classList.toggle('hidden');
+        const arrow = document.getElementById('arrow-' + rowId);
+        if (arrow) arrow.style.transform = row.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(90deg)';
+    }
+
+    function expandAllMagic(shouldExpand) {
+        document.querySelectorAll('tr[id^="spell-"]').forEach(row => {
+            row.classList.toggle('hidden', !shouldExpand);
+            const arrow = document.getElementById('arrow-' + row.id);
+            if (arrow) arrow.style.transform = shouldExpand ? 'rotate(90deg)' : 'rotate(0deg)';
+        });
+    }
+
+    function toggleFilter(type, value) {
+        activeFilters[type] = activeFilters[type] === value ? null : value;
+        updateFilterUI();
+        renderMagic();
+    }
+
+    function clearFilters() {
+        activeFilters.category = null;
+        activeFilters.cost = null;
+        updateFilterUI();
+        renderMagic();
+    }
+
+    function updateFilterUI() {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            const match = btn.getAttribute('onclick')?.match(/toggleFilter\('(\w+)',\s*'([^']+)'\)/);
+            if (!match) return;
+            const [, type, val] = match;
+            btn.classList.toggle('active', activeFilters[type] === val);
+        });
+        const hasFilt = activeFilters.category || activeFilters.cost;
+        document.getElementById('clear-filter').classList.toggle('hidden', !hasFilt);
+    }
+
+    function createRows(item, index, type) {
+        const rowId = `spell-${item.Cost}-${index}-${type}`;
+        const catSlug = (item.Category || '').toLowerCase().replace(/\s/g, '-');
+        return `
+        <tr onclick="toggleDetails('${rowId}')" class="expandable-row">
+            <td style="font-family:'Cinzel',serif; font-size:0.92rem; font-weight:600; color:var(--ink);">
+                <img src="../sheet/${catSlug}.png" style="width:14px;height:14px;display:inline;vertical-align:middle;margin-right:0.4rem;opacity:0.8;">
+                ${item.Name}
+            </td>
+            <td style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--gold);">${item.Cost} ✦</td>
+            <td><span class="category-tag">${item.Category || 'Universal'}</span></td>
+            <td style="text-align:right; color:var(--ink-faint);"><div id="arrow-${rowId}" style="display:inline-block; transition:transform 0.2s; font-size:0.7rem;">&#9656;</div></td>
+        </tr>
+        <tr id="${rowId}" class="hidden spell-detail-row">
+            <td colspan="4">
+                <div class="spell-meta-tags">
+                    ${item.Type ? `<span class="spell-meta-tag">Type: ${item.Type}</span>` : ''}
+                    ${item.Range ? `<span class="spell-meta-tag">Range: ${item.Range}</span>` : ''}
+                </div>
+                <p style="font-size:0.92rem; color:var(--ink-dim); line-height:1.75; margin:0;">${item.Description}</p>
+                ${item.Upcast ? `<div class="upcast-block"><span style="font-weight:700; color:var(--indigo);">✚ Upcast:</span> ${item.Upcast}</div>` : ''}
+                ${item.Lore ? `<div class="lore-line">${item.Lore}</div>` : ''}
+            </td>
+        </tr>`;
+    }
+
+    function toggleSpellClear() {
+        const val = document.getElementById('search-input')?.value;
+        document.getElementById('search-clear')?.classList.toggle('hidden', !val);
+    }
+
+    function clearSpellSearch() {
+        const input = document.getElementById('search-input');
+        if (input) { input.value = ''; renderMagic(); toggleSpellClear(); }
+    }
+
+    function renderMagic() {
+        const cantripBody = document.getElementById('cantrips-body');
+        const spellBody = document.getElementById('spells-body');
+        const q = (document.getElementById('search-input')?.value || '').toLowerCase();
+
+        const pass = item => {
+            const matchSearch = !q || (item.Name||'').toLowerCase().includes(q) || (item.Description||'').toLowerCase().includes(q);
+            const matchCat  = !activeFilters.category || item.Category === activeFilters.category;
+            const matchCost = !activeFilters.cost || String(item.Cost) === String(activeFilters.cost);
+            return matchSearch && matchCat && matchCost;
         };
 
+        const sc = rawCantrips.filter(pass);
+        const ss = rawSpells.filter(pass);
 
+        cantripBody.innerHTML = sc.length ? sc.map((item, i) => createRows(item, i, 'cantrip')).join('') : '<tr><td colspan="4" style="padding:2rem; text-align:center; color:var(--ink-faint); font-style:italic;">No matching cantrips.</td></tr>';
+        spellBody.innerHTML   = ss.length ? ss.map((item, i) => createRows(item, i, 'spell')).join('')   : '<tr><td colspan="4" style="padding:2rem; text-align:center; color:var(--ink-faint); font-style:italic;">No matching spells.</td></tr>';
 
-        let rawSpells = [];
-        let rawCantrips = [];
-        let activeFilters = { category: null, cost: null };
+        const total = rawCantrips.length + rawSpells.length;
+        const shown = sc.length + ss.length;
+        document.getElementById('magic-counter').textContent = `${shown} / ${total} Spells`;
+        document.getElementById('cantrip-counter').textContent = `${sc.length} / ${rawCantrips.length}`;
+        document.getElementById('spell-counter').textContent = `${ss.length} / ${rawSpells.length}`;
+    }
 
-        function syncLegendTop() {
-            const tabs = document.getElementById('spellsViewTabs');
-            if (!tabs) return;
-            if (!window.matchMedia('(min-width: 1024px)').matches) return;
+    function pickRandomSpell() {
+        const all = [...rawCantrips, ...rawSpells];
+        if (!all.length) return;
+        const modal = document.getElementById('random-spell-modal');
+        const nameEl = document.getElementById('rand-spell-name');
+        const descEl = document.getElementById('rand-spell-desc');
+        const metaEl = document.getElementById('rand-spell-meta');
+        const upcastEl = document.getElementById('rand-spell-upcast');
 
-            const rect = tabs.getBoundingClientRect();
-            const legendTop = Math.max(96, Math.round(rect.bottom + 12));
-            document.documentElement.style.setProperty('--spells-legend-top', `${legendTop}px`);
-        }
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        descEl.innerHTML = '<span style="color:var(--ink-faint);font-style:italic;">Deciphering...</span>';
+        metaEl.innerHTML = '';
+        upcastEl.classList.add('hidden');
+        nameEl.classList.add('shuffling');
 
-        function switchView(viewId) {
-            document.querySelectorAll('.top-view-section').forEach(section => {
-                if (section.id === viewId) section.classList.remove('hidden');
-                else section.classList.add('hidden');
-            });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                if (btn.getAttribute('onclick').includes(`switchView('${viewId}')`)) btn.classList.add('active');
-                else btn.classList.remove('active');
-            });
-            if (viewId !== 'view-schools') closeSchoolModal();
-            requestAnimationFrame(syncLegendTop);
-        }
-
-        function openSchoolModal(name, iconPath) {
-            const modal = document.getElementById('school-mobile-modal');
-            const icon = document.getElementById('school-mobile-icon');
-            const schoolName = document.getElementById('school-mobile-name');
-            const desc = document.getElementById('school-mobile-description');
-            if (!modal || !icon || !schoolName) return;
-
-            icon.src = iconPath;
-            icon.alt = `${name} icon`;
-            schoolName.textContent = name;
-            if (desc) {
-                desc.innerHTML = schoolDescriptions[name] || 'No description available.';
-            }
-
-            modal.classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
-        }
-
-        function closeSchoolModal(event) {
-            if (event && event.target !== event.currentTarget) return;
-            const modal = document.getElementById('school-mobile-modal');
-            if (!modal) return;
-            modal.classList.add('hidden');
-            document.body.classList.remove('overflow-hidden');
-        }
-
-        function showSchoolDetails(name, iconPath) {
-            openSchoolModal(name, iconPath);
-
-            document.querySelectorAll('.school-choice').forEach((btn) => {
-                btn.classList.toggle('active', btn.textContent.trim() === name);
-            });
-        }
-
-        function toggleDetails(rowId) {
-            const row = document.getElementById(rowId);
-            row.classList.toggle('hidden');
-            const arrow = document.getElementById(`arrow-${rowId}`);
-            if (arrow) arrow.style.transform = row.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-        }
-
-        function expandAllMagic(shouldExpand) {
-            document.querySelectorAll('tr[id^="spell-"]').forEach(row => {
-                row.classList.toggle('hidden', !shouldExpand);
-                const arrow = document.getElementById(`arrow-${row.id}`);
-                if (arrow) arrow.style.transform = shouldExpand ? 'rotate(180deg)' : 'rotate(0deg)';
-            });
-        }
-
-        function toggleFilter(type, value) {
-            if (activeFilters[type] === value) activeFilters[type] = null;
-            else activeFilters[type] = value;
-            updateFilterUI();
-            renderMagic();
-        }
-
-        function clearFilters() {
-            activeFilters.category = null; activeFilters.cost = null;
-            updateFilterUI(); renderMagic();
-        }
-
-        function updateFilterUI() {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                const match = btn.getAttribute('onclick').match(/toggleFilter\('(\w+)',\s*'(.+)'\)/);
-                if (match) {
-                    const [_, type, val] = match;
-                    if (activeFilters[type] === val) btn.classList.add('active');
-                    else btn.classList.remove('active');
-                }
-            });
-            document.getElementById('clear-filter').classList.toggle('hidden', !(activeFilters.category || activeFilters.cost));
-        }
-
-        function createRows(item, index, type) {
-            const rowId = `spell-${item.Cost}-${index}-${type}`;
-            return `
-            <tr onclick="toggleDetails('${rowId}')" class="expandable-row border-b border-slate-800/50 cursor-pointer hover:bg-slate-800/30">
-                <td class="px-6 py-4 font-bold text-white text-base"><img src="../sheet/${item.Category.toLowerCase().replace(' ', '-')}.png" alt="${item.Name}" class="w-5 h-5 inline-block mr-2">${item.Name}</td>
-                <td class="px-6 py-4 text-indigo-300 font-mono text-xs font-bold">${item.Cost} ✦</td>
-                <td class="px-6 py-4"><span class="category-tag">${item.Category || 'Universal'}</span></td>
-                <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${rowId}" class="transition-transform duration-200 inline-block">▼</div></td>
-            </tr>
-            <tr id="${rowId}" class="hidden bg-slate-900/40"><td colspan="4" class="px-6 py-6 border-b border-slate-800"><div class="space-y-4">
-                    <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest"><span class="text-white font-bold bg-slate-700/50 px-2 py-1 rounded">Type: ${item.Type || '-'}</span><span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${item.Range || 'Self'}</span></div>
-                    <p class="text-slate-300 text-sm leading-relaxed">${item.Description}</p>
-                    ${item.Upcast ? `<div class="text-indigo-300 text-xs p-2 bg-indigo-900/20 rounded border border-indigo-500/20"><span class="font-bold">✚ Upcast:</span> ${item.Upcast}</div>` : ''}
-                    <div class="text-slate-500 italic text-[11px] border-l-2 border-slate-700 pl-3">${item.Lore || ''}</div>
-            </div></td></tr>`;
-        }
-
-        function toggleSpellClear() {
-            const input = document.getElementById('search-input');
-            const clearBtn = document.getElementById('search-clear');
-            if (!input || !clearBtn) return;
-            clearBtn.classList.toggle('hidden', !input.value);
-        }
-
-        function clearSpellSearch() {
-            const input = document.getElementById('search-input');
-            if (!input) return;
-            input.value = '';
-            toggleSpellClear();
-            renderMagic();
-        }
-
-        function renderMagic() {
-            const cantripTable = document.getElementById('cantrips-body');
-            const spellTable = document.getElementById('spells-body');
-            const searchTerm = document.getElementById('search-input').value.toLowerCase();
-
-            const processData = (dataList) => {
-                return dataList.filter(item => {
-                    const mSearch = (item.Name && item.Name.toLowerCase().includes(searchTerm)) || (item.Description && item.Description.toLowerCase().includes(searchTerm));
-                    const mCat = !activeFilters.category || (item.Category === activeFilters.category);
-                    const mCost = !activeFilters.cost || (String(item.Cost) === String(activeFilters.cost));
-                    return mSearch && mCat && mCost;
-                });
-            };
-
-            const sCantrips = processData(rawCantrips);
-            const sSpells = processData(rawSpells);
-
-            cantripTable.innerHTML = sCantrips.length ? sCantrips.map((item, i) => createRows(item, i, 'cantrip')).join('') : '<tr><td colspan="4" class="p-6 text-center text-slate-600 italic">No matching cantrips.</td></tr>';
-            spellTable.innerHTML = sSpells.length ? sSpells.map((item, i) => createRows(item, i, 'spell')).join('') : '<tr><td colspan="4" class="p-6 text-center text-slate-600 italic">No matching spells.</td></tr>';
-
-            const totalCount = rawCantrips.length + rawSpells.length;
-            const filteredCount = sCantrips.length + sSpells.length;
-            document.getElementById('magic-counter').textContent = `${filteredCount} / ${totalCount} Spells`;
-            document.getElementById('cantrip-counter').textContent = `${sCantrips.length} / ${rawCantrips.length}`;
-            document.getElementById('spell-counter').textContent = `${sSpells.length} / ${rawSpells.length}`;
-            toggleSpellClear();
-        }
-
-        function pickRandomSpell() {
-            const allMagic = [...rawCantrips, ...rawSpells];
-            if (!allMagic.length) return;
-
-            const modal = document.getElementById('random-spell-modal');
-            const nameEl = document.getElementById('rand-spell-name');
-            const descEl = document.getElementById('rand-spell-desc');
-            const metaEl = document.getElementById('rand-spell-meta');
-            const upcastEl = document.getElementById('rand-spell-upcast');
-
-            modal.classList.remove('hidden');
-
-            let shuffleCount = 0;
-            const maxShuffles = 10;
-            const intervalTime = 60;
-
-            descEl.innerHTML = '<span class="text-slate-500 italic animate-pulse">Deciphering...</span>';
-            metaEl.innerHTML = '';
-            upcastEl.classList.add('hidden');
-            nameEl.classList.add('text-indigo-300', 'shuffling');
-
-            const shuffleInterval = setInterval(() => {
-                const temp = allMagic[Math.floor(Math.random() * allMagic.length)];
-                nameEl.textContent = temp.Name || 'Unknown Spell';
-                shuffleCount++;
-
-                if (shuffleCount >= maxShuffles) {
-                    clearInterval(shuffleInterval);
-                    finalizeSpell();
-                }
-            }, intervalTime);
-
-            function finalizeSpell() {
-                const spell = allMagic[Math.floor(Math.random() * allMagic.length)];
-                nameEl.classList.remove('text-indigo-300', 'shuffling');
-                nameEl.textContent = spell.Name || 'Unknown Spell';
+        let n = 0;
+        const iv = setInterval(() => {
+            nameEl.textContent = all[Math.floor(Math.random() * all.length)].Name;
+            if (++n >= 10) {
+                clearInterval(iv);
+                nameEl.classList.remove('shuffling');
+                const spell = all[Math.floor(Math.random() * all.length)];
+                nameEl.textContent = spell.Name;
                 descEl.textContent = spell.Description || 'No description available.';
-
-                metaEl.innerHTML = `
-                    <span class="px-3 py-1 rounded-none bg-slate-700 border border-slate-600 text-slate-200 text-[10px] font-bold uppercase tracking-wider">${spell.Category || 'Universal'}</span>
-                    <span class="px-3 py-1 rounded-none bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-[10px] font-bold uppercase tracking-wider">${spell.Cost ?? '-'} Mana</span>
-                    ${spell.Type ? `<span class="px-3 py-1 rounded-none bg-slate-700 border border-slate-600 text-slate-200 text-[10px] font-bold uppercase tracking-wider">${spell.Type}</span>` : ''}
-                `;
-
+                metaEl.innerHTML = [
+                    `<span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border:1px solid var(--border);background:var(--surface-0);color:var(--ink-dim);">${spell.Category||'Universal'}</span>`,
+                    `<span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border:1px solid rgba(129,140,248,0.25);background:var(--indigo-dim);color:var(--indigo);">${spell.Cost ?? '-'} Mana</span>`,
+                    spell.Type ? `<span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border:1px solid var(--border);background:var(--surface-0);color:var(--ink-dim);">${spell.Type}</span>` : ''
+                ].join('');
                 if (spell.Upcast) {
-                    upcastEl.textContent = `Upcast: ${spell.Upcast}`;
+                    upcastEl.innerHTML = `<strong style="color:var(--indigo);">✚ Upcast:</strong> ${spell.Upcast}`;
                     upcastEl.classList.remove('hidden');
-                } else {
-                    upcastEl.classList.add('hidden');
                 }
             }
-        }
+        }, 60);
+    }
 
-        function closeRandomSpell() {
-            document.getElementById('random-spell-modal').classList.add('hidden');
-        }
+    function closeRandomSpell(event) {
+        if (event && event.target !== event.currentTarget) return;
+        document.getElementById('random-spell-modal').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
 
-        async function loadData() {
-            try {
-                const res = await fetch('../json/spells_cantrips.json');
-                const allMagic = await res.json();
-                rawCantrips = []; rawSpells = [];
-
-                allMagic.forEach(item => {
-                    if (item.Category !== 'Artisan') {
-                        if (String(item.Cost) === "0") rawCantrips.push(item);
-                        else rawSpells.push(item);
-                    }
-                });
-            } catch (e) { console.error(e); }
-            renderMagic();
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            switchView('view-spells');
-            syncLegendTop();
-            loadData();
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeSchoolModal();
+    async function loadData() {
+        try {
+            const res = await fetch('../json/spells_cantrips.json');
+            const all = await res.json();
+            rawCantrips = []; rawSpells = [];
+            all.forEach(item => {
+                if (item.Category !== 'Artisan') {
+                    (String(item.Cost) === '0' ? rawCantrips : rawSpells).push(item);
+                }
             });
-        });
-        window.addEventListener('resize', syncLegendTop);
-        window.addEventListener('scroll', syncLegendTop, { passive: true });
+        } catch(e) { console.error(e); }
+        renderMagic();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        switchView('view-spells');
+        updateLegendTop();
+        loadData();
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSchoolModal(); closeRandomSpell(); } });
+    });
+
+    window.addEventListener('resize', updateLegendTop);
+    window.addEventListener('scroll', updateLegendTop, { passive: true });
     </script>
     <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
 </body>
-
 </html>
