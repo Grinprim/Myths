@@ -14,6 +14,11 @@
             displayName: 'Mythblitz',
             color: '#10b981',
             link: './Mythblitz/index.html'
+        },
+        {
+            displayName: 'History',
+            color: '#f50b0b',
+            link: './History/index.html'
         }
     ];
 

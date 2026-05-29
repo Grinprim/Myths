@@ -4,6 +4,7 @@
   "segments": [
     {
       "year": "10000 B.W.C",
+      "yearValue": -10000,
       "title": "The Great Creation",
       "miniTitle": "Great Creation",
       "summary": "The Kawanot and Eladri are created by the Primordials Athon and Xanu, establishing the first immortal races.",
@@ -13,6 +14,7 @@
     },
     {
       "year": "10000–5000 B.W.C",
+      "yearValue": -7500,
       "title": "Era of Immortal Peace",
       "miniTitle": "Millennia of Coexistence",
       "summary": "Kawanot and Eladri coexist peacefully while developing science and magic separately.",
@@ -22,6 +24,7 @@
     },
     {
       "year": "5000 B.W.C",
+      "yearValue": -5000,
       "title": "Evolution of Mortal Races",
       "miniTitle": "Rise of Mortals",
       "summary": "Ambient magic triggers the emergence of mortal races across the world.",
@@ -31,6 +34,7 @@
     },
     {
       "year": "4750 B.W.C",
+        "yearValue": -4750,
       "title": "Creation of the Dinqui",
       "miniTitle": "Forged Servants",
       "summary": "The Kawanot create the Dinqui, a stonefolk race built for labor and service.",
@@ -40,6 +44,7 @@
     },
     {
       "year": "4300 B.W.C",
+        "yearValue": -4300,
       "title": "Descent of the Wild Lights",
       "miniTitle": "Divine Intervention",
       "summary": "Celestial entities known as Wild Lights descend and bond with mortal hosts.",
@@ -49,6 +54,7 @@
     },
     {
       "year": "4300–100 B.W.C",
+        "yearValue": -2150,
       "title": "Rising Tensions",
       "miniTitle": "Growing Resentment",
       "summary": "The Kawanot grow bitter as divine recognition continues to elude them.",
@@ -58,6 +64,7 @@
     },
     {
       "year": "100 B.W.C",
+        "yearValue": -100,
       "title": "Birth of the Gorgon",
       "miniTitle": "Fall of the Kawanot",
       "summary": "The Kawanot invoke a power beyond the primordials and are transformed.",
@@ -67,6 +74,7 @@
     },
     {
       "year": "0 A.W.C",
+        "yearValue": 0,
       "title": "The War of Creation",
       "miniTitle": "Aspect Intervention",
       "summary": "The Gorgon attempt to bring the Void Serpent into the world, triggering divine war.",
@@ -76,6 +84,7 @@
     },
     {
       "year": "0–1000 A.W.C",
+        "yearValue": 500,
       "title": "The Great Fallout",
       "miniTitle": "Aftermath of War",
       "summary": "Worlds fracture politically and culturally after the Aspect War.",
@@ -85,6 +94,7 @@
     },
     {
       "year": "1000 A.W.C",
+        "yearValue": 1000,
       "title": "The Fall of North Star",
       "miniTitle": "The Fall of the North Star",
       "summary": "A failed celestial ritual leads to mass death and the exile of horned Eladri.",
@@ -94,6 +104,7 @@
     },
     {
       "year": "1000–1500 A.W.C",
+      "yearValue": 1250,
       "title": "The Settling of Mortals",
       "miniTitle": "Age of Expansion",
       "summary": "Mortal races establish nations and stabilize after divine withdrawal.",
@@ -103,6 +114,7 @@
     },
     {
       "year": "1500–1940 A.W.C",
+      "yearValue": 1720,
       "title": "The Industrial Era",
       "miniTitle": "Magic Meets Machine",
       "summary": "Industrial and magical advancement reshape civilization.",
@@ -112,6 +124,7 @@
     },
     {
       "year": "1940–1960 A.W.C",
+      "yearValue": 1950,
       "title": "The Great War",
       "miniTitle": "Twenty-Year War",
       "summary": "A global war erupts, introducing devastating Black Magic.",
