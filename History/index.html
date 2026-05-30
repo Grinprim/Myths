@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="./HistoryLogo.png">
 	<title>Interactive Timeline</title>
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Sora:wght@300;400;600&display=swap');
@@ -66,6 +67,9 @@
 			position: relative;
 			z-index: 2;
 			padding: clamp(2.4rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem) 0;
+			display: flex;
+			align-items: center;
+			gap: 1rem;
 		}
 
 		.title {
@@ -870,8 +874,11 @@
 		<canvas id="smokeCanvas" aria-hidden="true"></canvas>
 
 		<header class="tl-header">
-			<h1 class="title">Journey Timeline</h1>
+			<img src="./HistoryLogo.png" alt="Timeline logo" style="width: 68px; height: 68px; margin-bottom: 0.6rem; display: inline-block;">
+			<div>
+			<h1 class="title">Timeline of the World</h1>
 			<p class="subtitle">Drag or scroll to explore. Click any marker to read the full story.</p>
+			</div>
 		</header>
 
 		<div class="tl-body">
@@ -907,7 +914,7 @@
 			<p id="modalCopy" class="modal-copy">Details.</p>
 		</div>
 	</aside>
-
+<div id="footer-placeholder"></div>
 	<script>
 		/* ─────────────────────────────────────────────
 		   TIMELINE ENGINE
@@ -975,7 +982,7 @@
 			const STORIES_JSON  = './stories.json';
 
 			const FALLBACK_DATA = {
-				title: 'Journey Timeline',
+				title: 'Timeline of the World',
 				subtitle: 'Drag or scroll to explore. Click any marker to read the full story.',
 				segments: [
 					{ year: '2017', title: 'The Beginning', miniTitle: 'Origin', summary: 'Where it all started — a single spark that set everything in motion.', details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut lacus sed est sodales facilisis. Vestibulum feugiat augue non sapien accumsan, a finibus orci vehicula.', side: 'top' },
@@ -1687,6 +1694,7 @@ const renderTimeline = (data, storiesData = { stories: [] }) => {
 		})();
 	})();
 	</script>
+	<script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
 </body>
 
 </html>

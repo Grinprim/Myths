@@ -1,0 +1,119 @@
+{
+  "star": {
+    "name": "Athos",
+    "type": "Arcane Main Sequence",
+    "radius": 52,
+    "color": "#fff4c2",
+    "coronaColor": "#ffd36b",
+    "description": "Athos is the golden-white sun at the heart of the system. Its light carries faint arcane resonance, leading many cultures to view it as a divine observer watching over creation. Solar eclipses are considered omens of uncertainty, and many magical traditions believe Athos influences the flow of powerful magic.",
+    "facts": [
+      "Known as the Eye of Xanu",
+      "Faint arcane resonance detectable by mages",
+      "Solar eclipses viewed as divine omens",
+      "Center of the Athos System"
+    ]
+  },
+  "planets": [
+    {
+      "id": "p1",
+      "name": "Auros",
+      "type": "Barren",
+      "radius": 8,
+      "orbitRadius": 140,
+      "orbitSpeed": 1.5,
+      "color": "#d96a3a",
+      "atmosphereColor": "rgba(255,120,60,0.08)",
+      "tilt": 4,
+      "description": "Auros is a scorched world of molten plains, unstable crust, and intense arcane pressure. Though physically hostile, it symbolizes passion, hope, love, ambition, and creation. Many cultures view it as the burning heart of intention—a reminder that great beginnings are often born from overwhelming force.",
+      "facts": [
+        "Type: Barren / Volcanic",
+        "Symbol of passion and hope",
+        "Closest planet to Athos",
+        "Moons: 0"
+      ],
+      "moons": []
+    },
+    {
+      "id": "p2",
+      "name": "Seoferia",
+      "type": "Livable",
+      "radius": 14,
+      "orbitRadius": 280,
+      "orbitSpeed": 0.8,
+      "color": "#4d86d9",
+      "atmosphereColor": "rgba(100,160,255,0.15)",
+      "tilt": 22,
+      "description": "Seoferia is the cradle of civilization and the center of recorded history. Its stable climate and predictable arcane currents allowed countless cultures to flourish, making it the world upon which history, magic, and society fully matured.",
+      "facts": [
+        "Type: Livable / Cradle World",
+        "Center of known civilization",
+        "Stable climate and arcane currents",
+        "Moons: 1"
+      ],
+      "moons": [
+        {
+          "name": "Talos",
+          "radius": 5,
+          "orbitRadius": 38,
+          "orbitSpeed": 3.2,
+          "color": "#a8c8e8"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "name": "Retiko",
+      "type": "Gas Giant",
+      "radius": 38,
+      "orbitRadius": 520,
+      "orbitSpeed": 0.32,
+      "color": "#7a89c2",
+      "bandColors": [
+        "#5b6db0",
+        "#8b9be0",
+        "#7a89c2",
+        "#8b9be0",
+        "#8b9be0"
+      ],
+      "atmosphereColor": "#253C78",
+      "tilt": 6,
+      "description": "Retiko is a vast gas giant of shifting storms, luminous cloud bands, and endless atmospheric depth. Across cultures it represents knowledge, curiosity, and the pursuit of understanding without end. Scholars see it as a reminder that no truth is ever fully complete, only explored more deeply.",
+      "facts": [
+        "Type: Gas Giant",
+        "Symbol of knowledge and curiosity",
+        "Known for immense atmospheric storms",
+        "Moons: 4"
+      ],
+      "moons": [
+        {
+          "name": "Atenia",
+          "radius": 4,
+          "orbitRadius": 60,
+          "orbitSpeed": 1.5,
+          "color": "#d8e0f0"
+        },
+        {
+          "name": "Palosia",
+          "radius": 5,
+          "orbitRadius": 82,
+          "orbitSpeed": 0.5,
+          "color": "#9ba0b5"
+        },
+        {
+          "name": "Extria",
+          "radius": 4,
+          "orbitRadius": 102,
+          "orbitSpeed": 2.2,
+          "color": "#c58ad6"
+        },
+        {
+          "name": "Mystria",
+          "radius": 5,
+          "orbitRadius": 126,
+          "orbitSpeed": 1.6,
+          "color": "#7d6cff"
+        }
+      ]
+    }
+  ]
+}
