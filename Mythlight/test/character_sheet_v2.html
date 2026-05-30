@@ -6,632 +6,11 @@
 <title>Mythlight Character Sheet</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="../Assets/css/styles.css">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap');
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg:           #0b1220;
-  --panel:        #263247;
-  --panel-alt:    #1b2537;
-  --border:       #3b4860;
-  --border-dark:  #1e293b;
-  --accent:       #7c83ff;
-  --accent2:      #a5b4fc;
-  --text:         #f8fafc;
-  --muted:        #94a3b8;
-  --input-bg:     #111a2b;
-  --input-border: #4b5a74;
-  --rad:          5px;
-  --sheet-scale:  1.20;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: radial-gradient(circle at 20% 10%, #1e1b4b 0%, #0f172a 55%, #0b1220 100%);
-  color: var(--text);
-  font-size: 13px;
-  line-height: 1.4;
-  padding: 14px;
-}
-
-.sheet h1,
-.sheet h2,
-.sheet h3,
-.panel-title {
-  font-family: 'Cinzel', serif;
-}
-
-.page-content {
-  padding-top: 24px;
-  padding-bottom: 120px;
-  position: relative;
-  z-index: 1;
-}
-
-nav.nav-container,
-footer {
-  position: relative;
-  z-index: 1;
-}
-
-.nav-container {
-  position: relative;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.92));
-  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
-  box-shadow: 0 16px 28px rgba(2, 6, 23, 0.45);
-  border-radius: 16px;
-  margin: 10px 10px 0;
-  overflow: hidden;
-}
-.nav-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(120% 110% at 50% -10%, rgba(129, 140, 248, 0.18), rgba(15, 23, 42, 0) 55%),
-    linear-gradient(90deg, rgba(2, 6, 23, 0.8) 0%, rgba(15, 23, 42, 0.2) 30%, rgba(15, 23, 42, 0.2) 70%, rgba(2, 6, 23, 0.8) 100%);
-  pointer-events: none;
-}
-.nav-container::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -18px;
-  height: 18px;
-  background: linear-gradient(180deg, rgba(2, 6, 23, 0.55), rgba(2, 6, 23, 0));
-  pointer-events: none;
-}
-
-footer {
-  margin-top: 96px;
-}
-
-footer h4,
-footer p {
-  color: #cbd5e1;
-}
-
-.sheet {
-  width: 1250px;
-  max-width: 100%;
-  margin: 0 auto calc(225px * var(--sheet-scale));
-  background: linear-gradient(135deg, rgba(38, 50, 71, 0.95) 0%, rgba(21, 31, 48, 0.95) 100%);
-  border: 2px solid rgba(129, 140, 248, 0.25);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 24px 48px rgba(2, 6, 23, 0.6), 0 0 0 1px rgba(129, 140, 248, 0.1);
-  transform: scale(var(--sheet-scale));
-  transform-origin: top center;
-}
-
-/* -- HEADER -- */
-.sheet-header {
-  background: linear-gradient(180deg, #1f2937 0%, #0f172a 100%);
-  color: #e2e8f0;
-  padding: 9px 18px;
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-}
-.sheet-header h1 {
-  font-size: 1rem;
-  letter-spacing: .08em;
-  font-weight: normal;
-  text-transform: uppercase;
-  font-family: 'Cinzel', serif;
-  background: linear-gradient(135deg, #ffffff, #e0e7ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 14px rgba(129, 140, 248, 0.35);
-}
-.header-btns { display: flex; gap: 6px; }
-.header-left { display:flex; align-items:center; gap:12px; flex:0 0 auto; }
-.header-center { display:flex; justify-content:center; align-items:center; flex:1 1 auto; }
-.header-btns button {
-  padding: 4px 11px; border: 1px solid #334155;
-  background: transparent; color: #e2e8f0;
-  border-radius: var(--rad); cursor: pointer;
-  font-size: 11px; font-family: inherit; transition: background .15s;
-}
-.header-btns button:hover { background: rgba(255,255,255,.15); }
-
-/* -- ROLL LOG -- */
-.roll-log-bar {
-  background: linear-gradient(180deg, #1f2937 0%, #0f172a 100%);
-  color: #e2e8f0;
-  padding: 4px 18px; font-size: 11px; min-height: 24px;
-  display: flex; align-items: center; gap: 10px;
-  border-top: 1px solid rgba(255,255,255,.1);
-}
-#rollResult { font-weight: bold; font-size: 12px; }
-#rollHistory { opacity: .55; }
-
-/*
-   TOP SECTION: left=defences, right=(info + attributes)
-*/
-.top-section {
-  display: grid;
-  grid-template-columns: 220px 1fr 540px;
-  border-bottom: 1px solid var(--border);
-}
-
-/* -- LEFT: portrait + defences -- */
-.left-col {
-  border-right: 1px solid var(--border);
-  display: flex; flex-direction: column;
-}
-
-/* portrait */
-.portrait-wrap {
-  padding: 16px 14px 12px;
-  border-bottom: 1px solid var(--border);
-  display: flex; flex-direction: column; align-items: center;
-}
-.portrait-circle {
-  position: relative; width: 160px; height: 160px;
-  border-radius: 50%; border: 2px solid rgba(129, 140, 248, 0.7);
-  overflow: hidden; cursor: pointer; background: var(--bg); flex-shrink: 0;
-  box-shadow: 0 0 14px rgba(129, 140, 248, 0.35);
-}
-.portrait-circle:hover {
-  border-color: rgba(129, 140, 248, 0.95);
-  box-shadow: 0 0 18px rgba(129, 140, 248, 0.55);
-}
-#portraitCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-.portrait-overlay {
-  position: absolute; inset: 0; border-radius: 50%;
-  background: rgba(0,0,0,.45);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 4px; opacity: 0; transition: opacity .2s;
-  color: #fff; font-size: 10px; pointer-events: none;
-}
-.portrait-circle:hover .portrait-overlay { opacity: 1; }
-.portrait-overlay svg { width: 26px; height: 26px; fill: #fff; }
-#portraitInput { display: none; }
-
-/* defences panel */
-.vitals-panel {
-  padding: 10px 13px; flex: 1;
-  display: flex; flex-direction: column; gap: 5px;
-}
-.panel-title {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: .14em;
-  color: #e2e8f0;
-  border-bottom: 1px solid rgba(129, 140, 248, 0.35);
-  padding: 4px 10px;
-  margin-bottom: 6px;
-  text-shadow: 0 0 12px rgba(129, 140, 248, 0.45);
-  background: linear-gradient(135deg, rgba(129, 140, 248, 0.22), rgba(15, 23, 42, 0.2));
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.35);
-}
-
-.vital-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 5px;
-}
-.vital-row label { font-size: 11px; color: var(--muted); white-space: nowrap; }
-.vital-row input[type=number] {
-  width: 62px; padding: 0;
-  border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.45) 100%);
-  font-family: inherit;
-  font-size: 12px; text-align: center; color: var(--text);
-  height: 24px;
-  line-height: 22px;
-  appearance: textfield;
-}
-
-/* bars */
-.bar-wrap { margin: 0; }
-.bar-track { height: 5px; border-radius: 3px; overflow: hidden; margin-top: 2px; margin-bottom: 1px; }
-.bar-fill  { height: 100%; border-radius: 3px; transition: width .3s, background-color .3s, box-shadow .3s; }
-.bar-track.green { background: rgba(16, 185, 129, 0.25); }
-.bar-fill.green  { background: linear-gradient(90deg, #10b981 0%, #059669 100%); box-shadow: 0 0 8px rgba(16, 185, 129, 0.6); }
-.bar-track.blue  { background: rgba(59, 130, 246, 0.25); }
-.bar-fill.blue   { background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%); box-shadow: 0 0 8px rgba(59, 130, 246, 0.6); }
-.bar-fill.yellow { background: linear-gradient(90deg, #eab308 0%, #ca8a04 100%); box-shadow: 0 0 8px rgba(234, 179, 8, 0.6); }
-.bar-fill.orange { background: linear-gradient(90deg, #f97316 0%, #c2410c 100%); box-shadow: 0 0 8px rgba(249, 115, 22, 0.6); }
-.bar-fill.red    { background: linear-gradient(90deg, #ef4444 0%, #b91c1c 100%); box-shadow: 0 0 8px rgba(239, 68, 68, 0.6); }
-
-/* armor */
-.armor-row { display: flex; align-items: center; gap: 5px; }
-.armor-row label { font-size: 11px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
-.armor-name {
-  flex: 1; min-width: 0; padding: 3px 5px;
-  border: 1px solid var(--input-border); border-radius: var(--rad);
-  background: var(--input-bg); font-family: inherit; font-size: 11px; color: var(--text);
-}
-.armor-def {
-  width: 36px; padding: 3px 4px;
-  border: 1px solid var(--input-border); border-radius: var(--rad);
-  background: var(--input-bg); font-family: inherit; font-size: 12px;
-  text-align: center; color: var(--text);
-}
-
-/* exhaustion */
-.exhaust-row { display: flex; align-items: center; justify-content: space-between; gap: 5px; }
-.exhaust-row label { font-size: 11px; color: var(--muted); white-space: nowrap; }
-.exhaust-row input[type=number] {
-  width: 90px; padding: 0;
-  border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.45) 100%);
-  font-family: inherit; font-size: 11px; color: var(--text);
-  text-align: center;
-  height: 24px;
-  line-height: 22px;
-  appearance: textfield;
-}
-.exhaust-row input[type=number]::-webkit-outer-spin-button,
-.exhaust-row input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* pips */
-.pips-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
-.pip {
-  width: 22px; height: 22px; border-radius: 50%;
-  border: 2px solid rgba(165, 180, 252, 0.9);
-  background: transparent; cursor: pointer;
-  transition: background .15s; flex-shrink: 0;
-}
-.pip.filled { background: var(--accent2); border-color: var(--accent); }
-.pip.filled { box-shadow: 0 0 8px rgba(99, 102, 241, 0.55); }
-
-/* -- RIGHT: info on top, attributes below -- */
-.right-col {
-  display: flex; flex-direction: column;
-}
-
-.equip-col {
-  border-left: 1px solid var(--border);
-  display: flex;
-  flex-direction: row;
-  gap: 6px;
-  padding: 6px 4px 10px 2px;
-}
-
-/* info */
-.info-panel {
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.38) 0%, rgba(15, 23, 42, 0.3) 100%);
-}
-.info-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 56px 56px;
-  gap: 8px; align-items: end;
-}
-.field { display: flex; flex-direction: column; gap: 2px; }
-.field label { font-size: 9px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
-.field input {
-  padding: 4px 7px;
-  border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.45) 100%);
-  box-shadow: inset 0 6px 10px rgba(0, 0, 0, 0.25);
-  font-family: inherit;
-  font-size: 12px; color: var(--text); width: 100%;
-}
-.field input:focus,
-.vital-row input[type=number]:focus,
-.attr-base-group input:focus,
-.skill-row input:focus,
-.armor-card input:focus,
-.armor-card textarea:focus,
-.weapon-card input:focus,
-.weapon-notes textarea:focus,
-.notes-panel textarea:focus,
-.exhaust-row select:focus {
-  outline: none;
-  border-color: rgba(99, 102, 241, 0.8);
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2), inset 0 6px 10px rgba(0, 0, 0, 0.25);
-}
-.field.narrow input {
-  padding: 0; font-size: 11px; text-align: center; height: 24px;
-  line-height: 22px; appearance: textfield;
-}
-
-/* attributes */
-.attrs-panel { padding: 10px 14px; flex: 1; }
-.attrs-section-title {
-  font-size: 9px; text-transform: uppercase; letter-spacing: .12em;
-  color: var(--muted); border-bottom: 1px solid var(--border);
-  padding-bottom: 3px; margin-bottom: 8px;
-  font-family: 'Cinzel', serif;
-}
-.attrs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-.attr-card {
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  border-radius: var(--rad);
-  overflow: hidden;
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.3) 100%);
-}
-.attr-header {
-  padding: 4px 8px;
-  display: flex; align-items: center; justify-content: space-between; gap: 6px;
-}
-.attr-header h3 { font-size: 11px; font-weight: bold; }
-.attr-body .attr-header h3 { text-shadow: 0 0 8px rgba(220, 38, 38, 0.45); }
-.attr-skill .attr-header h3 { text-shadow: 0 0 8px rgba(34, 197, 94, 0.45); }
-.attr-mind .attr-header h3 { text-shadow: 0 0 8px rgba(168, 85, 247, 0.45); }
-.attr-style .attr-header h3 { text-shadow: 0 0 8px rgba(236, 72, 153, 0.45); }
-.attr-base-group { display: flex; align-items: center; gap: 4px; }
-.attr-base-group label { font-size: 10px; color: var(--muted); white-space: nowrap; }
-.attr-base-group input {
-  width: 42px; padding: 0;
-  border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.45) 100%);
-  text-align: center;
-  font-family: inherit; font-size: 11px;
-  height: 22px;
-  line-height: 20px;
-  appearance: textfield;
-}
-.attr-body { background: linear-gradient(135deg, rgba(220, 38, 38, 0.22) 0%, rgba(190, 24, 93, 0.12) 100%); border-color: rgba(220, 38, 38, 0.35); }
-.attr-skill { background: linear-gradient(135deg, rgba(34, 197, 94, 0.22) 0%, rgba(5, 150, 105, 0.12) 100%); border-color: rgba(34, 197, 94, 0.35); }
-.attr-mind { background: linear-gradient(135deg, rgba(168, 85, 247, 0.22) 0%, rgba(126, 34, 206, 0.12) 100%); border-color: rgba(168, 85, 247, 0.35); }
-.attr-style { background: linear-gradient(135deg, rgba(236, 72, 153, 0.22) 0%, rgba(190, 24, 93, 0.12) 100%); border-color: rgba(236, 72, 153, 0.35); }
-
-.skill-col-headers {
-  display: grid; grid-template-columns: 1fr 52px 52px;
-  gap: 4px; padding: 2px 8px 1px;
-}
-.skill-col-headers span {
-  font-size: 9px; text-transform: uppercase;
-  letter-spacing: .06em; color: var(--muted); text-align: center;
-}
-.skill-col-headers span:first-child { visibility: hidden; }
-
-.skill-list { padding: 3px 8px 5px; display: flex; flex-direction: column; gap: 3px; }
-.skill-row { display: grid; grid-template-columns: 1fr 52px 52px; gap: 4px; align-items: center; }
-.skill-name { font-size: 12px; }
-.skill-row input {
-  padding: 0;
-  border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.45) 100%);
-  font-family: inherit;
-  font-size: 11px; text-align: center; width: 100%;
-  height: 22px;
-  line-height: 20px;
-  appearance: textfield;
-}
-
-.vital-row input[type=number]::-webkit-outer-spin-button,
-.vital-row input[type=number]::-webkit-inner-spin-button,
-.field.narrow input::-webkit-outer-spin-button,
-.field.narrow input::-webkit-inner-spin-button,
-.attr-base-group input::-webkit-outer-spin-button,
-.attr-base-group input::-webkit-inner-spin-button,
-.skill-row input::-webkit-outer-spin-button,
-.skill-row input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.total-input {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.55) 100%);
-  border-color: rgba(99, 102, 241, 0.3);
-  font-weight: bold; cursor: default; color: #e2e8f0;
-}
-
-.notes-panel {
-  padding: 10px 14px 12px;
-  border-top: 1px solid var(--border);
-  display: flex; flex-direction: column; flex: 1; gap: 6px;
-}
-.notes-panel textarea {
-  flex: 1; width: 100%; min-height: 120px; padding: 6px 8px;
-  border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.45) 100%);
-  font-family: inherit; font-size: 12px; color: var(--text); resize: none;
-}
-
-.bottom-row { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); min-height: 160px; }
-.bottom-panel { padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; width: 100%; }
-.bottom-panel-header { display: flex; align-items: center; justify-content: space-between; }
-
-.armor-panel {
-  padding: 8px 4px 8px 4px; display: flex; flex-direction: column; gap: 8px;
-  border-right: none; flex: 1;
-}
-.armor-card {
-  padding: 6px; border: 1px solid rgba(99, 102, 241, 0.28); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.35) 100%);
-  display: flex; flex-direction: column; gap: 6px; min-height: 130px;
-  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.35);
-}
-.card {
-  padding: 12px; border: 1px solid rgba(99, 102, 241, 0.12); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.35) 0%, rgba(15, 23, 42, 0.28) 100%);
-  box-shadow: 0 8px 18px rgba(2,6,23,0.35);
-}
-.armor-header { display: grid; grid-template-columns: 1fr 56px; gap: 6px; align-items: end; }
-.armor-card .field label { font-size: 9px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
-.armor-card input, .armor-card textarea {
-  padding: 3px 5px; border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.45) 100%);
-  font-family: inherit; font-size: 12px; color: var(--text); width: 100%;
-}
-.armor-card textarea { min-height: 44px; resize: none; }
-
-.weapons-panel { max-width: none; justify-self: stretch; flex: 1; border-left: 1px solid var(--border); padding: 10px; }
-.add-weapon-btn {
-  padding: 2px 9px; border: 1px solid var(--border-dark);
-  background: var(--input-bg); color: var(--text);
-  border-radius: var(--rad); font-family: inherit;
-  font-size: 10px; cursor: pointer; transition: background .15s; white-space: nowrap;
-}
-.add-weapon-btn:hover { background: var(--border); }
-.weapons-list { display: flex; flex-direction: column; gap: 6px; width: 100%; }
-.weapon-card {
-  display: grid; grid-template-columns: 1fr 36px 36px 22px; gap: 6px; align-items: end;
-  padding: 5px 6px; border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.35) 100%);
-  width: 100%; min-height: 130px; box-shadow: 0 6px 14px rgba(15, 23, 42, 0.28);
-}
-.weapon-notes { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 2px; }
-.weapon-notes textarea {
-  width: 100%; min-height: 44px; padding: 4px 6px;
-  border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.45) 100%);
-  font-family: inherit; font-size: 12px; color: var(--text); resize: none;
-}
-.wfield { display: flex; flex-direction: column; gap: 1px; }
-.wlabel { font-size: 9px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
-.weapon-card input {
-  padding: 3px 5px; border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.45) 100%);
-  font-family: inherit; font-size: 12px; color: var(--text); width: 100%;
-}
-.weapon-card input[type=number] { text-align: center; padding: 0; line-height: 22px; height: 22px; }
-.weapon-card input[placeholder="—"] { text-align: center; padding: 0; line-height: 22px; height: 22px; }
-.weapon-card .wfield:nth-child(2), .weapon-card .wfield:nth-child(3) { align-items: center; text-align: center; }
-.weapon-card .wfield:nth-child(2) .wlabel, .weapon-card .wfield:nth-child(3) .wlabel { text-align: center; width: 100%; }
-.weapon-card .wfield:nth-child(2) input, .weapon-card .wfield:nth-child(3) input { text-align: center; padding: 0; }
-.weapon-remove {
-  width: 22px; height: 22px; border: 1px solid var(--border); border-radius: var(--rad);
-  background: transparent; color: var(--muted);
-  font-size: 14px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; align-self: end;
-  transition: background .15s, color .15s;
-}
-.weapon-remove:hover { background: #fbeaea; color: #c0392b; border-color: #c0392b; }
-
-.sheet-footer {
-  text-align: right; padding: 4px 14px;
-  font-size: 10px; color: var(--muted);
-  border-top: 1px solid var(--border);
-  background: linear-gradient(90deg, rgba(15, 23, 42, 0.6), rgba(99, 102, 241, 0.08));
-  text-transform: uppercase; letter-spacing: .12em;
-}
-
-/* -- PORTRAIT MODAL -- */
-.modal-backdrop {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,.6); z-index: 100;
-  align-items: center; justify-content: center;
-}
-.modal-backdrop.open { display: flex; }
-.modal-box {
-  background: var(--panel); border: 2px solid var(--border-dark);
-  border-radius: 10px; padding: 20px;
-  display: flex; flex-direction: column; align-items: center;
-  gap: 14px; width: 320px; max-width: 95vw;
-}
-.modal-box h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
-.editor-viewport {
-  width: 220px; height: 220px; border-radius: 50%;
-  border: 2px solid var(--border-dark);
-  overflow: hidden; position: relative; cursor: grab; background: #ddd; user-select: none;
-}
-.editor-viewport:active { cursor: grabbing; }
-#editorCanvas { position: absolute; top: 0; left: 0; }
-.editor-controls { display: flex; flex-direction: column; gap: 6px; width: 100%; }
-.editor-controls label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
-.editor-controls input[type=range] { width: 100%; accent-color: var(--accent2); }
-.editor-btns { display: flex; gap: 8px; width: 100%; }
-.btn-change { background: var(--input-bg); color: var(--text); border: 1px dashed var(--border-dark); }
-.btn-change:hover { background: var(--border); }
-.editor-btns button { flex: 1; padding: 7px; border-radius: var(--rad); border: 1px solid var(--border-dark); font-family: inherit; font-size: 12px; cursor: pointer; }
-.btn-apply { background: var(--accent); color: #f0e8d8; border-color: var(--accent) !important; }
-.btn-apply:hover { background: var(--accent2); }
-.btn-cancel { background: var(--input-bg); color: var(--text); }
-.btn-cancel:hover { background: var(--border); }
-
-/* Subtabs (Main / Inventory / Paths / Spells) */
-.sheet-subtabs { display: flex; gap: 8px; align-items: center; }
-.subtab {
-  background: transparent; color: var(--text);
-  border: 1px solid rgba(99,102,241,0.08); padding: 6px 10px; border-radius: 999px;
-  font-size: 12px; cursor: pointer;
-}
-.subtab.active {
-  background: linear-gradient(135deg, rgba(129,140,248,0.14), rgba(129,140,248,0.06));
-  border-color: rgba(129,140,248,0.28);
-}
-.tab-content { display: block; }
-
-/* INVENTORY CSS */
-.inv-top-bar { padding: 12px 14px; border-bottom: 1px solid var(--border); }
-.inv-container { display: grid; grid-template-columns: 220px 1fr 1fr; gap: 12px; align-items: stretch; }
-.inv-left.vitals-panel { display: flex; flex-direction: column; gap: 10px; padding: 10px 13px; border-right: 1px solid var(--border); align-self: stretch; height: 100%; }
-.inv-center { display: flex; flex-direction: column; }
-.inv-side { display: flex; flex-direction: column; gap: 12px; }
-.inv-compact-panel {
-  border: 1px solid rgba(99, 102, 241, 0.2); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.35) 100%);
-  padding: 8px; box-shadow: 0 6px 14px rgba(15, 23, 42, 0.28);
-}
-.inv-compact-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
-.inv-compact-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-
-/* Money dots configuration */
-.coin-dot {
-  width: 12px; height: 12px; border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.1);
-  flex-shrink: 0;
-}
-
-.inv-encumbrance-status { font-size: 11px; font-weight: 600; letter-spacing: .04em; }
-
-.inv-item-header { display: grid; gap: 4px; padding: 0 2px 3px; font-size: 9px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
-.inv-item-header-top { display: grid; grid-template-columns: 1fr 90px 26px; gap: 5px; align-items: center; }
-.inv-item-header-desc { padding-left: 2px; }
-.inv-main-grid { display: flex; flex-direction: column; gap: 5px; }
-.inv-grid-slots { display: grid; grid-template-columns: 1fr; gap: 12px; }
-.inv-item-row { display: grid; gap: 5px; }
-.inv-item-top { display: grid; grid-template-columns: 1fr 90px 26px; gap: 5px; align-items: center; }
-.inv-item-row input, .inv-item-row textarea {
-  padding: 4px 6px; border: 1px solid rgba(99,102,241,.2); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(15,23,42,.65) 0%, rgba(15,23,42,.4) 100%);
-  font-family: inherit; font-size: 12px; color: var(--text); width: 100%; outline: none; transition: border-color .2s, box-shadow .2s;
-}
-.inv-item-row textarea { resize: vertical; min-height: 64px; max-height: 160px; line-height: 1.35; }
-.inv-item-remove { width: 26px; height: 26px; border: 1px solid var(--border); border-radius: var(--rad); background: transparent; color: var(--muted); font-size: 14px; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
-
-.inv-sub-panels { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); }
-.inv-sub-cols { display: flex; flex-direction: column; gap: 12px; }
-.inv-sub-title { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 6px; }
-.inv-add-btn-sm { padding: 0 6px; background: transparent; border: 1px solid var(--border); border-radius: var(--rad); color: var(--text); cursor: pointer; }
-.inv-simple-grid { display: flex; flex-direction: column; gap: 4px; }
-.inv-simple-slot { display: flex; flex-direction: column; gap: 2px; }
-.inv-simple-slot input, .inv-simple-slot textarea {
-  padding: 4px 6px; border: 1px solid rgba(99,102,241,.2); border-radius: var(--rad);
-  background: linear-gradient(135deg, rgba(15,23,42,.65) 0%, rgba(15,23,42,.4) 100%);
-  font-family: inherit; font-size: 11px; color: var(--text); width: 100%;
-}
-.inv-add-btn {
-  padding: 4px 10px; border: 1px solid var(--border-dark); background: var(--input-bg);
-  color: var(--text); border-radius: var(--rad); font-size: 10px; cursor: pointer;
-}
-.inv-add-btn:hover { background: var(--border); }
-
-@media (max-width: 1100px) {
-  .inv-container { grid-template-columns: 220px 1fr; }
-  .inv-side { grid-column: 1 / -1; }
-}
-@media (max-width: 760px) {
-  .top-section { grid-template-columns: 1fr; }
-  .left-col { border-right: none; border-bottom: 1px solid var(--border); }
-  .attrs-grid { grid-template-columns: 1fr; }
-  .equip-col { border-left: none; border-top: 1px solid var(--border); }
-  .bottom-row { grid-template-columns: 1fr; }
-  .bottom-panel + .bottom-panel { border-left: none; border-top: 1px solid var(--border); }
-  .inv-container { grid-template-columns: 1fr; }
-  .inv-left.vitals-panel { border-right: none; border-bottom: 1px solid var(--border); }
-  .inv-grid-slots { grid-template-columns: 1fr; }
-  .inv-side { grid-column: auto; }
-}
-</style>
+<link rel="stylesheet" href="sheet.css">
+<script src="sheet.js" defer></script>
 </head>
 <body>
+  <div class="site-scale">
   <nav class="w-full z-50 nav-container">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <div class="flex items-center space-x-4">
@@ -697,6 +76,7 @@ footer p {
     <!-- tab-main -->
     <div id="tab-main" class="tab-content">
       <div class="top-section">
+        <!-- segment defences -->
         <!-- LEFT: Portrait + Defences & Vitals -->
         <div class="left-col">
           <div class="portrait-wrap">
@@ -716,19 +96,19 @@ footer p {
             <div class="panel-title">Defences &amp; Vitals</div>
             <div class="vital-row">
               <label>Armor</label>
-              <input type="number" id="armor" min="0" placeholder="0" readonly>
+              <input type="number" id="armor" min="0" placeholder="—" readonly>
             </div>
             <div class="vital-row">
               <label>Speed</label>
-              <input type="number" id="speed" min="0" placeholder="0" oninput="this.dataset.manual='true'">
+              <input type="number" id="speed" min="0" placeholder="—" oninput="this.dataset.manual='true'">
             </div>
             <div class="vital-row">
               <label>Max HP</label>
-              <input type="number" id="maxHealth" min="0" placeholder="0" readonly>
+              <input type="number" id="maxHealth" min="0" placeholder="—" readonly>
             </div>
             <div class="vital-row">
               <label>Current HP</label>
-              <input type="number" id="currentHealth" min="0" placeholder="0"
+              <input type="number" id="currentHealth" min="0" placeholder="—"
                 oninput="updateBar('healthBar',document.getElementById('maxHealth').value,this.value)">
             </div>
             <div class="bar-wrap">
@@ -736,11 +116,11 @@ footer p {
             </div>
             <div class="vital-row">
               <label>Max Mana</label>
-              <input type="number" id="maxMana" min="0" placeholder="0" readonly>
+              <input type="number" id="maxMana" min="0" placeholder="—" readonly>
             </div>
             <div class="vital-row">
               <label>Current Mana</label>
-              <input type="number" id="currentMana" min="0" placeholder="0"
+              <input type="number" id="currentMana" min="0" placeholder="—"
                 oninput="updateBar('manaBar',document.getElementById('maxMana').value,this.value)">
             </div>
             <div class="bar-wrap">
@@ -748,35 +128,36 @@ footer p {
             </div>
             <div class="exhaust-row">
               <label>Exhaustion</label>
-              <input type="number" id="exhaustion" min="0" max="6" placeholder="0–6">
+              <input type="number" id="exhaustion" min="0" max="6" placeholder="—">
             </div>
             <div style="margin-top:3px;">
-              <div class="panel-title">Final Blows (0–4)</div>
+              <div class="panel-title">Final Blows</div>
               <div class="pips-row" id="finalBlowPips"></div>
             </div>
             <div style="margin-top:3px;">
-              <div class="panel-title">Grace (0–6)</div>
+              <div class="panel-title">Grace</div>
               <div class="pips-row" id="gracePips"></div>
             </div>
           </div>
         </div>
 
+        <!-- segment stats -->
         <!-- RIGHT: Info + Attributes -->
         <div class="right-col">
           <!-- Character info -->
           <div class="info-panel">
-            <div class="panel-title" style="margin-bottom:8px;">Character Info</div>
+            <div class="panel-title" style="margin-bottom:8px;">Character info</div>
             <div class="info-grid">
               <div class="field"><label>Name</label><input type="text" id="charName" placeholder="Character name"></div>
               <div class="field"><label>Species</label><input type="text" id="charRace" placeholder="—"></div>
-              <div class="field narrow"><label>Age</label><input type="number" id="charAge" min="0" placeholder="0"></div>
-              <div class="field narrow"><label>Level</label><input type="number" id="charLevel" min="0" placeholder="0"></div>
+              <div class="field narrow"><label>Age</label><input type="number" id="charAge" min="0" placeholder="—"></div>
+              <div class="field narrow"><label>Level</label><input type="number" id="charLevel" min="0" placeholder="—"></div>
             </div>
           </div>
 
           <!-- Attributes -->
           <div class="attrs-panel">
-            <div class="attrs-section-title">Attributes</div>
+            <div class="panel-title attrs-section-title">Attributes</div>
             <div class="attrs-grid">
 
               <!-- BODY -->
@@ -785,19 +166,19 @@ footer p {
                   <h3>Body</h3>
                   <div class="attr-base-group">
                     <label>Base</label>
-                    <input type="number" id="body_base" placeholder="0" oninput="recalcGroup('body')">
+                    <input type="number" id="body_base" placeholder="" oninput="recalcGroup('body')">
                   </div>
                 </div>
                 <div class="skill-col-headers"><span>x</span><span>Mod</span><span>Total</span></div>
                 <div class="skill-list">
                   <div class="skill-row"><span class="skill-name">Might</span>
-                    <input type="number" id="body_might_mod" placeholder="0" oninput="recalcSkill('body','might')">
+                    <input type="number" id="body_might_mod" placeholder="" oninput="recalcSkill('body','might')">
                     <input type="text" id="body_might_total" class="total-input" readonly placeholder="0"></div>
                   <div class="skill-row"><span class="skill-name">Brawn</span>
-                    <input type="number" id="body_brawn_mod" placeholder="0" oninput="recalcSkill('body','brawn')">
+                    <input type="number" id="body_brawn_mod" placeholder="" oninput="recalcSkill('body','brawn')">
                     <input type="text" id="body_brawn_total" class="total-input" readonly placeholder="0"></div>
                   <div class="skill-row"><span class="skill-name">Fortitude</span>
-                    <input type="number" id="body_fortitude_mod" placeholder="0" oninput="recalcSkill('body','fortitude')">
+                    <input type="number" id="body_fortitude_mod" placeholder="" oninput="recalcSkill('body','fortitude')">
                     <input type="text" id="body_fortitude_total" class="total-input" readonly placeholder="0"></div>
                 </div>
               </div>
@@ -808,19 +189,19 @@ footer p {
                   <h3>Skill</h3>
                   <div class="attr-base-group">
                     <label>Base</label>
-                    <input type="number" id="skill_base" placeholder="0" oninput="recalcGroup('skill')">
+                    <input type="number" id="skill_base" placeholder="" oninput="recalcGroup('skill')">
                   </div>
                 </div>
                 <div class="skill-col-headers"><span>x</span><span>Mod</span><span>Total</span></div>
                 <div class="skill-list">
                   <div class="skill-row"><span class="skill-name">Finesse</span>
-                    <input type="number" id="skill_finesse_mod" placeholder="0" oninput="recalcSkill('skill','finesse')">
+                    <input type="number" id="skill_finesse_mod" placeholder="" oninput="recalcSkill('skill','finesse')">
                     <input type="text" id="skill_finesse_total" class="total-input" readonly placeholder="0"></div>
                   <div class="skill-row"><span class="skill-name">Reflex</span>
-                    <input type="number" id="skill_reflex_mod" placeholder="0" oninput="recalcSkill('skill','reflex')">
+                    <input type="number" id="skill_reflex_mod" placeholder="" oninput="recalcSkill('skill','reflex')">
                     <input type="text" id="skill_reflex_total" class="total-input" readonly placeholder="0"></div>
                   <div class="skill-row"><span class="skill-name">Tinker</span>
-                    <input type="number" id="skill_tinker_mod" placeholder="0" oninput="recalcSkill('skill','tinker')">
+                    <input type="number" id="skill_tinker_mod" placeholder="" oninput="recalcSkill('skill','tinker')">
                     <input type="text" id="skill_tinker_total" class="total-input" readonly placeholder="0"></div>
                 </div>
               </div>
@@ -831,19 +212,19 @@ footer p {
                   <h3>Mind</h3>
                   <div class="attr-base-group">
                     <label>Base</label>
-                    <input type="number" id="mind_base" placeholder="0" oninput="recalcGroup('mind')">
+                    <input type="number" id="mind_base" placeholder="" oninput="recalcGroup('mind')">
                   </div>
                 </div>
                 <div class="skill-col-headers"><span>x</span><span>Mod</span><span>Total</span></div>
                 <div class="skill-list">
                   <div class="skill-row"><span class="skill-name">Arcane</span>
-                    <input type="number" id="mind_arcane_mod" placeholder="0" oninput="recalcSkill('mind','arcane')">
+                    <input type="number" id="mind_arcane_mod" placeholder="" oninput="recalcSkill('mind','arcane')">
                     <input type="text" id="mind_arcane_total" class="total-input" readonly placeholder="0"></div>
                   <div class="skill-row"><span class="skill-name">Spirit</span>
-                    <input type="number" id="mind_spirit_mod" placeholder="0" oninput="recalcSkill('mind','spirit')">
+                    <input type="number" id="mind_spirit_mod" placeholder="" oninput="recalcSkill('mind','spirit')">
                     <input type="text" id="mind_spirit_total" class="total-input" readonly placeholder="0"></div>
                   <div class="skill-row"><span class="skill-name">Scholarship</span>
-                    <input type="number" id="mind_scholarship_mod" placeholder="0" oninput="recalcSkill('mind','scholarship')">
+                    <input type="number" id="mind_scholarship_mod" placeholder="" oninput="recalcSkill('mind','scholarship')">
                     <input type="text" id="mind_scholarship_total" class="total-input" readonly placeholder="0"></div>
                 </div>
               </div>
@@ -854,19 +235,19 @@ footer p {
                   <h3>Style</h3>
                   <div class="attr-base-group">
                     <label>Base</label>
-                    <input type="number" id="style_base" placeholder="0" oninput="recalcGroup('style')">
+                    <input type="number" id="style_base" placeholder="" oninput="recalcGroup('style')">
                   </div>
                 </div>
                 <div class="skill-col-headers"><span>x</span><span>Mod</span><span>Total</span></div>
                 <div class="skill-list">
                   <div class="skill-row"><span class="skill-name">Speech</span>
-                    <input type="number" id="style_speech_mod" placeholder="0" oninput="recalcSkill('style','speech')">
+                    <input type="number" id="style_speech_mod" placeholder="" oninput="recalcSkill('style','speech')">
                     <input type="text" id="style_speech_total" class="total-input" readonly placeholder="0"></div>
                   <div class="skill-row"><span class="skill-name">Insight</span>
-                    <input type="number" id="style_insight_mod" placeholder="0" oninput="recalcSkill('style','insight')">
+                    <input type="number" id="style_insight_mod" placeholder="" oninput="recalcSkill('style','insight')">
                     <input type="text" id="style_insight_total" class="total-input" readonly placeholder="0"></div>
                   <div class="skill-row"><span class="skill-name">Awareness</span>
-                    <input type="number" id="style_awareness_mod" placeholder="0" oninput="recalcSkill('style','awareness')">
+                    <input type="number" id="style_awareness_mod" placeholder="" oninput="recalcSkill('style','awareness')">
                     <input type="text" id="style_awareness_total" class="total-input" readonly placeholder="0"></div>
                 </div>
               </div>
@@ -879,35 +260,73 @@ footer p {
           </div>
         </div>
 
+        <!-- segment armor -->
         <!-- RIGHT: Armor + Weapons -->
         <div class="equip-col">
           <div class="armor-panel">
             <div class="bottom-panel-header">
               <div class="panel-title" style="margin:0;">Armor</div>
             </div>
-            <div class="armor-card">
-              <div class="armor-header">
-                <div class="field"><label>Armor Name</label><input type="text" id="armor_name" placeholder="Name"></div>
-                <div class="field narrow"><label>Defense</label><input type="number" id="armor_def" min="0" placeholder="—"></div>
+            <div class="armor-card armor-slot">
+              <div class="armor-row">
+                <div class="armor-icon-box">
+                  <img class="armor-icon" src="../Assets/sheet/img/armor.png" alt="" aria-hidden="true">
+                </div>
+                <div class="armor-name-field">
+                  <label class="armor-label">Armor Name</label>
+                  <input type="text" id="armor_name" placeholder="Name">
+                </div>
+                <div class="armor-value-field">
+                  <label class="armor-label">Defense</label>
+                  <input type="number" id="armor_def" min="0" placeholder="">
+                </div>
               </div>
-              <div class="field"><label>Notes</label><textarea id="armor_notes" rows="2"></textarea></div>
+              <div class="armor-notes">
+                <label class="armor-label">Notes</label>
+                <textarea id="armor_notes" rows="2"></textarea>
+              </div>
             </div>
-            <div class="armor-card">
-              <div class="armor-header">
-                <div class="field"><label>Shield Name</label><input type="text" id="shield_name" placeholder="Name"></div>
-                <div class="field narrow"><label>Defense</label><input type="number" id="shield_def" min="0" placeholder="—"></div>
+            <div class="armor-card armor-slot">
+              <div class="armor-row">
+                <div class="armor-icon-box">
+                  <img class="armor-icon" src="../Assets/sheet/img/shield.png" alt="" aria-hidden="true">
+                </div>
+                <div class="armor-name-field">
+                  <label class="armor-label">Shield Name</label>
+                  <input type="text" id="shield_name" placeholder="Name">
+                </div>
+                <div class="armor-value-field">
+                  <label class="armor-label">Defense</label>
+                  <input type="number" id="shield_def" min="0" placeholder="">
+                </div>
               </div>
-              <div class="field"><label>Notes</label><textarea id="shield_notes" rows="2"></textarea></div>
+              <div class="armor-notes">
+                <label class="armor-label">Notes</label>
+                <textarea id="shield_notes" rows="2"></textarea>
+              </div>
             </div>
-            <div class="armor-card">
-              <div class="armor-header">
-                <div class="field"><label>Cloak Name</label><input type="text" id="cloak_name" placeholder="Name"></div>
-                <div class="field narrow"><label>Defense</label><input type="number" id="cloak_def" min="0" placeholder="—"></div>
+            <div class="armor-card armor-slot">
+              <div class="armor-row">
+                <div class="armor-icon-box">
+                  <img class="armor-icon" src="../Assets/sheet/img/cloak.png" alt="" aria-hidden="true">
+                </div>
+                <div class="armor-name-field">
+                  <label class="armor-label">Cloak Name</label>
+                  <input type="text" id="cloak_name" placeholder="Name">
+                </div>
+                <div class="armor-value-field">
+                  <label class="armor-label">Defense</label>
+                  <input type="number" id="cloak_def" min="0" placeholder="">
+                </div>
               </div>
-              <div class="field"><label>Notes</label><textarea id="cloak_notes" rows="2"></textarea></div>
+              <div class="armor-notes">
+                <label class="armor-label">Notes</label>
+                <textarea id="cloak_notes" rows="2"></textarea>
+              </div>
             </div>
           </div>
 
+          <!-- segment weapons -->
           <div class="bottom-panel weapons-panel">
             <div class="bottom-panel-header">
               <div class="panel-title" style="margin:0;">Weapons</div>
@@ -928,7 +347,7 @@ footer p {
           <!-- LEFT: Money & Weight (Now using standard vitals style!) -->
           <div class="inv-left vitals-panel">
             <div class="panel-title">Money</div>
-            
+
             <div class="vital-row">
               <div class="flex items-center gap-2">
                 <div class="coin-dot" style="background:#b87333;"></div>
@@ -936,7 +355,7 @@ footer p {
               </div>
               <input type="number" id="inv_copper" min="0" placeholder="—">
             </div>
-            
+
             <div class="vital-row">
               <div class="flex items-center gap-2">
                 <div class="coin-dot" style="background:#9ca3af;"></div>
@@ -944,7 +363,7 @@ footer p {
               </div>
               <input type="number" id="inv_silver" min="0" placeholder="—">
             </div>
-            
+
             <div class="vital-row">
               <div class="flex items-center gap-2">
                 <div class="coin-dot" style="background:linear-gradient(90deg,#d4af37,#f5d06f);"></div>
@@ -952,7 +371,7 @@ footer p {
               </div>
               <input type="number" id="inv_gold" min="0" placeholder="—">
             </div>
-            
+
             <div class="vital-row">
               <div class="flex items-center gap-2">
                 <div class="coin-dot" style="background:#c0c0c0;"></div>
@@ -962,26 +381,26 @@ footer p {
             </div>
 
             <div class="panel-title" style="margin-top:12px;">Weight</div>
-            
+
             <div class="vital-row">
               <label>Current</label>
               <input type="number" id="inv_current_weight" readonly placeholder="—">
             </div>
-            
+
             <div class="vital-row">
               <label>Max</label>
               <input type="number" id="inv_max_weight" readonly placeholder="—">
             </div>
-            
+
             <div class="vital-row">
               <label>Backpack Bonus</label>
               <input type="number" id="inv_backpack_bonus" placeholder="—" oninput="inv_recalcMaxWeight(); inv_weightUpdate(); inv_encumbranceUpdate();">
             </div>
-            
+
             <div class="bar-wrap" style="margin-top: 4px;">
               <div class="bar-track green"><div class="bar-fill green" id="inv_weight_bar_fill" style="width:0%"></div></div>
             </div>
-            
+
             <div class="text-center mt-1">
               <span id="enc_none" class="enc-label text-[10px] text-gray-400 uppercase tracking-wider">Unencumbered</span>
               <span id="enc_enc" class="enc-label text-[10px] text-yellow-400 uppercase tracking-wider" style="display:none;">Encumbered</span>
@@ -1045,10 +464,131 @@ footer p {
     </div>
 
     <!-- tab-paths -->
-    <div id="tab-paths" class="tab-content" style="display:none;"></div>
+    <div id="tab-paths" class="tab-content" style="display:none;">
+      <div class="card paths-panel">
+        <div class="p-4 flex flex-col gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center border-b border-slate-800 pb-3">
+            <div class="md:col-span-6">
+              <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Multi-Path Talent System</h2>
+              <h1 class="text-lg font-bold fantasy-font text-white">Class Path Constellations</h1>
+            </div>
+
+            <div class="md:col-span-4 bg-slate-950/60 border border-slate-800 rounded p-2 flex items-center justify-between">
+              <div>
+                <p class="text-[9px] text-slate-400 uppercase">Trait Points Budget</p>
+                <p class="text-base font-bold text-white font-mono mt-0.5">
+                  <span id="spent-points" class="text-purple-400">0</span> / <span id="total-points">2</span>
+                </p>
+              </div>
+              <div class="text-right">
+                <span class="text-[9px] text-indigo-300 font-semibold block uppercase">Level <span id="budget-level-anchor">1</span></span>
+                <span class="text-[8px] text-slate-500 block">Autoscales with Main Level input</span>
+              </div>
+            </div>
+
+            <div class="md:col-span-2 flex justify-end">
+              <button onclick="resetAllTrees()" class="px-3 py-1.5 rounded border border-red-950 bg-red-950/30 text-xs text-red-200 hover:bg-red-950/60 transition-all">
+                Reclaim points
+              </button>
+            </div>
+          </div>
+
+          <div class="paths-grid-container">
+            <div class="flex flex-col gap-3">
+              <div class="original-card flex flex-col gap-2">
+                <h3 class="text-xs font-bold text-slate-300 uppercase mb-1">Browse Paths</h3>
+                <div class="flex flex-col gap-1.5" id="path-selector-list"></div>
+              </div>
+
+              <div class="original-card">
+                <h3 class="text-xs font-bold text-slate-300 uppercase mb-2">Passive Path Bonuses</h3>
+                <div class="flex flex-wrap gap-1.5" id="bonuses-shelf"></div>
+              </div>
+
+              <div class="original-card">
+                <h3 class="text-xs font-bold text-indigo-300 uppercase mb-2">Milestone Rewards</h3>
+                <div class="relative pl-4 border-l border-slate-800 flex flex-col gap-3 py-1" id="milestones-container"></div>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-3">
+              <div class="original-card relative flex flex-col min-h-[500px] justify-between">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-800 mb-2">
+                  <div>
+                    <h2 class="text-sm font-bold fantasy-font text-white" id="active-path-title">Occult Spellcasting</h2>
+                    <p class="text-[10px] text-slate-400 mt-0.5" id="active-path-desc">Configure your path talents below.</p>
+                  </div>
+                </div>
+
+                <div class="relative w-full h-[320px] bg-slate-950/60 rounded border border-slate-900 overflow-hidden" id="tree-viewport">
+                  <svg class="absolute inset-0 w-full h-full pointer-events-none" id="svg-canvas">
+                    <defs>
+                      <linearGradient id="line-unlocked" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#818cf8" />
+                        <stop offset="100%" stop-color="#c084fc" />
+                      </linearGradient>
+                      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                      </filter>
+                    </defs>
+                  </svg>
+
+                  <div class="absolute inset-0" id="nodes-container"></div>
+                </div>
+
+                <div class="mt-2 p-2.5 rounded bg-slate-950/50 border border-slate-900 min-h-[72px] flex flex-col justify-center" id="node-info-panel">
+                  <h4 class="text-xs font-bold text-white fantasy-font" id="info-name">Click or Hover a Talent Node</h4>
+                  <p class="text-[10px] text-slate-400 mt-0.5" id="info-details">Unlock prerequisites to purchase higher tier nodes.</p>
+                </div>
+
+                <div class="mt-3">
+                  <h3 class="text-xs font-bold text-slate-300 uppercase mb-2">Traits Directory Ledger</h3>
+                  <div class="border border-slate-800 rounded overflow-hidden text-xs bg-slate-950/40">
+                    <table class="w-full text-left">
+                      <thead>
+                        <tr class="bg-slate-900/60 border-b border-slate-800 text-slate-400 uppercase text-[9px]">
+                          <th class="p-2">Initials</th>
+                          <th class="p-2">Name</th>
+                          <th class="p-2">Prerequisites</th>
+                          <th class="p-2">Passives</th>
+                          <th class="p-2 text-right">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody id="ledger-table-body"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
     <!-- tab-spells -->
-    <div id="tab-spells" class="tab-content" style="display:none;"></div>
+    <div id="tab-spells" class="tab-content" style="display:none;">
+      <div class="card spells-panel">
+        <div class="spells-header">
+          <div class="panel-title" style="margin:0;">Spells</div>
+        </div>
+        <div class="spells-grid">
+          <div class="spell-bubble">
+            <label>Spell Slots</label>
+            <input type="number" id="spells_slots" placeholder="—">
+          </div>
+          <div class="spell-bubble">
+            <label>Prepared</label>
+            <input type="number" id="spells_prepared" placeholder="—">
+          </div>
+          <div class="spell-bubble">
+            <label>Focus</label>
+            <input type="number" id="spells_focus" placeholder="—">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 <!-- PORTRAIT MODAL -->
@@ -1068,7 +608,12 @@ footer p {
   </div>
 </div>
 </div>
-  
+
+  <div id="warning-toast" class="fixed bottom-4 right-4 bg-red-950 border border-red-500/50 text-red-200 text-xs px-4 py-3 rounded shadow-2xl transition-all duration-300 translate-y-20 opacity-0 flex items-center gap-2 pointer-events-none z-50">
+    <span>⚠️</span>
+    <span id="warning-msg">Unlock failure triggered!</span>
+  </div>
+
   <footer class="py-16 text-center">
     <div class="max-w-7xl mx-auto px-6">
       <h4 class="text-2xl text-slate-500 font-bold fantasy-font opacity-40 mb-6 uppercase tracking-widest hover:opacity-100 transition-opacity cursor-pointer">Mythlight</h4>
@@ -1076,600 +621,10 @@ footer p {
       <p class="text-slate-600 text-[10px] uppercase tracking-[0.2em]">&copy; 2025 Mythlight RPG System. By Grinprim.</p>
     </div>
   </footer>
-
-<script>
-/* === ATTRIBUTES === */
-const GROUPS={body:['might','brawn','fortitude'],skill:['finesse','reflex','tinker'],mind:['arcane','spirit','scholarship'],style:['speech','insight','awareness']};
-function val(id){const e=document.getElementById(id);return e?(parseFloat(e.value)||0):0;}
-function recalcSkill(g,s){
-  const o=document.getElementById(g+'_'+s+'_total');
-  const baseEl=document.getElementById(g+'_'+ 'base');
-  const modEl=document.getElementById(g+'_'+s+'_mod');
-  if(!o)return;
-  const baseEmpty=baseEl ? baseEl.value==='' : true;
-  const modEmpty=modEl ? modEl.value==='' : true;
-  if(baseEmpty && modEmpty){ o.value=''; updateDerivedVitals(); return; }
-  o.value=val(g+'_base')+val(g+'_'+s+'_mod');
-  updateDerivedVitals();
-}
-function recalcGroup(g){(GROUPS[g]||[]).forEach(s=>recalcSkill(g,s));}
-function recalcAll(){Object.keys(GROUPS).forEach(g=>recalcGroup(g));updateDerivedVitals();}
-
-/* === BARS === */
-function updateBar(barId,maxVal,curVal){
-  const max=parseFloat(maxVal)||0,cur=parseFloat(curVal)||0;
-  const pct=max>0?Math.max(0,Math.min(100,cur/max*100)):0;
-  document.getElementById(barId).style.width=pct+'%';
-}
-
-/* === PIPS === */
-function buildPips(cid,maxN,cur,onSet){
-  const c=document.getElementById(cid);c.innerHTML='';
-  for(let i=1;i<=maxN;i++){const b=document.createElement('button');b.className='pip'+(i<=cur?' filled':'');b.onclick=()=>onSet(cur===i?0:i);c.appendChild(b);}
-}
-let graceValue=0;
-function setGrace(n){graceValue=n;buildPips('gracePips',6,graceValue,setGrace);}
-let finalBlowValue=0;
-function setFinalBlow(n){finalBlowValue=n;buildPips('finalBlowPips',4,finalBlowValue,setFinalBlow);}
-
-/* === FEEDBACK === */
-function showFeedback(msg){const el=document.getElementById('rollResult'),prev=el?.textContent||'';if(el){el.textContent=msg;setTimeout(()=>el.textContent=prev,1500);}}
-
-/* === PORTRAIT === */
-const PORT_SIZE=160, VIEWPORT_SIZE=220;
-let portraitImg=null,portraitState={x:0,y:0,scale:1};
-let edState={imgW:0,imgH:0,offsetX:0,offsetY:0,scale:1,dragging:false,lastX:0,lastY:0};
-
-document.getElementById('portraitInput').addEventListener('change',function(){
-  const file=this.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{const img=new Image();img.onload=()=>{portraitImg=img;openEditorWith(img);};img.src=e.target.result;};
-  reader.readAsDataURL(file);this.value='';
-});
-function openPortraitEditor(){if(!portraitImg){document.getElementById('portraitInput').click();return;}openEditorWith(portraitImg);}
-function chooseNewPortrait(){document.getElementById('portraitInput').click();}
-function openEditorWith(img){
-  const fit=Math.max(VIEWPORT_SIZE/img.width,VIEWPORT_SIZE/img.height);
-  const hp=portraitImg===img&&portraitState.scale>0;
-  edState={imgW:img.width,imgH:img.height,offsetX:hp?portraitState.x:0,offsetY:hp?portraitState.y:0,scale:hp?portraitState.scale:fit,dragging:false,lastX:0,lastY:0};
-  const sl=document.getElementById('zoomSlider');sl.min=fit*0.5;sl.max=fit*6;sl.value=edState.scale;
-  document.getElementById('portraitModal').classList.add('open');drawEditor();setupEditorEvents();
-}
-function closePortraitEditor(){document.getElementById('portraitModal').classList.remove('open');removeEditorEvents();}
-function drawEditor(){
-  const c=document.getElementById('editorCanvas'),ctx=c.getContext('2d');
-  c.width=VIEWPORT_SIZE;c.height=VIEWPORT_SIZE;ctx.clearRect(0,0,VIEWPORT_SIZE,VIEWPORT_SIZE);
-  if(!portraitImg)return;
-  ctx.drawImage(portraitImg,VIEWPORT_SIZE/2+edState.offsetX-edState.imgW*edState.scale/2,VIEWPORT_SIZE/2+edState.offsetY-edState.imgH*edState.scale/2,edState.imgW*edState.scale,edState.imgH*edState.scale);
-}
-document.getElementById('zoomSlider').addEventListener('input',function(){edState.scale=parseFloat(this.value);drawEditor();});
-let _evMove,_evUp;
-function setupEditorEvents(){
-  const vp=document.getElementById('editorViewport');
-  _evMove=e=>{if(!edState.dragging)return;edState.offsetX+=e.clientX-edState.lastX;edState.offsetY+=e.clientY-edState.lastY;edState.lastX=e.clientX;edState.lastY=e.clientY;drawEditor();};
-  _evUp=()=>{edState.dragging=false;};
-  vp.addEventListener('mousedown',e=>{edState.dragging=true;edState.lastX=e.clientX;edState.lastY=e.clientY;});
-  window.addEventListener('mousemove',_evMove);window.addEventListener('mouseup',_evUp);
-  vp.addEventListener('touchstart',e=>{const t=e.touches[0];edState.dragging=true;edState.lastX=t.clientX;edState.lastY=t.clientY;},{passive:true});
-  vp.addEventListener('touchmove',e=>{if(!edState.dragging)return;const t=e.touches[0];edState.offsetX+=t.clientX-edState.lastX;edState.offsetY+=t.clientY-edState.lastY;edState.lastX=t.clientX;edState.lastY=t.clientY;drawEditor();},{passive:true});
-  vp.addEventListener('touchend',()=>{edState.dragging=false;});
-}
-function removeEditorEvents(){window.removeEventListener('mousemove',_evMove);window.removeEventListener('mouseup',_evUp);}
-function applyPortrait(){
-  portraitState={x:edState.offsetX,y:edState.offsetY,scale:edState.scale};
-  const S=PORT_SIZE,c=document.getElementById('portraitCanvas'),ctx=c.getContext('2d');
-  c.width=S;c.height=S;ctx.clearRect(0,0,S,S);ctx.save();
-  ctx.beginPath();ctx.arc(S/2,S/2,S/2,0,Math.PI*2);ctx.clip();
-  const s=edState.scale*(S/VIEWPORT_SIZE);
-  ctx.drawImage(portraitImg,S/2+edState.offsetX*(S/VIEWPORT_SIZE)-edState.imgW*s/2,S/2+edState.offsetY*(S/VIEWPORT_SIZE)-edState.imgH*s/2,edState.imgW*s,edState.imgH*s);
-  ctx.restore();
-  localStorage.setItem('ml_portrait_data',portraitImg.src);
-  localStorage.setItem('ml_portrait_state',JSON.stringify(portraitState));
-  closePortraitEditor();
-}
-function renderPortraitFromState(imgSrc,state){
-  const img=new Image();
-  img.onload=()=>{
-    portraitImg=img;portraitState=state;
-    const S=PORT_SIZE,VP=VIEWPORT_SIZE,c=document.getElementById('portraitCanvas'),ctx=c.getContext('2d');
-    c.width=S;c.height=S;ctx.clearRect(0,0,S,S);ctx.save();
-    ctx.beginPath();ctx.arc(S/2,S/2,S/2,0,Math.PI*2);ctx.clip();
-    const s=state.scale*(S/VP);
-    ctx.drawImage(img,S/2+state.x*(S/VP)-img.width*s/2,S/2+state.y*(S/VP)-img.height*s/2,img.width*s,img.height*s);
-    ctx.restore();
-  };img.src=imgSrc;
-}
-
-/* === WEAPONS === */
-let weaponCount=0,weapons=[];
-function addWeapon(data){weaponCount++;weapons.push(data||{id:weaponCount,name:'',damage:'',attack:'',notes:''});renderWeapons();}
-function removeWeapon(id){weapons=weapons.filter(w=>w.id!==id);renderWeapons();}
-function renderWeapons(){
-  const list=document.getElementById('weaponsList');list.innerHTML='';
-  weapons.forEach((w,idx)=>{
-    const card=document.createElement('div');card.className='weapon-card';
-    card.innerHTML=`
-      <div class="wfield">
-        <div class="wlabel">Weapon ${idx+1}</div>
-        <input type="text" placeholder="Name" value="${esc(w.name)}" oninput="upW(${w.id},'name',this.value)">
-      </div>
-      <div class="wfield">
-        <div class="wlabel">Damage</div>
-        <input type="text" placeholder="—" value="${esc(w.damage)}" oninput="upW(${w.id},'damage',this.value)">
-      </div>
-      <div class="wfield">
-        <div class="wlabel">Attack</div>
-        <input type="text" placeholder="—" value="${esc(w.attack)}" oninput="upW(${w.id},'attack',this.value)">
-      </div>
-      <button class="weapon-remove" onclick="removeWeapon(${w.id})" title="Remove">×</button>
-      <div class="weapon-notes">
-        <div class="wlabel">Notes</div>
-        <textarea rows="2" oninput="upW(${w.id},'notes',this.value)">${esc(w.notes)}</textarea>
-      </div>`;
-    list.appendChild(card);
-  });
-}
-function upW(id,field,value){const w=weapons.find(w=>w.id===id);if(w)w[field]=value;}
-
-/* === INVENTORY LOGIC === */
-const INV_BASE_SLOTS = 4;
-const INV_BASE_SIMPLE_SLOTS = 2;
-const INV_EXPAND_BY = 2;
-let _invItemId = 0;
-
-function inv_addItem(data) {
-  _invItemId++;
-  const grid = document.getElementById('inv_main_grid');
-  if (!grid) return;
-  const row = document.createElement('div');
-  row.className = 'inv-item-row';
-  row.dataset.itemId = _invItemId;
-  row.innerHTML = `
-    <div class="inv-item-top">
-      <input type="text" placeholder="Name" class="inv-name" value="${_esc(data?.name||'') }" oninput="inv_weightUpdate(); inv_encumbranceUpdate();">
-      <input type="number" placeholder="—" class="inv-weight" value="${data?.weight??''}" min="0" oninput="inv_weightUpdate(); inv_encumbranceUpdate();">
-      <button class="inv-item-remove" type="button" onclick="inv_removeItem(this)" title="Remove">×</button>
-    </div>
-    <textarea placeholder="Description" rows="4" class="inv-desc">${_esc(data?.desc||'')}</textarea>
-  `;
-  grid.appendChild(row);
-  inv_weightUpdate();
-}
-function inv_removeItem(btn) { btn.closest('.inv-item-row').remove(); inv_weightUpdate(); inv_encumbranceUpdate(); }
-
-function inv_addSimple(containerId, namePh, descPh, data) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  const slot = document.createElement('div');
-  slot.className = 'inv-simple-slot';
-  slot.innerHTML = `
-    <input type="text" placeholder="${_esc(namePh)}" value="${_esc(data?.name||'')}">
-    <textarea rows="2" placeholder="${_esc(descPh)}" style="resize:none;">${_esc(data?.desc||'')}</textarea>
-  `;
-  container.appendChild(slot);
-}
-
-function inv_init() {
-  const mainGrid = document.getElementById('inv_main_grid');
-  if (!mainGrid) return;
-  if (mainGrid.querySelectorAll('.inv-item-row').length === 0) {
-    for (let i = 0; i < INV_BASE_SLOTS; i++) inv_addItem();
-  }
-  const simpleSeed = [
-    ['inv_potions_ingredients','Ingredient','Notes'],
-    ['inv_potions_recipes','Potion','Recipe'],
-    ['inv_crafts_components','Component','Notes'],
-    ['inv_crafts_recipes','Craft','Recipe']
-  ];
-  simpleSeed.forEach(([id,np,dp]) => {
-    const c = document.getElementById(id);
-    if (c && c.querySelectorAll('.inv-simple-slot').length === 0) {
-      for (let i = 0; i < INV_BASE_SIMPLE_SLOTS; i++) inv_addSimple(id, np, dp);
-    }
-  });
-  inv_recalcMaxWeight(); inv_weightUpdate(); inv_encumbranceUpdate();
-}
-
-function inv_recalcMaxWeight() {
-  const might = parseFloat(document.getElementById('body_might_total')?.value) || 0;
-  const brawn = parseFloat(document.getElementById('body_brawn_total')?.value) || 0;
-  const level = parseFloat(document.getElementById('charLevel')?.value) || 0;
-  const backpack = parseFloat(document.getElementById('inv_backpack_bonus')?.value) || 0;
-  const maxEl = document.getElementById('inv_max_weight');
-  if (maxEl) maxEl.value = might + brawn + level + backpack;
-}
-
-function inv_weightUpdate() {
-  let total = 0;
-  document.querySelectorAll('#inv_main_grid .inv-weight').forEach(inp => { const v = parseFloat(inp.value); if (Number.isFinite(v)) total += v; });
-  const curEl = document.getElementById('inv_current_weight'); if (curEl) curEl.value = total;
-  inv_encumbranceUpdate();
-}
-
-function inv_encumbranceUpdate() {
-  const cur = parseFloat(document.getElementById('inv_current_weight')?.value) || 0;
-  const max = parseFloat(document.getElementById('inv_max_weight')?.value) || 0;
-  ['enc_none','enc_enc','enc_over','enc_crushed'].forEach(id=>{const el=document.getElementById(id); if (el) el.style.display='none';});
-  let activeId = 'enc_none';
-  if (max>0 && cur>max*3) activeId='enc_crushed'; else if (max>0 && cur>max*2) activeId='enc_over'; else if (max>0 && cur>max) activeId='enc_enc';
-  const activeEl = document.getElementById(activeId); if (activeEl) activeEl.style.display='inline';
-  
-  const fill = document.getElementById('inv_weight_bar_fill'); 
-  if (fill) { 
-    const pct = max>0 ? Math.min(cur/max*100,100) : 0; 
-    fill.style.width = pct + '%'; 
-    fill.className = 'bar-fill'; // Reset state
-    if (activeId==='enc_none') fill.classList.add('green');
-    if (activeId==='enc_enc') fill.classList.add('yellow');
-    if (activeId==='enc_over') fill.classList.add('orange');
-    if (activeId==='enc_crushed') fill.classList.add('red');
-  }
-}
-
-function inv_autoExpand() {}
-function inv_autoExpandSimple() {}
-function _esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-/* === HELPERS & DERIVEDS === */
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function getNumberValue(id){const el=document.getElementById(id);if(!el)return 0;const num=parseFloat(el.value);return Number.isFinite(num)?num:0;}
-function getTextValue(id){const el=document.getElementById(id);return el?el.value:'';}
-function hasNonZeroNumber(id){
-  const el=document.getElementById(id);
-  if(!el || el.value==='') return false;
-  const num=parseFloat(el.value);
-  return Number.isFinite(num) && num !== 0;
-}
-
-function getSpeciesBonus(stat){return 0;}
-function getPathBonus(stat){return 0;}
-function getTraitBonus(stat){return 0;}
-function getItemBonus(stat){return 0;}
-
-function updateDerivedVitals(){
-  const level=getNumberValue('charLevel');
-  const brawn=getNumberValue('body_base')+getNumberValue('body_brawn_mod');
-  const fortitude=getNumberValue('body_base')+getNumberValue('body_fortitude_mod');
-
-  const armorItemBonus=getNumberValue('armor_def')+getNumberValue('shield_def')+getNumberValue('cloak_def');
-  const armorBonus=getSpeciesBonus('armor')+getPathBonus('armor')+getTraitBonus('armor')+getItemBonus('armor');
-  const speedBonus=getSpeciesBonus('speed')+getPathBonus('speed')+getTraitBonus('speed')+getItemBonus('speed');
-  const hpBonus=getSpeciesBonus('max_hp')+getPathBonus('max_hp')+getTraitBonus('max_hp')+getItemBonus('max_hp');
-  const manaBonus=getSpeciesBonus('max_mana')+getPathBonus('max_mana')+getTraitBonus('max_mana')+getItemBonus('max_mana');
-
-  const shouldCalc = hasNonZeroNumber('charLevel') || hasNonZeroNumber('body_base') || hasNonZeroNumber('body_brawn_mod') ||
-    hasNonZeroNumber('body_fortitude_mod') || hasNonZeroNumber('armor_def') || hasNonZeroNumber('shield_def') || hasNonZeroNumber('cloak_def');
-  const baseArmor=4+fortitude;
-  const totalArmor=Math.max(0,baseArmor+armorItemBonus+armorBonus);
-  const baseSpeed=5;
-  const totalSpeed=Math.max(0,baseSpeed+speedBonus);
-
-  let maxHp=0;
-  if(level>0){ maxHp=(6+brawn)+(level-1)*(2+brawn); }
-  maxHp=Math.max(0,maxHp+hpBonus);
-
-  let maxMana=level>0?level:0;
-  maxMana=Math.max(0,maxMana+manaBonus);
-
-  const armorEl=document.getElementById('armor');
-  const speedEl=document.getElementById('speed');
-  const maxHpEl=document.getElementById('maxHealth');
-  const maxManaEl=document.getElementById('maxMana');
-  if (!shouldCalc) {
-    if (armorEl) armorEl.value = 0;
-    if (speedEl && !speedEl.dataset.manual) speedEl.value = 0;
-    if (maxHpEl) maxHpEl.value = 0;
-    if (maxManaEl) maxManaEl.value = 0;
-  } else {
-    if(armorEl)armorEl.value=Number.isFinite(totalArmor)?totalArmor:0;
-    if(speedEl && !speedEl.dataset.manual) speedEl.value=Number.isFinite(totalSpeed)?totalSpeed:0;
-    if(maxHpEl)maxHpEl.value=Number.isFinite(maxHp)?maxHp:0;
-    if(maxManaEl)maxManaEl.value=Number.isFinite(maxMana)?maxMana:0;
-  }
-
-  updateBar('healthBar',maxHpEl?maxHpEl.value:0,document.getElementById('currentHealth').value);
-  updateBar('manaBar',maxManaEl?maxManaEl.value:0,document.getElementById('currentMana').value);
-  
-  if (typeof inv_recalcMaxWeight === 'function') {
-    inv_recalcMaxWeight();
-    inv_encumbranceUpdate();
-  }
-}
-
-/* === SAVE / LOAD / CLEAR === */
-let fileHandle=null;
-
-function readInvMain() {
-  const rows = document.querySelectorAll('#inv_main_grid .inv-item-row');
-  return Array.from(rows).map(row => ({
-    name: row.querySelector('.inv-name')?.value || '',
-    weight: parseFloat(row.querySelector('.inv-weight')?.value) || 0,
-    desc: row.querySelector('.inv-desc')?.value || ''
-  }));
-}
-
-function readInvSimple(containerId) {
-  const rows = document.querySelectorAll(`#${containerId} .inv-simple-slot`);
-  return Array.from(rows).map(row => ({
-    name: row.querySelector('input')?.value || '',
-    desc: row.querySelector('textarea')?.value || ''
-  }));
-}
-
-function buildJsonExport(){
-  return {
-    version: '1.0',
-    info: {
-      name: getTextValue('charName'),
-      species: getTextValue('charRace'),
-      age: getNumberValue('charAge'),
-      level: getNumberValue('charLevel'),
-      avatar_data: portraitImg ? portraitImg.src : '',
-      avatar_state: portraitImg ? portraitState : null
-    },
-    vitals: {
-      armor: getNumberValue('armor'),
-      speed: getNumberValue('speed'),
-      max_hp: getNumberValue('maxHealth'),
-      current_hp: getNumberValue('currentHealth'),
-      max_mana: getNumberValue('maxMana'),
-      current_mana: getNumberValue('currentMana'),
-      exhaustion: parseInt(getTextValue('exhaustion'),10) || 0,
-      final_blows: finalBlowValue || 0,
-      grace: graceValue || 0
-    },
-    attributes: {
-      body: { base: getNumberValue('body_base'), might_mod: getNumberValue('body_might_mod'), brawn_mod: getNumberValue('body_brawn_mod'), fortitude_mod: getNumberValue('body_fortitude_mod') },
-      skill: { base: getNumberValue('skill_base'), finesse_mod: getNumberValue('skill_finesse_mod'), reflex_mod: getNumberValue('skill_reflex_mod'), tinker_mod: getNumberValue('skill_tinker_mod') },
-      mind: { base: getNumberValue('mind_base'), arcane_mod: getNumberValue('mind_arcane_mod'), spirit_mod: getNumberValue('mind_spirit_mod'), scholarship_mod: getNumberValue('mind_scholarship_mod') },
-      style: { base: getNumberValue('style_base'), speech_mod: getNumberValue('style_speech_mod'), insight_mod: getNumberValue('style_insight_mod'), awareness_mod: getNumberValue('style_awareness_mod') }
-    },
-    equipment: {
-      armor_slot: { name: getTextValue('armor_name'), defense: getTextValue('armor_def') === '' ? null : getNumberValue('armor_def'), notes: getTextValue('armor_notes') },
-      shield_slot: { name: getTextValue('shield_name'), defense: getTextValue('shield_def') === '' ? null : getNumberValue('shield_def'), notes: getTextValue('shield_notes') },
-      cloak_slot: { name: getTextValue('cloak_name'), defense: getTextValue('cloak_def') === '' ? null : getNumberValue('cloak_def'), notes: getTextValue('cloak_notes') },
-      weapons: weapons.map(w=>({ name: w.name || '', damage: w.damage || '', attack: w.attack || '', notes: w.notes || '' }))
-    },
-    inventory: {
-      money: {
-        copper: getNumberValue('inv_copper'),
-        silver: getNumberValue('inv_silver'),
-        gold: getNumberValue('inv_gold'),
-        platinum: getNumberValue('inv_platinum')
-      },
-      weight: {
-        backpack_bonus: getNumberValue('inv_backpack_bonus')
-      },
-      items: readInvMain(),
-      potions: {
-        ingredients: readInvSimple('inv_potions_ingredients'),
-        recipes: readInvSimple('inv_potions_recipes')
-      },
-      crafts: {
-        components: readInvSimple('inv_crafts_components'),
-        recipes: readInvSimple('inv_crafts_recipes')
-      }
-    },
-    notes: getTextValue('notes'),
-    traits: [],
-    spells: [],
-    custom_traits: [],
-    custom_spells: []
-  };
-}
-
-function applyJsonImport(data){
-  if(!data)return;
-  const info=data.info||{}; const vitals=data.vitals||{}; const attrs=data.attributes||{}; const equip=data.equipment||{}; const inv=data.inventory||{};
-  const setVal=(id,value)=>{const el=document.getElementById(id);if(el)el.value=value;};
-  const setNumber=(id,value)=>{const el=document.getElementById(id);if(!el)return;if(value===null||value===undefined){el.value='';return;}el.value=value;};
-
-  setVal('charName',info.name||''); setVal('charRace',info.species||''); setNumber('charAge',info.age); setNumber('charLevel',info.level);
-  setNumber('currentHealth',vitals.current_hp); setNumber('currentMana',vitals.current_mana); setNumber('exhaustion',vitals.exhaustion);
-  const speedEl = document.getElementById('speed');
-  if (speedEl && typeof vitals.speed === 'number') speedEl.dataset.manual = 'true';
-
-  if(typeof vitals.final_blows==='number')setFinalBlow(vitals.final_blows);
-  if(typeof vitals.grace==='number')setGrace(vitals.grace);
-
-  const body=attrs.body||{}; setNumber('body_base',body.base); setNumber('body_might_mod',body.might_mod); setNumber('body_brawn_mod',body.brawn_mod); setNumber('body_fortitude_mod',body.fortitude_mod);
-  const skill=attrs.skill||{}; setNumber('skill_base',skill.base); setNumber('skill_finesse_mod',skill.finesse_mod); setNumber('skill_reflex_mod',skill.reflex_mod); setNumber('skill_tinker_mod',skill.tinker_mod);
-  const mind=attrs.mind||{}; setNumber('mind_base',mind.base); setNumber('mind_arcane_mod',mind.arcane_mod); setNumber('mind_spirit_mod',mind.spirit_mod); setNumber('mind_scholarship_mod',mind.scholarship_mod);
-  const style=attrs.style||{}; setNumber('style_base',style.base); setNumber('style_speech_mod',style.speech_mod); setNumber('style_insight_mod',style.insight_mod); setNumber('style_awareness_mod',style.awareness_mod);
-
-  const armorSlot=equip.armor_slot||{}; setVal('armor_name',armorSlot.name||''); setNumber('armor_def',armorSlot.defense); setVal('armor_notes',armorSlot.notes||'');
-  const shieldSlot=equip.shield_slot||{}; setVal('shield_name',shieldSlot.name||''); setNumber('shield_def',shieldSlot.defense); setVal('shield_notes',shieldSlot.notes||'');
-  const cloakSlot=equip.cloak_slot||{}; setVal('cloak_name',cloakSlot.name||''); setNumber('cloak_def',cloakSlot.defense); setVal('cloak_notes',cloakSlot.notes||'');
-
-  const money=inv.money||{};
-  setNumber('inv_copper',money.copper);
-  setNumber('inv_silver',money.silver);
-  setNumber('inv_gold',money.gold);
-  setNumber('inv_platinum',money.platinum);
-  setNumber('inv_backpack_bonus',(inv.weight||{}).backpack_bonus);
-
-  const mainGrid = document.getElementById('inv_main_grid');
-  if (mainGrid) mainGrid.innerHTML = '';
-  _invItemId = 0;
-  const items = Array.isArray(inv.items) ? inv.items : [];
-  if (items.length === 0) {
-    for (let i = 0; i < INV_BASE_SLOTS; i++) inv_addItem();
-  } else {
-    items.forEach(item => inv_addItem({ name: item.name, weight: item.weight, desc: item.desc }));
-  }
-
-  const simpleRestore = (containerId, list, namePh, descPh) => {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    container.innerHTML = '';
-    const rows = Array.isArray(list) ? list : [];
-    if (rows.length === 0) {
-      for (let i = 0; i < INV_BASE_SIMPLE_SLOTS; i++) inv_addSimple(containerId, namePh, descPh);
-      return;
-    }
-    rows.forEach(row => inv_addSimple(containerId, namePh, descPh, row));
-  };
-  simpleRestore('inv_potions_ingredients',(inv.potions||{}).ingredients,'Ingredient','Notes');
-  simpleRestore('inv_potions_recipes',(inv.potions||{}).recipes,'Potion','Recipe');
-  simpleRestore('inv_crafts_components',(inv.crafts||{}).components,'Component','Notes');
-  simpleRestore('inv_crafts_recipes',(inv.crafts||{}).recipes,'Craft','Recipe');
-
-  weapons=[]; weaponCount=0;
-  const weaponList=Array.isArray(equip.weapons)?equip.weapons:[];
-  weaponList.forEach(w=>{weaponCount+=1;weapons.push({id:weaponCount,name:w.name||'',damage:w.damage||'',attack:w.attack||'',notes:w.notes||''});});
-  if(weapons.length===0){addWeapon();addWeapon();addWeapon();}
-  renderWeapons();
-
-  setVal('notes',data.notes||'');
-  recalcAll();
-  inv_recalcMaxWeight();
-  inv_weightUpdate();
-  inv_encumbranceUpdate();
-
-  if(info.avatar_data){ renderPortraitFromState(info.avatar_data,info.avatar_state||{x:0,y:0,scale:1}); }
-}
-
-async function saveJsonToFile(data){
-  const json=JSON.stringify(data,null,2);
-  const blob=new Blob([json],{type:'application/json'});
-  const link=document.createElement('a');
-  link.href=URL.createObjectURL(blob);
-  link.download=`${(data.info?.name||'character').trim()||'character'}.json`;
-  link.click();
-  URL.revokeObjectURL(link.href);
-}
-
-function collectData(){
-  const data={};
-  document.querySelectorAll('[id]').forEach(el=>{if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'||el.tagName==='SELECT')data[el.id]=el.value;});
-  data._grace=graceValue;data._finalBlow=finalBlowValue;
-  data._weapons=JSON.parse(JSON.stringify(weapons));
-  return data;
-}
-function applyData(data){
-  Object.entries(data).forEach(([id,value])=>{const el=document.getElementById(id);if(el&&(el.tagName==='INPUT'||el.tagName==='TEXTAREA'||el.tagName==='SELECT'))el.value=value;});
-  const speedEl=document.getElementById('speed');
-  if(speedEl && speedEl.value!=='') speedEl.dataset.manual='true';
-  if(data._grace!==undefined){graceValue=data._grace;buildPips('gracePips',6,graceValue,setGrace);}
-  if(data._finalBlow!==undefined){finalBlowValue=data._finalBlow;buildPips('finalBlowPips',4,finalBlowValue,setFinalBlow);}
-  if(data._weapons){weapons=[];weaponCount=0;data._weapons.forEach(w=>{weaponCount=Math.max(weaponCount,w.id);weapons.push(w);});renderWeapons();}
-  recalcAll();
-}
-async function saveSheet(){
-  const data=buildJsonExport();
-  try {
-    await saveJsonToFile(data);
-    showFeedback('Saved.');
-  } catch (error) {
-    console.error(error);
-    showFeedback('Save canceled.');
-  }
-}
-async function loadSheet(){
-  try {
-    if(window.showOpenFilePicker){
-      const [handle]=await window.showOpenFilePicker({
-        types: [{ description: 'JSON', accept: { 'application/json': ['.json'] } }],
-        multiple: false
-      });
-      const file=await handle.getFile();
-      const text=await file.text();
-      applyJsonImport(JSON.parse(text));
-      showFeedback('Loaded.');
-      return;
-    }
-    const input=document.createElement('input');
-    input.type='file';
-    input.accept='.json,application/json';
-    input.onchange=async()=>{
-      const file=input.files?.[0];
-      if(!file)return;
-      const text=await file.text();
-      applyJsonImport(JSON.parse(text));
-      showFeedback('Loaded.');
-    };
-    input.click();
-  } catch (error) {
-    console.error(error);
-    showFeedback('Load canceled.');
-  }
-}
-function clearSheet(){
-  if(!confirm('Clear all fields?'))return;
-  ['ml_sheet','ml_portrait_data','ml_portrait_state'].forEach(k=>localStorage.removeItem(k));
-  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el=>el.value=el.defaultValue||'');
-  document.querySelectorAll('select').forEach(el=>el.selectedIndex=0);
-  const speedEl=document.getElementById('speed');
-  if(speedEl){ speedEl.dataset.manual=''; speedEl.value = 0; }
-  document.querySelectorAll('#tab-main input[type=number]').forEach(el => { if (el.value === '') el.value = 0; });
-  portraitImg=null;portraitState={x:0,y:0,scale:1};
-  document.getElementById('portraitCanvas').getContext('2d').clearRect(0,0,PORT_SIZE,PORT_SIZE);
-  weapons=[];weaponCount=0;addWeapon();addWeapon();addWeapon();
-  graceValue=0;buildPips('gracePips',6,0,setGrace);
-  finalBlowValue=0;buildPips('finalBlowPips',4,0,setFinalBlow);
-  recalcAll();
-  
-  // Clear inventory properly
-  const mainGrid = document.getElementById('inv_main_grid'); if (mainGrid) mainGrid.innerHTML = ''; 
-  ['inv_potions_ingredients','inv_potions_recipes','inv_crafts_components','inv_crafts_recipes'].forEach(id=>{const el=document.getElementById(id); if (el) el.innerHTML='';}); 
-  _invItemId=0; inv_init();
-  showFeedback('Cleared.');
-}
-
-/* Tab Management */
-function showTab(name) {
-  document.querySelectorAll('.tab-content').forEach(el => {
-    el.style.display = (el.id === 'tab-' + name) ? '' : 'none';
-  });
-  document.querySelectorAll('.subtab').forEach(btn => {
-    const key = btn.textContent.trim().toLowerCase();
-    btn.classList.toggle('active', key === name);
-  });
-}
-
-/* === INIT === */
-window.addEventListener('DOMContentLoaded',()=>{
-  showTab('main');
-  document.querySelectorAll('#tab-main input[type=number]').forEach(el => { if (el.value === '') el.value = 0; });
-  buildPips('gracePips',6,0,setGrace);
-  buildPips('finalBlowPips',4,0,setFinalBlow);
-  inv_init(); // Inventory Init
-  recalcAll();
-  
-  ['charLevel','armor_def','shield_def','cloak_def'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el)el.addEventListener('input',updateDerivedVitals);
-  });
-  
-  const raw=localStorage.getItem('ml_sheet');
-  if(raw){
-    applyData(JSON.parse(raw));
-    const imgSrc=localStorage.getItem('ml_portrait_data'),stateRaw=localStorage.getItem('ml_portrait_state');
-    if(imgSrc&&stateRaw)renderPortraitFromState(imgSrc,JSON.parse(stateRaw));
-  }
-  if(weapons.length===0){
-    addWeapon(); addWeapon(); addWeapon();
-  }
-
-  // Mobile menu setup
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  if (btn && menu) {
-    btn.addEventListener('click', (event) => {
-      event.stopPropagation();
-      menu.classList.toggle('hidden');
-    });
-    document.addEventListener('click', () => {
-      if (!menu.classList.contains('hidden')) menu.classList.add('hidden');
-    });
-  }
-});
-
-// Watch inputs in real time
-document.addEventListener('input', ()=>{
-    if (typeof inv_recalcMaxWeight === 'function') inv_recalcMaxWeight();
-    if (typeof inv_encumbranceUpdate === 'function') inv_encumbranceUpdate();
-});
-</script>
+  </div>
 </body>
 </html>
+
+
+
+

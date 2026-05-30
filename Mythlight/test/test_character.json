@@ -1,10 +1,10 @@
 {
   "version": "1.0",
   "info": {
-    "name": "Garrick",
-    "species": "Elf",
-    "age": 112,
-    "level": 5,
+    "name": "",
+    "species": "",
+    "age": 0,
+    "level": 0,
     "avatar_data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..." 
   },
   "vitals": { "armor": 0, "speed": 0, "max_hp": 0, "current_hp": 0, "max_mana": 0, "current_mana": 0, "exhaustion": 0, "final_blows": 0, "grace": 0 },
@@ -20,6 +20,17 @@
     "cloak_slot": { "name": "", "defense": null, "notes": "" },
     "weapons": []
   },
+  "paths": [
+    {
+      "name": "test",
+      "bonuses": {
+        "armor": 0,
+        "speed": 0,
+        "max_hp": 0,
+        "max_mana": 0
+      }
+    }
+  ],
   "notes": "",
   "traits": [],
   "spells": [],

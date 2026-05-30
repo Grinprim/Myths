@@ -1,0 +1,76 @@
+{
+  "traits": [
+    {
+      "id": "occult_1",
+      "name": "Whispered Sigils",
+      "desc": "Trace silent sigils that steady your focus.",
+      "bonuses": { "arcane": 1 }
+    },
+    {
+      "id": "occult_2",
+      "name": "Ritual Focus",
+      "desc": "Long chants deepen your reserves.",
+      "bonuses": { "max_mana": 1 }
+    },
+    {
+      "id": "occult_3",
+      "name": "Grim Study",
+      "desc": "Forbidden notes sharpen your scholarship.",
+      "bonuses": { "scholarship": 1 }
+    },
+    {
+      "id": "occult_4",
+      "name": "Veil Sense",
+      "desc": "You notice the edges of unseen things.",
+      "bonuses": { "awareness": 1 }
+    },
+    {
+      "id": "occult_5",
+      "name": "Blood Tithe",
+      "desc": "Offerings harden your resolve.",
+      "bonuses": { "max_hp": 2 }
+    },
+    {
+      "id": "occult_6",
+      "name": "Hex Channel",
+      "desc": "You can hold a spell longer than most.",
+      "bonuses": { "spirit": 1 }
+    },
+    {
+      "id": "occult_7",
+      "name": "Night Tongue",
+      "desc": "Old dialects lend weight to your words.",
+      "bonuses": { "speech": 1 }
+    },
+    {
+      "id": "occult_8",
+      "name": "Runic Guard",
+      "desc": "Layered runes dull incoming strikes.",
+      "bonuses": { "armor": 1 }
+    },
+    {
+      "id": "occult_9",
+      "name": "Shadow Step",
+      "desc": "You move with a practiced hush.",
+      "bonuses": { "speed": 1 }
+    },
+    {
+      "id": "occult_10",
+      "name": "Eldritch Accuracy",
+      "desc": "You line up power with greater precision.",
+      "bonuses": { "finesse": 1 }
+    },
+    {
+      "id": "occult_11",
+      "name": "Sigil Mastery",
+      "desc": "Complex glyphs obey you more easily.",
+      "bonuses": { "arcane": 2 }
+    },
+    {
+      "id": "occult_12",
+      "name": "Void Pact",
+      "desc": "A hard bargain fortifies your will.",
+      "bonuses": { "might": 1 }
+    }
+  ]
+}
