@@ -36,6 +36,7 @@
 		body {
 			width: 100%;
 			min-height: 100%;
+			padding-top: 72px; /* to offset fixed navbar */
 		}
 
 		body {
@@ -375,6 +376,89 @@
 			animation: pulseRing 2.8s ease-out infinite;
 		}
 
+		/* ── Era segments ── */
+		.era-event {
+			pointer-events: none;
+		}
+
+		.era-tick {
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 2px;
+			height: 12px;
+			background: var(--c);
+			top: calc(50% - 6px);
+			opacity: 0.7;
+		}
+
+		.era-btn {
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 3px;
+			padding: 6px 14px 7px;
+			background: rgba(17, 7, 7, 0.75);
+			border: 1px dashed var(--c);
+			border-radius: 6px;
+			cursor: pointer;
+			pointer-events: auto;
+			backdrop-filter: blur(6px);
+			transition: background 200ms, box-shadow 200ms;
+			min-width: 110px;
+		}
+
+		.era-btn:hover {
+			background: rgba(17, 7, 7, 0.92);
+			box-shadow: 0 0 18px color-mix(in srgb, var(--c), transparent 65%);
+		}
+
+		.event.top .era-btn {
+			bottom: calc(50% + 18px);
+		}
+
+		.event.bottom .era-btn {
+			top: calc(50% + 18px);
+		}
+
+		.era-label {
+			font-family: 'Rajdhani', sans-serif;
+			font-size: 0.78rem;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			color: var(--c);
+			opacity: 0.85;
+			white-space: nowrap;
+		}
+
+		.era-name {
+			font-family: 'Rajdhani', sans-serif;
+			font-size: 0.92rem;
+			font-weight: 700;
+			letter-spacing: 0.05em;
+			color: var(--c-text);
+			white-space: nowrap;
+		}
+
+		.era-info {
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			width: var(--event-width);
+			text-align: center;
+		}
+
+		.event.top .era-info {
+			top: calc(50% + 14px);
+		}
+
+		.event.bottom .era-info {
+			bottom: calc(50% + 14px);
+		}
+
 		@keyframes pulseRing {
 			0% {
 				transform: scale(0.92);
@@ -406,6 +490,7 @@
 		.event.bottom .info {
 			bottom: calc(50% + 14px);
 		}
+
 		/* ─────────────────────────────────────────────
    STORY ENTRY SYSTEM
 ───────────────────────────────────────────── */
@@ -452,7 +537,7 @@
 			transform: translateX(-50%);
 			width: 1px;
 			height: 190px;
-			background:  linear-gradient(to bottom, transparent, var(--story-color), transparent);
+			background: linear-gradient(to bottom, transparent, var(--story-color), transparent);
 			opacity: 0.85;
 		}
 
@@ -708,7 +793,7 @@
 			padding-right: 0.375rem;
 			flex: 1;
 			scrollbar-width: thin;
-			scrollbar-color: rgba(196,58,47,0.55) transparent;
+			scrollbar-color: rgba(196, 58, 47, 0.55) transparent;
 		}
 
 		.modal-copy::-webkit-scrollbar {
@@ -720,14 +805,14 @@
 		}
 
 		.modal-copy::-webkit-scrollbar-thumb {
-			background: rgba(196,58,47,0.55);
+			background: rgba(196, 58, 47, 0.55);
 			border-radius: 999px;
 			border: 2px solid transparent;
 			background-clip: padding-box;
 		}
 
 		.modal-copy::-webkit-scrollbar-thumb:hover {
-			background: rgba(196,58,47,0.75);
+			background: rgba(196, 58, 47, 0.75);
 		}
 
 		.modal-card {
@@ -870,14 +955,16 @@
 </head>
 
 <body>
+	<div id="navbar-placeholder"></div>
 	<div class="timeline-page" id="tlPage">
 		<canvas id="smokeCanvas" aria-hidden="true"></canvas>
 
 		<header class="tl-header">
-			<img src="./HistoryLogo.png" alt="Timeline logo" style="width: 68px; height: 68px; margin-bottom: 0.6rem; display: inline-block;">
+			<img src="./HistoryLogo.png" alt="Timeline logo"
+				style="width: 68px; height: 68px; margin-bottom: 0.6rem; display: inline-block;">
 			<div>
-			<h1 class="title">Timeline of the World</h1>
-			<p class="subtitle">Drag or scroll to explore. Click any marker to read the full story.</p>
+				<h1 class="title">Timeline of the World</h1>
+				<p class="subtitle">Drag or scroll to explore. Click any marker to read the full story.</p>
 			</div>
 		</header>
 
@@ -902,9 +989,8 @@
 		</div>
 	</div>
 
-	<a class="back-to-myths" style="margin-top: 18rem;" href="../index.html">&larr; Back to Myths</a>
-
-	<aside id="timelineModal" style="z-index: 50;" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalYear" aria-describedby="modalCopy">
+	<aside id="timelineModal" style="z-index: 50;" class="modal" aria-hidden="true" role="dialog" aria-modal="true"
+		aria-labelledby="modalYear" aria-describedby="modalCopy">
 		<div class="modal-card" role="document">
 			<div class="modal-head">
 				<h2 id="modalYear" class="modal-year">0000</h2>
@@ -914,7 +1000,6 @@
 			<p id="modalCopy" class="modal-copy">Details.</p>
 		</div>
 	</aside>
-<div id="footer-placeholder"></div>
 	<script>
 		/* ─────────────────────────────────────────────
 		   TIMELINE ENGINE
@@ -972,14 +1057,14 @@
 				turnMax: 18
 			};
 			const CM_TO_PX = 37.8;
-			const MIN_BRANCH_LENGTH = 2 * CM_TO_PX;
-			const MAX_BRANCH_LENGTH = 9 * CM_TO_PX;  // shorter max — stays near line
+			const MIN_BRANCH_LENGTH = 0 * CM_TO_PX;
+			const MAX_BRANCH_LENGTH = 0 * CM_TO_PX;  // shorter max — stays near line
 			const SPEED_MULT = DEBUG.growthSpeed;
 			const MAX_DUST = 200;             // was 900
 
 			const EVENT_COLORS = ['#e05548', '#c94030', '#f06050', '#d94838', '#e86858', '#cc3c2c', '#f05848', '#d04535'];
 			const TIMELINE_JSON = './legends.json';
-			const STORIES_JSON  = './stories.json';
+			const STORIES_JSON = './stories.json';
 
 			const FALLBACK_DATA = {
 				title: 'Timeline of the World',
@@ -996,18 +1081,18 @@
 				]
 			};
 			const FALLBACK_STORIES = {
-	stories: [
-		{
-			year: 2019.5,
-			title: "The Crimson Pact",
-			summary: "A hidden accord was signed in secret.",
-			details: "This story entry exists between major milestones.",
-			side: "top",
-			color: "#d94838",
-			icon: "M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8Z"
-		}
-	]
-};
+				stories: [
+					{
+						year: 2019.5,
+						title: "The Crimson Pact",
+						summary: "A hidden accord was signed in secret.",
+						details: "This story entry exists between major milestones.",
+						side: "top",
+						color: "#d94838",
+						icon: "M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8Z"
+					}
+				]
+			};
 
 			const isNarrow = () => window.innerWidth < 860;
 
@@ -1082,128 +1167,167 @@
 			const detailsStore = window._tlDetailsStore;
 
 			const loadStoriesData = async () => {
-	try {
-		const r = await fetch(STORIES_JSON, { cache: 'no-store' });
-		if (!r.ok) throw new Error();
-		return await r.json();
-	} catch {
-		return FALLBACK_STORIES;
-	}
-};
+				try {
+					const r = await fetch(STORIES_JSON, { cache: 'no-store' });
+					if (!r.ok) throw new Error();
+					return await r.json();
+				} catch {
+					return FALLBACK_STORIES;
+				}
+			};
 
 			/* ── Render ── */
 
-const renderTimeline = (data, storiesData = { stories: [] }) => {
-	const segs = Array.isArray(data?.segments) ? data.segments : [];
-	const stories = Array.isArray(storiesData?.stories) ? storiesData.stories : [];
+			const renderTimeline = (data, storiesData = { stories: [] }) => {
+				const segs = Array.isArray(data?.segments) ? data.segments : [];
+				const stories = Array.isArray(storiesData?.stories) ? storiesData.stories : [];
 
-	if (titleEl && data?.title) titleEl.textContent = data.title;
-	if (subtitleEl && data?.subtitle) subtitleEl.textContent = data.subtitle;
+				if (titleEl && data?.title) titleEl.textContent = data.title;
+				if (subtitleEl && data?.subtitle) subtitleEl.textContent = data.subtitle;
 
-	const innerW = applyLayout(segs.length);
+				const innerW = applyLayout(segs.length);
 
-	if (!segs.length) {
-		eventsList.innerHTML = '';
-		return;
-	}
+				if (!segs.length) {
+					eventsList.innerHTML = '';
+					return;
+				}
 
-	const years = segs.map(s => Number(s.yearValue ?? s.year ?? 0));
-	const storyYears = segs.map(s => Number(s.yearValue ?? s.year ?? 0));
+				const years = segs.map(s => Number(s.yearValue ?? s.year ?? 0));
+				const storyYears = segs.map(s => Number(s.yearValue ?? s.year ?? 0));
 
-	const getStoryIndexValue = (yearVal) => {
-		if (!storyYears.length) return 0;
-		if (yearVal <= storyYears[0]) return 0;
-		const lastIndex = storyYears.length - 1;
-		if (yearVal >= storyYears[lastIndex]) return lastIndex;
+				const getStoryIndexValue = (yearVal) => {
+					if (!storyYears.length) return 0;
+					if (yearVal <= storyYears[0]) return 0;
+					const lastIndex = storyYears.length - 1;
+					if (yearVal >= storyYears[lastIndex]) return lastIndex;
 
-		for (let i = 0; i < lastIndex; i++) {
-			const start = storyYears[i];
-			const end = storyYears[i + 1];
-			if ((yearVal >= start && yearVal <= end) || (yearVal <= start && yearVal >= end)) {
-				return i + ((yearVal - start) / (end - start));
-			}
-		}
+					for (let i = 0; i < lastIndex; i++) {
+						const start = storyYears[i];
+						const end = storyYears[i + 1];
+						if ((yearVal >= start && yearVal <= end) || (yearVal <= start && yearVal >= end)) {
+							return i + ((yearVal - start) / (end - start));
+						}
+					}
 
-		return 0;
-	};
+					return 0;
+				};
 
-	const buildX = (value, total, W, mode = 'segment') => {
-		if (isNarrow() || !W) {
-			const ratio = mode === 'segment' && total > 1 ? value / (total - 1) : 0.5;
-			const min = 8;
-			const max = 92;
-			return `${(min + clamp01(ratio) * (max - min)).toFixed(2)}%`;
-		}
+				const buildX = (value, total, W, mode = 'segment') => {
+					if (isNarrow() || !W) {
+						const ratio = mode === 'segment' && total > 1 ? value / (total - 1) : 0.5;
+						const min = 8;
+						const max = 92;
+						return `${(min + clamp01(ratio) * (max - min)).toFixed(2)}%`;
+					}
 
-		const minYear = Math.min(...years);
-		const maxYear = Math.max(...years);
-		const evW = parseFloat(
-			getComputedStyle(document.documentElement)
-				.getPropertyValue('--event-width')
-		) || 220;
+					const minYear = Math.min(...years);
+					const maxYear = Math.max(...years);
+					const evW = parseFloat(
+						getComputedStyle(document.documentElement)
+							.getPropertyValue('--event-width')
+					) || 220;
 
-		const pad = Math.ceil(evW / 2) + 16;
-		const available = W - pad * 2;
+					const pad = Math.ceil(evW / 2) + 16;
+					const available = W - pad * 2;
 
-		if (mode === 'segment') {
-			if (total <= 1) return `${(W / 2).toFixed(1)}px`;
-			return `${(pad + (value / (total - 1)) * available).toFixed(1)}px`;
-		}
+					if (mode === 'segment') {
+						if (total <= 1) return `${(W / 2).toFixed(1)}px`;
+						return `${(pad + (value / (total - 1)) * available).toFixed(1)}px`;
+					}
 
-		const ratio = clamp01((value - minYear) / Math.max(1, maxYear - minYear));
-		return `${(pad + ratio * available).toFixed(1)}px`;
+					const ratio = clamp01((value - minYear) / Math.max(1, maxYear - minYear));
+					return `${(pad + ratio * available).toFixed(1)}px`;
 
-	};
+				};
 
-	detailsStore.clear();
+				detailsStore.clear();
 
-	const segmentHTML = segs.map((s, i) => {
-		detailsStore.set(`segment-${i}`, s.details || s.summary || '');
+				const isEra = s => /[–—-]/.test(String(s.year ?? '').replace(/^\d/, '').slice(0, 1) === '' ? '' : String(s.year ?? '').replace(/^-?\d/, 'X'));
 
-		const side  = s.side === 'bottom' ? 'bottom' : 'top';
-		const color = s.color || EVENT_COLORS[i % EVENT_COLORS.length];
+				// Better: detect era by checking if year string contains an en-dash, em-dash, or hyphen between two numbers
+				const ERA_RE = /\d\s*[–—-]\s*\d/;
+				const isEraSegment = s => ERA_RE.test(String(s.year ?? ''));
 
-		const year  = escapeHtml(s.year ?? `${i+1}`);
-		const title = escapeHtml(s.title || `Milestone ${i+1}`);
-		const mini  = escapeHtml(s.miniTitle || title);
-		const sum   = escapeHtml(s.summary || '');
+				const segmentHTML = segs.map((s, i) => {
+					detailsStore.set(`segment-${i}`, s.details || s.summary || '');
 
-		const pulse = i % 2 === 0 ? ' pulse' : '';
-			const x     = buildX(i, segs.length, innerW, 'segment');
-		return `
-		<li class="event ${side}" style="--x:${x};--c:${color};">
-			<span class="connector" aria-hidden="true"></span>
+					const side = s.side === 'bottom' ? 'bottom' : 'top';
+					const color = s.color || EVENT_COLORS[i % EVENT_COLORS.length];
+					const year = escapeHtml(s.year ?? `${i + 1}`);
+					const title = escapeHtml(s.title || `Milestone ${i + 1}`);
+					const mini = escapeHtml(s.miniTitle || title);
+					const sum = escapeHtml(s.summary || '');
+					const x = buildX(i, segs.length, innerW, 'segment');
 
-			<button
-				class="node-btn${pulse}"
-				data-idx="segment-${i}"
-				data-year="${year}"
-				data-title="${title}"
-				type="button"
-			>${year}</button>
+					if (isEraSegment(s)) {
+						// Render as an era span — a bracket on the line
+						return `
+        <li class="event era-event ${side}" style="--x:${x};--c:${color};">
+            <button
+                class="era-btn"
+                data-idx="segment-${i}"
+                data-year="${year}"
+                data-title="${title}"
+                data-color="${color}"
+                type="button"
+            >
+                <span class="era-label">${year}</span>
+                <span class="era-name">${mini}</span>
+            </button>
+            <div class="era-tick" aria-hidden="true"></div>
+            <div class="info era-info">
+                <p class="mini-copy">${sum}</p>
+            </div>
+        </li>`;
+					}
 
-			<div class="info">
-				<h2 class="mini-title">${mini}</h2>
-				<div class="mini-rule"></div>
-				<p class="mini-copy">${sum}</p>
-			</div>
-		</li>`;
-	}).join('');
+					const pulse = i % 2 === 0 ? ' pulse' : '';
+					return `
+    <li class="event ${side}" style="--x:${x};--c:${color};">
+        <span class="connector" aria-hidden="true"></span>
+        <button
+            class="node-btn${pulse}"
+            data-idx="segment-${i}"
+            data-year="${year}"
+            data-title="${title}"
+            type="button"
+        >${year}</button>
+        <div class="info">
+            <h2 class="mini-title">${mini}</h2>
+            <div class="mini-rule"></div>
+            <p class="mini-copy">${sum}</p>
+        </div>
+    </li>`;
+				}).join('');
 
-	const storiesHTML = stories.map((s, i) => {
-		detailsStore.set(`story-${i}`, s.details || s.summary || '');
+				const storiesHTML = stories.map((s, i) => {
+					const formatYearLabel = (y) => {
+						const n = Number(y);
+						if (isNaN(n)) return String(y);
+						if (n < 0) return `${Math.abs(n)} B.W.C`;
+						if (n === 0) return '0 A.W.C';
+						return `${n} A.W.C`;
+					};
 
-		const side  = s.side === 'bottom' ? 'bottom' : 'top';
-		const color = s.color || '#d94838';
+					detailsStore.set(`story-${i}`, s.details || s.summary || '');
 
-		const storyValue = Number(s.yearValue ?? s.year ?? 0);
-		const year = escapeHtml(s.year ?? `${storyValue}`);
-		const title = escapeHtml(s.title || 'Story Entry');
-		const icon  = s.icon || '';
+					const side = s.side === 'bottom' ? 'bottom' : 'top';
+					const color = s.color || '#d94838';
 
-		const x = buildX(getStoryIndexValue(storyValue), segs.length, innerW, 'segment');
+					const storyValue = Number(s.yearValue ?? s.year ?? 0);
+					const year = escapeHtml(
+						(s.year != null && !isNaN(Number(s.year)))
+							? formatYearLabel(s.year)
+							: String(s.year ?? storyValue)
+					);
 
-		return `
+
+					const title = escapeHtml(s.title || 'Story Entry');
+					const icon = s.icon || '';
+
+					const x = buildX(getStoryIndexValue(storyValue), segs.length, innerW, 'segment');
+
+					return `
 		<li class="story-entry ${side}"
 			style="
 				--x:${x};
@@ -1232,27 +1356,27 @@ const renderTimeline = (data, storiesData = { stories: [] }) => {
 				<div class="story-label">${title}</div>
 			</button>
 		</li>`;
-	}).join('');
+				}).join('');
 
-	eventsList.innerHTML = segmentHTML + storiesHTML;
+				eventsList.innerHTML = segmentHTML + storiesHTML;
 
-	const colors = segs.map(s => s.color || EVENT_COLORS[0]);
+				const colors = segs.map(s => s.color || EVENT_COLORS[0]);
 
-	if (colors.length >= 2) {
-		const stops = colors.map((c, i) => {
-			const pct = (i / (colors.length - 1) * 100).toFixed(1);
-			return `${c} ${pct}%`;
-		}).join(', ');
+				if (colors.length >= 2) {
+					const stops = colors.map((c, i) => {
+						const pct = (i / (colors.length - 1) * 100).toFixed(1);
+						return `${c} ${pct}%`;
+					}).join(', ');
 
-		lineEl.style.background =
-			`linear-gradient(90deg, transparent 0%, ${stops}, transparent 100%)`;
+					lineEl.style.background =
+						`linear-gradient(90deg, transparent 0%, ${stops}, transparent 100%)`;
 
-		lineEl.style.boxShadow =
-			`0 0 18px color-mix(in srgb, ${colors[Math.floor(colors.length/2)]}, transparent 60%)`;
-	}
+					lineEl.style.boxShadow =
+						`0 0 18px color-mix(in srgb, ${colors[Math.floor(colors.length / 2)]}, transparent 60%)`;
+				}
 
-	requestAnimationFrame(initScrollUI);
-};
+				requestAnimationFrame(initScrollUI);
+			};
 
 			/* ── Data loading ── */
 			const loadTimelineData = async () => {
@@ -1655,46 +1779,46 @@ const renderTimeline = (data, storiesData = { stories: [] }) => {
 
 			start();
 
-		/* ─────────────────────────────────────────────
-		   MODAL
-		───────────────────────────────────────────── */
-		(() => {
-			const eventsList = document.getElementById('eventsList');
-			const modal = document.getElementById('timelineModal');
-			const closeBtn = document.getElementById('closeModal');
-			const modalYear = document.getElementById('modalYear');
-			const modalTitle = document.getElementById('modalTitle');
-			const modalCopy = document.getElementById('modalCopy');
-			if (!eventsList || !modal || !closeBtn) return;
+			/* ─────────────────────────────────────────────
+			   MODAL
+			───────────────────────────────────────────── */
+			(() => {
+				const eventsList = document.getElementById('eventsList');
+				const modal = document.getElementById('timelineModal');
+				const closeBtn = document.getElementById('closeModal');
+				const modalYear = document.getElementById('modalYear');
+				const modalTitle = document.getElementById('modalTitle');
+				const modalCopy = document.getElementById('modalCopy');
+				if (!eventsList || !modal || !closeBtn) return;
 
-			let active = null;
-			const open = btn => {
-				active = btn;
-				modalYear.textContent = btn.dataset.year || '';
-				modalTitle.textContent = btn.dataset.title || 'Milestone';
-				// Use innerHTML so <br> and other tags in details render correctly
-				const idx = btn.dataset.idx ?? '';
-				modalCopy.innerHTML = (window._tlDetailsStore ?? new Map()).get(idx) ?? '';
-				const sourceColor = btn.dataset.color || getComputedStyle(btn).borderColor;
-				modal.style.setProperty('--active', sourceColor);
-				modal.classList.add('open');
-				modal.setAttribute('aria-hidden', 'false');
-				closeBtn.focus();
-			};
-			const close = () => {
-				modal.classList.remove('open');
-				modal.setAttribute('aria-hidden', 'true');
-				active?.focus();
-			};
+				let active = null;
+				const open = btn => {
+					active = btn;
+					modalYear.textContent = btn.dataset.year || '';
+					modalTitle.textContent = btn.dataset.title || 'Milestone';
+					// Use innerHTML so <br> and other tags in details render correctly
+					const idx = btn.dataset.idx ?? '';
+					modalCopy.innerHTML = (window._tlDetailsStore ?? new Map()).get(idx) ?? '';
+					const sourceColor = btn.dataset.color || getComputedStyle(btn).borderColor;
+					modal.style.setProperty('--active', sourceColor);
+					modal.classList.add('open');
+					modal.setAttribute('aria-hidden', 'false');
+					closeBtn.focus();
+				};
+				const close = () => {
+					modal.classList.remove('open');
+					modal.setAttribute('aria-hidden', 'true');
+					active?.focus();
+				};
 
-			eventsList.addEventListener('click', e => { const b = e.target.closest('button[data-idx]'); if (b) open(b); });
-			closeBtn.addEventListener('click', close);
-			modal.addEventListener('click', e => { if (e.target === modal) close(); });
-			document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+				eventsList.addEventListener('click', e => { const b = e.target.closest('button[data-idx]'); if (b) open(b); });
+				closeBtn.addEventListener('click', close);
+				modal.addEventListener('click', e => { if (e.target === modal) close(); });
+				document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+			})();
 		})();
-	})();
 	</script>
-	<script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
+	<script id="ml-layout" src="./dyn/layout.js" data-base="." defer></script>
 </body>
 
 </html>

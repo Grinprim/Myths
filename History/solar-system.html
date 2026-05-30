@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root {
+  --nav-height: 72px;
   --c-bg-0: #020810;
   --c-bg-1: #050d1a;
   --c-bg-2: #091428;
@@ -33,7 +34,8 @@ html, body {
 #app {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  min-height: calc(100vh - var(--nav-height));
+  height: calc(100vh - var(--nav-height));
   overflow: hidden;
 }
 
@@ -44,6 +46,7 @@ html, body {
   z-index: 20;
   padding: 1.5rem 2rem 0;
   display: flex;
+  top: var(--nav-height); /* to offset fixed navbar */
   align-items: flex-start;
   justify-content: space-between;
   pointer-events: none;
@@ -297,6 +300,7 @@ html, body {
 </style>
 </head>
 <body>
+  <div id="navbar-placeholder"></div>
 <div id="app">
   <div class="header">
     <div class="title-block">
@@ -1130,5 +1134,6 @@ function getDefaultZoom() {
   requestAnimationFrame(frame);
 })();
 </script>
+<script id="ml-layout" src="./dyn/layout.js" data-base="." defer></script>
 </body>
 </html>
