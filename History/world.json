@@ -1,0 +1,562 @@
+{
+  "world": {
+    "name": "Aethon",
+    "lore": "A world of ancient kingdoms, shifting alliances, and forgotten histories."
+  },
+  "continents": [
+    {
+      "id": "north-reinghar",
+      "name": "North Reinghar",
+      "description": "A vast continent spanning temperate forests in the south to frozen tundra in the far north. Its plains are rich and wide, broken by ancient mountain spines and slow, dark rivers. The people of North Reinghar are hardy and proud, shaped by long winters and longer memories.",
+      "biome": "plains-forest-tundra",
+      "color": "#4a7c59",
+      "kingdoms": [
+        {
+          "id": "aldfell",
+          "name": "Kingdom of Aldfell",
+          "description": "The oldest continuous monarchy on the continent, Aldfell has stood for over eight hundred years. Founded by the warlord Aldric the Unmoved, it controls the fertile heartland of North Reinghar. Its traditions are rigid, its loyalty fierce, and its history soaked in both glory and blood.",
+          "color": "#c4893a",
+          "cities": [
+            {
+              "id": "kareem",
+              "name": "Kareem",
+              "type": "capital",
+              "x": 18,
+              "y": 30,
+              "population": "large",
+              "description": "The seat of the Aldfell crown for six centuries. Kareem sits at the confluence of the rivers Vel and Arru, its great stone keep visible for miles across the surrounding plains. The city is famed for its open market — the Veldmeet — where traders from across the continent gather each spring solstice.",
+              "history": "Founded as a river fort by Aldric the Unmoved in the year 112 A.W.C, Kareem grew from a military garrison into the political heart of North Reinghar. The current ruling dynasty, House Mirren, has held the throne for two hundred and forty years."
+            },
+            {
+              "id": "galonia",
+              "name": "Galonia",
+              "type": "city",
+              "x": 14,
+              "y": 22,
+              "population": "medium",
+              "description": "A coastal city on the northern bight, Galonia is the primary fishing port of Aldfell. Its harbour is sheltered by a natural rock arch locals call the Jaw, and its fleet of deep-water vessels rivals any in the known world.",
+              "history": "Galonia was an independent fishing village long before Aldfell absorbed it. Its people still maintain a degree of cultural pride distinct from the inland kingdom — they keep their own dialect and their own sea-saints."
+            },
+            {
+              "id": "helwick",
+              "name": "Helwick",
+              "type": "city",
+              "x": 22,
+              "y": 20,
+              "population": "medium",
+              "description": "A garrison city on the tundra border, Helwick serves as the northernmost defended settlement of Aldfell. Its architecture is low and thick-walled, built to survive the brutal northern storms. The city is home to the famous Frostwatch regiment.",
+              "history": "Built as a forward base during the Tundra Wars of 340 A.W.C, Helwick was originally a rough camp. Over a century it hardened into a permanent city, attracting settlers willing to endure its climate for cheap land grants."
+            },
+            {
+              "id": "bramton",
+              "name": "Bramton",
+              "type": "city",
+              "x": 16,
+              "y": 36,
+              "population": "medium",
+              "description": "Known as the granary of the kingdom, Bramton sits in the most productive farmland in all of North Reinghar. It is a quiet city of merchants, millers, and farmers — prosperous, unhurried, and politically unambitious.",
+              "history": "Bramton has changed hands four times in its history, always by treaty rather than conquest. Its fields are too valuable to burn and its citizens too useful to antagonize."
+            },
+            {
+              "id": "verath",
+              "name": "Verath",
+              "type": "city",
+              "x": 25,
+              "y": 33,
+              "population": "small",
+              "description": "A remote forested town on the eastern edge of Aldfell territory. Verath is known for its woodcutters, its amber trade, and its suspiciously good luck.",
+              "history": "Legend holds that Verath was built over an old woodland shrine, and that the town's consistent prosperity is a blessing from the Old Powers. Scholars mostly dismiss this. The town's amber deposits, however, are very real."
+            },
+            {
+              "id": "caelford",
+              "name": "Caelford",
+              "type": "city",
+              "x": 12,
+              "y": 32,
+              "population": "medium",
+              "description": "A river crossing city built around an ancient stone bridge — the Caelspan — said to have been constructed by a civilization predating Aldfell. The city thrives on tolls and trade.",
+              "history": "The Caelspan is the oldest surviving structure in North Reinghar. No records document its construction. Aldfell simply annexed the crossing when it became militarily relevant and built the city around it."
+            },
+            {
+              "id": "dorthane",
+              "name": "Dorthane",
+              "type": "city",
+              "x": 20,
+              "y": 40,
+              "population": "small",
+              "description": "A hill-top town above the Vel marshes, Dorthane is known for its healers and herb-sellers. Many come from across Aldfell seeking the skilled physicians who train here.",
+              "history": "Dorthane was once an isolated monastery. The monks cultivated medicinal gardens that became so renowned the town grew up around them. The monastic order is long dissolved, but the healing tradition endures."
+            },
+            {
+              "id": "sovenmere",
+              "name": "Sovenmere",
+              "type": "city",
+              "x": 10,
+              "y": 26,
+              "population": "small",
+              "description": "A windswept coastal hamlet turned minor city, Sovenmere exports salt and dried fish. It is also informally the smuggling capital of the northern coast — something the crown politely ignores.",
+              "history": "For decades Sovenmere was a thorn in the crown's side. Its harbour master was once tried for seventeen counts of customs evasion. He was acquitted on a technicality and elected mayor the following year."
+            },
+            {
+              "id": "irenmoor",
+              "name": "Irenmoor",
+              "type": "city",
+              "x": 24,
+              "y": 25,
+              "population": "small",
+              "description": "Built on the edge of the great Irenmoor peatlands, this city is the source of much of Aldfell's fuel supply. Its air smells permanently of smoke and its people are stained dark from cutting peat.",
+              "history": "Irenmoor is a utilitarian city with no pretensions to culture. It does one thing and does it well: keeps the rest of the kingdom warm."
+            },
+            {
+              "id": "fenloch",
+              "name": "Fenloch",
+              "type": "city",
+              "x": 15,
+              "y": 42,
+              "population": "small",
+              "description": "The southernmost Aldfell city, Fenloch sits uncomfortably close to the Unicelian border. It functions as a trading checkpoint and occasional diplomatic meeting point between the two realms.",
+              "history": "Relations between Aldfell and the Unicelian Republic have never been warm. Fenloch has been sacked twice, rebuilt twice, and diplomatically contested three times. Its people are remarkably stoic about it."
+            },
+            {
+              "id": "arvenport",
+              "name": "Arvenport",
+              "type": "city",
+              "x": 8,
+              "y": 35,
+              "population": "medium",
+              "description": "The western sea-port of Aldfell, Arvenport looks out toward the deep Grayharbour waters and the distant horizon. It is a city of sailors, cartographers, and those who prefer to ask no questions.",
+              "history": "Arvenport grew dramatically during the Age of Exploration two centuries ago when Aldfell commissioned fleets to map the surrounding seas. The maps produced still form the basis of most charts in use today."
+            },
+            {
+              "id": "thornwall",
+              "name": "Thornwall",
+              "type": "city",
+              "x": 27,
+              "y": 28,
+              "population": "small",
+              "description": "A border fortress-town on the eastern reach of Aldfell, Thornwall guards the mountain passes that separate the kingdom from the wilder lands beyond. Its walls are, unsurprisingly, excellent.",
+              "history": "Built in response to a series of raids from eastern highlands clans in 510 A.W.C, Thornwall has never fallen in battle. It has, however, been negotiated away twice, which the garrison considers considerably worse."
+            }
+          ]
+        },
+        {
+          "id": "mount-haven",
+          "name": "Mount Haven (Khraa Kingdom)",
+          "description": "The Khraa are a reclusive people who have built their entire civilization vertically up the slopes and tunnels of Greyvast Peak — the tallest mountain in North Reinghar. Their kingdom is a single mountain, carved, terraced, and inhabited from base to near-summit. They rarely descend and rarely welcome visitors.",
+          "color": "#8a7a6a",
+          "cities": [
+            {
+              "id": "khraa-bastion",
+              "name": "The Bastion",
+              "type": "capital",
+              "x": 29,
+              "y": 22,
+              "population": "medium",
+              "description": "The central hub of Khraa civilization, carved into the eastern face of Greyvast Peak. A system of lifts, ramps, and tunnels connects the city's eleven levels. The Khraa High Conclave meets here in the Hall of Deep Stone.",
+              "history": "The Khraa claim to have inhabited the mountain for over two thousand years, long before any lowland civilization existed. Their oral records, kept in a complex tonal language, document a history the outside world has never been able to fully verify or refute."
+            }
+          ]
+        },
+        {
+          "id": "unicelian",
+          "name": "Unicelian Republic",
+          "description": "The most commercially sophisticated nation in North Reinghar, the Unicelian Republic controls the southern trade routes and river crossings that connect the continent to the sea lanes beyond. It is governed by an elected council of merchant-lords, and its politics are as complex as its contracts.",
+          "color": "#5a8ab0",
+          "cities": [
+            {
+              "id": "velcross",
+              "name": "Velcross",
+              "type": "capital",
+              "x": 16,
+              "y": 50,
+              "population": "large",
+              "description": "The commercial heart of North Reinghar, Velcross is a city of banks, guildhalls, and busy quays. Its streets run in deliberate geometric patterns — planned, not grown — and its skyline is dominated by counting-house towers rather than keeps.",
+              "history": "Velcross was purpose-built as a capital two hundred years ago when the Republic replaced the old feudal Council of Vels. Its rational city grid was the first of its kind in the known world, and urban planners still study it."
+            },
+            {
+              "id": "portavell",
+              "name": "Portavell",
+              "type": "city",
+              "x": 13,
+              "y": 54,
+              "population": "medium",
+              "description": "The Republic's main sea-trade hub, handling most of the import and export traffic for North Reinghar. Its warehouse districts never fully sleep.",
+              "history": "Portavell predates the Republic by two centuries. When the merchant-lords came to power, Portavell's existing trade infrastructure was the foundation on which the Republic's wealth was built."
+            },
+            {
+              "id": "calminora",
+              "name": "Calminora",
+              "type": "city",
+              "x": 20,
+              "y": 53,
+              "population": "medium",
+              "description": "An inland city known for its legal institutions. The Unicelian Bar — the continent's most respected body of contract law — is headquartered here. More deals are arbitrated in Calminora than in any other city in the world.",
+              "history": "Calminora grew around the old Vel River arbitration courts, where river-trade disputes were settled. Those courts evolved into the Republic's famous legal tradition."
+            },
+            {
+              "id": "fenmark",
+              "name": "Fenmark",
+              "type": "city",
+              "x": 17,
+              "y": 57,
+              "population": "small",
+              "description": "A border town on the edge of the Unicelian Republic, close to the sea narrows that separate North from South Reinghar. It is a transit city — everyone is passing through.",
+              "history": "Fenmark has historically been whoever's city was most convenient. It has flown the flags of three different nations without its residents particularly minding."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "south-reinghar",
+      "name": "South Reinghar",
+      "description": "Separated from the north by a shallow inland sea, South Reinghar is a continent of red earth, vast deserts, and sharp-edged coast. Its climate is brutal by northern standards, but its people have adapted over millennia. Beneath the sand lie rich veins of copper, salt, and rare minerals that have made the continent worth fighting over since records began.",
+      "biome": "desert-savanna",
+      "color": "#c4833a",
+      "kingdoms": [
+        {
+          "id": "rentalia",
+          "name": "Rentalia Republic",
+          "description": "South Reinghar's dominant political entity, the Rentalia Republic spans almost the entire habitable portion of the continent. It is a republic in name but governed in practice by a rotating council of regional governors — the Paskatolan Assembly — who represent the vast desert provinces. The Republic controls most known copper and salt deposits on the continent.",
+          "color": "#d4a050",
+          "cities": [
+            {
+              "id": "paskatola",
+              "name": "Paskatola",
+              "type": "capital",
+              "x": 55,
+              "y": 62,
+              "population": "large",
+              "description": "The ancient capital of South Reinghar, Paskatola is built around a deep underground aquifer that feeds twelve great cisterns across the city. Its architecture is sandstone and terracotta, its streets shaded by enormous linen canopies. The Assembly Hall — a vast circular chamber open to the sky — sits at the city's heart.",
+              "history": "Paskatola is older than the Republic. Historians estimate it was inhabited continuously for three thousand years, making it one of the oldest cities in the known world. The Rentalia Republic grew outward from Paskatola after the Great Unification of 290 A.W.C."
+            },
+            {
+              "id": "durvesh",
+              "name": "Durvesh",
+              "type": "city",
+              "x": 60,
+              "y": 55,
+              "population": "medium",
+              "description": "A copper-mining city on the eastern plateau, Durvesh smells of hot metal and desert dust. Its foundries run day and night, producing the raw copper that funds half the Republic's treasury.",
+              "history": "Durvesh was a minor nomadic campsite before a prospector named Duren Vesh struck a copper seam in 445 A.W.C. Within twenty years it was a city of thirty thousand. Duren Vesh himself died penniless — having sold his claim for a wagon and six goats."
+            },
+            {
+              "id": "mahreth",
+              "name": "Mahreth",
+              "type": "city",
+              "x": 50,
+              "y": 56,
+              "population": "medium",
+              "description": "An oasis city on the western edge of the Great Red Expanse, Mahreth is the last major settlement before the deep desert. It is a city of guides, supply merchants, and people who know where the water is.",
+              "history": "Mahreth has resisted Republic governance twice. After the second refusal, the Assembly sent a delegation rather than an army, negotiated trade rights rather than imposing taxes, and achieved what force could not. Mahreth joined voluntarily in 512 A.W.C."
+            },
+            {
+              "id": "saltholm",
+              "name": "Saltholm",
+              "type": "city",
+              "x": 48,
+              "y": 68,
+              "population": "medium",
+              "description": "On the southern coast, Saltholm harvests sea-salt on an industrial scale. Its salt pans stretch for miles and employ much of the local population. The product is shipped north and east as a primary preservative trade good.",
+              "history": "Saltholm's salt made South Reinghar wealthy long before the copper boom. The old Salt Lords who ran the city were eventually absorbed into the Republic's governor system, though several of the old families still hold significant informal power."
+            },
+            {
+              "id": "veradun",
+              "name": "Veradun",
+              "type": "city",
+              "x": 63,
+              "y": 68,
+              "population": "small",
+              "description": "A southeastern coastal city whose harbour catches reliable winds from the Vast Ocean. It is a waystation for ships rounding the continent — a place to resupply, repair, and move on.",
+              "history": "Veradun was founded by Tenesian sailors who were blown off course and decided the harbour was too good to leave. Their descendants still make up a distinct cultural quarter of the city."
+            },
+            {
+              "id": "khorrabad",
+              "name": "Khorrabad",
+              "type": "city",
+              "x": 57,
+              "y": 72,
+              "population": "small",
+              "description": "Deep in the southern desert, Khorrabad exists because of a single spring that has never dried in recorded memory. It is a quiet, dusty city with a reputation for stubbornness and an unusually good library.",
+              "history": "Khorrabad's library survived two city-destroying sandstorms and a minor civil war. Its archivists moved the collection each time on short notice. The current building is technically the fourth."
+            },
+            {
+              "id": "teruvane",
+              "name": "Teruvane",
+              "type": "city",
+              "x": 52,
+              "y": 74,
+              "population": "medium",
+              "description": "A river-fed agricultural city in the deep south, Teruvane grows the spiced grains and dried fruits that South Reinghar exports. It is a calm, orderly city governed by a capable local assembly.",
+              "history": "Teruvane is the exception that proves the rule about the desert — its river makes it improbably green. Visitors from the north often report being startled by how lush it is surrounded by so much sand."
+            },
+            {
+              "id": "redcliffe",
+              "name": "Redcliffe",
+              "type": "city",
+              "x": 44,
+              "y": 62,
+              "population": "small",
+              "description": "Named for the dramatic red sandstone cliffs that frame its western face, Redcliffe is a mining and quarrying settlement that also serves as a waypoint on the desert road west.",
+              "history": "The red sandstone from Redcliffe's quarries has been used in construction across the continent for centuries. The Assembly Hall in Paskatola is partly built from Redcliffe stone."
+            },
+            {
+              "id": "ashvern",
+              "name": "Ashvern",
+              "type": "city",
+              "x": 66,
+              "y": 60,
+              "population": "small",
+              "description": "The easternmost significant settlement in South Reinghar, Ashvern sits on the cliffs above the Eastern Strait. It is a modest city with a large lighthouse and a tradition of welcoming storm-damaged ships.",
+              "history": "Ashvern's lighthouse is the oldest operational lighthouse in the known world, built in 180 A.W.C. It has been maintained continuously since, through war, drought, and one particularly bad earthquake."
+            },
+            {
+              "id": "kolavar",
+              "name": "Kolavar",
+              "type": "city",
+              "x": 53,
+              "y": 65,
+              "population": "medium",
+              "description": "A central trade hub connecting Paskatola to the southern provinces. Kolavar's caravansary is enormous — it can house over three thousand travellers and ten thousand animals at capacity.",
+              "history": "Kolavar grew at the intersection of five desert trade routes. No one planned it — it simply accumulated until it became unavoidable. The Republic officially recognizes it as a city only since 480 A.W.C., though it had functioned as one for a century prior."
+            },
+            {
+              "id": "burresh",
+              "name": "Burresh",
+              "type": "city",
+              "x": 46,
+              "y": 58,
+              "population": "small",
+              "description": "A small garrison town on the western approach to Paskatola, Burresh is primarily military in character. It houses two permanent regiments and a significant weapons depot.",
+              "history": "Burresh was established after the Mahreth standoff as a reminder of what the Republic could do if politeness stopped working. Its garrison has never been needed for that purpose since."
+            },
+            {
+              "id": "veldara",
+              "name": "Veldara",
+              "type": "city",
+              "x": 61,
+              "y": 64,
+              "population": "small",
+              "description": "An inland city known for glassblowing — the desert sand provides exceptional silica and the dry air suits the craft. Veldara glass is exported across both continents.",
+              "history": "A Khraa trader is credited with introducing glassblowing techniques to Veldara three centuries ago. The craft took hold and replaced the city's previous economy of middling agriculture."
+            },
+            {
+              "id": "palashen",
+              "name": "Palashen",
+              "type": "city",
+              "x": 58,
+              "y": 58,
+              "population": "small",
+              "description": "A northern border city of South Reinghar, close to the narrows separating the two Reinghars. Palashen manages most of the legal cross-strait trade and hosts the only permanent Aldfell consulate in the south.",
+              "history": "Palashen has always been more culturally mixed than other South Reinghar cities. Its northern connections mean it has absorbed traders, refugees, and occasional spies from Aldfell and the Unicelian Republic for generations."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tenesenia",
+      "name": "Tenesenia",
+      "description": "The eastern continent, roughly similar in climate range to North Reinghar but distinct in culture and history. Tenesenia runs from broad central plains through thick deciduous forests to frozen northern reaches. Its people are diverse — the central plains host old settled kingdoms while the northern forests shelter more scattered peoples.",
+      "biome": "plains-forest-tundra",
+      "color": "#5a6e8a",
+      "kingdoms": [
+        {
+          "id": "greater-etheria",
+          "name": "Greater Etheria",
+          "description": "The dominant power of Tenesenia, Greater Etheria controls the central plains and most of the navigable rivers. It is an empire in all but name — governed by a High Monarch from the city of Mystiguard, with regional Archdukes managing the provinces. Its military is the largest standing force in the known world.",
+          "color": "#7a5a9a",
+          "cities": [
+            {
+              "id": "mystiguard",
+              "name": "Mystiguard",
+              "type": "capital",
+              "x": 72,
+              "y": 38,
+              "population": "large",
+              "description": "The imperial capital of Greater Etheria, Mystiguard is built on a wide bend of the River Thenn, its white-stone walls reflected in the dark water. The High Crown Palace dominates the skyline, its six towers visible from thirty miles. The city is famous for its academies, its libraries, and its political intrigue.",
+              "history": "Mystiguard was founded by Monarch Theris the Architect in 205 A.W.C on what was then open farmland. Theris planned the city from scratch, famously saying he wanted a capital worthy of the empire he intended to build. It took him forty years. The empire outlasted him by six centuries."
+            },
+            {
+              "id": "velthar",
+              "name": "Velthar",
+              "type": "city",
+              "x": 78,
+              "y": 32,
+              "population": "medium",
+              "description": "The northern military capital of Greater Etheria, Velthar commands the approaches to the tundra frontier. It is a serious city, given to no excess — grey stone, straight roads, and a pervasive sense of discipline.",
+              "history": "Velthar was built to hold the north. It has done so for four hundred years, repelling seven major incursions from the northern clans and two from disgruntled internal provinces."
+            },
+            {
+              "id": "carentum",
+              "name": "Carentum",
+              "type": "city",
+              "x": 68,
+              "y": 30,
+              "population": "medium",
+              "description": "A forest-edged city in northern Etheria known for its woodcraft and its exceptionally tall cathedral spire — visible above the treeline for miles. A city of craftspeople and clergy.",
+              "history": "Carentum was an important religious site before it was a city. The old forest temple that predates the cathedral still stands beneath it — the cathedral was built over it deliberately, to absorb its significance."
+            },
+            {
+              "id": "solvane",
+              "name": "Solvane",
+              "type": "city",
+              "x": 80,
+              "y": 42,
+              "population": "medium",
+              "description": "An eastern coastal city that serves as Etheria's main naval base and the gateway to the Eastern Ocean. Its fleet is the second largest in the known world.",
+              "history": "Solvane was originally a pirate haven before Greater Etheria brought it to heel in 388 A.W.C. The new administration wisely kept the sailors and simply redirected their skills toward legitimate naval service."
+            },
+            {
+              "id": "thornhaven",
+              "name": "Thornhaven",
+              "type": "city",
+              "x": 75,
+              "y": 47,
+              "population": "medium",
+              "description": "A mid-sized agricultural city in the central plains, Thornhaven supplies much of Etheria's domestic grain. It is governed by a particularly competent local council and is often cited as a model of effective provincial administration.",
+              "history": "Thornhaven has had no dramatic history. Its records are meticulous, its grain stores never empty, and its citizens have apparently never felt the urge to revolt. Historians find it somewhat boring, which the Thornhaveners consider a compliment."
+            },
+            {
+              "id": "ashenmere",
+              "name": "Ashenmere",
+              "type": "city",
+              "x": 70,
+              "y": 50,
+              "population": "small",
+              "description": "Built beside a large inland lake, Ashenmere processes fish, builds boats, and serves the river trade between the southern and northern provinces. Its lake is known for being perpetually grey — no one is sure why.",
+              "history": "Ashenmere was once the site of a significant battle — the Battle of the Grey Lake in 298 A.W.C — which ended a brief civil war within Greater Etheria. The lake's grey colour is rumoured to be caused by ash from the field burned after the battle. Geologists suggest volcanic mineral runoff. The rumour is better."
+            },
+            {
+              "id": "keldmere",
+              "name": "Keldmere",
+              "type": "city",
+              "x": 65,
+              "y": 45,
+              "population": "small",
+              "description": "A western city close to the Tenesenia coast, Keldmere handles trade coming across from the Silent Sea. It is an anxious city — always watching the water, waiting for news from the other side.",
+              "history": "Keldmere was once the point of first contact between Tenesenia and the western continents. Most of what Greater Etheria knows about Aldfell, Unicelian, and Rentalia passed first through Keldmere's hands."
+            },
+            {
+              "id": "dunavar",
+              "name": "Dunavar",
+              "type": "city",
+              "x": 76,
+              "y": 26,
+              "population": "small",
+              "description": "Far north, near the tundra border, Dunavar is a settlement of ice-fishers and fur-traders. Small, cold, and self-sufficient. The people are famously unfriendly to visitors until the third drink.",
+              "history": "Dunavar exists because a founding family refused to move south when the tundra expanded. They stayed. Others followed. The city has not grown meaningfully in a hundred and fifty years, and seems content with that."
+            },
+            {
+              "id": "selbrith",
+              "name": "Selbrith",
+              "type": "city",
+              "x": 83,
+              "y": 36,
+              "population": "medium",
+              "description": "The easternmost significant city in Etheria, Selbrith sits on a dramatic cliff overlooking the Eastern Ocean. It is a city of lighthouses, observatories, and scholars who study the sea and stars.",
+              "history": "Selbrith's University of Natural Philosophy is the oldest scientific institution in Tenesenia. It produced the first accurate maps of the stars and the first systematic record of tidal patterns. Its library is invaluable."
+            },
+            {
+              "id": "maventhor",
+              "name": "Maventhor",
+              "type": "city",
+              "x": 72,
+              "y": 55,
+              "population": "small",
+              "description": "A southern Etherian city on the edge of the warm lowlands. Maventhor produces wine and olive oil — unusual in an empire better known for grain and iron. Its products are luxury exports.",
+              "history": "Maventhor was once an independent city-state famed for its wine. Greater Etheria absorbed it three hundred years ago and was wise enough to leave its agriculture alone. The wine is still excellent."
+            },
+            {
+              "id": "velsharn",
+              "name": "Velsharn",
+              "type": "city",
+              "x": 67,
+              "y": 36,
+              "population": "medium",
+              "description": "A river port and manufacturing city, Velsharn produces much of Etheria's iron goods and precision metalwork. Its guild of smiths is one of the most powerful political bodies in the empire, outside the capital.",
+              "history": "The Velsharn Ironworkers' Guild successfully negotiated tax exemptions from three successive High Monarchs. When the fourth tried to revoke them, the city went on strike. The exemptions were reinstated within a week."
+            },
+            {
+              "id": "orventh",
+              "name": "Orventh",
+              "type": "city",
+              "x": 78,
+              "y": 52,
+              "population": "small",
+              "description": "A southern coastal city, Orventh is a waypoint for shipping around the southern tip of Tenesenia. Quiet, practical, and proud of a famous local dish involving smoked eel and flatbread.",
+              "history": "Orventh has no particularly dramatic history. It was founded, it grew, it was briefly taxed too heavily, it complained, the taxes were reduced, and it continued. Its smoked eel festival draws visitors from across the continent."
+            },
+            {
+              "id": "halvenmoor",
+              "name": "Halvenmoor",
+              "type": "city",
+              "x": 73,
+              "y": 43,
+              "population": "medium",
+              "description": "A central plains city built where two great rivers converge. Halvenmoor is a city of bridges — seventeen of them — and its river traffic is the lifeblood of the central Etherian trade network.",
+              "history": "Halvenmoor was almost certainly settled because of the river confluence. The first written mention dates to 89 A.W.C, which makes it one of the oldest documented cities in Tenesenia. The bridges have been rebuilt many times, but always in the same positions."
+            },
+            {
+              "id": "correth",
+              "name": "Correth",
+              "type": "city",
+              "x": 69,
+              "y": 42,
+              "population": "small",
+              "description": "A small city on the western Etherian plains, Correth is best known as the birthplace of High Monarch Veth the Unifier, who brought the last independent provinces under the Etherian crown in 601 A.W.C.",
+              "history": "Correth built a monument to Veth the Unifier immediately upon his death. His actual hometown is a point of some dispute — two other cities also claim him — but Correth's monument is the tallest, so tourists go there."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kings-island",
+      "name": "Kings Island",
+      "description": "A small to mid-sized island in the centre of the Silent Sea. Almost nothing is reliably known about Kings Island. Ships that approach it report seeing lights at night, and the occasional vessel has come back with accounts of a fortified harbour and people who speak no known language. The few travellers who have attempted to land and returned report being turned back by armed but non-aggressive guards who communicated through gesture alone. No trade relations exist. No maps of the interior are accurate. It is, for now, a mystery the world has quietly agreed to leave alone.",
+      "biome": "unknown",
+      "color": "#7a8a6a",
+      "kingdoms": [
+        {
+          "id": "kings-island-unknown",
+          "name": "Unknown",
+          "description": "The political structure of Kings Island, if any exists, is unknown.",
+          "color": "#6a7a5a",
+          "cities": [
+            {
+              "id": "kings-harbour",
+              "name": "The Watched Harbour",
+              "type": "settlement",
+              "x": 48,
+              "y": 48,
+              "population": "unknown",
+              "description": "The only confirmed point of contact between Kings Island and the outside world. Ships approaching within two miles are met by small fast boats with guards who escort them back to open water. No hostility has been reported, but no entry has been permitted.",
+              "history": "The Watched Harbour appears on charts dating back four hundred years, always in the same location. Whether the settlement behind it has remained constant or changed over those centuries is unknown."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "features": {
+    "mountains": [
+      { "id": "greyvast", "name": "Greyvast Peak", "x": 29, "y": 22, "description": "The tallest mountain in North Reinghar. Home to the Khraa Kingdom." },
+      { "id": "redspine", "name": "Red Spine Range", "x": 48, "y": 65, "description": "A dramatic range of red sandstone peaks running through central South Reinghar." },
+      { "id": "eastern-crown", "name": "Eastern Crown", "x": 82, "y": 28, "description": "A northern mountain range in Tenesenia, forming a natural barrier to the tundra." },
+      { "id": "caelridge", "name": "Caelridge", "x": 25, "y": 30, "description": "A modest ridge in eastern Aldfell, source of the Vel River." },
+      { "id": "deep-horns", "name": "The Deep Horns", "x": 62, "y": 70, "description": "Isolated volcanic peaks in southern South Reinghar." }
+    ],
+    "rivers": [
+      { "id": "vel", "name": "River Vel", "description": "The primary river of Aldfell, running from the Caelridge to the sea.", "path": [[25,28],[22,30],[18,32],[15,36],[12,40]] },
+      { "id": "arru", "name": "River Arru", "description": "A secondary Aldfell river meeting the Vel near Kareem.", "path": [[20,26],[18,29],[18,30]] },
+      { "id": "thenn", "name": "River Thenn", "description": "The great river of Tenesenia, flowing through Mystiguard.", "path": [[68,30],[72,36],[75,42],[78,50]] },
+      { "id": "deep-red", "name": "Deep Red", "description": "A rare permanent river in South Reinghar, fed by mountain springs.", "path": [[52,66],[54,68],[57,72]] }
+    ],
+    "seas": [
+      { "id": "silent-sea", "name": "The Silent Sea", "x": 45, "y": 46, "description": "The central ocean separating the three main continents. Known for unusually calm waters and poor fishing. Kings Island sits at its centre." },
+      { "id": "grey-harbour", "name": "Grayharbour Waters", "x": 5, "y": 33, "description": "The western ocean off North Reinghar's coast. Rich in deep-water fish and frequented by Aldfell and Arvenport fleets." },
+      { "id": "eastern-ocean", "name": "Eastern Ocean", "x": 90, "y": 42, "description": "The vast ocean east of Tenesenia. Largely unmapped beyond the Etherian coastal waters." }
+    ]
+  }
+}
