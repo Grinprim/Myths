@@ -2238,19 +2238,19 @@
                     <div class="text-[9px] uppercase tracking-wider mb-2" style="color:var(--ink-faint)">Select School</div>
                     <div class="spell-chip-grid" id="spell-school-chip-grid">
                       <button type="button" class="spell-school-chip" data-school="arcane" onclick="setSpellSchool('arcane')">
-                        <img src="../Assets/img/arcane.png" alt="Arcane icon"><span class="chip-copy"><span>Arcane</span><span>Spellcasting</span></span>
+                        <img src="../img/arcane.png" alt="Arcane icon"><span class="chip-copy"><span>Arcane</span><span>Spellcasting</span></span>
                       </button>
                       <button type="button" class="spell-school-chip" data-school="divine" onclick="setSpellSchool('divine')">
-                        <img src="../Assets/img/divine.png" alt="Divine icon"><span class="chip-copy"><span>Divine</span><span>Convocation</span></span>
+                        <img src="../img/divine.png" alt="Divine icon"><span class="chip-copy"><span>Divine</span><span>Convocation</span></span>
                       </button>
                       <button type="button" class="spell-school-chip" data-school="occult" onclick="setSpellSchool('occult')">
-                        <img src="../Assets/img/occult.png" alt="Occult icon"><span class="chip-copy"><span>Occult</span><span>Invocations</span></span>
+                        <img src="../img/occult.png" alt="Occult icon"><span class="chip-copy"><span>Occult</span><span>Invocations</span></span>
                       </button>
                       <button type="button" class="spell-school-chip" data-school="elemental" onclick="setSpellSchool('elemental')">
-                        <img src="../Assets/img/elemental.png" alt="Elemental icon"><span class="chip-copy"><span>Elemental</span><span>Attunement</span></span>
+                        <img src="../img/elemental.png" alt="Elemental icon"><span class="chip-copy"><span>Elemental</span><span>Attunement</span></span>
                       </button>
                       <button type="button" class="spell-school-chip" data-school="cosmic" onclick="setSpellSchool('cosmic')">
-                        <img src="../Assets/img/cosmic.png" alt="Cosmic icon"><span class="chip-copy"><span>Cosmic</span><span>Synchronicity</span></span>
+                        <img src="../img/cosmic.png" alt="Cosmic icon"><span class="chip-copy"><span>Cosmic</span><span>Synchronicity</span></span>
                       </button>
                     </div>
                     <select id="spellcasting_school_select" onchange="updateSpellSchoolTheme();filterSpellsSelector()" class="hidden">
@@ -2555,21 +2555,68 @@
       let TRAITS_CATALOG = [];
 
       const TREE_COORDINATES = {
-        "t1": { row: 1, col: 2 }, "t2": { row: 2, col: 1 }, "t3": { row: 2, col: 3 }, "t4": { row: 3, col: 3 },
-        "t5": { row: 1, col: 6 }, "t6": { row: 2, col: 5 }, "t7": { row: 2, col: 7 }, "t8": { row: 3, col: 1 },
-        "t9": { row: 3, col: 5 }, "t10": { row: 4, col: 2 }, "t11": { row: 4, col: 4 },
-        "t12": { row: 1, col: 2 }, "t13": { row: 1, col: 4 }, "t14": { row: 2, col: 2 }, "t15": { row: 1, col: 6 },
-        "t16": { row: 2, col: 5 }, "t17": { row: 2, col: 7 }, "t18": { row: 3, col: 1 }, "t19": { row: 3, col: 3 },
-        "t20": { row: 3, col: 6 }, "t21": { row: 4, col: 2 }, "t22": { row: 4, col: 5 },
-        "t23": { row: 1, col: 3 }, "t24": { row: 2, col: 3 }, "t25": { row: 3, col: 2 }, "t26": { row: 3, col: 4 }, 
-        "t27": { row: 4, col: 3 }, "t28": { row: 4, col: 4 }, "t29": { row: 4, col: 5 }, "t30": { row: 4, col: 6 },
-        "t313": { row: 2, col: 4 }
       };
 
-      const CONSTELLATION_PREREQS = {
-        "t2": ["t1"], "t3": ["t1"], "t4": ["t3"], "t6": ["t5"], "t7": ["t5"],
-        "t14": ["t12"], "t16": ["t15"], "t17": ["t15"], "t25": ["t24"], "t26": ["t24"]
-      };
+      function populateTreeCoordinates() {
+        let trait_number = 321;
+        let i = 1;
+        let j = 1;
+        let trait_id = `t1`;
+        let iteration = 1;
+        while (iteration <= trait_number) {
+          TREE_COORDINATES[trait_id] = { row: i, col: j };
+          j++;
+          if (j > 7) { j = 1; i++; }
+          if (i > 4) { i = 1; }
+          iteration++;
+          trait_id = `t${iteration}`;
+        }
+      }
+
+      populateTreeCoordinates();
+
+      const CONSTELLATION_PREREQS = {};
+const CONSTELLATION_TAGS = {};
+
+// Name -> ID lookup
+const TRAIT_NAME_TO_ID = Object.fromEntries(
+  TRAITS_CATALOG.map(t => [t.Name, t.ID])
+);
+
+function populateConstellationData() {
+  TRAITS_CATALOG.forEach(trait => {
+    const raw = trait.Parameters?.trim();
+    if (!raw) return;
+
+    const parts = raw
+      .split('⫘')
+      .map(s => s.trim())
+      .filter(Boolean);
+
+    const tags = [];
+    const prereqs = [];
+
+    parts.forEach(p => {
+      if (p.startsWith('★')) {
+        // tag: "★ Swift"
+        tags.push(p.replace('★', '').trim());
+      } else {
+        // prerequisite: trait name
+        const id = TRAIT_NAME_TO_ID[p];
+        if (id) prereqs.push(id);
+      }
+      
+    });
+
+    if (tags.length) {
+      CONSTELLATION_TAGS[trait.ID] = tags;
+    }
+
+    if (prereqs.length) {
+      CONSTELLATION_PREREQS[trait.ID] = prereqs;
+    }
+  });
+}
 
       let SPELLS_CATALOG = [];
 
@@ -2582,11 +2629,11 @@
       const POINTS_BY_LEVEL = [0, 2, 2, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2];
 
       const SCHOOL_ICON_MAP = {
-        arcane: '../Assets/img/arcane.png',
-        divine: '../Assets/img/divine.png',
-        occult: '../Assets/img/occult.png',
-        elemental: '../Assets/img/elemental.png',
-        cosmic: '../Assets/img/cosmic.png'
+        arcane: '../img/arcane.png',
+        divine: '../img/divine.png',
+        occult: '../img/occult.png',
+        elemental: '../img/elemental.png',
+        cosmic: '../img/cosmic.png'
       };
 
       function getSpellLibrary() {
@@ -3034,7 +3081,7 @@
         const parent = document.getElementById('nodes-container'); if (!parent) return;
         parent.innerHTML = '';
         TRAITS_CATALOG.filter(t => t.Path === pathId).forEach(trait => {
-          const coord = TREE_COORDINATES[trait.ID] || { row: 2, col: 2 };
+          const coord = TREE_COORDINATES[trait.ID];
           const btn = document.createElement('button');
           btn.id = `node-${trait.ID}`;
           btn.className = 'absolute node-bubble-paths z-10';
@@ -3063,29 +3110,62 @@
       }
 
       function drawTreeConnections() {
-        const canvas = document.getElementById('svg-canvas'), viewport = document.getElementById('tree-viewport');
-        if (!canvas || !viewport) return;
-        const vpRect = viewport.getBoundingClientRect();
-        canvas.querySelectorAll('path').forEach(p => p.remove());
-        TRAITS_CATALOG.filter(t => t.Path === selectedPathId).forEach(child => {
-          (CONSTELLATION_PREREQS[child.ID] || []).forEach(pId => {
-            const parentNode = TRAITS_CATALOG.find(n => n.ID === pId); if (!parentNode) return;
-            const childEl = document.getElementById(`node-${child.ID}`), parentEl = document.getElementById(`node-${parentNode.ID}`);
-            if (!childEl || !parentEl) return;
-            const cR = childEl.getBoundingClientRect(), pR = parentEl.getBoundingClientRect();
-            const x1 = (pR.left + pR.width / 2) - vpRect.left, y1 = (pR.top + pR.height / 2) - vpRect.top;
-            const x2 = (cR.left + cR.width / 2) - vpRect.left, y2 = (cR.top + cR.height / 2) - vpRect.top;
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            const dy = Math.abs(y2 - y1) * 0.25;
-            path.setAttribute('d', `M ${x1} ${y1} C ${x1} ${y1 + dy}, ${x2} ${y2 - dy}, ${x2} ${y2}`);
-            path.setAttribute('fill', 'none');
-            const active = unlockedTraits.has(child.ID) && unlockedTraits.has(parentNode.ID);
-            if (active) { path.setAttribute('stroke', 'url(#line-unlocked)'); path.setAttribute('stroke-width', '2.5'); path.classList.add('connector-line-paths'); path.setAttribute('filter', 'url(#glow)'); }
-            else { path.setAttribute('stroke', 'rgba(51,65,85,0.4)'); path.setAttribute('stroke-width', '1.2'); }
-            canvas.appendChild(path);
-          });
+  requestAnimationFrame(() => {
+    const canvas = document.getElementById('svg-canvas');
+    const viewport = document.getElementById('tree-viewport');
+    if (!canvas || !viewport) return;
+
+    const vpRect = viewport.getBoundingClientRect();
+
+    while (canvas.firstChild) canvas.removeChild(canvas.firstChild);
+
+    TRAITS_CATALOG
+      .filter(t => t.Path === selectedPathId)
+      .forEach(child => {
+        (CONSTELLATION_PREREQS[child.ID] || []).forEach(pId => {
+
+          const parentEl = document.getElementById(`node-${pId}`);
+          const childEl  = document.getElementById(`node-${child.ID}`);
+
+          if (!childEl || !parentEl) return;
+
+          const cR = childEl.getBoundingClientRect();
+          const pR = parentEl.getBoundingClientRect();
+
+          const x1 = (pR.left + pR.width / 2) - vpRect.left;
+          const y1 = (pR.top + pR.height / 2) - vpRect.top;
+          const x2 = (cR.left + cR.width / 2) - vpRect.left;
+          const y2 = (cR.top + cR.height / 2) - vpRect.top;
+
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+          const dy = Math.abs(y2 - y1) * 0.25;
+
+          path.setAttribute(
+            'd',
+            `M ${x1} ${y1} C ${x1} ${y1 + dy}, ${x2} ${y2 - dy}, ${x2} ${y2}`
+          );
+
+          path.setAttribute('fill', 'none');
+
+          const active =
+            unlockedTraits.has(child.ID) &&
+            unlockedTraits.has(pId);
+
+          if (active) {
+            path.setAttribute('stroke', 'url(#line-unlocked)');
+            path.setAttribute('stroke-width', '2.5');
+            path.setAttribute('filter', 'url(#glow)');
+          } else {
+            path.setAttribute('stroke', 'rgba(51,65,85,0.4)');
+            path.setAttribute('stroke-width', '1.2');
+          }
+
+          canvas.appendChild(path);
         });
-      }
+      });
+  });
+}
 
       // Floating node tooltip (appears near cursor inside the tree viewport)
       (function ensureFloatingTooltip(){
@@ -3369,6 +3449,8 @@
         showTab('main');
         buildPips('gracePips', 6, 0, setGrace);
         buildPips('finalBlowPips', 4, 0, setFinalBlow);
+        populateTreeCoordinates();
+        populateConstellationData();
         // load external catalogs first, then initialize paths and UI
         loadCatalogs().then(() => {
           inv_init(); paths_init(); recalcAll(); updateSpellSchoolTheme(); filterSpellsSelector(); renderKnownSpells();
@@ -3396,7 +3478,7 @@
       }
 
       async function loadCatalogs() {
-        const base = '../Assets/json/';
+        const base = '../json/';
         const spellsJsonPath = base + 'spells_cantrips.json';
         const importJson = async (url) => {
           try {
@@ -3412,14 +3494,9 @@
         else if (directSpells && Array.isArray(directSpells.spells)) SPELLS_CATALOG = directSpells.spells;
         if (SPELLS_CATALOG.length) console.log('Imported spells_cantrips.json as module');
 
-        const directPaths = await importJson(base + 'paths.json');
-        const directTraits = await importJson(base + 'traits.json');
-        if (Array.isArray(directPaths)) PATHS_CATALOG = directPaths;
-        else if (directPaths && Array.isArray(directPaths.paths)) PATHS_CATALOG = directPaths.paths;
-        if (Array.isArray(directTraits)) TRAITS_CATALOG = directTraits;
-        else if (directTraits && Array.isArray(directTraits.traits)) TRAITS_CATALOG = directTraits.traits;
+        
 
-        const combined = ['paths_traits.json', 'paths_n_traits.json', 'paths-traits.json'];
+        const combined = ['paths_traits.json'];
         for (const n of combined) {
           const data = await tryFetchJson(base + n);
           if (data) {
@@ -3432,9 +3509,6 @@
         else if (spells && Array.isArray(spells.spells)) SPELLS_CATALOG = spells.spells;
         if (SPELLS_CATALOG.length) console.log('Loaded spells_cantrips.json');
 
-        // fallback to separate files
-        const p = await tryFetchJson(base + 'paths.json');
-        const t = await tryFetchJson(base + 'traits.json');
         if (p) {
           if (Array.isArray(p)) PATHS_CATALOG = p; else if (Array.isArray(p.paths)) PATHS_CATALOG = p.paths;
           console.log('Loaded paths.json');
