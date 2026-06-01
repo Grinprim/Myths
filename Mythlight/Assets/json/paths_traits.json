@@ -1604,13 +1604,13 @@
     },
     {
       "ID": "t74",
-      "Name": "Devine Initiate",
+      "Name": "Divine Initiate",
       "Action": "⭘",
       "Path": "p8",
       "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "★ Spellcasting",
-      "Description": "Gain access to Divine Spellcasting. You learn a number of Divine spells equal to your [Scholarship]. You learn 2 Divine cantrips. Gain access to Divine Spellcasting. You learn a number of Divine spells equal to your [Scholarship]. You learn 2 Divine cantrips.",
+      "Description": "Gain access to Divine Spellcasting. You learn a number of Divine spells equal to your [Scholarship]. You learn 2 Divine cantrips.",
       "Scaling": ""
     },
     {
@@ -1631,7 +1631,7 @@
       "Path": "p8",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ ★req Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting & Divine Initiate",
       "Description": "When you cast a healing or buff spell, you or one ally regain 2 health.",
       "Scaling": ""
     },
