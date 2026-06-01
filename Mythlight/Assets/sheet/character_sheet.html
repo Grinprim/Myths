@@ -3078,7 +3078,7 @@
         if (level > 12) { cumulativeBaseHp += (level - 12) * 2; }
         const maxHp = shouldCalc && level > 0 ? (cumulativeBaseHp + (level * brawn) + val('maxHP_bonus')) : '';
         const manaBonusInp = val('mana_bonus');
-        const maxMana = shouldCalc && level > 0 ? (level + manaBonusInp) : '';
+        const maxMana = shouldCalc && level > 0 ? (level + Math.floor(level / 3) + manaBonusInp) : '';
         const setV = (id, v) => { const e = document.getElementById(id); if (e) e.value = v; };
         setV('armor', Number.isFinite(Number(totalArmor)) ? totalArmor : '');
         if (!document.getElementById('speed')?.dataset.manual) setV('speed', shouldCalc ? 5 : '');
