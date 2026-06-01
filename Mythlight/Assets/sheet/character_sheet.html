@@ -19,7 +19,6 @@
     }
 
     :root {
-      /* Lore palette */
       --ink: #e8e4dc;
       --ink-dim: #9a9488;
       --ink-faint: #5a5650;
@@ -35,7 +34,6 @@
       --surface-1: rgba(255, 255, 255, 0.04);
       --border: rgba(148, 163, 184, 0.06);
 
-      /* Sheet tokens */
       --bg: #0b1220;
       --panel: #263247;
       --panel-alt: #1b2537;
@@ -55,7 +53,6 @@
       --clr-mind: #a855f7;
       --clr-style: #ec4899;
 
-      /* Blueish Purple tokens for Grace and Final Blows */
       --bp-glow: #818cf8;
       --bp-glow-dim: rgba(129, 140, 248, 0.2);
     }
@@ -338,7 +335,6 @@
       margin: 0;
     }
 
-    /* ── Compound HP+Guard bar ── */
     .bar-wrap {
       margin: 0;
     }
@@ -391,7 +387,6 @@
       box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
     }
 
-    /* Compound HP bar — shows guard as gold segment */
     .hp-bar-compound {
       height: 7px;
       border-radius: 4px;
@@ -443,7 +438,6 @@
       margin-top: 2px;
     }
 
-    /* Blueish purple theme for Grace and Final Blow Pips */
     .pip {
       width: var(--bubble-size);
       height: var(--bubble-size);
@@ -473,7 +467,6 @@
       flex-direction: column;
     }
 
-    /* ── Equipment panel improvements ── */
     .equip-col {
       border-left: 1px solid var(--border-med);
       display: flex;
@@ -688,7 +681,6 @@
       gap: 6px;
     }
 
-    /* Expandable textareas */
     textarea {
       width: 100%;
       border: 1px solid rgba(201, 168, 76, 0.18);
@@ -723,7 +715,6 @@
       flex: 1;
     }
 
-    /* Improved design tokens for armor cards */
     .armor-card {
       padding: 12px;
       border: 1.5px solid rgba(201, 168, 76, 0.15);
@@ -830,7 +821,6 @@
       width: 100%;
     }
 
-    /* Improved design tokens for weapon cards */
     .weapon-card {
       display: grid;
       grid-template-columns: 1.4fr 36px 36px 44px 26px;
@@ -916,7 +906,6 @@
       border-color: rgba(248, 113, 113, 0.4);
     }
 
-    /* Ammo pill */
     .ammo-pip-row {
       display: flex;
       gap: 3px;
@@ -1036,21 +1025,28 @@
       font-family: 'Cinzel', serif;
     }
 
+    /* ── FIXED Portrait Editor ── */
     .editor-viewport {
-      width: 200px;
-      height: 200px;
+      width: 220px;
+      height: 220px;
       border-radius: 50%;
       border: 2px solid var(--border-dark);
       overflow: hidden;
       position: relative;
       cursor: grab;
-      background: #ddd;
+      background: #222;
+      user-select: none;
+    }
+
+    .editor-viewport.dragging {
+      cursor: grabbing;
     }
 
     #editorCanvas {
       position: absolute;
       top: 0;
       left: 0;
+      pointer-events: none;
     }
 
     .editor-controls {
@@ -1135,7 +1131,6 @@
       display: block;
     }
 
-    /* ── Spell Stats Panel ── */
     .spell-stats-panel {
       background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(6, 10, 20, 0.5) 100%);
       border: 1px solid rgba(168, 85, 247, 0.22);
@@ -1294,7 +1289,6 @@
       -webkit-appearance: none;
     }
 
-    /* Inventory Layout Tweaks */
     .inv-top-bar {
       padding: 12px 14px;
       border-bottom: 1px solid var(--border-med);
@@ -1486,7 +1480,6 @@
       width: 100%;
     }
 
-    /* Paths tab design improvements */
     .paths-panel {
       padding: 12px;
     }
@@ -1708,7 +1701,7 @@
         <input type="file" id="sheetLoadInput" accept=".json" class="hidden" onchange="handleLoadSheetFile(event)">
         <input type="file" id="pathsJsonInput" accept=".json" class="hidden" onchange="loadCustomPathsJsonFile(event)">
 
-        <!-- ═══════════════════════════════════════════ MAIN TAB ═══════════════════════════════════════════ -->
+        <!-- MAIN TAB -->
         <div id="tab-main" class="tab-content">
           <div class="top-section">
 
@@ -1738,8 +1731,6 @@
                   <label>Speed</label>
                   <input type="number" id="speed" min="0" placeholder="—" oninput="this.dataset.manual='true'">
                 </div>
-
-                <!-- Guard (overhealth) -->
                 <div class="vital-row" style="margin-top:4px;">
                   <label style="color:var(--gold)">Guard</label>
                   <input type="number" id="guardValue" min="0" placeholder="—" oninput="updateHPGuardBar()"
@@ -1754,8 +1745,6 @@
                   <label>Current HP</label>
                   <input type="number" id="currentHealth" min="0" placeholder="—" oninput="updateHPGuardBar()">
                 </div>
-
-                <!-- Compound HP + Guard bar -->
                 <div class="hp-bar-compound" title="Green = HP  |  Gold = Guard">
                   <div class="hp-bar-hp" id="hpBarHP" style="width:0%"></div>
                   <div class="hp-bar-guard" id="hpBarGuard" style="width:0%;left:0%"></div>
@@ -1764,7 +1753,6 @@
                   style="display:flex;justify-content:space-between;font-size:9px;color:var(--ink-faint);margin-bottom:4px;">
                   <span>HP</span><span style="color:var(--gold)">Guard</span>
                 </div>
-
                 <div class="vital-row">
                   <label>Max Mana</label>
                   <input type="number" id="maxMana" min="0" placeholder="—" readonly>
@@ -1793,7 +1781,7 @@
               </div>
             </div>
 
-            <!-- CENTER COL: attributes + notes -->
+            <!-- CENTER COL -->
             <div class="right-col">
               <div class="info-panel">
                 <div class="panel-title" style="margin-bottom:8px;">Character info</div>
@@ -1811,7 +1799,6 @@
               <div class="attrs-panel">
                 <div class="panel-title attrs-section-title">Attributes</div>
                 <div class="attrs-grid">
-                  <!-- BODY -->
                   <div class="attr-card attr-body">
                     <div class="attr-header">
                       <h3>Body</h3>
@@ -1831,7 +1818,6 @@
                           id="body_fortitude_total" class="total-input" readonly placeholder="—"></div>
                     </div>
                   </div>
-                  <!-- SKILL -->
                   <div class="attr-card attr-skill">
                     <div class="attr-header">
                       <h3>Skill</h3>
@@ -1851,7 +1837,6 @@
                           id="skill_tinker_total" class="total-input" readonly placeholder="—"></div>
                     </div>
                   </div>
-                  <!-- MIND -->
                   <div class="attr-card attr-mind">
                     <div class="attr-header">
                       <h3>Mind</h3>
@@ -1871,7 +1856,6 @@
                           id="mind_scholarship_total" class="total-input" readonly placeholder="—"></div>
                     </div>
                   </div>
-                  <!-- STYLE -->
                   <div class="attr-card attr-style">
                     <div class="attr-header">
                       <h3>Style</h3>
@@ -1907,13 +1891,22 @@
                 <div class="bottom-panel-header">
                   <div class="panel-title" style="margin:0;">Armor</div>
                 </div>
+
+                <!-- ARMOR card — breastplate/chest armor SVG -->
                 <div class="armor-card armor-slot">
                   <div class="armor-row">
-                    <div class="armor-icon-box"><svg class="w-6 h-6" style="color:var(--gold)" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                          d="M12 2a10 10 0 00-7.35 16.76 1 1 0 001.41.04l2.5-2.5a1 1 0 011.41 0L12 18l2.03-2.03a1 1 0 011.41 0l2.5 2.5a1 1 0 001.41-.04A10 10 0 0012 2z" />
-                      </svg></div>
+                    <div class="armor-icon-box">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Breastplate: chest plate with shoulder pauldrons and center ridge -->
+                        <path
+                          d="M6 4 C4 5 3 7 3 10 L3 16 C3 18 4.5 19.5 6 20 L12 21 L18 20 C19.5 19.5 21 18 21 16 L21 10 C21 7 20 5 18 4 L15 3 L12 2 L9 3 Z" />
+                        <path d="M12 2 L12 21" stroke-width="1" opacity="0.6" />
+                        <path d="M6 4 C7 6 9 7 12 7 C15 7 17 6 18 4" />
+                        <path d="M4 10 C5 9 7 8.5 9 9 L9 14" />
+                        <path d="M20 10 C19 9 17 8.5 15 9 L15 14" />
+                      </svg>
+                    </div>
                     <div class="armor-name-field"><label class="armor-label">Armor Name</label><input type="text"
                         id="armor_name" placeholder="Name"></div>
                     <div class="armor-value-field"><label class="armor-label">Defense</label><input type="number"
@@ -1922,13 +1915,23 @@
                   <div class="armor-notes"><label class="armor-label">Notes</label><textarea id="armor_notes" rows="2"
                       oninput="autoExpandTextarea(this)"></textarea></div>
                 </div>
+
+                <!-- SHIELD card — proper heraldic kite shield SVG -->
                 <div class="armor-card armor-slot">
                   <div class="armor-row">
-                    <div class="armor-icon-box"><svg class="w-6 h-6" style="color:var(--gold)" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                      </svg></div>
+                    <div class="armor-icon-box">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Heraldic heater/kite shield shape -->
+                        <path d="M12 2 L20 5 L20 13 C20 17.5 16.5 20.5 12 22 C7.5 20.5 4 17.5 4 13 L4 5 Z" />
+                        <!-- Center boss/ridge -->
+                        <path d="M12 5 L12 19" stroke-width="1" opacity="0.5" />
+                        <!-- Horizontal bar -->
+                        <path d="M5.5 11 L18.5 11" stroke-width="1" opacity="0.5" />
+                        <!-- Corner reinforcements -->
+                        <circle cx="12" cy="11" r="1.5" fill="#c9a84c" opacity="0.7" stroke="none" />
+                      </svg>
+                    </div>
                     <div class="armor-name-field"><label class="armor-label">Shield Name</label><input type="text"
                         id="shield_name" placeholder="Name"></div>
                     <div class="armor-value-field"><label class="armor-label">Defense</label><input type="number"
@@ -1937,13 +1940,28 @@
                   <div class="armor-notes"><label class="armor-label">Notes</label><textarea id="shield_notes" rows="2"
                       oninput="autoExpandTextarea(this)"></textarea></div>
                 </div>
+
+                <!-- CLOAK card — flowing cape/cloak SVG -->
                 <div class="armor-card armor-slot">
                   <div class="armor-row">
-                    <div class="armor-icon-box"><svg class="w-6 h-6" style="color:var(--gold)" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                      </svg></div>
+                    <div class="armor-icon-box">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Cloak: collar at top, flowing drape down to pointed hem -->
+                        <path d="M8 3 C8 3 9 2 12 2 C15 2 16 3 16 3" />
+                        <!-- Clasp/brooch at collar -->
+                        <circle cx="12" cy="3.5" r="1" fill="#c9a84c" opacity="0.8" stroke="none" />
+                        <!-- Left drape flowing down and out -->
+                        <path d="M8 3 C6 4 4 6 3 9 C2 12 2.5 16 4 19 C5 21 6 22 7 22" />
+                        <!-- Right drape flowing down and out -->
+                        <path d="M16 3 C18 4 20 6 21 9 C22 12 21.5 16 20 19 C19 21 18 22 17 22" />
+                        <!-- Bottom hem connecting both sides with gentle curve -->
+                        <path d="M7 22 C8.5 23 10 23.5 12 23.5 C14 23.5 15.5 23 17 22" />
+                        <!-- Inner fold lines for fabric texture -->
+                        <path d="M10 4 C9 7 8 11 8.5 16 C9 19 9.5 21 10 22" stroke-width="0.8" opacity="0.45" />
+                        <path d="M14 4 C15 7 16 11 15.5 16 C15 19 14.5 21 14 22" stroke-width="0.8" opacity="0.45" />
+                      </svg>
+                    </div>
                     <div class="armor-name-field"><label class="armor-label">Cloak Name</label><input type="text"
                         id="cloak_name" placeholder="Name"></div>
                     <div class="armor-value-field"><label class="armor-label">Defense</label><input type="number"
@@ -1967,7 +1985,7 @@
           <div class="sheet-footer">Mythlight Character Sheet — Version 2.0</div>
         </div>
 
-        <!-- ═══════════════════════════════════════════ INVENTORY TAB ═══════════════════════════════════════════ -->
+        <!-- INVENTORY TAB -->
         <div id="tab-inventory" class="tab-content" style="display:none;">
           <div class="inv-top-bar">
             <div class="inv-container">
@@ -2016,8 +2034,6 @@
                     style="display:none;color:#ef4444">Crushed</span>
                 </div>
               </div>
-
-              <!-- Redesigned full-width/clean inventory display -->
               <div class="inv-center">
                 <div class="inv-header" style="display:flex;align-items:center;justify-content:space-between">
                   <div class="panel-title">Your Backpack</div>
@@ -2034,7 +2050,7 @@
           </div>
         </div>
 
-        <!-- ═══════════════════════════════════════════ PATHS TAB ═══════════════════════════════════════════ -->
+        <!-- PATHS TAB -->
         <div id="tab-paths" class="tab-content" style="display:none;">
           <div class="card paths-panel" style="background:transparent;border:none;box-shadow:none;">
             <div class="flex flex-col gap-4">
@@ -2177,12 +2193,10 @@
           </div>
         </div>
 
-        <!-- ═══════════════════════════════════════════ SPELLS TAB ═══════════════════════════════════════════ -->
+        <!-- SPELLS TAB -->
         <div id="tab-spells" class="tab-content" style="display:none;">
           <div class="p-4 flex flex-col gap-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
-
-              <!-- Mana Matrix -->
               <div class="original-card flex flex-col justify-between gap-3">
                 <div>
                   <div class="panel-title">Mana Matrix</div>
@@ -2240,7 +2254,6 @@
               </div>
 
               <div class="md:col-span-2 grid grid-cols-1 xl:grid-cols-1 gap-4 items-stretch">
-                <!-- SPELL STATS -->
                 <div class="original-card flex flex-col gap-4" id="spellcasting-school-card">
                   <div class="flex items-start justify-between gap-4 border-b pb-3"
                     style="border-color:var(--border-med)">
@@ -2257,25 +2270,29 @@
                       </div>
                     </div>
                   </div>
-
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <div class="spell-stat-total" id="spell_cs_display" title="Challenge Score">—</div>
                     <div class="spell-stat-total" id="spell_atk_display" title="Attack Bonus">—</div>
                     <div class="spell-stat-total" id="spell_dmg_display" title="Damage Bonus">—</div>
                     <div class="flex flex-col items-center gap-1">
                       <label style="color:var(--ink-faint);font-size:12px">CS Bonus:</label>
-                      <input oninput="recalcSpellStats()"  style="background:rgba(6,10,20,0.8);width:100%;border:1px solid var(--border-med);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px" placeholder="—" id="spell_cs_bonus" type="number" min="0" step="1">
+                      <input oninput="recalcSpellStats()"
+                        style="background:rgba(6,10,20,0.8);width:100%;border:1px solid var(--border-med);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px"
+                        placeholder="—" id="spell_cs_bonus" type="number" min="0" step="1">
                     </div>
-                    <div class="flex flex-col items-center gap-1" >
+                    <div class="flex flex-col items-center gap-1">
                       <label style="color:var(--ink-faint);font-size:12px">Atk Bonus:</label>
-                      <input oninput="recalcSpellStats()" style="background:rgba(6,10,20,0.8);width:100%;border:1px solid var(--border-med);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px" placeholder="—" id="spell_atk_bonus" type="number" min="0" step="1">
+                      <input oninput="recalcSpellStats()"
+                        style="background:rgba(6,10,20,0.8);width:100%;border:1px solid var(--border-med);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px"
+                        placeholder="—" id="spell_atk_bonus" type="number" min="0" step="1">
                     </div>
                     <div class="flex flex-col items-center gap-1">
                       <label style="color:var(--ink-faint);font-size:12px">Dmg Bonus:</label>
-                      <input oninput="recalcSpellStats()" style="background:rgba(6,10,20,0.8);width:100%;border:1px solid var(--border-med);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px" placeholder="—" id="spell_dmg_bonus" type="number" min="0" step="1">
+                      <input oninput="recalcSpellStats()"
+                        style="background:rgba(6,10,20,0.8);width:100%;border:1px solid var(--border-med);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px"
+                        placeholder="—" id="spell_dmg_bonus" type="number" min="0" step="1">
                     </div>
                   </div>
-
                   <div class="spell-tracker">
                     <div class="tracker-box">
                       <div class="tracker-label">Known Spells</div>
@@ -2296,7 +2313,6 @@
                       <div class="tracker-sub">Extra slots from traits or house rules.</div>
                     </div>
                   </div>
-
                   <div>
                     <div class="text-[9px] uppercase tracking-wider mb-2" style="color:var(--ink-faint)">Select School
                     </div>
@@ -2337,12 +2353,9 @@
                     </select>
                   </div>
                 </div>
-
-                
               </div>
             </div>
 
-            <!-- Known Spells -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start mt-2">
               <div class="original-card flex flex-col gap-2.5">
                 <div class="flex items-center justify-between">
@@ -2364,13 +2377,11 @@
           </div>
         </div>
 
-        <!-- ═══════════════════════════════════════════ CRAFTING SUBTAB ═══════════════════════════════════════════ -->
+        <!-- CRAFTING TAB -->
         <div id="tab-crafting" class="tab-content" style="display:none;">
           <div class="p-4 flex flex-col gap-4">
             <h1 class="text-lg font-bold" style="font-family:'Cinzel',serif;color:var(--gold)">Crafting Stations</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
-
-              <!-- Anvil & Forge -->
               <div class="inv-compact-panel blacksmith-section p-4 rounded-lg border">
                 <div class="inv-compact-header flex items-center justify-between mb-3 border-b pb-2"
                   style="border-color:rgba(239, 68, 68, 0.2)">
@@ -2399,8 +2410,6 @@
                   </div>
                 </div>
               </div>
-
-              <!-- Alchemy Lab -->
               <div class="inv-compact-panel alchemist-section p-4 rounded-lg border">
                 <div class="inv-compact-header flex items-center justify-between mb-3 border-b pb-2"
                   style="border-color:rgba(168, 85, 247, 0.2)">
@@ -2429,32 +2438,27 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
 
-        <!-- ═══════════════════════════════════════════ INFO SUBTAB ═══════════════════════════════════════════ -->
+        <!-- INFO TAB -->
         <div id="tab-info" class="tab-content" style="display:none;">
           <div class="p-6 flex flex-col gap-6">
             <h1 class="text-xl font-bold" style="font-family:'Cinzel',serif;color:var(--gold)">Character Rules &amp;
               Formulas</h1>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="original-card p-4 flex flex-col gap-3">
                 <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">1.
                   Maximum Health Calculation</h3>
-                <p class="text-xs leading-relaxed style-desc" style="color:var(--ink-dim)">
-                  Your maximum health scales strictly off your character level and your Body's Brawn modifier. The level
-                  progression table provides a set amount of base HP, and you add <span
-                    class="font-mono text-gold">[Brawn Total × Level]</span> onto that.
-                </p>
+                <p class="text-xs leading-relaxed style-desc" style="color:var(--ink-dim)">Your maximum health scales
+                  strictly off your character level and your Body's Brawn modifier. The level progression table provides
+                  a set amount of base HP, and you add <span class="font-mono text-gold">[Brawn Total × Level]</span>
+                  onto that.</p>
                 <div class="mt-2 text-xs border border-slate-700 rounded overflow-hidden">
                   <div
                     class="grid grid-cols-3 bg-slate-900/60 p-2 font-bold uppercase tracking-wider text-[9px] text-slate-400">
-                    <span>Level</span>
-                    <span>Base HP Added</span>
-                    <span>Cumulative HP</span>
+                    <span>Level</span><span>Base HP Added</span><span>Cumulative HP</span>
                   </div>
                   <div class="grid grid-cols-3 p-1.5 border-b border-slate-800"><span>LVL
                       1</span><span>+6</span><span>6</span></div>
@@ -2480,36 +2484,27 @@
                       11</span><span>+2</span><span>32</span></div>
                   <div class="grid grid-cols-3 p-1.5"><span>LVL 12</span><span>+4</span><span>36</span></div>
                 </div>
-                <p class="text-[10px] italic mt-1" style="color:var(--ink-faint)">
-                  Formula: <span class="font-mono">Cumulative Level HP + (Brawn Total × Level)</span>
-                </p>
+                <p class="text-[10px] italic mt-1" style="color:var(--ink-faint)">Formula: <span
+                    class="font-mono">Cumulative Level HP + (Brawn Total × Level)</span></p>
               </div>
-
               <div class="original-card p-4 flex flex-col gap-3 justify-between">
                 <div>
                   <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">2.
                     Armor Defense Calculation</h3>
-                  <p class="text-xs leading-relaxed" style="color:var(--ink-dim)">
-                    Your final armor defense represents your structural durability. It is calculated by adding your
-                    Body's Fortitude modifier to your equipped defensive items and any path-specific bonuses.
-                  </p>
-                  <p class="text-xs font-mono bg-slate-900/40 p-2 rounded border border-slate-800 mt-2">
-                    Armor = 4 + Fortitude Total + Armor Value + Shield Value + Cloak Value + Path Bonuses
-                  </p>
+                  <p class="text-xs leading-relaxed" style="color:var(--ink-dim)">Your final armor defense represents
+                    your structural durability. It is calculated by adding your Body's Fortitude modifier to your
+                    equipped defensive items and any path-specific bonuses.</p>
+                  <p class="text-xs font-mono bg-slate-900/40 p-2 rounded border border-slate-800 mt-2">Armor = 4 +
+                    Fortitude Total + Armor Value + Shield Value + Cloak Value + Path Bonuses</p>
                 </div>
-
                 <div class="border-t pt-3" style="border-color:var(--border-med)">
                   <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">3.
                     Mana Pool Scaling</h3>
-                  <p class="text-xs leading-relaxed mb-2" style="color:var(--ink-dim)">
-                    Maximum Mana points correspond directly to your overall experience level plus any additional spell
-                    bonuses.
-                  </p>
-                  <p class="text-xs font-mono bg-slate-900/40 p-2 rounded border border-slate-800">
-                    Max Mana = Level + Spellcasting Bonus Mana
-                  </p>
+                  <p class="text-xs leading-relaxed mb-2" style="color:var(--ink-dim)">Maximum Mana points correspond
+                    directly to your overall experience level plus any additional spell bonuses.</p>
+                  <p class="text-xs font-mono bg-slate-900/40 p-2 rounded border border-slate-800">Max Mana = Level +
+                    Spellcasting Bonus Mana</p>
                 </div>
-
                 <div class="border-t pt-3" style="border-color:var(--border-med)">
                   <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">4.
                     Spellcasting Reference</h3>
@@ -2538,12 +2533,19 @@
       <div class="modal-backdrop" id="portraitModal">
         <div class="modal-box">
           <h3>Adjust Portrait</h3>
-          <div class="editor-viewport" id="editorViewport"><canvas id="editorCanvas"></canvas></div>
-          <div class="editor-controls"><label>Zoom</label><input type="range" id="zoomSlider" min="0.5" max="4"
-              step="0.01" value="1"></div>
-          <div class="editor-btns"><button class="btn-change" onclick="chooseNewPortrait()">Change Image</button><button
-              class="btn-cancel" onclick="closePortraitEditor()">Cancel</button><button class="btn-apply"
-              onclick="applyPortrait()">Apply</button></div>
+          <div class="editor-viewport" id="editorViewport">
+            <canvas id="editorCanvas" width="220" height="220"></canvas>
+          </div>
+          <div class="editor-controls">
+            <label>Zoom</label>
+            <input type="range" id="zoomSlider" min="0.5" max="4" step="0.01" value="1"
+              oninput="editorZoomFromSlider()">
+          </div>
+          <div class="editor-btns">
+            <button class="btn-change" onclick="chooseNewPortrait()">Change Image</button>
+            <button class="btn-cancel" onclick="closePortraitEditor()">Cancel</button>
+            <button class="btn-apply" onclick="applyPortrait()">Apply</button>
+          </div>
         </div>
       </div>
 
@@ -2552,9 +2554,10 @@
         <div class="modal-box max-w-lg w-[480px]">
           <h3 id="creator-modal-title">Create Custom Constellation Path</h3>
           <div id="creator-form-content" class="w-full flex flex-col gap-3 mt-2 text-xs"></div>
-          <div class="editor-btns mt-4"><button class="btn-cancel"
-              onclick="closeCustomCreatorModal()">Cancel</button><button class="btn-apply" id="creator-submit-btn"
-              onclick="saveCustomCreatorData()">Save</button></div>
+          <div class="editor-btns mt-4">
+            <button class="btn-cancel" onclick="closeCustomCreatorModal()">Cancel</button>
+            <button class="btn-apply" id="creator-submit-btn" onclick="saveCustomCreatorData()">Save</button>
+          </div>
         </div>
       </div>
 
@@ -2597,23 +2600,21 @@
                 style="color:var(--ink-faint)">Effect</label><textarea id="cust_spell_effect" rows="2"
                 class="rounded p-2"
                 style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink);resize:none"
-                oninput="autoExpandTextarea(this)"></textarea>
-            </div>
+                oninput="autoExpandTextarea(this)"></textarea></div>
             <div class="flex flex-col gap-1"><label class="uppercase text-[9px] font-bold"
                 style="color:var(--ink-faint)">Upcast</label><textarea id="cust_spell_upcast" rows="1"
                 class="rounded p-2"
                 style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink);resize:none"
-                oninput="autoExpandTextarea(this)"></textarea>
-            </div>
+                oninput="autoExpandTextarea(this)"></textarea></div>
             <div class="flex flex-col gap-1"><label class="uppercase text-[9px] font-bold"
                 style="color:var(--ink-faint)">Lore</label><textarea id="cust_spell_lore" rows="1" class="rounded p-2"
                 style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink);resize:none"
-                oninput="autoExpandTextarea(this)"></textarea>
-            </div>
+                oninput="autoExpandTextarea(this)"></textarea></div>
           </div>
-          <div class="editor-btns mt-4"><button class="btn-cancel"
-              onclick="closeCustomSpellModal()">Cancel</button><button class="btn-apply" onclick="saveCustomSpell()">Add
-              to Spells List</button></div>
+          <div class="editor-btns mt-4">
+            <button class="btn-cancel" onclick="closeCustomSpellModal()">Cancel</button>
+            <button class="btn-apply" onclick="saveCustomSpell()">Add to Spells List</button>
+          </div>
         </div>
       </div>
 
@@ -2651,60 +2652,128 @@
         style: ['speech', 'insight', 'awareness']
       };
 
-      // PATHS_CATALOG and TRAITS_CATALOG will be populated dynamically from external JSON.
-      // Removed large hardcoded arrays to allow using external/combined JSON files.
       let PATHS_CATALOG = [];
       let TRAITS_CATALOG = [];
-
-      const TREE_COORDINATES = {
-      };
+      const TREE_COORDINATES = {};
+      const CONSTELLATION_TAGS = {};
+      const CONSTELLATION_UNIQUES = {};
 
       const CONSTELLATION_PREREQS = {};
-      const CONSTELLATION_TAGS = {};
+      const CONSTELLATION_REQUIRE_TAGS = {};
+      const CONSTELLATION_REQUIRE_UNIQUES = {};
+      const TRAIT_NAME_TO_ID = {};
 
-      // Name -> ID lookup
-      const TRAIT_NAME_TO_ID = Object.fromEntries(
-        TRAITS_CATALOG.map(t => [t.Name, t.ID])
-      );
+      const UNIQUE_PROVIDER_MAP = {};
+      const TAG_PROVIDER_MAP = {};
 
       function populateConstellationData() {
-  console.trace('populateConstellationData called, TRAITS_CATALOG.length:', TRAITS_CATALOG.length);
-        // Build name→ID map fresh each time (catalog may have been extended)
+        Object.keys(TAG_PROVIDER_MAP).forEach(k => delete TAG_PROVIDER_MAP[k]);
+        Object.keys(UNIQUE_PROVIDER_MAP).forEach(k => delete UNIQUE_PROVIDER_MAP[k]);
+
         const nameToId = {};
-        TRAITS_CATALOG.forEach(t => { nameToId[t.Name] = t.ID; });
+        TRAITS_CATALOG.forEach(t => {
+          nameToId[t.Name] = t.ID;
+        });
 
         TRAITS_CATALOG.forEach(trait => {
           const raw = (trait.Parameters || '').trim();
           if (!raw) return;
 
-          const tags = [], prereqs = [];
-          raw.split('⫘').map(s => s.trim()).filter(Boolean).forEach(p => {
-            if (p.startsWith('★')) {
-              tags.push(p.replace('★', '').trim());
-            } else {
-              // prerequisite by name
-              const id = nameToId[p];
-              if (id) prereqs.push(id);
-            }
-          });
+          const tags = [];
+          const uniques = [];
 
-          if (tags.length) CONSTELLATION_TAGS[trait.ID] = tags;
-          if (prereqs.length) CONSTELLATION_PREREQS[trait.ID] = prereqs;
+          const prereqTraits = [];
+          const prereqTags = [];
+          const prereqUniques = [];
+
+          raw.split('⫘')
+            .map(s => s.trim())
+            .filter(Boolean)
+            .forEach(part => {
+
+              const isRequirement = raw.includes('⫘') ? part !== raw.split('⫘')[0] : true;
+              // ↑ FIX: if no explicit split meaning, treat as requirement context
+
+              const tokens = part
+                .split('&')
+                .map(t => t.trim())
+                .filter(Boolean);
+
+              tokens.forEach(token => {
+
+                // TAGS
+                if (token.startsWith('▲')) {
+                  const tag = token.slice(1).trim();
+                  isRequirement ? prereqTags.push(tag) : tags.push(tag);
+                  return;
+                }
+
+                // UNIQUES
+                // UNIQUE (identity only)
+                
+
+                // REQUIREMENT UNIQUE
+                if (isRequirement && token.startsWith('★req ')) {
+                  const unique = token.replace('★req', '').trim();
+                  prereqUniques.push(unique);
+                  return;
+                }
+                else if (token.startsWith('★')) {
+                  const unique = token.slice(1).trim();
+                  uniques.push(unique); // ONLY THIS
+                  return;
+                }
+
+                // TRAIT REFERENCES
+                const id = nameToId[token];
+                if (id) {
+                  prereqTraits.push(id);
+                  return;
+                }
+
+                // 🔥 DEFAULT FALLBACK (IMPORTANT FIX)
+                if (isRequirement) {
+                  prereqUniques.push(token);
+                } else {
+                  uniques.push(token);
+                }
+              });
+            });
+
+          if (tags.length) {
+            CONSTELLATION_TAGS[trait.ID] = tags;
+
+            tags.forEach(tag => {
+              if (!TAG_PROVIDER_MAP[tag]) TAG_PROVIDER_MAP[tag] = [];
+              TAG_PROVIDER_MAP[tag].push(trait.ID);
+            });
+          }
+
+          if (uniques.length) {
+            CONSTELLATION_UNIQUES[trait.ID] = uniques;
+
+            uniques.forEach(unique => {
+              if (!UNIQUE_PROVIDER_MAP[unique]) UNIQUE_PROVIDER_MAP[unique] = [];
+              UNIQUE_PROVIDER_MAP[unique].push(trait.ID);
+            });
+          }
+
+          console.log(
+            `Processed trait "${trait.Name}" (ID: ${trait.ID}): ` +
+            `Tags=${tags.join(', ')}; ` +
+            `Uniques=${uniques.join(', ')}; ` +
+            `PrereqTraits=${prereqTraits.join(', ')}; ` +
+            `PrereqTags=${prereqTags.join(', ')}; ` +
+            `PrereqUniques=${prereqUniques.join(', ')}`
+          );
         });
       }
 
-      // ── Per-path coordinate assignment ─────────────────────────────────────
-      // Assigns a (row, col) grid position to each trait WITHIN its own path,
-      // so every path gets a fresh 4-row × 7-col grid instead of using global
-      // sequential IDs that break across paths.
       function assignPathCoordinates(pathId) {
         const traits = TRAITS_CATALOG.filter(t => t.Path === pathId);
         let row = 1, col = 1;
         traits.forEach(trait => {
-          // Only assign if not already present (custom traits may have explicit coords)
-          if (!TREE_COORDINATES[trait.ID]) {
-            TREE_COORDINATES[trait.ID] = { row, col };
-          }
+          if (!TREE_COORDINATES[trait.ID]) { TREE_COORDINATES[trait.ID] = { row, col }; }
           col++;
           if (col > 7) { col = 1; row++; }
           if (row > 4) row = 1;
@@ -2712,7 +2781,6 @@
       }
 
       let SPELLS_CATALOG = [];
-
       let selectedPathId = "";
       let unlockedTraits = new Set();
       let maxBudgetLimit = 2;
@@ -2722,37 +2790,20 @@
       const POINTS_BY_LEVEL = [0, 2, 2, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2];
 
       const SCHOOL_ICON_MAP = {
-        arcane: '../img/arcane.png',
-        divine: '../img/divine.png',
-        occult: '../img/occult.png',
-        elemental: '../img/elemental.png',
-        cosmic: '../img/cosmic.png'
+        arcane: '../img/arcane.png', divine: '../img/divine.png', occult: '../img/occult.png',
+        elemental: '../img/elemental.png', cosmic: '../img/cosmic.png'
       };
 
-      function getSpellLibrary() {
-        return [...SPELLS_CATALOG, ...customSpells];
-      }
+      function getSpellLibrary() { return [...SPELLS_CATALOG, ...customSpells]; }
+      function getSpellById(id) { return getSpellLibrary().find(s => s.ID === id); }
+      function getSchoolIconPath(school) { return SCHOOL_ICON_MAP[(school || '').toLowerCase()] || SCHOOL_ICON_MAP.occult; }
 
-      function getSpellById(id) {
-        return getSpellLibrary().find(s => s.ID === id);
-      }
+      function autoExpandTextarea(element) { element.style.height = 'auto'; element.style.height = (element.scrollHeight) + 'px'; }
 
-      function getSchoolIconPath(school) {
-        return SCHOOL_ICON_MAP[(school || '').toLowerCase()] || SCHOOL_ICON_MAP.occult;
-      }
-
-      // ── Auto expandable textarea helper ──
-      function autoExpandTextarea(element) {
-        element.style.height = 'auto';
-        element.style.height = (element.scrollHeight) + 'px';
-      }
-
-      // ── Helpers ──
       function val(id) { const e = document.getElementById(id); return e ? (parseFloat(e.value) || 0) : 0; }
       function hasNumberInput(id) { const e = document.getElementById(id); return !!(e && e.value !== ''); }
       function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
-      // ── Attribute recalc ──
       function recalcSkill(group, skill) {
         const out = document.getElementById(group + '_' + skill + '_total');
         const baseEl = document.getElementById(group + '_base');
@@ -2764,7 +2815,7 @@
         let extra = 0;
         Object.entries(breakpointChoices).forEach(([key, choice]) => {
           const pathData = PATHS_CATALOG.find(p => p.ID === selectedPathId);
-          if (pathData && pathData.breakpoints[key]) {
+          if (pathData && pathData.breakpoints && pathData.breakpoints[key]) {
             const bpThreshold = pathData.breakpoints[key].investment;
             if (getInvestedCount(selectedPathId) >= bpThreshold && choice === `stat_${group}_${skill}`) extra += 1;
           }
@@ -2773,34 +2824,20 @@
         updateDerivedVitals();
         recalcSpellStats();
       }
+
       function recalcGroup(group) { (GROUPS[group] || []).forEach(skill => recalcSkill(group, skill)); }
       function recalcAll() { Object.keys(GROUPS).forEach(group => recalcGroup(group)); updateDerivedVitals(); recalcSpellStats(); }
 
-      // ── Spell Stats ──
       function recalcSpellStats() {
-        const spirit = val('mind_spirit_total');
-        const arcane = val('mind_arcane_total');
-        const schol = val('mind_scholarship_total');
+        const spirit = val('mind_spirit_total'), arcane = val('mind_arcane_total'), schol = val('mind_scholarship_total');
         const bonusSlots = parseInt(document.getElementById('spell_bonus_slots')?.value, 10) || 0;
-
         const hasSpellStats = hasNumberInput('mind_arcane_mod') || hasNumberInput('mind_spirit_mod') || hasNumberInput('mind_scholarship_mod') || hasNumberInput('mind_base');
-        const csBonus = val('spell_cs_bonus');
-        const atkBonus = val('spell_atk_bonus');
-        const dmgBonus = val('spell_dmg_bonus');
-
-        const challengeScore = 6 + spirit + csBonus;
-        const attackBonus = arcane + atkBonus;
-        const damageBonus = Math.ceil(arcane / 2) + dmgBonus;
-        const scholarshipCap = schol;
-        const knownCap = Math.max(0, scholarshipCap + bonusSlots);
+        const csBonus = val('spell_cs_bonus'), atkBonus = val('spell_atk_bonus'), dmgBonus = val('spell_dmg_bonus');
+        const challengeScore = 6 + spirit + csBonus, attackBonus = arcane + atkBonus, damageBonus = Math.ceil(arcane / 2) + dmgBonus;
+        const scholarshipCap = schol, knownCap = Math.max(0, scholarshipCap + bonusSlots);
         const knownCount = getSpellLibrary().filter(s => knownSpellIds.has(s.ID) && parseInt(s.Cost, 10) > 0).length;
         const knownCantrips = getSpellLibrary().filter(s => knownSpellIds.has(s.ID) && (parseInt(s.Cost, 10) || 0) === 0).length;
-
-        const setValue = (id, value) => {
-          const el = document.getElementById(id);
-          if (el) el.textContent = value;
-        };
-
+        const setValue = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
         setValue('spell_cs_display', hasSpellStats ? `CS ${challengeScore}` : 'CS —');
         setValue('spell_atk_display', hasSpellStats ? `ATK ${attackBonus >= 0 ? '+' + attackBonus : attackBonus}` : 'ATK —');
         setValue('spell_dmg_display', hasSpellStats ? `DMG ${damageBonus >= 0 ? '+' + damageBonus : damageBonus}` : 'DMG —');
@@ -2815,28 +2852,21 @@
         if (panelSpellCap) panelSpellCap.textContent = hasNumberInput('mind_scholarship_mod') || hasNumberInput('mind_base') ? `${knownCap}` : '—';
       }
 
-      // ── HP + Guard compound bar ──
       function updateHPGuardBar() {
         const maxHP = parseFloat(document.getElementById('maxHealth')?.value) || 0;
         const curHP = parseFloat(document.getElementById('currentHealth')?.value) || 0;
         const guard = parseFloat(document.getElementById('guardValue')?.value) || 0;
-
-        const hpBar = document.getElementById('hpBarHP');
-        const guardBar = document.getElementById('hpBarGuard');
+        const hpBar = document.getElementById('hpBarHP'), guardBar = document.getElementById('hpBarGuard');
         if (!hpBar || !guardBar) return;
-
         const total = maxHP + guard;
         if (total <= 0) { hpBar.style.width = '0%'; guardBar.style.width = '0%'; guardBar.style.left = '0%'; return; }
-
         const hpPct = Math.min(100, (curHP / total) * 100);
         const guardPct = Math.min(100 - hpPct, (guard / total) * 100);
-
         hpBar.style.width = hpPct + '%';
         guardBar.style.left = hpPct + '%';
         guardBar.style.width = guardPct + '%';
       }
 
-      // ── Bars ──
       function updateBar(barId, maxVal, curVal) {
         const max = parseFloat(maxVal) || 0, cur = parseFloat(curVal) || 0;
         const pct = max > 0 ? Math.max(0, Math.min(100, (cur / max) * 100)) : 0;
@@ -2844,7 +2874,6 @@
         if (bar) bar.style.width = pct + '%';
       }
 
-      // ── Pips restyled with Blueish Purple theme ──
       function buildPips(containerId, maxN, cur, onSet) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -2856,12 +2885,12 @@
           container.appendChild(btn);
         }
       }
+
       let graceValue = 0;
       function setGrace(n) { graceValue = n; buildPips('gracePips', 6, graceValue, setGrace); }
       let finalBlowValue = 0;
       function setFinalBlow(n) { finalBlowValue = n; buildPips('finalBlowPips', 4, finalBlowValue, setFinalBlow); }
 
-      // ── Derived vitals ──
       function getPathBonus(stat) {
         let bonus = 0;
         PATHS_CATALOG.forEach(p => {
@@ -2877,29 +2906,19 @@
         const armorBonus = getPathBonus('armor');
         const shouldCalc = hasNumberInput('charLevel') || hasNumberInput('body_base') || hasNumberInput('body_brawn_mod') || hasNumberInput('body_fortitude_mod') || hasNumberInput('armor_def') || hasNumberInput('shield_def') || hasNumberInput('cloak_def');
         const totalArmor = shouldCalc ? Math.max(0, 4 + fortitude + armorItems + armorBonus) : '';
-
-        // Accurate level-based base health addition from the table:
-        // Lvl 1: 6, Lvl 2: +2 (8), Lvl 3: +4 (12), Lvl 4: +2 (14), Lvl 5: +2 (16), Lvl 6: +4 (20), Lvl 7: +2 (22), Lvl 8: +2 (24), Lvl 9: +4 (28), Lvl 10: +2 (30), Lvl 11: +2 (32), Lvl 12: +4 (36)
         const HP_BY_LEVEL = [0, 6, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 4];
         let cumulativeBaseHp = 0;
-        for (let i = 1; i <= Math.min(level, 12); i++) {
-          cumulativeBaseHp += HP_BY_LEVEL[i];
-        }
-        if (level > 12) {
-          cumulativeBaseHp += (level - 12) * 2; // Flat +2 base per level over 12
-        }
-
-        const maxHp = shouldCalc && level > 0 ? (cumulativeBaseHp + (level * brawn)) : '' +val('maxHP_bonus');
+        for (let i = 1; i <= Math.min(level, 12); i++) { cumulativeBaseHp += HP_BY_LEVEL[i]; }
+        if (level > 12) { cumulativeBaseHp += (level - 12) * 2; }
+        const maxHp = shouldCalc && level > 0 ? (cumulativeBaseHp + (level * brawn) + val('maxHP_bonus')) : '';
         const manaBonusInp = val('mana_bonus');
         const maxMana = shouldCalc && level > 0 ? (level + manaBonusInp) : '';
-
         const setV = (id, v) => { const e = document.getElementById(id); if (e) e.value = v; };
         setV('armor', Number.isFinite(Number(totalArmor)) ? totalArmor : '');
         if (!document.getElementById('speed')?.dataset.manual) setV('speed', shouldCalc ? 5 : '');
         setV('maxHealth', Number.isFinite(Number(maxHp)) ? maxHp : '');
         setV('maxMana', Number.isFinite(Number(maxMana)) ? maxMana : '');
         setV('max_mana', Number.isFinite(Number(maxMana)) ? maxMana : '');
-
         updateHPGuardBar();
         const curEl = document.getElementById('currentMana');
         const currentManaVal = (curEl && curEl.value !== '') ? (parseInt(curEl.value, 10) || 0) : '';
@@ -2909,7 +2928,6 @@
       }
 
       function syncMana(value, source) {
-        // Preserve empty/placeholder input values; only coerce when numeric
         const parsed = (value === '' || value === null || value === undefined) ? null : parseInt(value, 10);
         const num = Number.isFinite(parsed) ? parsed : null;
         const maxVal = parseInt(document.getElementById('maxMana')?.value, 10) || 0;
@@ -2920,9 +2938,10 @@
         updateBar('manaBar', maxVal, numericClamped);
         updateBar('mana_fill', maxVal, numericClamped);
       }
+
       function updateManaBonus() { updateDerivedVitals(); }
 
-      // ── Weapons (with ammo) ──
+      // ── Weapons ──
       let weapons = [], weaponCount = 0;
 
       function addWeapon(data) {
@@ -2930,6 +2949,7 @@
         weapons.push(data || { id: weaponCount, name: '', damage: '', attack: '', notes: '', ammo_max: 0, ammo_cur: 0 });
         renderWeapons();
       }
+
       function removeWeapon(id) { weapons = weapons.filter(w => w.id !== id); renderWeapons(); }
       function upW(id, field, v) { const w = weapons.find(x => x.id === id); if (w) w[field] = v; }
 
@@ -2940,47 +2960,28 @@
         weapons.forEach((w, idx) => {
           const card = document.createElement('div');
           card.className = 'weapon-card';
-
           const maxAmmo = parseInt(w.ammo_max) || 0;
           const curAmmo = parseInt(w.ammo_cur) || 0;
           let pipsHtml = '';
           for (let i = 1; i <= Math.max(maxAmmo, 1); i++) {
             pipsHtml += `<button class="ammo-pip${i <= curAmmo ? ' used' : ''}" onclick="toggleAmmo(${w.id},${i})" title="Ammo ${i}"></button>`;
           }
-
           card.innerHTML = `
-      <div class="wfield">
-        <label class="wlabel">Weapon ${idx + 1}</label>
-        <input type="text" placeholder="Name" value="${esc(w.name)}" oninput="upW(${w.id},'name',this.value)">
-      </div>
-      <div class="wfield">
-        <label class="wlabel">Dmg</label>
-        <input type="text" placeholder="—" value="${esc(w.damage)}" oninput="upW(${w.id},'damage',this.value)">
-      </div>
-      <div class="wfield">
-        <label class="wlabel">Atk</label>
-        <input type="text" placeholder="—" value="${esc(w.attack)}" oninput="upW(${w.id},'attack',this.value)">
-      </div>
-      <div class="wfield">
-        <label class="wlabel">Ammo Max</label>
-        <input type="number" min="0" placeholder="—" value="${w.ammo_max || ''}" oninput="upW(${w.id},'ammo_max',this.value);renderWeapons();" style="text-align:center;height:var(--bubble-size)">
-      </div>
-      <button class="weapon-remove" type="button" onclick="removeWeapon(${w.id})">×</button>
-      <div class="weapon-notes">
-        <label class="wlabel">Notes</label>
-        <textarea oninput="upW(${w.id},'notes',this.value);autoExpandTextarea(this)">${esc(w.notes)}</textarea>
-      </div>
-      <div style="grid-column:1/-1;display:flex;flex-direction:column;gap:3px;">
-        <div style="display:flex;align-items:center;gap:6px;">
-          <label class="wlabel">Ammo</label>
-          <span id="ammo-count-${w.id}" style="font-size:9px;color:var(--gold);font-family:'JetBrains Mono',monospace">${curAmmo}/${Math.max(maxAmmo, 0)}</span>
-          <button onclick="refillAmmo(${w.id})" style="font-size:9px;padding:1px 5px;border:1px solid var(--gold-line);background:var(--gold-dim);color:var(--gold);border-radius:3px;cursor:pointer;">Refill</button>
-        </div>
-        <div class="ammo-pip-row" id="ammo-pips-${w.id}">${pipsHtml}</div>
-      </div>
-    `;
+            <div class="wfield"><label class="wlabel">Weapon ${idx + 1}</label><input type="text" placeholder="Name" value="${esc(w.name)}" oninput="upW(${w.id},'name',this.value)"></div>
+            <div class="wfield"><label class="wlabel">Dmg</label><input type="text" placeholder="—" value="${esc(w.damage)}" oninput="upW(${w.id},'damage',this.value)"></div>
+            <div class="wfield"><label class="wlabel">Atk</label><input type="text" placeholder="—" value="${esc(w.attack)}" oninput="upW(${w.id},'attack',this.value)"></div>
+            <div class="wfield"><label class="wlabel">Ammo Max</label><input type="number" min="0" placeholder="—" value="${w.ammo_max || ''}" oninput="upW(${w.id},'ammo_max',this.value);renderWeapons();" style="text-align:center;height:var(--bubble-size)"></div>
+            <button class="weapon-remove" type="button" onclick="removeWeapon(${w.id})">×</button>
+            <div class="weapon-notes"><label class="wlabel">Notes</label><textarea oninput="upW(${w.id},'notes',this.value);autoExpandTextarea(this)">${esc(w.notes)}</textarea></div>
+            <div style="grid-column:1/-1;display:flex;flex-direction:column;gap:3px;">
+              <div style="display:flex;align-items:center;gap:6px;">
+                <label class="wlabel">Ammo</label>
+                <span id="ammo-count-${w.id}" style="font-size:9px;color:var(--gold);font-family:'JetBrains Mono',monospace">${curAmmo}/${Math.max(maxAmmo, 0)}</span>
+                <button onclick="refillAmmo(${w.id})" style="font-size:9px;padding:1px 5px;border:1px solid var(--gold-line);background:var(--gold-dim);color:var(--gold);border-radius:3px;cursor:pointer;">Refill</button>
+              </div>
+              <div class="ammo-pip-row" id="ammo-pips-${w.id}">${pipsHtml}</div>
+            </div>`;
           list.appendChild(card);
-          // Auto expand the loaded/rendered textarea
           const ta = card.querySelector('textarea');
           if (ta) autoExpandTextarea(ta);
         });
@@ -2992,27 +2993,209 @@
         w.ammo_cur = (cur === pipIdx ? pipIdx - 1 : pipIdx);
         renderWeapons();
       }
+
       function refillAmmo(weaponId) {
         const w = weapons.find(x => x.id === weaponId); if (!w) return;
         w.ammo_cur = parseInt(w.ammo_max) || 0;
         renderWeapons();
       }
 
-      // ── Portrait ──
-      let portraitImg = null, portraitState = { x: 0, y: 0, scale: 1 };
+      // ─────────────────────────────────────────────────────────────────────────
+      // PORTRAIT EDITOR — FULLY FIXED: proper drag + zoom
+      // ─────────────────────────────────────────────────────────────────────────
+      let portraitImg = null;
+      // Editor state: offset in canvas pixels, scale
+      let edState = { ox: 0, oy: 0, scale: 1, dragging: false, lastX: 0, lastY: 0 };
       const PORT_SIZE = 160;
-      function openPortraitEditor() { document.getElementById('portraitInput').click(); }
+      const EDITOR_SIZE = 220;
+
+      function openPortraitEditor() {
+        // Just open file picker; portrait editor opens after file selected
+        document.getElementById('portraitInput').click();
+      }
+
       document.getElementById('portraitInput')?.addEventListener('change', function (e) {
-        const file = e.target.files?.[0]; if (!file) return;
+        const file = e.target.files?.[0];
+        if (!file) return;
         const reader = new FileReader();
-        reader.onload = function (evt) { const img = new Image(); img.onload = function () { portraitImg = img; portraitState = { x: 0, y: 0, scale: 1 }; initPortraitModal(); }; img.src = evt.target.result; };
+        reader.onload = function (evt) {
+          const img = new Image();
+          img.onload = function () {
+            portraitImg = img;
+            // Center image to fill editor viewport
+            const fitScale = Math.max(EDITOR_SIZE / img.width, EDITOR_SIZE / img.height);
+            edState.scale = fitScale;
+            edState.ox = (EDITOR_SIZE - img.width * fitScale) / 2;
+            edState.oy = (EDITOR_SIZE - img.height * fitScale) / 2;
+            document.getElementById('zoomSlider').value = fitScale;
+            document.getElementById('portraitModal').classList.add('open');
+            drawEditorCanvas();
+          };
+          img.src = evt.target.result;
+        };
         reader.readAsDataURL(file);
+        // Reset file input so same file can be re-selected
+        e.target.value = '';
       });
-      function initPortraitModal() { document.getElementById('portraitModal').classList.add('open'); const c = document.getElementById('editorCanvas'); c.width = 220; c.height = 220; drawEditorCanvas(); }
+
+      function drawEditorCanvas() {
+        const c = document.getElementById('editorCanvas');
+        if (!c) return;
+        c.width = EDITOR_SIZE;
+        c.height = EDITOR_SIZE;
+        const ctx = c.getContext('2d');
+        ctx.clearRect(0, 0, EDITOR_SIZE, EDITOR_SIZE);
+        if (portraitImg) {
+          ctx.drawImage(portraitImg, edState.ox, edState.oy, portraitImg.width * edState.scale, portraitImg.height * edState.scale);
+        }
+      }
+
+      function editorZoomFromSlider() {
+        const slider = document.getElementById('zoomSlider');
+        const newScale = parseFloat(slider.value);
+        // Zoom toward center of editor
+        const cx = EDITOR_SIZE / 2, cy = EDITOR_SIZE / 2;
+        edState.ox = cx - (cx - edState.ox) * (newScale / edState.scale);
+        edState.oy = cy - (cy - edState.oy) * (newScale / edState.scale);
+        edState.scale = newScale;
+        drawEditorCanvas();
+      }
+
+      // Wire up drag events on the viewport div
+      (function wirePortraitDrag() {
+        const setup = () => {
+          const vp = document.getElementById('editorViewport');
+          if (!vp) return;
+
+          vp.addEventListener('mousedown', (e) => {
+            if (!portraitImg) return;
+            edState.dragging = true;
+            edState.lastX = e.clientX;
+            edState.lastY = e.clientY;
+            vp.classList.add('dragging');
+            e.preventDefault();
+          });
+
+          window.addEventListener('mousemove', (e) => {
+            if (!edState.dragging) return;
+            const dx = e.clientX - edState.lastX;
+            const dy = e.clientY - edState.lastY;
+            edState.ox += dx;
+            edState.oy += dy;
+            edState.lastX = e.clientX;
+            edState.lastY = e.clientY;
+            drawEditorCanvas();
+          });
+
+          window.addEventListener('mouseup', () => {
+            if (edState.dragging) {
+              edState.dragging = false;
+              const vp2 = document.getElementById('editorViewport');
+              if (vp2) vp2.classList.remove('dragging');
+            }
+          });
+
+          // Wheel zoom
+          vp.addEventListener('wheel', (e) => {
+            if (!portraitImg) return;
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? 0.92 : 1.08;
+            const newScale = Math.max(0.5, Math.min(4, edState.scale * delta));
+            // Zoom toward mouse position
+            const rect = vp.getBoundingClientRect();
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+            edState.ox = mx - (mx - edState.ox) * (newScale / edState.scale);
+            edState.oy = my - (my - edState.oy) * (newScale / edState.scale);
+            edState.scale = newScale;
+            const slider = document.getElementById('zoomSlider');
+            if (slider) slider.value = newScale;
+            drawEditorCanvas();
+          }, { passive: false });
+
+          // Touch support
+          let lastTouchDist = null;
+          let lastTouchX = 0, lastTouchY = 0;
+
+          vp.addEventListener('touchstart', (e) => {
+            if (!portraitImg) return;
+            if (e.touches.length === 1) {
+              edState.dragging = true;
+              lastTouchX = e.touches[0].clientX;
+              lastTouchY = e.touches[0].clientY;
+            } else if (e.touches.length === 2) {
+              lastTouchDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+            }
+            e.preventDefault();
+          }, { passive: false });
+
+          vp.addEventListener('touchmove', (e) => {
+            if (!portraitImg) return;
+            if (e.touches.length === 1 && edState.dragging) {
+              const dx = e.touches[0].clientX - lastTouchX;
+              const dy = e.touches[0].clientY - lastTouchY;
+              edState.ox += dx; edState.oy += dy;
+              lastTouchX = e.touches[0].clientX;
+              lastTouchY = e.touches[0].clientY;
+              drawEditorCanvas();
+            } else if (e.touches.length === 2 && lastTouchDist !== null) {
+              const dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+              const newScale = Math.max(0.5, Math.min(4, edState.scale * (dist / lastTouchDist)));
+              const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+              const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+              const rect = vp.getBoundingClientRect();
+              const mx = cx - rect.left, my = cy - rect.top;
+              edState.ox = mx - (mx - edState.ox) * (newScale / edState.scale);
+              edState.oy = my - (my - edState.oy) * (newScale / edState.scale);
+              edState.scale = newScale;
+              lastTouchDist = dist;
+              const slider = document.getElementById('zoomSlider');
+              if (slider) slider.value = newScale;
+              drawEditorCanvas();
+            }
+            e.preventDefault();
+          }, { passive: false });
+
+          vp.addEventListener('touchend', () => {
+            edState.dragging = false;
+            lastTouchDist = null;
+          });
+        };
+        // Run after DOM ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', setup);
+        } else {
+          setup();
+        }
+      })();
+
       function closePortraitEditor() { document.getElementById('portraitModal').classList.remove('open'); }
-      function drawEditorCanvas() { const c = document.getElementById('editorCanvas'); const ctx = c.getContext('2d'); ctx.clearRect(0, 0, 220, 220); if (portraitImg) ctx.drawImage(portraitImg, portraitState.x, portraitState.y, portraitImg.width * portraitState.scale, portraitImg.height * portraitState.scale); }
-      function applyPortrait() { const c = document.getElementById('portraitCanvas'); const ctx = c.getContext('2d'); ctx.clearRect(0, 0, PORT_SIZE, PORT_SIZE); if (portraitImg) ctx.drawImage(portraitImg, portraitState.x * (PORT_SIZE / 220), portraitState.y * (PORT_SIZE / 220), portraitImg.width * portraitState.scale * (PORT_SIZE / 220), portraitImg.height * portraitState.scale * (PORT_SIZE / 220)); closePortraitEditor(); }
-      function chooseNewPortrait() { openPortraitEditor(); }
+
+      function applyPortrait() {
+        const c = document.getElementById('portraitCanvas');
+        if (!c) return;
+        c.width = PORT_SIZE;
+        c.height = PORT_SIZE;
+        const ctx = c.getContext('2d');
+        ctx.clearRect(0, 0, PORT_SIZE, PORT_SIZE);
+        if (portraitImg) {
+          // Scale coordinates from editor (220px) to portrait canvas (160px)
+          const ratio = PORT_SIZE / EDITOR_SIZE;
+          ctx.drawImage(
+            portraitImg,
+            edState.ox * ratio,
+            edState.oy * ratio,
+            portraitImg.width * edState.scale * ratio,
+            portraitImg.height * edState.scale * ratio
+          );
+        }
+        closePortraitEditor();
+      }
+
+      function chooseNewPortrait() {
+        closePortraitEditor();
+        document.getElementById('portraitInput').click();
+      }
 
       // ── Inventory ──
       let _invItemId = 0;
@@ -3021,17 +3204,22 @@
       function inv_addItem(data) {
         _invItemId++;
         const grid = document.getElementById('inv_main_grid'); if (!grid) return;
-        const row = document.createElement('div'); row.className = 'inv-item-row'; row.dataset.itemId = _invItemId;
+        const row = document.createElement('div');
+        row.className = 'inv-item-row';
+        row.dataset.itemId = _invItemId;
         row.innerHTML = `<div class="inv-item-top"><input type="text" placeholder="Item Name" class="inv-name" value="${esc(data?.name || '')}" oninput="inv_weightUpdate();"><input type="number" placeholder="—" class="inv-weight" value="${data?.weight ?? ''}" min="0" oninput="inv_weightUpdate();"><button class="inv-item-remove" type="button" onclick="inv_removeItem(this)">×</button></div><textarea placeholder="Write a short description of the item..." rows="2" class="inv-desc" oninput="autoExpandTextarea(this)">${esc(data?.desc || '')}</textarea>`;
         grid.appendChild(row);
         inv_weightUpdate();
         const ta = row.querySelector('textarea');
         if (ta) autoExpandTextarea(ta);
       }
+
       function inv_removeItem(btn) { btn.closest('.inv-item-row')?.remove(); inv_weightUpdate(); }
+
       function inv_addSimple(containerId, namePh, descPh, data) {
         const container = document.getElementById(containerId); if (!container) return;
-        const slot = document.createElement('div'); slot.className = 'inv-simple-slot';
+        const slot = document.createElement('div');
+        slot.className = 'inv-simple-slot';
         const isPotion = containerId.includes('potion');
         const headerText = isPotion ? (namePh === 'Ingredient' ? 'Herb Ingredient' : 'Potion Recipe') : (namePh === 'Component' ? 'Core Component' : 'Forge Blueprint');
         const headerClass = isPotion ? 'recipe-card-header' : 'craft-card-header';
@@ -3040,45 +3228,69 @@
         const ta = slot.querySelector('textarea');
         if (ta) autoExpandTextarea(ta);
       }
+
       function extractSimpleGridData(containerId) {
         const c = document.getElementById(containerId); if (!c) return [];
-        return Array.from(c.querySelectorAll('.inv-simple-slot')).map(slot => { const inputs = slot.querySelectorAll('input,textarea'); return { name: inputs[0]?.value || '', desc: inputs[1]?.value || '' }; });
+        return Array.from(c.querySelectorAll('.inv-simple-slot')).map(slot => {
+          const inputs = slot.querySelectorAll('input,textarea');
+          return { name: inputs[0]?.value || '', desc: inputs[1]?.value || '' };
+        });
       }
+
       function populateSimpleGrid(containerId, items, np, dp) {
         const c = document.getElementById(containerId); if (!c) return;
         c.innerHTML = '';
         if (!items || !items.length) { for (let i = 0; i < INV_BASE_SIMPLE_SLOTS; i++) inv_addSimple(containerId, np, dp); }
         else items.forEach(item => inv_addSimple(containerId, np, dp, item));
       }
+
       function inv_init() {
         const g = document.getElementById('inv_main_grid'); if (!g) return;
         if (!g.querySelectorAll('.inv-item-row').length) for (let i = 0; i < INV_BASE_SLOTS; i++) inv_addItem();
-        [['inv_potions_ingredients', 'Ingredient', 'Notes'], ['inv_potions_recipes', 'Potion', 'Recipe'], ['inv_crafts_components', 'Component', 'Notes'], ['inv_crafts_recipes', 'Craft', 'Recipe']].forEach(([id, np, dp]) => { const c = document.getElementById(id); if (c && !c.querySelectorAll('.inv-simple-slot').length) for (let i = 0; i < INV_BASE_SIMPLE_SLOTS; i++) inv_addSimple(id, np, dp); });
+        [['inv_potions_ingredients', 'Ingredient', 'Notes'], ['inv_potions_recipes', 'Potion', 'Recipe'], ['inv_crafts_components', 'Component', 'Notes'], ['inv_crafts_recipes', 'Craft', 'Recipe']].forEach(([id, np, dp]) => {
+          const c = document.getElementById(id);
+          if (c && !c.querySelectorAll('.inv-simple-slot').length) for (let i = 0; i < INV_BASE_SIMPLE_SLOTS; i++) inv_addSimple(id, np, dp);
+        });
         inv_recalcMaxWeight(); inv_weightUpdate();
       }
+
       function inv_recalcMaxWeight() {
         const might = parseFloat(document.getElementById('body_might_total')?.value) || 0;
         const brawn = parseFloat(document.getElementById('body_brawn_total')?.value) || 0;
         const level = parseFloat(document.getElementById('charLevel')?.value) || 0;
         const backpack = parseFloat(document.getElementById('inv_backpack_bonus')?.value) || 0;
-        const el = document.getElementById('inv_max_weight'); if (el) { const m = might + brawn + level + backpack; el.value = m > 0 ? m : ''; }
+        const el = document.getElementById('inv_max_weight');
+        if (el) { const m = might + brawn + level + backpack; el.value = m > 0 ? m : ''; }
       }
+
       function inv_weightUpdate() {
-        let total = 0; document.querySelectorAll('#inv_main_grid .inv-weight').forEach(inp => { const v = parseFloat(inp.value); if (Number.isFinite(v)) total += v; });
-        const el = document.getElementById('inv_current_weight'); if (el) el.value = total > 0 ? total : '';
+        let total = 0;
+        document.querySelectorAll('#inv_main_grid .inv-weight').forEach(inp => { const v = parseFloat(inp.value); if (Number.isFinite(v)) total += v; });
+        const el = document.getElementById('inv_current_weight');
+        if (el) el.value = total > 0 ? total : '';
         inv_encumbranceUpdate();
       }
+
       function inv_encumbranceUpdate() {
         const cur = parseFloat(document.getElementById('inv_current_weight')?.value) || 0;
         const max = parseFloat(document.getElementById('inv_max_weight')?.value) || 0;
         ['enc_none', 'enc_enc', 'enc_over', 'enc_crushed'].forEach(id => { const e = document.getElementById(id); if (e) e.style.display = 'none'; });
         let activeId = 'enc_none';
-        if (max > 0 && cur > max * 3) activeId = 'enc_crushed'; else if (max > 0 && cur > max * 2) activeId = 'enc_over'; else if (max > 0 && cur > max) activeId = 'enc_enc';
+        if (max > 0 && cur > max * 3) activeId = 'enc_crushed';
+        else if (max > 0 && cur > max * 2) activeId = 'enc_over';
+        else if (max > 0 && cur > max) activeId = 'enc_enc';
         const el = document.getElementById(activeId); if (el) el.style.display = 'inline';
         const fill = document.getElementById('inv_weight_bar_fill');
-        if (fill) { const pct = max > 0 ? Math.min((cur / max) * 100, 100) : 0; fill.style.width = pct + '%'; fill.className = 'bar-fill'; if (activeId === 'enc_none') fill.classList.add('green'); if (activeId === 'enc_enc') fill.classList.add('yellow'); if (activeId === 'enc_over') fill.classList.add('orange'); if (activeId === 'enc_crushed') fill.classList.add('red'); }
+        if (fill) {
+          const pct = max > 0 ? Math.min((cur / max) * 100, 100) : 0;
+          fill.style.width = pct + '%';
+          fill.className = 'bar-fill';
+          if (activeId === 'enc_none') fill.classList.add('green');
+          if (activeId === 'enc_enc') fill.classList.add('yellow');
+          if (activeId === 'enc_over') fill.classList.add('orange');
+          if (activeId === 'enc_crushed') fill.classList.add('red');
+        }
       }
-
 
       // ── Paths ──
       function paths_init() {
@@ -3087,19 +3299,26 @@
         if (li) { li.removeEventListener('input', handleLevelChange); li.addEventListener('input', handleLevelChange); }
         window.addEventListener('resize', drawTreeConnections);
       }
+
       function handleLevelChange() {
         const level = parseInt(document.getElementById('charLevel')?.value, 10) || 1;
         const la = document.getElementById('budget-level-anchor'); if (la) la.textContent = level;
-        let total = 0; for (let i = 1; i <= Math.min(level, 12); i++) total += POINTS_BY_LEVEL[i] || 0;
+        let total = 0;
+        for (let i = 1; i <= Math.min(level, 12); i++) total += POINTS_BY_LEVEL[i] || 0;
         if (level > 12) total += (level - 12);
         maxBudgetLimit = total;
         const el = document.getElementById('total-points'); if (el) el.textContent = maxBudgetLimit;
         updateSpentCount(); updateDerivedVitals();
       }
-      function getInvestedCount(pathId) { return TRAITS_CATALOG.filter(t => t.Path === pathId && unlockedTraits.has(t.ID)).length; }
-      function updateSpentCount() { let s = 0; unlockedTraits.forEach(id => { const t = TRAITS_CATALOG.find(x => x.ID === id); if (t) s += parseInt(t.Cost, 10) || 1; }); const el = document.getElementById('spent-points'); if (el) el.textContent = s; }
 
-      // Restyled Search & Display Paths behavior
+      function getInvestedCount(pathId) { return TRAITS_CATALOG.filter(t => t.Path === pathId && unlockedTraits.has(t.ID)).length; }
+
+      function updateSpentCount() {
+        let s = 0;
+        unlockedTraits.forEach(id => { const t = TRAITS_CATALOG.find(x => x.ID === id); if (t) s += parseInt(t.Cost, 10) || 1; });
+        const el = document.getElementById('spent-points'); if (el) el.textContent = s;
+      }
+
       function renderPathsList() {
         const parent = document.getElementById('path-selector-list'); if (!parent) return;
         parent.innerHTML = '';
@@ -3109,10 +3328,7 @@
           const invested = getInvestedCount(path.ID);
           const matchesSearch = query && path.name.toLowerCase().includes(query);
           const isSelected = path.ID === selectedPathId;
-
-          // Improved path filtering rules
           if (invested === 0 && !matchesSearch && !isSelected) return;
-
           matched++;
           const el = document.createElement('div');
           el.className = `path-select-item flex items-center justify-between${isSelected ? ' active' : ''}`;
@@ -3120,7 +3336,7 @@
           el.innerHTML = `<span class="text-xs font-bold tracking-wider" style="color:var(--ink)">${path.name}</span><span class="text-xs font-mono font-bold" style="color:var(--indigo)">${invested} TP</span>`;
           parent.appendChild(el);
         });
-        if (!matched) parent.innerHTML = `<div class="text-center text-xs italic p-3" style="color:var(--ink-faint)">Search a path above to discover and activate it. Unused paths start hidden to keep things clean.</div>`;
+        if (!matched) parent.innerHTML = `<div class="text-center text-xs italic p-3" style="color:var(--ink-faint)">Search a path above to discover and activate it.</div>`;
       }
 
       function selectPath(pathId) {
@@ -3140,87 +3356,235 @@
         const invested = getInvestedCount(pathData.ID);
         Object.entries(pathData.breakpoints || {}).forEach(([key, b]) => {
           const achieved = invested >= b.investment;
-          if (!breakpointChoices[key]) breakpointChoices[key] = 'passive';
+          // ── FIX: Don't clobber existing breakpointChoices on re-render ──
+          // Only set default if no choice exists yet
+          if (breakpointChoices[key] === undefined) {
+            breakpointChoices[key] = 'passive';
+          }
           const currentChoice = breakpointChoices[key];
+          const isStatChoice = currentChoice !== 'passive';
+
           const div = document.createElement('div');
           div.className = 'relative flex flex-col border p-3 rounded-lg my-2';
           div.style.cssText = `opacity:${achieved ? 1 : 0.5};background:rgba(6,10,20,0.4);border-color:${achieved ? 'var(--gold-line)' : 'var(--border-med)'}`;
-          let selectorHTML = achieved ? `<div class="mt-2.5 pt-2 flex flex-col gap-2" style="border-top:1px solid var(--border-med)"><span class="text-[9px] uppercase font-semibold tracking-wider" style="color:var(--ink-faint)">Choose Active Bonus:</span><div class="flex flex-col gap-1.5 text-[11px]"><label class="flex items-center gap-2 cursor-pointer" style="color:var(--ink)"><input type="radio" name="choice_${key}" value="passive" ${currentChoice === 'passive' ? 'checked' : ''} onchange="setBreakpointChoice('${key}','passive')" style="accent-color:var(--gold)"><span>Apply Path Feature</span></label><label class="flex items-center gap-2 cursor-pointer" style="color:var(--ink)"><input type="radio" name="choice_${key}" value="stat" ${currentChoice !== 'passive' ? 'checked' : ''} onchange="setBreakpointChoice('${key}','stat')" style="accent-color:var(--gold)"><span>Allocate +1 Attribute Point</span></label></div>${currentChoice !== 'passive' ? `<select onchange="setBreakpointStatChoice('${key}',this.value)" class="text-[10px] p-1.5 rounded outline-none" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--gold)"><option value="stat_body_might" ${currentChoice === 'stat_body_might' ? 'selected' : ''}>Might</option><option value="stat_body_brawn" ${currentChoice === 'stat_body_brawn' ? 'selected' : ''}>Brawn</option><option value="stat_body_fortitude" ${currentChoice === 'stat_body_fortitude' ? 'selected' : ''}>Fortitude</option><option value="stat_skill_finesse" ${currentChoice === 'stat_skill_finesse' ? 'selected' : ''}>Finesse</option><option value="stat_skill_reflex" ${currentChoice === 'stat_skill_reflex' ? 'selected' : ''}>Reflex</option><option value="stat_skill_tinker" ${currentChoice === 'stat_skill_tinker' ? 'selected' : ''}>Tinker</option><option value="stat_mind_arcane" ${currentChoice === 'stat_mind_arcane' ? 'selected' : ''}>Arcane</option><option value="stat_mind_spirit" ${currentChoice === 'stat_mind_spirit' ? 'selected' : ''}>Spirit</option><option value="stat_mind_scholarship" ${currentChoice === 'stat_mind_scholarship' ? 'selected' : ''}>Scholarship</option><option value="stat_style_speech" ${currentChoice === 'stat_style_speech' ? 'selected' : ''}>Speech</option><option value="stat_style_insight" ${currentChoice === 'stat_style_insight' ? 'selected' : ''}>Insight</option><option value="stat_style_awareness" ${currentChoice === 'stat_style_awareness' ? 'selected' : ''}>Awareness</option></select>` : ''}` : `<div class="text-[9px] mt-1 italic" style="color:var(--ink-faint)">Requires ${b.investment} TP spent in this path.</div>`;
-          div.innerHTML = `<div class="absolute w-2.5 h-2.5 rounded-full border" style="left:-23px;top:14px;border-color:${achieved ? 'var(--gold)' : '#334155'};background:rgba(6,10,20,0.8)"></div><div class="flex items-center justify-between"><h4 class="text-xs font-bold" style="color:${achieved ? 'var(--gold)' : 'var(--ink-faint)'};font-family:'Cinzel',serif">Breakpoint (${b.investment} TP)</h4>${achieved ? `<span class="text-[8px] px-1.5 py-0.5 rounded uppercase font-bold" style="background:var(--gold-dim);border:1px solid var(--gold-line);color:var(--gold)">${currentChoice === 'passive' ? 'Passive' : '+1 Stat'}</span>` : ''}</div><p class="text-[10px] mt-1 leading-normal ${currentChoice !== 'passive' ? 'line-through' : ''}" style="color:var(--ink-dim)">${b.description}</p>${selectorHTML}`;
+
+          let statDropdown = '';
+          if (isStatChoice) {
+            const statOpts = [
+              ['stat_body_might', 'Might'], ['stat_body_brawn', 'Brawn'], ['stat_body_fortitude', 'Fortitude'],
+              ['stat_skill_finesse', 'Finesse'], ['stat_skill_reflex', 'Reflex'], ['stat_skill_tinker', 'Tinker'],
+              ['stat_mind_arcane', 'Arcane'], ['stat_mind_spirit', 'Spirit'], ['stat_mind_scholarship', 'Scholarship'],
+              ['stat_style_speech', 'Speech'], ['stat_style_insight', 'Insight'], ['stat_style_awareness', 'Awareness']
+            ];
+            const optionsHtml = statOpts.map(([v, l]) => `<option value="${v}"${currentChoice === v ? ' selected' : ''}>${l}</option>`).join('');
+            statDropdown = `<select onchange="setBreakpointStatChoice('${key}',this.value)" class="text-[10px] p-1.5 rounded outline-none mt-1" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--gold)">${optionsHtml}</select>`;
+          }
+
+          let selectorHTML = achieved ? `
+            <div class="mt-2.5 pt-2 flex flex-col gap-2" style="border-top:1px solid var(--border-med)">
+              <span class="text-[9px] uppercase font-semibold tracking-wider" style="color:var(--ink-faint)">Choose Active Bonus:</span>
+              <div class="flex flex-col gap-1.5 text-[11px]">
+                <label class="flex items-center gap-2 cursor-pointer" style="color:var(--ink)">
+                  <input type="radio" name="choice_${key}" value="passive" ${!isStatChoice ? 'checked' : ''} onchange="setBreakpointChoice('${key}','passive')" style="accent-color:var(--gold)">
+                  <span>Apply Path Feature</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer" style="color:var(--ink)">
+                  <input type="radio" name="choice_${key}" value="stat" ${isStatChoice ? 'checked' : ''} onchange="setBreakpointChoice('${key}','stat')" style="accent-color:var(--gold)">
+                  <span>Allocate +1 Attribute Point</span>
+                </label>
+              </div>
+              ${statDropdown}
+            </div>` : `<div class="text-[9px] mt-1 italic" style="color:var(--ink-faint)">Requires ${b.investment} TP spent in this path.</div>`;
+
+          div.innerHTML = `
+            <div class="absolute w-2.5 h-2.5 rounded-full border" style="left:-23px;top:14px;border-color:${achieved ? 'var(--gold)' : '#334155'};background:rgba(6,10,20,0.8)"></div>
+            <div class="flex items-center justify-between">
+              <h4 class="text-xs font-bold" style="color:${achieved ? 'var(--gold)' : 'var(--ink-faint)'};font-family:'Cinzel',serif">Breakpoint (${b.investment} TP)</h4>
+              ${achieved ? `<span class="text-[8px] px-1.5 py-0.5 rounded uppercase font-bold" style="background:var(--gold-dim);border:1px solid var(--gold-line);color:var(--gold)">${isStatChoice ? '+1 Stat' : 'Passive'}</span>` : ''}
+            </div>
+            <p class="text-[10px] mt-1 leading-normal ${isStatChoice ? 'line-through' : ''}" style="color:var(--ink-dim)">${b.description}</p>
+            ${selectorHTML}`;
+
           container.appendChild(div);
         });
       }
 
-      function setBreakpointChoice(key, type) { breakpointChoices[key] = type === 'passive' ? 'passive' : 'stat_body_might'; recalcAll(); selectPath(selectedPathId); }
-      function setBreakpointStatChoice(key, stat) { breakpointChoices[key] = stat; recalcAll(); selectPath(selectedPathId); }
+      // ── FIX: setBreakpointChoice now preserves existing stat choice when switching TO stat mode ──
+      function setBreakpointChoice(key, type) {
+        if (type === 'passive') {
+          breakpointChoices[key] = 'passive';
+        } else {
+          // Only reset to might if there's no existing stat choice saved
+          const existing = breakpointChoices[key];
+          if (!existing || existing === 'passive') {
+            breakpointChoices[key] = 'stat_body_might';
+          }
+          // else: keep the existing stat choice
+        }
+        recalcAll();
+        selectPath(selectedPathId);
+      }
 
-      function canUnlockTrait(trait) { if (!trait) return false; const prereqs = CONSTELLATION_PREREQS[trait.ID]; return !prereqs || prereqs.length === 0 || prereqs.every(id => unlockedTraits.has(id)); }
-      function canLockTrait(traitId, pathId) { return !TRAITS_CATALOG.filter(t => t.Path === pathId && (CONSTELLATION_PREREQS[t.ID] || []).includes(traitId) && unlockedTraits.has(t.ID)).length; }
+      function setBreakpointStatChoice(key, stat) {
+        breakpointChoices[key] = stat;
+        recalcAll();
+        selectPath(selectedPathId);
+      }
+
+      function getTraitUnlockState(trait) {
+
+        const missing = [];
+
+        const traitReqs =
+          CONSTELLATION_PREREQS[trait.ID] || [];
+
+        const tagReqs =
+          CONSTELLATION_REQUIRE_TAGS[trait.ID] || [];
+
+        const uniqueReqs =
+          CONSTELLATION_REQUIRE_UNIQUES[trait.ID] || [];
+
+        traitReqs.forEach(id => {
+          if (!unlockedTraits.has(id)) {
+            const t = TRAITS_CATALOG.find(x => x.ID === id);
+            missing.push(t?.Name || id);
+          }
+        });
+
+        tagReqs.forEach(tag => {
+
+          const satisfied =
+            [...unlockedTraits].some(id =>
+              (CONSTELLATION_TAGS[id] || []).includes(tag)
+            );
+
+          if (!satisfied)
+            missing.push(`▲ ${tag}`);
+        });
+
+        uniqueReqs.forEach(unique => {
+
+          const satisfied =
+            [...unlockedTraits].some(id =>
+              (CONSTELLATION_UNIQUES[id] || []).includes(unique)
+            );
+
+          if (!satisfied)
+            missing.push(`★ ${unique}`);
+        });
+
+        return {
+          unlocked: unlockedTraits.has(trait.ID),
+          available: missing.length === 0,
+          missing
+        };
+      }
+
+      function canUnlockTrait(trait) {
+        return getTraitUnlockState(trait).available;
+      }
+
+      function canLockTrait(traitId, pathId) {
+        return !TRAITS_CATALOG.filter(t => t.Path === pathId && (CONSTELLATION_PREREQS[t.ID] || CONSTELLATION_REQUIRE_TAGS[t.ID] || CONSTELLATION_REQUIRE_UNIQUES[t.ID] || []).includes(traitId) && unlockedTraits.has(t.ID)).length;
+      }
 
       function toggleTraitSelection(traitId) {
         const trait = TRAITS_CATALOG.find(t => t.ID === traitId); if (!trait) return;
         const isUnlocked = unlockedTraits.has(traitId);
         const cost = parseInt(trait.Cost, 10) || 1;
-        if (isUnlocked) { if (!canLockTrait(traitId, trait.Path)) { triggerWarningToast("Cannot lock: dependent child nodes are active."); return; } unlockedTraits.delete(traitId); }
-        else {
+        if (isUnlocked) {
+          if (!canLockTrait(traitId, trait.Path)) { triggerWarningToast("Cannot lock: dependent child nodes are active."); return; }
+          unlockedTraits.delete(traitId);
+        } else {
           if (!canUnlockTrait(trait)) { triggerWarningToast("Planar connection locked: Complete parent prerequisites first."); return; }
-          let spent = 0; unlockedTraits.forEach(id => { const t = TRAITS_CATALOG.find(x => x.ID === id); if (t) spent += parseInt(t.Cost, 10) || 1; });
+          let spent = 0;
+          unlockedTraits.forEach(id => { const t = TRAITS_CATALOG.find(x => x.ID === id); if (t) spent += parseInt(t.Cost, 10) || 1; });
           if (spent + cost > maxBudgetLimit) { triggerWarningToast("Trait point budget exceeded. Increase Level to gain more TP."); return; }
           unlockedTraits.add(traitId);
         }
         updateNodeStates(); drawTreeConnections(); selectPath(selectedPathId); updateDerivedVitals();
       }
 
-      function getInitials(name) { if (!name) return "??"; const parts = name.trim().split(/\s+/); return parts.length >= 2 ? (parts[0][0] + parts[1][0]).toUpperCase() : name.substring(0, 2).toUpperCase(); }
-      function getActionColor(action) { if (action === "◆") return "var(--clr-style)"; if (action === "◇") return "var(--clr-skill)"; if (action === "⬖") return "var(--clr-mind)"; return "var(--clr-body)"; }
-      function getActionLabel(action) { if (action === "◆") return 'Attack'; if (action === "◇") return 'Reaction'; if (action === "⬖") return 'Action'; return 'Free'; }
+      function getInitials(name) {
+        if (!name) return "??";
+        const parts = name.trim().split(/\s+/);
+        return parts.length >= 2 ? (parts[0][0] + parts[1][0]).toUpperCase() : name.substring(0, 2).toUpperCase();
+      }
+
+      function getActionColor(action) {
+        if (action === "◆") return "var(--clr-style)";
+        if (action === "◇") return "var(--clr-skill)";
+        if (action === "⬖") return "var(--clr-mind)";
+        return "var(--clr-body)";
+      }
+
+      function getActionLabel(action) {
+        if (action === "◆") return 'Attack';
+        if (action === "◇") return 'Reaction';
+        if (action === "⬖") return 'Action';
+        return 'Free';
+      }
 
       function renderConstellationNodes(pathId) {
         const parent = document.getElementById('nodes-container');
         if (!parent) return;
         parent.innerHTML = '';
-
         assignPathCoordinates(pathId);
-
         const pathTraits = TRAITS_CATALOG.filter(t => t.Path === pathId);
         const pathTraitIds = new Set(pathTraits.map(t => t.ID));
-
-        // Collect cross-path prerequisite IDs that need ghost stubs
         const ghostIds = new Set();
         pathTraits.forEach(trait => {
-          (CONSTELLATION_PREREQS[trait.ID] || []).forEach(pid => {
-            if (!pathTraitIds.has(pid)) ghostIds.add(pid);
-          });
-        });
 
-        // Assign coordinates for ghost stubs (place them off-grid below main area)
+          (CONSTELLATION_PREREQS[trait.ID] || [])
+            .forEach(pid => {
+
+              if (!pathTraitIds.has(pid))
+                ghostIds.add(pid);
+
+            });
+
+          (CONSTELLATION_REQUIRE_TAGS[trait.ID] || [])
+            .forEach(tag => {
+
+              (TAG_PROVIDER_MAP[tag] || [])
+                .forEach(pid => {
+
+                  if (!pathTraitIds.has(pid))
+                    ghostIds.add(pid);
+
+                });
+
+            });
+
+          (CONSTELLATION_REQUIRE_UNIQUES[trait.ID] || [])
+            .forEach(unique => {
+
+              (UNIQUE_PROVIDER_MAP[unique] || [])
+                .forEach(pid => {
+
+                  if (!pathTraitIds.has(pid))
+                    ghostIds.add(pid);
+
+                });
+
+            });
+
+        });
         let ghostCol = 1;
         ghostIds.forEach(gid => {
-          if (!TREE_COORDINATES[gid]) {
-            TREE_COORDINATES[gid] = { row: 5, col: ghostCol++ };
-          }
+          if (!TREE_COORDINATES[gid]) { TREE_COORDINATES[gid] = { row: 5, col: ghostCol++ }; }
         });
-
-        // Render main path traits
         pathTraits.forEach(trait => placeNode(trait, parent, false));
-
-        // Render ghost stubs for cross-path prereqs
         ghostIds.forEach(gid => {
           const ghostTrait = TRAITS_CATALOG.find(t => t.ID === gid);
           if (ghostTrait) placeNode(ghostTrait, parent, true);
         });
-
-        // Wait for layout then draw connections
-        requestAnimationFrame(() => {
-          updateNodeStates();
-          drawTreeConnections();
-        });
+        requestAnimationFrame(() => { updateNodeStates(); drawTreeConnections(); });
       }
 
       function placeNode(trait, parent, isGhost) {
         const coord = TREE_COORDINATES[trait.ID];
         if (!coord) return;
-
         const COLS = 8, ROWS = isGhost ? 6 : 5;
         const btn = document.createElement('button');
         btn.id = `node-${trait.ID}`;
@@ -3231,9 +3595,17 @@
         btn.style.opacity = isGhost ? '0.4' : '1';
         btn.title = isGhost ? `[External] ${trait.Name}` : trait.Name;
         btn.textContent = getInitials(trait.Name);
-
         if (!isGhost) {
-          btn.onclick = () => toggleTraitSelection(trait.ID);
+          btn.onclick = () => {
+
+            const state =
+              getTraitUnlockState(trait);
+
+            if (!state.available)
+              return;
+
+            toggleTraitSelection(trait.ID);
+          };
           btn.onmouseenter = (e) => showTooltip(trait, e);
           btn.onmousemove = (e) => showTooltip(trait, e);
           btn.onmouseleave = () => resetTooltip();
@@ -3243,108 +3615,356 @@
           btn.onmousemove = (e) => showTooltip(trait, e);
           btn.onmouseleave = () => resetTooltip();
         }
-
         parent.appendChild(btn);
       }
 
       function updateNodeStates() {
-        TRAITS_CATALOG.filter(t => t.Path === selectedPathId).forEach(t => {
-          const el = document.getElementById(`node-${t.ID}`); if (!el) return;
-          el.classList.remove('locked', 'available', 'unlocked');
-          if (unlockedTraits.has(t.ID)) { el.classList.add('unlocked'); el.style.borderColor = '#a5b4fc'; }
-          else if (canUnlockTrait(t)) { el.classList.add('available'); el.style.borderColor = getActionColor(t.Action); }
-          else { el.classList.add('locked'); el.style.borderColor = '#334155'; }
-        });
+
+        TRAITS_CATALOG
+          .filter(t => t.Path === selectedPathId)
+          .forEach(t => {
+
+            const el =
+              document.getElementById(`node-${t.ID}`);
+
+            if (!el) return;
+
+            const state =
+              getTraitUnlockState(t);
+
+            el.classList.remove(
+              'locked',
+              'available',
+              'unlocked'
+            );
+
+            if (state.unlocked) {
+
+              el.classList.add('unlocked');
+              el.style.borderColor = '#a5b4fc';
+
+            } else if (state.available) {
+
+              el.classList.add('available');
+              el.style.borderColor =
+                getActionColor(t.Action);
+
+            } else {
+
+              el.classList.add('locked');
+              el.style.borderColor = '#334155';
+
+            }
+
+          });
+
         updateSpentCount();
       }
 
-      // ── Draw SVG connections ───────────────────────────────────────────────
-      function drawTreeConnections() {
-        const canvas = document.getElementById('svg-canvas');
-        const viewport = document.getElementById('tree-viewport');
-        if (!canvas || !viewport) return;
+      function drawUniqueConnections(child) {
 
-        // Remove existing connection paths (keep <defs>)
-        Array.from(canvas.children).forEach(child => {
-          if (child.tagName !== 'defs') canvas.removeChild(child);
+        const uniques =
+          CONSTELLATION_REQUIRE_UNIQUES[child.ID] || [];
+
+        uniques.forEach(unique => {
+
+          const providers =
+            UNIQUE_PROVIDER_MAP[unique] || [];
+
+          providers.forEach(providerId => {
+
+            drawConnection(
+              providerId,
+              child.ID,
+              'unique'
+            );
+
+          });
+
         });
 
-        const vpRect = viewport.getBoundingClientRect();
-        if (vpRect.width === 0) return; // not visible yet
+      }
+      function drawTagConnections(child) {
 
-        // All traits visible in current path + their ghost prereqs
+        const tags =
+          CONSTELLATION_REQUIRE_TAGS[child.ID] || [];
+
+        tags.forEach(tag => {
+
+          const providers =
+            TAG_PROVIDER_MAP[tag] || [];
+
+          providers.forEach(providerId => {
+
+            drawConnection(
+              providerId,
+              child.ID,
+              'tag'
+            );
+
+          });
+
+        });
+
+      }
+
+      function drawConnection(
+        canvas,
+        viewportRect,
+        parentId,
+        childId,
+        type = 'trait'
+      ) {
+
+        const parentEl =
+          document.getElementById(`node-${parentId}`);
+
+        const childEl =
+          document.getElementById(`node-${childId}`);
+
+        if (!parentEl || !childEl)
+          return;
+
+        const pR =
+          parentEl.getBoundingClientRect();
+
+        const cR =
+          childEl.getBoundingClientRect();
+
+        const x1 =
+          (pR.left + pR.width / 2) -
+          viewportRect.left;
+
+        const y1 =
+          (pR.top + pR.height / 2) -
+          viewportRect.top;
+
+        const x2 =
+          (cR.left + cR.width / 2) -
+          viewportRect.left;
+
+        const y2 =
+          (cR.top + cR.height / 2) -
+          viewportRect.top;
+
+        const dy =
+          Math.abs(y2 - y1) * 0.35;
+
+        const path =
+          document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'path'
+          );
+
+        path.setAttribute(
+          'd',
+          `M ${x1} ${y1} C ${x1} ${y1 + dy}, ${x2} ${y2 - dy}, ${x2} ${y2}`
+        );
+
+        path.setAttribute('fill', 'none');
+
+        const unlocked =
+          unlockedTraits.has(parentId) &&
+          unlockedTraits.has(childId);
+
+        if (unlocked) {
+
+          path.setAttribute(
+            'stroke',
+            'url(#line-unlocked)'
+          );
+
+          path.setAttribute(
+            'stroke-width',
+            '2.5'
+          );
+
+          path.setAttribute(
+            'filter',
+            'url(#glow)'
+          );
+
+        } else {
+
+          switch (type) {
+
+            case 'unique':
+              path.setAttribute(
+                'stroke',
+                'rgba(250,204,21,0.35)'
+              );
+              path.setAttribute(
+                'stroke-dasharray',
+                '8 4'
+              );
+              break;
+
+            case 'tag':
+              path.setAttribute(
+                'stroke',
+                'rgba(34,197,94,0.35)'
+              );
+              path.setAttribute(
+                'stroke-dasharray',
+                '4 4'
+              );
+              break;
+
+            default:
+              path.setAttribute(
+                'stroke',
+                'rgba(51,65,85,0.4)'
+              );
+          }
+
+          path.setAttribute(
+            'stroke-width',
+            '1.2'
+          );
+
+        }
+
+        canvas.appendChild(path);
+      }
+
+
+
+
+      function drawTreeConnections() {
+
+        const canvas =
+          document.getElementById('svg-canvas');
+
+        const viewport =
+          document.getElementById('tree-viewport');
+
+        if (!canvas || !viewport)
+          return;
+
+        Array.from(canvas.children)
+          .forEach(child => {
+
+            if (child.tagName !== 'defs')
+              canvas.removeChild(child);
+
+          });
+
+        const vpRect =
+          viewport.getBoundingClientRect();
+
+        if (vpRect.width === 0)
+          return;
+
         const visibleIds = new Set(
-          Array.from(document.getElementById('nodes-container')?.querySelectorAll('[id^="node-"]') || [])
-            .map(el => el.id.replace('node-', ''))
+          Array.from(
+            document.getElementById('nodes-container')
+              ?.querySelectorAll('[id^="node-"]') || []
+          ).map(el =>
+            el.id.replace('node-', '')
+          )
         );
 
         TRAITS_CATALOG
           .filter(t => visibleIds.has(t.ID))
           .forEach(child => {
-            (CONSTELLATION_PREREQS[child.ID] || []).forEach(pId => {
-              const parentEl = document.getElementById(`node-${pId}`);
-              const childEl = document.getElementById(`node-${child.ID}`);
-              if (!parentEl || !childEl) return;
 
-              const pR = parentEl.getBoundingClientRect();
-              const cR = childEl.getBoundingClientRect();
+            (CONSTELLATION_PREREQS[child.ID] || [])
+              .forEach(parentId => {
 
-              const x1 = (pR.left + pR.width / 2) - vpRect.left;
-              const y1 = (pR.top + pR.height / 2) - vpRect.top;
-              const x2 = (cR.left + cR.width / 2) - vpRect.left;
-              const y2 = (cR.top + cR.height / 2) - vpRect.top;
+                drawConnection(
+                  canvas,
+                  vpRect,
+                  parentId,
+                  child.ID,
+                  'trait'
+                );
 
-              const dy = Math.abs(y2 - y1) * 0.35;
-              const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-              path.setAttribute('d', `M ${x1} ${y1} C ${x1} ${y1 + dy}, ${x2} ${y2 - dy}, ${x2} ${y2}`);
-              path.setAttribute('fill', 'none');
+              });
 
-              const bothUnlocked = unlockedTraits.has(child.ID) && unlockedTraits.has(pId);
-              const isGhostLink = !TRAITS_CATALOG.find(t => t.ID === pId && t.Path === selectedPathId);
+            (CONSTELLATION_REQUIRE_TAGS[child.ID] || [])
+              .forEach(tag => {
 
-              if (bothUnlocked) {
-                path.setAttribute('stroke', 'url(#line-unlocked)');
-                path.setAttribute('stroke-width', '2.5');
-                path.setAttribute('filter', 'url(#glow)');
-              } else if (isGhostLink) {
-                path.setAttribute('stroke', 'rgba(129,140,248,0.25)');
-                path.setAttribute('stroke-width', '1');
-                path.setAttribute('stroke-dasharray', '4 4');
-              } else {
-                path.setAttribute('stroke', 'rgba(51,65,85,0.4)');
-                path.setAttribute('stroke-width', '1.2');
-              }
+                (TAG_PROVIDER_MAP[tag] || [])
+                  .forEach(parentId => {
 
-              canvas.appendChild(path);
-            });
+                    drawConnection(
+                      canvas,
+                      vpRect,
+                      parentId,
+                      child.ID,
+                      'tag'
+                    );
+
+                  });
+
+              });
+
+            (CONSTELLATION_REQUIRE_UNIQUES[child.ID] || [])
+              .forEach(unique => {
+
+                (UNIQUE_PROVIDER_MAP[unique] || [])
+                  .forEach(parentId => {
+
+                    drawConnection(
+                      canvas,
+                      vpRect,
+                      parentId,
+                      child.ID,
+                      'unique'
+                    );
+
+                  });
+
+              });
+
           });
+
       }
 
-      // Floating node tooltip (appears near cursor inside the tree viewport)
       (function ensureFloatingTooltip() {
         if (document.getElementById('node-tooltip-floating')) return;
-        const el = document.createElement('div'); el.id = 'node-tooltip-floating'; el.style.position = 'fixed'; el.style.zIndex = 60; el.style.display = 'none'; el.style.maxWidth = '360px'; el.style.background = 'rgba(6,10,20,0.95)'; el.style.border = '1px solid var(--border-med)'; el.style.padding = '10px'; el.style.borderRadius = '8px'; el.style.color = 'var(--ink)'; el.style.boxShadow = '0 6px 18px rgba(0,0,0,0.6)'; el.style.pointerEvents = 'none'; document.body.appendChild(el);
+        const el = document.createElement('div');
+        el.id = 'node-tooltip-floating';
+        el.style.cssText = 'position:fixed;z-index:60;display:none;max-width:360px;background:rgba(6,10,20,0.95);border:1px solid var(--border-med);padding:10px;border-radius:8px;color:var(--ink);box-shadow:0 6px 18px rgba(0,0,0,0.6);pointer-events:none';
+        document.body.appendChild(el);
       })();
 
       function showTooltip(trait, ev) {
         const el = document.getElementById('node-tooltip-floating'); if (!el) return;
-        const prereqs = CONSTELLATION_PREREQS[trait.ID] || [];
-        const prereqStr = prereqs.length > 0 ? 'Requires: ' + prereqs.map(p => TRAITS_CATALOG.find(x => x.ID === p)?.Name).join(', ') : 'Free Planar Talent';
+        const state =
+          getTraitUnlockState(trait);
+
+        let prereqStr = '';
+
+        if (state.available) {
+
+          prereqStr = 'Requirements Met';
+
+        } else {
+
+          prereqStr =
+            'Missing: ' +
+            state.missing.join(', ');
+
+        }
         el.innerHTML = `<div style="font-weight:700;color:var(--gold);font-size:12px">${trait.Name} <span style="font-weight:600;color:var(--ink-faint);font-size:11px">[${trait.Action}]</span></div>` +
           `<div style="font-size:11px;margin-top:6px;color:var(--ink)">${trait.Description}</div>` +
           `${trait.Scaling ? `<pre style="white-space:pre-wrap;margin-top:8px;font-family:monospace;font-size:11px;color:#cbd5e1;">${trait.Scaling}</pre>` : ''}` +
           `<div style="margin-top:6px;font-size:11px;color:var(--ink-faint);font-weight:600">${prereqStr} • ${trait.Cost} TP</div>`;
         el.style.display = 'block';
-        const x = ev?.clientX ?? (window.innerWidth / 2); const y = ev?.clientY ?? (window.innerHeight / 2);
-        const offset = 14; let left = x + offset; let top = y + offset;
+        const x = ev?.clientX ?? (window.innerWidth / 2);
+        const y = ev?.clientY ?? (window.innerHeight / 2);
+        const offset = 14;
+        let left = x + offset, top = y + offset;
         const rect = el.getBoundingClientRect();
         if (left + rect.width > window.innerWidth - 8) left = window.innerWidth - rect.width - 12;
         if (top + rect.height > window.innerHeight - 8) top = Math.max(8, y - rect.height - offset);
-        el.style.left = left + 'px'; el.style.top = top + 'px';
+        el.style.left = left + 'px';
+        el.style.top = top + 'px';
       }
+
       function resetTooltip() { const el = document.getElementById('node-tooltip-floating'); if (el) el.style.display = 'none'; }
 
-      // Render all unlocked traits regardless of path (Learned Traits)
       function renderLedgerDirectory() {
         const tbody = document.getElementById('ledger-table-body'); if (!tbody) return;
         tbody.innerHTML = '';
@@ -3354,11 +3974,10 @@
           const tr = document.createElement('tr');
           tr.className = 'ledger-row-unlocked';
           tr.style.borderBottom = '1px solid rgba(51,65,85,0.4)';
-          // format scaling into lines and escape content
           const scalingRaw = t.Scaling || '';
           const scalingLines = scalingRaw.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
-          const scalingHtml = scalingLines.length ? `<div class="scaling-list" style="display:flex;flex-direction:column;gap:2px">${scalingLines.map(l => `<div style="font-family:monospace;color:var(--indigo);font-size:12px">${esc(l)}</div>`).join('')}</div>` : '<span class="text-indigo-300">—</span>';
-          const actionHtml = `<div style="display:inline-flex;align-items:center;gap:8px"><div style=\"width:26px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;background:${getActionColor(t.Action)};color:#060a14;font-weight:700\">${esc(t.Action)}</div><div style=\"font-size:11px;color:var(--ink-faint)\">${getActionLabel(t.Action)}</div></div>`;
+          const scalingHtml = scalingLines.length ? `<div style="display:flex;flex-direction:column;gap:2px">${scalingLines.map(l => `<div style="font-family:monospace;color:var(--indigo);font-size:12px">${esc(l)}</div>`).join('')}</div>` : '<span>—</span>';
+          const actionHtml = `<div style="display:inline-flex;align-items:center;gap:8px"><div style="width:26px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;background:${getActionColor(t.Action)};color:#060a14;font-weight:700">${esc(t.Action)}</div><div style="font-size:11px;color:var(--ink-faint)">${getActionLabel(t.Action)}</div></div>`;
           tr.innerHTML = `<td class="p-3 text-sm font-semibold" style="color:var(--ink)">${esc(t.Name)}</td><td class="p-3 text-sm">${actionHtml}</td><td class="p-3 text-sm">${scalingHtml}</td><td class="p-3 text-sm leading-tight text-slate-300">${esc(t.Description)}</td>`;
           tbody.appendChild(tr);
         });
@@ -3366,6 +3985,7 @@
 
       // ── Custom creator modal ──
       let creatorMode = "path";
+
       function openCustomCreatorModal(mode) {
         creatorMode = mode;
         const modal = document.getElementById('customCreatorModal'), title = document.getElementById('creator-modal-title'), content = document.getElementById('creator-form-content');
@@ -3377,14 +3997,16 @@
         const f = (l, content) => `<div class="flex flex-col gap-1">${lbl(l)}${content}</div>`;
         if (mode === 'path') {
           title.textContent = 'Forge Custom Constellation Path';
-          content.innerHTML = f('Path ID', inp('cp_id', 'custom_path_id')) + f('Path Name', inp('cp_name', 'Path of the Void Weaver')) + f('Description', ta('cp_desc', 'Describe the cosmic vectors...')) + `<div class="border-t animate-pulse" style="border-color:var(--border-med)"></div><div class="panel-title">Breakpoints</div><div class="grid grid-cols-12 gap-2">${f('TP Investment', inp('cp_bp_inv', '3', 'number')).replace('class="flex flex-col gap-1"', 'class="col-span-3 flex flex-col gap-1"')}${f('Breakpoint Description', inp('cp_bp_desc', 'Gain +2 spell defense in darkness.')).replace('class="flex flex-col gap-1"', 'class="col-span-9 flex flex-col gap-1"')}</div>`;
+          content.innerHTML = f('Path ID', inp('cp_id', 'custom_path_id')) + f('Path Name', inp('cp_name', 'Path of the Void Weaver')) + f('Description', ta('cp_desc', 'Describe the cosmic vectors...')) + `<div class="border-t" style="border-color:var(--border-med)"></div><div class="panel-title">Breakpoints</div><div class="grid grid-cols-12 gap-2">${f('TP Investment', inp('cp_bp_inv', '3', 'number')).replace('class="flex flex-col gap-1"', 'class="col-span-3 flex flex-col gap-1"')}${f('Breakpoint Description', inp('cp_bp_desc', 'Gain +2 spell defense in darkness.')).replace('class="flex flex-col gap-1"', 'class="col-span-9 flex flex-col gap-1"')}</div>`;
         } else {
           title.textContent = 'Forge Custom Constellation Trait';
           const pathOpts = PATHS_CATALOG.map(p => `<option value="${p.ID}">${p.name}</option>`).join('');
           content.innerHTML = `<div class="grid grid-cols-2 gap-2">${f('Trait ID', inp('ct_id', 'ct_custom_id'))}${f('Trait Name', inp('ct_name', 'Necrotic Shroud'))}</div><div class="grid grid-cols-3 gap-2">${f('Path', `<select id="ct_path" class="rounded p-2 outline-none" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink)">${pathOpts}</select>`)}${f('Action', `<select id="ct_action" class="rounded p-2 outline-none" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink)"><option value="⭘">⭘ Free</option><option value="◇">◇ Reaction</option><option value="⬖">⬖ Action</option><option value="◆">◆ Attack</option></select>`)}${f('TP Cost', inp('ct_cost', '1', 'number'))}</div><div class="grid grid-cols-2 gap-2">${f('Row (1-4)', inp('ct_row', '1', 'number'))}${f('Col (1-7)', inp('ct_col', '4', 'number'))}</div>${f('Description', ta('ct_desc', 'Detailed mechanics...'))}${f('Scaling', inp('ct_scaling', '+1 Armor per tier'))}`;
         }
       }
+
       function closeCustomCreatorModal() { document.getElementById('customCreatorModal').classList.remove('open'); }
+
       function saveCustomCreatorData() {
         if (creatorMode === 'path') {
           const id = document.getElementById('cp_id')?.value.trim(), name = document.getElementById('cp_name')?.value.trim(), desc = document.getElementById('cp_desc')?.value.trim(), bp_inv = parseInt(document.getElementById('cp_bp_inv')?.value, 10) || 3, bp_desc = document.getElementById('cp_bp_desc')?.value.trim();
@@ -3405,7 +4027,9 @@
       function triggerWarningToast(msg) {
         const banner = document.getElementById('warning-toast'), text = document.getElementById('warning-msg');
         if (!banner || !text) return;
-        text.textContent = msg; banner.classList.remove('opacity-0', 'translate-y-20'); banner.classList.add('opacity-100', 'translate-y-0');
+        text.textContent = msg;
+        banner.classList.remove('opacity-0', 'translate-y-20');
+        banner.classList.add('opacity-100', 'translate-y-0');
         clearTimeout(bannerTimer);
         bannerTimer = setTimeout(() => { banner.classList.remove('opacity-100', 'translate-y-0'); banner.classList.add('opacity-0', 'translate-y-20'); }, 3500);
       }
@@ -3428,11 +4052,18 @@
         const school = document.getElementById('spellcasting_school_select')?.value || 'occult';
         const wrapper = document.getElementById('spell-school-icon-wrapper'), title = document.getElementById('school-title-text'), card = document.getElementById('spellcasting-school-card');
         if (!wrapper || !title || !card) return;
-        const themes = { arcane: { svg: ArcaneSVG, title: 'Arcane spell school', border: 'rgba(129,140,248,0.35)', shadow: 'rgba(129,140,248,0.15)' }, divine: { svg: DivineSVG, title: 'Divine spell school', border: 'rgba(201,168,76,0.35)', shadow: 'rgba(201,168,76,0.15)' }, occult: { svg: OccultSVG, title: 'Occult spell school', border: 'rgba(168,85,247,0.35)', shadow: 'rgba(168,85,247,0.15)' }, elemental: { svg: ElementalSVG, title: 'Elemental spell school', border: 'rgba(239,68,68,0.35)', shadow: 'rgba(239,68,68,0.15)' }, cosmic: { svg: CosmicSVG, title: 'Cosmic spell school', border: 'rgba(103,232,249,0.35)', shadow: 'rgba(103,232,249,0.15)' } };
+        const themes = {
+          arcane: { svg: ArcaneSVG, title: 'Arcane spell school', border: 'rgba(129,140,248,0.35)', shadow: 'rgba(129,140,248,0.15)' },
+          divine: { svg: DivineSVG, title: 'Divine spell school', border: 'rgba(201,168,76,0.35)', shadow: 'rgba(201,168,76,0.15)' },
+          occult: { svg: OccultSVG, title: 'Occult spell school', border: 'rgba(168,85,247,0.35)', shadow: 'rgba(168,85,247,0.15)' },
+          elemental: { svg: ElementalSVG, title: 'Elemental spell school', border: 'rgba(239,68,68,0.35)', shadow: 'rgba(239,68,68,0.15)' },
+          cosmic: { svg: CosmicSVG, title: 'Cosmic spell school', border: 'rgba(103,232,249,0.35)', shadow: 'rgba(103,232,249,0.15)' }
+        };
         const t = themes[school] || themes.occult;
         wrapper.innerHTML = `<img src="${getSchoolIconPath(school)}" alt="${school} school icon" style="width:24px;height:24px;object-fit:contain">`;
         title.textContent = t.title;
-        card.style.borderColor = t.border; card.style.boxShadow = `0 4px 20px ${t.shadow}`;
+        card.style.borderColor = t.border;
+        card.style.boxShadow = `0 4px 20px ${t.shadow}`;
         document.querySelectorAll('.spell-school-chip').forEach(btn => btn.classList.toggle('active', btn.dataset.school === school));
         filterSpellsSelector();
         recalcSpellStats();
@@ -3445,7 +4076,11 @@
         updateSpellSchoolTheme();
       }
 
-      function adjustMana(dir) { const delta = parseInt(document.getElementById('mana_delta')?.value, 10) || 1, cur = parseInt(document.getElementById('currentMana')?.value, 10) || 0; syncMana(cur + (dir * delta), 'adjust'); }
+      function adjustMana(dir) {
+        const delta = parseInt(document.getElementById('mana_delta')?.value, 10) || 1;
+        const cur = parseInt(document.getElementById('currentMana')?.value, 10) || 0;
+        syncMana(cur + (dir * delta), 'adjust');
+      }
 
       function filterSpellsSelector() {
         const query = document.getElementById('spell_search_query')?.value.toLowerCase().trim() || '';
@@ -3455,13 +4090,16 @@
           if (query && !spell.Name.toLowerCase().includes(query) && !spell.Category.toLowerCase().includes(query) && !String(spell.Type || '').toLowerCase().includes(query)) return;
           const cost = parseInt(spell.Cost, 10) || 0;
           const opt = document.createElement('option');
-          opt.value = spell.ID; opt.textContent = `[${spell.Category}] ${spell.Name} (${cost === 0 ? 'Cantrip' : 'Level ' + cost})`;
+          opt.value = spell.ID;
+          opt.textContent = `[${spell.Category}] ${spell.Name} (${cost === 0 ? 'Cantrip' : 'Level ' + cost})`;
           selector.appendChild(opt);
         });
       }
+
       function addSelectedSpell() { const s = document.getElementById('selectable_spells'); if (!s || !s.value) return; knownSpellIds.add(s.value); renderKnownSpells(); recalcSpellStats(); triggerWarningToast("Spell transcribed to grimoire!"); }
       function openCustomSpellModal() { document.getElementById('customSpellModal').classList.add('open'); }
       function closeCustomSpellModal() { document.getElementById('customSpellModal').classList.remove('open'); }
+
       function saveCustomSpell() {
         const name = document.getElementById('cust_spell_name')?.value.trim(), action = document.getElementById('cust_spell_action')?.value.trim() || "Action", cost = parseInt(document.getElementById('cust_spell_cost')?.value, 10) || 0, range = document.getElementById('cust_spell_range')?.value.trim() || "Self", school = document.getElementById('cust_spell_school')?.value, effect = document.getElementById('cust_spell_effect')?.value.trim(), upcast = document.getElementById('cust_spell_upcast')?.value.trim(), lore = document.getElementById('cust_spell_lore')?.value.trim();
         if (!name || !effect) { triggerWarningToast("Name and Effect are required."); return; }
@@ -3469,27 +4107,29 @@
         customSpells.push({ "ID": newId, "Name": name, "Cost": cost, "Category": school.charAt(0).toUpperCase() + school.slice(1), "Type": action, "Range": range, "Description": effect, "Upcast": upcast || "None", "Lore": lore || "" });
         knownSpellIds.add(newId); filterSpellsSelector(); renderKnownSpells(); recalcSpellStats(); closeCustomSpellModal(); triggerWarningToast(`${name} added to grimoire!`);
       }
+
       function removeKnownSpell(id) { knownSpellIds.delete(id); renderKnownSpells(); recalcSpellStats(); triggerWarningToast("Spell forgotten from grimoire."); }
+
       function castSpell(id) {
         const spell = getSpellById(id); if (!spell) return;
         const cost = parseInt(spell.Cost, 10) || 0;
         const cur = parseInt(document.getElementById('currentMana')?.value, 10) || 0;
         if (cur < cost) { triggerWarningToast("Insufficient mana."); return; }
         syncMana(cur - cost, 'spells_cast');
-        const notes = document.getElementById('notes'); if (notes) notes.value = `[Cast] ${spell.Name} — ${cost} Mana\n` + notes.value;
+        const notes = document.getElementById('notes');
+        if (notes) notes.value = `[Cast] ${spell.Name} — ${cost} Mana\n` + notes.value;
         triggerWarningToast(`Cast ${spell.Name}!`);
       }
+
       function renderKnownSpells() {
         const cantripsContainer = document.getElementById('known-cantrips-container');
         const spellsContainer = document.getElementById('known-spells-container');
         if (!cantripsContainer || !spellsContainer) return;
         cantripsContainer.innerHTML = '';
         spellsContainer.innerHTML = '';
-
         const active = getSpellLibrary().filter(s => knownSpellIds.has(s.ID));
         const cantrips = active.filter(s => (parseInt(s.Cost, 10) || 0) === 0);
         const spells = active.filter(s => (parseInt(s.Cost, 10) || 0) > 0);
-
         const renderCard = (s) => {
           const card = document.createElement('div');
           card.className = "p-3 rounded flex flex-col justify-between gap-2 text-xs";
@@ -3500,92 +4140,198 @@
           card.innerHTML = `<div class="flex items-start justify-between"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded flex items-center justify-center" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med)">${catSVG}</div><div><h4 class="font-bold text-xs" style="color:var(--ink)">${s.Name}</h4><span class="text-[9px] font-semibold uppercase tracking-wider" style="color:var(--gold)">${s.Category} · ${s.Type}</span></div></div><button onclick="removeKnownSpell('${s.ID}')" class="font-bold px-1" style="color:var(--ink-faint)">×</button></div><p class="text-[11px] leading-relaxed mt-1" style="color:var(--ink-dim)">${s.Description}</p>${s.Upcast && s.Upcast !== 'None' ? `<p class="text-[9px] mt-1"><b style="color:var(--indigo)">Upcast:</b> <span style="color:var(--ink-faint)">${s.Upcast}</span></p>` : ''}<div class="flex items-center justify-between pt-2 mt-1" style="border-top:1px solid var(--border-med)"><span class="font-mono font-bold uppercase text-[10px]" style="color:var(--gold)">${costText}</span><button onclick="castSpell('${s.ID}')" class="px-3 py-1 font-bold text-[10px] uppercase tracking-wider rounded" style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid var(--gold-line)">Channel</button></div>`;
           return card;
         };
-
-        if (!cantrips.length) {
-          cantripsContainer.innerHTML = `<p class="text-center text-xs italic py-4" style="color:var(--ink-faint)">No cantrips transcribed yet.</p>`;
-        } else {
-          cantrips.forEach(s => cantripsContainer.appendChild(renderCard(s)));
-        }
-
-        if (!spells.length) {
-          spellsContainer.innerHTML = `<p class="text-center text-xs italic py-4" style="color:var(--ink-faint)">No spells transcribed yet.</p>`;
-        } else {
-          spells.forEach(s => spellsContainer.appendChild(renderCard(s)));
-        }
+        if (!cantrips.length) { cantripsContainer.innerHTML = `<p class="text-center text-xs italic py-4" style="color:var(--ink-faint)">No cantrips transcribed yet.</p>`; }
+        else cantrips.forEach(s => cantripsContainer.appendChild(renderCard(s)));
+        if (!spells.length) { spellsContainer.innerHTML = `<p class="text-center text-xs italic py-4" style="color:var(--ink-faint)">No spells transcribed yet.</p>`; }
+        else spells.forEach(s => spellsContainer.appendChild(renderCard(s)));
       }
 
-      // ── Save / Load ──
+      // ─────────────────────────────────────────────────────────────────────────
+      // SAVE / LOAD — FIXED: spell school and breakpointChoices fully preserved
+      // ─────────────────────────────────────────────────────────────────────────
       function saveSheet() {
         const invGridData = [];
-        document.querySelectorAll('#inv_main_grid .inv-item-row').forEach(row => { invGridData.push({ name: row.querySelector('.inv-name')?.value || '', weight: row.querySelector('.inv-weight')?.value || '', desc: row.querySelector('.inv-desc')?.value || '' }); });
-
+        document.querySelectorAll('#inv_main_grid .inv-item-row').forEach(row => {
+          invGridData.push({ name: row.querySelector('.inv-name')?.value || '', weight: row.querySelector('.inv-weight')?.value || '', desc: row.querySelector('.inv-desc')?.value || '' });
+        });
         const portraitCanvas = document.getElementById('portraitCanvas');
         const portraitData = (portraitCanvas && portraitCanvas.toDataURL) ? portraitCanvas.toDataURL('image/png') : null;
 
+        // ── FIX: explicitly read spell school value before saving ──
+        const spellSchool = document.getElementById('spellcasting_school_select')?.value || 'occult';
+
         const sheetData = {
-          charName: document.getElementById('charName')?.value || '', charRace: document.getElementById('charRace')?.value || '', charAge: document.getElementById('charAge')?.value || '', charLevel: document.getElementById('charLevel')?.value || '',
-          currentHealth: document.getElementById('currentHealth')?.value || '', guardValue: document.getElementById('guardValue')?.value || '', currentMana: document.getElementById('currentMana')?.value || '', speed: document.getElementById('speed')?.value || '', exhaustion: document.getElementById('exhaustion')?.value || '',
+          charName: document.getElementById('charName')?.value || '',
+          charRace: document.getElementById('charRace')?.value || '',
+          charAge: document.getElementById('charAge')?.value || '',
+          charLevel: document.getElementById('charLevel')?.value || '',
+          currentHealth: document.getElementById('currentHealth')?.value || '',
+          guardValue: document.getElementById('guardValue')?.value || '',
+          currentMana: document.getElementById('currentMana')?.value || '',
+          speed: document.getElementById('speed')?.value || '',
+          exhaustion: document.getElementById('exhaustion')?.value || '',
           graceValue, finalBlowValue,
-          body_base: document.getElementById('body_base')?.value || '', body_might_mod: document.getElementById('body_might_mod')?.value || '', body_brawn_mod: document.getElementById('body_brawn_mod')?.value || '', body_fortitude_mod: document.getElementById('body_fortitude_mod')?.value || '',
-          skill_base: document.getElementById('skill_base')?.value || '', skill_finesse_mod: document.getElementById('skill_finesse_mod')?.value || '', skill_reflex_mod: document.getElementById('skill_reflex_mod')?.value || '', skill_tinker_mod: document.getElementById('skill_tinker_mod')?.value || '',
-          mind_base: document.getElementById('mind_base')?.value || '', mind_arcane_mod: document.getElementById('mind_arcane_mod')?.value || '', mind_spirit_mod: document.getElementById('mind_spirit_mod')?.value || '', mind_scholarship_mod: document.getElementById('mind_scholarship_mod')?.value || '',
-          style_base: document.getElementById('style_base')?.value || '', style_speech_mod: document.getElementById('style_speech_mod')?.value || '', style_insight_mod: document.getElementById('style_insight_mod')?.value || '', style_awareness_mod: document.getElementById('style_awareness_mod')?.value || '',
+          body_base: document.getElementById('body_base')?.value || '',
+          body_might_mod: document.getElementById('body_might_mod')?.value || '',
+          body_brawn_mod: document.getElementById('body_brawn_mod')?.value || '',
+          body_fortitude_mod: document.getElementById('body_fortitude_mod')?.value || '',
+          skill_base: document.getElementById('skill_base')?.value || '',
+          skill_finesse_mod: document.getElementById('skill_finesse_mod')?.value || '',
+          skill_reflex_mod: document.getElementById('skill_reflex_mod')?.value || '',
+          skill_tinker_mod: document.getElementById('skill_tinker_mod')?.value || '',
+          mind_base: document.getElementById('mind_base')?.value || '',
+          mind_arcane_mod: document.getElementById('mind_arcane_mod')?.value || '',
+          mind_spirit_mod: document.getElementById('mind_spirit_mod')?.value || '',
+          mind_scholarship_mod: document.getElementById('mind_scholarship_mod')?.value || '',
+          style_base: document.getElementById('style_base')?.value || '',
+          style_speech_mod: document.getElementById('style_speech_mod')?.value || '',
+          style_insight_mod: document.getElementById('style_insight_mod')?.value || '',
+          style_awareness_mod: document.getElementById('style_awareness_mod')?.value || '',
           notes: document.getElementById('notes')?.value || '',
-          armor_name: document.getElementById('armor_name')?.value || '', armor_def: document.getElementById('armor_def')?.value || '', armor_notes: document.getElementById('armor_notes')?.value || '',
-          shield_name: document.getElementById('shield_name')?.value || '', shield_def: document.getElementById('shield_def')?.value || '', shield_notes: document.getElementById('shield_notes')?.value || '',
-          cloak_name: document.getElementById('cloak_name')?.value || '', cloak_def: document.getElementById('cloak_def')?.value || '', cloak_notes: document.getElementById('cloak_notes')?.value || '',
+          armor_name: document.getElementById('armor_name')?.value || '',
+          armor_def: document.getElementById('armor_def')?.value || '',
+          armor_notes: document.getElementById('armor_notes')?.value || '',
+          shield_name: document.getElementById('shield_name')?.value || '',
+          shield_def: document.getElementById('shield_def')?.value || '',
+          shield_notes: document.getElementById('shield_notes')?.value || '',
+          cloak_name: document.getElementById('cloak_name')?.value || '',
+          cloak_def: document.getElementById('cloak_def')?.value || '',
+          cloak_notes: document.getElementById('cloak_notes')?.value || '',
           weapons,
           spell_cs_bonus: document.getElementById('spell_cs_bonus')?.value || '0',
           spell_atk_bonus: document.getElementById('spell_atk_bonus')?.value || '0',
           spell_dmg_bonus: document.getElementById('spell_dmg_bonus')?.value || '0',
           spell_bonus_slots: document.getElementById('spell_bonus_slots')?.value || '',
-          inv_copper: document.getElementById('inv_copper')?.value || '', inv_silver: document.getElementById('inv_silver')?.value || '', inv_gold: document.getElementById('inv_gold')?.value || '', inv_platinum: document.getElementById('inv_platinum')?.value || '', inv_backpack_bonus: document.getElementById('inv_backpack_bonus')?.value || '',
+          inv_copper: document.getElementById('inv_copper')?.value || '',
+          inv_silver: document.getElementById('inv_silver')?.value || '',
+          inv_gold: document.getElementById('inv_gold')?.value || '',
+          inv_platinum: document.getElementById('inv_platinum')?.value || '',
+          inv_backpack_bonus: document.getElementById('inv_backpack_bonus')?.value || '',
           inventory_items: invGridData,
-          inv_potions_ingredients: extractSimpleGridData('inv_potions_ingredients'), inv_potions_recipes: extractSimpleGridData('inv_potions_recipes'), inv_crafts_components: extractSimpleGridData('inv_crafts_components'), inv_crafts_recipes: extractSimpleGridData('inv_crafts_recipes'),
-          selectedPathId, unlockedTraits: Array.from(unlockedTraits), breakpointChoices,
-          spellcasting_school: document.getElementById('spellcasting_school_select')?.value || 'occult', mana_bonus: document.getElementById('mana_bonus')?.value || '0', knownSpellIds: Array.from(knownSpellIds), customSpells,
-          // Persist catalogs and layout so custom paths/traits survive imports
-          PATHS_CATALOG, TRAITS_CATALOG, TREE_COORDINATES, CONSTELLATION_PREREQS,
-          // Portrait image as data URL (if any)
+          inv_potions_ingredients: extractSimpleGridData('inv_potions_ingredients'),
+          inv_potions_recipes: extractSimpleGridData('inv_potions_recipes'),
+          inv_crafts_components: extractSimpleGridData('inv_crafts_components'),
+          inv_crafts_recipes: extractSimpleGridData('inv_crafts_recipes'),
+          selectedPathId,
+          unlockedTraits: Array.from(unlockedTraits),
+          breakpointChoices,                  // ← full object with all stat choices
+          spellcasting_school: spellSchool,   // ← explicit value
+          mana_bonus: document.getElementById('mana_bonus')?.value || '0',
+          knownSpellIds: Array.from(knownSpellIds),
+          customSpells,
+          PATHS_CATALOG,
+          TRAITS_CATALOG,
+          TREE_COORDINATES,
+          CONSTELLATION_PREREQS,
           portraitDataUrl: portraitData
         };
+
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(sheetData, null, 2));
-        const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", `${sheetData.charName || 'mythlight_character'}_sheet.json`); document.body.appendChild(a); a.click(); a.remove();
+        const a = document.createElement('a');
+        a.setAttribute("href", dataStr);
+        a.setAttribute("download", `${sheetData.charName || 'mythlight_character'}_sheet.json`);
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
         triggerWarningToast("Character sheet saved!");
       }
+
       function triggerLoadSheet() { document.getElementById('sheetLoadInput').click(); }
+
       function handleLoadSheetFile(event) {
         const file = event.target.files[0]; if (!file) return;
         const reader = new FileReader();
-        reader.onload = function (e) { try { applyLoadedSheetData(JSON.parse(e.target.result)); triggerWarningToast("Sheet imported!"); } catch { triggerWarningToast("Failed to parse JSON."); } };
+        reader.onload = function (e) {
+          try { applyLoadedSheetData(JSON.parse(e.target.result)); triggerWarningToast("Sheet imported!"); }
+          catch { triggerWarningToast("Failed to parse JSON."); }
+        };
         reader.readAsText(file);
       }
+
       function applyLoadedSheetData(data) {
         if (!data) return;
         const sv = (id, v) => { const e = document.getElementById(id); if (e) e.value = v || ''; };
+
         sv('charName', data.charName); sv('charRace', data.charRace); sv('charAge', data.charAge); sv('charLevel', data.charLevel);
-        sv('currentHealth', data.currentHealth); sv('guardValue', data.guardValue); sv('currentMana', data.currentMana); sv('speed', data.speed); sv('exhaustion', data.exhaustion);
-        setGrace(data.graceValue || 0); setFinalBlow(data.finalBlowValue || 0);
-        ['body_base', 'body_might_mod', 'body_brawn_mod', 'body_fortitude_mod', 'skill_base', 'skill_finesse_mod', 'skill_reflex_mod', 'skill_tinker_mod', 'mind_base', 'mind_arcane_mod', 'mind_spirit_mod', 'mind_scholarship_mod', 'style_base', 'style_speech_mod', 'style_insight_mod', 'style_awareness_mod'].forEach(s => sv(s, data[s]));
+        sv('currentHealth', data.currentHealth); sv('guardValue', data.guardValue);
+        sv('currentMana', data.currentMana); sv('speed', data.speed); sv('exhaustion', data.exhaustion);
+
+        setGrace(data.graceValue || 0);
+        setFinalBlow(data.finalBlowValue || 0);
+
+        ['body_base', 'body_might_mod', 'body_brawn_mod', 'body_fortitude_mod',
+          'skill_base', 'skill_finesse_mod', 'skill_reflex_mod', 'skill_tinker_mod',
+          'mind_base', 'mind_arcane_mod', 'mind_spirit_mod', 'mind_scholarship_mod',
+          'style_base', 'style_speech_mod', 'style_insight_mod', 'style_awareness_mod'].forEach(s => sv(s, data[s]));
+
         sv('notes', data.notes);
         ['armor_name', 'armor_def', 'armor_notes', 'shield_name', 'shield_def', 'shield_notes', 'cloak_name', 'cloak_def', 'cloak_notes'].forEach(a => sv(a, data[a]));
-        weapons = data.weapons || []; renderWeapons();
-        sv('spell_cs_bonus', data.spell_cs_bonus || '0'); sv('spell_atk_bonus', data.spell_atk_bonus || '0'); sv('spell_dmg_bonus', data.spell_dmg_bonus || '0'); sv('spell_bonus_slots', data.spell_bonus_slots);
-        sv('inv_copper', data.inv_copper); sv('inv_silver', data.inv_silver); sv('inv_gold', data.inv_gold); sv('inv_platinum', data.inv_platinum); sv('inv_backpack_bonus', data.inv_backpack_bonus);
-        const mg = document.getElementById('inv_main_grid'); if (mg) { mg.innerHTML = ''; (data.inventory_items || []).forEach(item => inv_addItem(item)); if (!data.inventory_items?.length) for (let i = 0; i < INV_BASE_SLOTS; i++) inv_addItem(); }
-        populateSimpleGrid('inv_potions_ingredients', data.inv_potions_ingredients, 'Ingredient', 'Notes'); populateSimpleGrid('inv_potions_recipes', data.inv_potions_recipes, 'Potion', 'Recipe'); populateSimpleGrid('inv_crafts_components', data.inv_crafts_components, 'Component', 'Notes'); populateSimpleGrid('inv_crafts_recipes', data.inv_crafts_recipes, 'Craft', 'Recipe');
-        // Restore catalogs/layout if present (preserve custom paths/traits)
+
+        weapons = data.weapons || [];
+        renderWeapons();
+
+        sv('spell_cs_bonus', data.spell_cs_bonus || '0');
+        sv('spell_atk_bonus', data.spell_atk_bonus || '0');
+        sv('spell_dmg_bonus', data.spell_dmg_bonus || '0');
+        sv('spell_bonus_slots', data.spell_bonus_slots);
+
+        sv('inv_copper', data.inv_copper); sv('inv_silver', data.inv_silver);
+        sv('inv_gold', data.inv_gold); sv('inv_platinum', data.inv_platinum);
+        sv('inv_backpack_bonus', data.inv_backpack_bonus);
+
+        const mg = document.getElementById('inv_main_grid');
+        if (mg) {
+          mg.innerHTML = '';
+          (data.inventory_items || []).forEach(item => inv_addItem(item));
+          if (!data.inventory_items?.length) for (let i = 0; i < INV_BASE_SLOTS; i++) inv_addItem();
+        }
+
+        populateSimpleGrid('inv_potions_ingredients', data.inv_potions_ingredients, 'Ingredient', 'Notes');
+        populateSimpleGrid('inv_potions_recipes', data.inv_potions_recipes, 'Potion', 'Recipe');
+        populateSimpleGrid('inv_crafts_components', data.inv_crafts_components, 'Component', 'Notes');
+        populateSimpleGrid('inv_crafts_recipes', data.inv_crafts_recipes, 'Craft', 'Recipe');
+
+        // Restore catalogs
         if (data.PATHS_CATALOG) PATHS_CATALOG = data.PATHS_CATALOG;
         if (data.TRAITS_CATALOG) TRAITS_CATALOG = data.TRAITS_CATALOG;
         if (data.TREE_COORDINATES) Object.assign(TREE_COORDINATES, data.TREE_COORDINATES);
         if (data.CONSTELLATION_PREREQS) Object.assign(CONSTELLATION_PREREQS, data.CONSTELLATION_PREREQS);
-        selectedPathId = data.selectedPathId || ""; unlockedTraits = new Set(data.unlockedTraits || []); breakpointChoices = data.breakpointChoices || {};
-        sv('spellcasting_school_select', data.spellcasting_school || 'occult'); sv('mana_bonus', data.mana_bonus || '0'); knownSpellIds = new Set(data.knownSpellIds || ["s1", "s2"]); customSpells = data.customSpells || [];
-        recalcAll(); paths_init(); updateSpellSchoolTheme(); filterSpellsSelector(); renderKnownSpells();
-        // restore portrait if present
+
+        selectedPathId = data.selectedPathId || "";
+        unlockedTraits = new Set(data.unlockedTraits || []);
+        // ── FIX: restore full breakpointChoices including stat selections ──
+        breakpointChoices = data.breakpointChoices || {};
+
+        // ── FIX: restore spell school BEFORE calling updateSpellSchoolTheme ──
+        const savedSchool = data.spellcasting_school || 'occult';
+        const schoolSelect = document.getElementById('spellcasting_school_select');
+        if (schoolSelect) schoolSelect.value = savedSchool;
+
+        sv('mana_bonus', data.mana_bonus || '0');
+        knownSpellIds = new Set(data.knownSpellIds || ["s1", "s2"]);
+        customSpells = data.customSpells || [];
+
+        recalcAll();
+        paths_init();
+        // Call with explicit school value to ensure chips update correctly
+        setSpellSchool(savedSchool);
+        filterSpellsSelector();
+        renderKnownSpells();
+
+        // Restore portrait
         if (data.portraitDataUrl) {
-          const img = new Image(); img.onload = function () { const c = document.getElementById('portraitCanvas'); if (c) { const ctx = c.getContext('2d'); ctx.clearRect(0, 0, c.width, c.height); ctx.drawImage(img, 0, 0, c.width, c.height); } }; img.src = data.portraitDataUrl;
+          const img = new Image();
+          img.onload = function () {
+            const c = document.getElementById('portraitCanvas');
+            if (c) {
+              const ctx = c.getContext('2d');
+              ctx.clearRect(0, 0, c.width, c.height);
+              ctx.drawImage(img, 0, 0, c.width, c.height);
+            }
+          };
+          img.src = data.portraitDataUrl;
         }
+
         document.querySelectorAll('textarea').forEach(autoExpandTextarea);
       }
 
@@ -3593,7 +4339,8 @@
         document.querySelectorAll('input,textarea').forEach(el => { if (el.type !== 'button' && el.type !== 'submit') el.value = ''; });
         weapons = []; unlockedTraits.clear(); breakpointChoices = {}; knownSpellIds.clear(); customSpells = [];
         addWeapon(); addWeapon(); addWeapon();
-        buildPips('gracePips', 6, 0, setGrace); buildPips('finalBlowPips', 4, 0, setFinalBlow);
+        buildPips('gracePips', 6, 0, setGrace);
+        buildPips('finalBlowPips', 4, 0, setFinalBlow);
         inv_init(); paths_init(); recalcAll(); filterSpellsSelector(); renderKnownSpells();
         triggerWarningToast("Sheet cleared!");
       }
@@ -3602,9 +4349,7 @@
         if (typeof ResizeObserver === 'undefined') return;
         const viewport = document.getElementById('tree-viewport');
         if (!viewport) return;
-        new ResizeObserver(() => {
-          if (selectedPathId) drawTreeConnections();
-        }).observe(viewport);
+        new ResizeObserver(() => { if (selectedPathId) drawTreeConnections(); }).observe(viewport);
       })();
 
       async function tryFetchJson(url) {
@@ -3623,12 +4368,11 @@
           if (data) {
             if (Array.isArray(data.paths) && Array.isArray(data.traits)) {
               PATHS_CATALOG = data.paths; TRAITS_CATALOG = data.traits;
-              console.log('Loaded catalogs from', n); break;
+              break;
             }
             if (Array.isArray(data.PATHS) && Array.isArray(data.TRAITS)) {
               PATHS_CATALOG = data.paths; TRAITS_CATALOG = data.traits;
-console.log('Assigned — TRAITS_CATALOG length:', TRAITS_CATALOG.length); // ADD THIS
-console.log('Loaded catalogs from', n); break;
+              break;
             }
           }
         }
@@ -3636,7 +4380,6 @@ console.log('Loaded catalogs from', n); break;
         if (Array.isArray(spells)) SPELLS_CATALOG = spells;
         else if (spells && Array.isArray(spells.spells)) SPELLS_CATALOG = spells.spells;
         populateConstellationData();
-        console.log('After populate — PREREQS keys:', Object.keys(CONSTELLATION_PREREQS).length); // ADD THIS
         return !!(PATHS_CATALOG.length || TRAITS_CATALOG.length || SPELLS_CATALOG.length);
       }
 
@@ -3669,25 +4412,6 @@ console.log('Loaded catalogs from', n); break;
         });
       };
     </script>
-    <script>
-window.addEventListener('load', function() {
-  setTimeout(function() {
-    console.log('=== DEBUG ===');
-    console.log('PATHS_CATALOG length:', window.PATHS_CATALOG?.length ?? 'undefined');
-    console.log('TRAITS_CATALOG length:', window.TRAITS_CATALOG?.length ?? 'undefined');
-    console.log('CONSTELLATION_PREREQS keys:', Object.keys(window.CONSTELLATION_PREREQS ?? {}).length);
-    console.log('selectedPathId:', window.selectedPathId);
-    console.log('loadCatalogs exists:', typeof window.loadCatalogs);
-    console.log('tryFetchJson exists:', typeof window.tryFetchJson);
-    
-    // Try fetching the JSON directly
-    fetch('../json/paths_traits.json', {cache:'no-store'})
-      .then(r => { console.log('fetch status:', r.status, r.url); return r.json(); })
-      .then(d => console.log('JSON keys:', Object.keys(d), 'paths:', d.paths?.length, 'traits:', d.traits?.length))
-      .catch(e => console.error('fetch failed:', e));
-  }, 2000);
-});
-</script>
 </body>
 
 </html>

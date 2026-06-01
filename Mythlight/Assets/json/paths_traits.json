@@ -1015,7 +1015,7 @@
       "Path": "p3",
       "Cost": "1",
       "Symbols": "🗲",
-      "Parameters": "⫘ Bonded",
+      "Parameters": "⫘ ▲ Bonded",
       "Description": "When your chosen Ally/Companion would fall to 0 Health, they intead remain at 1 Health and gain +2 Armor until the end of their next turn.",
       "Scaling": ""
     },
@@ -1422,7 +1422,7 @@
       "Path": "p6",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Lose access to cantrips, gaining Maximum Mana equal to the number of cantrips lost. Future cantrips are also converted.",
       "Scaling": ""
     },
@@ -1455,7 +1455,7 @@
       "Path": "p6",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "When a spell is cast within 8 tiles, you may counter it; doing so causes you to lose access to a spell you know of your choice until your next rest.",
       "Scaling": ""
     },
@@ -1477,7 +1477,7 @@
       "Path": "p6",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "All your mana costs are reduced by 1. You lose 2 Health, each time you cast a spell.",
       "Scaling": ""
     },
@@ -1488,7 +1488,7 @@
       "Path": "p6",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Mana Burn & Spellcasting",
+      "Parameters": "⫘ Mana Burn & ★req Spellcasting",
       "Description": "Spells cost no mana, instead pay [Double the Spell level] as Health. \"Scarlet Essence\" no longer has any effect.",
       "Scaling": ""
     },
@@ -1499,7 +1499,7 @@
       "Path": "p6",
       "Cost": "2",
       "Symbols": "🗲",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Spend up to your level health to add that much Damage or Healing to your next spell. If the spell kills an enemy, regain half the Health spent.",
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 3]\n3 [lvl 6]\n4 [lvl 9]"
     },
@@ -1510,7 +1510,7 @@
       "Path": "p6",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Deal 4 Damage to yourself to receive 2 Mana.",
       "Scaling": ""
     },
@@ -1554,7 +1554,7 @@
       "Path": "p7",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Occult Curses/Debuffs gain an additional Target. ",
       "Scaling": ""
     },
@@ -1631,7 +1631,7 @@
       "Path": "p8",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "When you cast a healing or buff spell, you or one ally regain 2 health.",
       "Scaling": ""
     },
@@ -1642,7 +1642,7 @@
       "Path": "p8",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting & Strand Of Restoration",
+      "Parameters": "⫘ ★req Spellcasting & Strand Of Restoration",
       "Description": "When you cast a healing spell or buff spell, extend its effect to one ally or you at full strength. \"Strand Of Restoration\" no longer has any effect.",
       "Scaling": ""
     },
@@ -1697,12 +1697,12 @@
       "Path": "p8",
       "Cost": "2",
       "Symbols": "🗲",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Perform a melee attack with your weapon, you may spend a number of mana equal to your level, add the amount of mana spent as damage to this attack.",
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 3]\n3 [lvl 6]\n4 [lvl 9]"
     },
     {
-      "ID": "t82",
+      "ID": "t322",
       "Name": "Answered Prayer",
       "Action": "⭘",
       "Path": "p8",
@@ -1719,7 +1719,7 @@
       "Path": "p9",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "★ Spellcasting",
       "Description": "Gain access to Cosmic Spellcasting. You learn a number of Cosmic spells equal to your [Scholarship], you cannot learn spells above level 1. Upcasting a spell instead casts it multiple times instead.",
       "Scaling": ""
     },
@@ -1730,7 +1730,7 @@
       "Path": "p9",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Each cast of a Cosmic spell grants +1 Guard.",
       "Scaling": ""
     },
@@ -1774,7 +1774,7 @@
       "Path": "p9",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Your spells apply Compromised to enemies you targeted with them, until the end of your turn.",
       "Scaling": ""
     },
@@ -1818,7 +1818,7 @@
       "Path": "p10",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Elemental Specialization",
+      "Parameters": "⫘ ▲ Elemental Specialization",
       "Description": "Enemy attacks and effects targeting you, matching your chosen element suffer a -X Accuracy penalty.",
       "Scaling": ""
     },
@@ -1939,7 +1939,7 @@
       "Path": "p11",
       "Cost": "2",
       "Symbols": "🗲",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Repeat the last spell cast within 8 tiles. Ignore any of its costs.",
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
     },
@@ -1972,7 +1972,7 @@
       "Path": "p11",
       "Cost": "1",
       "Symbols": "🗲",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "You learn 2 additional cantrips from your chosen spellcasting type. If you have chosen cosmic, learn one extra spell instead.",
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
     },
@@ -1983,7 +1983,7 @@
       "Path": "p11",
       "Cost": "1",
       "Symbols": "🗲",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "You learn 2 additional cantrips from your chosen spellcasting type. If you have chosen cosmic, learn one extra spell instead.",
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
     },
@@ -1994,7 +1994,7 @@
       "Path": "p11",
       "Cost": "1",
       "Symbols": "☀",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Once per rest, imbue a spell you know into a machine or construct, the spell lasts for a day, and will trigger based on a condition you declared at imbuement. (Complexity determines spell level, Trivial = Cantrips, Simple =1 mana etc.)",
       "Scaling": ""
     },
@@ -2005,7 +2005,7 @@
       "Path": "p11",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Casting a spell grants you Guard equal to half your level rounded up. This refreshes but does not stack.",
       "Scaling": ""
     },
@@ -2049,7 +2049,7 @@
       "Path": "p12",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Companions",
+      "Parameters": "⫘ ▲ Companions",
       "Description": "When you command your companion to strike the same target as you, your companion gains +X Accuracy against that target.",
       "Scaling": ""
     },
@@ -2060,7 +2060,7 @@
       "Path": "p12",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Companions",
+      "Parameters": "⫘ ▲ Companions",
       "Description": "When your companion is healed, you recover half the Health restored to your companion. You can sense through your companion within 12 tiles.",
       "Scaling": ""
     },
@@ -2071,7 +2071,7 @@
       "Path": "p12",
       "Cost": "1",
       "Symbols": "🗲",
-      "Parameters": "⫘ Companions",
+      "Parameters": "⫘ ▲ Companions",
       "Description": "While riding your companion, gain +2 Armor. Each combat; for the first time you or your mount would take damage, you both gain Guard equal to mount's Movement before damage is applied. Guard gained this way is shared between you and your mount.",
       "Scaling": ""
     },
@@ -2082,7 +2082,7 @@
       "Path": "p12",
       "Cost": "1",
       "Symbols": "🗲",
-      "Parameters": "⫘ Companions",
+      "Parameters": "⫘ ▲ Companions",
       "Description": "If your companion is within 10 tiles. You may teleport them to a tile adjacent to you and instantly heal them by half Your Level rounded up.",
       "Scaling": ""
     },
@@ -2093,7 +2093,7 @@
       "Path": "p12",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Companions",
+      "Parameters": "⫘ ▲ Companions",
       "Description": "Companions each grant +1 Tinker when brewing, crafting, smithing, medicine, cooking or ritual casting.",
       "Scaling": ""
     },
@@ -2104,7 +2104,7 @@
       "Path": "p12",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Companions",
+      "Parameters": "⫘ ▲ Companions",
       "Description": "Your companion may make a free attack against a target you attacked.",
       "Scaling": ""
     },
@@ -2115,7 +2115,7 @@
       "Path": "p12",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Companions & Spellcasting",
+      "Parameters": "⫘ ▲ Companions & ★req Spellcasting",
       "Description": "You may cast spells from your companion's position.",
       "Scaling": ""
     },
@@ -2126,7 +2126,7 @@
       "Path": "p12",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Companions & Spellcasting",
+      "Parameters": "⫘ ▲ Companions & ★req Spellcasting",
       "Description": "Your companion gains a mana pool of 4. You may spend its mana while it is within 6 tiles of you.",
       "Scaling": ""
     },
@@ -2137,7 +2137,7 @@
       "Path": "p12",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Companionsg",
+      "Parameters": "⫘ ▲ Companions",
       "Description": "Your companions attacks deal +1 Damage and gain +2 Accuracy while within 3 tiles of you.",
       "Scaling": ""
     },
@@ -2313,7 +2313,7 @@
       "Path": "p14",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Bonded",
+      "Parameters": "⫘ ▲ Bonded",
       "Description": "Your chosen ally/companion gains Advantage on Speech checks.",
       "Scaling": ""
     },
@@ -2390,7 +2390,7 @@
       "Path": "p14",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Taunt",
+      "Parameters": "⫘ ▲ Taunt",
       "Description": "Allies have advantage against enemies Taunted by you.",
       "Scaling": ""
     },
@@ -2401,7 +2401,7 @@
       "Path": "p14",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Taunt",
+      "Parameters": "⫘ ▲ Taunt",
       "Description": "Creatures you taunted become enter Rage",
       "Scaling": ""
     },
@@ -2456,7 +2456,7 @@
       "Path": "p15",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Trapper",
+      "Parameters": "⫘ ★req Trapper",
       "Description": "Traps you can deploy can be deployed within a range of 5 tiles.",
       "Scaling": ""
     },
@@ -2467,7 +2467,7 @@
       "Path": "p15",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Trapper",
+      "Parameters": "⫘ ★req Trapper",
       "Description": "[2× Common Component]: Create a trapped 2x2 area, it can trap multiple creatures, it will only trigger when a declared condition is met, the condition is set upon deployment. Trapped creatures take X damage and acquire 3 stacks of Slow until the end of their next turn.",
       "Scaling": "Damage X:\n1 [lvl 1]\n2 [lvl 3]\n3 [lvl 6]\n4 [lvl 9]"
     },
@@ -2478,7 +2478,7 @@
       "Path": "p15",
       "Cost": "2",
       "Symbols": "☀",
-      "Parameters": "⫘ Trapper",
+      "Parameters": "⫘ ★req Trapper",
       "Description": "You can deploy 2 normal traps, or 1 Large trap during a rest using no resorces.\nNormal traps: Combat Trapper traps.\nLarge traps: Constructive Trapper traps",
       "Scaling": ""
     },
@@ -2489,7 +2489,7 @@
       "Path": "p15",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Trapper",
+      "Parameters": "⫘ ★req Trapper",
       "Description": "Traps you deploy may, when triggered, deal +1 Damage and extend the damage zone to all adjacent tiles. These traps require at least 1 additional relevant component to create.",
       "Scaling": ""
     },
@@ -2500,7 +2500,7 @@
       "Path": "p15",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Trapper",
+      "Parameters": "⫘ ★req Trapper",
       "Description": "Traps you deploy now knock enemies prone or blind them, stated at the time of deployment, they must roll [Reflex] vs [6 + Tinker] to resist being blinded or knocked prone, but cannot resist being damaged or slowed.",
       "Scaling": ""
     },
@@ -2885,7 +2885,7 @@
       "Path": "p19",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "While at full Mana, your cantrips deal +X Damage.",
       "Scaling": "Damage X:\n+1 [lvl 1]\n+2 [lvl 6]\n+3 [lvl 12]"
     },
@@ -2896,7 +2896,7 @@
       "Path": "p19",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★reqSpellcasting",
       "Description": "After you have spent all of your mana for the first time in combat, your non-cantrip spells gain +2 Damage.",
       "Scaling": ""
     },
@@ -2907,7 +2907,7 @@
       "Path": "p19",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "You lose access to a spell of your choice until your next sleep. You replenish Double its Mana cost as Mana.",
       "Scaling": ""
     },
@@ -2918,7 +2918,7 @@
       "Path": "p19",
       "Cost": "2",
       "Symbols": "🗲",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "You deal 1 force damage to all adjacent enemies; you regain mana equal to the damage dealt.",
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
     },
@@ -2929,7 +2929,7 @@
       "Path": "p19",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "During the first Scene of combat, all of your spells cost 2 less mana.",
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
     },
@@ -2940,7 +2940,7 @@
       "Path": "p19",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "For every turn you do not cast a spell, you reduce the cost of the next spell cast by 1.",
       "Scaling": ""
     },
@@ -2951,7 +2951,7 @@
       "Path": "p19",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Your spells no longer cost mana; but they cost 2 actions to cast.",
       "Scaling": ""
     },
@@ -2962,7 +2962,7 @@
       "Path": "p19",
       "Cost": "2",
       "Symbols": "☀",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "During rest recover X additional mana.",
       "Scaling": "Mana X:\n3 [lvl 1]\n4 [lvl 3]\n5 [lvl 6]\n6 [lvl 9]\n7 [lvl 12]"
     },
@@ -2973,7 +2973,7 @@
       "Path": "p19",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Defeating an enemy with a spell refunds its mana cost.",
       "Scaling": "Mana X:\n3 [lvl 1]\n4 [lvl 3]\n5 [lvl 6]\n6 [lvl 9]\n7 [lvl 12]"
     },
@@ -3050,7 +3050,7 @@
       "Path": "p20",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Gain an additional 6 non-cantrip spells from your Spellcasting School; These spells can only be cast by paying for them using Grace instead of mana.",
       "Scaling": ""
     },
@@ -3655,7 +3655,7 @@
       "Path": "p28",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Ritual spells take half the time and gain +X Arcane on that spell.",
       "Scaling": "Arcane X:\n+2 [lvl 1]\n+3 [lvl 3]\n+4 [lvl 6]\n+5 [lvl 9]\n+6 [lvl 12]"
     },
@@ -3666,7 +3666,7 @@
       "Path": "p28",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "When casting a spell through a spellcasting craft, add your spell damage bonus to the spell’s damage, healing or Guard gain.",
       "Scaling": ""
     },
@@ -3677,7 +3677,7 @@
       "Path": "p28",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "When you hit with a melee attack, expend 1 Mana to trigger a level 1 spell at the hit's location. You may cast cantrips through ranged attacks.",
       "Scaling": ""
     },
@@ -3710,7 +3710,7 @@
       "Path": "p28",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Choose one known spell; it gains +2 damage, range, and healing when applicable. Reduce known spells by 2. You may change out the chosen spells when you level up.",
       "Scaling": ""
     },
@@ -3721,7 +3721,7 @@
       "Path": "p28",
       "Cost": "2",
       "Symbols": "🗲",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Cast one spell as a free action instead of an action (Does not bypass attack limit per turn).",
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
     },
@@ -3732,7 +3732,7 @@
       "Path": "p28",
       "Cost": "2",
       "Symbols": "🗲",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Allies within 2 tiles gain +2 Movement and +2 range for 2 turns.",
       "Scaling": "Uses 🗲:\n2 [lvl 2]"
     },
@@ -3743,7 +3743,7 @@
       "Path": "p28",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Convert one level 1 spell from your spellcasting school into a cantrip (cantrips can't be upcast or multicasted).",
       "Scaling": ""
     },
@@ -3754,7 +3754,7 @@
       "Path": "p28",
       "Cost": "1",
       "Symbols": "🗲",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Cast one level 1 spell without spending mana, you cannot upcast it. Ignoring attack per turn restrictions.",
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 3]\n3 [lvl 6]\n4 [lvl 9]"
     },
@@ -3765,7 +3765,7 @@
       "Path": "p28",
       "Cost": "2",
       "Symbols": "🗲",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Release all your mana; deal 2 force damage per mana spent to enemies within 2 tiles; you gain 2 Fatigue.",
       "Scaling": ""
     },
@@ -3776,7 +3776,7 @@
       "Path": "p28",
       "Cost": "2",
       "Symbols": "🗲",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "This trait does not gain any uses on a rest. Each time you cast a level 2 Spell or higher you gain 1 use. Make a ranged attack that uses [Arcane] as its accuracy bonus, dealing 1 + your [Arcane] damage to a creature within 6 tiles.",
       "Scaling": "Uses 🗲:\n2 [lvl 1]\n4 [lvl 6]\n6 [lvl 12]"
     },
@@ -3908,7 +3908,7 @@
       "Path": "p30",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Tinker",
+      "Parameters": "⫘ ▲ Tinker",
       "Description": "Crafts and modifications you create gain +2 Durability when applicable.",
       "Scaling": ""
     },
@@ -3919,7 +3919,7 @@
       "Path": "p30",
       "Cost": "1",
       "Symbols": "☀",
-      "Parameters": "⫘ Tinker",
+      "Parameters": "⫘ ▲ Tinker",
       "Description": "Repair one trivial or simple craft during a rest without a check (Requires 1 relevant component).",
       "Scaling": ""
     },
@@ -3930,7 +3930,7 @@
       "Path": "p30",
       "Cost": "2",
       "Symbols": "☀",
-      "Parameters": "⫘ Tinker",
+      "Parameters": "⫘ ▲ Tinker",
       "Description": "When unlocking this trait choose one of the following, and one more for every 3 feat points you have in tinker:\n\nMechanical Assistant\nUsing [1× Metal - Wire, 1× Metal - Plate], construct a small mechanical assistant. It counts as a companion with the following stat block:\n| Health/Durability [Your Level]\n| Armor [6+Your Tinker]\n| BODY 0 | SKILL 1 | MIND 2\n| Traits:\n- Assist: This companion assist you while crafting, smithing, brewing or casting a ritual. It grants you +2 to the relevant rolls. \n\nCombat Rover\nUsing [1× Metal - Wire, 1× Stone - Cut], create a small combat rover, It counts as a companion with the following stat block:\n| Health/Durability [Your Level]\n| Armor [6+Your Tinker]\n| BODY 2 | SKILL 1 | MIND 0\n| Traits:\n- Melee Strike (Costs 1 Durability): Strike a target within Melee range with [2 + Your Tinker] Accuracy; It deals [1+ Your Tinker] Force Damage. \n\nSpell Drone\nUsing [1× Metal - Wire, 1× Wooden - Core], create a flying spell drone that stays within 3 tiles of you. It counts as a companion with the following stat block:\n| Health/Durability [Your Level]\n| Armor [6+Your Tinker]\n| BODY 0 | SKILL 1 | MIND 2\n| Traits:\n- Conduit (Costs 1 Durability): You cast a spell from this companions position. ",
       "Scaling": ""
     },
@@ -3941,7 +3941,7 @@
       "Path": "p30",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Tinker",
+      "Parameters": "⫘ ▲ Tinker",
       "Description": "Constructs/Machines you have deployed can expend one unit of Durability (Fuel) to shock targets within 2 tiles, dealing lightning damage equal to half your [tinker] (rounded up). This counts as an attack by the machine.",
       "Scaling": ""
     },
@@ -3963,7 +3963,7 @@
       "Path": "p30",
       "Cost": "1",
       "Symbols": "🗲",
-      "Parameters": "⫘ Tinker",
+      "Parameters": "⫘ ▲ Tinker",
       "Description": "Attempt to repair a craft to full operation; Roll [Tinker] vs [Craft Complexity].",
       "Scaling": ""
     },
@@ -3985,7 +3985,7 @@
       "Path": "p30",
       "Cost": "2",
       "Symbols": "🗲",
-      "Parameters": "⫘ Tinker",
+      "Parameters": "⫘ ▲ Tinker",
       "Description": "Restore a broken craft to 1 Durability for a Scene. While active, it gains +2 damage or healing when applicable.",
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
     },
@@ -4183,7 +4183,7 @@
       "Path": "p32",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Spend 2 mana to create one crafting component; if unused the component disappears on your next sleep.",
       "Scaling": ""
     },
@@ -4205,7 +4205,7 @@
       "Path": "p32",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "When an ally within 8 tiles casts a spell, you may pay its mana costs with your mana instead.",
       "Scaling": ""
     },
@@ -4359,7 +4359,7 @@
       "Path": "p22",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Spellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "Defeating an enemy with a spell refunds its mana cost.",
       "Scaling": "Mana X:\n3 [lvl 1]\n4 [lvl 3]\n5 [lvl 6]\n6 [lvl 9]\n7 [lvl 12]"
     },
