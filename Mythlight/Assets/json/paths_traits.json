@@ -2831,40 +2831,7 @@
       "Scaling": ""
     },
     {
-      "ID": "t183",
-      "Name": "Resolute Will",
-      "Action": "⭘",
-      "Path": "p18",
-      "Cost": "2",
-      "Symbols": "",
-      "Parameters": "⧖",
-      "Description": "Ignore the first negative condition each rest, as long as it is not instantly reapplied.",
-      "Scaling": ""
-    },
-    {
-      "ID": "t184",
-      "Name": "Resolute Will",
-      "Action": "⭘",
-      "Path": "p18",
-      "Cost": "2",
-      "Symbols": "",
-      "Parameters": "⧖",
-      "Description": "Ignore the first negative condition each rest, as long as it is not instantly reapplied.",
-      "Scaling": ""
-    },
-    {
       "ID": "t185",
-      "Name": "Mark Of Death",
-      "Action": "⬖",
-      "Path": "p18",
-      "Cost": "2",
-      "Symbols": "🗲",
-      "Parameters": "",
-      "Description": "Transfer any and all negative conditions from yourself to a target within 9 tiles. You don't need to see the target, just know of its presence.",
-      "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
-    },
-    {
-      "ID": "t186",
       "Name": "Mark Of Death",
       "Action": "⬖",
       "Path": "p18",
@@ -3297,7 +3264,7 @@
       "Name": "Bounding Retreat",
       "Action": "⭘",
       "Path": "p24",
-      "Cost": "2",
+      "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "",
       "Description": "After you make a ranged attack, you may dash up to 3 tiles.",
@@ -3425,7 +3392,7 @@
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 3]\n3 [lvl 6]\n4 [lvl 9]"
     },
     {
-      "ID": "t234",
+      "ID": "t336",
       "Name": "Camper’s Discipline",
       "Action": "⭘",
       "Path": "p25",

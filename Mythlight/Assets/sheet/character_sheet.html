@@ -2176,16 +2176,20 @@
                             <stop offset="0%" stop-color="#818cf8" />
                             <stop offset="100%" stop-color="#c084fc" />
                           </linearGradient>
-                          <marker id="arrow-unlocked" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                          <marker id="arrow-unlocked" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"
+                            markerUnits="strokeWidth">
                             <path d="M0,0 L9,3 L0,6 Z" fill="#a5b4fc" />
                           </marker>
-                          <marker id="arrow-locked" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                          <marker id="arrow-locked" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"
+                            markerUnits="strokeWidth">
                             <path d="M0,0 L9,3 L0,6 Z" fill="rgba(51,65,85,0.6)" />
                           </marker>
-                          <marker id="arrow-tag" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                          <marker id="arrow-tag" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"
+                            markerUnits="strokeWidth">
                             <path d="M0,0 L9,3 L0,6 Z" fill="rgba(34,197,94,0.6)" />
                           </marker>
-                          <marker id="arrow-unique" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                          <marker id="arrow-unique" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"
+                            markerUnits="strokeWidth">
                             <path d="M0,0 L9,3 L0,6 Z" fill="rgba(250,204,21,0.6)" />
                           </marker>
                           <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
@@ -2710,245 +2714,267 @@
       const TAG_PROVIDER_MAP = {};
 
       function populateConstellationData() {
-        Object.keys(TAG_PROVIDER_MAP).forEach(k => delete TAG_PROVIDER_MAP[k]);
-        Object.keys(UNIQUE_PROVIDER_MAP).forEach(k => delete UNIQUE_PROVIDER_MAP[k]);
-        Object.keys(CONSTELLATION_TAGS).forEach(k => delete CONSTELLATION_TAGS[k]);
-        Object.keys(CONSTELLATION_UNIQUES).forEach(k => delete CONSTELLATION_UNIQUES[k]);
-        Object.keys(CONSTELLATION_PREREQS).forEach(k => delete CONSTELLATION_PREREQS[k]);
-        Object.keys(CONSTELLATION_REQUIRE_TAGS).forEach(k => delete CONSTELLATION_REQUIRE_TAGS[k]);
-        Object.keys(CONSTELLATION_REQUIRE_UNIQUES).forEach(k => delete CONSTELLATION_REQUIRE_UNIQUES[k]);
-        Object.keys(TRAIT_NAME_TO_ID).forEach(k => delete TRAIT_NAME_TO_ID[k]);
-
-        const nameToIds = {};
-        TRAITS_CATALOG.forEach(t => {
-          const nameKey = String(t.Name || '').trim().toLowerCase();
-          if (!nameKey) return;
-          if (!nameToIds[nameKey]) nameToIds[nameKey] = [];
-          nameToIds[nameKey].push(t.ID);
-          if (!TRAIT_NAME_TO_ID[nameKey]) TRAIT_NAME_TO_ID[nameKey] = t.ID;
-        });
-
-        TRAITS_CATALOG.forEach(trait => {
-          const raw = (trait.Parameters || '').trim();
-          if (!raw) return;
-
-          const tags = [];
-          const uniques = [];
-
-          const prereqTraits = [];
-          const prereqTags = [];
-          const prereqUniques = [];
-
-            const splitParts = raw.split('⫘').map(s => s.trim()).filter(Boolean);
-            const hasSplit = raw.includes('⫘');
-            const leadingRequirement = raw.trim().startsWith('⫘');
-
-            splitParts.forEach((part, idx) => {
-              const isRequirement = leadingRequirement ? true : (hasSplit ? idx > 0 : false);
-              const tokens = part
-                .split('&')
-                .map(t => t.trim())
-                .filter(Boolean);
-
-              tokens.forEach(token => {
-
-                // TAGS
-                if (token.startsWith('▲')) {
-                  const tag = token.slice(1).trim();
-                  isRequirement ? prereqTags.push(tag) : tags.push(tag);
-                  return;
-                }
-
-                // UNIQUES
-                // UNIQUE (identity only)
-                
-
-                // REQUIREMENT UNIQUE
-                if (isRequirement && token.startsWith('★req ')) {
-                  const unique = token.replace('★req', '').trim();
-                  prereqUniques.push(unique);
-                  return;
-                }
-                else if (token.startsWith('★')) {
-                  const unique = token.slice(1).trim();
-                  if (isRequirement) prereqUniques.push(unique);
-                  else uniques.push(unique);
-                  return;
-                }
-
-                // TRAIT REFERENCES
-                const nameKey = token.toLowerCase();
-                const ids = nameToIds[nameKey];
-                if (ids && isRequirement) {
-                  ids.forEach(id => prereqTraits.push(id));
-                  return;
-                }
-
-                // 🔥 DEFAULT FALLBACK (IMPORTANT FIX)
-                if (isRequirement) prereqTags.push(token);
-                else uniques.push(token);
-              });
+  Object.keys(TAG_PROVIDER_MAP).forEach(k => delete TAG_PROVIDER_MAP[k]);
+  Object.keys(UNIQUE_PROVIDER_MAP).forEach(k => delete UNIQUE_PROVIDER_MAP[k]);
+  Object.keys(CONSTELLATION_TAGS).forEach(k => delete CONSTELLATION_TAGS[k]);
+  Object.keys(CONSTELLATION_UNIQUES).forEach(k => delete CONSTELLATION_UNIQUES[k]);
+  Object.keys(CONSTELLATION_PREREQS).forEach(k => delete CONSTELLATION_PREREQS[k]);
+  Object.keys(CONSTELLATION_REQUIRE_TAGS).forEach(k => delete CONSTELLATION_REQUIRE_TAGS[k]);
+  Object.keys(CONSTELLATION_REQUIRE_UNIQUES).forEach(k => delete CONSTELLATION_REQUIRE_UNIQUES[k]);
+  Object.keys(TRAIT_NAME_TO_ID).forEach(k => delete TRAIT_NAME_TO_ID[k]);
+ 
+  const nameToIds = {};
+  TRAITS_CATALOG.forEach(t => {
+    const nameKey = String(t.Name || '').trim().toLowerCase();
+    if (!nameKey) return;
+    if (!nameToIds[nameKey]) nameToIds[nameKey] = [];
+    nameToIds[nameKey].push(t.ID);
+    if (!TRAIT_NAME_TO_ID[nameKey]) TRAIT_NAME_TO_ID[nameKey] = t.ID;
+  });
+ 
+  TRAITS_CATALOG.forEach(trait => {
+    const raw = (trait.Parameters || '').trim();
+    if (!raw) return;
+ 
+    const tags = [];
+    const uniques = [];
+    const prereqTraits = [];
+    const prereqTags = [];
+    const prereqUniques = [];
+ 
+    const splitParts = raw.split('⫘').map(s => s.trim()).filter(Boolean);
+    const hasSplit = raw.includes('⫘');
+    const leadingRequirement = raw.trim().startsWith('⫘');
+ 
+    splitParts.forEach((part, idx) => {
+      const isRequirement = leadingRequirement ? true : (hasSplit ? idx > 0 : false);
+      const tokens = part.split('&').map(t => t.trim()).filter(Boolean);
+ 
+      tokens.forEach(token => {
+ 
+        // ── OR-group (slash-separated alternatives) ──────────────────────────
+        if (token.includes('/')) {
+          const alternatives = token.split('/').map(s => s.trim()).filter(Boolean);
+ 
+          if (isRequirement) {
+            // Classify each alternative individually
+            const tagAlts    = [];
+            const uniqueAlts = [];
+            const traitAlts  = [];
+ 
+            alternatives.forEach(alt => {
+              if (alt.startsWith('▲')) {
+                tagAlts.push(alt.slice(1).trim());
+              } else if (alt.startsWith('★req ')) {
+                uniqueAlts.push(alt.replace('★req', '').trim());
+              } else if (alt.startsWith('★')) {
+                uniqueAlts.push(alt.slice(1).trim());
+              } else {
+                // Trait name — resolve to IDs
+                const ids = nameToIds[alt.toLowerCase()] || [];
+                ids.forEach(id => traitAlts.push(id));
+                // If not resolved, treat as tag fallback
+                if (!ids.length) tagAlts.push(alt);
+              }
             });
-
-          const uniq = (arr) => Array.from(new Set(arr));
-          if (prereqTraits.length) CONSTELLATION_PREREQS[trait.ID] = uniq(prereqTraits);
-          if (prereqTags.length) CONSTELLATION_REQUIRE_TAGS[trait.ID] = uniq(prereqTags);
-          if (prereqUniques.length) CONSTELLATION_REQUIRE_UNIQUES[trait.ID] = uniq(prereqUniques);
-
-          if (tags.length) {
-            CONSTELLATION_TAGS[trait.ID] = uniq(tags);
-
-            CONSTELLATION_TAGS[trait.ID].forEach(tag => {
-              if (!TAG_PROVIDER_MAP[tag]) TAG_PROVIDER_MAP[tag] = [];
-              TAG_PROVIDER_MAP[tag].push(trait.ID);
-            });
+ 
+            // Store each group under its appropriate bucket
+            if (traitAlts.length) {
+              prereqTags.push('__OR_TRAIT__' + traitAlts.join('|'));
+            }
+            if (tagAlts.length) {
+              prereqTags.push('__OR_TAG__' + tagAlts.join('|'));
+            }
+            if (uniqueAlts.length) {
+              prereqUniques.push('__OR_UNIQUE__' + uniqueAlts.join('|'));
+            }
           }
-
-          if (uniques.length) {
-            CONSTELLATION_UNIQUES[trait.ID] = uniq(uniques);
-
-            CONSTELLATION_UNIQUES[trait.ID].forEach(unique => {
-              if (!UNIQUE_PROVIDER_MAP[unique]) UNIQUE_PROVIDER_MAP[unique] = [];
-              UNIQUE_PROVIDER_MAP[unique].push(trait.ID);
-            });
-          }
-
-          console.log(
-            `Processed trait "${trait.Name}" (ID: ${trait.ID}): ` +
-            `Tags=${tags.join(', ')}; ` +
-            `Uniques=${uniques.join(', ')}; ` +
-            `PrereqTraits=${prereqTraits.join(', ')}; ` +
-            `PrereqTags=${prereqTags.join(', ')}; ` +
-            `PrereqUniques=${prereqUniques.join(', ')}`
-          );
-        });
-      }
-
-      function assignPathCoordinates(pathId) {
-  const traits = TRAITS_CATALOG.filter(t => t.Path === pathId);
-  if (!traits.length) return;
-
-  const traitIds = new Set(traits.map(t => t.ID));
-  const prereqMap = {};
-  const localTagProviders = {};
-  const localUniqueProviders = {};
-
-  traits.forEach(t => {
-    (CONSTELLATION_TAGS[t.ID] || []).forEach(tag => {
-      if (!localTagProviders[tag]) localTagProviders[tag] = [];
-      localTagProviders[tag].push(t.ID);
-    });
-    (CONSTELLATION_UNIQUES[t.ID] || []).forEach(unique => {
-      if (!localUniqueProviders[unique]) localUniqueProviders[unique] = [];
-      localUniqueProviders[unique].push(t.ID);
-    });
-  });
-
-  traits.forEach(t => {
-    const direct = (CONSTELLATION_PREREQS[t.ID] || []).filter(id => traitIds.has(id));
-    const tagReqs = (CONSTELLATION_REQUIRE_TAGS[t.ID] || [])
-      .flatMap(tag => localTagProviders[tag] || []);
-    const uniqueReqs = (CONSTELLATION_REQUIRE_UNIQUES[t.ID] || [])
-      .flatMap(unique => localUniqueProviders[unique] || []);
-    prereqMap[t.ID] = [...new Set([...direct, ...tagReqs, ...uniqueReqs])];
-  });
-
-  const depthMap = {};
-  const visiting = new Set();
-  function calcDepth(id) {
-    if (depthMap[id] !== undefined) return depthMap[id];
-    if (visiting.has(id)) return 0;
-    visiting.add(id);
-    const prereqs = prereqMap[id] || [];
-    const depth = prereqs.length ? Math.max(...prereqs.map(calcDepth)) + 1 : 0;
-    visiting.delete(id);
-    depthMap[id] = depth;
-    return depth;
-  }
-  traits.forEach(t => calcDepth(t.ID));
-
-  const layers = {};
-  let maxDepth = 0;
-  traits.forEach(t => {
-    const d = depthMap[t.ID] || 0;
-    maxDepth = Math.max(maxDepth, d);
-    if (!layers[d]) layers[d] = [];
-    layers[d].push(t);
-  });
-
-  const depthKeys = Object.keys(layers).map(Number).sort((a, b) => a - b);
-  const totalLayers = maxDepth + 1;
-
-  // Sort each layer by parent centroid so children cluster under parents
-  depthKeys.forEach(d => {
-    layers[d].sort((a, b) => {
-      const aParents = prereqMap[a.ID] || [];
-      const bParents = prereqMap[b.ID] || [];
-      const aAvg = aParents.length
-        ? aParents.reduce((s, id) => s + (TREE_COORDINATES[id]?.col || 0), 0) / aParents.length
-        : 0;
-      const bAvg = bParents.length
-        ? bParents.reduce((s, id) => s + (TREE_COORDINATES[id]?.col || 0), 0) / bParents.length
-        : 0;
-      return aAvg !== bAvg ? aAvg - bAvg : String(a.Name).localeCompare(String(b.Name));
-    });
-  });
-
-  const GRID_COLS = Math.max(8, ...depthKeys.map(d => layers[d].length * 2));
-  const PADDING = 1;
-  const placed = {};
-
-  depthKeys.forEach(d => {
-    const list = layers[d];
-    const count = list.length;
-    // Spread rows evenly across 10–90% of vertical space so nothing hugs edges
-    const rowFraction = totalLayers === 1 ? 0.5 : d / Math.max(maxDepth, 1);
-    const row = 0.1 + rowFraction * 0.8; // 0.1 → 0.9 normalised
-
-    const spacing = (GRID_COLS - PADDING * 2) / Math.max(count, 1);
-    list.forEach((t, idx) => {
-      placed[t.ID] = { row, col: PADDING + spacing * idx + spacing / 2 };
-    });
-  });
-
-  // Relaxation: push same-layer nodes apart
-  const MIN_DIST = 1.8;
-  depthKeys.forEach(d => {
-    const list = layers[d];
-    if (list.length < 2) return;
-    for (let pass = 0; pass < 20; pass++) {
-      let moved = false;
-      for (let i = 0; i < list.length - 1; i++) {
-        const a = placed[list[i].ID];
-        const b = placed[list[i + 1].ID];
-        const dist = b.col - a.col;
-        if (dist < MIN_DIST) {
-          const shift = (MIN_DIST - dist) / 2 + 0.01;
-          a.col -= shift;
-          b.col += shift;
-          moved = true;
+          return;
         }
-      }
-      list.forEach(t => {
-        placed[t.ID].col = Math.max(PADDING, Math.min(GRID_COLS - PADDING, placed[t.ID].col));
+ 
+        // ── Tags (▲) ─────────────────────────────────────────────────────────
+        if (token.startsWith('▲')) {
+          const tag = token.slice(1).trim();
+          isRequirement ? prereqTags.push(tag) : tags.push(tag);
+          return;
+        }
+ 
+        // ── Unique-requirement (★req …) ──────────────────────────────────────
+        if (isRequirement && token.startsWith('★req ')) {
+          const unique = token.replace('★req', '').trim();
+          prereqUniques.push(unique);
+          return;
+        }
+ 
+        // ── Uniques (★) ──────────────────────────────────────────────────────
+        if (token.startsWith('★')) {
+          const unique = token.slice(1).trim();
+          if (isRequirement) prereqUniques.push(unique);
+          else uniques.push(unique);
+          return;
+        }
+ 
+        // ── Trait name references ─────────────────────────────────────────────
+        const nameKey = token.toLowerCase();
+        const ids = nameToIds[nameKey];
+        if (ids && isRequirement) {
+          ids.forEach(id => prereqTraits.push(id));
+          return;
+        }
+ 
+        // ── Fallback ──────────────────────────────────────────────────────────
+        if (isRequirement) prereqTags.push(token);
+        else uniques.push(token);
       });
-      if (!moved) break;
+    });
+ 
+    const uniq = arr => Array.from(new Set(arr));
+    if (prereqTraits.length)  CONSTELLATION_PREREQS[trait.ID]         = uniq(prereqTraits);
+    if (prereqTags.length)    CONSTELLATION_REQUIRE_TAGS[trait.ID]    = uniq(prereqTags);
+    if (prereqUniques.length) CONSTELLATION_REQUIRE_UNIQUES[trait.ID] = uniq(prereqUniques);
+ 
+    if (tags.length) {
+      CONSTELLATION_TAGS[trait.ID] = uniq(tags);
+      CONSTELLATION_TAGS[trait.ID].forEach(tag => {
+        if (!TAG_PROVIDER_MAP[tag]) TAG_PROVIDER_MAP[tag] = [];
+        TAG_PROVIDER_MAP[tag].push(trait.ID);
+      });
+    }
+    if (uniques.length) {
+      CONSTELLATION_UNIQUES[trait.ID] = uniq(uniques);
+      CONSTELLATION_UNIQUES[trait.ID].forEach(unique => {
+        if (!UNIQUE_PROVIDER_MAP[unique]) UNIQUE_PROVIDER_MAP[unique] = [];
+        UNIQUE_PROVIDER_MAP[unique].push(trait.ID);
+      });
     }
   });
-
-  traits.forEach(t => {
-    const p = placed[t.ID];
-    if (!p) return;
-    TREE_COORDINATES[t.ID] = {
-      row: p.row,
-      col: p.col,
-      _rowNorm: true,
-      _colCount: GRID_COLS
-    };
-  });
-
-  PATH_LAYOUTS[pathId] = { rows: totalLayers + 1, cols: GRID_COLS };
 }
+
+      function assignPathCoordinates(pathId) {
+        const traits = TRAITS_CATALOG.filter(t => t.Path === pathId);
+        if (!traits.length) return;
+
+        const traitIds = new Set(traits.map(t => t.ID));
+        const prereqMap = {};
+        const localTagProviders = {};
+        const localUniqueProviders = {};
+
+        traits.forEach(t => {
+          (CONSTELLATION_TAGS[t.ID] || []).forEach(tag => {
+            if (!localTagProviders[tag]) localTagProviders[tag] = [];
+            localTagProviders[tag].push(t.ID);
+          });
+          (CONSTELLATION_UNIQUES[t.ID] || []).forEach(unique => {
+            if (!localUniqueProviders[unique]) localUniqueProviders[unique] = [];
+            localUniqueProviders[unique].push(t.ID);
+          });
+        });
+
+        traits.forEach(t => {
+          const direct = (CONSTELLATION_PREREQS[t.ID] || []).filter(id => traitIds.has(id));
+          const tagReqs = (CONSTELLATION_REQUIRE_TAGS[t.ID] || [])
+            .flatMap(tag => localTagProviders[tag] || []);
+          const uniqueReqs = (CONSTELLATION_REQUIRE_UNIQUES[t.ID] || [])
+            .flatMap(unique => localUniqueProviders[unique] || []);
+          prereqMap[t.ID] = [...new Set([...direct, ...tagReqs, ...uniqueReqs])];
+        });
+
+        const depthMap = {};
+        const visiting = new Set();
+        function calcDepth(id) {
+          if (depthMap[id] !== undefined) return depthMap[id];
+          if (visiting.has(id)) return 0;
+          visiting.add(id);
+          const prereqs = prereqMap[id] || [];
+          const depth = prereqs.length ? Math.max(...prereqs.map(calcDepth)) + 1 : 0;
+          visiting.delete(id);
+          depthMap[id] = depth;
+          return depth;
+        }
+        traits.forEach(t => calcDepth(t.ID));
+
+        const layers = {};
+        let maxDepth = 0;
+        traits.forEach(t => {
+          const d = depthMap[t.ID] || 0;
+          maxDepth = Math.max(maxDepth, d);
+          if (!layers[d]) layers[d] = [];
+          layers[d].push(t);
+        });
+
+        const depthKeys = Object.keys(layers).map(Number).sort((a, b) => a - b);
+        const totalLayers = maxDepth + 1;
+
+        // Sort each layer by parent centroid so children cluster under parents
+        depthKeys.forEach(d => {
+          layers[d].sort((a, b) => {
+            const aParents = prereqMap[a.ID] || [];
+            const bParents = prereqMap[b.ID] || [];
+            const aAvg = aParents.length
+              ? aParents.reduce((s, id) => s + (TREE_COORDINATES[id]?.col || 0), 0) / aParents.length
+              : 0;
+            const bAvg = bParents.length
+              ? bParents.reduce((s, id) => s + (TREE_COORDINATES[id]?.col || 0), 0) / bParents.length
+              : 0;
+            return aAvg !== bAvg ? aAvg - bAvg : String(a.Name).localeCompare(String(b.Name));
+          });
+        });
+
+        const GRID_COLS = Math.max(8, ...depthKeys.map(d => layers[d].length * 2));
+        const PADDING = 1;
+        const placed = {};
+
+        depthKeys.forEach(d => {
+          const list = layers[d];
+          const count = list.length;
+          // Spread rows evenly across 10–90% of vertical space so nothing hugs edges
+          const rowFraction = totalLayers === 1 ? 0.5 : d / Math.max(maxDepth, 1);
+          const row = 0.1 + rowFraction * 0.8; // 0.1 → 0.9 normalised
+
+          const spacing = (GRID_COLS - PADDING * 2) / Math.max(count, 1);
+          list.forEach((t, idx) => {
+            placed[t.ID] = { row, col: PADDING + spacing * idx + spacing / 2 };
+          });
+        });
+
+        // Relaxation: push same-layer nodes apart
+        const MIN_DIST = 1.8;
+        depthKeys.forEach(d => {
+          const list = layers[d];
+          if (list.length < 2) return;
+          for (let pass = 0; pass < 20; pass++) {
+            let moved = false;
+            for (let i = 0; i < list.length - 1; i++) {
+              const a = placed[list[i].ID];
+              const b = placed[list[i + 1].ID];
+              const dist = b.col - a.col;
+              if (dist < MIN_DIST) {
+                const shift = (MIN_DIST - dist) / 2 + 0.01;
+                a.col -= shift;
+                b.col += shift;
+                moved = true;
+              }
+            }
+            list.forEach(t => {
+              placed[t.ID].col = Math.max(PADDING, Math.min(GRID_COLS - PADDING, placed[t.ID].col));
+            });
+            if (!moved) break;
+          }
+        });
+
+        traits.forEach(t => {
+          const p = placed[t.ID];
+          if (!p) return;
+          TREE_COORDINATES[t.ID] = {
+            row: p.row,
+            col: p.col,
+            _rowNorm: true,
+            _colCount: GRID_COLS
+          };
+        });
+
+        PATH_LAYOUTS[pathId] = { rows: totalLayers + 1, cols: GRID_COLS };
+      }
 
       let SPELLS_CATALOG = [];
       let selectedPathId = "";
@@ -3652,53 +3678,67 @@
       }
 
       function getTraitUnlockState(trait) {
-
-        const missing = [];
-
-        const traitReqs =
-          CONSTELLATION_PREREQS[trait.ID] || [];
-
-        const tagReqs =
-          CONSTELLATION_REQUIRE_TAGS[trait.ID] || [];
-
-        const uniqueReqs =
-          CONSTELLATION_REQUIRE_UNIQUES[trait.ID] || [];
-
-        traitReqs.forEach(id => {
-          if (!unlockedTraits.has(id)) {
-            const t = TRAITS_CATALOG.find(x => x.ID === id);
-            missing.push(t?.Name || id);
-          }
-        });
-
-        tagReqs.forEach(tag => {
-
-          const satisfied =
-            [...unlockedTraits].some(id =>
-              (CONSTELLATION_TAGS[id] || []).includes(tag)
-            );
-
-          if (!satisfied)
-            missing.push(`▲ ${tag}`);
-        });
-
-        uniqueReqs.forEach(unique => {
-
-          const satisfied =
-            [...unlockedTraits].some(id =>
-              (CONSTELLATION_UNIQUES[id] || []).includes(unique)
-            );
-
-          if (!satisfied)
-            missing.push(`★ ${unique}`);
-        });
-
-        return {
-          unlocked: unlockedTraits.has(trait.ID),
-          available: missing.length === 0,
-          missing
-        };
+  const missing = [];
+ 
+  const hasTag = tag =>
+    [...unlockedTraits].some(id => (CONSTELLATION_TAGS[id] || []).includes(tag));
+ 
+  const hasUnique = unique =>
+    [...unlockedTraits].some(id => (CONSTELLATION_UNIQUES[id] || []).includes(unique));
+ 
+  const traitName = id => {
+    const t = TRAITS_CATALOG.find(x => x.ID === id);
+    return t?.Name || id;
+  };
+ 
+  // ── Direct trait prerequisites ─────────────────────────────────────────────
+  (CONSTELLATION_PREREQS[trait.ID] || []).forEach(id => {
+    if (!unlockedTraits.has(id)) missing.push(traitName(id));
+  });
+ 
+  // ── Tag prerequisites (includes __OR_TRAIT__ and __OR_TAG__ groups) ─────────
+  (CONSTELLATION_REQUIRE_TAGS[trait.ID] || []).forEach(entry => {
+ 
+    if (entry.startsWith('__OR_TRAIT__')) {
+      const ids = entry.slice(12).split('|');
+      if (!ids.some(id => unlockedTraits.has(id))) {
+        missing.push(ids.map(traitName).join(' or '));
       }
+      return;
+    }
+ 
+    if (entry.startsWith('__OR_TAG__')) {
+      const tagAlts = entry.slice(10).split('|');
+      if (!tagAlts.some(hasTag)) {
+        missing.push(tagAlts.join(' or '));
+      }
+      return;
+    }
+ 
+    // Plain tag
+    if (!hasTag(entry)) missing.push('▲ ' + entry);
+  });
+ 
+  // ── Unique prerequisites (includes __OR_UNIQUE__ groups) ──────────────────
+  (CONSTELLATION_REQUIRE_UNIQUES[trait.ID] || []).forEach(entry => {
+ 
+    if (entry.startsWith('__OR_UNIQUE__')) {
+      const uniqueAlts = entry.slice(13).split('|');
+      if (!uniqueAlts.some(hasUnique)) {
+        missing.push(uniqueAlts.join(' or '));
+      }
+      return;
+    }
+ 
+    if (!hasUnique(entry)) missing.push('★ ' + entry);
+  });
+ 
+  return {
+    unlocked:  unlockedTraits.has(trait.ID),
+    available: missing.length === 0,
+    missing
+  };
+}
 
       function canUnlockTrait(trait) {
         return getTraitUnlockState(trait).available;
@@ -3725,10 +3765,12 @@
       }
 
       function getLinkedTraitIds(trait) {
-        const nameKey = String(trait?.Name || '').trim().toLowerCase();
-        if (!nameKey) return [trait.ID];
-        return TRAITS_CATALOG.filter(t => String(t.Name || '').trim().toLowerCase() === nameKey).map(t => t.ID);
-      }
+  const nameKey = String(trait?.Name || '').trim().toLowerCase();
+  if (!nameKey) return [trait.ID];
+  return TRAITS_CATALOG
+    .filter(t => String(t.Name || '').trim().toLowerCase() === nameKey)
+    .map(t => t.ID);
+}
 
       function toggleTraitSelection(traitId) {
         const trait = TRAITS_CATALOG.find(t => t.ID === traitId); if (!trait) return;
@@ -3769,142 +3811,142 @@
 
       const GHOST_HUBS = {}; // hubId -> { label, memberIds: Set, keys: [] }
 
-function buildGhostHubs(pathId) {
-  // Clear hubs from any previous render
-  Object.keys(GHOST_HUBS).forEach(k => delete GHOST_HUBS[k]);
+      function buildGhostHubs(pathId) {
+        // Clear hubs from any previous render
+        Object.keys(GHOST_HUBS).forEach(k => delete GHOST_HUBS[k]);
 
-  const pathTraits = TRAITS_CATALOG.filter(t => t.Path === pathId);
-  const pathTraitIds = new Set(pathTraits.map(t => t.ID));
+        const pathTraits = TRAITS_CATALOG.filter(t => t.Path === pathId);
+        const pathTraitIds = new Set(pathTraits.map(t => t.ID));
 
-  const localTagProviders = {};
-  const localUniqueProviders = {};
-  pathTraits.forEach(t => {
-    (CONSTELLATION_TAGS[t.ID] || []).forEach(tag => {
-      if (!localTagProviders[tag]) localTagProviders[tag] = [];
-      localTagProviders[tag].push(t.ID);
-    });
-    (CONSTELLATION_UNIQUES[t.ID] || []).forEach(unique => {
-      if (!localUniqueProviders[unique]) localUniqueProviders[unique] = [];
-      localUniqueProviders[unique].push(t.ID);
-    });
-  });
+        const localTagProviders = {};
+        const localUniqueProviders = {};
+        pathTraits.forEach(t => {
+          (CONSTELLATION_TAGS[t.ID] || []).forEach(tag => {
+            if (!localTagProviders[tag]) localTagProviders[tag] = [];
+            localTagProviders[tag].push(t.ID);
+          });
+          (CONSTELLATION_UNIQUES[t.ID] || []).forEach(unique => {
+            if (!localUniqueProviders[unique]) localUniqueProviders[unique] = [];
+            localUniqueProviders[unique].push(t.ID);
+          });
+        });
 
-  // For each external unique/tag requirement, collect all external providers
-  // and group them under one hub per key.
-  pathTraits.forEach(trait => {
-    (CONSTELLATION_REQUIRE_TAGS[trait.ID] || []).forEach(tag => {
-      const localOk = (localTagProviders[tag] || []).some(id => pathTraitIds.has(id));
-      if (localOk) return;
-      const external = (TAG_PROVIDER_MAP[tag] || []).filter(id => !pathTraitIds.has(id));
-      if (!external.length) return;
-      const hubId = `__hub_▲${tag}`;
-      if (!GHOST_HUBS[hubId]) GHOST_HUBS[hubId] = { label: tag, memberIds: new Set(), keys: [`▲${tag}`] };
-      external.forEach(id => GHOST_HUBS[hubId].memberIds.add(id));
-    });
+        // For each external unique/tag requirement, collect all external providers
+        // and group them under one hub per key.
+        pathTraits.forEach(trait => {
+          (CONSTELLATION_REQUIRE_TAGS[trait.ID] || []).forEach(tag => {
+            const localOk = (localTagProviders[tag] || []).some(id => pathTraitIds.has(id));
+            if (localOk) return;
+            const external = (TAG_PROVIDER_MAP[tag] || []).filter(id => !pathTraitIds.has(id));
+            if (!external.length) return;
+            const hubId = `__hub_▲${tag}`;
+            if (!GHOST_HUBS[hubId]) GHOST_HUBS[hubId] = { label: tag, memberIds: new Set(), keys: [`▲${tag}`] };
+            external.forEach(id => GHOST_HUBS[hubId].memberIds.add(id));
+          });
 
-    (CONSTELLATION_REQUIRE_UNIQUES[trait.ID] || []).forEach(unique => {
-      const localOk = (localUniqueProviders[unique] || []).some(id => pathTraitIds.has(id));
-      if (localOk) return;
-      const external = (UNIQUE_PROVIDER_MAP[unique] || []).filter(id => !pathTraitIds.has(id));
-      if (!external.length) return;
-      const hubId = `__hub_★${unique}`;
-      if (!GHOST_HUBS[hubId]) GHOST_HUBS[hubId] = { label: unique, memberIds: new Set(), keys: [`★${unique}`] };
-      external.forEach(id => GHOST_HUBS[hubId].memberIds.add(id));
-    });
+          (CONSTELLATION_REQUIRE_UNIQUES[trait.ID] || []).forEach(unique => {
+            const localOk = (localUniqueProviders[unique] || []).some(id => pathTraitIds.has(id));
+            if (localOk) return;
+            const external = (UNIQUE_PROVIDER_MAP[unique] || []).filter(id => !pathTraitIds.has(id));
+            if (!external.length) return;
+            const hubId = `__hub_★${unique}`;
+            if (!GHOST_HUBS[hubId]) GHOST_HUBS[hubId] = { label: unique, memberIds: new Set(), keys: [`★${unique}`] };
+            external.forEach(id => GHOST_HUBS[hubId].memberIds.add(id));
+          });
 
-    (CONSTELLATION_PREREQS[trait.ID] || []).forEach(pid => {
-      if (pathTraitIds.has(pid)) return;
-      // Direct external trait prereq — give it its own solo hub
-      const hubId = `__hub_trait_${pid}`;
-      if (!GHOST_HUBS[hubId]) {
-        const t = TRAITS_CATALOG.find(x => x.ID === pid);
-        GHOST_HUBS[hubId] = { label: t?.Name || pid, memberIds: new Set([pid]), keys: [] };
+          (CONSTELLATION_PREREQS[trait.ID] || []).forEach(pid => {
+            if (pathTraitIds.has(pid)) return;
+            // Direct external trait prereq — give it its own solo hub
+            const hubId = `__hub_trait_${pid}`;
+            if (!GHOST_HUBS[hubId]) {
+              const t = TRAITS_CATALOG.find(x => x.ID === pid);
+              GHOST_HUBS[hubId] = { label: t?.Name || pid, memberIds: new Set([pid]), keys: [] };
+            }
+          });
+        });
       }
-    });
-  });
-}
 
-// Returns the hub ID that represents a given external traitId for a given
-// requirement context (unique/tag key). Falls back to solo hub.
-function getHubForExternalId(externalId, requireKey) {
-  // requireKey e.g. "★Spellcasting" or "▲Melee"
-  if (requireKey) {
-    const hubId = `__hub_${requireKey}`;
-    if (GHOST_HUBS[hubId]?.memberIds.has(externalId)) return hubId;
-  }
-  // fallback: find any hub that contains this member
-  for (const [hubId, hub] of Object.entries(GHOST_HUBS)) {
-    if (hub.memberIds.has(externalId)) return hubId;
-  }
-  return null;
-}
+      // Returns the hub ID that represents a given external traitId for a given
+      // requirement context (unique/tag key). Falls back to solo hub.
+      function getHubForExternalId(externalId, requireKey) {
+        // requireKey e.g. "★Spellcasting" or "▲Melee"
+        if (requireKey) {
+          const hubId = `__hub_${requireKey}`;
+          if (GHOST_HUBS[hubId]?.memberIds.has(externalId)) return hubId;
+        }
+        // fallback: find any hub that contains this member
+        for (const [hubId, hub] of Object.entries(GHOST_HUBS)) {
+          if (hub.memberIds.has(externalId)) return hubId;
+        }
+        return null;
+      }
 
-function renderConstellationNodes(pathId) {
-  const parent = document.getElementById('nodes-container');
-  if (!parent) return;
-  parent.innerHTML = '';
+      function renderConstellationNodes(pathId) {
+        const parent = document.getElementById('nodes-container');
+        if (!parent) return;
+        parent.innerHTML = '';
 
-  buildGhostHubs(pathId);
-  assignPathCoordinates(pathId);
+        buildGhostHubs(pathId);
+        assignPathCoordinates(pathId);
 
-  const layout = PATH_LAYOUTS[pathId] || { rows: 5, cols: 8 };
-  const pathTraits = TRAITS_CATALOG.filter(t => t.Path === pathId);
+        const layout = PATH_LAYOUTS[pathId] || { rows: 5, cols: 8 };
+        const pathTraits = TRAITS_CATALOG.filter(t => t.Path === pathId);
 
-  // Place regular nodes
-  pathTraits.forEach(trait => placeNode(trait, parent, false));
+        // Place regular nodes
+        pathTraits.forEach(trait => placeNode(trait, parent, false));
 
-  // Place one hub node per consolidated ghost group
-  const hubIds = Object.keys(GHOST_HUBS);
-  const hubCount = hubIds.length;
-  hubIds.forEach((hubId, idx) => {
-    const hub = GHOST_HUBS[hubId];
-    // Position hubs in their own dedicated strip at the very top
-    const spacing = (layout.cols - 2) / Math.max(hubCount, 1);
-    TREE_COORDINATES[hubId] = {
-      row: -0.12,   // above the main tree (normalised, slightly negative)
-      col: 1 + spacing * idx + spacing / 2,
-      _rowNorm: true,
-      _colCount: layout.cols
-    };
-    placeHubNode(hubId, hub, parent, pathId);
-  });
+        // Place one hub node per consolidated ghost group
+        const hubIds = Object.keys(GHOST_HUBS);
+        const hubCount = hubIds.length;
+        hubIds.forEach((hubId, idx) => {
+          const hub = GHOST_HUBS[hubId];
+          // Position hubs in their own dedicated strip at the very top
+          const spacing = (layout.cols - 2) / Math.max(hubCount, 1);
+          TREE_COORDINATES[hubId] = {
+            row: -0.12,   // above the main tree (normalised, slightly negative)
+            col: 1 + spacing * idx + spacing / 2,
+            _rowNorm: true,
+            _colCount: layout.cols
+          };
+          placeHubNode(hubId, hub, parent, pathId);
+        });
 
-  requestAnimationFrame(() => { updateNodeStates(); drawTreeConnections(); });
-}
+        requestAnimationFrame(() => { updateNodeStates(); drawTreeConnections(); });
+      }
 
-function placeHubNode(hubId, hub, parent, path) {
-  const layout = PATH_LAYOUTS[selectedPathId] || { rows: 5, cols: 8 };
-  const coord = TREE_COORDINATES[hubId];
-  if (!coord) return;
+      function placeHubNode(hubId, hub, parent, path) {
+        const layout = PATH_LAYOUTS[selectedPathId] || { rows: 5, cols: 8 };
+        const coord = TREE_COORDINATES[hubId];
+        if (!coord) return;
 
-  const colCount = coord._colCount || layout.cols;
-  // Normalised row: clamp so hub strip never goes off the top
-  const rawRow = coord.row; // may be slightly negative
-  const topPct = Math.max(2, (rawRow + 0.15) * 80 + 2); // remap -0.12→0.9 to ~2%→74%
-  const leftPct = (coord.col / colCount) * 100;
+        const colCount = coord._colCount || layout.cols;
+        // Normalised row: clamp so hub strip never goes off the top
+        const rawRow = coord.row; // may be slightly negative
+        const topPct = Math.max(2, (rawRow + 0.15) * 80 + 2); // remap -0.12→0.9 to ~2%→74%
+        const leftPct = (coord.col / colCount) * 100;
 
-  // Build member name list for tooltip
-  const memberNames = Array.from(hub.memberIds)
-    .map(id => TRAITS_CATALOG.find(t => t.ID === id)?.Name || id)
-    .join(', ');
+        // Build member name list for tooltip
+        const memberNames = Array.from(hub.memberIds)
+          .map(id => TRAITS_CATALOG.find(t => t.ID === id)?.Name || id)
+          .join(', ');
 
-  const btn = document.createElement('button');
-  btn.id = `node-${hubId}`;
-  btn.className = 'absolute node-bubble-paths ghost-node z-10';
-  let exception = 11;
-  if (path === 'p12') {
-    exception = 120; // tweak for p12's unique wider layout
-  }
-  else if (path === 'p3') {
-    exception = 90; // tweak for p10's unique tighter layout
-  }
-  else if (path === 'p32') {
-    exception = 90; // tweak for p9's unique tighter layout
-  }
-  else if (path === 'p6') {
-    exception = 90; // tweak for p9's unique tighter layout
-  }
-  btn.style.cssText = `
+        const btn = document.createElement('button');
+        btn.id = `node-${hubId}`;
+        btn.className = 'absolute node-bubble-paths ghost-node z-10';
+        let exception = 11;
+        if (path === 'p12') {
+          exception = 120; // tweak for p12's unique wider layout
+        }
+        else if (path === 'p3') {
+          exception = 90; // tweak for p10's unique tighter layout
+        }
+        else if (path === 'p32') {
+          exception = 90; // tweak for p9's unique tighter layout
+        }
+        else if (path === 'p6') {
+          exception = 90; // tweak for p9's unique tighter layout
+        }
+        btn.style.cssText = `
     left: calc(${leftPct}% - 21px);
     top: calc(${topPct}% + ${exception}px);
     border-style: dashed;
@@ -3919,76 +3961,76 @@ function placeHubNode(hubId, hub, parent, path) {
     height: 46px;
     border-radius: 50%;
   `;
-  // Show a star/tag icon + short label
-  const shortLabel = hub.label.length > 8 ? hub.label.slice(0, 7) + '…' : hub.label;
-  btn.textContent = shortLabel;
-  btn.title = '';
+        // Show a star/tag icon + short label
+        const shortLabel = hub.label.length > 8 ? hub.label.slice(0, 7) + '…' : hub.label;
+        btn.textContent = shortLabel;
+        btn.title = '';
 
-  btn.onmouseenter = (e) => {
-    const el = document.getElementById('node-tooltip-floating');
-    if (!el) return;
-    el.innerHTML = `
+        btn.onmouseenter = (e) => {
+          const el = document.getElementById('node-tooltip-floating');
+          if (!el) return;
+          el.innerHTML = `
       <div style="font-weight:700;color:var(--gold);font-size:12px">External Requirement</div>
       <div style="font-size:12px;margin-top:4px;color:var(--ink-dim)">Key: <b style="color:var(--ink)">${hub.label}</b></div>
       <div style="font-size:11px;margin-top:6px;color:var(--ink-faint)">Satisfied by any of:<br><span style="color:var(--ink)">${memberNames}</span></div>
       <div style="font-size:10px;margin-top:6px;color:var(--ink-faint)">Unlock one of these traits from another path to meet this requirement.</div>`;
-    el.style.display = 'block';
-    const x = e.clientX + 14, y = e.clientY + 14;
-    el.style.left = Math.min(x, window.innerWidth - 280) + 'px';
-    el.style.top  = Math.min(y, window.innerHeight - 120) + 'px';
-  };
-  btn.onmousemove = btn.onmouseenter;
-  btn.onmouseleave = () => resetTooltip();
+          el.style.display = 'block';
+          const x = e.clientX + 14, y = e.clientY + 14;
+          el.style.left = Math.min(x, window.innerWidth - 280) + 'px';
+          el.style.top = Math.min(y, window.innerHeight - 120) + 'px';
+        };
+        btn.onmousemove = btn.onmouseenter;
+        btn.onmouseleave = () => resetTooltip();
 
-  parent.appendChild(btn);
-}
+        parent.appendChild(btn);
+      }
 
-function placeNode(trait, parent, isGhost) {
-  const coord = TREE_COORDINATES[trait.ID];
-  if (!coord) return;
+      function placeNode(trait, parent, isGhost) {
+        const coord = TREE_COORDINATES[trait.ID];
+        if (!coord) return;
 
-  const layout = PATH_LAYOUTS[selectedPathId] || { rows: 5, cols: 8 };
-  const colCount = coord._colCount || layout.cols;
+        const layout = PATH_LAYOUTS[selectedPathId] || { rows: 5, cols: 8 };
+        const colCount = coord._colCount || layout.cols;
 
-  let topPct;
-  if (coord._rowNorm) {
-    // row is already 0..1 normalised — map to 10%..88% of viewport
-    topPct = 10 + coord.row * 78;
-  } else {
-    // Legacy integer row
-    const rowCount = layout.rows + 2;
-    topPct = (coord.row / rowCount) * 100;
-  }
-  const leftPct = (coord.col / colCount) * 100;
+        let topPct;
+        if (coord._rowNorm) {
+          // row is already 0..1 normalised — map to 10%..88% of viewport
+          topPct = 10 + coord.row * 78;
+        } else {
+          // Legacy integer row
+          const rowCount = layout.rows + 2;
+          topPct = (coord.row / rowCount) * 100;
+        }
+        const leftPct = (coord.col / colCount) * 100;
 
-  const btn = document.createElement('button');
-  btn.id = `node-${trait.ID}`;
-  btn.className = 'absolute node-bubble-paths z-10' + (isGhost ? ' ghost-node' : '');
-  btn.style.left = `calc(${leftPct}% - 21px)`;
-  btn.style.top  = `calc(${topPct}% - 21px)`;
-  btn.style.borderColor = isGhost ? '#334155' : getActionColor(trait.Action);
-  btn.style.opacity = isGhost ? '0.4' : '1';
-  btn.title = '';
-  btn.textContent = getInitials(trait.Name);
+        const btn = document.createElement('button');
+        btn.id = `node-${trait.ID}`;
+        btn.className = 'absolute node-bubble-paths z-10' + (isGhost ? ' ghost-node' : '');
+        btn.style.left = `calc(${leftPct}% - 21px)`;
+        btn.style.top = `calc(${topPct}% - 21px)`;
+        btn.style.borderColor = isGhost ? '#334155' : getActionColor(trait.Action);
+        btn.style.opacity = isGhost ? '0.4' : '1';
+        btn.title = '';
+        btn.textContent = getInitials(trait.Name);
 
-  if (!isGhost) {
-    btn.onclick = () => {
-      const state = getTraitUnlockState(trait);
-      if (!state.available) return;
-      toggleTraitSelection(trait.ID);
-    };
-    btn.onmouseenter = (e) => showTooltip(trait, e);
-    btn.onmousemove  = (e) => showTooltip(trait, e);
-    btn.onmouseleave = () => resetTooltip();
-  } else {
-    btn.style.cursor = 'default';
-    btn.onmouseenter = (e) => showTooltip(trait, e);
-    btn.onmousemove  = (e) => showTooltip(trait, e);
-    btn.onmouseleave = () => resetTooltip();
-  }
+        if (!isGhost) {
+          btn.onclick = () => {
+            const state = getTraitUnlockState(trait);
+            if (!state.available) return;
+            toggleTraitSelection(trait.ID);
+          };
+          btn.onmouseenter = (e) => showTooltip(trait, e);
+          btn.onmousemove = (e) => showTooltip(trait, e);
+          btn.onmouseleave = () => resetTooltip();
+        } else {
+          btn.style.cursor = 'default';
+          btn.onmouseenter = (e) => showTooltip(trait, e);
+          btn.onmousemove = (e) => showTooltip(trait, e);
+          btn.onmouseleave = () => resetTooltip();
+        }
 
-  parent.appendChild(btn);
-}
+        parent.appendChild(btn);
+      }
 
       function updateNodeStates() {
 
@@ -4209,68 +4251,68 @@ function placeNode(trait, parent, isGhost) {
 
 
       // ── Updated drawTreeConnections — routes through hub nodes ──────────────────
-function drawTreeConnections() {
-  const canvas   = document.getElementById('svg-canvas');
-  const viewport = document.getElementById('tree-viewport');
-  if (!canvas || !viewport) return;
+      function drawTreeConnections() {
+        const canvas = document.getElementById('svg-canvas');
+        const viewport = document.getElementById('tree-viewport');
+        if (!canvas || !viewport) return;
 
-  Array.from(canvas.children).forEach(child => {
-    if (child.tagName !== 'defs') canvas.removeChild(child);
-  });
+        Array.from(canvas.children).forEach(child => {
+          if (child.tagName !== 'defs') canvas.removeChild(child);
+        });
 
-  const vpRect = viewport.getBoundingClientRect();
-  if (vpRect.width === 0) return;
+        const vpRect = viewport.getBoundingClientRect();
+        if (vpRect.width === 0) return;
 
-  const visibleIds = new Set(
-    Array.from(document.getElementById('nodes-container')?.querySelectorAll('[id^="node-"]') || [])
-      .map(el => el.id.replace('node-', ''))
-  );
+        const visibleIds = new Set(
+          Array.from(document.getElementById('nodes-container')?.querySelectorAll('[id^="node-"]') || [])
+            .map(el => el.id.replace('node-', ''))
+        );
 
-  const localVisible = TRAITS_CATALOG.filter(t => t.Path === selectedPathId).map(t => t.ID);
-  const localVisibleSet = new Set(localVisible);
+        const localVisible = TRAITS_CATALOG.filter(t => t.Path === selectedPathId).map(t => t.ID);
+        const localVisibleSet = new Set(localVisible);
 
-  // Build reverse map: externalTraitId -> hubId
-  const externalToHub = {};
-  Object.entries(GHOST_HUBS).forEach(([hubId, hub]) => {
-    hub.memberIds.forEach(memberId => { externalToHub[memberId] = hubId; });
-  });
+        // Build reverse map: externalTraitId -> hubId
+        const externalToHub = {};
+        Object.entries(GHOST_HUBS).forEach(([hubId, hub]) => {
+          hub.memberIds.forEach(memberId => { externalToHub[memberId] = hubId; });
+        });
 
-  TRAITS_CATALOG.filter(t => visibleIds.has(t.ID)).forEach(child => {
-    // Direct trait prereqs
-    (CONSTELLATION_PREREQS[child.ID] || []).forEach(parentId => {
-      if (localVisibleSet.has(parentId)) {
-        drawConnection(canvas, vpRect, parentId, child.ID, 'trait');
-      } else {
-        const hubId = externalToHub[parentId];
-        if (hubId && visibleIds.has(hubId)) {
-          drawConnection(canvas, vpRect, hubId, child.ID, 'unique');
-        }
+        TRAITS_CATALOG.filter(t => visibleIds.has(t.ID)).forEach(child => {
+          // Direct trait prereqs
+          (CONSTELLATION_PREREQS[child.ID] || []).forEach(parentId => {
+            if (localVisibleSet.has(parentId)) {
+              drawConnection(canvas, vpRect, parentId, child.ID, 'trait');
+            } else {
+              const hubId = externalToHub[parentId];
+              if (hubId && visibleIds.has(hubId)) {
+                drawConnection(canvas, vpRect, hubId, child.ID, 'unique');
+              }
+            }
+          });
+
+          // Tag requirements
+          (CONSTELLATION_REQUIRE_TAGS[child.ID] || []).forEach(tag => {
+            const localProviders = (TAG_PROVIDER_MAP[tag] || []).filter(id => localVisibleSet.has(id));
+            if (localProviders.length) {
+              localProviders.forEach(pid => drawConnection(canvas, vpRect, pid, child.ID, 'tag'));
+            } else {
+              const hubId = `__hub_▲${tag}`;
+              if (visibleIds.has(hubId)) drawConnection(canvas, vpRect, hubId, child.ID, 'tag');
+            }
+          });
+
+          // Unique requirements
+          (CONSTELLATION_REQUIRE_UNIQUES[child.ID] || []).forEach(unique => {
+            const localProviders = (UNIQUE_PROVIDER_MAP[unique] || []).filter(id => localVisibleSet.has(id));
+            if (localProviders.length) {
+              localProviders.forEach(pid => drawConnection(canvas, vpRect, pid, child.ID, 'unique'));
+            } else {
+              const hubId = `__hub_★${unique}`;
+              if (visibleIds.has(hubId)) drawConnection(canvas, vpRect, hubId, child.ID, 'unique');
+            }
+          });
+        });
       }
-    });
-
-    // Tag requirements
-    (CONSTELLATION_REQUIRE_TAGS[child.ID] || []).forEach(tag => {
-      const localProviders = (TAG_PROVIDER_MAP[tag] || []).filter(id => localVisibleSet.has(id));
-      if (localProviders.length) {
-        localProviders.forEach(pid => drawConnection(canvas, vpRect, pid, child.ID, 'tag'));
-      } else {
-        const hubId = `__hub_▲${tag}`;
-        if (visibleIds.has(hubId)) drawConnection(canvas, vpRect, hubId, child.ID, 'tag');
-      }
-    });
-
-    // Unique requirements
-    (CONSTELLATION_REQUIRE_UNIQUES[child.ID] || []).forEach(unique => {
-      const localProviders = (UNIQUE_PROVIDER_MAP[unique] || []).filter(id => localVisibleSet.has(id));
-      if (localProviders.length) {
-        localProviders.forEach(pid => drawConnection(canvas, vpRect, pid, child.ID, 'unique'));
-      } else {
-        const hubId = `__hub_★${unique}`;
-        if (visibleIds.has(hubId)) drawConnection(canvas, vpRect, hubId, child.ID, 'unique');
-      }
-    });
-  });
-}
 
       (function ensureFloatingTooltip() {
         if (document.getElementById('node-tooltip-floating')) return;
@@ -4317,22 +4359,34 @@ function drawTreeConnections() {
       function resetTooltip() { const el = document.getElementById('node-tooltip-floating'); if (el) el.style.display = 'none'; }
 
       function renderLedgerDirectory() {
-        const tbody = document.getElementById('ledger-table-body'); if (!tbody) return;
-        tbody.innerHTML = '';
-        const unlocked = TRAITS_CATALOG.filter(t => unlockedTraits.has(t.ID));
-        if (!unlocked.length) { tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-sm italic" style="color:var(--ink-faint)">No learned traits yet.</td></tr>`; return; }
-        unlocked.forEach(t => {
-          const tr = document.createElement('tr');
-          tr.className = 'ledger-row-unlocked';
-          tr.style.borderBottom = '1px solid rgba(51,65,85,0.4)';
-          const scalingRaw = t.Scaling || '';
-          const scalingLines = scalingRaw.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
-          const scalingHtml = scalingLines.length ? `<div style="display:flex;flex-direction:column;gap:2px">${scalingLines.map(l => `<div style="font-family:monospace;color:var(--indigo);font-size:12px">${esc(l)}</div>`).join('')}</div>` : '<span>—</span>';
-          const actionHtml = `<div style="display:inline-flex;align-items:center;gap:8px"><div style="width:26px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;background:${getActionColor(t.Action)};color:#060a14;font-weight:700">${esc(t.Action)}</div><div style="font-size:11px;color:var(--ink-faint)">${getActionLabel(t.Action)}</div></div>`;
-          tr.innerHTML = `<td class="p-3 text-sm font-semibold" style="color:var(--ink)">${esc(t.Name)}</td><td class="p-3 text-sm">${actionHtml}</td><td class="p-3 text-sm">${scalingHtml}</td><td class="p-3 text-sm leading-tight text-slate-300">${esc(t.Description)}</td>`;
-          tbody.appendChild(tr);
-        });
-      }
+  const tbody = document.getElementById('ledger-table-body');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  const seen = new Set();
+  const unlocked = TRAITS_CATALOG.filter(t => {
+    if (!unlockedTraits.has(t.ID)) return false;
+    const key = String(t.Name || '').trim().toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+  if (!unlocked.length) {
+    tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-sm italic" style="color:var(--ink-faint)">No learned traits yet.</td></tr>`;
+    return;
+  }
+  unlocked.forEach(t => {
+    const tr = document.createElement('tr');
+    tr.className = 'ledger-row-unlocked';
+    tr.style.borderBottom = '1px solid rgba(51,65,85,0.4)';
+    const scalingLines = (t.Scaling || '').split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+    const scalingHtml = scalingLines.length
+      ? `<div style="display:flex;flex-direction:column;gap:2px">${scalingLines.map(l => `<div style="font-family:monospace;color:var(--indigo);font-size:12px">${esc(l)}</div>`).join('')}</div>`
+      : '<span>—</span>';
+    const actionHtml = `<div style="display:inline-flex;align-items:center;gap:8px"><div style="width:26px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;background:${getActionColor(t.Action)};color:#060a14;font-weight:700">${esc(t.Action)}</div><div style="font-size:11px;color:var(--ink-faint)">${getActionLabel(t.Action)}</div></div>`;
+    tr.innerHTML = `<td class="p-3 text-sm font-semibold" style="color:var(--ink)">${esc(t.Name)}</td><td class="p-3 text-sm">${actionHtml}</td><td class="p-3 text-sm">${scalingHtml}</td><td class="p-3 text-sm leading-tight text-slate-300">${esc(t.Description)}</td>`;
+    tbody.appendChild(tr);
+  });
+}
 
       // ── Custom creator modal ──
       let creatorMode = "path";
