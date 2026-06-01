@@ -3389,7 +3389,7 @@
         const isPotion = containerId.includes('potion');
         const headerText = isPotion ? (namePh === 'Ingredient' ? 'Herb Ingredient' : 'Potion Recipe') : (namePh === 'Component' ? 'Core Component' : 'Forge Blueprint');
         const headerClass = isPotion ? 'recipe-card-header' : 'craft-card-header';
-        slot.innerHTML = `<div class="${headerClass}">${headerText}</div><input class="mb-1" type="text" placeholder="${esc(namePh)}" value="${esc(data?.name || '')}"><textarea rows="2" placeholder="${esc(descPh)}" style="resize:none;" oninput="autoExpandTextarea(this)">${esc(data?.desc || '')}</textarea>`;
+        slot.innerHTML = `<div class="${headerClass}">${headerText}</div><input class="mb-1" type="text" placeholder="${esc(namePh)}" value="${esc(data?.name || '')}"><textarea rows="3" placeholder="${esc(descPh)}" style="resize:none; height: 3em;" oninput="autoExpandTextarea(this)">${esc(data?.desc || '')}</textarea>`;
         container.appendChild(slot);
         const ta = slot.querySelector('textarea');
         if (ta) autoExpandTextarea(ta);
