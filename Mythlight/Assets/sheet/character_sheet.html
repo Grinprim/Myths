@@ -3492,7 +3492,7 @@
           const nameKey = String(t.Name || '').trim().toLowerCase();
           if (nameKey && seenNames.has(nameKey)) return;
           if (nameKey) seenNames.add(nameKey);
-          s += parseInt(t.Cost, 10) || 1;
+          s += parseInt(t.Cost, 10) || 0;
         });
         return s;
       }
@@ -3692,7 +3692,7 @@
         const trait = TRAITS_CATALOG.find(t => t.ID === traitId); if (!trait) return;
         const linkedIds = getLinkedTraitIds(trait);
         const isUnlocked = linkedIds.some(id => unlockedTraits.has(id));
-        const cost = parseInt(trait.Cost, 10) || 1;
+        const cost = parseInt(trait.Cost, 10) || 0;
         if (isUnlocked) {
           if (!canLockTraitIds(linkedIds)) { triggerWarningToast("Cannot lock: dependent child nodes are active."); return; }
           linkedIds.forEach(id => unlockedTraits.delete(id));
