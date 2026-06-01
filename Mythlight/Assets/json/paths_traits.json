@@ -1412,7 +1412,7 @@
       "Scaling": "Armor X:\n+2 [lvl 1]\n+3 [lvl 6]\n+4 [lvl 12]"
     },
     {
-      "ID": "t336",
+      "ID": "t343",
       "Name": "Arena’s Crowd Pleaser",
       "Action": "⬖",
       "Path": "p6",
@@ -1588,18 +1588,7 @@
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
     },
     {
-      "ID": "t73",
-      "Name": "Forbidden Insight",
-      "Action": "⬖",
-      "Path": "p7",
-      "Cost": "2",
-      "Symbols": "🗲",
-      "Parameters": "",
-      "Description": "Learn one passive effect of a creature within 6 tiles. Your next attack or spell against it deals +2 Damage.",
-      "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
-    },
-    {
-      "ID": "t73",
+      "ID": "t338",
       "Name": "Forbidden Insight",
       "Action": "⬖",
       "Path": "p7",
@@ -2446,17 +2435,6 @@
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 3]\n3 [lvl 6]\n4 [lvl 9]"
     },
     {
-      "ID": "t149",
-      "Name": "Remote activation",
-      "Action": "⭘",
-      "Path": "p15",
-      "Cost": "1",
-      "Symbols": "🗲",
-      "Parameters": "",
-      "Description": "Activate an allied mechanical device, trap, or gadget within 6 tiles as a free action.",
-      "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 3]\n3 [lvl 6]\n4 [lvl 9]"
-    },
-    {
       "ID": "t150",
       "Name": "Deployment Trapper",
       "Action": "⭘",
@@ -3062,7 +3040,7 @@
       "Scaling": ""
     },
     {
-      "ID": "t206",
+      "ID": "t339",
       "Name": "Swift and Displacing",
       "Action": "⭘",
       "Path": "p21",
@@ -3084,7 +3062,7 @@
       "Scaling": ""
     },
     {
-      "ID": "t207",
+      "ID": "t340",
       "Name": "Relentless Advance",
       "Action": "⭘",
       "Path": "p22",
@@ -3447,7 +3425,7 @@
       "Scaling": "Uses 🗲:\n2 [lvl 1]\n3 [lvl 3]\n4 [lvl 6]\n5 [lvl 9]\n6 [lvl 12]"
     },
     {
-      "ID": "t238",
+      "ID": "t341",
       "Name": "Sizable Swing",
       "Action": "◆",
       "Path": "p26",
@@ -4063,7 +4041,7 @@
       "Scaling": ""
     },
     {
-      "ID": "t294",
+      "ID": "t342",
       "Name": "Feat Forward",
       "Action": "⭘",
       "Path": "p31",
