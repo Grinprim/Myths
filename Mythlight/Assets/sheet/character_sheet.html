@@ -2548,7 +2548,7 @@
                     Mana Pool Scaling</h3>
                   <p class="text-xs leading-relaxed mb-2" style="color:var(--ink-dim)">Maximum Mana points correspond
                     directly to your overall experience level plus any additional spell bonuses.</p>
-                  <p class="text-xs font-mono bg-slate-900/40 p-2 rounded border border-slate-800">Max Mana = Level +
+                  <p class="text-xs font-mono bg-slate-900/40 p-2 rounded border border-slate-800">Max Mana = Level + Level/3 (rounded down) +
                     Spellcasting Bonus Mana</p>
                 </div>
                 <div class="border-t pt-3" style="border-color:var(--border-med)">
@@ -3102,7 +3102,7 @@
       }
 
       function updateDerivedVitals() {
-        const level = val('charLevel'), brawn = val('body_base') + val('body_brawn_mod'), fortitude = val('body_base') + val('body_fortitude_mod');
+        const level = val('charLevel'), brawn = val('body_brawn_total'), fortitude = val('body_fortitude_total');
         const armorItems = val('armor_def') + val('shield_def') + val('cloak_def');
         const armorBonus = getPathBonus('armor');
         const armorManualBonus = val('armor_bonus');
@@ -3579,7 +3579,7 @@
           const el = document.createElement('div');
           el.className = `path-select-item flex items-center justify-between${isSelected ? ' active' : ''}`;
           el.onclick = () => selectPath(path.ID);
-          el.innerHTML = `<span class="text-xs font-bold tracking-wider" style="color:var(--ink)">${path.name}</span><span class="text-xs font-mono font-bold" style="color:var(--indigo)">${invested} TP</span>`;
+          el.innerHTML = `<span class="text-xs font-bold tracking-wider" style="color:var(--ink)">${path.name}</span><span class="text-xs font-mono font-bold" style="color:var(--indigo)">${invested} Trait</span>`;
           parent.appendChild(el);
         });
         if (!matched) parent.innerHTML = `<div class="text-center text-xs italic p-3" style="color:var(--ink-faint)">Search a path above to discover and activate it.</div>`;
@@ -3640,12 +3640,12 @@
                 </label>
               </div>
               ${statDropdown}
-            </div>` : `<div class="text-[9px] mt-1 italic" style="color:var(--ink-faint)">Requires ${b.investment} TP spent in this path.</div>`;
+            </div>` : `<div class="text-[9px] mt-1 italic" style="color:var(--ink-faint)">Requires ${b.investment} Traits Unlocked in this path.</div>`;
 
           div.innerHTML = `
             <div class="absolute w-2.5 h-2.5 rounded-full border" style="left:-23px;top:14px;border-color:${achieved ? 'var(--gold)' : '#334155'};background:rgba(6,10,20,0.8)"></div>
             <div class="flex items-center justify-between">
-              <h4 class="text-xs font-bold" style="color:${achieved ? 'var(--gold)' : 'var(--ink-faint)'};font-family:'Cinzel',serif">Breakpoint (${b.investment} TP)</h4>
+              <h4 class="text-xs font-bold" style="color:${achieved ? 'var(--gold)' : 'var(--ink-faint)'};font-family:'Cinzel',serif">Breakpoint (${b.investment} Traits)</h4>
               ${achieved ? `<span class="text-[8px] px-1.5 py-0.5 rounded uppercase font-bold" style="background:var(--gold-dim);border:1px solid var(--gold-line);color:var(--gold)">${isStatChoice ? '+1 Stat' : 'Passive'}</span>` : ''}
             </div>
             <p class="text-[10px] mt-1 leading-normal ${isStatChoice ? 'line-through' : ''}" style="color:var(--ink-dim)">${b.description}</p>
@@ -4402,11 +4402,11 @@
         const f = (l, content) => `<div class="flex flex-col gap-1">${lbl(l)}${content}</div>`;
         if (mode === 'path') {
           title.textContent = 'Forge Custom Constellation Path';
-          content.innerHTML = f('Path ID', inp('cp_id', 'custom_path_id')) + f('Path Name', inp('cp_name', 'Path of the Void Weaver')) + f('Description', ta('cp_desc', 'Describe the cosmic vectors...')) + `<div class="border-t" style="border-color:var(--border-med)"></div><div class="panel-title">Breakpoints</div><div class="grid grid-cols-12 gap-2">${f('TP Investment', inp('cp_bp_inv', '3', 'number')).replace('class="flex flex-col gap-1"', 'class="col-span-3 flex flex-col gap-1"')}${f('Breakpoint Description', inp('cp_bp_desc', 'Gain +2 spell defense in darkness.')).replace('class="flex flex-col gap-1"', 'class="col-span-9 flex flex-col gap-1"')}</div>`;
+          content.innerHTML = f('Path ID', inp('cp_id', 'ID', 'number')) + f('Path Name', inp('cp_name', 'Path of the Void Weaver')) + f('Description', ta('cp_desc', 'Describe the cosmic vectors...')) + `<div class="border-t" style="border-color:var(--border-med)"></div><div class="panel-title">Breakpoints</div><div class="grid grid-cols-12 gap-2">${f('TP Investment', inp('cp_bp_inv', '3', 'number')).replace('class="flex flex-col gap-1"', 'class="col-span-3 flex flex-col gap-1"')}${f('Breakpoint Description', inp('cp_bp_desc', 'Gain +2 spell defense in darkness.')).replace('class="flex flex-col gap-1"', 'class="col-span-9 flex flex-col gap-1"')}</div>`;
         } else {
           title.textContent = 'Forge Custom Constellation Trait';
           const pathOpts = PATHS_CATALOG.map(p => `<option value="${p.ID}">${p.name}</option>`).join('');
-          content.innerHTML = `<div class="grid grid-cols-2 gap-2">${f('Trait ID', inp('ct_id', 'ct_custom_id'))}${f('Trait Name', inp('ct_name', 'Necrotic Shroud'))}</div><div class="grid grid-cols-3 gap-2">${f('Path', `<select id="ct_path" class="rounded p-2 outline-none" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink)">${pathOpts}</select>`)}${f('Action', `<select id="ct_action" class="rounded p-2 outline-none" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink)"><option value="⭘">⭘ Free</option><option value="◇">◇ Reaction</option><option value="⬖">⬖ Action</option><option value="◆">◆ Attack</option></select>`)}${f('TP Cost', inp('ct_cost', '1', 'number'))}</div><div class="grid grid-cols-2 gap-2">${f('Row (1-4)', inp('ct_row', '1', 'number'))}${f('Col (1-7)', inp('ct_col', '4', 'number'))}</div>${f('Description', ta('ct_desc', 'Detailed mechanics...'))}${f('Scaling', inp('ct_scaling', '+1 Armor per tier'))}`;
+          content.innerHTML = `<div class="grid grid-cols-2 gap-2">${f('Trait ID', inp('ct_id', 'ID', 'number'))}${f('Trait Name', inp('ct_name', 'Necrotic Shroud'))}</div><div class="grid grid-cols-3 gap-2">${f('Path', `<select id="ct_path" class="rounded p-2 outline-none" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink)">${pathOpts}</select>`)}${f('Action', `<select id="ct_action" class="rounded p-2 outline-none" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink)"><option value="⭘">⭘ Free</option><option value="◇">◇ Reaction</option><option value="⬖">⬖ Action</option><option value="◆">◆ Attack</option></select>`)}${f('TP Cost', inp('ct_cost', '1', 'number'))}</div><div class="grid grid-cols-2 gap-2">${f('Row (1-4)', inp('ct_row', '1', 'number'))}${f('Col (1-7)', inp('ct_col', '4', 'number'))}</div>${f('Description', ta('ct_desc', 'Detailed mechanics...'))}${f('Scaling', inp('ct_scaling', '+1 Armor per tier'))}`;
         }
       }
 
@@ -4414,12 +4414,12 @@
 
       function saveCustomCreatorData() {
         if (creatorMode === 'path') {
-          const id = document.getElementById('cp_id')?.value.trim(), name = document.getElementById('cp_name')?.value.trim(), desc = document.getElementById('cp_desc')?.value.trim(), bp_inv = parseInt(document.getElementById('cp_bp_inv')?.value, 10) || 3, bp_desc = document.getElementById('cp_bp_desc')?.value.trim();
+          const id = "custom_" + document.getElementById('cp_id')?.value.trim(), name = document.getElementById('cp_name')?.value.trim(), desc = document.getElementById('cp_desc')?.value.trim(), bp_inv = parseInt(document.getElementById('cp_bp_inv')?.value, 10) || 3, bp_desc = document.getElementById('cp_bp_desc')?.value.trim();
           if (!id || !name || !bp_desc) { triggerWarningToast("Fill all configuration fields."); return; }
           PATHS_CATALOG.push({ "ID": id, "name": name, "description": desc || "Custom path.", "breakpoints": { "breakpoint_custom": { "investment": bp_inv, "description": bp_desc } } });
           paths_init(); selectPath(id);
         } else {
-          const id = document.getElementById('ct_id')?.value.trim(), name = document.getElementById('ct_name')?.value.trim(), path = document.getElementById('ct_path')?.value, action = document.getElementById('ct_action')?.value, cost = document.getElementById('ct_cost')?.value || "1", row = parseInt(document.getElementById('ct_row')?.value, 10) || 1, col = parseInt(document.getElementById('ct_col')?.value, 10) || 4, desc = document.getElementById('ct_desc')?.value.trim(), scaling = document.getElementById('ct_scaling')?.value.trim();
+          const id = "ct_custom_" + document.getElementById('ct_id')?.value.trim(), name = document.getElementById('ct_name')?.value.trim(), path = document.getElementById('ct_path')?.value, action = document.getElementById('ct_action')?.value, cost = document.getElementById('ct_cost')?.value || "1", row = parseInt(document.getElementById('ct_row')?.value, 10) || 1, col = parseInt(document.getElementById('ct_col')?.value, 10) || 4, desc = document.getElementById('ct_desc')?.value.trim(), scaling = document.getElementById('ct_scaling')?.value.trim();
           if (!id || !name || !desc) { triggerWarningToast("Fill all configuration fields."); return; }
           TRAITS_CATALOG.push({ "ID": id, "Name": name, "Action": action, "Path": path, "Cost": cost, "Symbols": "🗲", "Parameters": "Custom", "Description": desc, "Scaling": scaling });
           TREE_COORDINATES[id] = { row, col }; paths_init(); selectPath(path);
@@ -4626,6 +4626,8 @@
           mana_bonus: document.getElementById('mana_bonus')?.value || '0',
           knownSpellIds: Array.from(knownSpellIds),
           customSpells,
+          customTraits : TRAITS_CATALOG.filter(t => t.ID.startsWith('ct_custom_')),
+          customPaths : PATHS_CATALOG.filter(p => p.ID.startsWith('custom_')),
           portraitDataUrl: portraitData
         };
 
@@ -4689,6 +4691,9 @@
           (data.inventory_items || []).forEach(item => inv_addItem(item));
           if (!data.inventory_items?.length) for (let i = 0; i < INV_BASE_SLOTS; i++) inv_addItem();
         }
+
+        TRAITS_CATALOG = TRAITS_CATALOG.filter(t => !t.ID.startsWith('ct_custom_')).concat(data.customTraits || []);
+        PATHS_CATALOG = PATHS_CATALOG.filter(p => !p.ID.startsWith('custom_')).concat(data.customPaths || []);
 
         populateSimpleGrid('inv_potions_ingredients', data.inv_potions_ingredients, 'Ingredient', 'Notes');
         populateSimpleGrid('inv_potions_recipes', data.inv_potions_recipes, 'Potion', 'Recipe');
@@ -4769,7 +4774,8 @@
               break;
             }
             if (Array.isArray(data.PATHS) && Array.isArray(data.TRAITS)) {
-              PATHS_CATALOG = data.paths; TRAITS_CATALOG = data.traits;
+              PATHS_CATALOG = data.paths;
+              TRAITS_CATALOG = data.traits;
               break;
             }
           }
