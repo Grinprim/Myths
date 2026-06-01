@@ -3590,7 +3590,7 @@
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 3]\n3 [lvl 6]\n4 [lvl 9]"
     },
     {
-      "ID": "t445",
+      "ID": "t290",
       "Name": "Ethereal Step",
       "Action": "⬖",
       "Path": "p27",
@@ -4042,17 +4042,6 @@
     },
     {
       "ID": "t289",
-      "Name": "Overexertion",
-      "Action": "⭘",
-      "Path": "p31",
-      "Cost": "2",
-      "Symbols": "⧖",
-      "Parameters": "",
-      "Description": "You may activate traits, while you have no uses left. Doing so grants 1 point of fatigue per activation.",
-      "Scaling": ""
-    },
-    {
-      "ID": "t290",
       "Name": "Overexertion",
       "Action": "⭘",
       "Path": "p31",
