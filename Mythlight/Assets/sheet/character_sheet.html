@@ -2820,91 +2820,130 @@
       }
 
       function assignPathCoordinates(pathId) {
-        const traits = TRAITS_CATALOG.filter(t => t.Path === pathId);
-        if (!traits.length) return;
-        const traitIds = new Set(traits.map(t => t.ID));
-        const prereqMap = {};
-        const localTagProviders = {};
-        const localUniqueProviders = {};
+  const traits = TRAITS_CATALOG.filter(t => t.Path === pathId);
+  if (!traits.length) return;
 
-        traits.forEach(t => {
-          (CONSTELLATION_TAGS[t.ID] || []).forEach(tag => {
-            if (!localTagProviders[tag]) localTagProviders[tag] = [];
-            localTagProviders[tag].push(t.ID);
-          });
-          (CONSTELLATION_UNIQUES[t.ID] || []).forEach(unique => {
-            if (!localUniqueProviders[unique]) localUniqueProviders[unique] = [];
-            localUniqueProviders[unique].push(t.ID);
-          });
-        });
-        traits.forEach(t => {
-          const direct = (CONSTELLATION_PREREQS[t.ID] || []).filter(id => traitIds.has(id));
-          const tagReqs = (CONSTELLATION_REQUIRE_TAGS[t.ID] || [])
-            .flatMap(tag => localTagProviders[tag] || []);
-          const uniqueReqs = (CONSTELLATION_REQUIRE_UNIQUES[t.ID] || [])
-            .flatMap(unique => localUniqueProviders[unique] || []);
-          prereqMap[t.ID] = [...new Set([...direct, ...tagReqs, ...uniqueReqs])];
-        });
+  const traitIds = new Set(traits.map(t => t.ID));
+  const prereqMap = {};
+  const localTagProviders = {};
+  const localUniqueProviders = {};
 
-        const depthMap = {};
-        const visiting = new Set();
-        function calcDepth(id) {
-          if (depthMap[id] !== undefined) return depthMap[id];
-          if (visiting.has(id)) return 0;
-          visiting.add(id);
-          const prereqs = prereqMap[id] || [];
-          const depth = prereqs.length ? Math.max(...prereqs.map(calcDepth)) + 1 : 0;
-          visiting.delete(id);
-          depthMap[id] = depth;
-          return depth;
+  traits.forEach(t => {
+    (CONSTELLATION_TAGS[t.ID] || []).forEach(tag => {
+      if (!localTagProviders[tag]) localTagProviders[tag] = [];
+      localTagProviders[tag].push(t.ID);
+    });
+    (CONSTELLATION_UNIQUES[t.ID] || []).forEach(unique => {
+      if (!localUniqueProviders[unique]) localUniqueProviders[unique] = [];
+      localUniqueProviders[unique].push(t.ID);
+    });
+  });
+
+  traits.forEach(t => {
+    const direct = (CONSTELLATION_PREREQS[t.ID] || []).filter(id => traitIds.has(id));
+    const tagReqs = (CONSTELLATION_REQUIRE_TAGS[t.ID] || [])
+      .flatMap(tag => localTagProviders[tag] || []);
+    const uniqueReqs = (CONSTELLATION_REQUIRE_UNIQUES[t.ID] || [])
+      .flatMap(unique => localUniqueProviders[unique] || []);
+    prereqMap[t.ID] = [...new Set([...direct, ...tagReqs, ...uniqueReqs])];
+  });
+
+  const depthMap = {};
+  const visiting = new Set();
+  function calcDepth(id) {
+    if (depthMap[id] !== undefined) return depthMap[id];
+    if (visiting.has(id)) return 0;
+    visiting.add(id);
+    const prereqs = prereqMap[id] || [];
+    const depth = prereqs.length ? Math.max(...prereqs.map(calcDepth)) + 1 : 0;
+    visiting.delete(id);
+    depthMap[id] = depth;
+    return depth;
+  }
+  traits.forEach(t => calcDepth(t.ID));
+
+  const layers = {};
+  let maxDepth = 0;
+  traits.forEach(t => {
+    const d = depthMap[t.ID] || 0;
+    maxDepth = Math.max(maxDepth, d);
+    if (!layers[d]) layers[d] = [];
+    layers[d].push(t);
+  });
+
+  const depthKeys = Object.keys(layers).map(Number).sort((a, b) => a - b);
+  const totalLayers = maxDepth + 1;
+
+  // Sort each layer by parent centroid so children cluster under parents
+  depthKeys.forEach(d => {
+    layers[d].sort((a, b) => {
+      const aParents = prereqMap[a.ID] || [];
+      const bParents = prereqMap[b.ID] || [];
+      const aAvg = aParents.length
+        ? aParents.reduce((s, id) => s + (TREE_COORDINATES[id]?.col || 0), 0) / aParents.length
+        : 0;
+      const bAvg = bParents.length
+        ? bParents.reduce((s, id) => s + (TREE_COORDINATES[id]?.col || 0), 0) / bParents.length
+        : 0;
+      return aAvg !== bAvg ? aAvg - bAvg : String(a.Name).localeCompare(String(b.Name));
+    });
+  });
+
+  const GRID_COLS = Math.max(8, ...depthKeys.map(d => layers[d].length * 2));
+  const PADDING = 1;
+  const placed = {};
+
+  depthKeys.forEach(d => {
+    const list = layers[d];
+    const count = list.length;
+    // Spread rows evenly across 10–90% of vertical space so nothing hugs edges
+    const rowFraction = totalLayers === 1 ? 0.5 : d / Math.max(maxDepth, 1);
+    const row = 0.1 + rowFraction * 0.8; // 0.1 → 0.9 normalised
+
+    const spacing = (GRID_COLS - PADDING * 2) / Math.max(count, 1);
+    list.forEach((t, idx) => {
+      placed[t.ID] = { row, col: PADDING + spacing * idx + spacing / 2 };
+    });
+  });
+
+  // Relaxation: push same-layer nodes apart
+  const MIN_DIST = 1.8;
+  depthKeys.forEach(d => {
+    const list = layers[d];
+    if (list.length < 2) return;
+    for (let pass = 0; pass < 20; pass++) {
+      let moved = false;
+      for (let i = 0; i < list.length - 1; i++) {
+        const a = placed[list[i].ID];
+        const b = placed[list[i + 1].ID];
+        const dist = b.col - a.col;
+        if (dist < MIN_DIST) {
+          const shift = (MIN_DIST - dist) / 2 + 0.01;
+          a.col -= shift;
+          b.col += shift;
+          moved = true;
         }
-
-        traits.forEach(t => calcDepth(t.ID));
-
-        const rowsByDepth = {};
-        let maxDepth = 0;
-        traits.forEach(t => {
-          const d = depthMap[t.ID] || 0;
-          maxDepth = Math.max(maxDepth, d);
-          if (!rowsByDepth[d]) rowsByDepth[d] = [];
-          rowsByDepth[d].push(t);
-        });
-
-        const depthKeys = Object.keys(rowsByDepth).map(n => parseInt(n, 10)).sort((a, b) => a - b);
-        let maxColCount = 0;
-        depthKeys.forEach(d => {
-          rowsByDepth[d].sort((a, b) => String(a.Name).localeCompare(String(b.Name)));
-          maxColCount = Math.max(maxColCount, rowsByDepth[d].length);
-        });
-
-        const hasMultipleDepths = maxDepth > 0;
-        const rows = hasMultipleDepths ? (maxDepth + 3) : 3;
-        const cols = Math.max(4, maxColCount * 2);
-        PATH_LAYOUTS[pathId] = { rows, cols };
-
-        if (traits.length === 1) {
-          TREE_COORDINATES[traits[0].ID] = { row: 2, col: Math.ceil(cols / 2) };
-          return;
-        }
-
-        depthKeys.forEach(d => {
-          const list = rowsByDepth[d];
-          const ordered = list.slice().sort((a, b) => {
-            const aParents = prereqMap[a.ID] || [];
-            const bParents = prereqMap[b.ID] || [];
-            const aAvg = aParents.length ? aParents.reduce((s, id) => s + (TREE_COORDINATES[id]?.col || 0), 0) / aParents.length : 0;
-            const bAvg = bParents.length ? bParents.reduce((s, id) => s + (TREE_COORDINATES[id]?.col || 0), 0) / bParents.length : 0;
-            if (aAvg !== bAvg) return aAvg - bAvg;
-            return String(a.Name).localeCompare(String(b.Name));
-          });
-          const gap = cols / (ordered.length + 1);
-          ordered.forEach((trait, idx) => {
-            const col = Math.max(1, Math.round((idx + 1) * gap));
-            const row = hasMultipleDepths ? (d + 2) : 2;
-            TREE_COORDINATES[trait.ID] = { row, col };
-          });
-        });
       }
+      list.forEach(t => {
+        placed[t.ID].col = Math.max(PADDING, Math.min(GRID_COLS - PADDING, placed[t.ID].col));
+      });
+      if (!moved) break;
+    }
+  });
+
+  traits.forEach(t => {
+    const p = placed[t.ID];
+    if (!p) return;
+    TREE_COORDINATES[t.ID] = {
+      row: p.row,
+      col: p.col,
+      _rowNorm: true,
+      _colCount: GRID_COLS
+    };
+  });
+
+  PATH_LAYOUTS[pathId] = { rows: totalLayers + 1, cols: GRID_COLS };
+}
 
       let SPELLS_CATALOG = [];
       let selectedPathId = "";
@@ -3686,107 +3725,225 @@
         return 'Free';
       }
 
-      function renderConstellationNodes(pathId) {
-        const parent = document.getElementById('nodes-container');
-        if (!parent) return;
-        parent.innerHTML = '';
-        assignPathCoordinates(pathId);
-        const layout = PATH_LAYOUTS[pathId] || { rows: 5, cols: 6 };
-        const pathTraits = TRAITS_CATALOG.filter(t => t.Path === pathId);
-        const pathTraitIds = new Set(pathTraits.map(t => t.ID));
-        const localTagProviders = {};
-        const localUniqueProviders = {};
-        pathTraits.forEach(t => {
-          (CONSTELLATION_TAGS[t.ID] || []).forEach(tag => {
-            if (!localTagProviders[tag]) localTagProviders[tag] = [];
-            localTagProviders[tag].push(t.ID);
-          });
-          (CONSTELLATION_UNIQUES[t.ID] || []).forEach(unique => {
-            if (!localUniqueProviders[unique]) localUniqueProviders[unique] = [];
-            localUniqueProviders[unique].push(t.ID);
-          });
-        });
-        const ghostIds = new Set();
-        pathTraits.forEach(trait => {
+      const GHOST_HUBS = {}; // hubId -> { label, memberIds: Set, keys: [] }
 
-          (CONSTELLATION_PREREQS[trait.ID] || [])
-            .forEach(pid => {
+function buildGhostHubs(pathId) {
+  // Clear hubs from any previous render
+  Object.keys(GHOST_HUBS).forEach(k => delete GHOST_HUBS[k]);
 
-              if (!pathTraitIds.has(pid))
-                ghostIds.add(pid);
+  const pathTraits = TRAITS_CATALOG.filter(t => t.Path === pathId);
+  const pathTraitIds = new Set(pathTraits.map(t => t.ID));
 
-            });
+  const localTagProviders = {};
+  const localUniqueProviders = {};
+  pathTraits.forEach(t => {
+    (CONSTELLATION_TAGS[t.ID] || []).forEach(tag => {
+      if (!localTagProviders[tag]) localTagProviders[tag] = [];
+      localTagProviders[tag].push(t.ID);
+    });
+    (CONSTELLATION_UNIQUES[t.ID] || []).forEach(unique => {
+      if (!localUniqueProviders[unique]) localUniqueProviders[unique] = [];
+      localUniqueProviders[unique].push(t.ID);
+    });
+  });
 
-          (CONSTELLATION_REQUIRE_TAGS[trait.ID] || [])
-            .forEach(tag => {
-              const localProviders = (localTagProviders[tag] || []).filter(pid => pathTraitIds.has(pid));
-              if (localProviders.length) return;
-              (TAG_PROVIDER_MAP[tag] || [])
-                .forEach(pid => {
-                  if (!pathTraitIds.has(pid)) ghostIds.add(pid);
-                });
-            });
+  // For each external unique/tag requirement, collect all external providers
+  // and group them under one hub per key.
+  pathTraits.forEach(trait => {
+    (CONSTELLATION_REQUIRE_TAGS[trait.ID] || []).forEach(tag => {
+      const localOk = (localTagProviders[tag] || []).some(id => pathTraitIds.has(id));
+      if (localOk) return;
+      const external = (TAG_PROVIDER_MAP[tag] || []).filter(id => !pathTraitIds.has(id));
+      if (!external.length) return;
+      const hubId = `__hub_▲${tag}`;
+      if (!GHOST_HUBS[hubId]) GHOST_HUBS[hubId] = { label: tag, memberIds: new Set(), keys: [`▲${tag}`] };
+      external.forEach(id => GHOST_HUBS[hubId].memberIds.add(id));
+    });
 
-          (CONSTELLATION_REQUIRE_UNIQUES[trait.ID] || [])
-            .forEach(unique => {
-              const localProviders = (localUniqueProviders[unique] || []).filter(pid => pathTraitIds.has(pid));
-              if (localProviders.length) return;
-              (UNIQUE_PROVIDER_MAP[unique] || [])
-                .forEach(pid => {
-                  if (!pathTraitIds.has(pid)) ghostIds.add(pid);
-                });
-            });
+    (CONSTELLATION_REQUIRE_UNIQUES[trait.ID] || []).forEach(unique => {
+      const localOk = (localUniqueProviders[unique] || []).some(id => pathTraitIds.has(id));
+      if (localOk) return;
+      const external = (UNIQUE_PROVIDER_MAP[unique] || []).filter(id => !pathTraitIds.has(id));
+      if (!external.length) return;
+      const hubId = `__hub_★${unique}`;
+      if (!GHOST_HUBS[hubId]) GHOST_HUBS[hubId] = { label: unique, memberIds: new Set(), keys: [`★${unique}`] };
+      external.forEach(id => GHOST_HUBS[hubId].memberIds.add(id));
+    });
 
-        });
-        let ghostCol = 1;
-        ghostIds.forEach(gid => {
-          if (!TREE_COORDINATES[gid]) { TREE_COORDINATES[gid] = { row: layout.rows + 1, col: ghostCol++ }; }
-        });
-        pathTraits.forEach(trait => placeNode(trait, parent, false));
-        ghostIds.forEach(gid => {
-          const ghostTrait = TRAITS_CATALOG.find(t => t.ID === gid);
-          if (ghostTrait) placeNode(ghostTrait, parent, true);
-        });
-        requestAnimationFrame(() => { updateNodeStates(); drawTreeConnections(); });
+    (CONSTELLATION_PREREQS[trait.ID] || []).forEach(pid => {
+      if (pathTraitIds.has(pid)) return;
+      // Direct external trait prereq — give it its own solo hub
+      const hubId = `__hub_trait_${pid}`;
+      if (!GHOST_HUBS[hubId]) {
+        const t = TRAITS_CATALOG.find(x => x.ID === pid);
+        GHOST_HUBS[hubId] = { label: t?.Name || pid, memberIds: new Set([pid]), keys: [] };
       }
+    });
+  });
+}
 
-      function placeNode(trait, parent, isGhost) {
-        const coord = TREE_COORDINATES[trait.ID];
-        if (!coord) return;
-        const layout = PATH_LAYOUTS[selectedPathId] || { rows: 5, cols: 6 };
-        const COLS = layout.cols + 1;
-        const ROWS = layout.rows + (isGhost ? 1 : 0);
-        const btn = document.createElement('button');
-        btn.id = `node-${trait.ID}`;
-        btn.className = 'absolute node-bubble-paths z-10' + (isGhost ? ' ghost-node' : '');
-        btn.style.left = `calc(${(coord.col / COLS) * 100}% - 21px)`;
-        btn.style.top = `calc(${(coord.row / ROWS) * 100}% - 21px)`;
-        btn.style.borderColor = isGhost ? '#334155' : getActionColor(trait.Action);
-        btn.style.opacity = isGhost ? '0.4' : '1';
-        btn.title = '';
-        btn.textContent = getInitials(trait.Name);
-        if (!isGhost) {
-          btn.onclick = () => {
+// Returns the hub ID that represents a given external traitId for a given
+// requirement context (unique/tag key). Falls back to solo hub.
+function getHubForExternalId(externalId, requireKey) {
+  // requireKey e.g. "★Spellcasting" or "▲Melee"
+  if (requireKey) {
+    const hubId = `__hub_${requireKey}`;
+    if (GHOST_HUBS[hubId]?.memberIds.has(externalId)) return hubId;
+  }
+  // fallback: find any hub that contains this member
+  for (const [hubId, hub] of Object.entries(GHOST_HUBS)) {
+    if (hub.memberIds.has(externalId)) return hubId;
+  }
+  return null;
+}
 
-            const state =
-              getTraitUnlockState(trait);
+function renderConstellationNodes(pathId) {
+  const parent = document.getElementById('nodes-container');
+  if (!parent) return;
+  parent.innerHTML = '';
 
-            if (!state.available)
-              return;
+  buildGhostHubs(pathId);
+  assignPathCoordinates(pathId);
 
-            toggleTraitSelection(trait.ID);
-          };
-          btn.onmouseenter = (e) => showTooltip(trait, e);
-          btn.onmousemove = (e) => showTooltip(trait, e);
-          btn.onmouseleave = () => resetTooltip();
-        } else {
-          btn.style.cursor = 'default';
-          btn.onmouseenter = (e) => showTooltip(trait, e);
-          btn.onmousemove = (e) => showTooltip(trait, e);
-          btn.onmouseleave = () => resetTooltip();
-        }
-        parent.appendChild(btn);
-      }
+  const layout = PATH_LAYOUTS[pathId] || { rows: 5, cols: 8 };
+  const pathTraits = TRAITS_CATALOG.filter(t => t.Path === pathId);
+
+  // Place regular nodes
+  pathTraits.forEach(trait => placeNode(trait, parent, false));
+
+  // Place one hub node per consolidated ghost group
+  const hubIds = Object.keys(GHOST_HUBS);
+  const hubCount = hubIds.length;
+  hubIds.forEach((hubId, idx) => {
+    const hub = GHOST_HUBS[hubId];
+    // Position hubs in their own dedicated strip at the very top
+    const spacing = (layout.cols - 2) / Math.max(hubCount, 1);
+    TREE_COORDINATES[hubId] = {
+      row: -0.12,   // above the main tree (normalised, slightly negative)
+      col: 1 + spacing * idx + spacing / 2,
+      _rowNorm: true,
+      _colCount: layout.cols
+    };
+    placeHubNode(hubId, hub, parent, pathId);
+  });
+
+  requestAnimationFrame(() => { updateNodeStates(); drawTreeConnections(); });
+}
+
+function placeHubNode(hubId, hub, parent, path) {
+  const layout = PATH_LAYOUTS[selectedPathId] || { rows: 5, cols: 8 };
+  const coord = TREE_COORDINATES[hubId];
+  if (!coord) return;
+
+  const colCount = coord._colCount || layout.cols;
+  // Normalised row: clamp so hub strip never goes off the top
+  const rawRow = coord.row; // may be slightly negative
+  const topPct = Math.max(2, (rawRow + 0.15) * 80 + 2); // remap -0.12→0.9 to ~2%→74%
+  const leftPct = (coord.col / colCount) * 100;
+
+  // Build member name list for tooltip
+  const memberNames = Array.from(hub.memberIds)
+    .map(id => TRAITS_CATALOG.find(t => t.ID === id)?.Name || id)
+    .join(', ');
+
+  const btn = document.createElement('button');
+  btn.id = `node-${hubId}`;
+  btn.className = 'absolute node-bubble-paths ghost-node z-10';
+  let exception = 11;
+  if (path === 'p12') {
+    exception = 120; // tweak for p12's unique wider layout
+  }
+  else if (path === 'p3') {
+    exception = 90; // tweak for p10's unique tighter layout
+  }
+  else if (path === 'p32') {
+    exception = 90; // tweak for p9's unique tighter layout
+  }
+  btn.style.cssText = `
+    left: calc(${leftPct}% - 21px);
+    top: calc(${topPct}% + ${exception}px);
+    border-style: dashed;
+    border-color: #334155;
+    opacity: 0.55;
+    cursor: default;
+    font-size: 9px;
+    line-height: 1.1;
+    text-align: center;
+    padding: 2px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+  `;
+  // Show a star/tag icon + short label
+  const shortLabel = hub.label.length > 8 ? hub.label.slice(0, 7) + '…' : hub.label;
+  btn.textContent = shortLabel;
+  btn.title = '';
+
+  btn.onmouseenter = (e) => {
+    const el = document.getElementById('node-tooltip-floating');
+    if (!el) return;
+    el.innerHTML = `
+      <div style="font-weight:700;color:var(--gold);font-size:12px">External Requirement</div>
+      <div style="font-size:12px;margin-top:4px;color:var(--ink-dim)">Key: <b style="color:var(--ink)">${hub.label}</b></div>
+      <div style="font-size:11px;margin-top:6px;color:var(--ink-faint)">Satisfied by any of:<br><span style="color:var(--ink)">${memberNames}</span></div>
+      <div style="font-size:10px;margin-top:6px;color:var(--ink-faint)">Unlock one of these traits from another path to meet this requirement.</div>`;
+    el.style.display = 'block';
+    const x = e.clientX + 14, y = e.clientY + 14;
+    el.style.left = Math.min(x, window.innerWidth - 280) + 'px';
+    el.style.top  = Math.min(y, window.innerHeight - 120) + 'px';
+  };
+  btn.onmousemove = btn.onmouseenter;
+  btn.onmouseleave = () => resetTooltip();
+
+  parent.appendChild(btn);
+}
+
+function placeNode(trait, parent, isGhost) {
+  const coord = TREE_COORDINATES[trait.ID];
+  if (!coord) return;
+
+  const layout = PATH_LAYOUTS[selectedPathId] || { rows: 5, cols: 8 };
+  const colCount = coord._colCount || layout.cols;
+
+  let topPct;
+  if (coord._rowNorm) {
+    // row is already 0..1 normalised — map to 10%..88% of viewport
+    topPct = 10 + coord.row * 78;
+  } else {
+    // Legacy integer row
+    const rowCount = layout.rows + 2;
+    topPct = (coord.row / rowCount) * 100;
+  }
+  const leftPct = (coord.col / colCount) * 100;
+
+  const btn = document.createElement('button');
+  btn.id = `node-${trait.ID}`;
+  btn.className = 'absolute node-bubble-paths z-10' + (isGhost ? ' ghost-node' : '');
+  btn.style.left = `calc(${leftPct}% - 21px)`;
+  btn.style.top  = `calc(${topPct}% - 21px)`;
+  btn.style.borderColor = isGhost ? '#334155' : getActionColor(trait.Action);
+  btn.style.opacity = isGhost ? '0.4' : '1';
+  btn.title = '';
+  btn.textContent = getInitials(trait.Name);
+
+  if (!isGhost) {
+    btn.onclick = () => {
+      const state = getTraitUnlockState(trait);
+      if (!state.available) return;
+      toggleTraitSelection(trait.ID);
+    };
+    btn.onmouseenter = (e) => showTooltip(trait, e);
+    btn.onmousemove  = (e) => showTooltip(trait, e);
+    btn.onmouseleave = () => resetTooltip();
+  } else {
+    btn.style.cursor = 'default';
+    btn.onmouseenter = (e) => showTooltip(trait, e);
+    btn.onmousemove  = (e) => showTooltip(trait, e);
+    btn.onmouseleave = () => resetTooltip();
+  }
+
+  parent.appendChild(btn);
+}
 
       function updateNodeStates() {
 
@@ -4006,94 +4163,69 @@
 
 
 
-      function drawTreeConnections() {
+      // ── Updated drawTreeConnections — routes through hub nodes ──────────────────
+function drawTreeConnections() {
+  const canvas   = document.getElementById('svg-canvas');
+  const viewport = document.getElementById('tree-viewport');
+  if (!canvas || !viewport) return;
 
-        const canvas =
-          document.getElementById('svg-canvas');
+  Array.from(canvas.children).forEach(child => {
+    if (child.tagName !== 'defs') canvas.removeChild(child);
+  });
 
-        const viewport =
-          document.getElementById('tree-viewport');
+  const vpRect = viewport.getBoundingClientRect();
+  if (vpRect.width === 0) return;
 
-        if (!canvas || !viewport)
-          return;
+  const visibleIds = new Set(
+    Array.from(document.getElementById('nodes-container')?.querySelectorAll('[id^="node-"]') || [])
+      .map(el => el.id.replace('node-', ''))
+  );
 
-        Array.from(canvas.children)
-          .forEach(child => {
+  const localVisible = TRAITS_CATALOG.filter(t => t.Path === selectedPathId).map(t => t.ID);
+  const localVisibleSet = new Set(localVisible);
 
-            if (child.tagName !== 'defs')
-              canvas.removeChild(child);
+  // Build reverse map: externalTraitId -> hubId
+  const externalToHub = {};
+  Object.entries(GHOST_HUBS).forEach(([hubId, hub]) => {
+    hub.memberIds.forEach(memberId => { externalToHub[memberId] = hubId; });
+  });
 
-          });
-
-        const vpRect =
-          viewport.getBoundingClientRect();
-
-        if (vpRect.width === 0)
-          return;
-
-        const visibleIds = new Set(
-          Array.from(
-            document.getElementById('nodes-container')
-              ?.querySelectorAll('[id^="node-"]') || []
-          ).map(el =>
-            el.id.replace('node-', '')
-          )
-        );
-        const localVisible = TRAITS_CATALOG.filter(t => t.Path === selectedPathId).map(t => t.ID);
-        const localVisibleSet = new Set(localVisible);
-
-        TRAITS_CATALOG
-          .filter(t => visibleIds.has(t.ID))
-          .forEach(child => {
-
-            (CONSTELLATION_PREREQS[child.ID] || [])
-              .forEach(parentId => {
-
-                drawConnection(
-                  canvas,
-                  vpRect,
-                  parentId,
-                  child.ID,
-                  'trait'
-                );
-
-              });
-
-            (CONSTELLATION_REQUIRE_TAGS[child.ID] || [])
-              .forEach(tag => {
-                const all = TAG_PROVIDER_MAP[tag] || [];
-                const localProviders = all.filter(id => localVisibleSet.has(id));
-                const providers = localProviders.length ? localProviders : all.filter(id => visibleIds.has(id));
-                providers.forEach(parentId => {
-                  drawConnection(
-                    canvas,
-                    vpRect,
-                    parentId,
-                    child.ID,
-                    'tag'
-                  );
-                });
-              });
-
-            (CONSTELLATION_REQUIRE_UNIQUES[child.ID] || [])
-              .forEach(unique => {
-                const all = UNIQUE_PROVIDER_MAP[unique] || [];
-                const localProviders = all.filter(id => localVisibleSet.has(id));
-                const providers = localProviders.length ? localProviders : all.filter(id => visibleIds.has(id));
-                providers.forEach(parentId => {
-                  drawConnection(
-                    canvas,
-                    vpRect,
-                    parentId,
-                    child.ID,
-                    'unique'
-                  );
-                });
-              });
-
-          });
-
+  TRAITS_CATALOG.filter(t => visibleIds.has(t.ID)).forEach(child => {
+    // Direct trait prereqs
+    (CONSTELLATION_PREREQS[child.ID] || []).forEach(parentId => {
+      if (localVisibleSet.has(parentId)) {
+        drawConnection(canvas, vpRect, parentId, child.ID, 'trait');
+      } else {
+        const hubId = externalToHub[parentId];
+        if (hubId && visibleIds.has(hubId)) {
+          drawConnection(canvas, vpRect, hubId, child.ID, 'unique');
+        }
       }
+    });
+
+    // Tag requirements
+    (CONSTELLATION_REQUIRE_TAGS[child.ID] || []).forEach(tag => {
+      const localProviders = (TAG_PROVIDER_MAP[tag] || []).filter(id => localVisibleSet.has(id));
+      if (localProviders.length) {
+        localProviders.forEach(pid => drawConnection(canvas, vpRect, pid, child.ID, 'tag'));
+      } else {
+        const hubId = `__hub_▲${tag}`;
+        if (visibleIds.has(hubId)) drawConnection(canvas, vpRect, hubId, child.ID, 'tag');
+      }
+    });
+
+    // Unique requirements
+    (CONSTELLATION_REQUIRE_UNIQUES[child.ID] || []).forEach(unique => {
+      const localProviders = (UNIQUE_PROVIDER_MAP[unique] || []).filter(id => localVisibleSet.has(id));
+      if (localProviders.length) {
+        localProviders.forEach(pid => drawConnection(canvas, vpRect, pid, child.ID, 'unique'));
+      } else {
+        const hubId = `__hub_★${unique}`;
+        if (visibleIds.has(hubId)) drawConnection(canvas, vpRect, hubId, child.ID, 'unique');
+      }
+    });
+  });
+}
 
       (function ensureFloatingTooltip() {
         if (document.getElementById('node-tooltip-floating')) return;
