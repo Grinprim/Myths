@@ -1933,6 +1933,18 @@
         "Description": "When a creature casts a cantrip, cancel the spell.",
         "Upcast": "You may instead impose -4 Accuracy on a non-cantrip spell.",
         "Lore": "Some magic simply refuses to happen."
+    },
+    {
+        "ID": "DC1-X7",
+        "Category": "Divine",
+        "Name": "Holy Shrieker",
+        "Cost": "1",
+        "Type": "Action",
+        "Range": "Touch",
+        "Description": "Perform an attack with your ranged weapon. It deals +[Spell Damage Bonus] Light damage.",
+        "Upcast": "+1 Damage per upcast level.",
+        "Lore": "It screams as it flies, a beacon of faith in the darkness."
     }
+
 
 ]

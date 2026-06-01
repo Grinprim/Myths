@@ -4626,10 +4626,6 @@
           mana_bonus: document.getElementById('mana_bonus')?.value || '0',
           knownSpellIds: Array.from(knownSpellIds),
           customSpells,
-          PATHS_CATALOG,
-          TRAITS_CATALOG,
-          TREE_COORDINATES,
-          CONSTELLATION_PREREQS,
           portraitDataUrl: portraitData
         };
 
@@ -4698,12 +4694,6 @@
         populateSimpleGrid('inv_potions_recipes', data.inv_potions_recipes, 'Potion', 'Recipe');
         populateSimpleGrid('inv_crafts_components', data.inv_crafts_components, 'Component', 'Notes');
         populateSimpleGrid('inv_crafts_recipes', data.inv_crafts_recipes, 'Craft', 'Recipe');
-
-        // Restore catalogs
-        if (data.PATHS_CATALOG) PATHS_CATALOG = data.PATHS_CATALOG;
-        if (data.TRAITS_CATALOG) TRAITS_CATALOG = data.TRAITS_CATALOG;
-        if (data.TREE_COORDINATES) Object.assign(TREE_COORDINATES, data.TREE_COORDINATES);
-        if (data.CONSTELLATION_PREREQS) Object.assign(CONSTELLATION_PREREQS, data.CONSTELLATION_PREREQS);
 
         selectedPathId = data.selectedPathId || "";
         unlockedTraits = new Set(data.unlockedTraits || []);
