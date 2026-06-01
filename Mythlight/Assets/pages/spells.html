@@ -620,23 +620,23 @@
                             <span class="legend-section-label">Sources</span>
                             <div style="display:flex; flex-direction:column; gap:0.3rem;">
                                 <button class="filter-btn" onclick="toggleFilter('category','Arcane')">
-                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../sheet/arcane.png" style="width:16px;height:16px;"> Arcane</span>
+                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../img/arcane.png" style="width:16px;height:16px;"> Arcane</span>
                                     <div class="filter-dot"></div>
                                 </button>
                                 <button class="filter-btn" onclick="toggleFilter('category','Divine')">
-                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../sheet/divine.png" style="width:16px;height:16px;"> Divine</span>
+                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../img/divine.png" style="width:16px;height:16px;"> Divine</span>
                                     <div class="filter-dot"></div>
                                 </button>
                                 <button class="filter-btn" onclick="toggleFilter('category','Occult')">
-                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../sheet/occult.png" style="width:16px;height:16px;"> Occult</span>
+                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../img/occult.png" style="width:16px;height:16px;"> Occult</span>
                                     <div class="filter-dot"></div>
                                 </button>
                                 <button class="filter-btn" onclick="toggleFilter('category','Cosmic')">
-                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../sheet/cosmic.png" style="width:16px;height:16px;"> Cosmic</span>
+                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../img/cosmic.png" style="width:16px;height:16px;"> Cosmic</span>
                                     <div class="filter-dot"></div>
                                 </button>
                                 <button class="filter-btn" onclick="toggleFilter('category','Elemental')">
-                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../sheet/elemental.png" style="width:16px;height:16px;"> Elemental</span>
+                                    <span style="display:flex; align-items:center; gap:0.5rem;"><img src="../img/elemental.png" style="width:16px;height:16px;"> Elemental</span>
                                     <div class="filter-dot"></div>
                                 </button>
                             </div>
@@ -732,36 +732,36 @@
                 <div class="school-orbit-rotor">
                     <article class="orbit-item" style="--angle:0deg;">
                         <div class="orbit-upright" style="--angle:0deg;">
-                            <button type="button" class="school-card school-choice orbit-card school-arcane" onclick="showSchoolDetails('Arcane','../sheet/arcane.png')">
-                                <img src="../sheet/arcane.png" alt="Arcane"><h3>Arcane</h3>
+                            <button type="button" class="school-card school-choice orbit-card school-arcane" onclick="showSchoolDetails('Arcane','../img/arcane.png')">
+                                <img src="../img/arcane.png" alt="Arcane"><h3>Arcane</h3>
                             </button>
                         </div>
                     </article>
                     <article class="orbit-item" style="--angle:72deg;">
                         <div class="orbit-upright" style="--angle:72deg;">
-                            <button type="button" class="school-card school-choice orbit-card school-divine" onclick="showSchoolDetails('Divine','../sheet/divine.png')">
-                                <img src="../sheet/divine.png" alt="Divine"><h3>Divine</h3>
+                            <button type="button" class="school-card school-choice orbit-card school-divine" onclick="showSchoolDetails('Divine','../img/divine.png')">
+                                <img src="../img/divine.png" alt="Divine"><h3>Divine</h3>
                             </button>
                         </div>
                     </article>
                     <article class="orbit-item" style="--angle:144deg;">
                         <div class="orbit-upright" style="--angle:144deg;">
-                            <button type="button" class="school-card school-choice orbit-card school-elemental" onclick="showSchoolDetails('Elemental','../sheet/elemental.png')">
-                                <img src="../sheet/elemental.png" alt="Elemental"><h3>Elemental</h3>
+                            <button type="button" class="school-card school-choice orbit-card school-elemental" onclick="showSchoolDetails('Elemental','../img/elemental.png')">
+                                <img src="../img/elemental.png" alt="Elemental"><h3>Elemental</h3>
                             </button>
                         </div>
                     </article>
                     <article class="orbit-item" style="--angle:216deg;">
                         <div class="orbit-upright" style="--angle:216deg;">
-                            <button type="button" class="school-card school-choice orbit-card school-occult" onclick="showSchoolDetails('Occult','../sheet/occult.png')">
-                                <img src="../sheet/occult.png" alt="Occult"><h3>Occult</h3>
+                            <button type="button" class="school-card school-choice orbit-card school-occult" onclick="showSchoolDetails('Occult','../img/occult.png')">
+                                <img src="../img/occult.png" alt="Occult"><h3>Occult</h3>
                             </button>
                         </div>
                     </article>
                     <article class="orbit-item" style="--angle:288deg;">
                         <div class="orbit-upright" style="--angle:288deg;">
-                            <button type="button" class="school-card school-choice orbit-card school-cosmic" onclick="showSchoolDetails('Cosmic','../sheet/cosmic.png')">
-                                <img src="../sheet/cosmic.png" alt="Cosmic"><h3>Cosmic</h3>
+                            <button type="button" class="school-card school-choice orbit-card school-cosmic" onclick="showSchoolDetails('Cosmic','../img/cosmic.png')">
+                                <img src="../img/cosmic.png" alt="Cosmic"><h3>Cosmic</h3>
                             </button>
                         </div>
                     </article>
@@ -905,7 +905,7 @@
         return `
         <tr onclick="toggleDetails('${rowId}')" class="expandable-row">
             <td style="font-family:'Cinzel',serif; font-size:0.92rem; font-weight:600; color:var(--ink);">
-                <img src="../sheet/${catSlug}.png" style="width:14px;height:14px;display:inline;vertical-align:middle;margin-right:0.4rem;opacity:0.8;">
+                <img src="../img/${catSlug}.png" style="width:14px;height:14px;display:inline;vertical-align:middle;margin-right:0.4rem;opacity:0.8;">
                 ${item.Name}
             </td>
             <td style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--gold);">${item.Cost} ✦</td>
