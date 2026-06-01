@@ -763,6 +763,13 @@
           ]
         }
       }
+    },
+    {
+      "ID": "p33",
+      "name": "Species Traits",
+      "description": "",
+      "breakpoints": {
+      }
     }
   ],
   "traits": [
@@ -1405,7 +1412,7 @@
       "Scaling": "Armor X:\n+2 [lvl 1]\n+3 [lvl 6]\n+4 [lvl 12]"
     },
     {
-      "ID": "t58",
+      "ID": "t323",
       "Name": "Arena’s Crowd Pleaser",
       "Action": "⬖",
       "Path": "p6",
@@ -3583,7 +3590,7 @@
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 3]\n3 [lvl 6]\n4 [lvl 9]"
     },
     {
-      "ID": "t248",
+      "ID": "t445",
       "Name": "Ethereal Step",
       "Action": "⬖",
       "Path": "p27",
@@ -4406,6 +4413,138 @@
       "Parameters": "",
       "Description": "Repair gear during rest. Restored gear gains +1 Damage or +1 Armor, the Bonus has 3 Durability. You can create standard gear during a rest.",
       "Scaling": ""
-    }
+    },
+    {
+      "ID": "t322",
+      "Name": "Human: Adaptive Soul",
+      "Action": "⭘",
+      "Path": "p33",
+      "Cost": "-1",
+      "Symbols": "⧖",
+      "Parameters": "★ Species",
+      "Description": "You gain an additional Trait Point at character creation.",
+      "Scaling": ""
+    },
+    {
+      "ID": "t323",
+      "Name": "Dinqui: Hardened Stone",
+      "Action": "⭘",
+      "Path": "p33",
+      "Cost": "0",
+      "Symbols": "⧖",
+      "Parameters": "★ Species",
+      "Description": "Whenever you reach half health, you gain Guard equal to your Fortitude. This effect refreshes upon reaching full health.",
+      "Scaling": ""
+    },
+    {
+      "ID": "t324",
+      "Name": "Dinqui: Heavy Flight",
+      "Action": "⭘",
+      "Path": "p33",
+      "Cost": "0",
+      "Symbols": "⧖",
+      "Parameters": "★ Species",
+      "Description": "Using your gargoyle wings, you can fly—ignoring floor hazards and moving freely up to 8 units above the ground. Your flight distance is limited by your Movement.",
+      "Scaling": ""
+    },
+    {
+      "ID": "t325",
+      "Name": "Ashten: Aetherblood Surge",
+      "Action": "◇",
+      "Path": "p33",
+      "Cost": "0",
+      "Symbols": "🗲",
+      "Parameters": "★ Species",
+      "Description": "When you take damage, release energy: deal 2 Fire Damage to adjacent enemies and gain +1 Armor for 2 turns.",
+      "Scaling": "Uses 🗲:\n 2 [lvl 1]\n 4 [lvl 6]\n 6 [lvl 12]"
+    },
+    {
+      "ID": "t326",
+      "Name": "Ashten: Surviving Ash",
+      "Action": "⭘",
+      "Path": "p33",
+      "Cost": "0",
+      "Symbols": "⧖",
+      "Parameters": "★ Species",
+      "Description": "When healed, gain 1 stack of Mantra. Outside combat, regenerate 1 health per hour.",
+      "Scaling": ""
+    },
+    {
+      "ID": "t327",
+      "Name": "Khraa: Fourfold Precision",
+      "Action": "⭘",
+      "Path": "p33",
+      "Cost": "0",
+      "Symbols": "⧖",
+      "Parameters": "★ Species",
+      "Description": "You may wield an additional one-handed weapon or perform two off-hand attacks per turn. Gain +1 Accuracy on all melee attacks made while dual wielding or climbing.",
+      "Scaling": ""
+    },
+    {
+      "ID": "t328",
+      "Name": "Eladri: Wild: Starlit Anima",
+      "Action": "⬖",
+      "Path": "p33",
+      "Cost": "0",
+      "Symbols": "⧖",
+      "Parameters": "★ Species",
+      "Description": "Spend 1 Mana to gain +2 Reflex or +2 Accuracy for 2 Scenes.",
+      "Scaling": ""
+    },
+    {
+      "ID": "t329",
+      "Name": "Eladri: Wild: Mortal Knowledge",
+      "Action": "⬖",
+      "Path": "p33",
+      "Cost": "0",
+      "Symbols": "🗲",
+      "Parameters": "★ Species",
+      "Description": "Spend X Mana to gain +X on a check.",
+      "Scaling": "Uses 🗲: \n1 [lvl 1] \n2 [lvl 3] \n3 [lvl 6] \n4 [lvl 9]"
+    },
+    {
+  "ID": "t330",
+  "Name": "Eladri: Astral: Starlit Knowledge",
+  "Action": "⬖",
+  "Path": "p33",
+  "Cost": "0",
+  "Symbols": "⧖",
+  "Parameters": "★ Species",
+  "Description": "Spend 1 Mana to gain +2 Arcana or +2 Accuracy for 2 Scenes.",
+  "Scaling": ""
+},
+{
+  "ID": "t331",
+  "Name": "Eladri: Astral: Astral Knowledge",
+  "Action": "◇",
+  "Path": "p33",
+  "Cost": "0",
+  "Symbols": "🗲",
+  "Parameters": "★ Species",
+  "Description": "When receiving an Accuracy bonus, you can instead gain Mana equal to half that amount, rounded up.",
+  "Scaling": "Uses 🗲: \n2 [lvl 1] \n4 [lvl 6] \n6 [lvl 12]"
+},
+{
+  "ID": "t332",
+  "Name": "Rokana: Pelagic: Aquatic Combatant",
+  "Action": "⬖",
+  "Path": "p33",
+  "Cost": "0",
+  "Symbols": "🗲",
+  "Parameters": "★ Species",
+  "Description": "While swimming you have +3 Speed. You may activate this bonus on land, where it lasts for 2 Scenes.",
+  "Scaling": "Uses 🗲: \n2 [lvl 1] \n3 [lvl 3] \n4 [lvl 6] \n5 [lvl 9] \n6 [lvl 12]"
+},
+{
+  "ID": "t333",
+  "Name": "Rokana: Chthonic: Durable Chitin",
+  "Action": "◇",
+  "Path": "p33",
+  "Cost": "0",
+  "Symbols": "⧖",
+  "Parameters": "★ Species",
+  "Description": "When you take damage, you may reduce it by your level. If you do, reduce your Speed by X until your next turn.",
+  "Scaling": "Speed X: \n1 [lvl 1] \n2 [lvl 3] \n3 [lvl 6] \n4 [lvl 9] \n5 [lvl 12]"
+}
   ]
 }
