@@ -3041,7 +3041,7 @@
         const setValue = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
         setValue('spell_cs_display', hasSpellStats ? `CS ${challengeScore}` : 'CS —');
         setValue('spell_atk_display', hasSpellStats ? `ATK ${attackBonus >= 0 ? '+' + attackBonus : attackBonus}` : 'ATK —');
-        setValue('spell_dmg_display', hasSpellStats ? `DMG ${damageBonus >= 0 ? '+' + damageBonus : damageBonus}` : 'DMG —');
+        setValue('spell_dmg_display', hasSpellStats ? `DMG/HEAL ${damageBonus >= 0 ? '+' + damageBonus : damageBonus}` : 'DMG/HEAL —');
         setValue('scholarship-spell-cap', hasNumberInput('mind_scholarship_mod') || hasNumberInput('mind_base') ? `${scholarshipCap}` : '—');
         setValue('known-spells-cap', hasNumberInput('mind_scholarship_mod') || hasNumberInput('mind_base') ? `${knownCap}` : '—');
         setValue('known-spells-count', `${knownCount}`);
@@ -3636,7 +3636,7 @@
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer" style="color:var(--ink)">
                   <input type="radio" name="choice_${key}" value="stat" ${isStatChoice ? 'checked' : ''} onchange="setBreakpointChoice('${key}','stat')" style="accent-color:var(--gold)">
-                  <span>Allocate +1 Attribute Point</span>
+                  <span>Allocate +1 Feat Point</span>
                 </label>
               </div>
               ${statDropdown}
@@ -3646,7 +3646,7 @@
             <div class="absolute w-2.5 h-2.5 rounded-full border" style="left:-23px;top:14px;border-color:${achieved ? 'var(--gold)' : '#334155'};background:rgba(6,10,20,0.8)"></div>
             <div class="flex items-center justify-between">
               <h4 class="text-xs font-bold" style="color:${achieved ? 'var(--gold)' : 'var(--ink-faint)'};font-family:'Cinzel',serif">Breakpoint (${b.investment} Traits)</h4>
-              ${achieved ? `<span class="text-[8px] px-1.5 py-0.5 rounded uppercase font-bold" style="background:var(--gold-dim);border:1px solid var(--gold-line);color:var(--gold)">${isStatChoice ? '+1 Stat' : 'Passive'}</span>` : ''}
+              ${achieved ? `<span class="text-[8px] px-1.5 py-0.5 rounded uppercase font-bold" style="background:var(--gold-dim);border:1px solid var(--gold-line);color:var(--gold)">${isStatChoice ? '+1 Feat' : 'Passive'}</span>` : ''}
             </div>
             <p class="text-[10px] mt-1 leading-normal ${isStatChoice ? 'line-through' : ''}" style="color:var(--ink-dim)">${b.description}</p>
             ${selectorHTML}`;
