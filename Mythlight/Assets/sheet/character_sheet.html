@@ -702,7 +702,7 @@
     }
 
     .notes-panel textarea {
-      flex: 1;
+      flex: 0 0 auto;
       min-height: 120px;
       padding: 8px 10px;
     }
@@ -1478,6 +1478,11 @@
       font-size: 11px;
       color: var(--ink);
       width: 100%;
+    }
+
+    .inv-simple-slot textarea {
+      min-height: 52px;
+      line-height: 1.35;
     }
 
     .paths-panel {
@@ -2924,7 +2929,12 @@
       function getSpellById(id) { return getSpellLibrary().find(s => s.ID === id); }
       function getSchoolIconPath(school) { return SCHOOL_ICON_MAP[(school || '').toLowerCase()] || SCHOOL_ICON_MAP.occult; }
 
-      function autoExpandTextarea(element) { element.style.height = 'auto'; element.style.height = (element.scrollHeight) + 'px'; }
+      function autoExpandTextarea(element) {
+        if (!element) return;
+        const minHeight = parseFloat(getComputedStyle(element).minHeight) || 0;
+        element.style.height = 'auto';
+        element.style.height = Math.max(element.scrollHeight, minHeight) + 'px';
+      }
 
       function val(id) { const e = document.getElementById(id); return e ? (parseFloat(e.value) || 0) : 0; }
       function hasNumberInput(id) { const e = document.getElementById(id); return !!(e && e.value !== ''); }
@@ -3135,6 +3145,40 @@
       let edState = { ox: 0, oy: 0, scale: 1, dragging: false, lastX: 0, lastY: 0 };
       const PORT_SIZE = 160;
       const EDITOR_SIZE = 220;
+      let zoomLimits = { min: 0.5, max: 4 };
+
+      function getZoomLimits() { return zoomLimits; }
+
+      function clampEditorState() {
+        if (!portraitImg) return;
+        const scaledW = portraitImg.width * edState.scale;
+        const scaledH = portraitImg.height * edState.scale;
+        if (scaledW <= EDITOR_SIZE) {
+          edState.ox = (EDITOR_SIZE - scaledW) / 2;
+        } else {
+          const minX = EDITOR_SIZE - scaledW;
+          edState.ox = Math.min(0, Math.max(minX, edState.ox));
+        }
+        if (scaledH <= EDITOR_SIZE) {
+          edState.oy = (EDITOR_SIZE - scaledH) / 2;
+        } else {
+          const minY = EDITOR_SIZE - scaledH;
+          edState.oy = Math.min(0, Math.max(minY, edState.oy));
+        }
+      }
+
+      function setEditorScale(newScale, anchorX, anchorY) {
+        const { min, max } = getZoomLimits();
+        const clamped = Math.max(min, Math.min(max, newScale));
+        const ratio = clamped / edState.scale;
+        edState.ox = anchorX - (anchorX - edState.ox) * ratio;
+        edState.oy = anchorY - (anchorY - edState.oy) * ratio;
+        edState.scale = clamped;
+        clampEditorState();
+        const slider = document.getElementById('zoomSlider');
+        if (slider) slider.value = clamped;
+        drawEditorCanvas();
+      }
 
       function openPortraitEditor() {
         // Just open file picker; portrait editor opens after file selected
@@ -3154,7 +3198,17 @@
             edState.scale = fitScale;
             edState.ox = (EDITOR_SIZE - img.width * fitScale) / 2;
             edState.oy = (EDITOR_SIZE - img.height * fitScale) / 2;
-            document.getElementById('zoomSlider').value = fitScale;
+            const maxDim = Math.max(img.width, img.height);
+            const minZoom = Math.max(0.05, (EDITOR_SIZE * 0.35) / maxDim);
+            const maxZoom = Math.max(4, fitScale * 1.5);
+            zoomLimits = { min: Math.min(minZoom, fitScale), max: maxZoom };
+            const slider = document.getElementById('zoomSlider');
+            if (slider) {
+              slider.min = zoomLimits.min.toFixed(3);
+              slider.max = zoomLimits.max.toFixed(2);
+              slider.value = fitScale.toFixed(2);
+            }
+            clampEditorState();
             document.getElementById('portraitModal').classList.add('open');
             drawEditorCanvas();
           };
@@ -3179,13 +3233,11 @@
 
       function editorZoomFromSlider() {
         const slider = document.getElementById('zoomSlider');
+        if (!slider) return;
         const newScale = parseFloat(slider.value);
         // Zoom toward center of editor
         const cx = EDITOR_SIZE / 2, cy = EDITOR_SIZE / 2;
-        edState.ox = cx - (cx - edState.ox) * (newScale / edState.scale);
-        edState.oy = cy - (cy - edState.oy) * (newScale / edState.scale);
-        edState.scale = newScale;
-        drawEditorCanvas();
+        setEditorScale(newScale, cx, cy);
       }
 
       // Wire up drag events on the viewport div
@@ -3211,6 +3263,7 @@
             edState.oy += dy;
             edState.lastX = e.clientX;
             edState.lastY = e.clientY;
+            clampEditorState();
             drawEditorCanvas();
           });
 
@@ -3227,17 +3280,11 @@
             if (!portraitImg) return;
             e.preventDefault();
             const delta = e.deltaY > 0 ? 0.92 : 1.08;
-            const newScale = Math.max(0.5, Math.min(4, edState.scale * delta));
             // Zoom toward mouse position
             const rect = vp.getBoundingClientRect();
             const mx = e.clientX - rect.left;
             const my = e.clientY - rect.top;
-            edState.ox = mx - (mx - edState.ox) * (newScale / edState.scale);
-            edState.oy = my - (my - edState.oy) * (newScale / edState.scale);
-            edState.scale = newScale;
-            const slider = document.getElementById('zoomSlider');
-            if (slider) slider.value = newScale;
-            drawEditorCanvas();
+            setEditorScale(edState.scale * delta, mx, my);
           }, { passive: false });
 
           // Touch support
@@ -3264,21 +3311,16 @@
               edState.ox += dx; edState.oy += dy;
               lastTouchX = e.touches[0].clientX;
               lastTouchY = e.touches[0].clientY;
+              clampEditorState();
               drawEditorCanvas();
             } else if (e.touches.length === 2 && lastTouchDist !== null) {
               const dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-              const newScale = Math.max(0.5, Math.min(4, edState.scale * (dist / lastTouchDist)));
               const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
               const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2;
               const rect = vp.getBoundingClientRect();
               const mx = cx - rect.left, my = cy - rect.top;
-              edState.ox = mx - (mx - edState.ox) * (newScale / edState.scale);
-              edState.oy = my - (my - edState.oy) * (newScale / edState.scale);
-              edState.scale = newScale;
+              setEditorScale(edState.scale * (dist / lastTouchDist), mx, my);
               lastTouchDist = dist;
-              const slider = document.getElementById('zoomSlider');
-              if (slider) slider.value = newScale;
-              drawEditorCanvas();
             }
             e.preventDefault();
           }, { passive: false });
