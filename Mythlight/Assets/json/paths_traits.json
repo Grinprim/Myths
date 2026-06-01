@@ -1412,7 +1412,7 @@
       "Scaling": "Armor X:\n+2 [lvl 1]\n+3 [lvl 6]\n+4 [lvl 12]"
     },
     {
-      "ID": "t323",
+      "ID": "t336",
       "Name": "Arena’s Crowd Pleaser",
       "Action": "⬖",
       "Path": "p6",
@@ -1506,7 +1506,7 @@
       "Path": "p6",
       "Cost": "2",
       "Symbols": "🗲",
-      "Parameters": "⫘ ★req Spellcasting",
+      "Parameters": "⫘ Scarlet Essence & ★req Spellcasting",
       "Description": "Spend up to your level health to add that much Damage or Healing to your next spell. If the spell kills an enemy, regain half the Health spent.",
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 3]\n3 [lvl 6]\n4 [lvl 9]"
     },
@@ -1709,7 +1709,7 @@
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 3]\n3 [lvl 6]\n4 [lvl 9]"
     },
     {
-      "ID": "t322",
+      "ID": "t335",
       "Name": "Answered Prayer",
       "Action": "⭘",
       "Path": "p8",
@@ -2710,7 +2710,7 @@
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
     },
     {
-      "ID": "t173",
+      "ID": "t334",
       "Name": "All For One",
       "Action": "⭘",
       "Path": "p17",
@@ -3894,7 +3894,7 @@
       "Cost": "1",
       "Symbols": "☀",
       "Parameters": "",
-      "Description": "During a rest, you may attempt to create potions from your known potions list. You know a number of potion recipes equal to your level (rounded up), gain +X to brewing related checks.",
+      "Description": "During a rest, you can brew non-simple potions. You know all Medium Recipes with both ingredients being the same Aspect, in addition you know a number of bonus potion recipes, equal to your level. You gain +X to brewing related checks.",
       "Scaling": "Bonus X:\n+0 [lvl 1]\n+1 [lvl 3]\n+2 [lvl 6]\n+3 [lvl 9]\n+4 [lvl 12]"
     },
     {
