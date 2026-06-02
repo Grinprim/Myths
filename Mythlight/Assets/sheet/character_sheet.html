@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Mythlight Character Sheet</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style id="external-styles">
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600;700&display=swap');
 
@@ -22,9 +21,9 @@
       --ink: #e8e4dc;
       --ink-dim: #9a9488;
       --ink-faint: #5a5650;
-      --gold: #c9a84c;
-      --gold-dim: rgba(201, 168, 76, 0.18);
-      --gold-line: rgba(201, 168, 76, 0.30);
+    --gold:        #c9a84c;
+    --gold-dim:    rgba(201,168,76,0.18);
+    --gold-line:   rgba(201,168,76,0.30);
       --indigo: #818cf8;
       --indigo-dim: rgba(129, 140, 248, 0.12);
       --red: #f87171;
@@ -45,17 +44,25 @@
       --muted: #94a3b8;
       --input-bg: #111a2b;
       --input-border: #4b5a74;
-      --rad: 6px;
+      --rad: 0px;
       --sheet-scale: 1;
       --bubble-size: 26px;
       --clr-body: #ef4444;
       --clr-skill: #10b981;
       --clr-mind: #a855f7;
       --clr-style: #ec4899;
+          --border-gold: rgba(201,168,76,0.25);
 
       --bp-glow: #818cf8;
       --bp-glow-dim: rgba(129, 140, 248, 0.2);
     }
+
+
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-gold); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+* { scrollbar-width: thin; scrollbar-color: var(--gold-line); }
 
     body {
       font-family: 'Inter', 'Crimson Pro', sans-serif;
@@ -63,10 +70,32 @@
       color: var(--ink);
       font-size: 14px;
       line-height: 1.4;
-      padding: 14px;
+      padding: 0px;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
+
+    .cosmos { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .nebula {
+      position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
+      background: radial-gradient(circle at 25% 35%, rgba(99,102,241,0.13), transparent 45%),
+                  radial-gradient(circle at 75% 65%, rgba(168,85,247,0.09), transparent 50%),
+                  radial-gradient(circle at 50% 10%, rgba(201,168,76,0.05), transparent 40%);
+      filter: blur(80px);
+      animation: driftNebula 140s linear infinite;
+    }
+    @keyframes driftNebula { from { transform: translate(0,0) scale(1); } to { transform: translate(-8%,-8%) scale(1.08); } }
+
+    .stars { position: absolute; inset: 0; }
+    .stars.layer1 { width: 2px; height: 2px; background: white; box-shadow: 250px 150px rgba(255,255,255,.7), 650px 320px rgba(255,255,255,.5), 1050px 480px rgba(255,255,255,.6), 450px 720px rgba(255,255,255,.4), 1350px 280px rgba(255,255,255,.7), 850px 650px rgba(255,255,255,.5), 1450px 550px rgba(255,255,255,.6); }
+    .stars.layer2 { width: 2px; height: 2px; background: white; box-shadow: 180px 420px rgba(255,255,255,.4), 720px 180px rgba(255,255,255,.5), 980px 620px rgba(255,255,255,.4), 380px 880px rgba(255,255,255,.3), 1580px 320px rgba(255,255,255,.5), 780px 580px rgba(255,255,255,.4), 1180px 420px rgba(255,255,255,.3); }
+
+    .shooting-star { position: absolute; width: 2px; height: 2px; background: white; opacity: 0; transform: rotate(-35deg); }
+    .shooting-star::after { content: ""; position: absolute; width: 100px; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,.8), transparent); }
+    @keyframes shoot { 0% { opacity: 0; transform: translate(0,0) rotate(-35deg); } 10% { opacity: .7; } 100% { opacity: 0; transform: translate(-800px,400px) rotate(-35deg); } }
+    .s1 { top: 20%; left: 80%; animation: shoot 6s linear infinite; animation-delay: 2s; }
+    .s2 { top: 40%; left: 60%; animation: shoot 8s linear infinite; animation-delay: 5s; }
+    .s3 { top: 10%; left: 50%; animation: shoot 7s linear infinite; animation-delay: 8s; }
 
     .sheet h1,
     .sheet h2,
@@ -88,15 +117,27 @@
       z-index: 1;
     }
 
-    .nav-container {
-      position: relative;
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(6, 10, 20, 0.92));
-      border-bottom: 1px solid var(--gold-line);
-      box-shadow: 0 16px 28px rgba(2, 6, 23, 0.45);
-      border-radius: 16px;
-      margin: 10px 10px 0;
-      overflow: hidden;
-    }
+    .nav-glass,
+.nav-container {
+    background: rgba(6,10,20,0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-gold);
+    transition: all 0.3s ease;
+}
+
+.nav-link {
+    position: relative;
+    color: var(--ink-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.25s ease;
+}
+
+.nav-link:hover  { color: var(--ink); }
+.nav-link.active { color: var(--gold); }
 
     .nav-container::before {
       content: '';
@@ -128,7 +169,7 @@
       margin: 0 auto 24px;
       background: linear-gradient(135deg, rgba(38, 50, 71, 0.95) 0%, rgba(21, 31, 48, 0.95) 100%);
       border: 2px solid var(--gold-line);
-      border-radius: 10px;
+      border-radius: 0px;
       overflow: hidden;
       box-shadow: 0 24px 48px rgba(2, 6, 23, 0.6), 0 0 0 1px rgba(201, 168, 76, 0.08);
     }
@@ -718,7 +759,7 @@
     .armor-card {
       padding: 12px;
       border: 1.5px solid rgba(201, 168, 76, 0.15);
-      border-radius: 12px;
+      border-radius: 0px;
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.3) 100%);
       display: flex;
       flex-direction: column;
@@ -745,9 +786,9 @@
       width: 44px;
       height: 44px;
       padding: 4px;
-      border-radius: 10px;
-      border: 1px solid rgba(201, 168, 76, 0.15);
-      background: rgba(6, 10, 20, 0.4);
+      border-radius: 9999px;
+      border: transparent;
+      background: radial-gradient(circle,rgb(4, 6, 17) 0%, rgba(252, 70, 107, 0) 70%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -967,7 +1008,7 @@
       border: 1px solid var(--gold-line);
       color: var(--gold);
       padding: 2px 6px;
-      border-radius: 4px;
+      border-radius: 0px;
       font-size: 10px;
       transition: all 0.2s;
       cursor: pointer;
@@ -1006,7 +1047,7 @@
     .modal-box {
       background: #1a2538;
       border: 2px solid var(--gold-line);
-      border-radius: 12px;
+      border-radius: 0px;
       padding: 20px;
       display: flex;
       flex-direction: column;
@@ -1113,7 +1154,7 @@
       color: var(--ink);
       border: 1px solid rgba(201, 168, 76, 0.1);
       padding: 6px 14px;
-      border-radius: 999px;
+      border-radius: 0px;
       font-size: 12px;
       cursor: pointer;
       transition: all 0.2s;
@@ -1123,6 +1164,7 @@
     .subtab.active {
       background: var(--gold-dim);
       border-color: var(--gold-line);
+      border-bottom: 2px solid var(--gold) !important;
       box-shadow: 0 0 10px rgba(201, 168, 76, 0.2);
       color: var(--gold);
     }
@@ -1134,7 +1176,7 @@
     .spell-stats-panel {
       background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(6, 10, 20, 0.5) 100%);
       border: 1px solid rgba(168, 85, 247, 0.22);
-      border-radius: 8px;
+      border-radius: 0px;
       padding: 12px;
     }
 
@@ -1158,7 +1200,7 @@
       gap: 10px;
       width: 100%;
       padding: 10px 11px;
-      border-radius: 10px;
+      border-radius: 0px;
       border: 1px solid var(--border-med);
       background: rgba(6, 10, 20, 0.55);
       color: var(--ink);
@@ -1213,7 +1255,7 @@
 
     .spell-tracker .tracker-box {
       border: 1px solid var(--border-med);
-      border-radius: 10px;
+      border-radius: 0px;
       background: rgba(6, 10, 20, 0.45);
       padding: 10px;
       display: flex;
@@ -1265,7 +1307,7 @@
       color: var(--indigo);
       background: var(--indigo-dim);
       border: 1px solid rgba(129, 140, 248, 0.3);
-      border-radius: 4px;
+      border-radius: 0px;
       height: 28px;
       line-height: 28px;
     }
@@ -1276,7 +1318,7 @@
       text-align: center;
       font-size: 11px;
       border: 1px solid rgba(201, 168, 76, 0.2);
-      border-radius: 4px;
+      border-radius: 0px;
       background: rgba(6, 10, 20, 0.6);
       color: var(--ink);
       padding: 0;
@@ -1308,14 +1350,14 @@
       padding: 14px;
       border-right: 1px solid var(--border-med);
       background: rgba(15, 23, 42, 0.35);
-      border-radius: 8px;
+      border-radius: 0px;
     }
 
     .inv-center {
       display: flex;
       flex-direction: column;
       background: rgba(15, 23, 42, 0.2);
-      border-radius: 8px;
+      border-radius: 0px;
       padding: 14px;
       border: 1px solid rgba(255, 255, 255, 0.03);
     }
@@ -1664,6 +1706,17 @@
   </style>
 </head>
 
+<!-- Cosmos -->
+  <div class="cosmos">
+    <div class="nebula"></div>
+    <div class="stars layer1"></div>
+    <div class="stars layer2"></div>
+    <div class="shooting-star s1"></div>
+    <div class="shooting-star s2"></div>
+    <div class="shooting-star s3"></div>
+  </div>
+
+
 <body>
   <div class="site-scale">
     <nav class="w-full z-50 nav-container">
@@ -1680,6 +1733,8 @@
           <a style="padding-top:5px;color:var(--ink-dim)" href="../pages/rules.html" class="nav-link">Rules</a>
           <a style="padding-top:5px;color:var(--ink-dim)" href="../pages/species.html" class="nav-link">Species</a>
           <a style="padding-top:5px;color:var(--ink-dim)" href="../pages/paths.html" class="nav-link">Paths</a>
+          <a style="padding-top:5px;color:var(--ink-dim)" href="../pages/spells.html" class="nav-link">Spells</a>
+          <a style="padding-top:5px;color:var(--ink-dim)" href="../pages/inventory.html" class="nav-link">Inventory</a>
           <a style="padding-top:5px;color:var(--gold)" href="../sheet/character_sheet.html"
             class="nav-link active">Character Sheet</a>
         </div>
@@ -1695,6 +1750,10 @@
         <div class="flex flex-col text-sm font-semibold uppercase tracking-widest p-4 space-y-3">
           <a href="../index.html" style="color:var(--ink-dim)">Home</a>
           <a href="../pages/rules.html" style="color:var(--ink-dim)">Rules</a>
+          <a href="../pages/species.html" style="color:var(--ink-dim)">Species</a>
+          <a href="../pages/paths.html" style="color:var(--ink-dim)">Paths</a>
+          <a href="../pages/spells.html" style="color:var(--ink-dim)">Spells</a>
+          <a href="../pages/inventory.html" style="color:var(--ink-dim)">Inventory</a>
           <a href="../sheet/character_sheet.html" style="color:var(--gold)">Character Sheet</a>
         </div>
       </div>
@@ -3179,7 +3238,7 @@
               <div style="display:flex;align-items:center;gap:6px;">
                 <label class="wlabel">Ammo</label>
                 <span id="ammo-count-${w.id}" style="font-size:9px;color:var(--gold);font-family:'JetBrains Mono',monospace">${curAmmo}/${Math.max(maxAmmo, 0)}</span>
-                <button onclick="refillAmmo(${w.id})" style="font-size:9px;padding:1px 5px;border:1px solid var(--gold-line);background:var(--gold-dim);color:var(--gold);border-radius:3px;cursor:pointer;">Refill</button>
+                <button onclick="refillAmmo(${w.id})" style="font-size:9px;padding:1px 5px;border:1px solid var(--gold-line);background:var(--gold-dim);color:var(--gold);border-radius:0px;cursor:pointer;">Refill</button>
               </div>
               <div class="ammo-pip-row" id="ammo-pips-${w.id}">${pipsHtml}</div>
             </div>`;
@@ -4318,7 +4377,7 @@
         if (document.getElementById('node-tooltip-floating')) return;
         const el = document.createElement('div');
         el.id = 'node-tooltip-floating';
-        el.style.cssText = 'position:fixed;z-index:60;display:none;max-width:360px;background:rgba(6,10,20,0.95);border:1px solid var(--border-med);padding:10px;border-radius:8px;color:var(--ink);box-shadow:0 6px 18px rgba(0,0,0,0.6);pointer-events:none';
+        el.style.cssText = 'position:fixed;z-index:60;display:none;max-width:360px;background:rgba(6,10,20,0.95);border:1px solid var(--border-med);padding:10px;border-radius:0px;color:var(--ink);box-shadow:0 6px 18px rgba(0,0,0,0.6);pointer-events:none';
         document.body.appendChild(el);
       })();
 
@@ -4382,7 +4441,7 @@
     const scalingHtml = scalingLines.length
       ? `<div style="display:flex;flex-direction:column;gap:2px">${scalingLines.map(l => `<div style="font-family:monospace;color:var(--indigo);font-size:12px">${esc(l)}</div>`).join('')}</div>`
       : '<span>—</span>';
-    const actionHtml = `<div style="display:inline-flex;align-items:center;gap:8px"><div style="width:26px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;background:${getActionColor(t.Action)};color:#060a14;font-weight:700">${esc(t.Action)}</div><div style="font-size:11px;color:var(--ink-faint)">${getActionLabel(t.Action)}</div></div>`;
+    const actionHtml = `<div style="display:inline-flex;align-items:center;gap:8px"><div style="width:26px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:0px;background:${getActionColor(t.Action)};color:#060a14;font-weight:700">${esc(t.Action)}</div><div style="font-size:11px;color:var(--ink-faint)">${getActionLabel(t.Action)}</div></div>`;
     tr.innerHTML = `<td class="p-3 text-sm font-semibold" style="color:var(--ink)">${esc(t.Name)}</td><td class="p-3 text-sm">${actionHtml}</td><td class="p-3 text-sm">${scalingHtml}</td><td class="p-3 text-sm leading-tight text-slate-300">${esc(t.Description)}</td>`;
     tbody.appendChild(tr);
   });

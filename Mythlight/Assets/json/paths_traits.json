@@ -3443,7 +3443,7 @@
       "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "",
-      "Description": "Weapons that require at least 3 might to weald, deal +X Damage, but suffer -3 Accuracy",
+      "Description": "Weapons that require at least 3 might to wield, deal +X Damage, but suffer -3 Accuracy",
       "Scaling": "Damage X:\n+2 [lvl 1]\n+3 [lvl 6]\n+4 [lvl 12]"
     },
     {
