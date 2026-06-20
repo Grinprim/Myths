@@ -777,7 +777,7 @@
   "description": "",
   "breakpoints": {
     "breakpoint_1": {
-      "investment": 3,
+      "investment": 1,
       "description": "Basic Transformation: You may transform into non-magical, non-mystical creatures.",
       "alternative_feat_bonuses": [
         {
@@ -786,7 +786,7 @@
       ]
     },
     "breakpoint_2": {
-      "investment": 6,
+      "investment": 3,
       "description": "Magical Transformation: You may transform into magical beasts.",
       "alternative_feat_bonuses": [
         {
@@ -795,7 +795,7 @@
       ]
     },
     "breakpoint_3": {
-      "investment": 9,
+      "investment": 6,
       "description": "Mythical Transformation: You may transform into mythical beasts.",
       "alternative_feat_bonuses": [
         {
