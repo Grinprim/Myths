@@ -770,7 +770,41 @@
       "description": "",
       "breakpoints": {
       }
+    },
+    {
+  "ID": "p34",
+  "name": "Path of the Transformist",
+  "description": "",
+  "breakpoints": {
+    "breakpoint_1": {
+      "investment": 3,
+      "description": "Basic Transformation: You may transform into non-magical, non-mystical creatures.",
+      "alternative_feat_bonuses": [
+        {
+          "feat": "+1 feat point in any Body or Mind feat."
+        }
+      ]
+    },
+    "breakpoint_2": {
+      "investment": 6,
+      "description": "Magical Transformation: You may transform into magical beasts.",
+      "alternative_feat_bonuses": [
+        {
+          "feat": "+1 feat point in any Mind feat."
+        }
+      ]
+    },
+    "breakpoint_3": {
+      "investment": 9,
+      "description": "Mythical Transformation: You may transform into mythical beasts.",
+      "alternative_feat_bonuses": [
+        {
+          "feat": "+2 feat points in any different Body or Mind feat."
+        }
+      ]
     }
+  }
+}
   ],
   "traits": [
     {
@@ -1973,17 +2007,6 @@
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
     },
     {
-      "ID": "t108",
-      "Name": "Cantrip Adept",
-      "Action": "⭘",
-      "Path": "p11",
-      "Cost": "1",
-      "Symbols": "🗲",
-      "Parameters": "⫘ ★req Spellcasting",
-      "Description": "You learn 2 additional cantrips from your chosen spellcasting type. If you have chosen cosmic, learn one extra spell instead.",
-      "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]"
-    },
-    {
       "ID": "t109",
       "Name": "Spell Interface",
       "Action": "⭘",
@@ -2579,17 +2602,6 @@
     },
     {
       "ID": "t163",
-      "Name": "Drift Distance",
-      "Action": "⭘",
-      "Path": "p16",
-      "Cost": "2",
-      "Symbols": "⧖",
-      "Parameters": "",
-      "Description": "All your dashes have bonus tiles of movement equal to half your speed over 5 (rounded up).",
-      "Scaling": ""
-    },
-    {
-      "ID": "t164",
       "Name": "Drift Distance",
       "Action": "⭘",
       "Path": "p16",
@@ -4041,17 +4053,6 @@
       "Scaling": ""
     },
     {
-      "ID": "t342",
-      "Name": "Feat Forward",
-      "Action": "⭘",
-      "Path": "p31",
-      "Cost": "1",
-      "Symbols": "⧖",
-      "Parameters": "",
-      "Description": "You gain 2 Feat points.",
-      "Scaling": ""
-    },
-    {
       "ID": "t295",
       "Name": "Carrying Mule",
       "Action": "⭘",
@@ -4479,6 +4480,105 @@
   "Parameters": "★ Species",
   "Description": "When you take damage, you may reduce it by your level. If you do, reduce your Speed by X until your next turn.",
   "Scaling": "Speed X: \n1 [lvl 1] \n2 [lvl 3] \n3 [lvl 6] \n4 [lvl 9] \n5 [lvl 12]"
-}
+},
+{
+    "ID": "t344",
+    "Name": "Beastial Metamorphosis",
+    "Action": "⬖",
+    "Path": "p34",
+    "Cost": "2",
+    "Symbols": "🗲",
+    "Parameters": "★ Transformation",
+    "Description": "You can transform into any creature you qualify to become. The transformation lasts 1 hour or until you become unconscious. When the hour ends, you may extend the transformation by rolling [Fortitude] vs [6 + hours extended]. On a failure, you suffer a negative side effect determined by the Narrator.<br><br>While transformed, your Health, Armor, Movement, and Core Attributes are replaced by the creature's. You cannot use your gear or equipment unless the form can reasonably wield it.<br><br>When the transformation ends, you return to the exact state you were in before transforming.",
+    "Scaling": "Uses 🗲:\n2 [lvl 1]\n4 [lvl 3]\n6 [lvl 6]\n8 [lvl 9]\n10 [lvl 12]"
+  },
+  {
+    "ID": "t345",
+    "Name": "Partial Transformist",
+    "Action": "⭘",
+    "Path": "p34",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★req Transformation",
+    "Description": "You may choose to only partially transform, choosing to gain either:<br>- The Creatures Movement<br><br>- 1 of the Creatures Core Attributes<br><br>- Half of the Creatures Health as Guard<br><br>- The Amount the Creatures Armor score Exceeds 10, as Armor",
+    "Scaling": ""
+  },
+  {
+  "ID": "t352",
+  "Name": "Mutation",
+  "Action": "⭘",
+  "Path": "p34",
+  "Cost": "1",
+  "Symbols": "⧖",
+  "Parameters": "⫘ ★req Transformation",
+  "Description": "When you transform, roll a [1d6] and gain one of the following mutations until the transformation ends:<br><br>[1] Aquatic Mutation: You can breathe underwater. Your swimming Movement becomes equal to your base Movement (if your base is 0, it becomes 5 tiles). If you already possess a swimming Movement, it increases by +2.<br><br>[2] Carnivorous Mutation: You grow razor-sharp teeth and spines. Your melee attacks, and melee attacks made against you, inflict stacks of Bleed equal to your [Body].<br><br>[3] Subterranean Mutation: You develop digging claws and tremorsense. You gain a burrowing Movement equal to half your base Movement (rounded down) and ignore penalties from Rough terrain.<br><br>[4] Carapace Mutation: Thick armor plating forms over your body. Upon transforming, you immediately gain Guard equal to your [Level] + 2.<br><br>[5] Aerial Mutation: You grow wings. Your flying Movement becomes equal to your base Movement (if your base is 0, it becomes 5 tiles). If you already possess a flying speed, it increases by +2.<br><br>[6] Antimagic Mutation: You gain Advantage on [Spirit] checks to resist spells, and you gain Resistance to damage dealt by spells.",
+  "Scaling": ""
+},
+  {
+    "ID": "t346",
+    "Name": "Adaptive Transformation",
+    "Action": "⭘",
+    "Path": "p34",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Mutation",
+    "Description": "When you transform into a creature, you may choose which mutation it gains from the",
+    "Scaling": ""
+  },
+  {
+    "ID": "t347",
+    "Name": "Lasting Form",
+    "Action": "⭘",
+    "Path": "p34",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★req Transformation",
+    "Description": "Your transformations last an additional X hours before requiring a Fortitude check to avoid negative side effects.",
+    "Scaling": "Hours X:\n+1 [lvl 1]\n+2 [lvl 6]\n+3 [lvl 12]"
+  },
+  {
+    "ID": "t348",
+    "Name": "Quick Shift",
+    "Action": "◇",
+    "Path": "p34",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★req Transformation",
+    "Description": "You may transform or revert to your base form as a reaction.",
+    "Scaling": ""
+  },
+  {
+    "ID": "t349",
+    "Name": "Twin Mutation",
+    "Action": "⭘",
+    "Path": "p34",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ Adaptive Transformation",
+    "Description": "When you transform, you gain two Mutations instead of one. Both last the duration of the transformation.",
+    "Scaling": ""
+  },
+  {
+    "ID": "t350",
+    "Name": "Formic Adaptation",
+    "Action": "⭘",
+    "Path": "p34",
+    "Cost": "1",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★req Transformation",
+    "Description": "Armor you have equipped grants half of its bonus Armor while transformed if you cannot have it equipped.",
+    "Scaling": ""
+  },
+  {
+    "ID": "t351",
+    "Name": "Arcane Beastform",
+    "Action": "⭘",
+    "Path": "p34",
+    "Cost": "2",
+    "Symbols": "⧖",
+    "Parameters": "⫘ ★req Transformation & ★req Spellcasting",
+    "Description": "You may cast spells from your own spell list while transformed, even as a non-magical creature.",
+    "Scaling": ""
+  }
   ]
 }
