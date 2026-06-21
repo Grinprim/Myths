@@ -1704,6 +1704,374 @@
         border-top: 1px solid var(--border-med);
       }
     }
+
+    /* ── Custom Sidebar (attached to the sheet) ── */
+    .sheet-shell {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .sheet-shell .sheet {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .custom-sidebar {
+      flex-shrink: 0;
+      align-self: stretch;
+      width: 46px;
+      min-width: 46px;
+      background: linear-gradient(135deg, rgba(38, 50, 71, 0.95) 0%, rgba(21, 31, 48, 0.95) 100%);
+      border: 2px solid var(--gold-line);
+      border-right: none;
+      border-radius: 6px 0 0 6px;
+      margin-right: -2px;
+      order: -1;
+      overflow: hidden;
+      transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 24px 48px rgba(2, 6, 23, 0.6);
+      position: relative;
+    }
+
+    .custom-sidebar.expanded {
+      width: 300px;
+    }
+
+    .sidebar-tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 0;
+      cursor: pointer;
+      flex-shrink: 0;
+      border-bottom: 1px solid var(--gold-line);
+      background: linear-gradient(180deg, #1f2937 0%, #0f172a 100%);
+      color: var(--gold);
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .sidebar-tab:hover {
+      background: linear-gradient(180deg, #28344a 0%, #131d2e 100%);
+    }
+
+    .sidebar-tab .tab-icon {
+      flex-shrink: 0;
+      width: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .sidebar-tab .tab-label {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .custom-sidebar.expanded .sidebar-tab {
+      padding: 10px 10px;
+    }
+
+    .custom-sidebar.expanded .sidebar-tab .tab-icon {
+      width: auto;
+    }
+
+    .custom-sidebar.expanded .sidebar-tab .tab-label {
+      writing-mode: horizontal-tb;
+      font-size: 12px;
+      flex: 1;
+    }
+
+    .sidebar-body {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+      min-width: 254px;
+      overflow-y: auto;
+    }
+
+    .custom-sidebar.expanded .sidebar-body {
+      display: flex;
+    }
+
+    .sidebar-toolbar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding: 10px;
+      border-bottom: 1px solid var(--border-med);
+      flex-shrink: 0;
+    }
+
+    .sidebar-add-btn {
+      padding: 6px 6px;
+      font-size: 10px;
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      border: 1px solid var(--gold-line);
+      background: var(--gold-dim);
+      color: var(--gold);
+      border-radius: 0px;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .sidebar-add-btn:hover {
+      background: rgba(201, 168, 76, 0.28);
+    }
+
+    .sidebar-widgets-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px;
+      flex: 1;
+    }
+
+    .sidebar-widget-card {
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      border-radius: var(--rad);
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.3) 100%);
+      padding: 8px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sidebar-widget-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .sidebar-widget-name {
+      font-size: 11px;
+      font-weight: bold;
+      color: var(--ink);
+      font-family: 'Cinzel', serif;
+      letter-spacing: .03em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .sidebar-widget-actions {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-widget-actions button {
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--border-med);
+      background: transparent;
+      color: var(--ink-dim);
+      border-radius: var(--rad);
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .sidebar-widget-actions button:hover {
+      border-color: var(--gold-line);
+      color: var(--gold);
+    }
+
+    .sidebar-widget-actions button.del-btn:hover {
+      border-color: rgba(248, 113, 113, 0.4);
+      color: #f87171;
+    }
+
+    .sidebar-empty-note {
+      font-size: 10px;
+      color: var(--ink-faint);
+      text-align: center;
+      font-style: italic;
+      padding: 10px 4px;
+    }
+
+    .sw-counter-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .sw-counter-row button {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-line);
+      background: var(--gold-dim);
+      color: var(--gold);
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .sw-counter-value {
+      min-width: 38px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .sw-bar-track {
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sw-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width .25s;
+    }
+
+    .sw-bar-nums {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 10px;
+      color: var(--ink-dim);
+    }
+
+    .sw-bar-nums input {
+      width: 38px;
+      text-align: center;
+      padding: 1px 2px;
+      font-size: 10px;
+      height: 18px;
+    }
+
+    .sw-textbox {
+      width: 100%;
+      min-height: 50px;
+      font-size: 11px;
+      padding: 5px 6px;
+    }
+
+    .sw-checkbox-row {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .sw-checkbox-pip {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      border: 1.5px solid var(--gold-line);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .sw-checkbox-pip.checked {
+      background: var(--gold);
+      box-shadow: 0 0 5px rgba(201, 168, 76, 0.6);
+    }
+
+    .sw-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .sw-toggle-switch {
+      width: 36px;
+      height: 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border-med);
+      background: rgba(6, 10, 20, 0.6);
+      position: relative;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .sw-toggle-switch .knob {
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--ink-dim);
+      transition: left .18s, background .18s;
+    }
+
+    .sw-toggle-switch.on {
+      border-color: var(--gold-line);
+      background: var(--gold-dim);
+    }
+
+    .sw-toggle-switch.on .knob {
+      left: 19px;
+      background: var(--gold);
+    }
+
+    .sw-divider-label {
+      text-align: center;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      border-bottom: 1px solid var(--gold-line);
+      padding-bottom: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .sheet-shell {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .custom-sidebar {
+        width: 100% !important;
+        order: 1;
+        border-left: 2px solid var(--gold-line);
+        border-right: 2px solid var(--gold-line);
+        border-top: none;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: -2px;
+        border-radius: 0 0 8px 8px;
+      }
+
+      .custom-sidebar .sidebar-tab .tab-label {
+        writing-mode: horizontal-tb;
+      }
+
+      .sidebar-body {
+        min-width: 0;
+      }
+    }
   </style>
 </head>
 
@@ -1761,6 +2129,7 @@
     </nav>
 
     <div class="page-content">
+      <div class="sheet-shell">
       <div class="sheet">
 
         <header class="sheet-header">
@@ -2635,6 +3004,26 @@
 
       </div>
 
+      <!-- CUSTOM SIDEBAR -->
+      <div class="custom-sidebar" id="customSidebar">
+        <div class="sidebar-tab" onclick="toggleCustomSidebar()">
+          <span class="tab-icon">☰</span>
+          <span class="tab-label">Trackers</span>
+        </div>
+        <div class="sidebar-body">
+          <div class="sidebar-toolbar">
+            <button class="sidebar-add-btn" onclick="openWidgetCreator('counter')">+ Counter</button>
+            <button class="sidebar-add-btn" onclick="openWidgetCreator('bar')">+ Bar</button>
+            <button class="sidebar-add-btn" onclick="openWidgetCreator('text')">+ Text Box</button>
+            <button class="sidebar-add-btn" onclick="openWidgetCreator('checkbox')">+ Checkboxes</button>
+            <button class="sidebar-add-btn" onclick="openWidgetCreator('toggle')">+ Toggle</button>
+            <button class="sidebar-add-btn" onclick="openWidgetCreator('divider')">+ Divider</button>
+          </div>
+          <div class="sidebar-widgets-list" id="sidebarWidgetsList"></div>
+        </div>
+      </div>
+      </div><!-- /sheet-shell -->
+
       <!-- PORTRAIT MODAL -->
       <div class="modal-backdrop" id="portraitModal">
         <div class="modal-box">
@@ -2720,6 +3109,18 @@
           <div class="editor-btns mt-4">
             <button class="btn-cancel" onclick="closeCustomSpellModal()">Cancel</button>
             <button class="btn-apply" onclick="saveCustomSpell()">Add to Spells List</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOM SIDEBAR WIDGET MODAL -->
+      <div class="modal-backdrop" id="customWidgetModal">
+        <div class="modal-box max-w-lg w-[420px]">
+          <h3 id="widget-modal-title">Add Tracker</h3>
+          <div id="widget-form-content" class="w-full flex flex-col gap-3 mt-2 text-xs text-left"></div>
+          <div class="editor-btns mt-4">
+            <button class="btn-cancel" onclick="closeWidgetModal()">Cancel</button>
+            <button class="btn-apply" id="widget-submit-btn" onclick="saveWidgetFromModal()">Save</button>
           </div>
         </div>
       </div>
@@ -4490,6 +4891,246 @@
         closeCustomCreatorModal(); triggerWarningToast("Constellation schema modified!");
       }
 
+      // ── Custom Sidebar Widgets ──
+      let SIDEBAR_WIDGETS = [];
+      let _widgetIdCounter = 0;
+      let widgetEditingId = null;
+      let widgetCreatorType = null;
+
+      const WIDGET_COLORS = [
+        ['#10b981', 'Green'], ['#3b82f6', 'Blue'], ['#ef4444', 'Red'],
+        ['#eab308', 'Yellow'], ['#a855f7', 'Purple'], ['#c9a84c', 'Gold'], ['#67e8f9', 'Sky']
+      ];
+
+      function toggleCustomSidebar() {
+        document.getElementById('customSidebar')?.classList.toggle('expanded');
+      }
+
+      function openWidgetCreator(type, editId) {
+        widgetCreatorType = type;
+        widgetEditingId = editId || null;
+        const modal = document.getElementById('customWidgetModal');
+        const title = document.getElementById('widget-modal-title');
+        const content = document.getElementById('widget-form-content');
+        if (!modal || !title || !content) return;
+
+        const existing = editId ? SIDEBAR_WIDGETS.find(w => w.id === editId) : null;
+
+        const inp = (id, ph, type2 = 'text', v = '') => `<input type="${type2}" id="${id}" placeholder="${esc(ph)}" value="${esc(v)}" class="rounded p-2 w-full outline-none" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink)">`;
+        const ta = (id, ph, v = '') => `<textarea id="${id}" rows="2" placeholder="${esc(ph)}" class="rounded p-2 w-full outline-none" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink);resize:none">${esc(v)}</textarea>`;
+        const lbl = (t) => `<label class="uppercase text-[9px] font-bold" style="color:var(--ink-faint)">${t}</label>`;
+        const f = (l, c) => `<div class="flex flex-col gap-1">${lbl(l)}${c}</div>`;
+        const colorSelect = (id, v) => `<select id="${id}" class="rounded p-2 w-full outline-none" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink)">${WIDGET_COLORS.map(([hex, name]) => `<option value="${hex}"${v === hex ? ' selected' : ''}>${name}</option>`).join('')}</select>`;
+
+        const baseNames = { counter: 'Counter', bar: 'Bar', text: 'Text Box', checkbox: 'Checkbox Counter', toggle: 'Toggle', divider: 'Divider / Label' };
+        title.textContent = (existing ? 'Edit ' : 'Add ') + (baseNames[type] || 'Tracker');
+
+        if (type === 'counter') {
+          content.innerHTML = f('Label', inp('w_label', 'Inspiration', 'text', existing?.label || '')) +
+            `<div class="grid grid-cols-3 gap-2">${f('Min', inp('w_min', '0', 'number', existing?.min ?? '0'))}${f('Max', inp('w_max', '—', 'number', existing?.max ?? ''))}${f('Step', inp('w_step', '1', 'number', existing?.step ?? '1'))}</div>` +
+            f('Starting Value', inp('w_value', '0', 'number', existing?.value ?? '0')) +
+            f('Color', colorSelect('w_color', existing?.color || '#818cf8'));
+        } else if (type === 'bar') {
+          content.innerHTML = f('Label', inp('w_label', 'Stamina', 'text', existing?.label || '')) +
+            `<div class="grid grid-cols-2 gap-2">${f('Max Value', inp('w_max', '10', 'number', existing?.max ?? '10'))}${f('Current Value', inp('w_value', '10', 'number', existing?.value ?? '10'))}</div>` +
+            f('Color', colorSelect('w_color', existing?.color || '#10b981'));
+        } else if (type === 'text') {
+          content.innerHTML = f('Label', inp('w_label', 'Companion Name', 'text', existing?.label || '')) +
+            f('Value', ta('w_value', 'Write here...', existing?.value || ''));
+        } else if (type === 'checkbox') {
+          content.innerHTML = f('Label', inp('w_label', 'Death Saves', 'text', existing?.label || '')) +
+            f('Number of Boxes', inp('w_max', '5', 'number', existing?.max ?? '5')) +
+            f('Color', colorSelect('w_color', existing?.color || '#c9a84c'));
+        } else if (type === 'toggle') {
+          content.innerHTML = f('Label', inp('w_label', 'Concentrating', 'text', existing?.label || '')) +
+            `<label class="flex items-center gap-2 text-[11px]" style="color:var(--ink)"><input type="checkbox" id="w_value" ${existing?.value ? 'checked' : ''}><span>Start ON</span></label>`;
+        } else if (type === 'divider') {
+          content.innerHTML = f('Section Label', inp('w_label', 'Combat Trackers', 'text', existing?.label || ''));
+        }
+
+        modal.classList.add('open');
+      }
+
+      function closeWidgetModal() {
+        document.getElementById('customWidgetModal')?.classList.remove('open');
+      }
+
+      function saveWidgetFromModal() {
+        const type = widgetCreatorType;
+        const label = document.getElementById('w_label')?.value.trim() || 'Untitled';
+        let widget;
+
+        if (type === 'counter') {
+          widget = {
+            type, label,
+            min: document.getElementById('w_min')?.value === '' ? null : parseFloat(document.getElementById('w_min').value),
+            max: document.getElementById('w_max')?.value === '' ? null : parseFloat(document.getElementById('w_max').value),
+            step: parseFloat(document.getElementById('w_step')?.value) || 1,
+            value: parseFloat(document.getElementById('w_value')?.value) || 0,
+            color: document.getElementById('w_color')?.value || '#818cf8'
+          };
+        } else if (type === 'bar') {
+          widget = {
+            type, label,
+            max: parseFloat(document.getElementById('w_max')?.value) || 10,
+            value: parseFloat(document.getElementById('w_value')?.value) || 0,
+            color: document.getElementById('w_color')?.value || '#10b981'
+          };
+        } else if (type === 'text') {
+          widget = { type, label, value: document.getElementById('w_value')?.value || '' };
+        } else if (type === 'checkbox') {
+          const max = Math.max(1, Math.min(30, parseInt(document.getElementById('w_max')?.value, 10) || 5));
+          const existing = widgetEditingId ? SIDEBAR_WIDGETS.find(w => w.id === widgetEditingId) : null;
+          const prevChecked = existing?.checked || [];
+          const checked = Array.from({ length: max }, (_, i) => !!prevChecked[i]);
+          widget = { type, label, max, checked, color: document.getElementById('w_color')?.value || '#c9a84c' };
+        } else if (type === 'toggle') {
+          widget = { type, label, value: !!document.getElementById('w_value')?.checked };
+        } else if (type === 'divider') {
+          widget = { type, label };
+        } else {
+          return;
+        }
+
+        if (widgetEditingId) {
+          const idx = SIDEBAR_WIDGETS.findIndex(w => w.id === widgetEditingId);
+          if (idx > -1) { widget.id = widgetEditingId; SIDEBAR_WIDGETS[idx] = widget; }
+        } else {
+          _widgetIdCounter++;
+          widget.id = 'sw_' + Date.now() + '_' + _widgetIdCounter;
+          SIDEBAR_WIDGETS.push(widget);
+        }
+
+        closeWidgetModal();
+        renderSidebarWidgets();
+        triggerWarningToast("Tracker saved!");
+      }
+
+      function removeWidget(id) {
+        SIDEBAR_WIDGETS = SIDEBAR_WIDGETS.filter(w => w.id !== id);
+        renderSidebarWidgets();
+      }
+
+      function widgetCounterChange(id, delta) {
+        const w = SIDEBAR_WIDGETS.find(x => x.id === id); if (!w) return;
+        let nv = (w.value || 0) + delta * (w.step || 1);
+        if (w.min !== null && w.min !== undefined && nv < w.min) nv = w.min;
+        if (w.max !== null && w.max !== undefined && nv > w.max) nv = w.max;
+        w.value = nv;
+        renderSidebarWidgets();
+      }
+
+      function widgetBarUpdate(id, field, v) {
+        const w = SIDEBAR_WIDGETS.find(x => x.id === id); if (!w) return;
+        const num = parseFloat(v);
+        w[field] = Number.isFinite(num) ? num : 0;
+        if (field === 'max' && w.value > w.max) w.value = w.max;
+        renderSidebarWidgets();
+      }
+
+      function widgetTextUpdate(id, v) {
+        const w = SIDEBAR_WIDGETS.find(x => x.id === id); if (!w) return;
+        w.value = v;
+      }
+
+      function widgetCheckboxToggle(id, idx) {
+        const w = SIDEBAR_WIDGETS.find(x => x.id === id); if (!w) return;
+        w.checked[idx] = !w.checked[idx];
+        renderSidebarWidgets();
+      }
+
+      function widgetToggleFlip(id) {
+        const w = SIDEBAR_WIDGETS.find(x => x.id === id); if (!w) return;
+        w.value = !w.value;
+        renderSidebarWidgets();
+      }
+
+      function renderSidebarWidgets() {
+        const list = document.getElementById('sidebarWidgetsList');
+        if (!list) return;
+        list.innerHTML = '';
+        if (!SIDEBAR_WIDGETS.length) {
+          list.innerHTML = `<div class="sidebar-empty-note">No trackers yet. Use the buttons above to add one.</div>`;
+          return;
+        }
+        SIDEBAR_WIDGETS.forEach(w => {
+          const card = document.createElement('div');
+          card.className = 'sidebar-widget-card';
+
+          if (w.type === 'divider') {
+            card.innerHTML = `<div class="sidebar-widget-head" style="border-bottom:none;">
+              <span class="sw-divider-label" style="flex:1;text-align:left;border-bottom:none;">${esc(w.label)}</span>
+              <div class="sidebar-widget-actions">
+                <button onclick="openWidgetCreator('divider','${w.id}')" title="Edit">✎</button>
+                <button class="del-btn" onclick="removeWidget('${w.id}')" title="Remove">×</button>
+              </div>
+            </div>`;
+            list.appendChild(card);
+            return;
+          }
+
+          const head = document.createElement('div');
+          head.className = 'sidebar-widget-head';
+          head.innerHTML = `<span class="sidebar-widget-name">${esc(w.label)}</span>
+            <div class="sidebar-widget-actions">
+              <button onclick="openWidgetCreator('${w.type}','${w.id}')" title="Edit">✎</button>
+              <button class="del-btn" onclick="removeWidget('${w.id}')" title="Remove">×</button>
+            </div>`;
+          card.appendChild(head);
+
+          if (w.type === 'counter') {
+            const body = document.createElement('div');
+            body.className = 'sw-counter-row';
+            body.innerHTML = `<button onclick="widgetCounterChange('${w.id}',-1)">−</button><span class="sw-counter-value" style="color:${w.color}">${w.value}</span><button onclick="widgetCounterChange('${w.id}',1)">+</button>`;
+            card.appendChild(body);
+          } else if (w.type === 'bar') {
+            const pct = w.max > 0 ? Math.max(0, Math.min(100, (w.value / w.max) * 100)) : 0;
+            const track = document.createElement('div');
+            track.className = 'sw-bar-track';
+            track.innerHTML = `<div class="sw-bar-fill" style="width:${pct}%;background:${w.color};box-shadow:0 0 6px ${w.color}99"></div>`;
+            card.appendChild(track);
+            const nums = document.createElement('div');
+            nums.className = 'sw-bar-nums';
+            nums.innerHTML = `<input type="number" value="${w.value}" onchange="widgetBarUpdate('${w.id}','value',this.value)"> / <input type="number" value="${w.max}" onchange="widgetBarUpdate('${w.id}','max',this.value)">`;
+            card.appendChild(nums);
+          } else if (w.type === 'text') {
+            const txt = document.createElement('textarea');
+            txt.className = 'sw-textbox';
+            txt.value = w.value || '';
+            txt.oninput = () => { widgetTextUpdate(w.id, txt.value); autoExpandTextarea(txt); };
+            card.appendChild(txt);
+            setTimeout(() => autoExpandTextarea(txt), 0);
+          } else if (w.type === 'checkbox') {
+            const row = document.createElement('div');
+            row.className = 'sw-checkbox-row';
+            w.checked.forEach((c, idx) => {
+              const pip = document.createElement('button');
+              pip.className = 'sw-checkbox-pip' + (c ? ' checked' : '');
+              if (c) { pip.style.background = w.color; pip.style.borderColor = w.color; }
+              pip.onclick = () => widgetCheckboxToggle(w.id, idx);
+              row.appendChild(pip);
+            });
+            card.appendChild(row);
+          } else if (w.type === 'toggle') {
+            const row = document.createElement('div');
+            row.className = 'sw-toggle-row';
+            const sw = document.createElement('div');
+            sw.className = 'sw-toggle-switch' + (w.value ? ' on' : '');
+            sw.innerHTML = `<div class="knob"></div>`;
+            sw.onclick = () => widgetToggleFlip(w.id);
+            row.appendChild(sw);
+            const stateLbl = document.createElement('span');
+            stateLbl.style.fontSize = '10px';
+            stateLbl.style.color = 'var(--ink-faint)';
+            stateLbl.textContent = w.value ? 'ON' : 'OFF';
+            row.appendChild(stateLbl);
+            card.appendChild(row);
+          }
+
+          list.appendChild(card);
+        });
+      }
+
       // ── Toast ──
       let bannerTimer = null;
       function triggerWarningToast(msg) {
@@ -4507,6 +5148,7 @@
         document.querySelectorAll('.tab-content').forEach(el => { el.style.display = (el.id === 'tab-' + name) ? '' : 'none'; });
         document.querySelectorAll('.subtab').forEach(btn => { btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === name); });
         if (name === 'paths') setTimeout(drawTreeConnections, 60);
+        sideBarHeightMatch();
       }
 
       // ── Spells ──
@@ -4691,6 +5333,7 @@
           customSpells,
           customTraits : TRAITS_CATALOG.filter(t => t.ID.startsWith('ct_custom_')),
           customPaths : PATHS_CATALOG.filter(p => p.ID.startsWith('custom_')),
+          sidebarWidgets: SIDEBAR_WIDGETS,
           portraitDataUrl: portraitData
         };
 
@@ -4777,6 +5420,9 @@
         knownSpellIds = new Set(data.knownSpellIds || ["s1", "s2"]);
         customSpells = data.customSpells || [];
 
+        SIDEBAR_WIDGETS = (data.sidebarWidgets || []).map(w => ({ ...w }));
+        renderSidebarWidgets();
+
         recalcAll();
         paths_init();
         // Call with explicit school value to ensure chips update correctly
@@ -4804,10 +5450,11 @@
       function clearSheet() {
         document.querySelectorAll('input,textarea').forEach(el => { if (el.type !== 'button' && el.type !== 'submit') el.value = ''; });
         weapons = []; unlockedTraits.clear(); breakpointChoices = {}; knownSpellIds.clear(); customSpells = [];
+        SIDEBAR_WIDGETS = [];
         addWeapon(); addWeapon(); addWeapon();
         buildPips('gracePips', 6, 0, setGrace);
         buildPips('finalBlowPips', 4, 0, setFinalBlow);
-        inv_init(); paths_init(); recalcAll(); filterSpellsSelector(); renderKnownSpells();
+        inv_init(); paths_init(); recalcAll(); filterSpellsSelector(); renderKnownSpells(); renderSidebarWidgets();
         triggerWarningToast("Sheet cleared!");
       }
 
@@ -4850,10 +5497,21 @@
         return !!(PATHS_CATALOG.length || TRAITS_CATALOG.length || SPELLS_CATALOG.length);
       }
 
+      function sideBarHeightMatch(){
+        const sidebar = document.querySelector('.custom-sidebar');
+        const sheet = document.querySelector('.sheet');
+        if (sidebar && sheet) {
+          sidebar.style.height = sheet.offsetHeight + 'px';
+        }
+      }
+
       window.onload = function () {
+        
         showTab('main');
         buildPips('gracePips', 6, 0, setGrace);
         buildPips('finalBlowPips', 4, 0, setFinalBlow);
+        renderSidebarWidgets();
+        sideBarHeightMatch();
         loadCatalogs().then(() => {
           inv_init(); paths_init(); recalcAll(); updateSpellSchoolTheme(); filterSpellsSelector(); renderKnownSpells();
         }).catch(() => {
@@ -4873,6 +5531,9 @@
           btn.addEventListener('click', e => { e.stopPropagation(); menu.classList.toggle('hidden'); });
           document.addEventListener('click', () => { if (!menu.classList.contains('hidden')) menu.classList.add('hidden'); });
         }
+        document.querySelectorAll('input').forEach(inp =>{
+          inp.addEventListener('input', sideBarHeightMatch)
+        });
         document.querySelectorAll('textarea').forEach(el => {
           autoExpandTextarea(el);
           el.addEventListener('input', () => autoExpandTextarea(el));
