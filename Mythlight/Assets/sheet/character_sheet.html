@@ -18,6 +18,27 @@
       padding: 0;
     }
 
+    input,
+    select,
+    textarea,
+    button {
+      min-width: 0;
+    }
+
+    /* Grid/flex items shrink-to-fit their track by default is blocked by
+       a child's intrinsic min-content size. Several rows here (.top-section
+       columns, .armor-row, .vital-row, etc.) nest inputs/text fields with no
+       explicit width, so the browser's default min-content for those
+       controls was quietly forcing whole shared tracks wider than the
+       viewport - which on mobile pushed right-aligned fields off-screen
+       with nothing visibly wrong about the row itself. */
+    .top-section > div,
+    .armor-row > div,
+    .vital-row,
+    .vital-row > div {
+      min-width: 0;
+    }
+
     :root {
       --ink: #e8e4dc;
       --ink-dim: #9a9488;
@@ -199,6 +220,10 @@
       color: transparent;
     }
 
+    .sheet-header h1 .title-short {
+      display: none;
+    }
+
     .header-btns {
       display: flex;
       gap: 6px;
@@ -353,11 +378,58 @@
       white-space: nowrap;
     }
 
+    .hp-adjust-row {
+      flex-wrap: wrap;
+    }
+
+    .hp-adjust-controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .hp-adjust-controls input[type=number] {
+      width: 46px;
+    }
+
+    .hp-adjust-btn {
+      padding: 4px 9px;
+      font-size: 10px;
+      font-family: 'Cinzel', serif;
+      letter-spacing: .03em;
+      border-radius: var(--rad);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+
+    .hp-adjust-btn.heal {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #4ade80;
+    }
+
+    .hp-adjust-btn.heal:hover {
+      background: rgba(34, 197, 94, 0.3);
+    }
+
+    .hp-adjust-btn.damage {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #f87171;
+    }
+
+    .hp-adjust-btn.damage:hover {
+      background: rgba(239, 68, 68, 0.3);
+    }
+
     input[type=number],
     .total-input {
       width: 62px;
       padding: 0 !important;
-      border: 1px solid rgba(201, 168, 76, 0.2);
+      border: 1px solid rgba(201, 168, 76, 0.35);
       border-radius: var(--rad);
       background: linear-gradient(135deg, rgba(6, 10, 20, 0.7) 0%, rgba(6, 10, 20, 0.45) 100%);
       font-family: inherit;
@@ -369,6 +441,13 @@
       line-height: var(--bubble-size);
       appearance: textfield;
       -moz-appearance: textfield;
+    }
+
+    input[type=number][readonly] {
+      border-style: dashed;
+      border-color: rgba(154, 148, 136, 0.35);
+      color: var(--ink-dim) !important;
+      background: rgba(6, 10, 20, 0.35);
     }
 
     input[type=number]::-webkit-outer-spin-button,
@@ -2072,6 +2151,139 @@
         min-width: 0;
       }
     }
+
+    /* ── Mobile cleanup pass ──
+       Targets: the header/tab row overflowing, iOS auto-zoom on inputs,
+       2-up grids becoming too cramped, and tiny touch targets. */
+    @media (max-width: 640px) {
+      /* Header: stop cramming title + 6 tabs + 3 buttons onto one line */
+      .sheet-header {
+        flex-wrap: wrap;
+        padding: 10px 12px;
+        gap: 8px;
+      }
+
+      .header-left {
+        order: 1;
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      .sheet-header h1 {
+        font-size: 1rem;
+        white-space: nowrap;
+      }
+
+      .sheet-header h1 .title-full {
+        display: none;
+      }
+
+      .sheet-header h1 .title-short {
+        display: inline;
+      }
+
+      .header-btns {
+        order: 2;
+        flex: 0 0 auto;
+      }
+
+      .header-btns button {
+        padding: 7px 10px;
+        font-size: 11px;
+        min-height: 34px;
+      }
+
+      .header-center {
+        order: 3;
+        width: 100%;
+        flex: 1 1 100%;
+        justify-content: flex-start;
+        position: relative;
+      }
+
+      .header-center::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 2px;
+        width: 22px;
+        background: linear-gradient(to right, transparent, #15202f);
+        pointer-events: none;
+      }
+
+      /* Tabs become a horizontally-scrollable strip instead of squeezing */
+      .sheet-subtabs {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
+        scrollbar-width: thin;
+        padding-bottom: 2px;
+        -ms-overflow-style: none;
+      }
+
+      .sheet-subtabs::-webkit-scrollbar {
+        height: 3px;
+      }
+
+      .subtab {
+        flex-shrink: 0;
+        padding: 8px 13px;
+        font-size: 11.5px;
+        min-height: 34px;
+      }
+
+      /* Two-column attribute cards get too narrow for skill rows once the
+         middle column is no longer a fixed 480px - go full width instead */
+      .attrs-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* 3-up spell grid (min 120px each) overflows sub-400px viewports */
+      .spells-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      /* Prevent iOS Safari from auto-zooming the page on input focus.
+         Needs to out-specify input[type=number]'s own !important rule. */
+      input,
+      input[type="number"],
+      input[type="text"],
+      select,
+      textarea {
+        font-size: 16px !important;
+      }
+
+      /* Bubble-style numeric inputs need a touch more height for that
+         larger font so text doesn't feel clipped */
+      :root {
+        --bubble-size: 30px;
+      }
+
+      /* Small icon-only buttons are hard to hit precisely with a thumb */
+      .sidebar-widget-actions button {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+      }
+
+      .inv-item-remove {
+        width: 32px;
+        height: 32px;
+      }
+
+      .sidebar-add-btn {
+        padding: 9px 6px;
+        font-size: 11px;
+      }
+
+      /* Modals: a little less padding so content has more breathing room */
+      .modal-box {
+        padding: 16px;
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
@@ -2137,7 +2349,7 @@
             <svg class="w-6 h-6" style="color:var(--gold)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-9m-9 9l-9-9m9 9v10" />
             </svg>
-            <h1>Mythlight — Character Sheet</h1>
+            <h1><span class="title-full">Mythlight — Character Sheet</span><span class="title-short">Mythlight</span></h1>
           </div>
           <div class="header-center">
             <div class="sheet-subtabs">
@@ -2203,6 +2415,14 @@
                 <div class="vital-row">
                   <label>Current HP</label>
                   <input type="number" id="currentHealth" min="0" placeholder="—" oninput="updateHPGuardBar()">
+                </div>
+                <div class="vital-row hp-adjust-row">
+                  <label>Adjust HP</label>
+                  <div class="hp-adjust-controls">
+                    <input type="number" id="hpAdjustAmount" min="0" placeholder="0" inputmode="numeric">
+                    <button type="button" class="hp-adjust-btn heal" onclick="adjustHP(1)">Heal</button>
+                    <button type="button" class="hp-adjust-btn damage" onclick="adjustHP(-1)">Damage</button>
+                  </div>
                 </div>
                 <div class="hp-bar-compound" title="Green = HP  |  Gold = Guard">
                   <div class="hp-bar-hp" id="hpBarHP" style="width:0%"></div>
@@ -3512,6 +3732,21 @@
         const panelSpellCap = document.getElementById('known-spells-panel-cap');
         if (panelSpellCount) panelSpellCount.textContent = `${knownCount}`;
         if (panelSpellCap) panelSpellCap.textContent = hasNumberInput('mind_scholarship_mod') || hasNumberInput('mind_base') ? `${knownCap}` : '—';
+      }
+
+      function adjustHP(sign) {
+        const amtEl = document.getElementById('hpAdjustAmount');
+        const curEl = document.getElementById('currentHealth');
+        const maxEl = document.getElementById('maxHealth');
+        if (!amtEl || !curEl) return;
+        const amt = parseFloat(amtEl.value) || 0;
+        if (amt <= 0) return;
+        const maxRaw = parseFloat(maxEl?.value);
+        const max = Number.isFinite(maxRaw) && maxRaw > 0 ? maxRaw : Infinity;
+        let cur = parseFloat(curEl.value) || 0;
+        cur = sign > 0 ? Math.min(max, cur + amt) : Math.max(0, cur - amt);
+        curEl.value = cur;
+        updateHPGuardBar();
       }
 
       function updateHPGuardBar() {
@@ -5500,10 +5735,19 @@
       function sideBarHeightMatch(){
         const sidebar = document.querySelector('.custom-sidebar');
         const sheet = document.querySelector('.sheet');
-        if (sidebar && sheet) {
-          sidebar.style.height = sheet.offsetHeight + 'px';
+        if (!sidebar || !sheet) return;
+        // Below 900px the sidebar stacks under the sheet instead of beside
+        // it (see the matching @media rule), so forcing it to match the
+        // sheet's full height just creates a giant empty box. Only sync
+        // heights in the side-by-side desktop layout.
+        if (window.innerWidth <= 900) {
+          sidebar.style.height = '';
+          return;
         }
+        sidebar.style.height = sheet.offsetHeight + 'px';
       }
+
+      window.addEventListener('resize', sideBarHeightMatch);
 
       window.onload = function () {
         
