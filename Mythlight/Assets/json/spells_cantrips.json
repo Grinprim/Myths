@@ -291,7 +291,7 @@
         "Name": "Light of Resolve",
         "Cost": "0",
         "Type": "Reaction",
-        "Range": "2 tiles",
+        "Range": "6 tiles",
         "Description": "When a creature within range fails a roll, grant them +2 to that roll after seeing the result.",
         "Upcast": "",
         "Lore": "Resolve shines brightest at the moment of failure."
