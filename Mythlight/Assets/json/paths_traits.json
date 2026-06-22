@@ -2220,11 +2220,11 @@
       "Name": "Risky Strike",
       "Action": "◆",
       "Path": "p13",
-      "Cost": "2",
+      "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "",
-      "Description": "Invest any amount of Gold into performing an attack dealing X damage, if the creature being targeted dies you gain a proportionate amount of bonus of Gold. If you miss or the creature survives, you lose the gold invested(Narrator's discretion).",
-      "Scaling": "Damage X:\n2 [lvl 1]\n4 [lvl 6]\n6 [lvl 12]"
+      "Description": "Invest any amount of Gold into an attack, if the creature being targeted dies you gain a scaling amount of bonus of Gold. If you miss or the creature survives, you lose the gold invested(Narrator's discretion).",
+      "Scaling": "Gold Multiplier :\nx1.5 [lvl 1]\nx2 [lvl 6]\nx3.5 [lvl 12]"
     },
     {
       "ID": "t129",
@@ -2804,8 +2804,8 @@
       "Action": "⭘",
       "Path": "p18",
       "Cost": "2",
-      "Symbols": "",
-      "Parameters": "⧖",
+      "Symbols": "⧖",
+      "Parameters": "",
       "Description": "When you negate a spell, cause an explosion on the tile and all adjacent tiles from where the spell originated, dealing damage equal to the spells damage or mana cost.",
       "Scaling": ""
     },
@@ -2815,8 +2815,8 @@
       "Action": "⭘",
       "Path": "p18",
       "Cost": "2",
-      "Symbols": "",
-      "Parameters": "⧖",
+      "Symbols": "⧖",
+      "Parameters": "",
       "Description": "Ignore the first negative condition each rest, as long as it is not instantly reapplied.",
       "Scaling": ""
     },
@@ -3895,7 +3895,7 @@
       "Cost": "2",
       "Symbols": "☀",
       "Parameters": "⫘ ▲ Tinker",
-      "Description": "When unlocking this trait choose one of the following, and one more for every 3 feat points you have in tinker:\n\nMechanical Assistant\nUsing [1× Metal - Wire, 1× Metal - Plate], construct a small mechanical assistant. It counts as a companion with the following stat block:\n| Health/Durability [Your Level]\n| Armor [6+Your Tinker]\n| BODY 0 | SKILL 1 | MIND 2\n| Traits:\n- Assist: This companion assist you while crafting, smithing, brewing or casting a ritual. It grants you +2 to the relevant rolls. \n\nCombat Rover\nUsing [1× Metal - Wire, 1× Stone - Cut], create a small combat rover, It counts as a companion with the following stat block:\n| Health/Durability [Your Level]\n| Armor [6+Your Tinker]\n| BODY 2 | SKILL 1 | MIND 0\n| Traits:\n- Melee Strike (Costs 1 Durability): Strike a target within Melee range with [2 + Your Tinker] Accuracy; It deals [1+ Your Tinker] Force Damage. \n\nSpell Drone\nUsing [1× Metal - Wire, 1× Wooden - Core], create a flying spell drone that stays within 3 tiles of you. It counts as a companion with the following stat block:\n| Health/Durability [Your Level]\n| Armor [6+Your Tinker]\n| BODY 0 | SKILL 1 | MIND 2\n| Traits:\n- Conduit (Costs 1 Durability): You cast a spell from this companions position. ",
+      "Description": "When unlocking this trait, choose one of the following creations. Choose one additional creation for every 3 Feat Points you have in Tinker.<br><br><b>Mechanical Assistant</b><br>Using [1× Metal - Wire, 1× Metal - Plate], construct a small mechanical assistant. It counts as a Companion with the following stat block:<br>• Health/Durability: [Your Level]<br>• Armor: [6 + Your Tinker]<br>• BODY: 0 | SKILL: 1 | MIND: 2<br><br>Traits:<br>• <b>Assist</b>: This companion assists you while crafting, smithing, brewing, or casting rituals. You gain +2 to the relevant rolls.<br><br><b>Combat Rover</b><br>Using [1× Metal - Wire, 1× Stone - Cut], create a small combat rover. It counts as a Companion with the following stat block:<br>• Health/Durability: [Your Level]<br>• Armor: [6 + Your Tinker]<br>• BODY: 2 | SKILL: 1 | MIND: 0<br><br>Traits:<br>• <b>Melee Strike</b> (Costs 1 Durability): Strike a target within Melee range with [2 + Your Tinker] Accuracy. The attack deals [1 + Your Tinker] Force Damage.<br><br><b>Spell Drone</b><br>Using [1× Metal - Wire, 1× Wooden - Core], create a flying spell drone that remains within 3 tiles of you. It counts as a Companion with the following stat block:<br>• Health/Durability: [Your Level]<br>• Armor: [6 + Your Tinker]<br>• BODY: 0 | SKILL: 1 | MIND: 2<br><br>Traits:<br>• <b>Conduit</b> (Costs 1 Durability): You may cast a spell from this companion's position.",
       "Scaling": ""
     },
     {
@@ -4522,7 +4522,7 @@
     "Cost": "1",
     "Symbols": "⧖",
     "Parameters": "⫘ Mutation",
-    "Description": "When you transform into a creature, you may choose which mutation it gains from the",
+    "Description": "When you transform into a creature, you may choose which mutation it gains from the Mutation Trait",
     "Scaling": ""
   },
   {
