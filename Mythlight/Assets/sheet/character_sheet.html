@@ -3538,6 +3538,8 @@
 
       let PATHS_CATALOG = [];
       let TRAITS_CATALOG = [];
+      let BASE_PATH_IDS = new Set();
+      let BASE_TRAIT_IDS = new Set();
       const TREE_COORDINATES = {};
       const PATH_LAYOUTS = {};
       const CONSTELLATION_TAGS = {};
@@ -6031,8 +6033,8 @@
           mana_bonus: document.getElementById('mana_bonus')?.value || '0',
           knownSpellIds: Array.from(knownSpellIds),
           customSpells,
-          customTraits : TRAITS_CATALOG.filter(t => t.ID.startsWith('ct_custom_')),
-          customPaths : PATHS_CATALOG.filter(p => p.ID.startsWith('custom_')),
+          customTraits : TRAITS_CATALOG.filter(t => !BASE_TRAIT_IDS.has(t.ID)),
+          customPaths : PATHS_CATALOG.filter(p => !BASE_PATH_IDS.has(p.ID)),
           sidebarWidgets: SIDEBAR_WIDGETS,
           portraitDataUrl: portraitData
         };
@@ -6098,8 +6100,8 @@
           if (!data.inventory_items?.length) for (let i = 0; i < INV_BASE_SLOTS; i++) inv_addItem();
         }
 
-        TRAITS_CATALOG = TRAITS_CATALOG.filter(t => !t.ID.startsWith('ct_custom_')).concat(data.customTraits || []);
-        PATHS_CATALOG = PATHS_CATALOG.filter(p => !p.ID.startsWith('custom_')).concat(data.customPaths || []);
+        TRAITS_CATALOG = TRAITS_CATALOG.filter(t => BASE_TRAIT_IDS.has(t.ID)).concat(data.customTraits || []);
+        PATHS_CATALOG = PATHS_CATALOG.filter(p => BASE_PATH_IDS.has(p.ID)).concat(data.customPaths || []);
 
         populateSimpleGrid('inv_potions_ingredients', data.inv_potions_ingredients, 'Ingredient', 'Notes');
         populateSimpleGrid('inv_potions_recipes', data.inv_potions_recipes, 'Potion', 'Recipe');
@@ -6193,6 +6195,10 @@
         const spells = await tryFetchJson(base + 'spells_cantrips.json');
         if (Array.isArray(spells)) SPELLS_CATALOG = spells;
         else if (spells && Array.isArray(spells.spells)) SPELLS_CATALOG = spells.spells;
+        // Snapshot the built-in catalog IDs so imported/custom paths & traits can later be
+        // identified by "not in this set" rather than by guessing an ID prefix.
+        BASE_PATH_IDS = new Set(PATHS_CATALOG.map(p => p.ID));
+        BASE_TRAIT_IDS = new Set(TRAITS_CATALOG.map(t => t.ID));
         populateConstellationData();
         return !!(PATHS_CATALOG.length || TRAITS_CATALOG.length || SPELLS_CATALOG.length);
       }
