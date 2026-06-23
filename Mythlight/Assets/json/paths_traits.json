@@ -4354,7 +4354,7 @@
       "Name": "Human: Adaptive Soul",
       "Action": "⭘",
       "Path": "p33",
-      "Cost": "-1",
+      "Cost": "0",
       "Symbols": "⧖",
       "Parameters": "★ Species",
       "Description": "You gain an additional Trait Point at character creation.",
