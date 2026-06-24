@@ -1748,6 +1748,66 @@
       transition: all 0.2s ease;
     }
 
+    .path-action-toolbar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .path-action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 7px 4px;
+      border-radius: var(--rad);
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      cursor: pointer;
+      border: 1px solid var(--border-med);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--ink-dim);
+      transition: all .15s ease;
+      white-space: nowrap;
+    }
+
+    .path-action-icon {
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .path-action-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.15);
+    }
+
+    .path-action-btn--gold {
+      border-color: var(--gold-line);
+      background: rgba(201, 168, 76, 0.1);
+      color: var(--gold);
+    }
+
+    .path-action-btn--indigo {
+      border-color: var(--indigo);
+      background: rgba(129, 140, 248, 0.1);
+      color: var(--accent2);
+    }
+
+    .path-action-btn--mind {
+      border-color: var(--clr-mind);
+      background: rgba(168, 85, 247, 0.1);
+      color: #c084fc;
+    }
+
+    @media (max-width: 480px) {
+      .path-action-toolbar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     .path-select-item:hover {
       border-color: var(--accent);
       background: rgba(6, 10, 20, 0.55);
@@ -1912,7 +1972,10 @@
 
     .custom-sidebar {
       flex-shrink: 0;
-      align-self: stretch;
+      align-self: flex-start;
+      position: sticky;
+      top: 12px;
+      max-height: calc(100vh - 24px);
       width: 46px;
       min-width: 46px;
       background: linear-gradient(135deg, rgba(38, 50, 71, 0.95) 0%, rgba(21, 31, 48, 0.95) 100%);
@@ -1926,7 +1989,6 @@
       display: flex;
       flex-direction: column;
       box-shadow: 0 24px 48px rgba(2, 6, 23, 0.6);
-      position: relative;
     }
 
     .custom-sidebar.expanded {
@@ -2247,6 +2309,7 @@
       .custom-sidebar {
         width: 100% !important;
         order: 1;
+        position: static;
         border-left: 2px solid var(--gold-line);
         border-right: 2px solid var(--gold-line);
         border-top: none;
@@ -2254,6 +2317,10 @@
         margin-right: 0;
         margin-top: -2px;
         border-radius: 0 0 8px 8px;
+      }
+
+      .custom-sidebar.expanded {
+        height: 70vh;
       }
 
       .custom-sidebar .sidebar-tab .tab-label {
@@ -2906,25 +2973,22 @@
                   <div class="original-card flex flex-col gap-2">
                     <div class="flex justify-between items-center mb-1">
                       <h3 class="text-xs font-bold uppercase" style="color:var(--ink-dim)">Browse Paths</h3>
-                      <div class="flex gap-1">
-                        <button onclick="downloadPathsJsonTemplate()"
-                          class="px-2 py-0.5 rounded text-[9px] uppercase font-semibold"
-                          style="border:1px solid var(--gold-line);background:rgba(201,168,76,0.1);color:var(--gold)"
-                          title="Download a blank template JSON showing the expected paths/traits format">⇩
-                          Template</button>
-                        <button onclick="triggerLoadPathsJson()"
-                          class="px-2 py-0.5 rounded text-[9px] uppercase font-semibold"
-                          style="border:1px solid var(--gold-line);background:rgba(201,168,76,0.1);color:var(--gold)"
-                          title="Import paths/traits from a JSON file">⇪ Import JSON</button>
-                        <button onclick="openCustomCreatorModal('path')"
-                          class="px-2 py-0.5 rounded text-[9px] uppercase font-semibold"
-                          style="border:1px solid var(--indigo);background:rgba(129,140,248,0.1);color:var(--accent2)">+
-                          Custom Path</button>
-                        <button onclick="openCustomCreatorModal('trait')"
-                          class="px-2 py-0.5 rounded text-[9px] uppercase font-semibold"
-                          style="border:1px solid var(--clr-mind);background:rgba(168,85,247,0.1);color:#c084fc">+
-                          Custom Trait</button>
-                      </div>
+                    </div>
+                    <div class="path-action-toolbar">
+                      <button onclick="downloadPathsJsonTemplate()" class="path-action-btn path-action-btn--gold"
+                        title="Download a blank template JSON showing the expected paths/traits format">
+                        <span class="path-action-icon">⇩</span><span>Template</span>
+                      </button>
+                      <button onclick="triggerLoadPathsJson()" class="path-action-btn path-action-btn--gold"
+                        title="Import paths/traits from a JSON file">
+                        <span class="path-action-icon">⇪</span><span>Import</span>
+                      </button>
+                      <button onclick="openCustomCreatorModal('path')" class="path-action-btn path-action-btn--indigo">
+                        <span class="path-action-icon">+</span><span>Path</span>
+                      </button>
+                      <button onclick="openCustomCreatorModal('trait')" class="path-action-btn path-action-btn--mind">
+                        <span class="path-action-icon">+</span><span>Trait</span>
+                      </button>
                     </div>
                     <input type="text" id="path-search-input" oninput="renderPathsList()"
                       placeholder="Type to search and discover paths..."
@@ -3347,7 +3411,7 @@
                     your structural durability. It is calculated by adding your Body's Fortitude modifier to your
                     equipped defensive items and any path-specific bonuses.</p>
                   <p class="text-xs font-mono bg-slate-900/40 p-2 rounded border border-slate-800 mt-2">Armor = 4 +
-                    Fortitude Total + Armor Value + Shield Value + Cloak Value + Path Bonuses</p>
+                    Fortitude Total + Armor Value + Shield Value + Cloak Value + Artifact Value + Path Bonuses</p>
                 </div>
                 <div class="border-t pt-3" style="border-color:var(--border-med)">
                   <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">3.
@@ -3374,6 +3438,178 @@
                       manually</div>
                   </div>
                 </div>
+              </div>
+
+              <div class="original-card p-4 flex flex-col gap-3">
+                <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">5.
+                  Speed &amp; Movement</h3>
+                <p class="text-xs leading-relaxed" style="color:var(--ink-dim)">Speed has a flat base of 5 tiles, plus
+                  any manual Speed Bonus you add (from traits, gear, or conditions). Each tile of Speed lets you move
+                  to one directly-adjacent tile; diagonal movement does not skip over tiles.</p>
+                <p class="text-xs font-mono bg-slate-900/40 p-2 rounded border border-slate-800">Speed = 5 + Speed
+                  Bonus (manual input)</p>
+                <div class="grid grid-cols-1 gap-2 text-xs mt-1">
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Jump Distance:</span> Half your Speed, rounded up</div>
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Rough Terrain:</span> Each tile costs 2 Speed instead of 1</div>
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Dash:</span> Range set by its source; ignores opportunity attacks
+                    and terrain movement penalties</div>
+                </div>
+              </div>
+
+              <div class="original-card p-4 flex flex-col gap-3">
+                <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">6.
+                  Trait Points &amp; Feat Points</h3>
+                <p class="text-xs leading-relaxed" style="color:var(--ink-dim)">Trait Points (TP) are the budget you
+                  spend unlocking traits on the Paths tab. Your total grows automatically with Level, and can be
+                  further increased with the manual Bonus TP slot or certain species/traits.</p>
+                <p class="text-xs font-mono bg-slate-900/40 p-2 rounded border border-slate-800">Total TP = (2 × Level)
+                  + Bonus TP (manual input) + Trait/Species Bonuses</p>
+                <p class="text-xs leading-relaxed mt-1" style="color:var(--ink-dim)">Feat Points work differently on
+                  this sheet than a flat per-level grant: each time you reach a <span class="text-gold font-semibold">Path
+                    Breakpoint</span>, you choose between applying that path's passive feature, <em>or</em> converting
+                  it into +1 Feat Point to raise one Attribute or Skill of your choice by 1. This choice can be changed
+                  at any time from the breakpoint panel.</p>
+              </div>
+
+              <div class="original-card p-4 flex flex-col gap-3">
+                <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">7.
+                  Guard, Grace &amp; Final Blows</h3>
+                <div class="grid grid-cols-1 gap-2 text-xs">
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Guard:</span> Temporary HP. Always lost before Health. Cannot be
+                    healed once lost — only regained through traits or external effects.</div>
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Grace (max 6):</span> Gain +1 on a failed roll. A success doesn't
+                    reset Grace, but delays the next gain by one fail. Spend ALL Grace at once to boost a roll.
+                    Resets at the start/end of combat or on Sleep.</div>
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Final Blows (max 4):</span> At 0 Health you fall unconscious. While
+                    unconscious, only Final Blows can harm you — you can resist 4 before dying (Narrator may adjust).
+                  </div>
+                </div>
+              </div>
+
+              <div class="original-card p-4 flex flex-col gap-3">
+                <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">8.
+                  Exhaustion</h3>
+                <p class="text-xs leading-relaxed" style="color:var(--ink-dim)">The Exhaustion tracker (max 6) caps
+                  out at the point this condition becomes fatal — going past it without sleeping is lethal. Each point
+                  stacks a penalty on every roll you make.</p>
+                <p class="text-xs font-mono bg-slate-900/40 p-2 rounded border border-slate-800">Roll Penalty = −2 ×
+                  Exhaustion (stacking)</p>
+                <p class="text-[10px] italic mt-1" style="color:var(--ink-faint)">A full 8-hour Sleep removes 1 point
+                  of Exhaustion and fully restores Health and Mana.</p>
+              </div>
+
+              <div class="original-card p-4 flex flex-col gap-3">
+                <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">9.
+                  Carry Weight &amp; Encumbrance</h3>
+                <p class="text-xs leading-relaxed" style="color:var(--ink-dim)">Your maximum carry weight is derived
+                  from your Body's Might and Brawn totals, your character level, and any backpack bonus you enter on
+                  the Inventory tab. Current weight is the sum of every item's weight in your main inventory grid.</p>
+                <p class="text-xs font-mono bg-slate-900/40 p-2 rounded border border-slate-800">Max Carry Weight =
+                  Might Total + Brawn Total + Level + Backpack Bonus</p>
+                <div class="mt-1 text-xs border border-slate-700 rounded overflow-hidden">
+                  <div
+                    class="grid grid-cols-2 bg-slate-900/60 p-2 font-bold uppercase tracking-wider text-[9px] text-slate-400">
+                    <span>Current Weight</span><span>Status</span>
+                  </div>
+                  <div class="grid grid-cols-2 p-1.5 border-b border-slate-800"><span>≤ 1× Max</span><span
+                      class="text-emerald-400">Unencumbered</span></div>
+                  <div class="grid grid-cols-2 p-1.5 border-b border-slate-800"><span>&gt; 1× Max</span><span
+                      class="text-yellow-400">Encumbered — Movement halved</span></div>
+                  <div class="grid grid-cols-2 p-1.5 border-b border-slate-800"><span>&gt; 2× Max</span><span
+                      class="text-orange-400">Over Encumbered — Movement halved, disadvantage on Body/Skill</span>
+                  </div>
+                  <div class="grid grid-cols-2 p-1.5"><span>&gt; 3× Max</span><span class="text-red-400">Crushed —
+                      Movement 0, disadvantage on all checks, 1 damage/10 min</span></div>
+                </div>
+                <p class="text-[10px] italic mt-1" style="color:var(--ink-faint)">100 coins of carried currency counts
+                  as 1 unit of weight.</p>
+              </div>
+
+              <div class="original-card p-4 flex flex-col gap-3">
+                <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">10.
+                  Armor &amp; Weapon Proficiencies</h3>
+                <p class="text-xs leading-relaxed" style="color:var(--ink-dim)">One piece of equipment per slot
+                  (Armor, Shield, Cloak/Artifact) unless a trait says otherwise. Armor proficiency is gated by your
+                  Fortitude score; weapon proficiency limits are gated by Might and Finesse.</p>
+                <div class="mt-1 text-xs border border-slate-700 rounded overflow-hidden">
+                  <div
+                    class="grid grid-cols-2 bg-slate-900/60 p-2 font-bold uppercase tracking-wider text-[9px] text-slate-400">
+                    <span>Armor Type</span><span>Defense Value / Fortitude Required</span>
+                  </div>
+                  <div class="grid grid-cols-2 p-1.5 border-b border-slate-800"><span>Shield</span><span>+1–2 / 1+
+                      Fortitude</span></div>
+                  <div class="grid grid-cols-2 p-1.5 border-b border-slate-800"><span>Light</span><span>+1–2 / 2+
+                      Fortitude</span></div>
+                  <div class="grid grid-cols-2 p-1.5 border-b border-slate-800"><span>Medium</span><span>+2–3 / 3+
+                      Fortitude</span></div>
+                  <div class="grid grid-cols-2 p-1.5"><span>Heavy</span><span>+4–5 / 4+ Fortitude</span></div>
+                </div>
+                <p class="text-[10px] italic mt-1" style="color:var(--ink-faint)">You can wield as many weapons as you
+                  have arms, but without traits only 1 weapon is fully effective. Might and Finesse set your max
+                  investment in Melee, Ranged, and Finesse weapon proficiencies — multiple points may go into the same
+                  proficiency.</p>
+              </div>
+              <div class="original-card p-4 flex flex-col gap-3">
+                <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">11.
+                  Core Resolution (2d6)</h3>
+                <p class="text-xs leading-relaxed" style="color:var(--ink-dim)">Most actions are resolved by rolling
+                  <span class="font-mono text-gold">2d6 + Modifiers</span>, succeeding if the total meets or beats the
+                  target's Challenge Score (CS).</p>
+                <div class="grid grid-cols-1 gap-2 text-xs">
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Advantage:</span> Roll one extra d6 (3d6 total), keep all — no upper
+                    limit on stacking.</div>
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Disadvantage:</span> Remove one d6 (down to 1d6, or even 0d6) and you
+                    lose the ability to Midnight.</div>
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Midnight (Crit Success):</span> Two natural sixes. Auto-hits, deals
+                    Double Damage. Extra sixes from Advantage increase the effect further.</div>
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Snake Eyes (Crit Fail):</span> Two natural ones. Auto-misses with a
+                    narrative setback. Cannot occur at 0d6.</div>
+                </div>
+              </div>
+
+              <div class="original-card p-4 flex flex-col gap-3">
+                <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">12.
+                  Attack &amp; Damage Reference</h3>
+                <p class="text-xs leading-relaxed mb-1" style="color:var(--ink-dim)">The Weapons section's Dmg and Atk
+                  fields are filled in manually — use these formulas to work out what to write in them.</p>
+                <div class="grid grid-cols-1 gap-2 text-xs">
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Melee / Finesse / Firearm Attack:</span> <span
+                      class="font-mono">2d6 + Proficiency + Weapon Mod + Accuracy</span></div>
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Magic Attack:</span> <span class="font-mono">2d6 + Arcane Total +
+                      Focus Mod + Accuracy</span></div>
+                  <div class="p-2 rounded border border-slate-800 bg-slate-900/40"><span
+                      class="font-bold text-gold">Spell Damage Bonus:</span> Half your Arcane Total (rounded up),
+                    added to every spell you cast</div>
+                </div>
+                <p class="text-[10px] italic mt-1" style="color:var(--ink-faint)">Off-hand attacks use only the base
+                  stat score. A weapon with 0 Proficiency is treated as Improvised, using only Might (melee) or
+                  Finesse (thrown).</p>
+              </div>
+
+              <div class="original-card p-4 flex flex-col gap-3">
+                <h3 class="text-sm font-bold tracking-wider" style="color:var(--indigo);font-family:'Cinzel',serif">13.
+                  Attributes &amp; Skill Totals</h3>
+                <p class="text-xs leading-relaxed" style="color:var(--ink-dim)">At character creation you distribute
+                  <span class="font-mono text-gold">3 points</span> across the four attribute groups (Body, Skill,
+                  Mind, Style), with a maximum of <span class="font-mono text-gold">2 points</span> in any one group
+                  before Species modifiers apply.</p>
+                <p class="text-xs font-mono bg-slate-900/40 p-2 rounded border border-slate-800">Skill Total = Group
+                  Base + Skill Mod + Breakpoint Bonus</p>
+                <p class="text-[10px] italic mt-1" style="color:var(--ink-faint)">The Breakpoint Bonus comes from
+                  choosing "+1 Attribute Point" instead of a path's passive feature when you unlock a breakpoint on
+                  the Paths tab — it only applies to whichever skill you assign it to there.</p>
               </div>
             </div>
           </div>
@@ -3819,6 +4055,18 @@
       let SPELLS_CATALOG = [];
       let selectedPathId = "";
       let unlockedTraits = new Set();
+      // Some trait IDs in the catalog are accidentally reused across different paths (a pre-existing
+      // data issue). This map records which specific Path each unlocked ID actually came from, so
+      // cost/budget lookups can resolve the correct trait instead of always grabbing whichever
+      // colliding entry happens to appear first in the catalog.
+      let unlockedTraitPaths = {};
+
+      function resolveUnlockedTrait(id) {
+        const candidates = TRAITS_CATALOG.filter(t => t.ID === id);
+        if (candidates.length <= 1) return candidates[0];
+        const knownPath = unlockedTraitPaths[id];
+        return candidates.find(t => t.Path === knownPath) || candidates[0];
+      }
       let maxBudgetLimit = 2;
       let breakpointChoices = {};
       let knownSpellIds = new Set(["s1", "s2"]);
@@ -3897,14 +4145,29 @@
         const amtEl = document.getElementById('hpAdjustAmount');
         const curEl = document.getElementById('currentHealth');
         const maxEl = document.getElementById('maxHealth');
+        const guardEl = document.getElementById('guardValue');
         if (!amtEl || !curEl) return;
-        const amt = parseFloat(amtEl.value) || 0;
+        let amt = parseFloat(amtEl.value) || 0;
         if (amt <= 0) return;
         const maxRaw = parseFloat(maxEl?.value);
         const max = Number.isFinite(maxRaw) && maxRaw > 0 ? maxRaw : Infinity;
         let cur = parseFloat(curEl.value) || 0;
-        cur = sign > 0 ? Math.min(max, cur + amt) : Math.max(0, cur - amt);
-        curEl.value = cur;
+        if (sign > 0) {
+          // Heal: restores HP directly.
+          cur = Math.min(max, cur + amt);
+          curEl.value = cur;
+        } else {
+          // Damage: depletes Guard first, then spills any remaining damage into HP.
+          let guard = parseFloat(guardEl?.value) || 0;
+          if (guard > 0) {
+            const guardAbsorbed = Math.min(guard, amt);
+            guard -= guardAbsorbed;
+            amt -= guardAbsorbed;
+            if (guardEl) guardEl.value = guard;
+          }
+          cur = Math.max(0, cur - amt);
+          curEl.value = cur;
+        }
         updateHPGuardBar();
       }
 
@@ -4391,6 +4654,24 @@
         window.addEventListener('resize', drawTreeConnections);
       }
 
+      // Traits with a negative Cost (e.g. "Human: Adaptive Soul" granting an extra Trait Point) are meant to
+      // raise your total TP budget, not show up as negative "spent" points. This computes that bonus generically
+      // from whatever is unlocked, so it works correctly even when a trait's Cost is written as negative.
+      function getNegativeCostBudgetBonus() {
+        let bonus = 0;
+        const seenNames = new Set();
+        unlockedTraits.forEach(id => {
+          const t = resolveUnlockedTrait(id);
+          if (!t) return;
+          const nameKey = String(t.Name || '').trim().toLowerCase();
+          if (nameKey && seenNames.has(nameKey)) return;
+          if (nameKey) seenNames.add(nameKey);
+          const cost = parseInt(t.Cost, 10) || 0;
+          if (cost < 0) bonus += -cost;
+        });
+        return bonus;
+      }
+
       function handleLevelChange() {
         const level = parseInt(document.getElementById('charLevel')?.value, 10) || 1;
         const la = document.getElementById('budget-level-anchor'); if (la) la.textContent = level;
@@ -4398,8 +4679,8 @@
         for (let i = 1; i <= Math.min(level, 12); i++) total += POINTS_BY_LEVEL[i] || 0;
         if (level > 12) total += (level - 12);
         const tpBonus = parseInt(document.getElementById('tp_bonus')?.value, 10) || 0;
-        const adaptiveSoulBonus = [...TRAITS_CATALOG].some(t => t.Name === 'Human: Adaptive Soul' && unlockedTraits.has(t.ID)) ? 1 : 0;
-        maxBudgetLimit = total + tpBonus + adaptiveSoulBonus;
+        const negativeCostBonus = getNegativeCostBudgetBonus();
+        maxBudgetLimit = total + tpBonus + negativeCostBonus;
         const el = document.getElementById('total-points'); if (el) el.textContent = maxBudgetLimit;
         updateSpentCount(); updateDerivedVitals();
       }
@@ -4414,12 +4695,13 @@
         let s = 0;
         const seenNames = new Set();
         unlockedTraits.forEach(id => {
-          const t = TRAITS_CATALOG.find(x => x.ID === id);
+          const t = resolveUnlockedTrait(id);
           if (!t) return;
           const nameKey = String(t.Name || '').trim().toLowerCase();
           if (nameKey && seenNames.has(nameKey)) return;
           if (nameKey) seenNames.add(nameKey);
-          s += parseInt(t.Cost, 10) || 0;
+          const cost = parseInt(t.Cost, 10) || 0;
+          s += Math.max(0, cost); // negative-cost traits add to the total budget instead (see getNegativeCostBudgetBonus), never reduce spent below 0
         });
         return s;
       }
@@ -4631,19 +4913,23 @@
     .map(t => t.ID);
 }
 
-      function toggleTraitSelection(traitId) {
-        const trait = TRAITS_CATALOG.find(t => t.ID === traitId); if (!trait) return;
+      function toggleTraitSelection(traitOrId) {
+        // Accepts either the exact trait object (preferred — avoids ambiguity when multiple
+        // traits in the catalog share the same ID) or a plain ID string (falls back to a
+        // catalog lookup, which can resolve to the wrong trait if IDs collide).
+        const trait = (typeof traitOrId === 'object' && traitOrId) ? traitOrId : TRAITS_CATALOG.find(t => t.ID === traitOrId);
+        if (!trait) return;
         const linkedIds = getLinkedTraitIds(trait);
         const isUnlocked = linkedIds.some(id => unlockedTraits.has(id));
-        const cost = parseInt(trait.Cost, 10) || 0;
+        const cost = Math.max(0, parseInt(trait.Cost, 10) || 0); // negative-cost traits never consume budget at this gate; their bonus is added to the total separately
         if (isUnlocked) {
           if (!canLockTraitIds(linkedIds)) { triggerWarningToast("Cannot lock: dependent child nodes are active."); return; }
-          linkedIds.forEach(id => unlockedTraits.delete(id));
+          linkedIds.forEach(id => { unlockedTraits.delete(id); delete unlockedTraitPaths[id]; });
         } else {
           if (!canUnlockTrait(trait)) { triggerWarningToast("Planar connection locked: Complete parent prerequisites first."); return; }
           const spent = getSpentPoints();
           if (spent + cost > maxBudgetLimit) { triggerWarningToast("Trait point budget exceeded. Increase Level to gain more TP."); return; }
-          linkedIds.forEach(id => unlockedTraits.add(id));
+          linkedIds.forEach(id => { unlockedTraits.add(id); unlockedTraitPaths[id] = trait.Path; });
         }
         updateNodeStates(); drawTreeConnections(); selectPath(selectedPathId); handleLevelChange();
       }
@@ -4879,7 +5165,7 @@
           btn.onclick = () => {
             const state = getTraitUnlockState(trait);
             if (!state.available) return;
-            toggleTraitSelection(trait.ID);
+            toggleTraitSelection(trait);
           };
           btn.onmouseenter = (e) => showTooltip(trait, e);
           btn.onmousemove = (e) => showTooltip(trait, e);
@@ -5202,10 +5488,12 @@
             state.missing.join(', ');
 
         }
+        const rawCost = parseInt(trait.Cost, 10) || 0;
+        const costLabel = rawCost < 0 ? `0 TP <span style="color:var(--gold)">(+${-rawCost} budget)</span>` : `${rawCost} TP`;
         el.innerHTML = `<div style="font-weight:700;color:var(--gold);font-size:12px">${trait.Name} <span style="font-weight:600;color:var(--ink-faint);font-size:11px">[${trait.Action}]</span></div>` +
           `<div style="font-size:11px;margin-top:6px;color:var(--ink)">${trait.Description}</div>` +
           `${trait.Scaling ? `<pre style="white-space:pre-wrap;margin-top:8px;font-family:monospace;font-size:11px;color:#cbd5e1;">${trait.Scaling}</pre>` : ''}` +
-          `<div style="margin-top:6px;font-size:11px;color:var(--ink-faint);font-weight:600">${prereqStr} • ${trait.Cost} TP</div>`;
+          `<div style="margin-top:6px;font-size:11px;color:var(--ink-faint);font-weight:600">${prereqStr} • ${costLabel}</div>`;
         el.style.display = 'block';
         const x = ev?.clientX ?? (window.innerWidth / 2);
         const y = ev?.clientY ?? (window.innerHeight / 2);
@@ -5601,6 +5889,7 @@
 
       function toggleCustomSidebar() {
         document.getElementById('customSidebar')?.classList.toggle('expanded');
+        requestAnimationFrame(syncSidebarHeight);
       }
 
       function openWidgetCreator(type, editId) {
@@ -5748,6 +6037,7 @@
         list.innerHTML = '';
         if (!SIDEBAR_WIDGETS.length) {
           list.innerHTML = `<div class="sidebar-empty-note">No trackers yet. Use the buttons above to add one.</div>`;
+          requestAnimationFrame(syncSidebarHeight);
           return;
         }
         SIDEBAR_WIDGETS.forEach(w => {
@@ -5826,6 +6116,7 @@
 
           list.appendChild(card);
         });
+        requestAnimationFrame(syncSidebarHeight);
       }
 
       // ── Toast ──
@@ -5841,11 +6132,29 @@
       }
 
       // ── Tab Navigation ──
+      function syncSidebarHeight() {
+        const sidebar = document.querySelector('.custom-sidebar');
+        const sheet = document.querySelector('.sheet');
+        if (!sidebar || !sheet) return;
+        if (!sidebar.classList.contains('expanded') || window.innerWidth <= 900) {
+          sidebar.style.height = '';
+          return;
+        }
+        const viewportCap = window.innerHeight - 24;
+        const sheetHeight = sheet.offsetHeight;
+        // Measure how tall the sidebar's own content actually wants to be by briefly
+        // letting it size naturally, so a long tracker list is never clipped on a short tab.
+        sidebar.style.height = 'auto';
+        const naturalHeight = sidebar.scrollHeight;
+        const target = Math.min(viewportCap, Math.max(sheetHeight, naturalHeight));
+        sidebar.style.height = target + 'px';
+      }
+
       function showTab(name) {
         document.querySelectorAll('.tab-content').forEach(el => { el.style.display = (el.id === 'tab-' + name) ? '' : 'none'; });
         document.querySelectorAll('.subtab').forEach(btn => { btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === name); });
         if (name === 'paths') setTimeout(drawTreeConnections, 60);
-        sideBarHeightMatch();
+        requestAnimationFrame(syncSidebarHeight);
       }
 
       // ── Spells ──
@@ -6028,6 +6337,7 @@
           inv_crafts_recipes: extractSimpleGridData('inv_crafts_recipes'),
           selectedPathId,
           unlockedTraits: Array.from(unlockedTraits),
+          unlockedTraitPaths,
           breakpointChoices,                  // ← full object with all stat choices
           spellcasting_school: spellSchool,   // ← explicit value
           mana_bonus: document.getElementById('mana_bonus')?.value || '0',
@@ -6110,6 +6420,7 @@
 
         selectedPathId = data.selectedPathId || "";
         unlockedTraits = new Set(data.unlockedTraits || []);
+        unlockedTraitPaths = data.unlockedTraitPaths || {};
         // ── FIX: restore full breakpointChoices including stat selections ──
         breakpointChoices = data.breakpointChoices || {};
 
@@ -6151,7 +6462,7 @@
 
       function clearSheet() {
         document.querySelectorAll('input,textarea').forEach(el => { if (el.type !== 'button' && el.type !== 'submit') el.value = ''; });
-        weapons = []; unlockedTraits.clear(); breakpointChoices = {}; knownSpellIds.clear(); customSpells = [];
+        weapons = []; unlockedTraits.clear(); unlockedTraitPaths = {}; breakpointChoices = {}; knownSpellIds.clear(); customSpells = [];
         SIDEBAR_WIDGETS = [];
         addWeapon(); addWeapon(); addWeapon();
         buildPips('gracePips', 6, 0, setGrace);
@@ -6203,22 +6514,10 @@
         return !!(PATHS_CATALOG.length || TRAITS_CATALOG.length || SPELLS_CATALOG.length);
       }
 
-      function sideBarHeightMatch(){
-        const sidebar = document.querySelector('.custom-sidebar');
-        const sheet = document.querySelector('.sheet');
-        if (!sidebar || !sheet) return;
-        // Below 900px the sidebar stacks under the sheet instead of beside
-        // it (see the matching @media rule), so forcing it to match the
-        // sheet's full height just creates a giant empty box. Only sync
-        // heights in the side-by-side desktop layout.
-        if (window.innerWidth <= 900) {
-          sidebar.style.height = '';
-          return;
-        }
-        sidebar.style.height = sheet.offsetHeight + 'px';
-      }
-
-      window.addEventListener('resize', sideBarHeightMatch);
+      // Sidebar height tracks the sheet's rendered height (never shorter than its own
+      // content needs, never taller than the viewport) — recalculated on tab switch,
+      // toggle, tracker add/remove, and window resize via syncSidebarHeight().
+      window.addEventListener('resize', () => requestAnimationFrame(syncSidebarHeight));
 
       window.onload = function () {
         
@@ -6226,11 +6525,13 @@
         buildPips('gracePips', 6, 0, setGrace);
         buildPips('finalBlowPips', 4, 0, setFinalBlow);
         renderSidebarWidgets();
-        sideBarHeightMatch();
+        requestAnimationFrame(syncSidebarHeight);
         loadCatalogs().then(() => {
           inv_init(); paths_init(); recalcAll(); updateSpellSchoolTheme(); filterSpellsSelector(); renderKnownSpells();
+          requestAnimationFrame(syncSidebarHeight);
         }).catch(() => {
           inv_init(); paths_init(); recalcAll(); updateSpellSchoolTheme(); filterSpellsSelector(); renderKnownSpells();
+          requestAnimationFrame(syncSidebarHeight);
         });
         ['charLevel', 'armor_def', 'shield_def', 'cloak_def', 'artifact_def', 'armor_bonus', 'mana_bonus', 'speed_bonus', 'tp_bonus'].forEach(id => {
           const el = document.getElementById(id);
@@ -6246,9 +6547,6 @@
           btn.addEventListener('click', e => { e.stopPropagation(); menu.classList.toggle('hidden'); });
           document.addEventListener('click', () => { if (!menu.classList.contains('hidden')) menu.classList.add('hidden'); });
         }
-        document.querySelectorAll('input').forEach(inp =>{
-          inp.addEventListener('input', sideBarHeightMatch)
-        });
         document.querySelectorAll('textarea').forEach(el => {
           autoExpandTextarea(el);
           el.addEventListener('input', () => autoExpandTextarea(el));
