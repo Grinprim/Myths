@@ -1583,18 +1583,15 @@
 
                         <div class="rule-card">
                             <div class="grid md:grid-cols-2 gap-6 text-sm">
-                                <div>
+                                <div style="border:1px solid rgb(46, 46, 46); padding: 15px; border-radius: 5px;">
                                     <h4 class="text-white font-bold mb-2">Rest (&gt;10 mins)</h4>
-                                    <p>Regain Health equal to your Level for a short rest. Longer rests heal more —
-                                        typically equal to your Level per hour up to 4 × Level. Rests may also replenish
-                                        certain resources depending on traits.</p>
+                                    <p>A rest is a period of time, in which your charcters perform tasks they do not find physically demanding. You must rest atleast 10 minutes to gain the benefits of a rest, but can rest up to 4 hours:<br><br>
+                                        - For each hour rested including the first 10 minutes, you regain health equal to your level.<br><br>
+                                        - You regain Active trait uses.</p>
                                 </div>
-                                <div>
+                                <div style="border:1px solid rgb(46, 46, 46); padding: 15px; border-radius: 5px;">
                                     <h4 class="text-white font-bold mb-2">Sleep (8 hrs)</h4>
-                                    <p>Full recovery of Health and Mana. Replenish charged trait uses and remove 1 point
-                                        of Fatigue. Sleeping less than 6 hours gives partial benefit as determined by
-                                        the
-                                        Narrator.</p>
+                                    <p>Sleeping is a type of extended rest, where your character does not act in any way, and simply sleeps for a duration, up to 8 hours.<br><br>- If you manage to sleep atleast 6 hours you fully recover your health and mana, however if you have any amount of Fatigue, you may choose to reduce it by 1 instead.<br><br>- If you manage to sleep atleast 4 hours you recover half of your health and mana.<br><br>- If you sleep less than 4 hours you do not recover health and mana.<br><br>- Any amount of Sleep prevents Fatigue gain. </p>
                                 </div>
                             </div>
                             <div class="mt-4 pt-4 border-t border-slate-700">
@@ -1986,6 +1983,9 @@
                                 essential.</p>
                             <p>Creatures can also not occupy the same space, this has only a few exceptions.</p>
                             <ul class="list-disc ml-5 space-y-1 mt-2">
+                                <li><strong class="notice_blue">Tiny [~1 x ~1]:</strong> While sharing their tile size
+                                    with small, tiny creatures do appear even smaller, and <b>CAN</b> occupy spaces of
+                                    medium creatures and above with no penalty. They are <i>technically</i> 1 x 1, but realistically they are more like 0.25x0.25 at the biggest.</li>
                                 <li><strong class="notice_blue">Small [1 x 1]:</strong> While sharing their tile size
                                     with medium, small creatures do appear smaller, and <b>CAN</b> occupy spaces of
                                     large creatures and above with no penalty.</li>
@@ -2391,6 +2391,15 @@
                                 <p>While you have this condition, you must use at least one movement action per turn to
                                     move away from the creature that fears you.</p>
                             </div>
+                            <div class="condition-card"><strong class="text-red-400">Dazed</strong>
+                                <p>Active trait uses are disabled as long as you have any stacks of Dazed. One stack decays at the end of your turn.</p>
+                            </div>
+                            <div class="condition-card"><strong class="text-red-400">Silanced</strong>
+                                <p>You are unable to cast spells while you have any stacks of Silanced. One stack decays at the end of your turn.</p>
+                            </div>
+                            <div class="condition-card"><strong class="text-red-400">Hesitation</strong>
+                                <p>You are unable to make unarmed or weapon attacks while you have any stacks of Hesitation. One stack decays at the end of your turn.</p>
+                            </div>
                         </div>
 
                         <div class="grid md:grid-cols-3 gap-4 text-sm">
@@ -2433,6 +2442,12 @@
                             <div class="condition-card"><strong class="text-teal-400">Unconscious</strong>
                                 <p>While in this condition you cannot act, taking any damage causes you to lose 1 Fatal
                                     Blow.</p>
+                            </div>
+                            <div class="condition-card"><strong class="text-teal-400">Pacifism</strong>
+                                <p>While you have this condition, you cannot take any action that would directly harm another creature.</p>
+                            </div>
+                            <div class="condition-card"><strong class="text-teal-400">Sleep</strong>
+                                <p>While in this condition you cannot act, you regain 1 health for each scene Slept, if you take any damage, you are Awakened.</p>
                             </div>
                         </div>
 

@@ -7,7 +7,7 @@
       "breakpoints": {
         "breakpoint_1": {
           "investment": 3,
-          "description": "While fighting alone against a single opponent gain +2 armour against their attacks.",
+          "description": "While fighting alone against a single opponent gain +2 armor against their attacks.",
           "alternative_feat_bonuses": [
             {
               "feat": "+1 feat point in any Skill feat."
@@ -94,7 +94,7 @@
       "breakpoints": {
         "breakpoint_8": {
           "investment": 4,
-          "description": "You no longer lose armour while enraged (except reckless). You gain the ability to dismiss Rage using one action.",
+          "description": "You no longer lose armor while enraged (except reckless). You gain the ability to dismiss Rage using one action.",
           "alternative_feat_bonuses": [
             {
               "feat": "+2 feat point in might, brawn, fortitude or spirit."
@@ -120,7 +120,7 @@
       "breakpoints": {
         "breakpoint_10": {
           "investment": 3,
-          "description": "When you gain armour during combat, gain the same amount of guard.",
+          "description": "When you gain armor during combat, gain the same amount of guard.",
           "alternative_feat_bonuses": [
             {
               "feat": "+1 feat point in brawn, fortitude or spirit."
@@ -132,7 +132,7 @@
           "description": "Tough.",
           "alternative_feat_bonuses": [
             {
-              "feat": "Tough but for armour."
+              "feat": "Tough but for armor."
             }
           ]
         }
@@ -155,7 +155,7 @@
         },
         "breakpoint_13": {
           "investment": 6,
-          "description": "When you lose health or armour from your “Path of the Aether” pact traits gain +1 grace.",
+          "description": "When you lose health or armor from your “Path of the Aether” pact traits gain +1 grace.",
           "alternative_feat_bonuses": [
             {
               "feat": "You may sacrifice any Attribute point, to gain +2 Attribute points anywhere you did not sacrifice them with this Breakpoint."
@@ -622,7 +622,7 @@
         },
         "breakpoint_47": {
           "investment": 6,
-          "description": "If your accuracy exceeded the target's armour by at least 3, you may select a specific spot on the target to hit.",
+          "description": "If your accuracy exceeded the target's armor by at least 3, you may select a specific spot on the target to hit.",
           "alternative_feat_bonuses": [
             {
               "feat": "+1 finesse on aim checks. +3 range on your ranged weaponry."
@@ -826,7 +826,6 @@
             }
           ]
         }
-        
       },
       "source": "lakeview"
     },
@@ -870,7 +869,7 @@
       "name": "Path of the Transformist",
       "description": "",
       "breakpoints": {
-        "breakpoint_1": {
+        "breakpoint_t1": {
           "investment": 1,
           "description": "Basic Transformation: You may transform into non-magical, non-mystical creatures.",
           "alternative_feat_bonuses": [
@@ -879,7 +878,7 @@
             }
           ]
         },
-        "breakpoint_2": {
+        "breakpoint_t2": {
           "investment": 3,
           "description": "Magical Transformation: You may transform into magical beasts.",
           "alternative_feat_bonuses": [
@@ -888,7 +887,7 @@
             }
           ]
         },
-        "breakpoint_3": {
+        "breakpoint_t3": {
           "investment": 6,
           "description": "Mythical Transformation: You may transform into mythical beasts.",
           "alternative_feat_bonuses": [
@@ -906,6 +905,32 @@
       "description": "Unique traits for the campain of Lords of the Dark.",
       "breakpoints": {},
       "source": "lords"
+    },
+    {
+      "ID": "pS1",
+      "name": "Path of the Sinner",
+      "description": "",
+      "breakpoints": {
+        "breakpoint_S1": {
+          "investment": 3,
+          "description": "You gain an additional 2 trait points to spend anywhere",
+          "alternative_feat_bonuses": [
+            {
+              "feat": "+1 in any Feat"
+            }
+          ]
+        },
+        "breakpoint_S2": {
+          "investment": 7,
+          "description": "You Level up twice",
+          "alternative_feat_bonuses": [
+            {
+              "feat": "+1 Attribute point anywhere"
+            }
+          ]
+        }
+      },
+      "source": "sinners"
     }
   ],
   "traits": [
@@ -3071,7 +3096,7 @@
     },
     {
       "ID": "t180",
-      "Name": "Glinting Armour",
+      "Name": "Glinting armor",
       "Action": "◇",
       "Path": "p18",
       "Cost": "2",
@@ -4493,7 +4518,7 @@
       "Cost": "2",
       "Symbols": "⧖",
       "Parameters": "",
-      "Description": "While you have no known spells; When you are given a buff by an ally, you may choose to double its duration or effect.",
+      "Description": "You permenantely have a stack of the Silanced Condition; When you are given a buff by an ally, you may choose to double its duration or effect.",
       "Scaling": "",
       "source": "core"
     },
@@ -4566,6 +4591,18 @@
       "Symbols": "⧖",
       "Parameters": "⫘ ★req Spellcasting",
       "Description": "When an ally within 8 tiles casts a spell, you may pay its mana costs with your mana instead.",
+      "Scaling": "",
+      "source": "core"
+    },
+    {
+      "ID": "tp303",
+      "Name": "Apprenticeship",
+      "Action": "⊘",
+      "Path": "p32",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "▲ Bonded",
+      "Description": "Choose an Ally or Companion, (this choice can only be changed upon leveling up or if the bondead target dies)<br><br>Your ally learns a trait you have access to, for free.",
       "Scaling": "",
       "source": "core"
     },
@@ -5181,7 +5218,6 @@
       "Scaling": "",
       "source": "core"
     },
-    
     {
       "ID": "tM1",
       "Name": "Grafting",
@@ -5265,6 +5301,90 @@
       "Description": "Upon taking damage, you may spend 1 use of Block to reduce the damage to 1/4 rounded up of the original damage.",
       "Scaling": "Uses:\n4 [lvl 4]\n6 [lvl 6]\n8 [lvl 8]\n10 [lvl 10]\n12 [lvl 12]",
       "source": "lords"
+    },
+    {
+      "ID": "tS1",
+      "Name": "Greed",
+      "Action": "⊘",
+      "Path": "pS1",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "",
+      "Description": "<b>[You gain 2 Trait Points]</b><br><br> Once per day, when presented with an opportunity to steal from anyone other than an ally, roll [Spirit] vs 6. On a failure, you cannot resist the temptation and must attempt to take the opportunity. Each successful resistance increases the score to beat by 1. This bonus resets when you fail the check.",
+      "Scaling": "",
+      "source": "sinners"
+    },
+    {
+      "ID": "tS2",
+      "Name": "Gluttony",
+      "Action": "⊘",
+      "Path": "pS1",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "",
+      "Description": "<b>[You gain 2 Trait Points]</b><br><br> Your constant overindulgence causes you to consume four times the normal amount of daily rations.",
+      "Scaling": "",
+      "source": "sinners"
+    },
+    {
+      "ID": "tS3",
+      "Name": "Wrath",
+      "Action": "⊘",
+      "Path": "pS1",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "",
+      "Description": "<b>[You gain 2 Trait Points]</b><br><br> Your anger consumes your judgment. Whenever possible, you must direct your attacks toward the creature that most recently damaged you, regardless of the distance between you.",
+      "Scaling": "",
+      "source": "sinners"
+    },
+    {
+      "ID": "tS4",
+      "Name": "Lust",
+      "Action": "⊘",
+      "Path": "pS1",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "",
+      "Description": "<b>[You gain 2 Trait Points]</b><br><br> Armor is far too restrictive for your tastes. You cannot equip armor, or any item placed in your Armor or Artifact slots that provides statistical or gameplay benefits.",
+      "Scaling": "",
+      "source": "sinners"
+    },
+    {
+      "ID": "tS5",
+      "Name": "Pride",
+      "Action": "⊘",
+      "Path": "pS1",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "",
+      "Description": "<b>[You gain 2 Trait Points]</b><br><br> Your pride refuses to accept defeat. Once you willingly enter a fight, you cannot voluntarily retreat, surrender, or withdraw until the conflict is resolved.",
+      "Scaling": "",
+      "source": "sinners"
+    },
+    {
+      "ID": "tS6",
+      "Name": "Envy",
+      "Action": "⊘",
+      "Path": "pS1",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "",
+      "Description": "<b>[You gain 2 Trait Points]</b><br><br> You cannot bear to see others receive what you do not. Whenever an ally would receive healing or a beneficial effect, you must be a valid target for and benefit from the same effect first. Allies may only receive healing or beneficial effects that you have personally benefited from within the last 3 scenes.",
+      "Scaling": "",
+      "source": "sinners"
+    },
+    {
+      "ID": "tS7",
+      "Name": "Sloth",
+      "Action": "⊘",
+      "Path": "pS1",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "",
+      "Description": "<b>[You gain 2 Trait Points]</b><br><br> Comfort is your highest priority. If you do not take at least 2 Short Rests during a day, you gain 1 Exhaustion. Additionally, all other sources of Exhaustion affecting you are doubled.",
+      "Scaling": "",
+      "source": "sinners"
     }
   ]
 }
