@@ -1,0 +1,21 @@
+{
+  "_comment": "Expansion module file. Lives at json/expansions/<source>.json, where <source> matches the \"source\" tag used on the paths/traits this expansion adds in paths_traits.json (here, 'lakeview' — Path of the Modified / Path of the Risky Fella). Auto-loaded by the sheet when an expansion with this source is detected; can also be imported manually from the Expansions tab. The sheet only reads the 'source', 'name', 'bars', and 'counters' keys below — everything else (like this comment) is ignored and safe to keep for your own notes.",
+
+  "source": "lakeview",
+  "name": "Lakeview",
+
+  "bars": [
+    {
+      "id": "risk_meter",
+      "label": "Risk Meter",
+      "max": 128,
+      "value": 0,
+      "color": "#ef4444",
+      "_comment": "How much Risk your character has taken on"
+    }
+  ],
+
+  "counters": [
+    
+  ]
+}

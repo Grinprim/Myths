@@ -73,6 +73,7 @@
       --clr-skill: #10b981;
       --clr-mind: #a855f7;
       --clr-style: #ec4899;
+      --clr-passive: #64748b;
           --border-gold: rgba(201,168,76,0.25);
 
       --bp-glow: #818cf8;
@@ -1829,60 +1830,222 @@
     }
 
     .node-bubble-paths {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 2px solid rgba(201, 168, 76, 0.25);
-      background: #0f172a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      user-select: none;
-      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.7), 0 0 8px rgba(15, 23, 42, 0.4);
-      font-family: 'JetBrains Mono', monospace;
-    }
+  position: absolute;
+  width: 42px;
+  height: 42px;
 
-    .node-bubble-paths::after {
-      content: '';
-      position: absolute;
-      inset: 6px;
-      border-radius: 50%;
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      opacity: 0.6;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0,0,0,0.95);
+
+  user-select: none;
+  font-family: 'JetBrains Mono', monospace;
+
+  background: transparent;
+  border: none;
+
+  z-index: 2;
+  position: relative;
+
+  clip-path: var(--shape, circle(50% at 50% 50%));
+
+  --node-stroke: rgba(201,168,76,0.25);
+  --shape: circle(50% at 50% 50%);
+  --stroke-width: 2px;
+}
+
+.node-bubble-paths::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--node-stroke);
+  clip-path: var(--shape);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.node-bubble-paths::after {
+  content: '';
+  position: absolute;
+  inset: var(--stroke-width, 2px);
+  background: #0f172a;
+  clip-path: var(--shape);
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+.shape-star {
+  --stroke-width: 6px;
+  --shape: polygon(
+    50% 4%,
+    61% 30%,
+    94% 36%,
+    70% 54%,
+    78% 88%,
+    50% 70%,
+    22% 88%,
+    30% 54%,
+    6% 36%,
+    39% 30%
+  );
+  clip-path: none;
+}
+
+.shape-star::before,
+.shape-star::after {
+  transform: scale(1.3);
+  transform-origin: center;
+}
+
+.shape-octagon {
+  --stroke-width: 3px;
+  --shape: polygon(
+    30% 2%,
+    70% 2%,
+    98% 30%,
+    98% 70%,
+    70% 98%,
+    30% 98%,
+    2% 70%,
+    2% 30%
+  );
+}
+
+.shape-triangle {
+  --stroke-width: 6px;
+   --shape: polygon(
+    50% 0%,
+    66% 34%,
+    100% 50%,
+    66% 66%,
+    50% 100%,
+    34% 66%,
+    0% 50%,
+    34% 34%
+  );
+  clip-path: none;
+}
+
+.shape-triangle::before,
+.shape-triangle::after {
+  transform: scale(1.1);
+  transform-origin: center;
+}
+
+.shape-square {
+  --shape: inset(0 round 8px);
+}
+
+.shape-circle {
+  --shape: circle(50% at 50% 50%);
+}
+
+.shape-hexagon {
+  --stroke-width: 3px;
+  --shape: polygon(
+    25% 5%,
+    75% 5%,
+    100% 50%,
+    75% 95%,
+    25% 95%,
+    0% 50%
+  );
+}
+
+/* Doubled outline for major (2-cost) traits: a second, slightly larger ring of the same
+   shape sitting behind the node — see placeNode/updateNodeStates in the script for how it's
+   created and kept in sync. */
+.node-outline-ring {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  pointer-events: none;
+  z-index: 1;
+  transform: scale(1.3);
+  transform-origin: center;
+  clip-path: var(--shape, circle(50% at 50% 50%));
+  --node-stroke: rgba(201,168,76,0.25);
+  /* --shape and --stroke-width are intentionally NOT defaulted here: this rule is defined
+     after .shape-circle/.shape-square/.shape-hexagon/.shape-star/.shape-triangle in the
+     stylesheet, so a same-specificity default here would always win over those classes
+     (later same-specificity rule wins) and the outer ring would render as a plain circle
+     regardless of which shape class JS attaches to it. Let the var() fallbacks below handle
+     the "no shape class" case instead. */
+}
+
+.node-outline-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--node-stroke);
+  clip-path: var(--shape);
+  z-index: -1;
+}
+
+.node-outline-ring::after {
+  content: '';
+  position: absolute;
+  inset: var(--stroke-width, 2px);
+  background: #0f172a;
+  clip-path: var(--shape);
+  z-index: -1;
+}
+
+/* Small badge marking traits whose Action is "Non-Activatable" (↺) — the trait is always
+   passively on and can never be toggled. Positioned as a SIBLING of the node button (appended
+   to the same parent as the node, not as a child of it) — the node itself has a clip-path
+   applied for its shape, and clip-path also clips any descendant content, so a child badge
+   sitting outside the node's own box would get silently cut off by that shape's border. */
+.node-passive-badge {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(226, 232, 240, 0.9);
+  background: rgba(15, 23, 42, 0.92);
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  line-height: 1;
+  color: var(--clr-passive);
+}
 
     .node-bubble-paths.locked {
-      border-color: #334155;
-      color: #475569;
-      opacity: 0.6;
-    }
+  --node-stroke: #334155;
+  opacity: 0.6;
+}
 
     .node-bubble-paths.available {
-      border-color: var(--accent);
-      color: var(--accent2);
-      box-shadow: 0 0 8px rgba(124, 131, 255, 0.2);
-    }
+  /* --node-stroke set via JavaScript */
+}
 
     .node-bubble-paths.unlocked {
-      background: radial-gradient(circle at 30% 30%, #4f46e5, #0f172a);
-      border-color: #a5b4fc;
-      color: #fff;
-      box-shadow: 0 0 12px rgba(165, 180, 252, 0.4), inset 0 0 4px rgba(255, 255, 255, 0.2);
-    }
+  /* --node-stroke set via JavaScript */
+}
+.node-bubble-paths.unlocked::after {
+  background: rgb(45, 52, 115);
+}
+
 
     .node-bubble-paths.ghost-node {
-      border-style: dashed;
-      color: rgba(148, 163, 184, 0.6);
-    }
+  --node-stroke: rgba(51, 65, 85, 0.5);
+  color: rgba(148, 163, 184, 0.6);
+}
 
     .node-bubble-paths:hover {
-      transform: scale(1.1);
-      z-index: 20;
-    }
+  transform: scale(1.1);
+  z-index: 20;
+}
 
     .connector-line-paths {
       stroke-dasharray: 6, 4;
@@ -2205,6 +2368,19 @@
       transition: width .25s;
     }
 
+    .sw-bar-body {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .sw-bar-slider {
+      width: 100%;
+      height: 14px;
+      margin: 0;
+      cursor: pointer;
+    }
+
     .sw-bar-nums {
       display: flex;
       align-items: center;
@@ -2298,6 +2474,52 @@
       font-family: 'Cinzel', serif;
       border-bottom: 1px solid var(--gold-line);
       padding-bottom: 4px;
+    }
+
+    .expansion-card {
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      border-radius: var(--rad);
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.45) 0%, rgba(15, 23, 42, 0.3) 100%);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: border-color 0.2s;
+    }
+
+    .expansion-card.enabled {
+      border-color: var(--gold-line);
+    }
+
+    .expansion-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .expansion-card-name {
+      font-family: 'Cinzel', serif;
+      font-weight: bold;
+      font-size: 13px;
+      color: var(--ink);
+      letter-spacing: .02em;
+    }
+
+    .expansion-card-meta {
+      font-size: 10px;
+      color: var(--ink-faint);
+      margin-top: 2px;
+    }
+
+    .expansion-card-sub {
+      font-size: 10px;
+      color: var(--ink-dim);
+      font-style: italic;
+    }
+
+    .expansion-card .sw-toggle-switch {
+      flex-shrink: 0;
     }
 
     @media (max-width: 900px) {
@@ -2545,6 +2767,7 @@
               <button class="subtab" onclick="showTab('spells')">Spells</button>
               <button class="subtab" onclick="showTab('crafting')">Crafting</button>
               <button class="subtab" onclick="showTab('info')">Info</button>
+              <button class="subtab" onclick="showTab('expansions')">Expansions</button>
             </div>
           </div>
           <div class="header-btns">
@@ -2555,6 +2778,7 @@
         </header>
 
         <input type="file" id="sheetLoadInput" accept=".json" class="hidden" onchange="handleLoadSheetFile(event)">
+        <input type="file" id="expansionModuleInput" accept=".json" class="hidden" onchange="handleLoadExpansionModuleFile(event)">
         <input type="file" id="pathsJsonInput" accept=".json" class="hidden" onchange="loadCustomPathsJsonFile(event)">
 
         <!-- MAIN TAB -->
@@ -3034,6 +3258,11 @@
                               class="legend-dot style"
                               style="width:10px;height:10px;border-radius:50%;display:inline-block;background:var(--clr-style);border:1px solid rgba(255,255,255,0.06)"></span><span>Attack
                               Action</span></div>
+                          <div class="legend-item"
+                            style="display:flex;align-items:center;gap:6px;color:var(--ink-faint);font-size:11px;"><span
+                              class="legend-dot passive"
+                              style="width:10px;height:10px;border-radius:50%;display:inline-block;background:var(--clr-passive);border:1px solid rgba(255,255,255,0.06)"></span><span>Non-Activatable</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -3614,8 +3843,25 @@
             </div>
           </div>
         </div>
-
+ <div id="tab-expansions" class="tab-content" style="display:none;">
+        <div class="p-6 flex flex-col gap-6">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b pb-3" style="border-color:var(--border-med)">
+            <div>
+              <h2 class="text-xs font-bold uppercase tracking-widest" style="color:var(--ink-faint)">Content Sources</h2>
+              <h1 class="text-lg font-bold" style="font-family:'Cinzel',serif;color:var(--ink)">Expansions</h1>
+            </div>
+            <div class="flex gap-1">
+              <button onclick="reloadExpansionModules()" class="px-2 py-0.5 rounded text-[9px] uppercase font-semibold" style="border:1px solid var(--gold-line);background:rgba(201,168,76,0.1);color:var(--gold)" title="Re-check the json/expansions folder for expansion module files">⟳ Reload Modules</button>
+              <button onclick="triggerLoadExpansionModule()" class="px-2 py-0.5 rounded text-[9px] uppercase font-semibold" style="border:1px solid var(--gold-line);background:rgba(201,168,76,0.1);color:var(--gold)" title="Import an expansion module JSON (e.g. lakeview.json)">⇪ Import Module</button>
+            </div>
+          </div>
+          <p class="text-xs leading-relaxed" style="color:var(--ink-dim)">Expansions default to off. Toggle one on to show its paths, traits, and sidebar tracker widgets everywhere on the sheet; toggle it back off any time — nothing is deleted, and your choice is saved with the character.</p>
+          <div id="expansions-list" class="flex flex-col gap-3"></div>
+        </div>
       </div>
+      </div>
+
+     
 
       <!-- CUSTOM SIDEBAR -->
       <div class="custom-sidebar" id="customSidebar">
@@ -3776,6 +4022,189 @@
       let TRAITS_CATALOG = [];
       let BASE_PATH_IDS = new Set();
       let BASE_TRAIT_IDS = new Set();
+
+      // ── Expansions ──
+      // ALL_*_CATALOG holds every path/trait ever loaded (core + every expansion + custom),
+      // regardless of whether its source is currently enabled. PATHS_CATALOG/TRAITS_CATALOG
+      // (above) are always the *filtered* view — i.e. only what's currently enabled — and are
+      // what the rest of the sheet reads from, so no other rendering code needs to change.
+      let ALL_PATHS_CATALOG = [];
+      let ALL_TRAITS_CATALOG = [];
+      let ENABLED_EXPANSIONS = new Set();      // set of "source" strings currently enabled
+      let EXPANSION_MODULES = {};              // source -> { source, name, bars:[...], counters:[...] }
+      let EXPANSION_WIDGET_STATE = {};         // "source::widgetId" -> { value, max }
+
+      function isSourceEnabled(source) {
+        if (!source || source === 'core' || source === 'custom') return true;
+        return ENABLED_EXPANSIONS.has(source);
+      }
+
+      function applyExpansionFilter() {
+        PATHS_CATALOG = ALL_PATHS_CATALOG.filter(p => isSourceEnabled(p.source));
+        TRAITS_CATALOG = ALL_TRAITS_CATALOG.filter(t => isSourceEnabled(t.source));
+        populateConstellationData();
+      }
+
+      function getKnownExpansionSources() {
+        const set = new Set();
+        ALL_PATHS_CATALOG.forEach(p => { if (p.source && p.source !== 'core' && p.source !== 'custom') set.add(p.source); });
+        ALL_TRAITS_CATALOG.forEach(t => { if (t.source && t.source !== 'core' && t.source !== 'custom') set.add(t.source); });
+        Object.keys(EXPANSION_MODULES).forEach(s => set.add(s));
+        return Array.from(set).sort();
+      }
+
+      function expansionDisplayName(source) {
+        if (EXPANSION_MODULES[source]?.name) return EXPANSION_MODULES[source].name;
+        return String(source || '').replace(/[_-]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      }
+
+      function clearPathSelection() {
+        selectedPathId = '';
+        const te = document.getElementById('active-path-title'), de = document.getElementById('active-path-desc');
+        if (te) te.textContent = 'Select a Path';
+        if (de) de.textContent = 'No path selected.';
+        const nodes = document.getElementById('nodes-container'); if (nodes) nodes.innerHTML = '';
+        renderPathsList();
+      }
+
+      function toggleExpansion(source) {
+        if (ENABLED_EXPANSIONS.has(source)) ENABLED_EXPANSIONS.delete(source);
+        else ENABLED_EXPANSIONS.add(source);
+        applyExpansionFilter();
+        if (selectedPathId && !PATHS_CATALOG.some(p => p.ID === selectedPathId)) clearPathSelection();
+        paths_init();
+        renderSidebarWidgets();
+        renderExpansionsTab();
+        triggerWarningToast(`${expansionDisplayName(source)} ${ENABLED_EXPANSIONS.has(source) ? 'enabled' : 'disabled'}.`);
+      }
+
+      function normalizeModuleWidget(w, type, idx) {
+        if (!w || typeof w !== 'object') return null;
+        const label = (w.label || w.name || 'Untitled').toString();
+        const id = (w.id || label).toString().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '') || (type + '_' + idx);
+        const base = { id, type, label, color: w.color || (type === 'bar' ? '#67e8f9' : '#818cf8') };
+        if (type === 'counter') {
+          base.min = (w.min === undefined || w.min === null || w.min === '') ? null : parseFloat(w.min);
+          base.max = (w.max === undefined || w.max === null || w.max === '') ? null : parseFloat(w.max);
+          base.step = parseFloat(w.step) || 1;
+          base.value = parseFloat(w.value) || 0;
+        } else {
+          base.max = parseFloat(w.max) || 10;
+          base.value = parseFloat(w.value) || 0;
+        }
+        return base;
+      }
+
+      function normalizeExpansionModule(raw, fallbackSource) {
+        if (!raw || typeof raw !== 'object') return null;
+        const source = (raw.source || fallbackSource || '').toString().trim().toLowerCase();
+        if (!source) return null;
+        const pick = (...keys) => { for (const k of keys) { if (Array.isArray(raw[k])) return raw[k]; } return []; };
+        const bars = pick('added bars', 'added_bars', 'addedBars', 'bars').map((b, i) => normalizeModuleWidget(b, 'bar', i)).filter(Boolean);
+        const counters = pick('added counters', 'added_counters', 'addedCounters', 'counters').map((c, i) => normalizeModuleWidget(c, 'counter', i)).filter(Boolean);
+        return { source, name: (raw.name || '').toString().trim() || expansionDisplayName(source), bars, counters };
+      }
+
+      async function attemptAutoLoadExpansionModules() {
+        const sources = getKnownExpansionSources();
+        let changed = false;
+        for (const src of sources) {
+          if (EXPANSION_MODULES[src]) continue;
+          const data = await tryFetchJson('../json/expansions/' + src + '.json');
+          if (data) {
+            const mod = normalizeExpansionModule(data, src);
+            if (mod) { EXPANSION_MODULES[mod.source] = mod; changed = true; }
+          }
+        }
+        return changed;
+      }
+
+      async function reloadExpansionModules() {
+        triggerWarningToast("Checking for expansion modules…");
+        const changed = await attemptAutoLoadExpansionModules();
+        renderExpansionsTab();
+        renderSidebarWidgets();
+        triggerWarningToast(changed ? "Expansion modules updated." : "No new module files found.");
+      }
+
+      function triggerLoadExpansionModule() { document.getElementById('expansionModuleInput')?.click(); }
+
+      function handleLoadExpansionModuleFile(event) {
+        const file = event.target.files[0]; if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          let data;
+          try { data = JSON.parse(e.target.result); }
+          catch { triggerWarningToast("Failed to parse JSON file."); event.target.value = ''; return; }
+          const guessSource = file.name.replace(/\.json$/i, '').toLowerCase();
+          const mod = normalizeExpansionModule(data, guessSource);
+          if (!mod) { triggerWarningToast('Module JSON must include a "source" field (or be named like the source, e.g. lakeview.json).'); event.target.value = ''; return; }
+          EXPANSION_MODULES[mod.source] = mod;
+          renderExpansionsTab();
+          renderSidebarWidgets();
+          triggerWarningToast(`Loaded "${mod.name}" expansion module (${mod.bars.length} bar(s), ${mod.counters.length} counter(s)).`);
+          event.target.value = '';
+        };
+        reader.readAsText(file);
+      }
+
+      function renderExpansionsTab() {
+        const list = document.getElementById('expansions-list');
+        if (!list) return;
+        list.innerHTML = '';
+        const sources = getKnownExpansionSources();
+        if (!sources.length) {
+          list.innerHTML = `<div class="sidebar-empty-note" style="padding:20px;">No expansions detected yet. Paths/traits tagged with a "source" other than "core" will show up here automatically, or load an expansion module file above.</div>`;
+          return;
+        }
+        sources.forEach(src => {
+          const enabled = ENABLED_EXPANSIONS.has(src);
+          const pathCount = ALL_PATHS_CATALOG.filter(p => p.source === src).length;
+          const traitCount = ALL_TRAITS_CATALOG.filter(t => t.source === src).length;
+          const mod = EXPANSION_MODULES[src];
+          const trackerCount = mod ? (mod.bars.length + mod.counters.length) : 0;
+          const card = document.createElement('div');
+          card.className = 'expansion-card' + (enabled ? ' enabled' : '');
+          card.innerHTML = `
+            <div class="expansion-card-head">
+              <div>
+                <div class="expansion-card-name">${esc(expansionDisplayName(src))}</div>
+                <div class="expansion-card-meta">${pathCount} path(s) · ${traitCount} trait(s)${trackerCount ? ` · ${trackerCount} tracker(s)` : ''}</div>
+              </div>
+              <div class="sw-toggle-switch${enabled ? ' on' : ''}" onclick="toggleExpansion('${src}')" title="${enabled ? 'Disable' : 'Enable'} ${esc(expansionDisplayName(src))}"><div class="knob"></div></div>
+            </div>
+            <div class="expansion-card-sub">${mod ? 'Module loaded — adds sidebar tracker(s) when enabled.' : 'No module loaded — paths/traits only.'}</div>
+          `;
+          list.appendChild(card);
+        });
+      }
+
+      function getExpWidgetState(source, tmpl) {
+        const key = source + '::' + tmpl.id;
+        if (!EXPANSION_WIDGET_STATE[key]) EXPANSION_WIDGET_STATE[key] = { value: tmpl.value ?? 0, max: tmpl.max };
+        return EXPANSION_WIDGET_STATE[key];
+      }
+
+      function expWidgetCounterChange(source, id, delta) {
+        const mod = EXPANSION_MODULES[source]; if (!mod) return;
+        const tmpl = mod.counters.find(c => c.id === id); if (!tmpl) return;
+        const state = getExpWidgetState(source, tmpl);
+        let nv = (state.value || 0) + delta * (tmpl.step || 1);
+        if (tmpl.min !== null && tmpl.min !== undefined && nv < tmpl.min) nv = tmpl.min;
+        if (tmpl.max !== null && tmpl.max !== undefined && nv > tmpl.max) nv = tmpl.max;
+        state.value = nv;
+        renderSidebarWidgets();
+      }
+
+      function expWidgetBarUpdate(source, id, field, v, live) {
+        const mod = EXPANSION_MODULES[source]; if (!mod) return;
+        const tmpl = mod.bars.find(b => b.id === id); if (!tmpl) return;
+        const state = getExpWidgetState(source, tmpl);
+        const num = parseFloat(v);
+        state[field] = Number.isFinite(num) ? num : 0;
+        if (field === 'max' && state.value > state.max) state.value = state.max;
+        if (!live) renderSidebarWidgets();
+      }
       const TREE_COORDINATES = {};
       const PATH_LAYOUTS = {};
       const CONSTELLATION_TAGS = {};
@@ -4944,6 +5373,7 @@
         if (action === "◆") return "var(--clr-style)";
         if (action === "◇") return "var(--clr-skill)";
         if (action === "⬖") return "var(--clr-mind)";
+        if (action === "↺") return "var(--clr-passive)";
         return "var(--clr-body)";
       }
 
@@ -4951,6 +5381,7 @@
         if (action === "◆") return 'Attack';
         if (action === "◇") return 'Reaction';
         if (action === "⬖") return 'Action';
+        if (action === "↺") return 'Passive';
         return 'Free';
       }
 
@@ -5133,6 +5564,16 @@
         parent.appendChild(btn);
       }
 
+      // Recharge classification drives node shape (see placeNode): "always" (no resource cost
+      // to use again), "use" (limited uses that recharge on use/purchase logic defined by the
+      // trait itself), or "rest" (recharges on a rest). Defaults to "always" when a trait
+      // doesn't specify — older/un-tagged catalog entries fall back to this safely.
+      function getTraitRecharge(trait) {
+        const r = (trait.Symbols || '').toString().trim().toLowerCase();
+        if (r === '🗲' || r === '☀') return r;
+        return '⧖';
+      }
+
       function placeNode(trait, parent, isGhost) {
         const coord = TREE_COORDINATES[trait.ID];
         if (!coord) return;
@@ -5154,12 +5595,47 @@
         const btn = document.createElement('button');
         btn.id = `node-${trait.ID}`;
         btn.className = 'absolute node-bubble-paths z-10' + (isGhost ? ' ghost-node' : '');
+
+        
+        const cost = Number(trait.Cost);
+        const recharge = getTraitRecharge(trait);
+
+        // Shape now communicates recharge type rather than cost: circle = always available,
+        // square = use-biased, hexagon = rest-biased. Unique/tagged traits keep their existing
+        // star/triangle markers, which take precedence over the recharge shape.
+        let shapeClass = 'shape-circle';
+        
+        if (recharge === '🗲') shapeClass = 'shape-square';
+        else if (recharge === '☀') shapeClass = 'shape-hexagon';
+        btn.classList.add(shapeClass);
+
         btn.style.left = `calc(${leftPct}% - 21px)`;
         btn.style.top = `calc(${topPct}% - 21px)`;
-        btn.style.borderColor = isGhost ? '#334155' : getActionColor(trait.Action);
+        const strokeColor = isGhost ? '#334155' : getActionColor(trait.Action);
+        btn.style.setProperty('--node-stroke', strokeColor);
         btn.style.opacity = isGhost ? '0.4' : '1';
         btn.title = '';
         btn.textContent = getInitials(trait.Name);
+
+        // Cost doubles the outline: a minor (1-cost) trait gets the normal single ring; a
+        // major (2-cost) trait gets a second, larger ring of the same shape behind it.
+        if (cost === 2) {
+          const ring = document.createElement('div');
+          ring.id = `node-${trait.ID}-ring`;
+          ring.className = 'node-outline-ring ' + shapeClass;
+          ring.style.left = btn.style.left;
+          ring.style.top = btn.style.top;
+          ring.style.setProperty('--node-stroke', strokeColor);
+          ring.style.opacity = isGhost ? '0.4' : '1';
+          parent.appendChild(ring);
+        }
+
+        // Action symbol ↺ ("Non-Activatable") means the trait is always passively on and can
+        // never be toggled — mark it with a small badge so players can tell at a glance.
+        // IMPORTANT: append this to `parent` (a sibling of btn), NOT as a child of btn — btn
+        // has a clip-path applied for its node shape, and clip-path clips descendants too, so
+        // a badge positioned outside btn's box would get cut off by the node's own border.
+        
 
         if (!isGhost) {
           btn.onclick = () => {
@@ -5191,6 +5667,8 @@
 
             if (!el) return;
 
+            const ring = document.getElementById(`node-${t.ID}-ring`);
+
             const state =
               getTraitUnlockState(t);
 
@@ -5200,23 +5678,26 @@
               'unlocked'
             );
 
+            let stroke;
             if (state.unlocked) {
 
               el.classList.add('unlocked');
-              el.style.borderColor = '#a5b4fc';
+              stroke = '#6366f1';
 
             } else if (state.available) {
 
               el.classList.add('available');
-              el.style.borderColor =
-                getActionColor(t.Action);
+              stroke = getActionColor(t.Action);
 
             } else {
 
               el.classList.add('locked');
-              el.style.borderColor = '#334155';
+              stroke = '#334155';
 
             }
+
+            el.style.setProperty('--node-stroke', stroke);
+            if (ring) ring.style.setProperty('--node-stroke', stroke);
 
           });
 
@@ -5645,7 +6126,8 @@
             </div>`;
         } else {
           const pathOpts = PATHS_CATALOG.map(p => [p.ID, p.name]);
-          const actionOpts = [['⭘', '⭘ Free'], ['◇', '◇ Reaction'], ['⬖', '⬖ Action'], ['◆', '◆ Attack']];
+          const actionOpts = [['⭘', '⭘ Free'], ['◇', '◇ Reaction'], ['⬖', '⬖ Action'], ['◆', '◆ Attack'], ['↺', '↺ Non-Activatable']];
+          const rechargeOpts = [['always', 'Always Available'], ['use', 'Use-Biased'], ['rest', 'Rest-Biased']];
           let scalingHTML = creatorScalingTiers.map((s, idx) => `
             <div class="creator-tier-row">
               <input type="text" placeholder="Tier label (e.g. Tier 2)" value="${(s.label || '').replace(/"/g, '&quot;')}" class="creator-field-input" oninput="updateScalingTier(${idx},'label',this.value)">
@@ -5669,6 +6151,9 @@
               ${f('Path', sel('ct_path', pathOpts, PATHS_CATALOG[0]?.ID || ''))}
               ${f('Action', sel('ct_action', actionOpts, '⭘'))}
               ${f('Trait Point Cost', inp('ct_cost', '1', 'number', '1'))}
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              ${f('Recharge (sets node shape)', sel('ct_recharge', rechargeOpts, 'always'))}
             </div>
             ${f('Description', ta('ct_desc', 'Detailed mechanical effect of this trait...'))}
 
@@ -5720,8 +6205,8 @@
           const name = sv('cp_name');
           const desc = sv('cp_desc');
           if (!name) { triggerWarningToast("Path Name is required."); return; }
-          if (!id) id = nextAvailableId(PATHS_CATALOG, 'ID', 'custom_path_');
-          if (PATHS_CATALOG.some(p => p.ID === id)) { triggerWarningToast(`Path ID "${id}" already exists — choose a different ID.`); return; }
+          if (!id) id = nextAvailableId(ALL_PATHS_CATALOG, 'ID', 'custom_path_');
+          if (ALL_PATHS_CATALOG.some(p => p.ID === id)) { triggerWarningToast(`Path ID "${id}" already exists — choose a different ID.`); return; }
 
           const breakpoints = {};
           creatorBreakpointRows.forEach((bp, idx) => {
@@ -5731,21 +6216,23 @@
             breakpoints[`breakpoint_${idx + 1}`] = { investment: inv, description: bdesc };
           });
 
-          // Custom paths live only in-memory (PATHS_CATALOG) — never written back to the JSON catalog files.
-          PATHS_CATALOG.push({ "ID": id, "name": name, "description": desc || "Custom path.", "breakpoints": breakpoints });
+          // Custom paths live only in-memory (ALL_PATHS_CATALOG) — never written back to the JSON catalog files.
+          ALL_PATHS_CATALOG.push({ "ID": id, "name": name, "description": desc || "Custom path.", "breakpoints": breakpoints, "source": "custom" });
+          applyExpansionFilter();
           paths_init(); selectPath(id);
         } else {
           let id = sv('ct_id');
           const name = sv('ct_name');
           const path = creatorMainFields['ct_path'] || PATHS_CATALOG[0]?.ID || '';
           const action = creatorMainFields['ct_action'] || '⭘';
+          const recharge = creatorMainFields['ct_recharge'] || 'always';
           const cost = sv('ct_cost') || "1";
           const desc = sv('ct_desc');
           const params = sv('ct_params');
           if (!name || !desc) { triggerWarningToast("Trait Name and Description are required."); return; }
           if (!path) { triggerWarningToast("Select a Path for this trait."); return; }
-          if (!id) id = nextAvailableId(TRAITS_CATALOG, 'ID', 'custom_trait_');
-          if (TRAITS_CATALOG.some(t => t.ID === id)) { triggerWarningToast(`Trait ID "${id}" already exists — choose a different ID.`); return; }
+          if (!id) id = nextAvailableId(ALL_TRAITS_CATALOG, 'ID', 'custom_trait_');
+          if (ALL_TRAITS_CATALOG.some(t => t.ID === id)) { triggerWarningToast(`Trait ID "${id}" already exists — choose a different ID.`); return; }
 
           // Build Scaling text from structured tiers (kept as a display string so existing renderers/tooltips work unchanged)
           let scalingText = '';
@@ -5762,13 +6249,13 @@
             scalingText = scalingText ? `${scalingText}\n${usesText}` : usesText;
           }
 
-          const newTrait = { "ID": id, "Name": name, "Action": action, "Path": path, "Cost": cost, "Symbols": "🗲", "Parameters": params, "Description": desc, "Scaling": scalingText };
-          // Custom traits live only in-memory (TRAITS_CATALOG) — never written back to the JSON catalog files.
+          const newTrait = { "ID": id, "Name": name, "Action": action, "Path": path, "Cost": cost, "Symbols": "🗲", "Parameters": params, "Description": desc, "Scaling": scalingText, "Recharge": recharge, "source": "custom" };
+          // Custom traits live only in-memory (ALL_TRAITS_CATALOG) — never written back to the JSON catalog files.
           // Row/Col placement is intentionally not set here: the constellation tree auto-computes
           // node position from prerequisite depth (see assignPathCoordinates), so manual coordinates
           // would just be overwritten on render.
-          TRAITS_CATALOG.push(newTrait);
-          populateConstellationData();
+          ALL_TRAITS_CATALOG.push(newTrait);
+          applyExpansionFilter();
           paths_init(); selectPath(path);
         }
         closeCustomCreatorModal(); triggerWarningToast("Constellation schema modified!");
@@ -5806,13 +6293,16 @@
               "Symbols": "🗲",
               "Parameters": "",
               "Description": "Describe the mechanical effect of this trait here.",
-              "Scaling": "Tier 1: +1 effect\nTier 2: +2 effect\nUses:\n1 [lvl 1]\n2 [lvl 3]"
+              "Scaling": "Tier 1: +1 effect\nTier 2: +2 effect\nUses:\n1 [lvl 1]\n2 [lvl 3]",
+              "Recharge": "always"
             }
           ],
           "_notes": [
             "ID must be unique across the whole catalog (existing + custom). Duplicate IDs are skipped on import.",
             "Path on a trait must match an existing Path ID — either a built-in one or one of the custom paths in this same file.",
-            "Action symbols used by the sheet: ⭘ Free, ◇ Reaction, ⬖ Action, ◆ Attack.",
+            "Action symbols used by the sheet: ⭘ Free, ◇ Reaction, ⬖ Action, ◆ Attack, ↺ Non-Activatable. Traits with Action ↺ get a small badge on their node marking them as always passively active and never needing to be toggled.",
+            "Recharge sets the trait's node shape: \"always\" = circle (always available), \"use\" = square (use-biased), \"rest\" = hexagon (rest-biased). Omit it (or leave it out) to default to \"always\". Unique/tagged traits still show their star/triangle shape regardless of Recharge.",
+            "Cost also controls the node outline: Cost 1 (minor) gets a single outline ring, Cost 2 (major) gets a doubled outline.",
             "breakpoints may be an empty object {} — a path does not need any breakpoints.",
             "Scaling is a free-text field. Tiers and Uses-per-level are just lines of text in this field; the in-app Custom Trait form will build this string for you automatically from structured rows.",
             "Imported paths/traits are merged into memory only — they are never written back to paths_traits.json on disk. Save your character sheet to keep them."
@@ -5846,30 +6336,34 @@
           }
 
           let addedPaths = 0, skippedPaths = 0, addedTraits = 0, skippedTraits = 0;
-          const existingPathIds = new Set(PATHS_CATALOG.map(p => p.ID));
+          const existingPathIds = new Set(ALL_PATHS_CATALOG.map(p => p.ID));
           incomingPaths.forEach(p => {
             if (!p || !p.ID || !p.name) { skippedPaths++; return; }
             if (existingPathIds.has(p.ID)) { skippedPaths++; return; }
-            PATHS_CATALOG.push({ ID: p.ID, name: p.name, description: p.description || '', breakpoints: p.breakpoints || {} });
+            ALL_PATHS_CATALOG.push({ ID: p.ID, name: p.name, description: p.description || '', breakpoints: p.breakpoints || {}, source: p.source || 'custom' });
             existingPathIds.add(p.ID);
             addedPaths++;
           });
 
-          const existingTraitIds = new Set(TRAITS_CATALOG.map(t => t.ID));
+          const existingTraitIds = new Set(ALL_TRAITS_CATALOG.map(t => t.ID));
           incomingTraits.forEach(t => {
             if (!t || !t.ID || !t.Name || !t.Path) { skippedTraits++; return; }
             if (existingTraitIds.has(t.ID)) { skippedTraits++; return; }
-            TRAITS_CATALOG.push({
+            ALL_TRAITS_CATALOG.push({
               ID: t.ID, Name: t.Name, Action: t.Action || '⭘', Path: t.Path, Cost: t.Cost ?? '1',
               Symbols: t.Symbols || '🗲', Parameters: t.Parameters || '', Description: t.Description || '',
-              Scaling: t.Scaling || ''
+              Scaling: t.Scaling || '', Recharge: t.Recharge || 'always', source: t.source || 'custom'
             });
             existingTraitIds.add(t.ID);
             addedTraits++;
           });
 
-          populateConstellationData();
+          // Expansions default to off (see Expansions tab) — newly-imported sources show up
+          // there for the player to enable manually rather than being switched on silently.
+          applyExpansionFilter();
           paths_init();
+          renderExpansionsTab();
+          attemptAutoLoadExpansionModules().then(changed => { if (changed) { renderExpansionsTab(); renderSidebarWidgets(); } });
           triggerWarningToast(`Imported ${addedPaths} path(s), ${addedTraits} trait(s). Skipped ${skippedPaths + skippedTraits} duplicate/invalid entr${(skippedPaths + skippedTraits) === 1 ? 'y' : 'ies'}.`);
           event.target.value = '';
         };
@@ -6006,12 +6500,12 @@
         renderSidebarWidgets();
       }
 
-      function widgetBarUpdate(id, field, v) {
+      function widgetBarUpdate(id, field, v, live) {
         const w = SIDEBAR_WIDGETS.find(x => x.id === id); if (!w) return;
         const num = parseFloat(v);
         w[field] = Number.isFinite(num) ? num : 0;
         if (field === 'max' && w.value > w.max) w.value = w.max;
-        renderSidebarWidgets();
+        if (!live) renderSidebarWidgets();
       }
 
       function widgetTextUpdate(id, v) {
@@ -6031,12 +6525,114 @@
         renderSidebarWidgets();
       }
 
+      // Shared bar UI for both personal trackers and expansion-provided trackers: a fill track,
+      // a draggable range slider (live-updates the fill while dragging, no full re-render so the
+      // drag gesture never gets interrupted), and precise number inputs underneath.
+      function buildBarBody(value, max, color, setValue, setMax) {
+        const safeMax = (Number.isFinite(max) && max > 0) ? max : 10;
+        const wrap = document.createElement('div');
+        wrap.className = 'sw-bar-body';
+
+        const pct = safeMax > 0 ? Math.max(0, Math.min(100, (value / safeMax) * 100)) : 0;
+        const track = document.createElement('div');
+        track.className = 'sw-bar-track';
+        const fill = document.createElement('div');
+        fill.className = 'sw-bar-fill';
+        fill.style.width = pct + '%';
+        fill.style.background = color;
+        fill.style.boxShadow = `0 0 6px ${color}99`;
+        track.appendChild(fill);
+        wrap.appendChild(track);
+
+        const slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'sw-bar-slider';
+        slider.min = 0;
+        slider.max = safeMax;
+        slider.step = 1;
+        slider.value = value;
+        slider.style.accentColor = color;
+        wrap.appendChild(slider);
+
+        const nums = document.createElement('div');
+        nums.className = 'sw-bar-nums';
+        const valInput = document.createElement('input');
+        valInput.type = 'number'; valInput.value = value;
+        const sep = document.createTextNode(' / ');
+        const maxInput = document.createElement('input');
+        maxInput.type = 'number'; maxInput.value = safeMax;
+        nums.appendChild(valInput); nums.appendChild(sep); nums.appendChild(maxInput);
+        wrap.appendChild(nums);
+
+        slider.addEventListener('input', () => {
+          const v = parseFloat(slider.value) || 0;
+          setValue(v, true); // live=true: update model only, skip full re-render mid-drag
+          fill.style.width = (safeMax > 0 ? Math.max(0, Math.min(100, (v / safeMax) * 100)) : 0) + '%';
+          valInput.value = v;
+        });
+        valInput.onchange = () => setValue(valInput.value, false);
+        maxInput.onchange = () => setMax(maxInput.value);
+
+        return wrap;
+      }
+
+      // ── Expansion-provided sidebar trackers ("semi-official" — defined by an expansion module,
+      // shown only while that expansion is enabled, sit above the player's own custom trackers) ──
+      function renderExpansionWidgetSections(list) {
+        getKnownExpansionSources().forEach(src => {
+          if (!ENABLED_EXPANSIONS.has(src)) return;
+          const mod = EXPANSION_MODULES[src];
+          if (!mod || (!mod.bars.length && !mod.counters.length)) return;
+
+          const divider = document.createElement('div');
+          divider.className = 'sidebar-widget-card';
+          divider.innerHTML = `<div class="sidebar-widget-head" style="border-bottom:none;"><span class="sw-divider-label" style="flex:1;text-align:left;border-bottom:none;">${esc(mod.name)} <span style="opacity:.6;font-weight:normal;">· expansion</span></span></div>`;
+          list.appendChild(divider);
+
+          mod.counters.forEach(tmpl => {
+            const state = getExpWidgetState(src, tmpl);
+            const card = document.createElement('div');
+            card.className = 'sidebar-widget-card';
+            const head = document.createElement('div');
+            head.className = 'sidebar-widget-head';
+            head.innerHTML = `<span class="sidebar-widget-name">${esc(tmpl.label)}</span>`;
+            card.appendChild(head);
+            const body = document.createElement('div');
+            body.className = 'sw-counter-row';
+            body.innerHTML = `<button onclick="expWidgetCounterChange('${src}','${tmpl.id}',-1)">−</button><span class="sw-counter-value" style="color:${tmpl.color}">${state.value}</span><button onclick="expWidgetCounterChange('${src}','${tmpl.id}',1)">+</button>`;
+            card.appendChild(body);
+            list.appendChild(card);
+          });
+
+          mod.bars.forEach(tmpl => {
+            const state = getExpWidgetState(src, tmpl);
+            const card = document.createElement('div');
+            card.className = 'sidebar-widget-card';
+            const head = document.createElement('div');
+            head.className = 'sidebar-widget-head';
+            head.innerHTML = `<span class="sidebar-widget-name">${esc(tmpl.label)}</span>`;
+            card.appendChild(head);
+            card.appendChild(buildBarBody(
+              state.value, state.max ?? tmpl.max, tmpl.color,
+              (v, live) => expWidgetBarUpdate(src, tmpl.id, 'value', v, live),
+              (v) => expWidgetBarUpdate(src, tmpl.id, 'max', v, false)
+            ));
+            list.appendChild(card);
+          });
+        });
+      }
+
       function renderSidebarWidgets() {
         const list = document.getElementById('sidebarWidgetsList');
         if (!list) return;
         list.innerHTML = '';
+        renderExpansionWidgetSections(list);
+
         if (!SIDEBAR_WIDGETS.length) {
-          list.innerHTML = `<div class="sidebar-empty-note">No trackers yet. Use the buttons above to add one.</div>`;
+          const note = document.createElement('div');
+          note.className = 'sidebar-empty-note';
+          note.textContent = 'No personal trackers yet. Use the buttons above to add one.';
+          list.appendChild(note);
           requestAnimationFrame(syncSidebarHeight);
           return;
         }
@@ -6071,15 +6667,11 @@
             body.innerHTML = `<button onclick="widgetCounterChange('${w.id}',-1)">−</button><span class="sw-counter-value" style="color:${w.color}">${w.value}</span><button onclick="widgetCounterChange('${w.id}',1)">+</button>`;
             card.appendChild(body);
           } else if (w.type === 'bar') {
-            const pct = w.max > 0 ? Math.max(0, Math.min(100, (w.value / w.max) * 100)) : 0;
-            const track = document.createElement('div');
-            track.className = 'sw-bar-track';
-            track.innerHTML = `<div class="sw-bar-fill" style="width:${pct}%;background:${w.color};box-shadow:0 0 6px ${w.color}99"></div>`;
-            card.appendChild(track);
-            const nums = document.createElement('div');
-            nums.className = 'sw-bar-nums';
-            nums.innerHTML = `<input type="number" value="${w.value}" onchange="widgetBarUpdate('${w.id}','value',this.value)"> / <input type="number" value="${w.max}" onchange="widgetBarUpdate('${w.id}','max',this.value)">`;
-            card.appendChild(nums);
+            card.appendChild(buildBarBody(
+              w.value, w.max, w.color,
+              (v, live) => widgetBarUpdate(w.id, 'value', v, live),
+              (v) => widgetBarUpdate(w.id, 'max', v, false)
+            ));
           } else if (w.type === 'text') {
             const txt = document.createElement('textarea');
             txt.className = 'sw-textbox';
@@ -6343,9 +6935,12 @@
           mana_bonus: document.getElementById('mana_bonus')?.value || '0',
           knownSpellIds: Array.from(knownSpellIds),
           customSpells,
-          customTraits : TRAITS_CATALOG.filter(t => !BASE_TRAIT_IDS.has(t.ID)),
-          customPaths : PATHS_CATALOG.filter(p => !BASE_PATH_IDS.has(p.ID)),
+          customTraits : ALL_TRAITS_CATALOG.filter(t => !BASE_TRAIT_IDS.has(t.ID)),
+          customPaths : ALL_PATHS_CATALOG.filter(p => !BASE_PATH_IDS.has(p.ID)),
           sidebarWidgets: SIDEBAR_WIDGETS,
+          enabledExpansions: Array.from(ENABLED_EXPANSIONS),
+          expansionModules: EXPANSION_MODULES,
+          expansionWidgetState: EXPANSION_WIDGET_STATE,
           portraitDataUrl: portraitData
         };
 
@@ -6410,8 +7005,21 @@
           if (!data.inventory_items?.length) for (let i = 0; i < INV_BASE_SLOTS; i++) inv_addItem();
         }
 
-        TRAITS_CATALOG = TRAITS_CATALOG.filter(t => BASE_TRAIT_IDS.has(t.ID)).concat(data.customTraits || []);
-        PATHS_CATALOG = PATHS_CATALOG.filter(p => BASE_PATH_IDS.has(p.ID)).concat(data.customPaths || []);
+        ALL_TRAITS_CATALOG = ALL_TRAITS_CATALOG.filter(t => BASE_TRAIT_IDS.has(t.ID)).concat(data.customTraits || []);
+        ALL_PATHS_CATALOG = ALL_PATHS_CATALOG.filter(p => BASE_PATH_IDS.has(p.ID)).concat(data.customPaths || []);
+
+        EXPANSION_MODULES = data.expansionModules || {};
+        EXPANSION_WIDGET_STATE = data.expansionWidgetState || {};
+        if (Array.isArray(data.enabledExpansions)) {
+          // Trust exactly what was saved. Any source that's appeared since this save (new
+          // module/custom content, etc.) is left disabled — expansions default to off and the
+          // player opts in via the Expansions tab, same as a brand new sheet.
+          ENABLED_EXPANSIONS = new Set(data.enabledExpansions);
+        } else {
+          // Older save with no expansion data at all — nothing to restore, so default to off.
+          ENABLED_EXPANSIONS = new Set();
+        }
+        applyExpansionFilter();
 
         populateSimpleGrid('inv_potions_ingredients', data.inv_potions_ingredients, 'Ingredient', 'Notes');
         populateSimpleGrid('inv_potions_recipes', data.inv_potions_recipes, 'Potion', 'Recipe');
@@ -6434,6 +7042,7 @@
         customSpells = data.customSpells || [];
 
         SIDEBAR_WIDGETS = (data.sidebarWidgets || []).map(w => ({ ...w }));
+        renderExpansionsTab();
         renderSidebarWidgets();
 
         recalcAll();
@@ -6493,12 +7102,12 @@
           const data = await tryFetchJson(base + n);
           if (data) {
             if (Array.isArray(data.paths) && Array.isArray(data.traits)) {
-              PATHS_CATALOG = data.paths; TRAITS_CATALOG = data.traits;
+              ALL_PATHS_CATALOG = data.paths; ALL_TRAITS_CATALOG = data.traits;
               break;
             }
             if (Array.isArray(data.PATHS) && Array.isArray(data.TRAITS)) {
-              PATHS_CATALOG = data.paths;
-              TRAITS_CATALOG = data.traits;
+              ALL_PATHS_CATALOG = data.paths;
+              ALL_TRAITS_CATALOG = data.traits;
               break;
             }
           }
@@ -6508,9 +7117,13 @@
         else if (spells && Array.isArray(spells.spells)) SPELLS_CATALOG = spells.spells;
         // Snapshot the built-in catalog IDs so imported/custom paths & traits can later be
         // identified by "not in this set" rather than by guessing an ID prefix.
-        BASE_PATH_IDS = new Set(PATHS_CATALOG.map(p => p.ID));
-        BASE_TRAIT_IDS = new Set(TRAITS_CATALOG.map(t => t.ID));
-        populateConstellationData();
+        BASE_PATH_IDS = new Set(ALL_PATHS_CATALOG.map(p => p.ID));
+        BASE_TRAIT_IDS = new Set(ALL_TRAITS_CATALOG.map(t => t.ID));
+        // Expansions default to OFF on a fresh sheet — the player opts in to each one via the
+        // Expansions tab. (A loaded save restores whatever was actually enabled at save time —
+        // see applyLoadedSheetData.)
+        applyExpansionFilter();
+        await attemptAutoLoadExpansionModules();
         return !!(PATHS_CATALOG.length || TRAITS_CATALOG.length || SPELLS_CATALOG.length);
       }
 
@@ -6518,6 +7131,23 @@
       // content needs, never taller than the viewport) — recalculated on tab switch,
       // toggle, tracker add/remove, and window resize via syncSidebarHeight().
       window.addEventListener('resize', () => requestAnimationFrame(syncSidebarHeight));
+
+      // Belt-and-suspenders: rather than chasing every place the sheet's content can grow or
+      // shrink (textareas auto-expanding, inventory rows being added/removed, breakpoint panels
+      // opening, etc.), watch the sheet element itself and resync whenever its rendered height
+      // actually changes. This catches cases the discrete call sites above don't.
+      (function hookSheetResizeObserver() {
+        if (typeof ResizeObserver === 'undefined') return;
+        const sheetEl = document.querySelector('.sheet');
+        if (!sheetEl) return;
+        let lastHeight = 0;
+        new ResizeObserver(entries => {
+          const h = entries[0]?.contentRect?.height || 0;
+          if (Math.abs(h - lastHeight) < 1) return;
+          lastHeight = h;
+          requestAnimationFrame(syncSidebarHeight);
+        }).observe(sheetEl);
+      })();
 
       window.onload = function () {
         
@@ -6528,9 +7158,11 @@
         requestAnimationFrame(syncSidebarHeight);
         loadCatalogs().then(() => {
           inv_init(); paths_init(); recalcAll(); updateSpellSchoolTheme(); filterSpellsSelector(); renderKnownSpells();
+          renderExpansionsTab(); renderSidebarWidgets();
           requestAnimationFrame(syncSidebarHeight);
         }).catch(() => {
           inv_init(); paths_init(); recalcAll(); updateSpellSchoolTheme(); filterSpellsSelector(); renderKnownSpells();
+          renderExpansionsTab(); renderSidebarWidgets();
           requestAnimationFrame(syncSidebarHeight);
         });
         ['charLevel', 'armor_def', 'shield_def', 'cloak_def', 'artifact_def', 'armor_bonus', 'mana_bonus', 'speed_bonus', 'tp_bonus'].forEach(id => {

@@ -1,0 +1,14 @@
+{
+  "_comment": "Expansion module file. Lives at json/expansions/<source>.json, where <source> matches the \"source\" tag used on the paths/traits this expansion adds in paths_traits.json",
+
+  "source": "lords",
+  "name": "Lords",
+
+  "bars": [
+    
+  ],
+
+  "counters": [
+    
+  ]
+}
