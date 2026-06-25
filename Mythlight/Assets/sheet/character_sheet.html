@@ -1998,7 +1998,7 @@
   z-index: -1;
 }
 
-/* Small badge marking traits whose Action is "Non-Activatable" (↺) — the trait is always
+/* Small badge marking traits whose Action is "Non-Activatable" (⊘) — the trait is always
    passively on and can never be toggled. Positioned as a SIBLING of the node button (appended
    to the same parent as the node, not as a child of it) — the node itself has a clip-path
    applied for its shape, and clip-path also clips any descendant content, so a child badge
@@ -4521,6 +4521,12 @@
       function val(id) { const e = document.getElementById(id); return e ? (parseFloat(e.value) || 0) : 0; }
       function hasNumberInput(id) { const e = document.getElementById(id); return !!(e && e.value !== ''); }
       function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+      function formatTextWithBreaks(s) {
+        const escaped = esc(String(s || ''));
+        const allowedTagPattern = /&lt;\/?(?:b|strong|i|em|u|l|br)\s*\/?&gt;/gi;
+        const unescapedAllowed = escaped.replace(allowedTagPattern, matched => matched.replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
+        return unescapedAllowed.replace(/\r?\n/g, '<br>').replace(/&lt;br\s*\/?&gt;/gi, '<br>');
+      }
 
       function recalcSkill(group, skill) {
         const out = document.getElementById(group + '_' + skill + '_total');
@@ -5373,7 +5379,7 @@
         if (action === "◆") return "var(--clr-style)";
         if (action === "◇") return "var(--clr-skill)";
         if (action === "⬖") return "var(--clr-mind)";
-        if (action === "↺") return "var(--clr-passive)";
+        if (action === "⊘") return "var(--clr-passive)";
         return "var(--clr-body)";
       }
 
@@ -5381,7 +5387,7 @@
         if (action === "◆") return 'Attack';
         if (action === "◇") return 'Reaction';
         if (action === "⬖") return 'Action';
-        if (action === "↺") return 'Passive';
+        if (action === "⊘") return 'Passive';
         return 'Free';
       }
 
@@ -5630,7 +5636,7 @@
           parent.appendChild(ring);
         }
 
-        // Action symbol ↺ ("Non-Activatable") means the trait is always passively on and can
+        // Action symbol ⊘ ("Non-Activatable") means the trait is always passively on and can
         // never be toggled — mark it with a small badge so players can tell at a glance.
         // IMPORTANT: append this to `parent` (a sibling of btn), NOT as a child of btn — btn
         // has a clip-path applied for its node shape, and clip-path clips descendants too, so
@@ -5971,9 +5977,9 @@
         }
         const rawCost = parseInt(trait.Cost, 10) || 0;
         const costLabel = rawCost < 0 ? `0 TP <span style="color:var(--gold)">(+${-rawCost} budget)</span>` : `${rawCost} TP`;
-        el.innerHTML = `<div style="font-weight:700;color:var(--gold);font-size:12px">${trait.Name} <span style="font-weight:600;color:var(--ink-faint);font-size:11px">[${trait.Action}]</span></div>` +
-          `<div style="font-size:11px;margin-top:6px;color:var(--ink)">${trait.Description}</div>` +
-          `${trait.Scaling ? `<pre style="white-space:pre-wrap;margin-top:8px;font-family:monospace;font-size:11px;color:#cbd5e1;">${trait.Scaling}</pre>` : ''}` +
+        el.innerHTML = `<div style="font-weight:700;color:var(--gold);font-size:12px">${esc(trait.Name)} <span style="font-weight:600;color:var(--ink-faint);font-size:11px">[${esc(trait.Action)}]</span></div>` +
+          `<div style="font-size:11px;margin-top:6px;color:var(--ink)">${formatTextWithBreaks(trait.Description)}</div>` +
+          `${trait.Scaling ? `<pre style="white-space:pre-wrap;margin-top:8px;font-family:monospace;font-size:11px;color:#cbd5e1;">${esc(trait.Scaling)}</pre>` : ''}` +
           `<div style="margin-top:6px;font-size:11px;color:var(--ink-faint);font-weight:600">${prereqStr} • ${costLabel}</div>`;
         el.style.display = 'block';
         const x = ev?.clientX ?? (window.innerWidth / 2);
@@ -6022,7 +6028,7 @@
       ? `<div style="display:flex;flex-direction:column;gap:2px">${usesLines.map(l => `<div style="font-family:monospace;color:var(--gold);font-size:12px">${esc(l)}</div>`).join('')}</div>`
       : '<span>—</span>';
     const actionHtml = `<div style="display:inline-flex;align-items:center;gap:8px"><div style="width:26px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:0px;background:${getActionColor(t.Action)};color:#060a14;font-weight:700">${esc(t.Action)}</div><div style="font-size:11px;color:var(--ink-faint)">${getActionLabel(t.Action)}</div></div>`;
-    tr.innerHTML = `<td class="p-3 text-sm font-semibold" style="color:var(--ink)">${esc(t.Name)}</td><td class="p-3 text-sm">${actionHtml}</td><td class="p-3 text-sm">${scalingHtml}</td><td class="p-3 text-sm">${usesHtml}</td><td class="p-3 text-sm leading-tight text-slate-300">${esc(t.Description)}</td>`;
+    tr.innerHTML = `<td class="p-3 text-sm font-semibold" style="color:var(--ink)">${esc(t.Name)}</td><td class="p-3 text-sm">${actionHtml}</td><td class="p-3 text-sm">${scalingHtml}</td><td class="p-3 text-sm">${usesHtml}</td><td class="p-3 text-sm leading-tight text-slate-300">${formatTextWithBreaks(t.Description)}</td>`;
     tbody.appendChild(tr);
   });
 }
@@ -6126,7 +6132,7 @@
             </div>`;
         } else {
           const pathOpts = PATHS_CATALOG.map(p => [p.ID, p.name]);
-          const actionOpts = [['⭘', '⭘ Free'], ['◇', '◇ Reaction'], ['⬖', '⬖ Action'], ['◆', '◆ Attack'], ['↺', '↺ Non-Activatable']];
+          const actionOpts = [['⭘', '⭘ Free'], ['◇', '◇ Reaction'], ['⬖', '⬖ Action'], ['◆', '◆ Attack'], ['⊘', '⊘ Non-Activatable']];
           const rechargeOpts = [['always', 'Always Available'], ['use', 'Use-Biased'], ['rest', 'Rest-Biased']];
           let scalingHTML = creatorScalingTiers.map((s, idx) => `
             <div class="creator-tier-row">
@@ -6300,7 +6306,7 @@
           "_notes": [
             "ID must be unique across the whole catalog (existing + custom). Duplicate IDs are skipped on import.",
             "Path on a trait must match an existing Path ID — either a built-in one or one of the custom paths in this same file.",
-            "Action symbols used by the sheet: ⭘ Free, ◇ Reaction, ⬖ Action, ◆ Attack, ↺ Non-Activatable. Traits with Action ↺ get a small badge on their node marking them as always passively active and never needing to be toggled.",
+            "Action symbols used by the sheet: ⭘ Free, ◇ Reaction, ⬖ Action, ◆ Attack, ⊘ Non-Activatable. Traits with Action ⊘ get a small badge on their node marking them as always passively active and never needing to be toggled.",
             "Recharge sets the trait's node shape: \"always\" = circle (always available), \"use\" = square (use-biased), \"rest\" = hexagon (rest-biased). Omit it (or leave it out) to default to \"always\". Unique/tagged traits still show their star/triangle shape regardless of Recharge.",
             "Cost also controls the node outline: Cost 1 (minor) gets a single outline ring, Cost 2 (major) gets a doubled outline.",
             "breakpoints may be an empty object {} — a path does not need any breakpoints.",

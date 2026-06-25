@@ -898,7 +898,7 @@
           ]
         }
       },
-      "source": "core"
+      "source": "lords"
     },
     {
       "ID": "lotd",
@@ -948,7 +948,7 @@
     {
       "ID": "t4",
       "Name": "Precision Form",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p1",
       "Cost": "2",
       "Symbols": "⧖",
@@ -960,7 +960,7 @@
     {
       "ID": "t5",
       "Name": "Duelist Technique",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p1",
       "Cost": "2",
       "Symbols": "⧖",
@@ -972,7 +972,7 @@
     {
       "ID": "t6",
       "Name": "Duelist’s Prowess",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p1",
       "Cost": "2",
       "Symbols": "🗲",
@@ -996,7 +996,7 @@
     {
       "ID": "t8",
       "Name": "Perfect Form",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p1",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1008,7 +1008,7 @@
     {
       "ID": "t9",
       "Name": "Counter Stance",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p1",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1020,7 +1020,7 @@
     {
       "ID": "t10",
       "Name": "Twin Strikes",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p1",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1032,7 +1032,7 @@
     {
       "ID": "t11",
       "Name": "Momentum Drive",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p1",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1056,7 +1056,7 @@
     {
       "ID": "t13",
       "Name": "Hostage Taker",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p2",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1080,7 +1080,7 @@
     {
       "ID": "t15",
       "Name": "Braced Stance",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p2",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1140,7 +1140,7 @@
     {
       "ID": "t20",
       "Name": "Gumption",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p2",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1152,7 +1152,7 @@
     {
       "ID": "t21",
       "Name": "Patient",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p2",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1164,7 +1164,7 @@
     {
       "ID": "t22",
       "Name": "Swift Hug",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p2",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1176,7 +1176,7 @@
     {
       "ID": "t23",
       "Name": "Safety Net",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p3",
       "Cost": "1",
       "Symbols": "🗲",
@@ -1224,7 +1224,7 @@
     {
       "ID": "t27",
       "Name": "Meat Shield",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p3",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1236,7 +1236,7 @@
     {
       "ID": "t28",
       "Name": "Stasis Shield",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p3",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1260,7 +1260,7 @@
     {
       "ID": "t30",
       "Name": "One For All",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p3",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1320,7 +1320,7 @@
     {
       "ID": "t35",
       "Name": "Enduring Rage",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p4",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1332,7 +1332,7 @@
     {
       "ID": "t36",
       "Name": "Bloodlust",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p4",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1344,7 +1344,7 @@
     {
       "ID": "t37",
       "Name": "Reckless",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p4",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1356,7 +1356,7 @@
     {
       "ID": "t38",
       "Name": "Natural Defenses",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p4",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1368,7 +1368,7 @@
     {
       "ID": "t39",
       "Name": "Unstoppable Force",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p4",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1380,7 +1380,7 @@
     {
       "ID": "t40",
       "Name": "Poke The Nest",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p4",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1392,7 +1392,7 @@
     {
       "ID": "t41",
       "Name": "Enduring Spirit",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p4",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1404,7 +1404,7 @@
     {
       "ID": "t42",
       "Name": "Unyielding Defense",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p4",
       "Cost": "2",
       "Symbols": "🗲",
@@ -1416,7 +1416,7 @@
     {
       "ID": "t43",
       "Name": "Last Stand",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p4",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1428,7 +1428,7 @@
     {
       "ID": "t44",
       "Name": "Death Disregard",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p4",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1440,7 +1440,7 @@
     {
       "ID": "t45",
       "Name": "Martyr’s Zeal",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p4",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1464,7 +1464,7 @@
     {
       "ID": "t47",
       "Name": "Thick Skin",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p5",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1488,7 +1488,7 @@
     {
       "ID": "t49",
       "Name": "Survival Skills",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p5",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1500,7 +1500,7 @@
     {
       "ID": "t50",
       "Name": "Adaptive Hide",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p5",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1512,7 +1512,7 @@
     {
       "ID": "t51",
       "Name": "Stress Recovery",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p5",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1524,7 +1524,7 @@
     {
       "ID": "t52",
       "Name": "Steadfast",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p5",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1548,7 +1548,7 @@
     {
       "ID": "t54",
       "Name": "Combat Guard",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p5",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1560,7 +1560,7 @@
     {
       "ID": "t55",
       "Name": "Crimson Convergence",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p5",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1572,7 +1572,7 @@
     {
       "ID": "t56",
       "Name": "Swift and Impactful",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p5",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1596,7 +1596,7 @@
     {
       "ID": "t58",
       "Name": "Veiled Blessing",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p6",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1620,7 +1620,7 @@
     {
       "ID": "t59",
       "Name": "Bookies Choice",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p6",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1680,7 +1680,7 @@
     {
       "ID": "t64",
       "Name": "Scarlet Essence",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p6",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1692,7 +1692,7 @@
     {
       "ID": "t65",
       "Name": "Boiling Blood",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p6",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1728,7 +1728,7 @@
     {
       "ID": "t68",
       "Name": "Occult Apprentice",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p7",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1740,7 +1740,7 @@
     {
       "ID": "t69",
       "Name": "Secrets Of The Cosmos",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p7",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1752,7 +1752,7 @@
     {
       "ID": "t70",
       "Name": "Cursed Cycle",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p7",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1764,7 +1764,7 @@
     {
       "ID": "t71",
       "Name": "Occult Dominion",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p7",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1776,7 +1776,7 @@
     {
       "ID": "t72",
       "Name": "Eldritch Convergence",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p7",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1812,7 +1812,7 @@
     {
       "ID": "t74",
       "Name": "Divine Initiate",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p8",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1824,7 +1824,7 @@
     {
       "ID": "t75",
       "Name": "Guiding Faith",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p8",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1836,7 +1836,7 @@
     {
       "ID": "t76",
       "Name": "Strand Of Restoration",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p8",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1848,7 +1848,7 @@
     {
       "ID": "t77",
       "Name": "Chain Of Restoration",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p8",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1860,7 +1860,7 @@
     {
       "ID": "t78",
       "Name": "Candle Keeper",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p8",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1884,7 +1884,7 @@
     {
       "ID": "t80",
       "Name": "Radiance Of The Lightbearer",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p8",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1932,7 +1932,7 @@
     {
       "ID": "t83",
       "Name": "Cosmic Novice",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p9",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1944,7 +1944,7 @@
     {
       "ID": "t84",
       "Name": "Cosmic Protection",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p9",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1968,7 +1968,7 @@
     {
       "ID": "t86",
       "Name": "Disperse Impulse",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p9",
       "Cost": "2",
       "Symbols": "⧖",
@@ -1980,7 +1980,7 @@
     {
       "ID": "t87",
       "Name": "Overwhelming assault",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p9",
       "Cost": "1",
       "Symbols": "⧖",
@@ -1992,7 +1992,7 @@
     {
       "ID": "t88",
       "Name": "Yielding Defence",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p9",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2004,7 +2004,7 @@
     {
       "ID": "t89",
       "Name": "Elemental Disciple",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p10",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2040,7 +2040,7 @@
     {
       "ID": "t93",
       "Name": "Home Turf",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p10",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2064,7 +2064,7 @@
     {
       "ID": "t95",
       "Name": "Ember Soul",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p10",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2076,7 +2076,7 @@
     {
       "ID": "t96",
       "Name": "Frostwalker",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p10",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2088,7 +2088,7 @@
     {
       "ID": "t97",
       "Name": "Stone Skin",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p10",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2100,7 +2100,7 @@
     {
       "ID": "t98",
       "Name": "Natures Lash",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p10",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2112,7 +2112,7 @@
     {
       "ID": "t99",
       "Name": "Wave Flow",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p10",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2124,7 +2124,7 @@
     {
       "ID": "t100",
       "Name": "Living Tempest",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p10",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2136,7 +2136,7 @@
     {
       "ID": "t101",
       "Name": "Potent Toxin",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p10",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2148,7 +2148,7 @@
     {
       "ID": "t102",
       "Name": "Arcane Student",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p11",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2160,7 +2160,7 @@
     {
       "ID": "t103",
       "Name": "Arcane Sniper",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p11",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2196,7 +2196,7 @@
     {
       "ID": "t106",
       "Name": "Temporal Surge",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p11",
       "Cost": "2",
       "Symbols": "🗲",
@@ -2208,7 +2208,7 @@
     {
       "ID": "t107",
       "Name": "Cantrip Adept",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p11",
       "Cost": "1",
       "Symbols": "🗲",
@@ -2256,7 +2256,7 @@
     {
       "ID": "t112",
       "Name": "Minmaximize",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p11",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2268,7 +2268,7 @@
     {
       "ID": "t113",
       "Name": "Beast Whisperer",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p12",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2280,7 +2280,7 @@
     {
       "ID": "t114",
       "Name": "Bonded Instinct",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p12",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2292,7 +2292,7 @@
     {
       "ID": "t115",
       "Name": "Spirit Bond",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p12",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2304,7 +2304,7 @@
     {
       "ID": "t116",
       "Name": "Noble Steed",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p12",
       "Cost": "1",
       "Symbols": "🗲",
@@ -2328,7 +2328,7 @@
     {
       "ID": "t118",
       "Name": "Workers Companion",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p12",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2364,7 +2364,7 @@
     {
       "ID": "t121",
       "Name": "Arcane Link",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p12",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2376,7 +2376,7 @@
     {
       "ID": "t122",
       "Name": "Alpha Bond",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p12",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2388,7 +2388,7 @@
     {
       "ID": "t123",
       "Name": "Locksmith",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p13",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2412,7 +2412,7 @@
     {
       "ID": "t125",
       "Name": "Treasure Hunter",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p13",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2424,7 +2424,7 @@
     {
       "ID": "t126",
       "Name": "Unseen Strike",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p13",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2460,7 +2460,7 @@
     {
       "ID": "t129",
       "Name": "Quiet Steps",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p13",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2472,7 +2472,7 @@
     {
       "ID": "t130",
       "Name": "Pocket Aces",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p13",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2484,7 +2484,7 @@
     {
       "ID": "t131",
       "Name": "Master Of Disguise",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p13",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2496,7 +2496,7 @@
     {
       "ID": "t132",
       "Name": "Hit and Fade",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p13",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2520,7 +2520,7 @@
     {
       "ID": "t134",
       "Name": "Swift and Crippling",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p13",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2568,7 +2568,7 @@
     {
       "ID": "t138",
       "Name": "Wingman",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p14",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2592,7 +2592,7 @@
     {
       "ID": "t140",
       "Name": "Lead Role",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p14",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2604,7 +2604,7 @@
     {
       "ID": "t141",
       "Name": "Fearsome Sight",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p14",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2652,7 +2652,7 @@
     {
       "ID": "t145",
       "Name": "Combat Wingman",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p14",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2664,7 +2664,7 @@
     {
       "ID": "t146",
       "Name": "Brutal Ridicule",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p14",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2712,7 +2712,7 @@
     {
       "ID": "t150",
       "Name": "Deployment Trapper",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p15",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2736,7 +2736,7 @@
     {
       "ID": "t152",
       "Name": "Guerrilla Trapper",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p15",
       "Cost": "2",
       "Symbols": "☀",
@@ -2748,7 +2748,7 @@
     {
       "ID": "t153",
       "Name": "Explosive Trapper",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p15",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2760,7 +2760,7 @@
     {
       "ID": "t154",
       "Name": "Binding Trapper",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p15",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2772,7 +2772,7 @@
     {
       "ID": "t155",
       "Name": "Traveler's Endurance",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p16",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2784,7 +2784,7 @@
     {
       "ID": "t156",
       "Name": "Coward’s Instinct",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p16",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2808,7 +2808,7 @@
     {
       "ID": "t158",
       "Name": "Climber",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p16",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2820,7 +2820,7 @@
     {
       "ID": "t159",
       "Name": "Light Footed",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p16",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2832,7 +2832,7 @@
     {
       "ID": "t160",
       "Name": "Treaded Ground",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p16",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2844,7 +2844,7 @@
     {
       "ID": "t161",
       "Name": "Evasive Stance",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p16",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2856,7 +2856,7 @@
     {
       "ID": "t162",
       "Name": "Eternal Discipline",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p16",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2868,7 +2868,7 @@
     {
       "ID": "t163",
       "Name": "Drift Distance",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p16",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2880,7 +2880,7 @@
     {
       "ID": "t165",
       "Name": "Tavern Brawler",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p17",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2892,7 +2892,7 @@
     {
       "ID": "t166",
       "Name": "Bardic Drunk",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p17",
       "Cost": "1",
       "Symbols": "⧖",
@@ -2928,7 +2928,7 @@
     {
       "ID": "t169",
       "Name": "Poke The Eye",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p17",
       "Cost": "2",
       "Symbols": "⧖",
@@ -2976,7 +2976,7 @@
     {
       "ID": "t334",
       "Name": "All For One",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p17",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3000,7 +3000,7 @@
     {
       "ID": "t174",
       "Name": "Swiftswitch",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p17",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3084,7 +3084,7 @@
     {
       "ID": "t181",
       "Name": "Red Zone Punishment",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p18",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3096,7 +3096,7 @@
     {
       "ID": "t182",
       "Name": "Resolute Will",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p18",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3132,7 +3132,7 @@
     {
       "ID": "t188",
       "Name": "Overflow",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p19",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3144,7 +3144,7 @@
     {
       "ID": "t189",
       "Name": "All Warmed Up",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p19",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3156,7 +3156,7 @@
     {
       "ID": "t190",
       "Name": "Measured Restraint",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p19",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3180,7 +3180,7 @@
     {
       "ID": "t192",
       "Name": "Battle Ready",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p19",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3192,7 +3192,7 @@
     {
       "ID": "t193",
       "Name": "Returned Investment",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p19",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3204,7 +3204,7 @@
     {
       "ID": "t194",
       "Name": "Artillery Mage",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p19",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3216,7 +3216,7 @@
     {
       "ID": "t195",
       "Name": "Restorative Meditation",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p19",
       "Cost": "2",
       "Symbols": "☀",
@@ -3228,7 +3228,7 @@
     {
       "ID": "t196",
       "Name": "Absorb Soul",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p19",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3240,7 +3240,7 @@
     {
       "ID": "t197",
       "Name": "Memorium",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p20",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3252,7 +3252,7 @@
     {
       "ID": "tR13",
       "Name": "Hot Streak",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p20",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3264,7 +3264,7 @@
     {
       "ID": "t198",
       "Name": "High Road",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p20",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3276,7 +3276,7 @@
     {
       "ID": "t199",
       "Name": "Child Of Fortune",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p20",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3312,7 +3312,7 @@
     {
       "ID": "t202",
       "Name": "Loaded Dice",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p20",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3324,7 +3324,7 @@
     {
       "ID": "t203",
       "Name": "Behold The Infinite",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p20",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3336,7 +3336,7 @@
     {
       "ID": "t204",
       "Name": "Gravedigger",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p20",
       "Cost": "1",
       "Symbols": "☀",
@@ -3360,7 +3360,7 @@
     {
       "ID": "t206",
       "Name": "Swift and Crushing",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p21",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3372,7 +3372,7 @@
     {
       "ID": "t339",
       "Name": "Swift and Displacing",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p21",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3384,7 +3384,7 @@
     {
       "ID": "t207",
       "Name": "Soul Slash",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p21",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3396,7 +3396,7 @@
     {
       "ID": "t340",
       "Name": "Relentless Advance",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p22",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3408,7 +3408,7 @@
     {
       "ID": "t208",
       "Name": "Blood Vigor",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p22",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3420,7 +3420,7 @@
     {
       "ID": "t209",
       "Name": "Adrenalin Rush",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p22",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3432,7 +3432,7 @@
     {
       "ID": "t210",
       "Name": "Ruthless Predator",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p22",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3444,7 +3444,7 @@
     {
       "ID": "t211",
       "Name": "Executioner’s Edge",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p22",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3456,7 +3456,7 @@
     {
       "ID": "t212",
       "Name": "Guillotine",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p22",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3468,7 +3468,7 @@
     {
       "ID": "t213",
       "Name": "No Restrains",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p22",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3480,7 +3480,7 @@
     {
       "ID": "t214",
       "Name": "Thrill Of The Hunt",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p22",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3492,7 +3492,7 @@
     {
       "ID": "t215",
       "Name": "Hermit",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p22",
       "Cost": "1",
       "Symbols": "☀",
@@ -3504,7 +3504,7 @@
     {
       "ID": "t216",
       "Name": "Fisher",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p23",
       "Cost": "1",
       "Symbols": "☀",
@@ -3516,7 +3516,7 @@
     {
       "ID": "t217",
       "Name": "Survivalist",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p23",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3528,7 +3528,7 @@
     {
       "ID": "t218",
       "Name": "Field Medic",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p23",
       "Cost": "2",
       "Symbols": "☀",
@@ -3540,7 +3540,7 @@
     {
       "ID": "t219",
       "Name": "Cartographer",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p23",
       "Cost": "1",
       "Symbols": "☀",
@@ -3564,7 +3564,7 @@
     {
       "ID": "t221",
       "Name": "Live-fire Tempo",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p24",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3588,7 +3588,7 @@
     {
       "ID": "t223",
       "Name": "Bounding Retreat",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p24",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3612,7 +3612,7 @@
     {
       "ID": "t225",
       "Name": "Hard Target",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p24",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3648,7 +3648,7 @@
     {
       "ID": "t228",
       "Name": "Arc Shot",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p24",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3660,7 +3660,7 @@
     {
       "ID": "t229",
       "Name": "Non-lethal Shot",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p25",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3684,7 +3684,7 @@
     {
       "ID": "t231",
       "Name": "Snipers Nest",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p25",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3696,7 +3696,7 @@
     {
       "ID": "t232",
       "Name": "Steady Hand",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p25",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3732,7 +3732,7 @@
     {
       "ID": "t336",
       "Name": "Camper’s Discipline",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p25",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3756,7 +3756,7 @@
     {
       "ID": "t236",
       "Name": "Longshot",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p25",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3804,7 +3804,7 @@
     {
       "ID": "t239",
       "Name": "Not So Great Weapon Mastery",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p26",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3816,7 +3816,7 @@
     {
       "ID": "t240",
       "Name": "Giant Slayer",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p26",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3828,7 +3828,7 @@
     {
       "ID": "t241",
       "Name": "Against The Odds",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p26",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3840,7 +3840,7 @@
     {
       "ID": "t242",
       "Name": "Shumpo",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p26",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3852,7 +3852,7 @@
     {
       "ID": "t243",
       "Name": "Darkness Rise",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p26",
       "Cost": "2",
       "Symbols": "⧖",
@@ -3876,7 +3876,7 @@
     {
       "ID": "t245",
       "Name": "Self Defence",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p26",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3948,7 +3948,7 @@
     {
       "ID": "t250",
       "Name": "Forgotten History",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p27",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3960,7 +3960,7 @@
     {
       "ID": "t251",
       "Name": "Scroll Of A Madman",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p27",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3972,7 +3972,7 @@
     {
       "ID": "t252",
       "Name": "Blindfold Training",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p27",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3984,7 +3984,7 @@
     {
       "ID": "t254",
       "Name": "Ritualist’s Expertise",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p28",
       "Cost": "1",
       "Symbols": "⧖",
@@ -3996,7 +3996,7 @@
     {
       "ID": "t255",
       "Name": "Charged Conduit",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p28",
       "Cost": "2",
       "Symbols": "⧖",
@@ -4020,7 +4020,7 @@
     {
       "ID": "t257",
       "Name": "Focused Mind",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p28",
       "Cost": "2",
       "Symbols": "⧖",
@@ -4032,7 +4032,7 @@
     {
       "ID": "t258",
       "Name": "Bypassed",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p28",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4080,7 +4080,7 @@
     {
       "ID": "t262",
       "Name": "Cantrip Knowledge",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p28",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4152,7 +4152,7 @@
     {
       "ID": "t268",
       "Name": "Jeweler",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p29",
       "Cost": "1",
       "Symbols": "☀",
@@ -4176,7 +4176,7 @@
     {
       "ID": "t270",
       "Name": "Herbalist",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p29",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4200,7 +4200,7 @@
     {
       "ID": "t272",
       "Name": "Alchemedic",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p29",
       "Cost": "2",
       "Symbols": "⧖",
@@ -4212,7 +4212,7 @@
     {
       "ID": "t273",
       "Name": "Deep Diving Miner",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p29",
       "Cost": "2",
       "Symbols": "⧖",
@@ -4224,7 +4224,7 @@
     {
       "ID": "t274",
       "Name": "Sharp Nose",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p29",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4260,7 +4260,7 @@
     {
       "ID": "t277",
       "Name": "Reinforced Construction",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p30",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4284,7 +4284,7 @@
     {
       "ID": "t279",
       "Name": "Create Friend",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p30",
       "Cost": "2",
       "Symbols": "☀",
@@ -4380,7 +4380,7 @@
     {
       "ID": "t287",
       "Name": "Loser's Fallacy",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p31",
       "Cost": "2",
       "Symbols": "⧖",
@@ -4404,7 +4404,7 @@
     {
       "ID": "t289",
       "Name": "Overexertion",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p31",
       "Cost": "2",
       "Symbols": "⧖",
@@ -4416,7 +4416,7 @@
     {
       "ID": "t291",
       "Name": "Phoenix Recovery",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p31",
       "Cost": "2",
       "Symbols": "⧖",
@@ -4428,7 +4428,7 @@
     {
       "ID": "t292",
       "Name": "Return",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p31",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4440,7 +4440,7 @@
     {
       "ID": "t293",
       "Name": "Master Thrower",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p31",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4452,7 +4452,7 @@
     {
       "ID": "t294",
       "Name": "Feat Forward",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p31",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4464,7 +4464,7 @@
     {
       "ID": "t295",
       "Name": "Carrying Mule",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p32",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4500,7 +4500,7 @@
     {
       "ID": "t298",
       "Name": "Tactical Awareness",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p32",
       "Cost": "2",
       "Symbols": "⧖",
@@ -4512,7 +4512,7 @@
     {
       "ID": "t299",
       "Name": "Lead And Follow",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p32",
       "Cost": "2",
       "Symbols": "⧖",
@@ -4524,7 +4524,7 @@
     {
       "ID": "t300",
       "Name": "Splash Zone",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p32",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4572,7 +4572,7 @@
     {
       "ID": "t304",
       "Name": "Precision Form",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p25",
       "Cost": "2",
       "Symbols": "⧖",
@@ -4584,7 +4584,7 @@
     {
       "ID": "t305",
       "Name": "Swift Hug",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p21",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4608,7 +4608,7 @@
     {
       "ID": "t307",
       "Name": "Swift and Impactful",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p21",
       "Cost": "2",
       "Symbols": "⧖",
@@ -4620,7 +4620,7 @@
     {
       "ID": "t308",
       "Name": "Secrets Of The Cosmos",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p9",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4656,7 +4656,7 @@
     {
       "ID": "t311",
       "Name": "Swift and Crippling",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p21",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4680,7 +4680,7 @@
     {
       "ID": "t313",
       "Name": "Climber",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p23",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4692,7 +4692,7 @@
     {
       "ID": "t314",
       "Name": "Traveler's Endurance",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p23",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4704,7 +4704,7 @@
     {
       "ID": "t315",
       "Name": "Coward’s Instinct",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p17",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4716,7 +4716,7 @@
     {
       "ID": "t316",
       "Name": "Swiftswitch",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p21",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4728,7 +4728,7 @@
     {
       "ID": "t317",
       "Name": "Absorb Soul",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p22",
       "Cost": "2",
       "Symbols": "⧖",
@@ -4740,7 +4740,7 @@
     {
       "ID": "t318",
       "Name": "Swift and Crushing",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p22",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4764,7 +4764,7 @@
     {
       "ID": "t320",
       "Name": "Arc Shot",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p25",
       "Cost": "1",
       "Symbols": "⧖",
@@ -4788,7 +4788,7 @@
     {
       "ID": "t322",
       "Name": "Human: Adaptive Soul",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p33",
       "Cost": "0",
       "Symbols": "⧖",
@@ -4800,7 +4800,7 @@
     {
       "ID": "t323",
       "Name": "Dinqui: Hardened Stone",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p33",
       "Cost": "0",
       "Symbols": "⧖",
@@ -4812,7 +4812,7 @@
     {
       "ID": "t324",
       "Name": "Dinqui: Heavy Flight",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p33",
       "Cost": "0",
       "Symbols": "⧖",
@@ -4836,7 +4836,7 @@
     {
       "ID": "t326",
       "Name": "Ashten: Surviving Ash",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p33",
       "Cost": "0",
       "Symbols": "⧖",
@@ -4848,7 +4848,7 @@
     {
       "ID": "t327",
       "Name": "Khraa: Fourfold Precision",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p33",
       "Cost": "0",
       "Symbols": "⧖",
@@ -4937,9 +4937,21 @@
       "Cost": "2",
       "Symbols": "🗲",
       "Parameters": "★ Transformation",
-      "Description": "You can transform into any creature you qualify to become. The transformation lasts 1 hour or until you become unconscious. When the hour ends, you may extend the transformation by rolling [Fortitude] vs [6 + hours extended]. On a failure, you suffer a negative side effect determined by the Narrator.<br><br>While transformed, your Health, Armor, Movement, and Core Attributes are replaced by the creature's. You cannot use your gear or equipment unless the form can reasonably wield it.<br><br>When the transformation ends, you return to the exact state you were in before transforming.",
+      "Description": "You can transform into any creature you qualify to become. The transformation lasts 1 hour or until you become unconscious, or until dismissed. When the hour ends, you may extend the transformation by rolling [Fortitude] vs [6 + hours extended]. On a failure, you suffer a negative side effect determined by the Narrator.<br><br>While transformed, your Health, Armor, Movement, Body Attribute and Skill Attribute are replaced by the creature's. You cannot use your gear or equipment unless the form can reasonably wield it. You have access to creature specific traits.<br><br>When the transformation concludes, you take the damage that the creature had sustained, to a minimum of 1 hp, however if the creatue was knocked unconcious, you are knocked unconcious aswell.",
       "Scaling": "Uses 🗲:\n2 [lvl 1]\n4 [lvl 3]\n6 [lvl 6]\n8 [lvl 9]\n10 [lvl 12]",
-      "source": "core"
+      "source": "lords"
+    },
+    {
+      "ID": "tT1",
+      "Name": "Maintained Knowledge",
+      "Action": "⭘",
+      "Path": "p34",
+      "Cost": "2",
+      "Symbols": "⧖",
+      "Parameters": "⫘ Formic Adaptation",
+      "Description": "When you transform you may pick X traits to keep while transformed, picked traits grant all of their prerequesites aswell.",
+      "Scaling": "Traits X:\n1 [lvl 1]\n2 [lvl 3]\n3 [lvl 6]\n4 [lvl 9]\n5 [lvl 12]",
+      "source": "lords"
     },
     {
       "ID": "t345",
@@ -4949,45 +4961,45 @@
       "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "⫘ ★req Transformation",
-      "Description": "You may choose to only partially transform, choosing to gain either:<br>- The Creatures Movement<br><br>- 1 of the Creatures Core Attributes<br><br>- Half of the Creatures Health as Guard<br><br>- The Amount the Creatures Armor score Exceeds 10, as Armor",
+      "Description": "You may choose to only partially transform, choosing to gain either:<br>- The Creatures Movement<br><br>- 1 of the Creatures Core Attributes<br><br>- Half of the Creatures Health as Guard<br><br>- 1 of the Creatures Traits",
       "Scaling": "",
-      "source": "core"
+      "source": "lords"
     },
     {
       "ID": "t352",
       "Name": "Mutation",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p34",
       "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "⫘ ★req Transformation",
-      "Description": "When you transform, roll a [1d6] and gain one of the following mutations until the transformation ends:<br><br>[1] Aquatic Mutation: You can breathe underwater. Your swimming Movement becomes equal to your base Movement (if your base is 0, it becomes 5 tiles). If you already possess a swimming Movement, it increases by +2.<br><br>[2] Carnivorous Mutation: You grow razor-sharp teeth and spines. Your melee attacks, and melee attacks made against you, inflict stacks of Bleed equal to your [Body].<br><br>[3] Subterranean Mutation: You develop digging claws and tremorsense. You gain a burrowing Movement equal to half your base Movement (rounded down) and ignore penalties from Rough terrain.<br><br>[4] Carapace Mutation: Thick armor plating forms over your body. Upon transforming, you immediately gain Guard equal to your [Level] + 2.<br><br>[5] Aerial Mutation: You grow wings. Your flying Movement becomes equal to your base Movement (if your base is 0, it becomes 5 tiles). If you already possess a flying speed, it increases by +2.<br><br>[6] Antimagic Mutation: You gain Advantage on [Spirit] checks to resist spells, and you gain Resistance to damage dealt by spells.",
+      "Description": "When you transform, roll a [1d6] and gain one of the following mutations until the transformation ends:<br><br>[1] Aquatic Mutation: You can breathe underwater. Your swimming Movement becomes equal to your base Movement (if your base is 0, it becomes 5 tiles). If you already possess a swimming Movement, it increases by +2.<br><br>[2] Carnivorous Mutation: You grow razor-sharp teeth and spines. Your melee attacks, and melee attacks made against you, inflict stacks of Bleed equal to your [Body].<br><br>[3] Subterranean Mutation: You develop digging claws and tremorsense. You gain a burrowing Movement equal to half your base Movement (rounded down) and ignore penalties from Rough terrain.<br><br>[4] Carapace Mutation: Thick armor plating forms over your body. Upon transforming, you immediately gain Guard equal to your [Level] + 2.<br><br>[5] Aerial Mutation: You grow wings. Your flying Movement becomes equal to your base Movement (if your base is 0, it becomes 5 tiles). If you already possess a flying speed, it increases by +2.<br><br>[6] Arcane Mutation: You gain 2 Mind Score.",
       "Scaling": "",
-      "source": "core"
+      "source": "lords"
     },
     {
       "ID": "t346",
       "Name": "Adaptive Transformation",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p34",
       "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "⫘ Mutation",
       "Description": "When you transform into a creature, you may choose which mutation it gains from the Mutation Trait",
       "Scaling": "",
-      "source": "core"
+      "source": "lords"
     },
     {
       "ID": "t347",
       "Name": "Lasting Form",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p34",
       "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "⫘ ★req Transformation",
       "Description": "Your transformations last an additional X hours before requiring a Fortitude check to avoid negative side effects.",
       "Scaling": "Hours X:\n+1 [lvl 1]\n+2 [lvl 6]\n+3 [lvl 12]",
-      "source": "core"
+      "source": "lords"
     },
     {
       "ID": "t348",
@@ -4999,43 +5011,43 @@
       "Parameters": "⫘ ★req Transformation",
       "Description": "You may transform or revert to your base form as a reaction.",
       "Scaling": "",
-      "source": "core"
+      "source": "lords"
     },
     {
       "ID": "t349",
       "Name": "Twin Mutation",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p34",
       "Cost": "2",
       "Symbols": "⧖",
       "Parameters": "⫘ Adaptive Transformation",
       "Description": "When you transform, you gain two Mutations instead of one. Both last the duration of the transformation.",
       "Scaling": "",
-      "source": "core"
+      "source": "lords"
     },
     {
       "ID": "t350",
       "Name": "Formic Adaptation",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p34",
       "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "⫘ ★req Transformation",
-      "Description": "Armor you have equipped grants half of its bonus Armor while transformed if you cannot have it equipped.",
+      "Description": "If your pre-transormation armor exceeds your transformation armor, keep your pre-transformation armor.",
       "Scaling": "",
-      "source": "core"
+      "source": "lords"
     },
     {
       "ID": "t351",
       "Name": "Arcane Beastform",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p34",
       "Cost": "2",
       "Symbols": "⧖",
       "Parameters": "⫘ ★req Transformation & ★req Spellcasting",
       "Description": "You may cast spells from your own spell list while transformed, even as a non-magical creature.",
       "Scaling": "",
-      "source": "core"
+      "source": "lords"
     },
     {
       "ID": "tR1",
@@ -5052,7 +5064,7 @@
     {
       "ID": "tR3",
       "Name": "Cheat Fate",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p35",
       "Cost": "2",
       "Symbols": "⧖",
@@ -5064,7 +5076,7 @@
     {
       "ID": "tR4",
       "Name": "Fortune Favors the Blind",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p35",
       "Cost": "2",
       "Symbols": "⧖",
@@ -5100,7 +5112,7 @@
     {
       "ID": "tR7",
       "Name": "Lucky Streak",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p35",
       "Cost": "2",
       "Symbols": "⧖",
@@ -5124,7 +5136,7 @@
     {
       "ID": "tR10",
       "Name": "Sunk Cost",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p35",
       "Cost": "2",
       "Symbols": "⧖",
@@ -5148,7 +5160,7 @@
     {
       "ID": "tR122",
       "Name": "Beginners Luck",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p35",
       "Cost": "2",
       "Symbols": "⧖",
@@ -5197,7 +5209,7 @@
     {
       "ID": "tM24",
       "Name": "Efficient Metabolism",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p36",
       "Cost": "1",
       "Symbols": "⧖",
@@ -5221,7 +5233,7 @@
     {
       "ID": "tM26",
       "Name": "Monstrous Perfection",
-      "Action": "↺",
+      "Action": "⊘",
       "Path": "p36",
       "Cost": "2",
       "Symbols": "⧖",

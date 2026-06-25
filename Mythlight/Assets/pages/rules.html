@@ -1264,13 +1264,17 @@
 
         <div id="rulesViewTabs"
             class="flex flex-wrap justify-center gap-4 border-t border-b border-white/10 py-6 mb-16 sticky top-20 z-30 bg-[#060a14]/90 backdrop-blur-md">
-            <button onclick="switchView('view-campaign')"
+            <button data-view="view-campaign" onclick="switchView('view-campaign')"
                 class="tab-btn active px-6 py-2 border border-slate-700 rounded-none text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
                 Campaign Rules
             </button>
-            <button onclick="switchView('view-oneshots')"
+            <button data-view="view-oneshots" onclick="switchView('view-oneshots')"
                 class="tab-btn px-6 py-2 border border-slate-700 rounded-none text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
                 One Shots
+            </button>
+            <button data-view="view-expansions" onclick="switchView('view-expansions')"
+                class="tab-btn px-6 py-2 border border-slate-700 rounded-none text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+                Expansion Rules
             </button>
         </div>
 
@@ -3852,6 +3856,26 @@
             </div>
         </div>
 
+        <div id="view-expansions" class="view-section rules-layout hidden">
+            <aside class="sidebar hidden lg:block">
+                <div class="sidebar-fixed" id="expansion-sidebar">
+                    <div class="mb-8">
+                        <p class="text-xs text-slate-500 mb-2">EXPANSION CONTENT</p>
+                        <div class="h-1 w-10 bg-indigo-500 rounded"></div>
+                    </div>
+                    <div id="expansion-sidebar-nav"></div>
+                </div>
+            </aside>
+
+            <div class="content space-y-10" id="expansion-content">
+                <div class="rule-card">
+                    <h2 class="text-3xl text-white font-bold mb-4">Expansion Rules</h2>
+                    <p class="text-slate-300 text-sm max-w-3xl">Browse expansion-specific rules, species, paths, and other optional content. Select an expansion from the sidebar to load its rules pages.</p>
+                </div>
+                <div id="expansion-page-area"></div>
+            </div>
+        </div>
+
     </main>
 
     <div id="footer-placeholder"></div>
@@ -4011,8 +4035,8 @@
             const target = document.getElementById(viewId);
             if (target) {
                 target.classList.remove('hidden');
-                const index = ['view-campaign', 'view-oneshots'].indexOf(viewId);
-                if (index >= 0) document.querySelectorAll('.tab-btn')[index].classList.add('active');
+                const tab = document.querySelector(`.tab-btn[data-view="${viewId}"]`);
+                if (tab) tab.classList.add('active');
             }
             requestAnimationFrame(() => { syncSidebarTop(); updateSidebarActive(); });
         }
@@ -4026,6 +4050,119 @@
             });
         }
 
+        async function loadExpansionPages() {
+            const sidebar = document.getElementById('expansion-sidebar-nav');
+            const pageArea = document.getElementById('expansion-page-area');
+            if (!sidebar || !pageArea) return;
+
+            sidebar.innerHTML = '<p class="text-slate-300 text-sm">Loading expansion list…</p>';
+            try {
+                const manifestResponse = await fetch('expansions/manifest.json');
+                if (!manifestResponse.ok) throw new Error('Manifest not found');
+                const manifest = await manifestResponse.json();
+                const expansions = Array.isArray(manifest.expansions) ? manifest.expansions : [];
+                renderExpansionSidebar(expansions);
+                if (expansions.length) {
+                    const firstButton = sidebar.querySelector('.sidebar-link[data-expansion]');
+                    firstButton && firstButton.click();
+                } else {
+                    pageArea.innerHTML = '<div class="rule-card"><p class="text-slate-300 text-sm">No expansion content is available yet.</p></div>';
+                }
+            } catch (err) {
+                sidebar.innerHTML = '<p class="text-slate-300 text-sm">Unable to read expansion manifest.</p>';
+                pageArea.innerHTML = '<div class="rule-card"><p class="text-slate-300 text-sm">No expansion pages could be loaded.</p></div>';
+            }
+        }
+
+        function renderExpansionSidebar(expansions) {
+            const sidebar = document.getElementById('expansion-sidebar-nav');
+            if (!sidebar) return;
+            sidebar.innerHTML = '';
+            const expansionGroup = document.createElement('div');
+            expansionGroup.innerHTML = '<div class="nav-group-title">Expansions</div>';
+            expansions.forEach(exp => {
+                const link = document.createElement('a');
+                link.href = '#';
+                link.dataset.expansion = exp.id;
+                link.dataset.page = exp.page;
+                link.className = 'sidebar-link';
+                link.textContent = exp.name;
+                link.addEventListener('click', event => {
+                    event.preventDefault();
+                    Array.from(sidebar.querySelectorAll('.sidebar-link[data-expansion]')).forEach(el => el.classList.remove('active'));
+                    link.classList.add('active');
+                    fetchExpansionPage(exp);
+                });
+                expansionGroup.appendChild(link);
+            });
+            sidebar.appendChild(expansionGroup);
+            const sectionGroup = document.createElement('div');
+            sectionGroup.id = 'expansion-section-nav';
+            sectionGroup.innerHTML = '<div class="nav-group-title">Page Sections</div>';
+            sidebar.appendChild(sectionGroup);
+        }
+
+        async function fetchExpansionPage(expansion) {
+            const pageArea = document.getElementById('expansion-page-area');
+            const sectionNav = document.getElementById('expansion-section-nav');
+            if (!pageArea || !sectionNav) return;
+            pageArea.innerHTML = '<div class="rule-card"><p class="text-slate-300 text-sm">Loading expansion rules…</p></div>';
+            sectionNav.innerHTML = '<div class="nav-group-title">Page Sections</div><p class="text-slate-300 text-sm">Loading sections…</p>';
+            try {
+                const response = await fetch(`expansions/${expansion.page}`);
+                if (!response.ok) throw new Error('Failed to load page');
+                const html = await response.text();
+                pageArea.innerHTML = html;
+                buildExpansionSectionNav();
+                requestAnimationFrame(updateSidebarActive);
+            } catch (err) {
+                pageArea.innerHTML = `<div class="rule-card"><p class="text-slate-300 text-sm">Unable to load ${expansion.name} rules.</p></div>`;
+                sectionNav.innerHTML = '<div class="nav-group-title">Page Sections</div><p class="text-slate-300 text-sm">No sections available.</p>';
+            }
+        }
+
+        function buildExpansionSectionNav() {
+            const sectionNav = document.getElementById('expansion-section-nav');
+            const pageArea = document.getElementById('expansion-page-area');
+            if (!sectionNav || !pageArea) return;
+            const sections = Array.from(pageArea.querySelectorAll('section[id]'));
+            sectionNav.innerHTML = '<div class="nav-group-title">Page Sections</div>';
+            if (!sections.length) {
+                sectionNav.innerHTML += '<p class="text-slate-300 text-sm">No sections found in expansion page.</p>';
+                return;
+            }
+            sections.forEach(section => {
+                const link = document.createElement('a');
+                link.href = `#${section.id}`;
+                link.className = 'sidebar-link';
+                link.dataset.sectionId = section.id;
+                link.textContent = section.querySelector('h2, h3, h4')?.textContent || section.id;
+                link.addEventListener('click', event => {
+                    event.preventDefault();
+                    showExpansionSection(section.id);
+                });
+                sectionNav.appendChild(link);
+            });
+            // Honor a deep-link hash if it matches a section on this page, otherwise default to the first one.
+            const requested = location.hash ? location.hash.replace('#', '') : '';
+            const startId = sections.some(s => s.id === requested) ? requested : sections[0].id;
+            showExpansionSection(startId);
+        }
+
+        function showExpansionSection(sectionId) {
+            const pageArea = document.getElementById('expansion-page-area');
+            const sectionNav = document.getElementById('expansion-section-nav');
+            if (!pageArea || !sectionNav) return;
+            pageArea.querySelectorAll('section[id]').forEach(section => {
+                section.classList.toggle('hidden', section.id !== sectionId);
+            });
+            sectionNav.querySelectorAll('.sidebar-link[data-section-id]').forEach(link => {
+                link.classList.toggle('active', link.dataset.sectionId === sectionId);
+            });
+            if (history.replaceState) history.replaceState(null, '', `#${sectionId}`);
+            pageArea.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        }
+
         function syncSidebarTop() {
             const tabs = document.getElementById('rulesViewTabs');
             if (!tabs) return;
@@ -4036,11 +4173,14 @@
         }
 
         function updateSidebarActive() {
-            const campaignVisible = !document.getElementById('view-campaign').classList.contains('hidden');
-            const activeViewId = campaignVisible ? 'view-campaign' : 'view-oneshots';
-            const activeSidebar = document.querySelector(`#${activeViewId} .sidebar`);
+            const activeView = Array.from(document.querySelectorAll('.view-section')).find(el => !el.classList.contains('hidden'));
+            if (!activeView) return;
+            // Expansion sections are filtered on click (only one is ever visible at a time),
+            // so scroll-spying them would just fight with showExpansionSection().
+            if (activeView.id === 'view-expansions') return;
+            const activeSidebar = activeView.querySelector('.sidebar');
             if (!activeSidebar) return;
-            const sections = Array.from(document.querySelectorAll(`#${activeViewId} section[id]`));
+            const sections = Array.from(document.querySelectorAll(`#${activeView.id} section[id]`));
             if (!sections.length) return;
             const rawOffset = getComputedStyle(document.documentElement).getPropertyValue('--rules-sidebar-top');
             const offset = Number.parseFloat(rawOffset) || 0;
@@ -4079,6 +4219,7 @@
             document.querySelectorAll('.sidebar-link').forEach(link => {
                 link.addEventListener('click', () => { setTimeout(updateSidebarActive, 120); });
             });
+            loadExpansionPages();
         });
     </script>
     <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>

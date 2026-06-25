@@ -7,10 +7,18 @@
   "bars": [
     {
       "id": "risk_meter",
-      "label": "Risk Meter",
+      "label": "Risk",
       "max": 128,
       "value": 0,
       "color": "#ef4444",
+      "_comment": "How much Risk your character has taken on"
+    },
+    {
+      "id": "Smog_meter",
+      "label": "Smog",
+      "max": 12,
+      "value": 0,
+      "color": "#4e6128",
       "_comment": "How much Risk your character has taken on"
     }
   ],
