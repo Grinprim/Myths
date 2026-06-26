@@ -5382,9 +5382,33 @@
       "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "",
-      "Description": "<b>[You gain 2 Trait Points]</b><br><br> Comfort is your highest priority. If you do not take at least 2 Short Rests during a day, you gain 1 Exhaustion. Additionally, all other sources of Exhaustion affecting you are doubled.",
+      "Description": "<b>[You gain 2 Trait Points]</b><br><br> Comfort is your highest priority. If you do not take at least 2 Rests during a day, you gain 1 Fatigue. Additionally, all other sources of Fatigue are doubled.",
       "Scaling": "",
       "source": "sinners"
+    },
+    {
+      "ID": "tM27",
+      "Name": "Hivemind Mentality",
+      "Action": "⬖",
+      "Path": "p36",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "⫘ ★req Transformation",
+      "Description": "When you transform into a [Tiny] creature, you may split yourself into multiple creatures. All creatures you have split into have only 1 health. You may split into the number of creatures equal to your maximum health. When you exit your transformation, chose a location where at least 1 of the creatures you have transformed into is located, your health becomes equal to the combined health total of your creatures within adjacent tiles",
+      "Scaling": "",
+      "source": "lords"
+    },
+    {
+      "ID": "tM28",
+      "Name": "Poster Boy",
+      "Action": "⊘",
+      "Path": "p17",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "",
+      "Description": "Everyone has advantage on checks needed to recognize you, if they have seen or heard of you before. Trying to draw your face no longer requires a check",
+      "Scaling": "",
+      "source": "lakeview"
     }
   ]
 }
