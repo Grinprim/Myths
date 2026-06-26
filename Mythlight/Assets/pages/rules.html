@@ -2309,155 +2309,291 @@
                 </section>
 
                 <section id="conditions" class="scroll-offset-center">
-                    <div class="section-header">
-                        <span class="section-number">12</span>
-                        Conditions
-                    </div>
-                    <div class="rule-card space-y-8">
-                        <h2 class="text-3xl text-white font-bold">Conditions</h2>
-                        <p class="text-sm text-slate-400">Conditions represent ongoing states. Some stack, others
-                            persist until removed.</p>
+    <div class="section-header">
+        <span class="section-number">12</span>
+        Conditions
+    </div>
+    <div class="rule-card space-y-8">
+        <h2 class="text-3xl text-white font-bold">Conditions</h2>
+        <p class="text-sm text-slate-400">Conditions represent ongoing states. Some stack, others
+            persist until removed.</p>
 
-                        <div class="grid md:grid-cols-3 gap-4 text-sm">
-                            <div class="condition-card"><strong class="text-red-400">Poison</strong>
-                                <p>This condition stacks. When you take Poison damage, gain stacks equal to the damage
-                                    taken. Each scene, one stack expires and deals 1 Poison damage while active.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Bleed</strong>
-                                <p>This condition stacks. Each stack reduces healing by 1. One stack expires each scene.
-                                </p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Slow</strong>
-                                <p>This condition stacks. You lose 1 tile of movement per stack, cannot make reactions
-                                    while you have any stacks, and all stacks expire next scene if not reapplied.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Stunned</strong>
-                                <p>This condition stacks. Each stack reduces your actions per turn by 1; if reduced to
-                                    0, your turn is skipped.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Prone</strong>
-                                <p>Your movement becomes 0, non-ranged attacks against you have advantage, and standing
-                                    up costs 1 action. While prone you cannot dash.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Restrained</strong>
-                                <p>Your movement becomes 0, attacks against you have advantage, you cannot attack.
-                                    Ending this condition depends on the type of restraints, though usually a [Might]
-                                    check is required.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Exhausted</strong>
-                                <p>This condition stacks. Each stack grants 1 temporary Fatigue; one stack expires each
-                                    scene, and Fatigue gained this way cannot be fatal.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Weakened</strong>
-                                <p>This condition stacks. Each stack reduces damage dealt by 1; if an attack would deal
-                                    0 damage, it cannot be made. All stacks expire next scene if not reapplied.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Blinded</strong>
-                                <p>You have disadvantage on attacks you make, and attacks against you gain advantage.
-                                </p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Taunt</strong>
-                                <p>You are taunted by a creature, your next attack must target them. Including attacks
-                                    of Opportunity, and this condition expires after the attack is made.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Burn</strong>
-                                <p>Each of your turns with this condition you will take 1 damage, it expires at the end
-                                    of the Scene if it was not reapplied.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Chilled</strong>
-                                <p>You suffer -2 to Reflex, it expires at the end of your next turn if it was not
-                                    reapplied.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Compromised</strong>
-                                <p>This condition stacks. Each stack reduces armor by 1; if you reach 0 Armor, all
-                                    attacks automatically hit. Each Scene 1 Stack expires.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Madness</strong>
-                                <p>While you have this condition, every time you cast a spell roll [1d6], you must pay
-                                    the result instead of the mana cost.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Charmed</strong>
-                                <p>While you have this condition you must follow commands of the creature that charmed
-                                    you (The commands cannot be harmful to you.), it expires at the end of the Scene if
-                                    it was not reapplied.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Intoxicated</strong>
-                                <p>While under this condition, you have -2 Finesse and -2 Scholarship.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Stoned</strong>
-                                <p>While under this condition, you have -2 Reflex and -2 Insight.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Feared</strong>
-                                <p>While you have this condition, you must use at least one movement action per turn to
-                                    move away from the creature that fears you.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Dazed</strong>
-                                <p>Active trait uses are disabled as long as you have any stacks of Dazed. One stack decays at the end of your turn.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Silanced</strong>
-                                <p>You are unable to cast spells while you have any stacks of Silanced. One stack decays at the end of your turn.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-red-400">Hesitation</strong>
-                                <p>You are unable to make unarmed or weapon attacks while you have any stacks of Hesitation. One stack decays at the end of your turn.</p>
-                            </div>
-                        </div>
+        <!-- Detrimental vs Beneficial, paired -->
+        <div class="space-y-3">
+            <div class="grid md:grid-cols-2 gap-3">
+                <div class="text-center text-red-400/80 font-bold uppercase tracking-wider text-xs">Detrimental</div>
+                <div class="text-center text-green-400/80 font-bold uppercase tracking-wider text-xs">Beneficial</div>
+            </div>
 
-                        <div class="grid md:grid-cols-3 gap-4 text-sm">
-                            <div class="condition-card"><strong class="text-green-400">Mantra</strong>
-                                <p>This condition stacks. Each of your turns you heal 1 health and reduce the number of
-                                    Stacks by 1. The healing increases for each 4 Stacks.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-green-400">Courage</strong>
-                                <p>This condition stacks. Each stack grants +1 to resisting Intimidation and Fear
-                                    effects. Each time you attempt to resist this kind of effect a Stack Expires.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-green-400">Haste</strong>
-                                <p>This condition stacks. Each Stack grants an additional Action on your turn. All
-                                    stacks expire at the end of the Scene if not reapplied.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-green-400">Speed</strong>
-                                <p>This condition stacks. You gain 1 tile of movement per stack, you can make 2
-                                    reactions as long as you have any stacks, and all stacks expire next scene if not
-                                    reapplied.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-green-400">Bolstered</strong>
-                                <p>This condition stacks. You gain 1 Armor per stack, one stack expires each time you
-                                    take Damage.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-green-400">Peace</strong>
-                                <p>As long as you have this Condition you cannot be Taunted.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-green-400">Flying</strong>
-                                <p>While you have this condition you are immune to floor hazards, you can move up to
-                                    your Movement in any direction, with a fixed height that is specified when the
-                                    condition is granted.</p>
-                            </div>
-                        </div>
+            <!-- Poison / Mantra -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Poison</strong>
+                    <p>This condition stacks. When you take Poison damage, gain stacks equal to the damage
+                        taken. Each scene, one stack expires and deals 1 Poison damage while active.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Mantra</strong>
+                    <p>This condition stacks. Each of your turns you heal 1 health and reduce the number of
+                        Stacks by 1. The healing increases for each 4 Stacks.</p>
+                </div>
+            </div>
 
-                        <div class="grid md:grid-cols-3 gap-4 text-sm">
-                            <div class="condition-card"><strong class="text-teal-400">Rage</strong>
-                                <p>During this condition you lose 6 Armor and gain +1 Damage and +2 Accuracy. This
-                                    condition is dismissed if you haven't attacked or taken damage for 2 scenes.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-teal-400">Unconscious</strong>
-                                <p>While in this condition you cannot act, taking any damage causes you to lose 1 Fatal
-                                    Blow.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-teal-400">Pacifism</strong>
-                                <p>While you have this condition, you cannot take any action that would directly harm another creature.</p>
-                            </div>
-                            <div class="condition-card"><strong class="text-teal-400">Sleep</strong>
-                                <p>While in this condition you cannot act, you regain 1 health for each scene Slept, if you take any damage, you are Awakened.</p>
-                            </div>
-                        </div>
+            <!-- Bleed / Vigor -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Bleed</strong>
+                    <p>This condition stacks. Each stack reduces healing by 1. One stack expires each scene.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Vigor</strong>
+                    <p>This condition stacks. Each stack increases healing received by 1. One stack expires
+                        each scene.</p>
+                </div>
+            </div>
 
-                        <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4 text-xs text-slate-400">
-                            <strong class="text-white">Removal</strong><br>
-                            Conditions may require checks, items, magic, or rest. Multiple stacks may be removed at
-                            once.
-                        </div>
-                    </div>
-                </section>
+            <!-- Slow / Speed -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Slow</strong>
+                    <p>This condition stacks. You lose 1 tile of movement per stack, cannot make reactions
+                        while you have any stacks, and all stacks expire next scene if not reapplied.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Speed</strong>
+                    <p>This condition stacks. You gain 1 tile of movement per stack, you can make 2
+                        reactions as long as you have any stacks, and all stacks expire next scene if not
+                        reapplied.</p>
+                </div>
+            </div>
+
+            <!-- Stunned / Haste -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Stunned</strong>
+                    <p>This condition stacks. Each stack reduces your actions per turn by 1; if reduced to
+                        0, your turn is skipped.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Haste</strong>
+                    <p>This condition stacks. Each Stack grants an additional Action on your turn. All
+                        stacks expire at the end of the Scene if not reapplied.</p>
+                </div>
+            </div>
+
+            <!-- Prone / no counterpart -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Prone</strong>
+                    <p>Your movement becomes 0, non-ranged attacks against you have advantage, and standing
+                        up costs 1 action. While prone you cannot dash.</p>
+                </div>
+                <div class="condition-card border-l-4 border-yellow-500/60"><strong class="text-yellow-400">No Counterpart</strong>
+                    <p>This condition has no counterpart. If the condition is reversed, clear it.</p>
+                </div>
+            </div>
+
+            <!-- Grounded / Flying -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Grounded</strong>
+                    <p>You are unable to fly while you have this condition. If you are currently Flying,
+                        that condition ends immediately.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Flying</strong>
+                    <p>While you have this condition you are immune to floor hazards, you can move up to
+                        your Movement in any direction, with a fixed height that is specified when the
+                        condition is granted.</p>
+                </div>
+            </div>
+
+            <!-- Restrained / no counterpart -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Restrained</strong>
+                    <p>Your movement becomes 0, attacks against you have advantage, you cannot attack.
+                        Ending this condition depends on the type of restraints, though usually a [Might]
+                        check is required.</p>
+                </div>
+                <div class="condition-card border-l-4 border-yellow-500/60"><strong class="text-yellow-400">No Counterpart</strong>
+                    <p>This condition has no counterpart. If the condition is reversed, clear it.</p>
+                </div>
+            </div>
+
+            <!-- Exhausted / Invigorated -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Exhausted</strong>
+                    <p>This condition stacks. Each stack grants 1 temporary Fatigue; one stack expires each
+                        scene, and Fatigue gained this way cannot be fatal.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Invigorated</strong>
+                    <p>This condition stacks. Each stack removes 1 Fatigue, down to a minimum of 0. One
+                        stack expires each scene.</p>
+                </div>
+            </div>
+
+            <!-- Weakened / Empowered -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Weakened</strong>
+                    <p>This condition stacks. Each stack reduces damage dealt by 1; if an attack would deal
+                        0 damage, it cannot be made. All stacks expire next scene if not reapplied.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Empowered</strong>
+                    <p>This condition stacks. Each stack increases damage dealt by 1. All stacks expire
+                        next scene if not reapplied.</p>
+                </div>
+            </div>
+
+            <!-- Blinded / Keen Sight -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Blinded</strong>
+                    <p>You have disadvantage on attacks you make, and attacks against you gain advantage.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Keen Sight</strong>
+                    <p>You have advantage on attacks you make, and attacks against you suffer disadvantage.</p>
+                </div>
+            </div>
+
+            <!-- Taunt / Peace -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Taunt</strong>
+                    <p>You are taunted by a creature, your next attack must target them. Including attacks
+                        of Opportunity, and this condition expires after the attack is made.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Peace</strong>
+                    <p>As long as you have this Condition you cannot be Taunted.</p>
+                </div>
+            </div>
+
+            <!-- Burn / Chilled, both detrimental, counter each other -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Burn</strong>
+                    <p>Each of your turns with this condition you will take 1 damage, it expires at the end
+                        of the Scene if it was not reapplied.</p>
+                </div>
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Chilled</strong>
+                    <p>You suffer -2 to Reflex, it expires at the end of your next turn if it was not
+                        reapplied.</p>
+                </div>
+            </div>
+            <p class="text-xs text-slate-500 italic -mt-1">Burn and Chilled counter each other despite both
+                being detrimental — when one is applied the other is removed.</p>
+
+            <!-- Compromised / Bolstered -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Compromised</strong>
+                    <p>This condition stacks. Each stack reduces armor by 1; if you reach 0 Armor, all
+                        attacks automatically hit. Each Scene 1 Stack expires.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Bolstered</strong>
+                    <p>This condition stacks. You gain 1 Armor per stack, one stack expires each time you
+                        take Damage.</p>
+                </div>
+            </div>
+
+            <!-- Madness / no counterpart -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Madness</strong>
+                    <p>While you have this condition, every time you cast a spell roll [1d6], you must pay
+                        the result instead of the mana cost.</p>
+                </div>
+                <div class="condition-card border-l-4 border-yellow-500/60"><strong class="text-yellow-400">No Counterpart</strong>
+                    <p>This condition has no counterpart. If the condition is reversed, clear it.</p>
+                </div>
+            </div>
+
+            <!-- Charmed / no counterpart -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Charmed</strong>
+                    <p>While you have this condition you must follow commands of the creature that charmed
+                        you (The commands cannot be harmful to you.), it expires at the end of the Scene if
+                        it was not reapplied.</p>
+                </div>
+                <div class="condition-card border-l-4 border-yellow-500/60"><strong class="text-yellow-400">No Counterpart</strong>
+                    <p>This condition has no counterpart. If the condition is reversed, clear it.</p>
+                </div>
+            </div>
+
+            <!-- Intoxicated / Clear-Headed -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Intoxicated</strong>
+                    <p>While under this condition, you have -2 Finesse and -2 Scholarship.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Clear-Headed</strong>
+                    <p>While under this condition, you have +2 Finesse and +2 Scholarship.</p>
+                </div>
+            </div>
+
+            <!-- Stoned / Enlightened -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Stoned</strong>
+                    <p>While under this condition, you have -2 Reflex and -2 Insight.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Enlightened</strong>
+                    <p>While under this condition, you have +2 Reflex and +2 Insight.</p>
+                </div>
+            </div>
+
+            <!-- Feared / Courage -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Feared</strong>
+                    <p>While you have this condition, you must use at least one movement action per turn to
+                        move away from the creature that fears you.</p>
+                </div>
+                <div class="condition-card border-l-4 border-green-500/60"><strong class="text-white">Courage</strong>
+                    <p>This condition stacks. Each stack grants +1 to resisting Intimidation and Fear
+                        effects. Each time you attempt to resist this kind of effect a Stack Expires.</p>
+                </div>
+            </div>
+
+            <!-- Dazed / no counterpart -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Dazed</strong>
+                    <p>Active trait uses are disabled as long as you have any stacks of Dazed. One stack
+                        decays at the end of your turn.</p>
+                </div>
+                <div class="condition-card border-l-4 border-yellow-500/60"><strong class="text-yellow-400">No Counterpart</strong>
+                    <p>This condition has no counterpart. If the condition is reversed, clear it.</p>
+                </div>
+            </div>
+
+            <!-- Silanced / no counterpart -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Silanced</strong>
+                    <p>You are unable to cast spells while you have any stacks of Silanced. One stack
+                        decays at the end of your turn.</p>
+                </div>
+                <div class="condition-card border-l-4 border-yellow-500/60"><strong class="text-yellow-400">No Counterpart</strong>
+                    <p>This condition has no counterpart. If the condition is reversed, clear it.</p>
+                </div>
+            </div>
+
+            <!-- Hesitation / no counterpart -->
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <div class="condition-card border-l-4 border-red-500/60"><strong class="text-white">Hesitation</strong>
+                    <p>You are unable to make unarmed or weapon attacks while you have any stacks of
+                        Hesitation. One stack decays at the end of your turn.</p>
+                </div>
+                <div class="condition-card border-l-4 border-yellow-500/60"><strong class="text-yellow-400">No Counterpart</strong>
+                    <p>This condition has no counterpart. If the condition is reversed, clear it.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mixed / situational conditions, not counterparted -->
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+            <div class="condition-card border-l-4 border-teal-500/60"><strong class="text-white">Rage</strong>
+                <p>During this condition you lose 6 Armor and gain +1 Damage and +2 Accuracy. This
+                    condition is dismissed if you haven't attacked or taken damage for 2 scenes.</p>
+            </div>
+            <div class="condition-card border-l-4 border-teal-500/60"><strong class="text-white">Unconscious</strong>
+                <p>While in this condition you cannot act, taking any damage causes you to lose 1 Fatal
+                    Blow.</p>
+            </div>
+            <div class="condition-card border-l-4 border-teal-500/60"><strong class="text-white">Pacifism</strong>
+                <p>While you have this condition, you cannot take any action that would directly harm another creature.</p>
+            </div>
+            <div class="condition-card border-l-4 border-teal-500/60"><strong class="text-white">Sleep</strong>
+                <p>While in this condition you cannot act, you regain 1 health for each scene Slept, if you take any damage, you are Awakened.</p>
+            </div>
+        </div>
+
+        <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4 text-xs text-slate-400">
+            <strong class="text-white">Removal</strong><br>
+            Conditions may require checks, items, magic, or rest. Multiple stacks may be removed at
+            once.
+        </div>
+    </div>
+</section>
 
                 <div class="section-header">
                     <span class="section-number">13</span>
