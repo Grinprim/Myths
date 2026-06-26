@@ -5409,6 +5409,30 @@
       "Description": "Everyone has advantage on checks needed to recognize you, if they have seen or heard of you before. Trying to draw your face no longer requires a check",
       "Scaling": "",
       "source": "lakeview"
+    },
+    {
+      "ID": "tN6557",
+      "Name": "Ninki Nonk",
+      "Action": "⊘",
+      "Path": "p5",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "",
+      "Description": "The first time you would be knocked unconscious, remain at 1 health and gain the Sleep condition.",
+      "Scaling": "",
+      "source": "core"
+    },
+    {
+      "ID": "tN6558",
+      "Name": "Anger Managment",
+      "Action": "⊘",
+      "Path": "p18",
+      "Cost": "2",
+      "Symbols": "⧖",
+      "Parameters": "⫘ ▲ Taunt",
+      "Description": "Your taunts inflict the Pacifism condition until the end of the taunted creatures turn.",
+      "Scaling": "",
+      "source": "core"
     }
   ]
 }
