@@ -1410,8 +1410,8 @@
       "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "▲ Rage",
-      "Description": "If you have taken at least 3 separate instances of damage during one combat, enter Rage automatically.",
-      "Scaling": "",
+      "Description": "If you have taken at least 3 separate instances of damage during one combat, enter Rage automatically. When in Rage, gain +X Armor and deal X damage to creatures that attempt to damage you.",
+      "Scaling": "Armor/Damage X:\n+2 [lvl 1]\n+3 [lvl 6]\n+4 [lvl 12]",
       "source": "core"
     },
     {
@@ -5223,10 +5223,10 @@
       "Name": "Grafting",
       "Action": "⭘",
       "Path": "p36",
-      "Cost": "1",
+      "Cost": "2",
       "Symbols": "☀",
       "Parameters": "▲ Grafting",
-      "Description": "During a Rest with surgical tools, you may permanently install or remove a Graft.<br><br>Grafts linked to Grafting do not cost Trait Points; you only need to supply their listed material cost and have a free Modification slot.<br><br>You may maintain a number of active Modifications (Grafts and Mutations, combined) equal to:<br>[Level 3+]: 1<br>[Level 6+]: 2<br>[Level 9+]: 3<br>[Level 12]: 4<br><br>A destroyed Graft is unusable until repaired or replaced.",
+      "Description": "During a Rest with surgical tools, you may permanently install or remove a Graft. To Succesfuly graft onto yourself, you must succeed a Tinker check [8 + 2 per recipe component]. On a failure you loose 1 component, and halve your current Health.",
       "Scaling": "",
       "source": "lakeview"
     },
@@ -5235,10 +5235,10 @@
       "Name": "Experimental Mutagen",
       "Action": "⭘",
       "Path": "p36",
-      "Cost": "1",
+      "Cost": "2",
       "Symbols": "☀",
       "Parameters": "▲ Experimental Mutagen",
-      "Description": "You inject or consume an experimental mutagen, permanently altering your biology.<br><br>Mutations linked to Experimental Mutagen do not cost Trait Points; you only need to supply their listed material cost and have a free Modification slot (see Grafting).<br><br>A Mutation may only be removed during a Rest.",
+      "Description": "During a Rest you may inject yourself with a mutagenic concoction, it is up to the narrator on how you obtain this. Upon doing so you will develop a mutation of your choice. To succesfuly control the mutation you must succeed a Fortitude check [14 + 2 per additional component], otherwise you will loose half of your max health, until your next sleep but still gain the mutation.",
       "Scaling": "",
       "source": "lakeview"
     },
