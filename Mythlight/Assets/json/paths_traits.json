@@ -3042,7 +3042,7 @@
       "Cost": "2",
       "Symbols": "🗲",
       "Parameters": "",
-      "Description": "When a spell is cast within 6 tiles, you may negate it. You can only do this before rolls are made.",
+      "Description": "When a spell is cast within 6 tiles, you may negate it (Inflict Silance upon the caster until the end of their turn). You can only do this before rolls are made.",
       "Scaling": "Uses 🗲:\n1 [lvl 1]\n2 [lvl 6]\n3 [lvl 12]",
       "source": "core"
     },
