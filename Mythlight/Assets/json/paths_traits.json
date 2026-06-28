@@ -741,7 +741,7 @@
             }
           ]
         },
-        "breakpoint_47": {
+        "breakpoint_B47": {
           "investment": 6,
           "description": "Studying / disassembling a craft will let you learn its crafting recipe.",
           "alternative_feat_bonuses": [
@@ -759,8 +759,17 @@
       "description": "",
       "breakpoints": {
         "breakpoint_48": {
-          "investment": 4,
-          "description": "Gain a feat point in any feat, for every 3 different paths you have at least 1 trait unlocked in.",
+          "investment": 3,
+          "description": "Gain a feat point in any feat, for every 2 different paths you have at least 1 trait unlocked in.",
+          "alternative_feat_bonuses": [
+            {
+              "feat": "+2 feat points in any feat."
+            }
+          ]
+        },
+        "breakpoint_48B": {
+          "investment": 6,
+          "description": "All traits cost 1 point.",
           "alternative_feat_bonuses": [
             {
               "feat": "+2 feat points in any feat."
@@ -768,7 +777,7 @@
           ]
         }
       },
-      "source": "core"
+      "source": "core" 
     },
     {
       "ID": "p32",
@@ -786,7 +795,7 @@
         },
         "breakpoint_51": {
           "investment": 6,
-          "description": "While allies are within 6 tiles of you they have Courage and Peace.",
+          "description": "While allies are within 6 tiles of you they have Courage and 1 Stack of Boon.",
           "alternative_feat_bonuses": [
             {
               "feat": "+2 feat points in any different feat."
@@ -835,29 +844,20 @@
       "description": "This path focuses on replacing and enhancing the body through grafts, mutations, and unnatural augmentation. The character becomes a modular construct of biological, mechanical, and arcane modifications, gaining power through structural sacrifice and adaptation. However, each modification increases dependency on altered physiology and reduces natural resilience.",
       "breakpoints": {
         "breakpoint_70": {
-          "investment": 3,
-          "description": "You may maintain 1 additional active Modification (Graft or Mutation) beyond your normal maximum.",
+          "investment": 2,
+          "description": "You have advantage on Installing Grafts or Stabalizing Mutations.",
           "alternative_feat_bonuses": [
             {
-              "feat": "+1 feat point in any Body feat."
+              "feat": "+1 feat point in any Body feat. (Will be +1 Modification Slot)"
             }
           ]
         },
         "breakpoint_71": {
-          "investment": 6,
-          "description": "Whenever a Graft or Mutation you have grants you a beneficial effect, gain 1 Guard.",
+          "investment": 5,
+          "description": "You can safely remove a Graft at any point, no check required. You can take triple dosage of stabalizing medication, to remove a mutation at any point in time, no check required.",
           "alternative_feat_bonuses": [
             {
               "feat": "Whenever you gain a Condition from your own modification, reduce its duration by 1 turn (minimum 1)."
-            }
-          ]
-        },
-        "breakpoint_72": {
-          "investment": 9,
-          "description": "You may install or remove a Graft during a Rest without requiring surgical tools or a specialized facility.",
-          "alternative_feat_bonuses": [
-            {
-              "feat": "Whenever you activate a Graft or Mutation ability, gain 1 Guard."
             }
           ]
         }
@@ -913,7 +913,7 @@
       "breakpoints": {
         "breakpoint_S1": {
           "investment": 3,
-          "description": "You gain an additional 2 trait points to spend anywhere",
+          "description": "Effects refering to your level, treat your level as if it were double its value.",
           "alternative_feat_bonuses": [
             {
               "feat": "+1 in any Feat"
@@ -922,7 +922,7 @@
         },
         "breakpoint_S2": {
           "investment": 7,
-          "description": "You Level up twice",
+          "description": "You level up 2 times.",
           "alternative_feat_bonuses": [
             {
               "feat": "+1 Attribute point anywhere"
@@ -1755,10 +1755,10 @@
       "Name": "Occult Apprentice",
       "Action": "⊘",
       "Path": "p7",
-      "Cost": "1",
+      "Cost": "2",
       "Symbols": "⧖",
       "Parameters": "★ Spellcasting",
-      "Description": "Gain access to Occult Spellcasting. You learn a number of Occult spells equal to your [Scholarship], you cannot learn spells above level 2; Spells are always upcast. You learn 2 Occult cantrips.",
+      "Description": "Gain access to Occult Spellcasting. You learn a number of Occult spells equal to your [Scholarship], you cannot learn spells above level 2; Spells are always upcast. You learn 3 Occult cantrips.",
       "Scaling": "",
       "source": "core"
     },
@@ -1839,7 +1839,7 @@
       "Name": "Divine Initiate",
       "Action": "⊘",
       "Path": "p8",
-      "Cost": "1",
+      "Cost": "2",
       "Symbols": "⧖",
       "Parameters": "★ Spellcasting",
       "Description": "Gain access to Divine Spellcasting. You learn a number of Divine spells equal to your [Scholarship]. You learn 2 Divine cantrips.",
@@ -1890,8 +1890,8 @@
       "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "",
-      "Description": "Light sources you hold never go out (Narrator's Discretion). While in its light, gain +1 Awareness and +1 Reflex.",
-      "Scaling": "",
+      "Description": "Light sources you hold never go out (Narrator's Discretion). While in its light, gain +X Reflex and +X Awareness.",
+      "Scaling": "Reflex/Awareness X:\n+2 [lvl 1]\n+3 [lvl 3]\n+4 [lvl 6]\n+5 [lvl 9]",
       "source": "core"
     },
     {
@@ -1959,10 +1959,10 @@
       "Name": "Cosmic Novice",
       "Action": "⊘",
       "Path": "p9",
-      "Cost": "1",
+      "Cost": "2",
       "Symbols": "⧖",
       "Parameters": "★ Spellcasting",
-      "Description": "Gain access to Cosmic Spellcasting. You learn a number of Cosmic spells equal to your [Scholarship], you cannot learn spells above level 1. Upcasting a spell instead casts it multiple times instead.",
+      "Description": "Gain access to Cosmic Spellcasting. You learn a number of Cosmic spells equal to your [Scholarship], you cannot learn spells above level 1. You have access to Multicasting instead of Upcasting.",
       "Scaling": "",
       "source": "core"
     },
@@ -2031,7 +2031,7 @@
       "Name": "Elemental Disciple",
       "Action": "⊘",
       "Path": "p10",
-      "Cost": "1",
+      "Cost": "2",
       "Symbols": "⧖",
       "Parameters": "★ Spellcasting",
       "Description": "Gain access to Elemental Spellcasting. You learn a number of Elemental spells equal to your [Scholarship]. You learn 2 Elemental cantrips.",
@@ -2175,7 +2175,7 @@
       "Name": "Arcane Student",
       "Action": "⊘",
       "Path": "p11",
-      "Cost": "1",
+      "Cost": "2",
       "Symbols": "⧖",
       "Parameters": "★ Spellcasting",
       "Description": "Gain access to Arcane Spellcasting. You learn a number of Arcane spells equal to your [Scholarship]. You learn 2 Arcane cantrips.",
@@ -2619,10 +2619,10 @@
       "Name": "Lead Role",
       "Action": "⊘",
       "Path": "p14",
-      "Cost": "1",
+      "Cost": "2",
       "Symbols": "⧖",
       "Parameters": "",
-      "Description": "Gain +1 Speech; When you spend grace on an attack roll it deals bonus Damage equal to your [Speech].",
+      "Description": "Gain +1 Speech; When you spend grace on an attack roll it deals bonus Damage equal to your [Speech]. Gain +1 Speech.",
       "Scaling": "",
       "source": "core"
     },
@@ -3003,12 +3003,12 @@
       "Name": "All For One",
       "Action": "⊘",
       "Path": "p17",
-      "Cost": "2",
+      "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "",
       "Description": "Half of any guard gained by your allies (rounded down) is instead given to you instead.",
       "Scaling": "",
-      "source": "core"
+      "source": "sinners"
     },
     {
       "ID": "t173",
@@ -3570,7 +3570,7 @@
       "Cost": "1",
       "Symbols": "☀",
       "Parameters": "",
-      "Description": "Gain advantage on [Scholarship] checks when recalling known locations. When resting in a previously visited area, you cannot be ambushed.",
+      "Description": "Gain advantage on [Scholarship] checks when recalling known locations. When resting in a previously visited area, you cannot be ambushed. You can create a map of a previously explored area with 100% accuracy, when using the map you have advantage on all Scholarship and Awareness checks in the region.",
       "Scaling": "",
       "source": "core"
     },
@@ -4182,7 +4182,7 @@
       "Cost": "1",
       "Symbols": "☀",
       "Parameters": "",
-      "Description": "During a rest, you can restore a found object and increase its perceived market value.",
+      "Description": "During a rest, you can restore a found object and increase its perceived market value. You may store a cantrip inside a gemstone, when doing so declare a condition for its activation.",
       "Scaling": "",
       "source": "core"
     },
@@ -5226,7 +5226,7 @@
       "Cost": "2",
       "Symbols": "☀",
       "Parameters": "▲ Grafting",
-      "Description": "During a Rest with surgical tools, you may permanently install or remove a Graft. To Succesfuly graft onto yourself, you must succeed a Tinker check [8 + 2 per recipe component]. On a failure you loose 1 component, and halve your current Health.",
+      "Description": "During a Rest with surgical tools, you may permanently install or remove a Graft. To Succesfuly graft onto yourself or remove said graft, you must succeed a Tinker check [8 + 2 per recipe component]. On a failure you loose 1 component, and halve your current Health.",
       "Scaling": "",
       "source": "lakeview"
     },
@@ -5238,7 +5238,7 @@
       "Cost": "2",
       "Symbols": "☀",
       "Parameters": "▲ Experimental Mutagen",
-      "Description": "During a Rest you may inject yourself with a mutagenic concoction, it is up to the narrator on how you obtain this. Upon doing so you will develop a mutation of your choice. To succesfuly control the mutation you must succeed a Fortitude check [14 + 2 per additional component], otherwise you will loose half of your max health, until your next sleep but still gain the mutation.",
+      "Description": "During a Rest you may inject yourself with a mutagenic concoction, it is up to the narrator on how you obtain this. Upon doing so you will develop a mutation of your choice. To succesfuly control the mutation you must succeed a Fortitude check [14 + 2 per additional component], otherwise you will loose half of your max health, until your next sleep but still gain the mutation. To remove a mutation you must take 6 peices of stabalizing medication, and succeed on a Fortitude Check [16].",
       "Scaling": "",
       "source": "lakeview"
     },
@@ -5250,20 +5250,20 @@
       "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "",
-      "Description": "Your body adapts to extreme biological and mechanical strain.<br><br>Whenever a Graft or Mutation ability you have would cause you to suffer damage, reduce that damage by 1.",
+      "Description": "When you use a Graft or Mutation Ability or Attack, grant yourself 3 Guard.",
       "Scaling": "",
       "source": "lakeview"
     },
     {
       "ID": "tM25",
-      "Name": "Redundant Systems",
+      "Name": "Flesh and Steel",
       "Action": "◇",
       "Path": "p36",
       "Cost": "2",
       "Symbols": "🗲",
-      "Parameters": "",
-      "Description": "Vital functions are duplicated throughout your body.<br><br>When you would become Incapacitated, remain conscious until the end of your turn instead.",
-      "Scaling": "Uses 🗲:\n1 [lvl 1]",
+      "Parameters": "⫘ ▲ Experimental Mutagen & ▲ Grafting",
+      "Description": "You gain +10 Maximum Health, for each pair of 1 Mutation and 1 Graft",
+      "Scaling": "",
       "source": "lakeview"
     },
     {
@@ -5274,7 +5274,7 @@
       "Cost": "2",
       "Symbols": "⧖",
       "Parameters": "",
-      "Description": "You have surpassed the limitations of natural anatomy.<br><br>Increase your maximum active Modifications by 1.<br><br>Once per Rest, you may immediately remove and replace a Graft or Mutation, ignoring the normal Rest requirement to do so.",
+      "Description": "Increase your maximum active Modifications by 2.",
       "Scaling": "",
       "source": "lakeview"
     },
@@ -5387,10 +5387,10 @@
       "source": "sinners"
     },
     {
-      "ID": "tM27",
+      "ID": "tM778",
       "Name": "Hivemind Mentality",
       "Action": "⬖",
-      "Path": "p36",
+      "Path": "p34",
       "Cost": "1",
       "Symbols": "⧖",
       "Parameters": "⫘ ★req Transformation",
@@ -5431,6 +5431,30 @@
       "Symbols": "⧖",
       "Parameters": "⫘ ▲ Taunt",
       "Description": "Your taunts inflict the Pacifism condition until the end of the taunted creatures turn.",
+      "Scaling": "",
+      "source": "core"
+    },
+    {
+      "ID": "tN6559",
+      "Name": "Sailor",
+      "Action": "⊘",
+      "Path": "p23",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "",
+      "Description": "You gain Advantage on all checks, if one of the following is true; You are swimming, you are on a boat you own, you are plotting a path across the seas.",
+      "Scaling": "",
+      "source": "core"
+    },
+    {
+      "ID": "tN6560",
+      "Name": "Meteorologist",
+      "Action": "⊘",
+      "Path": "p23",
+      "Cost": "1",
+      "Symbols": "⧖",
+      "Parameters": "",
+      "Description": "You know the weather for the next 3 days in advance. You are immune to conditions imposed by weather effects.",
       "Scaling": "",
       "source": "core"
     }

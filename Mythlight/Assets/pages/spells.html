@@ -567,6 +567,10 @@
         <!-- ── Tab bar ── -->
         <div id="spellsViewTabs"
             class="flex flex-wrap justify-center gap-4 border-t border-b border-white/10 py-6 mb-16 sticky top-20 z-30 bg-[#060a14]/90 backdrop-blur-md">
+            <button onclick="switchView('view-spell-rules')"
+                class="tab-btn px-6 py-2 border border-slate-700 rounded-none text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+                Spellcasting Rules
+            </button>
             <button onclick="switchView('view-spells')"
                 class="tab-btn active px-6 py-2 border border-slate-700 rounded-none text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
                 Spell Lists
@@ -576,12 +580,124 @@
                 Spellcasting Schools
             </button>
         </div>
+        <div id="view-spell-rules" class="top-view-section pt-12">
+            <header style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:1.5rem; margin-bottom:2.5rem;">
+                <div>
+                    <p style="font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--indigo); margin-bottom:0.4rem;">Mythlight Reference</p>
+                    <h2 style="font-family:'Cinzel',serif; font-size:2.5rem; font-weight:700; color:var(--ink); margin:0 0 0.5rem;">Spellcasting Rules</h2>
+                    <p style="color:var(--ink-dim); font-size:0.95rem; display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+                        Rules that govern all parameters of spellcasting.
+                    </p>
+                </div>
+                
+            </header>
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
 
+        <div class="grid md:grid-cols-1 gap-6 mb-6">
+
+            <div>
+                <strong class="text-white">Spell Levels & Mana</strong>
+                <p class="text-sm text-slate-400">
+                    Spells range from <strong>Level 0 (Cantrips)</strong> to <strong>Level 4</strong>.
+                    Casting a spell costs Mana equal to its level. Cantrips cost no Mana.
+                </p>
+            </div>
+
+            <div>
+                <strong class="text-white">Upcasting</strong>
+                <p class="text-sm text-slate-400">
+                    Non-cantrip spells may be cast at a higher level, up to Level 4, to gain additional
+                    effects or bonuses specified in the spell. Cost: +1 Mana per additional level.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <div>
+                    <strong class="text-white">Spell Damage/Healing Bonus</strong>
+                    <p class="text-sm text-slate-400">
+                        Certain spells gain bonus damage or healing equal to
+                        <strong>Half your Arcane</strong>. Cantrips never gain this bonus.
+                    </p>
+                </div>
+
+                <div>
+                    <strong class="text-white">Spell Attack Bonus</strong>
+                    <p class="text-sm text-slate-400">
+                        Some spells require a Spell Attack. Roll 2d6 and add
+                        <strong>your Arcane</strong>.
+                    </p>
+                </div>
+
+            </div>
+
+            <div>
+                <strong class="text-white">Spell Challenge Score (CS)</strong>
+                <p class="text-sm text-slate-400">
+                    Your Spell CS equals <strong>6 + your Spirit</strong>. When a spell says a creature
+                    must roll a stat to resist, they must meet or exceed your Spell CS.
+                </p>
+            </div>
+
+            <div>
+                <strong class="text-white">Scholarship</strong>
+                <p class="text-sm text-slate-400">
+                    Scholarship determines how many spells you know and grants bonus Mana to your
+                    maximum Mana Pool. You may change your known spells when leveling up or by
+                    spending 8 hours studying.
+                </p>
+            </div>
+
+            <div>
+                <strong class="text-white">Spellcasting Prerequisites</strong>
+                <p class="text-sm text-slate-400">
+                    Traits that require spellcasting as a prerequisite may be taken by any spellcaster,
+                    unless a specific spellcasting school is stated.
+                </p>
+            </div>
+
+            <div>
+                <strong class="text-white">Ritual Casting</strong>
+                <p class="text-sm text-slate-400">
+                    Certain spells can be cast as rituals. They cannot be cast during combat and take
+                    longer to perform. Some rituals may require components or Arcane checks. You may cast any spell as a ritual, as long as you spend a number of 10 minute intervals, equal to its cost, casting it. Spells cast this way, do not cost mana.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="data-table text-sm">
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>Mana Pool</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>1</td></tr>
+                    <tr><td>2</td><td>2</td></tr>
+                    <tr><td>3</td><td>4</td></tr>
+                    <tr><td>4</td><td>5</td></tr>
+                    <tr><td>5</td><td>6</td></tr>
+                    <tr><td>6</td><td>8</td></tr>
+                    <tr><td>7</td><td>9</td></tr>
+                    <tr><td>8</td><td>10</td></tr>
+                    <tr><td>9</td><td>12</td></tr>
+                    <tr><td>10</td><td>13</td></tr>
+                    <tr><td>11</td><td>14</td></tr>
+                    <tr><td>12</td><td>16</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div> 
         <!-- ══════════════════════════════════════ -->
         <!-- VIEW: SPELLS                           -->
         <!-- ══════════════════════════════════════ -->
         <div id="view-spells" class="top-view-section pt-12">
-
+           
             <header style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:1.5rem; margin-bottom:2.5rem;">
                 <div>
                     <p style="font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--indigo); margin-bottom:0.4rem;">Mythlight Reference</p>
@@ -807,12 +923,13 @@
 
     <script>
     const schoolDescriptions = {
-        'Arcane': '<b>Arcane magic</b> is fundamentally similar to <b>mathematics</b>, requiring <b>study</b> and <b>precision</b> to command it to do your will. In exchange for its <b>complexity</b>, it is highly <b>diverse</b> in its applications, ranging from <b>a minor blast</b> to <b>altering fate and outcomes</b>. In addition to its more powerful effects, <b>Arcane magic</b> is commonly used as a <b>utility school</b>, offering many spells that can assist in everyday situations.<br><br>As a <b>spellcaster</b>, the <b>Arcane School</b> grants you access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
-        'Divine': '<b>Divine magic</b>, often a source of <b>faith</b> and <b>stability</b>, can also be a source of <b>great power</b>. As you pledge yourself to <b>Divine magic</b>, you make an <b>oath</b> to act in the name of your <b>deity</b>. Your <b>Divine power</b> manifests as both <b>defensive power</b>, in the form of <b>healing</b> and <b>bolstering allies</b>, and <b>offensive power</b>, through <b>divine smites</b> and <b>sundering the undead</b>.<br><br><b>The Divine School</b> grants you access to <b>spells</b> from <b>levels 1 to 4</b>, as well as <b>cantrips</b>, provided you have sufficient <b>level</b> and <b>Scholarship</b>.',
-        'Elemental': '<b>Elemental magic</b> is rooted in the <b>fundamental elements</b> that appear in every facet of the world. Commanding them requires <b>attunement</b> to <b>nature</b> — listen to them and let them flow through you, and you will gain access to one of the most <b>versatile schools of magic</b>. <b>Elemental casters</b> have access to <b>buffs</b>, <b>debuffs</b>, <b>damage</b>, <b>area control</b>, and much more.<br><br>When you select the <b>Elemental School</b>, you choose an element: <b>Earth</b>, <b>Nature</b>, <b>Fire</b>, <b>Water</b>, <b>Lightning</b>, <b>Wind</b>, <b>Toxic</b>. Your chosen element is <b>enhanced</b>. You gain access to <b>spells levels 1 to 4</b> plus <b>cantrips</b>.',
-        'Occult': '<b>Occult magic</b> is a <b>dark</b> and <b>mysterious</b> force, born from one\'s own <b>inner demons</b>, an expression of <b>emotion</b> manifested into <b>power</b>. You exert your <b>will</b> upon others, <b>hexing</b> and <b>cursing</b> them, sacrificing portions of yourself to gain even stronger effects.<br><br>You only have access to <b>spells levels 1 to 2</b>, however your spells are far more <b>potent</b> when <b>upcast</b>. As such, you can <b>only cast spells at the highest level</b> you have access to.',
-        'Cosmic': '<b>Cosmic magic</b> draws power from the <b>cosmos</b>, an ever-expansive force that binds everything together. In <b>Cosmic magic</b>, no spell is inherently <b>powerful</b> — they are designed to be cast as many times as possible in a single moment.<br><br>The <b>Cosmic School</b> grants access to only <b>level 1 spells</b>, and you cannot <b>upcast</b>. Instead you gain <b>multicasting</b> — spend mana normally used for upcasting to cast multiple instances of a spell, each targeting a different target.'
+        'Arcane': '<b>Arcane magic</b> is fundamentally similar to <b>mathematics</b>, requiring <b>study</b> and <b>precision</b> to command it to do your will. In exchange for its <b>complexity</b>, it is highly <b>diverse</b> in its applications, ranging from <b>a minor blast</b> to <b>altering fate and outcomes</b>. In addition to its more powerful effects, <b>Arcane magic</b> is commonly used as a <b>utility school</b>, offering many spells that can assist in everyday situations.<br><br><b>The Arcane Spellschool</b> follows the <b>standard rules</b> of Spellcasting.',
+        'Divine': '<b>Divine magic</b>, often a source of <b>faith</b> and <b>stability</b>, can also be a source of <b>great power</b>. As you pledge yourself to <b>Divine magic</b>, you make an <b>oath</b> to act in the name of your <b>deity</b>. Your <b>Divine power</b> manifests as both <b>defensive power</b>, in the form of <b>healing</b> and <b>bolstering allies</b>, and <b>offensive power</b>, through <b>divine smites</b> and <b>sundering the undead</b>.<br><br><b>The Divine Spellschool</b>, instead of using mana, uses a <b>system of cooldowns</b>. Each spell will specify a cooldown, usually matching its level, unless stated otherwise. <b>Cooldown</b> is tracked in <b>turns</b>, when <b>upcasting</b>, add <b>+1 turn per level</b>. Cost reduction Traits, will lower the cooldown of the spell, even if they specify a mana cost reduction.',
+        'Elemental': '<b>Elemental magic</b> is rooted in the <b>fundamental elements</b> that appear in every facet of the world. Commanding them requires <b>attunement</b> to <b>nature</b> — listen to them and let them flow through you, and you will gain access to one of the most <b>versatile schools of magic</b>. <b>Elemental casters</b> have access to <b>buffs</b>, <b>debuffs</b>, <b>damage</b>, <b>area control</b>, and much more.<br><br>Elemental Spells will have an element attached to them, either <b>Fire</b>, <b>Lightning</b>, <b>Ice</b>, <b>Water</b>, <b>Earth</b>, <b>Nature</b>, <b>Wind</b> or <b>Toxic</b>. Each element also corresponds to a semi matching damage type: Fire = Fire, Water = Force etc.',
+        'Occult': '<b>Occult magic</b> is a <b>dark</b> and <b>mysterious</b> force, born from one\'s own <b>inner demons</b>, an expression of <b>emotion</b> manifested into <b>power</b>. You exert your <b>will</b> upon others, <b>hexing</b> and <b>cursing</b> them, sacrificing portions of yourself to gain even stronger effects.<br><br>Occult spells only come up to <b>level 2</b>. When an occult spell is cast, it must <b>always</b> be <b>upcast</b> to the highest level you can. ',
+        'Cosmic': '<b>Cosmic magic</b> draws power from the <b>cosmos</b>, an ever-expansive force that binds everything together. In <b>Cosmic magic</b>, no spell is inherently <b>powerful</b> — they are designed to be cast as many times as possible in a single moment.<br><br>Cosmic spells only come up to <b>level 1</b>, you do not have access to cantrips. You are <b>unable to upcast</b> cosmic spells, instead you may cast <b>multiple</b> cosmic spells (Multicast) per action, up to 4.'
     };
+
 
     let rawSpells = [];
     let rawCantrips = [];
@@ -830,7 +947,7 @@
             s.classList.toggle('hidden', s.id !== viewId);
         });
         document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-            const ids = ['view-spells', 'view-schools'];
+            const ids = ['view-spell-rules','view-spells', 'view-schools'];
             btn.classList.toggle('active', ids[i] === viewId);
         });
         if (viewId !== 'view-schools') closeSchoolModal();
@@ -1019,7 +1136,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        switchView('view-spells');
+        switchView('view-spell-rules');
         updateLegendTop();
         loadData();
         document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSchoolModal(); closeRandomSpell(); } });

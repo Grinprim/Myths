@@ -494,6 +494,11 @@
       box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
     }
 
+    .bar-fill.purple {
+      background: linear-gradient(90deg, #8f3bf6, #8b25eb);
+      box-shadow: 0 0 8px rgba(184, 59, 246, 0.6);
+    }
+
     .bar-fill.yellow {
       background: linear-gradient(90deg, #eab308, #ca8a04);
       box-shadow: 0 0 8px rgba(234, 179, 8, 0.6);
@@ -1438,6 +1443,34 @@
     .spell-school-chip .chip-copy span:last-child {
       font-size: 9px;
       color: var(--ink-faint);
+    }
+
+    .element-chip svg {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.35));
+    }
+
+    .element-chip.active {
+      border-color: rgba(163, 230, 53, 0.5);
+      background: rgba(163, 230, 53, 0.08);
+    }
+
+    .occult-mana-track {
+      width: 100%;
+      height: 14px;
+      border-radius: 0px;
+      background: rgba(6, 10, 20, 0.7);
+      border: 1px solid rgba(192, 132, 252, 0.35);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .occult-mana-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #6b21a8, #c084fc);
+      transition: width 0.25s ease;
     }
 
     .spell-tracker {
@@ -3490,9 +3523,9 @@
                     </div>
                     <select id="spellcasting_school_select" onchange="updateSpellSchoolTheme();filterSpellsSelector()"
                       class="hidden">
-                      <option value="arcane">Arcane spell school</option>
+                      <option value="arcane" selected>Arcane spell school</option>
                       <option value="divine">Divine spell school</option>
-                      <option value="occult" selected>Occult spell school</option>
+                      <option value="occult">Occult spell school</option>
                       <option value="elemental">Elemental spell school</option>
                       <option value="cosmic">Cosmic spell school</option>
                     </select>
@@ -3501,8 +3534,44 @@
               </div>
             </div>
 
+            <div class="original-card flex flex-col gap-3 mt-2" id="scene-tracker-card">
+              <div class="flex items-center justify-between">
+                <div class="panel-title">Scene &amp; Turn Tracker</div>
+                <div class="text-[9px] uppercase font-mono" style="color:var(--ink-faint)">Scene <span
+                    id="scene-number">1</span></div>
+              </div>
+              <p class="text-[10px]" style="color:var(--ink-faint)">Advance turns to tick down cooldowns (used by
+                cooldown-based schools like Divine). Once the turn count reaches the scene length, a new scene
+                begins automatically.</p>
+              <div class="flex items-center gap-3 flex-wrap">
+                <div class="flex items-center gap-1.5">
+                  <label class="text-[10px] uppercase" style="color:var(--ink-faint)">Turn</label>
+                  <span class="font-mono font-bold text-sm" id="scene-turn-display" style="color:var(--gold)">0</span>
+                  <span style="color:var(--ink-faint)">/</span>
+                  <input type="number" id="scene_turns_total" min="1" value="4"
+                    class="w-12 h-7 text-center text-xs rounded"
+                    style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink)"
+                    oninput="updateSceneTrackerDisplay()">
+                </div>
+                <button type="button" onclick="advanceSceneTurn()" class="py-1.5 px-3 rounded text-xs font-semibold"
+                  style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#67e8f9">Advance
+                  Turn</button>
+                <button type="button" onclick="resetSceneTracker()" class="py-1.5 px-3 rounded text-xs font-semibold"
+                  style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.25);color:#f87171">Reset</button>
+              </div>
+            </div>
+
+            
+
+            <div class="original-card flex flex-col gap-3 mt-2" id="element-select-card">
+              <div class="panel-title">Element Specialization</div>
+              <p class="text-[10px]" style="color:var(--ink-faint)">Choose the element your Elemental attunement
+                draws on.</p>
+              <div class="spell-chip-grid" id="element-chip-grid"></div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start mt-2">
-              <div class="original-card flex flex-col gap-2.5">
+              <div class="original-card flex flex-col gap-2.5" id="known-cantrips-panel">
                 <div class="flex items-center justify-between">
                   <div class="panel-title">Known Cantrips</div>
                   <div class="text-[10px] font-mono" style="color:var(--ink-faint)"><span
@@ -4010,6 +4079,15 @@
     </div>
 
     <script id="external-scripts">
+
+      // ── FIX: modals were nested inside .site-scale, which has a CSS `transform`.
+      // A transform creates a new containing block for `position: fixed` descendants,
+      // so the modal backdrops were centering against the *content* height of that
+      // wrapper instead of the actual viewport. Moving them to be direct children of
+      // <body> restores normal fixed-position-to-viewport behavior. Safe to do here:
+      // at this point in parsing, every modal-backdrop element above this script tag
+      // already exists in the DOM (this script is neither async nor deferred).
+      document.querySelectorAll('.modal-backdrop').forEach(m => document.body.appendChild(m));
 
       const GROUPS = {
         body: ['might', 'brawn', 'fortitude'],
@@ -4537,11 +4615,19 @@
         const modEmpty = modEl ? modEl.value === '' : true;
         if (baseEmpty && modEmpty) { out.value = ''; updateDerivedVitals(); return; }
         let extra = 0;
-        Object.entries(breakpointChoices).forEach(([key, choice]) => {
-          const pathData = PATHS_CATALOG.find(p => p.ID === selectedPathId);
-          if (pathData && pathData.breakpoints && pathData.breakpoints[key]) {
-            const bpThreshold = pathData.breakpoints[key].investment;
-            if (getInvestedCount(selectedPathId) >= bpThreshold && choice === `stat_${group}_${skill}`) extra += 1;
+        // ── FIX: breakpointChoices keys are scoped as "<pathId>::<breakpointKey>" so that
+        // breakpoints from different paths (which all reuse generic names like "breakpoint_1")
+        // don't collide in this single shared map. Each one is now resolved against its own
+        // path, so multiple breakpoints granting the same stat correctly stack. ──
+        Object.entries(breakpointChoices).forEach(([scopedKey, choice]) => {
+          const sep = scopedKey.indexOf('::');
+          if (sep === -1) return; // legacy/unscoped entry — ignored (migrated on load)
+          const pathId = scopedKey.slice(0, sep);
+          const bpKey = scopedKey.slice(sep + 2);
+          const pathData = PATHS_CATALOG.find(p => p.ID === pathId);
+          if (pathData && pathData.breakpoints && pathData.breakpoints[bpKey]) {
+            const bpThreshold = pathData.breakpoints[bpKey].investment;
+            if (getInvestedCount(pathId) >= bpThreshold && choice === `stat_${group}_${skill}`) extra += 1;
           }
         });
         out.value = val(group + '_base') + val(group + '_' + skill + '_mod') + extra;
@@ -4558,7 +4644,7 @@
         const hasSpellStats = hasNumberInput('mind_arcane_mod') || hasNumberInput('mind_spirit_mod') || hasNumberInput('mind_scholarship_mod') || hasNumberInput('mind_base');
         const csBonus = val('spell_cs_bonus'), atkBonus = val('spell_atk_bonus'), dmgBonus = val('spell_dmg_bonus');
         const challengeScore = 6 + spirit + csBonus, attackBonus = arcane + atkBonus, damageBonus = Math.ceil(arcane / 2) + dmgBonus;
-        const scholarshipCap = schol, knownCap = Math.max(0, scholarshipCap + bonusSlots);
+        const scholarshipCap = schol, knownCap = Math.max(0, scholarshipCap + bonusSlots +Math.floor(val(charLevel)/3));
         const knownCount = getSpellLibrary().filter(s => knownSpellIds.has(s.ID) && parseInt(s.Cost, 10) > 0).length;
         const knownCantrips = getSpellLibrary().filter(s => knownSpellIds.has(s.ID) && (parseInt(s.Cost, 10) || 0) === 0).length;
         const setValue = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
@@ -4625,6 +4711,39 @@
         const max = parseFloat(maxVal) || 0, cur = parseFloat(curVal) || 0;
         const pct = max > 0 ? Math.max(0, Math.min(100, (cur / max) * 100)) : 0;
         const bar = document.getElementById(barId);
+        if (barId == "mana_fill" || barId == "manaBar"){
+          const school = document.getElementById('spellcasting_school_select')?.value || 'arcane';
+          if (school == "occult"){
+            if (bar.classList.contains("blue")){
+            bar.classList.add("purple");
+            bar.classList.remove("blue");
+            }
+            else if (bar.classList.contains("yellow")){
+            bar.classList.add("purple");
+            bar.classList.remove("yellow");
+            }
+          }
+          else if (school == "divine"){
+            if (bar.classList.contains("blue")){
+            bar.classList.add("yellow");
+            bar.classList.remove("blue");
+            }
+            else if (bar.classList.contains("purple")){
+            bar.classList.add("yellow");
+            bar.classList.remove("purple");
+            }
+          }
+          else{
+            if (bar.classList.contains("purple")){
+            bar.classList.add("blue");
+            bar.classList.remove("purple");
+            }
+            else if (bar.classList.contains("yellow")){
+            bar.classList.add("blue");
+            bar.classList.remove("yellow");
+            }
+          }
+        }
         if (bar) bar.style.width = pct + '%';
       }
 
@@ -4649,7 +4768,7 @@
         let bonus = 0;
         PATHS_CATALOG.forEach(p => {
           const spent = getInvestedCount(p.ID);
-          if (p.ID === "p1" && spent >= 3 && breakpointChoices["breakpoint_1"] === 'passive' && stat === 'armor') bonus += 2;
+          if (p.ID === "p1" && spent >= 3 && breakpointChoices["p1::breakpoint_1"] === 'passive' && stat === 'armor') bonus += 2;
         });
         return bonus;
       }
@@ -4667,7 +4786,7 @@
         if (level > 12) { cumulativeBaseHp += (level - 12) * 2; }
         const maxHp = shouldCalc && level > 0 ? (cumulativeBaseHp + (level * brawn) + val('maxHP_bonus')) : '';
         const manaBonusInp = val('mana_bonus');
-        const maxMana = shouldCalc && level > 0 ? (level + Math.floor(level / 3) + manaBonusInp) : '';
+        const maxMana = shouldCalc && level > 0 ? (level + Math.floor(level / 3) + manaBonusInp + val('mind_scholarship_total')) : '';
         const speedBonusInp = val('speed_bonus');
         const totalSpeed = shouldCalc ? (5 + speedBonusInp) : '';
         const setV = (id, v) => { const e = document.getElementById(id); if (e) e.value = v; };
@@ -4694,16 +4813,27 @@
         const numericClamped = clamped === '' ? 0 : clamped;
         updateBar('manaBar', maxVal, numericClamped);
         updateBar('mana_fill', maxVal, numericClamped);
+        // Occult's auto-upcast mana-spend fields track available mana live.
+        if ((document.getElementById('spellcasting_school_select')?.value || '') === 'occult') renderKnownSpells();
       }
 
       function updateManaBonus() { updateDerivedVitals(); }
 
       // ── Weapons ──
-      let weapons = [], weaponCount = 0;
+      let weapons = [];
+
+      // ── FIX: ids used to come from a standalone `weaponCount` counter that never
+      // learned about ids loaded from a save file. Loading a sheet with e.g. 4 weapons
+      // (ids 1-4) left the counter at 3 (from the page's default 3 starting slots), so
+      // the next "+ Add" produced a duplicate id:4. From then on, every lookup by id
+      // (upW/removeWeapon/toggleAmmo/refillAmmo) matched the *first* weapon with that id,
+      // silently corrupting edits to one of the two cards and breaking saves. Deriving the
+      // new id from the current max id in `weapons` instead means it can never collide,
+      // regardless of how many were loaded, added, or removed beforehand. ──
+      function nextWeaponId() { return weapons.reduce((m, w) => Math.max(m, parseInt(w.id, 10) || 0), 0) + 1; }
 
       function addWeapon(data) {
-        weaponCount++;
-        weapons.push(data || { id: weaponCount, name: '', damage: '', attack: '', notes: '', ammo_max: 0, ammo_cur: 0 });
+        weapons.push(data || { id: nextWeaponId(), name: '', damage: '', attack: '', notes: '', ammo_max: 0, ammo_cur: 0 });
         renderWeapons();
       }
 
@@ -5178,12 +5308,15 @@
         const invested = getInvestedCount(pathData.ID);
         Object.entries(pathData.breakpoints || {}).forEach(([key, b]) => {
           const achieved = invested >= b.investment;
-          // ── FIX: Don't clobber existing breakpointChoices on re-render ──
+          // ── FIX: keys are scoped per-path ("<pathId>::<key>") so two different paths'
+          // breakpoints (which reuse generic names like "breakpoint_1") never collide and
+          // their chosen bonuses stack correctly instead of overwriting one another. ──
+          const scopedKey = pathData.ID + '::' + key;
           // Only set default if no choice exists yet
-          if (breakpointChoices[key] === undefined) {
-            breakpointChoices[key] = 'passive';
+          if (breakpointChoices[scopedKey] === undefined) {
+            breakpointChoices[scopedKey] = 'passive';
           }
-          const currentChoice = breakpointChoices[key];
+          const currentChoice = breakpointChoices[scopedKey];
           const isStatChoice = currentChoice !== 'passive';
 
           const div = document.createElement('div');
@@ -5199,7 +5332,7 @@
               ['stat_style_speech', 'Speech'], ['stat_style_insight', 'Insight'], ['stat_style_awareness', 'Awareness']
             ];
             const optionsHtml = statOpts.map(([v, l]) => `<option value="${v}"${currentChoice === v ? ' selected' : ''}>${l}</option>`).join('');
-            statDropdown = `<select onchange="setBreakpointStatChoice('${key}',this.value)" class="text-[10px] p-1.5 rounded outline-none mt-1" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--gold)">${optionsHtml}</select>`;
+            statDropdown = `<select onchange="setBreakpointStatChoice('${scopedKey}',this.value)" class="text-[10px] p-1.5 rounded outline-none mt-1" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--gold)">${optionsHtml}</select>`;
           }
 
           let selectorHTML = achieved ? `
@@ -5207,11 +5340,11 @@
               <span class="text-[9px] uppercase font-semibold tracking-wider" style="color:var(--ink-faint)">Choose Active Bonus:</span>
               <div class="flex flex-col gap-1.5 text-[11px]">
                 <label class="flex items-center gap-2 cursor-pointer" style="color:var(--ink)">
-                  <input type="radio" name="choice_${key}" value="passive" ${!isStatChoice ? 'checked' : ''} onchange="setBreakpointChoice('${key}','passive')" style="accent-color:var(--gold)">
+                  <input type="radio" name="choice_${scopedKey}" value="passive" ${!isStatChoice ? 'checked' : ''} onchange="setBreakpointChoice('${scopedKey}','passive')" style="accent-color:var(--gold)">
                   <span>Apply Path Feature</span>
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer" style="color:var(--ink)">
-                  <input type="radio" name="choice_${key}" value="stat" ${isStatChoice ? 'checked' : ''} onchange="setBreakpointChoice('${key}','stat')" style="accent-color:var(--gold)">
+                  <input type="radio" name="choice_${scopedKey}" value="stat" ${isStatChoice ? 'checked' : ''} onchange="setBreakpointChoice('${scopedKey}','stat')" style="accent-color:var(--gold)">
                   <span>Allocate +1 Feat Point</span>
                 </label>
               </div>
@@ -6762,8 +6895,21 @@
       const ElementalSVG = `<svg class="w-6 h-6" style="color:var(--red)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/></svg>`;
       const CosmicSVG = `<svg class="w-6 h-6" style="color:var(--sky)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>`;
 
+      // ── Elemental specializations ──
+      const ELEMENT_SVGS = {
+        fire: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:#fb923c"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"/></svg>`,
+        lightning: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:#facc15"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>`,
+        ice: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:#67e8f9"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 2v20M4.93 4.93l14.14 14.14M2 12h20M4.93 19.07L19.07 4.93M7 7l-1.5-.5M7 7l-.5-1.5M17 17l1.5.5M17 17l.5 1.5M7 17l-1.5.5M7 17l-.5 1.5M17 7l1.5-.5M17 7l.5-1.5"/></svg>`,
+        water: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:#60a5fa"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2.69s-6 7-6 11.13A6 6 0 0012 20a6 6 0 006-6.18c0-4.13-6-11.13-6-11.13z"/></svg>`,
+        nature: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:#4ade80"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21c-3.5-1-6-4.5-6-9 0-4 2-7 6-9.5 4 2.5 6 5.5 6 9.5 0 4.5-2.5 8-6 9zM12 21V8"/></svg>`,
+        earth: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:#b45309"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.5 19l5.5-10 3.5 5.5 2.5-4.5 7.5 9h-19z"/></svg>`,
+        wind: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:#5eead4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7.5h11.5a2.5 2.5 0 100-5M3 12.5h15a2.75 2.75 0 110 5.5M3 17.5h8.5"/></svg>`,
+        toxic: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:#a3e635"><circle cx="12" cy="7.3" r="2.3" stroke-width="2"/><circle cx="7.6" cy="15.2" r="2.3" stroke-width="2"/><circle cx="16.4" cy="15.2" r="2.3" stroke-width="2"/><circle cx="12" cy="12" r="1.8" stroke-width="2"/></svg>`
+      };
+      const ELEMENT_LABELS = { fire: 'Fire', lightning: 'Lightning', ice: 'Ice', water: 'Water', nature: 'Nature', earth: 'Earth', wind: 'Wind', toxic: 'Toxic' };
+
       function updateSpellSchoolTheme() {
-        const school = document.getElementById('spellcasting_school_select')?.value || 'occult';
+        const school = document.getElementById('spellcasting_school_select')?.value || 'arcane';
         const wrapper = document.getElementById('spell-school-icon-wrapper'), title = document.getElementById('school-title-text'), card = document.getElementById('spellcasting-school-card');
         if (!wrapper || !title || !card) return;
         const themes = {
@@ -6778,9 +6924,45 @@
         title.textContent = t.title;
         card.style.borderColor = t.border;
         card.style.boxShadow = `0 4px 20px ${t.shadow}`;
-        document.querySelectorAll('.spell-school-chip').forEach(btn => btn.classList.toggle('active', btn.dataset.school === school));
+        document.querySelectorAll('.spell-school-chip:not(.element-chip)').forEach(btn => btn.classList.toggle('active', btn.dataset.school === school));
+        // ── Update: the spell section now reshapes itself per-school — Cosmic drops
+        // its cantrips panel, Divine surfaces the Scene/Turn Tracker, Occult surfaces a
+        // dedicated Mana Reserve bar, and Elemental surfaces the element specialization picker. ──
+        updateSchoolSectionVisibility(school);
         filterSpellsSelector();
         recalcSpellStats();
+        renderKnownSpells();
+        updateBar("mana_fill",document.getElementById("maxMana").value,document.getElementById("currentMana").value);
+        updateBar("manaBar",document.getElementById("maxMana").value,document.getElementById("currentMana").value);
+      }
+
+      function updateSchoolSectionVisibility(school) {
+        const show = (id, on) => { const el = document.getElementById(id); if (el) el.classList.toggle('hidden', !on); };
+        show('scene-tracker-card', school === 'divine');
+        show('occult-manabar-card', school === 'occult');
+        show('element-select-card', school === 'elemental');
+        show('known-cantrips-panel', school !== 'cosmic'); // Cosmic magic has no cantrips at all
+        updateOccultManaBar();
+      }
+
+      function updateOccultManaBar() {
+        const fill = document.getElementById('occult-mana-fill'), label = document.getElementById('occult-mana-label');
+        if (!fill || !label) return;
+        const cur = parseInt(document.getElementById('currentMana')?.value, 10) || 0;
+        const max = parseInt(document.getElementById('maxMana')?.value, 10) || 0;
+        fill.style.width = max > 0 ? `${Math.max(0, Math.min(100, (cur / max) * 100))}%` : '0%';
+        label.textContent = `${cur} / ${max}`;
+      }
+
+      // ── Elemental specialization ──
+      let selectedElement = 'fire';
+      function renderElementChips() {
+        const grid = document.getElementById('element-chip-grid'); if (!grid) return;
+        grid.innerHTML = Object.keys(ELEMENT_SVGS).map(key => `<button type="button" class="spell-school-chip element-chip${key === selectedElement ? ' active' : ''}" data-element="${key}" onclick="setElement('${key}')">${ELEMENT_SVGS[key]}<span class="chip-copy"><span>${ELEMENT_LABELS[key]}</span></span></button>`).join('');
+      }
+      function setElement(el) {
+        selectedElement = el;
+        renderElementChips();
       }
 
       function setSpellSchool(school) {
@@ -6805,7 +6987,8 @@
           const cost = parseInt(spell.Cost, 10) || 0;
           const opt = document.createElement('option');
           opt.value = spell.ID;
-          opt.textContent = `[${spell.Category}] ${spell.Name} (${cost === 0 ? 'Cantrip' : 'Level ' + cost})`;
+          const metaBits = [spell.Type, spell.Range].filter(Boolean).join(', ');
+          opt.textContent = `[${spell.Category}] ${spell.Name} (${cost === 0 ? 'Cantrip' : 'Level ' + cost})${metaBits ? ' — ' + metaBits : ''}`;
           selector.appendChild(opt);
         });
       }
@@ -6822,17 +7005,102 @@
         knownSpellIds.add(newId); filterSpellsSelector(); renderKnownSpells(); recalcSpellStats(); closeCustomSpellModal(); triggerWarningToast(`${name} added to grimoire!`);
       }
 
-      function removeKnownSpell(id) { knownSpellIds.delete(id); renderKnownSpells(); recalcSpellStats(); triggerWarningToast("Spell forgotten from grimoire."); }
+      // ── Scene / Turn Tracker (drives cooldown-based spellcasting, e.g. Divine) ──
+      let sceneNumber = 1, sceneTurn = 0;
+      let spellCooldowns = {}; // spellId -> remaining turns until off cooldown
+
+      function updateSceneTrackerDisplay() {
+        const turnEl = document.getElementById('scene-turn-display'); if (turnEl) turnEl.textContent = sceneTurn;
+        const sceneEl = document.getElementById('scene-number'); if (sceneEl) sceneEl.textContent = sceneNumber;
+      }
+
+      function advanceSceneTurn() {
+        sceneTurn++;
+        Object.keys(spellCooldowns).forEach(id => {
+          spellCooldowns[id]--;
+          if (spellCooldowns[id] <= 0) delete spellCooldowns[id];
+        });
+        const turnsTotal = parseInt(document.getElementById('scene_turns_total')?.value, 10) || 1;
+        if (sceneTurn >= turnsTotal) {
+          sceneTurn = 0;
+          sceneNumber++;
+          triggerWarningToast(`Scene ${sceneNumber} begins.`);
+        }
+        updateSceneTrackerDisplay();
+        renderKnownSpells();
+      }
+
+      function resetSceneTracker() {
+        sceneNumber = 1; sceneTurn = 0; spellCooldowns = {};
+        updateSceneTrackerDisplay();
+        renderKnownSpells();
+        triggerWarningToast("Scene tracker reset.");
+      }
+
+      function removeKnownSpell(id) { knownSpellIds.delete(id); delete spellCooldowns[id]; delete spellCooldownMax[id]; delete spellFieldValues[id]; renderKnownSpells(); recalcSpellStats(); triggerWarningToast("Spell forgotten from grimoire."); }
 
       function castSpell(id) {
         const spell = getSpellById(id); if (!spell) return;
         const cost = parseInt(spell.Cost, 10) || 0;
-        const cur = parseInt(document.getElementById('currentMana')?.value, 10) || 0;
-        if (cur < cost) { triggerWarningToast("Insufficient mana."); return; }
-        syncMana(cur - cost, 'spells_cast');
+        const catLower = (spell.Category || '').toLowerCase();
         const notes = document.getElementById('notes');
-        if (notes) notes.value = `[Cast] ${spell.Name} — ${cost} Mana\n` + notes.value;
+
+        if (cost === 0) { triggerWarningToast(`Cast ${spell.Name}!`); return; } // cantrips are always free
+
+        // ── Divine: cooldown-based casting using the per-card cooldown-length field
+        // (defaults to the spell's Mana cost) instead of spending Mana at all. ──
+        if (catLower === 'divine') {
+          const remaining = spellCooldowns[id] || 0;
+          if (remaining > 0) { triggerWarningToast(`${spell.Name} is on cooldown (${remaining} turn${remaining === 1 ? '' : 's'} left).`); return; }
+          const cd = parseInt(spellFieldValues[id], 10) || cost || 1;
+          spellCooldowns[id] = cd;
+          spellCooldownMax[id] = cd;
+          if (notes) notes.value = `[Cast] ${spell.Name} — Cooldown ${cd} turn(s)\n` + notes.value;
+          triggerWarningToast(`Cast ${spell.Name}! On cooldown for ${cd} turn(s).`);
+          renderKnownSpells();
+          return;
+        }
+
+        const cur = parseInt(document.getElementById('currentMana')?.value, 10) || 0;
+
+        // ── Occult: automatic upcasting. Always spends as much Mana as it can, up to 4,
+        // stopping short of 4 if there isn't enough Mana left. ──
+        if (catLower === 'occult') {
+          const spend = Math.max(0, Math.min(4, cur));
+          if (spend <= 0) { triggerWarningToast("No mana left to cast with."); return; }
+          syncMana(cur - spend, 'spells_cast');
+          if (notes) notes.value = `[Cast] ${spell.Name} — ${spend} Mana (auto-upcast)\n` + notes.value;
+          triggerWarningToast(`Cast ${spell.Name}! Auto-upcast for ${spend} Mana.`);
+          return;
+        }
+
+        // ── Arcane / Elemental / Cosmic: mana-spend field next to Channel, defaulting to
+        // the spell's level, lets the caster manually upcast by spending more Mana. ──
+        const manaCost = spellFieldValues[id] !== undefined ? (parseInt(spellFieldValues[id], 10) || 0) : cost;
+        if (cur < manaCost) { triggerWarningToast("Insufficient mana."); return; }
+        syncMana(cur - manaCost, 'spells_cast');
+        if (notes) notes.value = `[Cast] ${spell.Name} — ${manaCost} Mana\n` + notes.value;
         triggerWarningToast(`Cast ${spell.Name}!`);
+      }
+
+      // Per-spell user-editable overrides for the field next to the Channel button
+      // (cooldown length for Divine, mana spend for Arcane/Elemental/Cosmic). Occult's
+      // field is always auto-computed live, so it never reads from this map.
+      let spellFieldValues = {};
+      let spellCooldownMax = {};
+
+      function setSpellFieldValue(id, v) { spellFieldValues[id] = v; }
+
+      function cooldownRingSVG(remaining, max) {
+        const r = 14, c = 2 * Math.PI * r;
+        const frac = max > 0 ? Math.max(0, Math.min(1, remaining / max)) : 0;
+        const dash = c * frac;
+        return `<svg width="34" height="34" viewBox="0 0 34 34" style="flex-shrink:0">
+          <circle cx="17" cy="17" r="${r}" fill="none" stroke="var(--border-med)" stroke-width="4"/>
+          <circle cx="17" cy="17" r="${r}" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round"
+            stroke-dasharray="${dash.toFixed(2)} ${c.toFixed(2)}" transform="rotate(-90 17 17)"/>
+          <text x="17" y="19.5" text-anchor="middle" font-size="9" font-family="'JetBrains Mono',monospace" fill="var(--gold)">${remaining > 0 ? remaining : '✓'}</text>
+        </svg>`;
       }
 
       function renderKnownSpells() {
@@ -6844,14 +7112,46 @@
         const active = getSpellLibrary().filter(s => knownSpellIds.has(s.ID));
         const cantrips = active.filter(s => (parseInt(s.Cost, 10) || 0) === 0);
         const spells = active.filter(s => (parseInt(s.Cost, 10) || 0) > 0);
+        const currentMana = parseInt(document.getElementById('currentMana')?.value, 10) || 0;
         const renderCard = (s) => {
           const card = document.createElement('div');
           card.className = "p-3 rounded flex flex-col justify-between gap-2 text-xs";
           card.style.cssText = "border:1px solid var(--border-med);background:rgba(6,10,20,0.6)";
-          const catSVG = { arcane: ArcaneSVG, divine: DivineSVG, occult: OccultSVG, elemental: ElementalSVG, cosmic: CosmicSVG }[s.Category.toLowerCase()] || CosmicSVG;
+          const catSVG = { arcane: ArcaneSVG, divine: DivineSVG, occult: OccultSVG, elemental: ElementalSVG, cosmic: CosmicSVG }[(s.Category || '').toLowerCase()] || CosmicSVG;
           const costValue = parseInt(s.Cost, 10) || 0;
-          const costText = costValue === 0 ? 'Cantrip' : `${costValue} Mana`;
-          card.innerHTML = `<div class="flex items-start justify-between"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded flex items-center justify-center" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med)">${catSVG}</div><div><h4 class="font-bold text-xs" style="color:var(--ink)">${s.Name}</h4><span class="text-[9px] font-semibold uppercase tracking-wider" style="color:var(--gold)">${s.Category} · ${s.Type}</span></div></div><button onclick="removeKnownSpell('${s.ID}')" class="font-bold px-1" style="color:var(--ink-faint)">×</button></div><p class="text-[11px] leading-relaxed mt-1" style="color:var(--ink-dim)">${s.Description}</p>${s.Upcast && s.Upcast !== 'None' ? `<p class="text-[9px] mt-1"><b style="color:var(--indigo)">Upcast:</b> <span style="color:var(--ink-faint)">${s.Upcast}</span></p>` : ''}<div class="flex items-center justify-between pt-2 mt-1" style="border-top:1px solid var(--border-med)"><span class="font-mono font-bold uppercase text-[10px]" style="color:var(--gold)">${costText}</span><button onclick="castSpell('${s.ID}')" class="px-3 py-1 font-bold text-[10px] uppercase tracking-wider rounded" style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid var(--gold-line)">Channel</button></div>`;
+          const catLower = (s.Category || '').toLowerCase();
+          const isCantrip = costValue === 0;
+
+          // ── The control area to the left of Channel: cooldown ring + duration field for
+          // Divine, a live auto-upcast readout for Occult, or an editable mana-spend field
+          // (defaulting to the spell's level) for everything else. ──
+          let costText = '', controlHTML = '', channelLabel = 'Channel', channelDisabledAttr = '';
+
+          if (isCantrip) {
+            costText = 'Cantrip';
+          } else if (catLower === 'divine') {
+            const cdRemaining = spellCooldowns[s.ID] || 0;
+            const cdValue = spellFieldValues[s.ID] !== undefined ? (parseInt(spellFieldValues[s.ID], 10) || 1) : costValue;
+            const cdMax = spellCooldownMax[s.ID] || cdValue;
+            costText = cdRemaining > 0 ? `On Cooldown` : `Ready`;
+            controlHTML = `${cooldownRingSVG(cdRemaining, cdMax)}<div class="flex flex-col items-center"><label class="text-[8px] uppercase" style="color:var(--ink-faint)">Cooldown</label><input type="number" min="1" value="${cdValue}" oninput="setSpellFieldValue('${s.ID}',this.value)" class="w-12 h-6 text-center text-[11px] rounded" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink)"></div>`;
+            if (cdRemaining > 0) { channelLabel = 'Cooling Down'; channelDisabledAttr = 'disabled style="opacity:0.4;cursor:not-allowed"'; }
+          } else if (catLower === 'occult') {
+            const autoSpend = Math.max(0, Math.min(4, currentMana));
+            costText = `Auto-Upcast`;
+            controlHTML = `<div class="flex flex-col items-center"><label class="text-[8px] uppercase" style="color:#c084fc">Mana Spent</label><input type="number" value="${autoSpend}" readonly title="Occult always auto-upcasts as high as your Mana allows (up to 4)." class="w-12 h-6 text-center text-[11px] rounded" style="background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.35);color:#c084fc"></div>`;
+          } else {
+            const spendValue = spellFieldValues[s.ID] !== undefined ? (parseInt(spellFieldValues[s.ID], 10) || 0) : costValue;
+            costText = 'Mana Spend';
+            controlHTML = `<div class="flex flex-col items-center"><label class="text-[8px] uppercase" style="color:var(--ink-faint)">Mana</label><input type="number" min="0" value="${spendValue}" oninput="setSpellFieldValue('${s.ID}',this.value)" class="w-12 h-6 text-center text-[11px] rounded" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink)"></div>`;
+          }
+
+          // ── FIX: spell cards only ever showed Category/Type and silently dropped Range
+          // entirely (and printed the literal word "undefined" for spells missing a Type).
+          // Both Type and Range now render as their own tags, omitted individually if absent
+          // instead of corrupting the whole line. ──
+          const metaBits = [s.Category, s.Type].filter(Boolean).join(' · ');
+          card.innerHTML = `<div class="flex items-start justify-between"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded flex items-center justify-center" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med)">${catSVG}</div><div><h4 class="font-bold text-xs" style="color:var(--ink)">${s.Name}</h4><span class="text-[9px] font-semibold uppercase tracking-wider" style="color:var(--gold)">${metaBits}</span></div></div><button onclick="removeKnownSpell('${s.ID}')" class="font-bold px-1" style="color:var(--ink-faint)">×</button></div>${s.Range ? `<div class="text-[9px] font-semibold uppercase tracking-wider" style="color:var(--ink-faint)">Range: ${s.Range}</div>` : ''}<p class="text-[11px] leading-relaxed mt-1" style="color:var(--ink-dim)">${s.Description}</p>${s.Upcast && s.Upcast !== 'None' ? `<p class="text-[9px] mt-1"><b style="color:var(--indigo)">Upcast:</b> <span style="color:var(--ink-faint)">${s.Upcast}</span></p>` : ''}<div class="flex items-center justify-between pt-2 mt-1 gap-2" style="border-top:1px solid var(--border-med)"><div class="flex items-center gap-2"><span class="font-mono font-bold uppercase text-[10px]" style="color:var(--gold)">${costText}</span>${controlHTML}</div><button onclick="castSpell('${s.ID}')" ${channelDisabledAttr} class="px-3 py-1 font-bold text-[10px] uppercase tracking-wider rounded" style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid var(--gold-line)">${channelLabel}</button></div>`;
           return card;
         };
         if (!cantrips.length) { cantripsContainer.innerHTML = `<p class="text-center text-xs italic py-4" style="color:var(--ink-faint)">No cantrips transcribed yet.</p>`; }
@@ -6941,6 +7241,8 @@
           mana_bonus: document.getElementById('mana_bonus')?.value || '0',
           knownSpellIds: Array.from(knownSpellIds),
           customSpells,
+          sceneNumber, sceneTurn, spellCooldowns, spellCooldownMax, spellFieldValues, selectedElement,
+          scene_turns_total: document.getElementById('scene_turns_total')?.value || '4',
           customTraits : ALL_TRAITS_CATALOG.filter(t => !BASE_TRAIT_IDS.has(t.ID)),
           customPaths : ALL_PATHS_CATALOG.filter(p => !BASE_PATH_IDS.has(p.ID)),
           sidebarWidgets: SIDEBAR_WIDGETS,
@@ -6993,6 +7295,8 @@
         ['armor_name', 'armor_def', 'armor_notes', 'armor_bonus', 'shield_name', 'shield_def', 'shield_notes', 'cloak_name', 'cloak_def', 'cloak_notes', 'artifact_name', 'artifact_def', 'artifact_notes'].forEach(a => sv(a, data[a]));
 
         weapons = data.weapons || [];
+        // Defensive: repair duplicate ids from saves made before the id-collision fix above.
+        { const seen = new Set(); weapons.forEach(w => { while (seen.has(w.id)) w.id = nextWeaponId(); seen.add(w.id); }); }
         renderWeapons();
 
         sv('spell_cs_bonus', data.spell_cs_bonus || '0');
@@ -7037,15 +7341,34 @@
         unlockedTraitPaths = data.unlockedTraitPaths || {};
         // ── FIX: restore full breakpointChoices including stat selections ──
         breakpointChoices = data.breakpointChoices || {};
+        // Migrate legacy unscoped keys (pre-fix saves, e.g. "breakpoint_1") onto the path
+        // that was selected when the file was saved, so old sheets keep working. New saves
+        // always use scoped "<pathId>::<breakpointKey>" keys and never hit this path.
+        Object.keys(breakpointChoices).forEach(k => {
+          if (!k.includes('::') && data.selectedPathId) {
+            const migratedKey = data.selectedPathId + '::' + k;
+            if (!(migratedKey in breakpointChoices)) breakpointChoices[migratedKey] = breakpointChoices[k];
+            delete breakpointChoices[k];
+          }
+        });
 
         // ── FIX: restore spell school BEFORE calling updateSpellSchoolTheme ──
         const savedSchool = data.spellcasting_school || 'occult';
         const schoolSelect = document.getElementById('spellcasting_school_select');
         if (schoolSelect) schoolSelect.value = savedSchool;
-
         sv('mana_bonus', data.mana_bonus || '0');
         knownSpellIds = new Set(data.knownSpellIds || ["s1", "s2"]);
         customSpells = data.customSpells || [];
+
+        sceneNumber = data.sceneNumber || 1;
+        sceneTurn = data.sceneTurn || 0;
+        spellCooldowns = data.spellCooldowns || {};
+        spellCooldownMax = data.spellCooldownMax || {};
+        spellFieldValues = data.spellFieldValues || {};
+        selectedElement = data.selectedElement || 'fire';
+        sv('scene_turns_total', data.scene_turns_total || '4');
+        updateSceneTrackerDisplay();
+        renderElementChips();
 
         SIDEBAR_WIDGETS = (data.sidebarWidgets || []).map(w => ({ ...w }));
         renderExpansionsTab();
@@ -7079,10 +7402,15 @@
         document.querySelectorAll('input,textarea').forEach(el => { if (el.type !== 'button' && el.type !== 'submit') el.value = ''; });
         weapons = []; unlockedTraits.clear(); unlockedTraitPaths = {}; breakpointChoices = {}; knownSpellIds.clear(); customSpells = [];
         SIDEBAR_WIDGETS = [];
+        sceneNumber = 1; sceneTurn = 0; spellCooldowns = {}; spellCooldownMax = {}; spellFieldValues = {}; selectedElement = 'fire';
+        const stt = document.getElementById('scene_turns_total'); if (stt) stt.value = '4';
+        updateSceneTrackerDisplay();
+        renderElementChips();
         addWeapon(); addWeapon(); addWeapon();
         buildPips('gracePips', 6, 0, setGrace);
         buildPips('finalBlowPips', 4, 0, setFinalBlow);
         inv_init(); paths_init(); recalcAll(); filterSpellsSelector(); renderKnownSpells(); renderSidebarWidgets();
+        updateSchoolSectionVisibility(document.getElementById('spellcasting_school_select')?.value || 'occult');
         triggerWarningToast("Sheet cleared!");
       }
 
@@ -7163,11 +7491,11 @@
         renderSidebarWidgets();
         requestAnimationFrame(syncSidebarHeight);
         loadCatalogs().then(() => {
-          inv_init(); paths_init(); recalcAll(); updateSpellSchoolTheme(); filterSpellsSelector(); renderKnownSpells();
+          inv_init(); paths_init(); recalcAll(); renderElementChips(); updateSpellSchoolTheme(); filterSpellsSelector(); renderKnownSpells();
           renderExpansionsTab(); renderSidebarWidgets();
           requestAnimationFrame(syncSidebarHeight);
         }).catch(() => {
-          inv_init(); paths_init(); recalcAll(); updateSpellSchoolTheme(); filterSpellsSelector(); renderKnownSpells();
+          inv_init(); paths_init(); recalcAll(); renderElementChips(); updateSpellSchoolTheme(); filterSpellsSelector(); renderKnownSpells();
           renderExpansionsTab(); renderSidebarWidgets();
           requestAnimationFrame(syncSidebarHeight);
         });
