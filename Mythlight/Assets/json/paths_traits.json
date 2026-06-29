@@ -777,7 +777,7 @@
           ]
         }
       },
-      "source": "core" 
+      "source": "core"
     },
     {
       "ID": "p32",
@@ -1721,7 +1721,7 @@
       "Path": "p6",
       "Cost": "2",
       "Symbols": "⧖",
-      "Parameters": "⫘ Mana Burn & ★req Spellcasting",
+      "Parameters": "⫘ Scarlet Essence & ★req Spellcasting",
       "Description": "Spells cost no mana, instead pay [Double the Spell level] as Health. \"Scarlet Essence\" no longer has any effect.",
       "Scaling": "",
       "source": "core"
@@ -2564,7 +2564,8 @@
       "Parameters": "",
       "Description": "Tell a tale; allies gain 2 Grace at the end of the rest. You have +1 Scholarship.",
       "Scaling": "",
-      "source": "core"
+      "source": "core",
+      "Callback": "modifyFeat('scholarship',1)"
     },
     {
       "ID": "t136",
@@ -2804,7 +2805,8 @@
       "Parameters": "",
       "Description": "You have +1 Movement and you ignore the first level of Fatigue.",
       "Scaling": "",
-      "source": "core"
+      "source": "core",
+      "Callback": "modifyMovement(1)"
     },
     {
       "ID": "t156",
@@ -3173,7 +3175,7 @@
       "Path": "p19",
       "Cost": "1",
       "Symbols": "⧖",
-      "Parameters": "⫘ ★reqSpellcasting",
+      "Parameters": "⫘ ★req Spellcasting",
       "Description": "After you have spent all of your mana for the first time in combat, your non-cantrip spells gain +2 Damage.",
       "Scaling": "",
       "source": "core"
@@ -3992,7 +3994,8 @@
       "Parameters": "",
       "Description": "Gain +3 Scholarship. You permanently gain the Madness Condition.",
       "Scaling": "",
-      "source": "core"
+      "source": "core",
+      "Callback": "modifyFeat('scholarship',3)"
     },
     {
       "ID": "t252",
@@ -4736,7 +4739,8 @@
       "Parameters": "",
       "Description": "You have +1 Movement and you ignore the first level of Fatigue.",
       "Scaling": "",
-      "source": "core"
+      "source": "core",
+      "Callback": "modifyMovement(1)"
     },
     {
       "ID": "t315",

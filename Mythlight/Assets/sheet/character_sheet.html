@@ -4606,6 +4606,306 @@
         return unescapedAllowed.replace(/\r?\n/g, '<br>').replace(/&lt;br\s*\/?&gt;/gi, '<br>');
       }
 
+      // ════════════════════════════════════════════════════════════════════════
+      // CALLBACK ENGINE
+      // ────────────────────────────────────────────────────────────────────────
+      // A small expression language that lets traits, breakpoints, and (in future)
+      // expansion content describe *mechanical* effects as data instead of code.
+      //
+      // A trait JSON entry may carry an optional "Callback" string, e.g.:
+      //   "Description": "Gain +1 Scholarship. Lose 1 Reflex and 3 Movement"
+      //   "Callback":    "modifyFeat('scholarship',1);modifyFeat('reflex',-1);modifyMovement(-3)"
+      //
+      // While that trait is unlocked, its Callback string is re-evaluated on every
+      // recalc. Statements are separated by ';'. Arguments support +,-,*,/, unary
+      // minus, parentheses, numbers, 'quoted strings', and nested function calls,
+      // e.g.  modifyMovement(val('mind_scholarship_total') * 2)
+      //
+      // Effects are accumulated fresh into `traitAccum` on every refresh — nothing
+      // is ever written permanently into an input field — so toggling a trait off,
+      // or a referenced stat changing, is always reflected correctly with no risk
+      // of stacking the same bonus twice across saves/reloads.
+      // ════════════════════════════════════════════════════════════════════════
+
+      let traitAccum = {};
+      function resetTraitAccum() {
+        traitAccum = {
+          attrBase: { body: 0, skill: 0, mind: 0, style: 0 }, // group-wide "attribute point" bonuses
+          featMod: {},   // per-skill "feat point" bonuses, e.g. featMod.scholarship
+          movement: 0,
+          maxHP: 0,
+          maxMana: 0,
+          armor: 0,
+          guard: 0,      // reserved for a future Max Guard mechanic — not yet wired to a UI field
+          traitPoints: 0, // bonus Trait Points added to the budget (on top of tp_bonus / negative-cost traits)
+          custom: {}      // free-form named pools for homebrew trackers (modifyCustom)
+        };
+      }
+      resetTraitAccum();
+
+      function skillGroup(skill) {
+        skill = String(skill || '').toLowerCase();
+        for (const g in GROUPS) if (GROUPS[g].includes(skill)) return g;
+        return null;
+      }
+
+      // ── Functions callable from inside a Callback string ──
+      const CALLBACK_FUNCTIONS = {
+        // Modifiers — these are the verbs trait/breakpoint authors write effects with.
+        modifyAttribute: (group, amount) => { group = String(group).toLowerCase(); if (traitAccum.attrBase[group] === undefined) return 0; traitAccum.attrBase[group] += (amount || 0); return amount; },
+        modifyFeat: (skill, amount) => { skill = String(skill).toLowerCase(); traitAccum.featMod[skill] = (traitAccum.featMod[skill] || 0) + (amount || 0); return amount; },
+        modifyMovement: (amount) => { traitAccum.movement += (amount || 0); return amount; },
+        modifyHealth: (amount) => { traitAccum.maxHP += (amount || 0); return amount; },
+        modifyMana: (amount) => { traitAccum.maxMana += (amount || 0); return amount; },
+        modifyArmor: (amount) => { traitAccum.armor += (amount || 0); return amount; },
+        modifyGuard: (amount) => { traitAccum.guard += (amount || 0); return amount; },
+        modifyTraitPoints: (amount) => { traitAccum.traitPoints += (amount || 0); return amount; },
+        modifyCustom: (key, amount) => { key = String(key); traitAccum.custom[key] = (traitAccum.custom[key] || 0) + (amount || 0); return amount; },
+
+        // Readers — pull live values off the sheet so effects can scale dynamically.
+        val: (id) => val(String(id)),
+        feat: (skill) => { skill = String(skill).toLowerCase(); const g = skillGroup(skill); return g ? val(g + '_' + skill + '_total') : 0; },
+        attr: (group) => val(String(group).toLowerCase() + '_base'),
+        level: () => val('charLevel'),
+        custom: (key) => traitAccum.custom[String(key)] || 0,
+
+        // Math — operators (+ - * / parentheses) work directly in expressions too;
+        // these are here for readability and for cases that need a function form.
+        add: (...a) => a.reduce((s, n) => s + n, 0),
+        sub: (a, b) => a - b,
+        mul: (...a) => a.reduce((s, n) => s * n, 1),
+        div: (a, b) => (!b ? 0 : a / b),
+        min: (...a) => Math.min(...a),
+        max: (...a) => Math.max(...a),
+        floor: (a) => Math.floor(a),
+        ceil: (a) => Math.ceil(a),
+        round: (a) => Math.round(a),
+        abs: (a) => Math.abs(a),
+        pow: (a, b) => Math.pow(a, b),
+        mod: (a, b) => (!b ? 0 : a % b),
+
+        // Conditionals / comparisons — return 1/0 so they compose with math functions.
+        ifElse: (cond, a, b) => (cond ? a : b),
+        gt: (a, b) => (a > b ? 1 : 0),
+        gte: (a, b) => (a >= b ? 1 : 0),
+        lt: (a, b) => (a < b ? 1 : 0),
+        lte: (a, b) => (a <= b ? 1 : 0),
+        eq: (a, b) => (a === b ? 1 : 0)
+      };
+
+      function tokenizeCallback(src) {
+        const tokens = []; let i = 0;
+        const isDigit = c => c >= '0' && c <= '9';
+        const isIdentStart = c => /[A-Za-z_]/.test(c);
+        const isIdentChar = c => /[A-Za-z0-9_]/.test(c);
+        while (i < src.length) {
+          const c = src[i];
+          if (c === ' ' || c === '\t' || c === '\n' || c === '\r') { i++; continue; }
+          if (c === "'" || c === '"') {
+            const quote = c; let j = i + 1, s = '';
+            while (j < src.length && src[j] !== quote) { s += src[j]; j++; }
+            tokens.push({ type: 'string', value: s }); i = j + 1; continue;
+          }
+          if (isDigit(c) || (c === '.' && isDigit(src[i + 1]))) {
+            let j = i, s = '';
+            while (j < src.length && /[0-9.]/.test(src[j])) { s += src[j]; j++; }
+            tokens.push({ type: 'number', value: parseFloat(s) }); i = j; continue;
+          }
+          if (isIdentStart(c)) {
+            let j = i, s = '';
+            while (j < src.length && isIdentChar(src[j])) { s += src[j]; j++; }
+            tokens.push({ type: 'ident', value: s }); i = j; continue;
+          }
+          if ('()+-*/,;'.includes(c)) { tokens.push({ type: c }); i++; continue; }
+          i++; // skip unrecognized character rather than throw — keeps one bad trait from breaking the sheet
+        }
+        return tokens;
+      }
+
+      function evalCallbackTokens(tokens) {
+        let pos = 0;
+        const peek = () => tokens[pos];
+        const next = () => tokens[pos++];
+        function parseExpr() {
+          let v = parseTerm();
+          while (peek() && (peek().type === '+' || peek().type === '-')) {
+            const op = next().type; const rhs = parseTerm();
+            v = op === '+' ? v + rhs : v - rhs;
+          }
+          return v;
+        }
+        function parseTerm() {
+          let v = parseFactor();
+          while (peek() && (peek().type === '*' || peek().type === '/')) {
+            const op = next().type; const rhs = parseFactor();
+            v = op === '*' ? v * rhs : (rhs === 0 ? 0 : v / rhs);
+          }
+          return v;
+        }
+        function parseFactor() {
+          const t = peek();
+          if (!t) return 0;
+          if (t.type === '-') { next(); return -parseFactor(); }
+          if (t.type === '+') { next(); return parseFactor(); }
+          if (t.type === '(') { next(); const v = parseExpr(); if (peek() && peek().type === ')') next(); return v; }
+          if (t.type === 'number') { next(); return t.value; }
+          if (t.type === 'string') { next(); return t.value; }
+          if (t.type === 'ident') {
+            next();
+            if (peek() && peek().type === '(') {
+              next();
+              const args = [];
+              if (peek() && peek().type !== ')') {
+                args.push(parseExpr());
+                while (peek() && peek().type === ',') { next(); args.push(parseExpr()); }
+              }
+              if (peek() && peek().type === ')') next();
+              const fn = CALLBACK_FUNCTIONS[t.value];
+              if (typeof fn === 'function') return fn(...args) || 0;
+              return 0; // unknown function name — silently no-op
+            }
+            return 0; // bare identifier with no call — unsupported, treated as 0
+          }
+          next(); return 0;
+        }
+        let result = 0;
+        while (pos < tokens.length) {
+          result = parseExpr();
+          if (peek() && peek().type === ';') next(); else break;
+        }
+        return result;
+      }
+
+      function runCallback(src) {
+        if (!src || typeof src !== 'string') return;
+        try { evalCallbackTokens(tokenizeCallback(src)); }
+        catch (e) { console.warn('Callback error in:', src, e); }
+      }
+
+      // Hand-authored callbacks for the rare breakpoint bonuses whose text can't be
+      // parsed into a generic feat/attribute-point grant — compound grants, or
+      // dual-stat texts ("+1 in X and +1 in Y"). Keyed "<pathId>::<breakpointKey>::passive"
+      // for the main path feature slot, or "...::alt" for the alternative-bonus slot.
+      // Anything not listed here that also can't be auto-parsed is left purely
+      // descriptive (no automatic stat change) — same as the sheet's prior behavior.
+      const MANUAL_BREAKPOINT_CALLBACKS = {
+        'p1::breakpoint_1::passive': "modifyArmor(2)", // Duelist: +2 Armor (simplified — always active once unlocked rather than only "while alone vs one opponent")
+        'p3::breakpoint_7::alt': "modifyFeat('brawn',1);modifyFeat('fortitude',1)",
+        'p4::breakpoint_9::alt': "modifyAttribute('body',1);modifyFeat('spirit',1)",
+        'p25::breakpoint_46::alt': "modifyFeat('finesse',1)",
+        'p25::breakpoint_47::alt': "modifyFeat('finesse',1)",
+        'p25::breakpoint_48::alt': "modifyFeat('finesse',1)"
+      };
+
+      // Parses an alternative_feat_bonuses[].feat string into a structured spec the
+      // breakpoint UI can build dropdown(s) from. Returns one of:
+      //   { kind:'feat'|'attribute', amount, distinct, allowedGroups, allowedSkills }
+      //   { kind:'movement', amount }
+      //   { kind:'special' }   — text didn't match a known grant pattern
+      const STAT_LABELS = { might: 'Might', brawn: 'Brawn', fortitude: 'Fortitude', finesse: 'Finesse', reflex: 'Reflex', tinker: 'Tinker', arcane: 'Arcane', spirit: 'Spirit', scholarship: 'Scholarship', speech: 'Speech', insight: 'Insight', awareness: 'Awareness' };
+      function parseFeatBonusSpec(text) {
+        const t = String(text || ''); const lower = t.toLowerCase();
+
+        const moveMatch = lower.match(/\+\s*(\d+)\s*movement/);
+        if (moveMatch) return { kind: 'movement', amount: parseInt(moveMatch[1], 10) || 1 };
+
+        const amountMatch = lower.match(/\+\s*(\d+)(?:\s+\w+){0,2}\s+(feat|attribute)\s*points?/)
+          || lower.match(/\+\s*(\d+)\s+in\s+any\s+(feat|attribute)\b/);
+        if (!amountMatch) return { kind: 'special' };
+
+        const amount = parseInt(amountMatch[1], 10) || 1;
+        const type = amountMatch[2] === 'attribute' ? 'attribute' : 'feat';
+        const distinct = /\bdifferent\b/.test(lower) && amount > 1;
+
+        const allowedGroups = Object.keys(GROUPS).filter(g => new RegExp('\\b' + g + '\\b', 'i').test(t));
+        const allowedSkills = [];
+        Object.values(GROUPS).flat().forEach(s => {
+          const pattern = s === 'tinker' ? 'tinker(?:ing)?' : s;
+          if (new RegExp('\\b' + pattern + '\\b', 'i').test(t)) allowedSkills.push(s);
+        });
+
+        return { kind: type, amount, distinct, allowedGroups, allowedSkills };
+      }
+
+      // Builds the list of selectable dropdown options for a parsed feat/attribute spec.
+      function getBonusOptionsForSpec(spec) {
+        if (spec.kind === 'attribute') {
+          const groups = spec.allowedGroups.length ? spec.allowedGroups : Object.keys(GROUPS);
+          return groups.map(g => ({ value: 'attr_' + g, label: g.charAt(0).toUpperCase() + g.slice(1) }));
+        }
+        let skills = spec.allowedSkills.slice();
+        spec.allowedGroups.forEach(g => GROUPS[g].forEach(s => { if (!skills.includes(s)) skills.push(s); }));
+        if (!skills.length) skills = Object.values(GROUPS).flat();
+        return skills.map(s => ({ value: 'stat_' + skillGroup(s) + '_' + s, label: STAT_LABELS[s] || s }));
+      }
+
+      // Normalizes a breakpointChoices[scopedKey] value. Legacy saves stored either
+      // 'passive' or a bare 'stat_<group>_<skill>' string — both still load correctly.
+      function normalizeBreakpointChoice(raw) {
+        if (!raw || raw === 'passive') return { mode: 'passive' };
+        if (typeof raw === 'string') return { mode: 'feat', picks: [raw] }; // legacy single-stat format
+        if (typeof raw === 'object' && raw.mode) return raw;
+        return { mode: 'passive' };
+      }
+
+      // Returns the spec the UI should render for a breakpoint's alternative-bonus
+      // slot, accounting for any manual override (which needs no dropdown at all).
+      function getBreakpointAltSpec(pathId, key, afbText) {
+        if (MANUAL_BREAKPOINT_CALLBACKS[pathId + '::' + key + '::alt']) return { kind: 'manual' };
+        return parseFeatBonusSpec(afbText);
+      }
+
+      // Resolves the active callback string(s) for one breakpoint, given the player's
+      // chosen mode for it. This is where a chosen stat dropdown turns into an actual
+      // modifyFeat/modifyAttribute call.
+      function getBreakpointCallbacks(pathId, key, b, rawChoice) {
+        const choice = normalizeBreakpointChoice(rawChoice);
+        if (choice.mode === 'passive') {
+          const manual = MANUAL_BREAKPOINT_CALLBACKS[pathId + '::' + key + '::passive'];
+          return manual ? [manual] : [];
+        }
+        const manualAlt = MANUAL_BREAKPOINT_CALLBACKS[pathId + '::' + key + '::alt'];
+        if (manualAlt) return [manualAlt];
+
+        const afb = (b.alternative_feat_bonuses || [])[0];
+        if (!afb) return [];
+        const spec = parseFeatBonusSpec(afb.feat);
+
+        if (spec.kind === 'movement') return [`modifyMovement(${spec.amount})`];
+        if (spec.kind !== 'feat' && spec.kind !== 'attribute') return []; // 'special' — descriptive only
+
+        const picks = (choice.picks || []).filter(Boolean);
+        const perPick = spec.distinct ? 1 : spec.amount;
+        return picks.map(pick => {
+          if (spec.kind === 'attribute' && pick.startsWith('attr_')) return `modifyAttribute('${pick.slice(5)}', ${perPick})`;
+          if (pick.startsWith('stat_')) return `modifyFeat('${pick.slice(pick.lastIndexOf('_') + 1)}', ${perPick})`;
+          return null;
+        }).filter(Boolean);
+      }
+
+      // Gathers every currently-active callback string in the sheet: unlocked traits
+      // (their "Callback" field) plus achieved breakpoints (per the player's chosen mode).
+      function getActiveCallbackSources() {
+        const sources = [];
+        unlockedTraits.forEach(id => {
+          const t = resolveUnlockedTrait(id);
+          if (t && t.Callback) sources.push(t.Callback);
+        });
+        PATHS_CATALOG.forEach(p => {
+          const invested = getInvestedCount(p.ID);
+          Object.entries(p.breakpoints || {}).forEach(([key, b]) => {
+            if (invested < b.investment) return;
+            sources.push(...getBreakpointCallbacks(p.ID, key, b, breakpointChoices[p.ID + '::' + key]));
+          });
+        });
+        return sources;
+      }
+
+      function refreshTraitAccum() {
+        resetTraitAccum();
+        getActiveCallbackSources().forEach(runCallback);
+      }
+
       function recalcSkill(group, skill) {
         const out = document.getElementById(group + '_' + skill + '_total');
         const baseEl = document.getElementById(group + '_base');
@@ -4614,29 +4914,24 @@
         const baseEmpty = baseEl ? baseEl.value === '' : true;
         const modEmpty = modEl ? modEl.value === '' : true;
         if (baseEmpty && modEmpty) { out.value = ''; updateDerivedVitals(); return; }
-        let extra = 0;
-        // ── FIX: breakpointChoices keys are scoped as "<pathId>::<breakpointKey>" so that
-        // breakpoints from different paths (which all reuse generic names like "breakpoint_1")
-        // don't collide in this single shared map. Each one is now resolved against its own
-        // path, so multiple breakpoints granting the same stat correctly stack. ──
-        Object.entries(breakpointChoices).forEach(([scopedKey, choice]) => {
-          const sep = scopedKey.indexOf('::');
-          if (sep === -1) return; // legacy/unscoped entry — ignored (migrated on load)
-          const pathId = scopedKey.slice(0, sep);
-          const bpKey = scopedKey.slice(sep + 2);
-          const pathData = PATHS_CATALOG.find(p => p.ID === pathId);
-          if (pathData && pathData.breakpoints && pathData.breakpoints[bpKey]) {
-            const bpThreshold = pathData.breakpoints[bpKey].investment;
-            if (getInvestedCount(pathId) >= bpThreshold && choice === `stat_${group}_${skill}`) extra += 1;
-          }
-        });
-        out.value = val(group + '_base') + val(group + '_' + skill + '_mod') + extra;
+        refreshTraitAccum();
+        const attrBonus = traitAccum.attrBase[group] || 0;
+        const featBonus = traitAccum.featMod[skill] || 0;
+        out.value = val(group + '_base') + attrBonus + val(group + '_' + skill + '_mod') + featBonus;
         updateDerivedVitals();
         recalcSpellStats();
       }
 
       function recalcGroup(group) { (GROUPS[group] || []).forEach(skill => recalcSkill(group, skill)); }
-      function recalcAll() { Object.keys(GROUPS).forEach(group => recalcGroup(group)); updateDerivedVitals(); recalcSpellStats(); }
+      function recalcAll() {
+        // Two passes: the first lets callbacks read totals as of *before* this
+        // recalc (e.g. modifyMovement(val('mind_scholarship_total'))); the second
+        // re-resolves once more so a trait that boosts a stat another trait reads
+        // from settles within the same recalc instead of lagging a frame behind.
+        Object.keys(GROUPS).forEach(recalcGroup); updateDerivedVitals();
+        Object.keys(GROUPS).forEach(recalcGroup); updateDerivedVitals();
+        recalcSpellStats();
+      }
 
       function recalcSpellStats() {
         const spirit = val('mind_spirit_total'), arcane = val('mind_arcane_total'), schol = val('mind_scholarship_total');
@@ -4644,7 +4939,7 @@
         const hasSpellStats = hasNumberInput('mind_arcane_mod') || hasNumberInput('mind_spirit_mod') || hasNumberInput('mind_scholarship_mod') || hasNumberInput('mind_base');
         const csBonus = val('spell_cs_bonus'), atkBonus = val('spell_atk_bonus'), dmgBonus = val('spell_dmg_bonus');
         const challengeScore = 6 + spirit + csBonus, attackBonus = arcane + atkBonus, damageBonus = Math.ceil(arcane / 2) + dmgBonus;
-        const scholarshipCap = schol, knownCap = Math.max(0, scholarshipCap + bonusSlots +Math.floor(val(charLevel)/3));
+        const scholarshipCap = schol, knownCap = Math.max(0, scholarshipCap + bonusSlots + Math.floor(val("charLevel")/3));
         const knownCount = getSpellLibrary().filter(s => knownSpellIds.has(s.ID) && parseInt(s.Cost, 10) > 0).length;
         const knownCantrips = getSpellLibrary().filter(s => knownSpellIds.has(s.ID) && (parseInt(s.Cost, 10) || 0) === 0).length;
         const setValue = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
@@ -4764,19 +5059,15 @@
       let finalBlowValue = 0;
       function setFinalBlow(n) { finalBlowValue = n; buildPips('finalBlowPips', 4, finalBlowValue, setFinalBlow); }
 
-      function getPathBonus(stat) {
-        let bonus = 0;
-        PATHS_CATALOG.forEach(p => {
-          const spent = getInvestedCount(p.ID);
-          if (p.ID === "p1" && spent >= 3 && breakpointChoices["p1::breakpoint_1"] === 'passive' && stat === 'armor') bonus += 2;
-        });
-        return bonus;
-      }
+      // NOTE: path/breakpoint-driven stat bonuses (e.g. the Duelist's +2 Armor) are no
+      // longer special-cased here — they're resolved generically by the callback engine
+      // into `traitAccum` (see getActiveCallbackSources / MANUAL_BREAKPOINT_CALLBACKS above).
 
       function updateDerivedVitals() {
+        refreshTraitAccum();
         const level = val('charLevel'), brawn = val('body_brawn_total'), fortitude = val('body_fortitude_total');
         const armorItems = val('armor_def') + val('shield_def') + val('cloak_def') + val('artifact_def');
-        const armorBonus = getPathBonus('armor');
+        const armorBonus = traitAccum.armor || 0;
         const armorManualBonus = val('armor_bonus');
         const shouldCalc = hasNumberInput('charLevel') || hasNumberInput('body_base') || hasNumberInput('body_brawn_mod') || hasNumberInput('body_fortitude_mod') || hasNumberInput('armor_def') || hasNumberInput('shield_def') || hasNumberInput('cloak_def') || hasNumberInput('artifact_def') || hasNumberInput('armor_bonus');
         const totalArmor = shouldCalc ? Math.max(0, 4 + fortitude + armorItems + armorBonus + armorManualBonus) : '';
@@ -4784,11 +5075,11 @@
         let cumulativeBaseHp = 0;
         for (let i = 1; i <= Math.min(level, 12); i++) { cumulativeBaseHp += HP_BY_LEVEL[i]; }
         if (level > 12) { cumulativeBaseHp += (level - 12) * 2; }
-        const maxHp = shouldCalc && level > 0 ? (cumulativeBaseHp + (level * brawn) + val('maxHP_bonus')) : '';
+        const maxHp = shouldCalc && level > 0 ? (cumulativeBaseHp + (level * brawn) + val('maxHP_bonus') + (traitAccum.maxHP || 0)) : '';
         const manaBonusInp = val('mana_bonus');
-        const maxMana = shouldCalc && level > 0 ? (level + Math.floor(level / 3) + manaBonusInp + val('mind_scholarship_total')) : '';
+        const maxMana = shouldCalc && level > 0 ? (level + Math.floor(level / 3) + manaBonusInp + val('mind_scholarship_total') + (traitAccum.maxMana || 0)) : '';
         const speedBonusInp = val('speed_bonus');
-        const totalSpeed = shouldCalc ? (5 + speedBonusInp) : '';
+        const totalSpeed = shouldCalc ? (5 + speedBonusInp + (traitAccum.movement || 0)) : '';
         const setV = (id, v) => { const e = document.getElementById(id); if (e) e.value = v; };
         setV('armor', Number.isFinite(Number(totalArmor)) ? totalArmor : '');
         setV('speed', Number.isFinite(Number(totalSpeed)) ? totalSpeed : '');
@@ -5238,6 +5529,7 @@
       }
 
       function handleLevelChange() {
+        refreshTraitAccum();
         const level = parseInt(document.getElementById('charLevel')?.value, 10) || 1;
         const la = document.getElementById('budget-level-anchor'); if (la) la.textContent = level;
         let total = 0;
@@ -5245,7 +5537,7 @@
         if (level > 12) total += (level - 12);
         const tpBonus = parseInt(document.getElementById('tp_bonus')?.value, 10) || 0;
         const negativeCostBonus = getNegativeCostBudgetBonus();
-        maxBudgetLimit = total + tpBonus + negativeCostBonus;
+        maxBudgetLimit = total + tpBonus + negativeCostBonus + (traitAccum.traitPoints || 0);
         const el = document.getElementById('total-points'); if (el) el.textContent = maxBudgetLimit;
         updateSpentCount(); updateDerivedVitals();
       }
@@ -5312,27 +5604,39 @@
           // breakpoints (which reuse generic names like "breakpoint_1") never collide and
           // their chosen bonuses stack correctly instead of overwriting one another. ──
           const scopedKey = pathData.ID + '::' + key;
-          // Only set default if no choice exists yet
-          if (breakpointChoices[scopedKey] === undefined) {
-            breakpointChoices[scopedKey] = 'passive';
-          }
-          const currentChoice = breakpointChoices[scopedKey];
-          const isStatChoice = currentChoice !== 'passive';
+          const choice = normalizeBreakpointChoice(breakpointChoices[scopedKey]);
+          if (breakpointChoices[scopedKey] === undefined) breakpointChoices[scopedKey] = { mode: 'passive' };
+          const isAltChoice = choice.mode !== 'passive';
 
-          const div = document.createElement('div');
-          div.className = 'relative flex flex-col border p-3 rounded-lg my-2';
-          div.style.cssText = `opacity:${achieved ? 1 : 0.5};background:rgba(6,10,20,0.4);border-color:${achieved ? 'var(--gold-line)' : 'var(--border-med)'}`;
+          const afbText = (b.alternative_feat_bonuses || [])[0]?.feat || '';
+          const spec = getBreakpointAltSpec(pathData.ID, key, afbText);
 
-          let statDropdown = '';
-          if (isStatChoice) {
-            const statOpts = [
-              ['stat_body_might', 'Might'], ['stat_body_brawn', 'Brawn'], ['stat_body_fortitude', 'Fortitude'],
-              ['stat_skill_finesse', 'Finesse'], ['stat_skill_reflex', 'Reflex'], ['stat_skill_tinker', 'Tinker'],
-              ['stat_mind_arcane', 'Arcane'], ['stat_mind_spirit', 'Spirit'], ['stat_mind_scholarship', 'Scholarship'],
-              ['stat_style_speech', 'Speech'], ['stat_style_insight', 'Insight'], ['stat_style_awareness', 'Awareness']
-            ];
-            const optionsHtml = statOpts.map(([v, l]) => `<option value="${v}"${currentChoice === v ? ' selected' : ''}>${l}</option>`).join('');
-            statDropdown = `<select onchange="setBreakpointStatChoice('${scopedKey}',this.value)" class="text-[10px] p-1.5 rounded outline-none mt-1" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--gold)">${optionsHtml}</select>`;
+          // How many dropdowns does the alternative bonus need? Distinct multi-point
+          // grants ("+2 feat points in any different Mind feat") need one dropdown per
+          // point so each point lands on a *different* stat — this is the fix for
+          // breakpoints that only ever offered a single stat picker regardless of
+          // how many points the bonus was actually worth.
+          const dropdownCount = (spec.kind === 'feat' || spec.kind === 'attribute') ? (spec.distinct ? spec.amount : 1) : 0;
+          const options = dropdownCount ? getBonusOptionsForSpec(spec) : [];
+
+          let altLabel = 'Allocate Alternative Bonus';
+          if (spec.kind === 'feat') altLabel = spec.distinct ? `Allocate ${spec.amount} Feat Points (different feats)` : `Allocate +${spec.amount} Feat Point${spec.amount > 1 ? 's' : ''}`;
+          else if (spec.kind === 'attribute') altLabel = spec.distinct ? `Allocate ${spec.amount} Attribute Points (different groups)` : `Allocate +${spec.amount} Attribute Point${spec.amount > 1 ? 's' : ''}`;
+          else if (spec.kind === 'movement') altLabel = `Allocate +${spec.amount} Movement`;
+          else if (spec.kind === 'manual') altLabel = 'Allocate Path Bonus';
+          else altLabel = 'Allocate Alternative Bonus (manual / no auto stat change)';
+
+          let dropdownsHtml = '';
+          if (isAltChoice && dropdownCount) {
+            const picks = (choice.picks && choice.picks.length === dropdownCount) ? choice.picks : new Array(dropdownCount).fill(options[0]?.value || '');
+            if (!Array.isArray(choice.picks) || choice.picks.length !== dropdownCount) { breakpointChoices[scopedKey] = { mode: spec.kind, picks }; }
+            dropdownsHtml = `<div class="flex flex-col gap-1.5 mt-1.5">` + picks.map((p, idx) => {
+              // When picks must be distinct, hide stats already chosen in the other dropdown(s).
+              const usedElsewhere = new Set(picks.filter((_, i) => i !== idx));
+              const opts = options.filter(o => !spec.distinct || !usedElsewhere.has(o.value) || o.value === p);
+              const optionsHtml = opts.map(o => `<option value="${o.value}"${p === o.value ? ' selected' : ''}>${o.label}</option>`).join('');
+              return `<select onchange="setBreakpointPick('${scopedKey}',${idx},this.value)" class="text-[10px] p-1.5 rounded outline-none" style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--gold)">${optionsHtml}</select>`;
+            }).join('') + `</div>`;
           }
 
           let selectorHTML = achieved ? `
@@ -5340,48 +5644,63 @@
               <span class="text-[9px] uppercase font-semibold tracking-wider" style="color:var(--ink-faint)">Choose Active Bonus:</span>
               <div class="flex flex-col gap-1.5 text-[11px]">
                 <label class="flex items-center gap-2 cursor-pointer" style="color:var(--ink)">
-                  <input type="radio" name="choice_${scopedKey}" value="passive" ${!isStatChoice ? 'checked' : ''} onchange="setBreakpointChoice('${scopedKey}','passive')" style="accent-color:var(--gold)">
+                  <input type="radio" name="choice_${scopedKey}" value="passive" ${!isAltChoice ? 'checked' : ''} onchange="setBreakpointMode('${scopedKey}','passive',null)" style="accent-color:var(--gold)">
                   <span>Apply Path Feature</span>
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer" style="color:var(--ink)">
-                  <input type="radio" name="choice_${scopedKey}" value="stat" ${isStatChoice ? 'checked' : ''} onchange="setBreakpointChoice('${scopedKey}','stat')" style="accent-color:var(--gold)">
-                  <span>Allocate +1 Feat Point</span>
+                  <input type="radio" name="choice_${scopedKey}" value="alt" ${isAltChoice ? 'checked' : ''} onchange="setBreakpointMode('${scopedKey}','${spec.kind}',${dropdownCount})" style="accent-color:var(--gold)">
+                  <span>${altLabel}</span>
                 </label>
               </div>
-              ${statDropdown}
+              ${dropdownsHtml}
             </div>` : `<div class="text-[9px] mt-1 italic" style="color:var(--ink-faint)">Requires ${b.investment} Traits Unlocked in this path.</div>`;
 
-          div.innerHTML = `
-            <div class="absolute w-2.5 h-2.5 rounded-full border" style="left:-23px;top:14px;border-color:${achieved ? 'var(--gold)' : '#334155'};background:rgba(6,10,20,0.8)"></div>
-            <div class="flex items-center justify-between">
-              <h4 class="text-xs font-bold" style="color:${achieved ? 'var(--gold)' : 'var(--ink-faint)'};font-family:'Cinzel',serif">Breakpoint (${b.investment} Traits)</h4>
-              ${achieved ? `<span class="text-[8px] px-1.5 py-0.5 rounded uppercase font-bold" style="background:var(--gold-dim);border:1px solid var(--gold-line);color:var(--gold)">${isStatChoice ? '+1 Feat' : 'Passive'}</span>` : ''}
-            </div>
-            <p class="text-[10px] mt-1 leading-normal ${isStatChoice ? 'line-through' : ''}" style="color:var(--ink-dim)">${b.description}</p>
-            ${selectorHTML}`;
-
-          container.appendChild(div);
+          div_appendBreakpointCard(container, achieved, isAltChoice, spec, b, selectorHTML);
         });
       }
 
-      // ── FIX: setBreakpointChoice now preserves existing stat choice when switching TO stat mode ──
-      function setBreakpointChoice(key, type) {
-        if (type === 'passive') {
-          breakpointChoices[key] = 'passive';
+      function div_appendBreakpointCard(container, achieved, isAltChoice, spec, b, selectorHTML) {
+        const div = document.createElement('div');
+        div.className = 'relative flex flex-col border p-3 rounded-lg my-2';
+        div.style.cssText = `opacity:${achieved ? 1 : 0.5};background:rgba(6,10,20,0.4);border-color:${achieved ? 'var(--gold-line)' : 'var(--border-med)'}`;
+        const badge = !achieved ? '' : (!isAltChoice ? 'Passive' : (spec.kind === 'feat' || spec.kind === 'attribute' ? `+${spec.amount} ${spec.kind === 'feat' ? 'Feat' : 'Attr'}` : 'Alt'));
+        div.innerHTML = `
+          <div class="absolute w-2.5 h-2.5 rounded-full border" style="left:-23px;top:14px;border-color:${achieved ? 'var(--gold)' : '#334155'};background:rgba(6,10,20,0.8)"></div>
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold" style="color:${achieved ? 'var(--gold)' : 'var(--ink-faint)'};font-family:'Cinzel',serif">Breakpoint (${b.investment} Traits)</h4>
+            ${achieved ? `<span class="text-[8px] px-1.5 py-0.5 rounded uppercase font-bold" style="background:var(--gold-dim);border:1px solid var(--gold-line);color:var(--gold)">${badge}</span>` : ''}
+          </div>
+          <p class="text-[10px] mt-1 leading-normal ${isAltChoice ? 'line-through' : ''}" style="color:var(--ink-dim)">${b.description}</p>
+          ${selectorHTML}`;
+        container.appendChild(div);
+      }
+
+      // Switches a breakpoint between "Apply Path Feature" and its alternative bonus.
+      // `dropdownCount` is how many distinct-stat dropdowns the alt bonus needs (0 if none).
+      function setBreakpointMode(scopedKey, kind, dropdownCount) {
+        if (kind === 'passive') {
+          breakpointChoices[scopedKey] = { mode: 'passive' };
         } else {
-          // Only reset to might if there's no existing stat choice saved
-          const existing = breakpointChoices[key];
-          if (!existing || existing === 'passive') {
-            breakpointChoices[key] = 'stat_body_might';
+          const existing = breakpointChoices[scopedKey];
+          // Preserve an existing pick set if it already matches this shape (e.g. flipping
+          // back and forth between the two radios shouldn't reset your stat choices).
+          if (existing && existing.mode === kind && Array.isArray(existing.picks) && existing.picks.length === dropdownCount) {
+            // keep as-is
+          } else if (dropdownCount > 0) {
+            // default picks filled in lazily by renderMilestoneTimeline on next render
+            breakpointChoices[scopedKey] = { mode: kind, picks: [] };
+          } else {
+            breakpointChoices[scopedKey] = { mode: kind };
           }
-          // else: keep the existing stat choice
         }
         recalcAll();
         selectPath(selectedPathId);
       }
 
-      function setBreakpointStatChoice(key, stat) {
-        breakpointChoices[key] = stat;
+      function setBreakpointPick(scopedKey, idx, value) {
+        const choice = breakpointChoices[scopedKey];
+        if (!choice || !Array.isArray(choice.picks)) return;
+        choice.picks[idx] = value;
         recalcAll();
         selectPath(selectedPathId);
       }
@@ -5499,7 +5818,7 @@
           if (spent + cost > maxBudgetLimit) { triggerWarningToast("Trait point budget exceeded. Increase Level to gain more TP."); return; }
           linkedIds.forEach(id => { unlockedTraits.add(id); unlockedTraitPaths[id] = trait.Path; });
         }
-        updateNodeStates(); drawTreeConnections(); selectPath(selectedPathId); handleLevelChange();
+        updateNodeStates(); drawTreeConnections(); selectPath(selectedPathId); handleLevelChange(); recalcAll();
       }
 
       function getInitials(name) {
