@@ -3786,7 +3786,7 @@
       "Path": "p25",
       "Cost": "2",
       "Symbols": "🗲",
-      "Parameters": "",
+      "Parameters": "⫘ Piercing Shot",
       "Description": "Make one ranged attack with +X Damage, piercing all enemies in line within range. If any enemy dies to this, regain the trait use. Targets must roll [Reflex] vs you accuracy roll.",
       "Scaling": "Uses/Damage 🗲/X:\n1/+3 [lvl 1]\n2/+4 [lvl 6]\n3/+5 [lvl 12]",
       "source": "core"
