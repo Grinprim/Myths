@@ -1852,6 +1852,55 @@
       background: linear-gradient(90deg, var(--gold-dim), rgba(6, 10, 20, 0.6));
     }
 
+    /* ── Trait-match popout: shown on a path row when the search query matched one of its
+       traits rather than the path's own name, so it's obvious *why* that path surfaced. ── */
+    .path-select-item.trait-hit {
+      border-color: var(--indigo);
+      background: rgba(129, 140, 248, 0.07);
+    }
+    .path-trait-match-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px dashed rgba(129, 140, 248, 0.25);
+    }
+    .path-trait-match-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--indigo);
+      background: rgba(129, 140, 248, 0.16);
+      color: var(--accent2);
+      cursor: pointer;
+      transition: all .15s ease;
+      white-space: nowrap;
+    }
+    .path-trait-match-chip:hover {
+      background: rgba(129, 140, 248, 0.32);
+      transform: translateY(-1px);
+    }
+    .path-trait-match-chip .chip-icon {
+      font-size: 9px;
+      opacity: .85;
+    }
+
+    @keyframes traitFoundPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(129, 140, 248, 0.9); }
+      70%  { box-shadow: 0 0 0 14px rgba(129, 140, 248, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(129, 140, 248, 0); }
+    }
+    .node-search-ping {
+      animation: traitFoundPulse 0.8s ease-out 2;
+      z-index: 20;
+    }
+
     #tree-viewport {
       background-image:
         radial-gradient(circle at 15% 15%, rgba(129, 140, 248, 0.08), transparent 55%),
@@ -3248,7 +3297,7 @@
                       </button>
                     </div>
                     <input type="text" id="path-search-input" oninput="renderPathsList()"
-                      placeholder="Type to search and discover paths..."
+                      placeholder="Type to search paths or traits..."
                       class="w-full text-xs rounded px-2 py-1 mb-1 outline-none"
                       style="background:rgba(6,10,20,0.8);border:1px solid var(--border-med);color:var(--ink)">
                     <div class="flex flex-col gap-1.5 max-h-[250px] overflow-y-auto" id="path-selector-list"></div>
@@ -4573,7 +4622,6 @@
         if (candidates.length <= 1) return candidates[0];
         const knownPath = unlockedTraitPaths[id];
         return candidates.find(t => t.Path === knownPath) || candidates[0];
-        
       }
       let maxBudgetLimit = 2;
       let breakpointChoices = {};
@@ -5603,17 +5651,54 @@
         let matched = 0;
         PATHS_CATALOG.forEach(path => {
           const invested = getInvestedCount(path.ID);
-          const matchesSearch = query && path.name.toLowerCase().includes(query);
+          const pathNameMatch = query && path.name.toLowerCase().includes(query);
+          // Trait-name search: surface a path even when only one of its traits matches, so
+          // searching "Candle Keeper" finds the path it lives on instead of coming up empty.
+          const traitMatches = query && !pathNameMatch
+            ? TRAITS_CATALOG.filter(t => t.Path === path.ID && String(t.Name || '').toLowerCase().includes(query))
+            : [];
+          const matchesSearch = pathNameMatch || traitMatches.length > 0;
           const isSelected = path.ID === selectedPathId;
           if (invested === 0 && !matchesSearch && !isSelected) return;
           matched++;
           const el = document.createElement('div');
-          el.className = `path-select-item flex items-center justify-between${isSelected ? ' active' : ''}`;
+          el.className = `path-select-item flex flex-col${isSelected ? ' active' : ''}${traitMatches.length ? ' trait-hit' : ''}`;
           el.onclick = () => selectPath(path.ID);
-          el.innerHTML = `<span class="text-xs font-bold tracking-wider" style="color:var(--ink)">${path.name}</span><span class="text-xs font-mono font-bold" style="color:var(--indigo)">${invested} Trait</span>`;
+          const headRow = document.createElement('div');
+          headRow.className = 'flex items-center justify-between';
+          headRow.innerHTML = `<span class="text-xs font-bold tracking-wider" style="color:var(--ink)">${path.name}</span><span class="text-xs font-mono font-bold" style="color:var(--indigo)">${invested} Trait</span>`;
+          el.appendChild(headRow);
+          // Popout strip listing the specific trait(s) that matched, styled distinctly (indigo
+          // chip) so it reads as "found inside this path" rather than the path itself matching.
+          if (traitMatches.length) {
+            const row = document.createElement('div');
+            row.className = 'path-trait-match-row';
+            traitMatches.slice(0, 6).forEach(t => {
+              const chip = document.createElement('span');
+              chip.className = 'path-trait-match-chip';
+              chip.innerHTML = `<span class="chip-icon">✦</span>${esc(t.Name)}`;
+              chip.title = `Jump to "${t.Name}" on this path`;
+              chip.onclick = (e) => { e.stopPropagation(); jumpToTraitNode(path.ID, t.ID); };
+              row.appendChild(chip);
+            });
+            el.appendChild(row);
+          }
           parent.appendChild(el);
         });
-        if (!matched) parent.innerHTML = `<div class="text-center text-xs italic p-3" style="color:var(--ink-faint)">Search a path above to discover and activate it.</div>`;
+        if (!matched) parent.innerHTML = `<div class="text-center text-xs italic p-3" style="color:var(--ink-faint)">Search a path or trait above to discover and activate it.</div>`;
+      }
+
+      // Selects the path and scrolls/pulses the matched trait's node in the constellation so a
+      // trait-name search feels like it actually took you somewhere, not just to the right path.
+      function jumpToTraitNode(pathId, traitId) {
+        selectPath(pathId);
+        setTimeout(() => {
+          const node = document.getElementById('node-' + traitId);
+          if (!node) return;
+          node.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+          node.classList.add('node-search-ping');
+          setTimeout(() => node.classList.remove('node-search-ping'), 1700);
+        }, 80);
       }
 
       function selectPath(pathId) {
@@ -6120,6 +6205,12 @@
           ring.style.opacity = isGhost ? '0.4' : '1';
           parent.appendChild(ring);
         }
+
+        // Action symbol ⊘ ("Non-Activatable") means the trait is always passively on and can
+        // never be toggled — mark it with a small badge so players can tell at a glance.
+        // IMPORTANT: append this to `parent` (a sibling of btn), NOT as a child of btn — btn
+        // has a clip-path applied for its node shape, and clip-path clips descendants too, so
+        // a badge positioned outside btn's box would get cut off by the node's own border.
         
 
         if (!isGhost) {
