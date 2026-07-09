@@ -4573,6 +4573,7 @@
         if (candidates.length <= 1) return candidates[0];
         const knownPath = unlockedTraitPaths[id];
         return candidates.find(t => t.Path === knownPath) || candidates[0];
+        
       }
       let maxBudgetLimit = 2;
       let breakpointChoices = {};
@@ -4638,9 +4639,21 @@
           armor: 0,
           guard: 0,      // reserved for a future Max Guard mechanic — not yet wired to a UI field
           traitPoints: 0, // bonus Trait Points added to the budget (on top of tp_bonus / negative-cost traits)
-          custom: {}      // free-form named pools for homebrew trackers (modifyCustom)
+          custom: {}      // free-form named pools for homebrew trackers (modifyCustom) — also where
+                           // createTracker() publishes each tracker's current value, keyed by its id,
+                           // so the same Callback string can read it back via custom('key')
         };
+        // Which trait-driven trackers are "live" this refresh — rebuilt fresh every pass so a
+        // tracker vanishes from the sidebar the instant its owning trait is unlocked-off, exactly
+        // like traitAccum itself. The stored VALUES persist in TRAIT_TRACKER_STATE regardless.
+        ACTIVE_TRAIT_TRACKERS = [];
       }
+
+      // Persisted values for trait-owned trackers, keyed by the id passed to createTracker().
+      // Survives across saves/reloads and across a trait being toggled off and back on again —
+      // only the sidebar *visibility* is tied to the trait being currently unlocked.
+      let TRAIT_TRACKER_STATE = {};
+      let ACTIVE_TRAIT_TRACKERS = [];
       resetTraitAccum();
 
       function skillGroup(skill) {
@@ -4661,6 +4674,26 @@
         modifyGuard: (amount) => { traitAccum.guard += (amount || 0); return amount; },
         modifyTraitPoints: (amount) => { traitAccum.traitPoints += (amount || 0); return amount; },
         modifyCustom: (key, amount) => { key = String(key); traitAccum.custom[key] = (traitAccum.custom[key] || 0) + (amount || 0); return amount; },
+
+        // Creates (or re-registers) a small persistent sidebar tracker owned by the trait whose
+        // Callback calls it — e.g. Candle Keeper's "while in its light" toggle. Unlike modifyCustom,
+        // the tracker's value survives independently of any single recalc: it lives in
+        // TRAIT_TRACKER_STATE and is only reset if the player clears it manually. Call it, then
+        // read the same value back later in the *same* Callback string via custom(key) to gate
+        // other effects on it (e.g. modifyFeat('reflex', mul(custom('t78_light'), 2))).
+        //   createTracker(key, label, type, defaultValue, max)
+        //   type: 'toggle' (0/1) or 'counter' (numeric, optionally capped by max)
+        createTracker: (key, label, type, defaultValue, max) => {
+          key = String(key);
+          type = (type === 'counter') ? 'counter' : 'toggle';
+          if (!(key in TRAIT_TRACKER_STATE)) {
+            TRAIT_TRACKER_STATE[key] = (defaultValue !== undefined && defaultValue !== null) ? Number(defaultValue) || 0 : 0;
+          }
+          ACTIVE_TRAIT_TRACKERS.push({ key, label: String(label || key), type, max: (max !== undefined && max !== null) ? Number(max) : null });
+          const v = TRAIT_TRACKER_STATE[key] || 0;
+          traitAccum.custom[key] = v;
+          return v;
+        },
 
         // Readers — pull live values off the sheet so effects can scale dynamically.
         val: (id) => val(String(id)),
@@ -6087,12 +6120,6 @@
           ring.style.opacity = isGhost ? '0.4' : '1';
           parent.appendChild(ring);
         }
-
-        // Action symbol ⊘ ("Non-Activatable") means the trait is always passively on and can
-        // never be toggled — mark it with a small badge so players can tell at a glance.
-        // IMPORTANT: append this to `parent` (a sibling of btn), NOT as a child of btn — btn
-        // has a clip-path applied for its node shape, and clip-path clips descendants too, so
-        // a badge positioned outside btn's box would get cut off by the node's own border.
         
 
         if (!isGhost) {
@@ -6100,6 +6127,7 @@
             const state = getTraitUnlockState(trait);
             if (!state.available) return;
             toggleTraitSelection(trait);
+            renderSidebarWidgets();
           };
           btn.onmouseenter = (e) => showTooltip(trait, e);
           btn.onmousemove = (e) => showTooltip(trait, e);
@@ -7080,10 +7108,73 @@
         });
       }
 
+      // ── Trait-owned trackers (createTracker) — non-removable while their trait is unlocked;
+      // rendered above personal/expansion widgets so the always-relevant ones surface first. ──
+      function traitTrackerToggle(key) {
+        TRAIT_TRACKER_STATE[key] = TRAIT_TRACKER_STATE[key] ? 0 : 1;
+        recalcAll();
+        renderSidebarWidgets();
+      }
+      function traitTrackerCounterChange(key, delta) {
+        let nv = (TRAIT_TRACKER_STATE[key] || 0) + delta;
+        const tr = ACTIVE_TRAIT_TRACKERS.find(t => t.key === key);
+        if (nv < 0) nv = 0;
+        if (tr && tr.max !== null && nv > tr.max) nv = tr.max;
+        TRAIT_TRACKER_STATE[key] = nv;
+        recalcAll();
+        renderSidebarWidgets();
+      }
+      function renderTraitTrackerSection(list) {
+        if (!ACTIVE_TRAIT_TRACKERS.length) return;
+        const divider = document.createElement('div');
+        divider.className = 'sidebar-widget-card';
+        divider.innerHTML = `<div class="sidebar-widget-head" style="border-bottom:none;"><span class="sw-divider-label" style="flex:1;text-align:left;border-bottom:none;">Trait Trackers</span></div>`;
+        list.appendChild(divider);
+
+        // De-dupe by key — a shared tracker key called from more than one active source should
+        // only render once — while preserving the first label/type/max it was registered with.
+        const seen = new Set();
+        ACTIVE_TRAIT_TRACKERS.forEach(tr => {
+          if (seen.has(tr.key)) return;
+          seen.add(tr.key);
+          const value = TRAIT_TRACKER_STATE[tr.key] || 0;
+
+          const card = document.createElement('div');
+          card.className = 'sidebar-widget-card';
+          const head = document.createElement('div');
+          head.className = 'sidebar-widget-head';
+          head.innerHTML = `<span class="sidebar-widget-name">${esc(tr.label)}</span>`;
+          card.appendChild(head);
+
+          if (tr.type === 'counter') {
+            const body = document.createElement('div');
+            body.className = 'sw-counter-row';
+            body.innerHTML = `<button onclick="traitTrackerCounterChange('${tr.key}',-1)">−</button><span class="sw-counter-value" style="color:#c9a84c">${value}${tr.max !== null ? ' / ' + tr.max : ''}</span><button onclick="traitTrackerCounterChange('${tr.key}',1)">+</button>`;
+            card.appendChild(body);
+          } else {
+            const row = document.createElement('div');
+            row.className = 'sw-toggle-row';
+            const sw = document.createElement('div');
+            sw.className = 'sw-toggle-switch' + (value ? ' on' : '');
+            sw.innerHTML = `<div class="knob"></div>`;
+            sw.onclick = () => traitTrackerToggle(tr.key);
+            row.appendChild(sw);
+            const stateLbl = document.createElement('span');
+            stateLbl.style.fontSize = '10px';
+            stateLbl.style.color = 'var(--ink-faint)';
+            stateLbl.textContent = value ? 'ON' : 'OFF';
+            row.appendChild(stateLbl);
+            card.appendChild(row);
+          }
+          list.appendChild(card);
+        });
+      }
+
       function renderSidebarWidgets() {
         const list = document.getElementById('sidebarWidgetsList');
         if (!list) return;
         list.innerHTML = '';
+        renderTraitTrackerSection(list);
         renderExpansionWidgetSections(list);
 
         if (!SIDEBAR_WIDGETS.length) {
@@ -7565,6 +7656,7 @@
           customTraits : ALL_TRAITS_CATALOG.filter(t => !BASE_TRAIT_IDS.has(t.ID)),
           customPaths : ALL_PATHS_CATALOG.filter(p => !BASE_PATH_IDS.has(p.ID)),
           sidebarWidgets: SIDEBAR_WIDGETS,
+          traitTrackers: TRAIT_TRACKER_STATE,
           enabledExpansions: Array.from(ENABLED_EXPANSIONS),
           expansionModules: EXPANSION_MODULES,
           expansionWidgetState: EXPANSION_WIDGET_STATE,
@@ -7690,6 +7782,7 @@
         renderElementChips();
 
         SIDEBAR_WIDGETS = (data.sidebarWidgets || []).map(w => ({ ...w }));
+        TRAIT_TRACKER_STATE = data.traitTrackers || {};
         renderExpansionsTab();
         renderSidebarWidgets();
 
@@ -7699,6 +7792,7 @@
         setSpellSchool(savedSchool);
         filterSpellsSelector();
         renderKnownSpells();
+        renderSidebarWidgets(); // re-render once more now that recalcAll() has populated ACTIVE_TRAIT_TRACKERS
 
         // Restore portrait
         if (data.portraitDataUrl) {
@@ -7721,6 +7815,7 @@
         document.querySelectorAll('input,textarea').forEach(el => { if (el.type !== 'button' && el.type !== 'submit') el.value = ''; });
         weapons = []; unlockedTraits.clear(); unlockedTraitPaths = {}; breakpointChoices = {}; knownSpellIds.clear(); customSpells = [];
         SIDEBAR_WIDGETS = [];
+        TRAIT_TRACKER_STATE = {};
         sceneNumber = 1; sceneTurn = 0; spellCooldowns = {}; spellCooldownMax = {}; spellFieldValues = {}; selectedElement = 'fire';
         const stt = document.getElementById('scene_turns_total'); if (stt) stt.value = '4';
         updateSceneTrackerDisplay();

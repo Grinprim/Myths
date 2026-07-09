@@ -992,6 +992,7 @@
       "Parameters": "",
       "Description": "While wielding a single one-handed weapon, gain +X Armor and +X Reflex.",
       "Scaling": "Armor & Reflex X:\n+1 [lvl 1]\n+2 [lvl 6]\n+3 [lvl 12]",
+      "Callback": "createTracker('t5_1h_stance','Wielding Single 1H Weapon','toggle',0);modifyArmor(mul(custom('t5_1h_stance'),ifElse(gte(level(),12),3,ifElse(gte(level(),6),2,1))));modifyFeat('reflex',mul(custom('t5_1h_stance'),ifElse(gte(level(),12),3,ifElse(gte(level(),6),2,1))))",
       "source": "core"
     },
     {
@@ -1172,6 +1173,7 @@
       "Parameters": "",
       "Description": "While unarmored, gain +X Armor.",
       "Scaling": "Armor X:\n+1 [lvl 1]\n+2 [lvl 6]\n+3 [lvl 12]",
+      "Callback": "createTracker('t20_unarmored','Unarmored','toggle',0);modifyArmor(mul(custom('t20_unarmored'),ifElse(gte(level(),12),3,ifElse(gte(level(),6),2,1))))",
       "source": "core"
     },
     {
@@ -1424,6 +1426,7 @@
       "Parameters": "",
       "Description": "When at or below half Health, gain +X Armor and +X Spirit. ",
       "Scaling": "Armor X:\n+2 [lvl 1]\n+3 [lvl 6]\n+4 [lvl 12]",
+      "Callback": "modifyArmor(ifElse(lte(val('currentHealth'),div(val('maxHealth'),2)),ifElse(gte(level(),12),4,ifElse(gte(level(),6),3,2)),0));modifyFeat('spirit',ifElse(lte(val('currentHealth'),div(val('maxHealth'),2)),ifElse(gte(level(),12),4,ifElse(gte(level(),6),3,2)),0))",
       "source": "core"
     },
     {
@@ -1448,6 +1451,7 @@
       "Parameters": "",
       "Description": "While at or below half Health, gain +2 Damage, +1 Armor and +1 Spirit. ",
       "Scaling": "",
+      "Callback": "modifyArmor(ifElse(lte(val('currentHealth'),div(val('maxHealth'),2)),1,0));modifyFeat('spirit',ifElse(lte(val('currentHealth'),div(val('maxHealth'),2)),1,0))",
       "source": "core"
     },
     {
@@ -1568,6 +1572,7 @@
       "Parameters": "",
       "Description": "Gain +2 Armor and you cannot be knocked prone, restrained, grappled or forcibly moved when at or below half Health.",
       "Scaling": "",
+      "Callback": "modifyArmor(ifElse(lte(val('currentHealth'),div(val('maxHealth'),2)),2,0))",
       "source": "core"
     },
     {
@@ -1628,6 +1633,7 @@
       "Parameters": "",
       "Description": "You can no longer be Healed or gain Guard from allies. You have +X Armor.",
       "Scaling": "Armor X:\n+2 [lvl 1]\n+3 [lvl 6]\n+4 [lvl 12]",
+      "Callback": "modifyArmor(ifElse(gte(level(),12),4,ifElse(gte(level(),6),3,2)))",
       "source": "core"
     },
     {
@@ -1892,6 +1898,7 @@
       "Parameters": "",
       "Description": "Light sources you hold never go out (Narrator's Discretion). While in its light, gain +X Reflex and +X Awareness.",
       "Scaling": "Reflex/Awareness X:\n+2 [lvl 1]\n+3 [lvl 3]\n+4 [lvl 6]\n+5 [lvl 9]",
+      "Callback": "createTracker('t78_light','In Light of Kept Candle','toggle',0);modifyFeat('reflex',mul(custom('t78_light'),ifElse(gte(level(),9),5,ifElse(gte(level(),6),4,ifElse(gte(level(),3),3,2)))));modifyFeat('awareness',mul(custom('t78_light'),ifElse(gte(level(),9),5,ifElse(gte(level(),6),4,ifElse(gte(level(),3),3,2)))))",
       "source": "core"
     },
     {
@@ -2336,6 +2343,7 @@
       "Parameters": "⫘ ▲ Companions",
       "Description": "While riding your companion, gain +2 Armor. Each combat; for the first time you or your mount would take damage, you both gain Guard equal to mount's Movement before damage is applied. Guard gained this way is shared between you and your mount.",
       "Scaling": "",
+      "Callback": "createTracker('t116_riding','Riding Companion','toggle',0);modifyArmor(mul(custom('t116_riding'),2))",
       "source": "core"
     },
     {
@@ -2516,6 +2524,7 @@
       "Parameters": "",
       "Description": "Gain +2 Speech and +1 Finesse while disguised or attempting to blend into a crowd.",
       "Scaling": "",
+      "Callback": "createTracker('t131_disguised','Disguised','toggle',0);modifyFeat('speech',mul(custom('t131_disguised'),2));modifyFeat('finesse',mul(custom('t131_disguised'),1))",
       "source": "core"
     },
     {
@@ -2564,8 +2573,8 @@
       "Parameters": "",
       "Description": "Tell a tale; allies gain 2 Grace at the end of the rest. You have +1 Scholarship.",
       "Scaling": "",
-      "source": "core",
-      "Callback": "modifyFeat('scholarship',1)"
+      "Callback": "modifyFeat('scholarship',1)",
+      "source": "core"
     },
     {
       "ID": "t136",
@@ -2625,6 +2634,7 @@
       "Parameters": "",
       "Description": "Gain +1 Speech; When you spend grace on an attack roll it deals bonus Damage equal to your [Speech]. Gain +1 Speech.",
       "Scaling": "",
+      "Callback": "modifyFeat('speech',2)",
       "source": "core"
     },
     {
@@ -2805,8 +2815,8 @@
       "Parameters": "",
       "Description": "You have +1 Movement and you ignore the first level of Fatigue.",
       "Scaling": "",
-      "source": "core",
-      "Callback": "modifyMovement(1)"
+      "Callback": "modifyMovement(1)",
+      "source": "core"
     },
     {
       "ID": "t156",
@@ -2878,6 +2888,7 @@
       "Parameters": "",
       "Description": "You gain bonus Armor equal to the amount of Movement over 5.",
       "Scaling": "",
+      "Callback": "modifyArmor(max(0,sub(val('speed'),5)))",
       "source": "core"
     },
     {
@@ -3994,8 +4005,8 @@
       "Parameters": "",
       "Description": "Gain +3 Scholarship. You permanently gain the Madness Condition.",
       "Scaling": "",
-      "source": "core",
-      "Callback": "modifyFeat('scholarship',3)"
+      "Callback": "modifyFeat('scholarship',3)",
+      "source": "core"
     },
     {
       "ID": "t252",
@@ -4247,6 +4258,7 @@
       "Parameters": "",
       "Description": "You gain advantage on extracting and identifying minerals. Deal +X damage to constructs and stone enemies. Ignore disadvantages from non-magical darkness. Gain +2 Armor underground or in darkness. Blunt weapons deal +1 Damage.",
       "Scaling": "Damage X:\n+1 [lvl 1]\n+2 [lvl 3]\n+3 [lvl 6]\n+4 [lvl 9]",
+      "Callback": "createTracker('t273_dark','Underground / In Darkness','toggle',0);modifyArmor(mul(custom('t273_dark'),2))",
       "source": "core"
     },
     {
@@ -4739,8 +4751,8 @@
       "Parameters": "",
       "Description": "You have +1 Movement and you ignore the first level of Fatigue.",
       "Scaling": "",
-      "source": "core",
-      "Callback": "modifyMovement(1)"
+      "Callback": "modifyMovement(1)",
+      "source": "core"
     },
     {
       "ID": "t315",
@@ -4836,6 +4848,7 @@
       "Parameters": "★ Species",
       "Description": "You gain an additional Trait Point at character creation.",
       "Scaling": "",
+      "Callback": "modifyTraitPoints(1)",
       "source": "core"
     },
     {
@@ -5316,6 +5329,7 @@
       "Parameters": "",
       "Description": "<b>[You gain 2 Trait Points]</b><br><br> Once per day, when presented with an opportunity to steal from anyone other than an ally, roll [Spirit] vs 6. On a failure, you cannot resist the temptation and must attempt to take the opportunity. Each successful resistance increases the score to beat by 1. This bonus resets when you fail the check.",
       "Scaling": "",
+      "Callback": "modifyTraitPoints(2)",
       "source": "sinners"
     },
     {
@@ -5328,6 +5342,7 @@
       "Parameters": "",
       "Description": "<b>[You gain 2 Trait Points]</b><br><br> Your constant overindulgence causes you to consume four times the normal amount of daily rations.",
       "Scaling": "",
+      "Callback": "modifyTraitPoints(2)",
       "source": "sinners"
     },
     {
@@ -5340,6 +5355,7 @@
       "Parameters": "",
       "Description": "<b>[You gain 2 Trait Points]</b><br><br> Your anger consumes your judgment. Whenever possible, you must direct your attacks toward the creature that most recently damaged you, regardless of the distance between you.",
       "Scaling": "",
+      "Callback": "modifyTraitPoints(2)",
       "source": "sinners"
     },
     {
@@ -5352,6 +5368,7 @@
       "Parameters": "",
       "Description": "<b>[You gain 2 Trait Points]</b><br><br> Armor is far too restrictive for your tastes. You cannot equip armor, or any item placed in your Armor or Artifact slots that provides statistical or gameplay benefits.",
       "Scaling": "",
+      "Callback": "modifyTraitPoints(2)",
       "source": "sinners"
     },
     {
@@ -5364,6 +5381,7 @@
       "Parameters": "",
       "Description": "<b>[You gain 2 Trait Points]</b><br><br> Your pride refuses to accept defeat. Once you willingly enter a fight, you cannot voluntarily retreat, surrender, or withdraw until the conflict is resolved.",
       "Scaling": "",
+      "Callback": "modifyTraitPoints(2)",
       "source": "sinners"
     },
     {
@@ -5376,6 +5394,7 @@
       "Parameters": "",
       "Description": "<b>[You gain 2 Trait Points]</b><br><br> You cannot bear to see others receive what you do not. Whenever an ally would receive healing or a beneficial effect, you must be a valid target for and benefit from the same effect first. Allies may only receive healing or beneficial effects that you have personally benefited from within the last 3 scenes.",
       "Scaling": "",
+      "Callback": "modifyTraitPoints(2)",
       "source": "sinners"
     },
     {
@@ -5388,6 +5407,7 @@
       "Parameters": "",
       "Description": "<b>[You gain 2 Trait Points]</b><br><br> Comfort is your highest priority. If you do not take at least 2 Rests during a day, you gain 1 Fatigue. Additionally, all other sources of Fatigue are doubled.",
       "Scaling": "",
+      "Callback": "modifyTraitPoints(2)",
       "source": "sinners"
     },
     {
