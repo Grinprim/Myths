@@ -1,0 +1,110 @@
+{
+  "categories": {
+    "light_armor": [
+      "Buckler",
+      "Cloth Armor",
+      "Padded Armor",
+      "Leather Armor"
+    ],
+    "medium_armor": [
+      "Shield",
+      "Hide Armor",
+      "Studded Armor",
+      "Chain Shirt",
+      "Scale Armor"
+    ],
+    "heavy_armor": [
+      "Tower Shield",
+      "Chainmail",
+      "Splint Armor",
+      "Plate Armor"
+    ],
+    "backpacks": [
+      "Satchel",
+      "Small Backpack",
+      "Standard Backpack",
+      "Large Backpack",
+      "War Pack"
+    ],
+    "utility": [
+      "Cloak",
+      "Gloves",
+      "Boots",
+      "Belt",
+      "Bandolier",
+      "Helmet",
+      "Gauntlets",
+      "Greaves",
+      "Potion Belt",
+      "Torch",
+      "Lantern",
+      "Grappling Hook",
+      "Waterskin",
+      "Lockpicks",
+      "Field Kit"
+    ]
+  },
+  "prefixes": {
+    "quality": [
+      { "name": "Improvised", "description": "2 max durability, attacks are counted as improvised." },
+      { "name": "Dilapidated", "description": "3 max durability." },
+      { "name": "Defective", "description": "6 max durability, can be repaired by a skilled craftsman." },
+      { "name": "Faulty", "description": "9 max durability, can be repaired by a mediocre craftsman." },
+      { "name": "Unreliable", "description": "Chance to become Defective on use." },
+      { "name": "Rackety", "description": "12 max durability, uncomfortable to use." },
+      { "name": "Ordinary", "description": "No durability, breaks only on misuse (snake eyes → Rackety)." },
+      { "name": "Acceptable", "description": "No durability, breakable with medium might." },
+      { "name": "Standard", "description": "No durability, breakable with high might." },
+      { "name": "Reliable", "description": "No durability, requires very high might to break." },
+      { "name": "Solid", "description": "No durability, lasts a lifetime." },
+      { "name": "Fair", "description": "No durability, may sell for higher price." },
+      { "name": "Well-maintained", "description": "No durability, higher value." },
+      { "name": "Superior", "description": "+1 to a Stat" },
+      { "name": "Refined", "description": "+2 to a Stat" },
+      { "name": "Military Grade", "description": "Functionally unbreakable." },
+      { "name": "Preserved", "description": "Pristine condition, very high value." },
+      { "name": "Masterwork", "description": "+2 to a Stat, +1 to Another Stat, unbreakable." }
+    ],
+    "functional": [
+      { "name": "Padded", "description": "+1 Armor" },
+      { "name": "Reinforced", "description": "+2 Armor" },
+      { "name": "Fortified", "description": "+3 Armor" },
+      { "name": "Warded", "description": "+1 Resist (all)" },
+      { "name": "Shielded", "description": "+2 Resist (all)" },
+      { "name": "Aegis", "description": "+3 Resist (all)" },
+      { "name": "Flexible", "description": "+1 Movement" },
+      { "name": "Supple", "description": "+2 Movement" },
+      { "name": "Unburdened", "description": "+3 Movement" },
+      { "name": "Silent", "description": "+1 Reflex" },
+      { "name": "Muffled", "description": "+2 Reflex" },
+      { "name": "Ghosted", "description": "+3 Reflex" },
+      { "name": "Roomy", "description": "+4 Encumbrance" },
+      { "name": "Spacious", "description": "+6 Encumbrance" },
+      { "name": "Bottomless", "description": "+8 Encumbrance" },
+      { "name": "Soothing", "description": "+1 healing received" },
+      { "name": "Restorative", "description": "+2 healing received" },
+      { "name": "Renewing", "description": "+3 healing received" },
+      { "name": "Steadfast", "description": "+1 Resist vs conditions" },
+      { "name": "Resolute", "description": "+2 Resist vs conditions" },
+      { "name": "Unyielding", "description": "+3 Resist vs conditions" },
+      { "name": "Stalwart", "description": "+2 Max Health" },
+      { "name": "Enduring", "description": "+4 Max Health" },
+      { "name": "Titanic", "description": "+6 Max Health" },
+      { "name": "Regenerating", "description": "Heal 1 per turn" },
+      { "name": "Rejuvenating", "description": "Heal 2 per turn" },
+      { "name": "Immortal", "description": "Heal 3 per turn" },
+      { "name": "Sturdy", "description": "+1 Armor (shield)" },
+      { "name": "Hardened", "description": "+2 Armor (shield)" },
+      { "name": "Unbreakable", "description": "+3 Armor (shield)" },
+      { "name": "Spiked", "description": "Deal 2 damage on block" },
+      { "name": "Barbed", "description": "Deal 3 damage on block" },
+      { "name": "Ready", "description": "+1 Accuracy on opportunity attacks" },
+      { "name": "Watchful", "description": "+2 Accuracy on opportunity attacks" },
+      { "name": "Sentinel", "description": "+3 Accuracy on opportunity attacks" },
+      { "name": "Capable Brewing Kit", "description": "Can brew potions." },
+      { "name": "Competent Brewing Kit", "description": "+1 to brew checks." },
+      { "name": "Personal Brewing Kit", "description": "+2 to brew checks." },
+      { "name": "Professional Brewing Kit", "description": "+3 to brew checks, immovable." }
+    ]
+  }
+}

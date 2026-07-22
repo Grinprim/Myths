@@ -1,0 +1,655 @@
+{
+  "weapons": {
+    "m1": [
+      {
+        "Name": "Combat Knife",
+        "Damage": 1,
+        "DamageType": "Puncture",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "Reliable and balanced; standard issue for soldiers and scouts."
+      },
+      {
+        "Name": "Switchblade",
+        "Damage": 1,
+        "DamageType": "Slash",
+        "Reach": 1,
+        "Tags": [
+          "Compact"
+        ],
+        "Description": "Fast to draw and easy to conceal."
+      },
+      {
+        "Name": "Trench Spike",
+        "Damage": 2,
+        "DamageType": "Puncture",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "Narrow and brutal; built for piercing through armor and cloth alike."
+      },
+      {
+        "Name": "Straight Razor",
+        "Damage": 1,
+        "DamageType": "Slash",
+        "Reach": 1,
+        "Tags": [
+          "Compact"
+        ],
+        "Description": "A gentleman’s hidden threat — clean, quick, silent."
+      },
+      {
+        "Name": "Wrench",
+        "Damage": 1,
+        "DamageType": "Blunt",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "A worker’s weapon; short, heavy, and efficient."
+      },
+      {
+        "Name": "Sap / Blackjack",
+        "Damage": 1,
+        "DamageType": "Blunt",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "Nonlethal; on a hit, target suffers –1 Accuracy until next turn."
+      },
+      {
+        "Name": "Folding Baton",
+        "Damage": 1,
+        "DamageType": "Blunt",
+        "Reach": 1,
+        "Tags": [
+          "Compact"
+        ],
+        "Description": "Compact and responsive; favored by officers and agents."
+      },
+      {
+        "Name": "Serrated knife",
+        "Damage": 1,
+        "DamageType": "Slash",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "Lethal and vicious; on hit, apply 1 Bleed for 1 turn."
+      }
+    ],
+    "m2": [
+      {
+        "Name": "Trench Club",
+        "Damage": 2,
+        "DamageType": "Blunt",
+        "Reach": 1,
+        "Tags": [
+          "Two-handed"
+        ],
+        "Description": "Weighted to break bone and resolve alike."
+      },
+      {
+        "Name": "Bayonet (Detached)",
+        "Damage": 2,
+        "DamageType": "Puncture",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "A soldier’s last resort — short, sharp, and unrelenting."
+      },
+      {
+        "Name": "Machete",
+        "Damage": 2,
+        "DamageType": "Slash",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "Broad-bladed and heavy; cuts through brush and bodies alike."
+      },
+      {
+        "Name": "Cleaver",
+        "Damage": 2,
+        "DamageType": "Cleave",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "Made for butchering larger foe."
+      },
+      {
+        "Name": "Hatchet",
+        "Damage": 2,
+        "DamageType": "Cleave",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "Compact chopping weapon, favored by laborers and soldiers."
+      },
+      {
+        "Name": "Crowbar",
+        "Damage": 2,
+        "DamageType": "Blunt",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "Built for leverage, swung for survival."
+      },
+      {
+        "Name": "Cane Sword",
+        "Damage": 1,
+        "DamageType": "Puncture",
+        "Reach": 2,
+        "Tags": [],
+        "Description": "Elegant concealment; gains +1 Accuracy on surprise attacks."
+      },
+      {
+        "Name": "Police Baton",
+        "Damage": 1,
+        "DamageType": "Blunt",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "Balanced for control; may disarm on a successful hit."
+      },
+      {
+        "Name": "Field Shovel",
+        "Damage": 2,
+        "DamageType": "Slash/Blunt",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "A sharpened field shovel; quick, brutal, and efficient."
+      },
+      {
+        "Name": "Baseball Bat",
+        "Damage": 2,
+        "DamageType": "Blunt",
+        "Reach": 1,
+        "Tags": [
+          "Two-handed"
+        ],
+        "Description": "Weighted for consistent impact — clean and punishing."
+      }
+    ],
+    "m3": [
+      {
+        "Name": "Fire Axe",
+        "Damage": 3,
+        "DamageType": "Cleave",
+        "Reach": 1,
+        "Tags": [
+          "Two-handed"
+        ],
+        "Description": "Built to breach walls — or anything else that resists."
+      },
+      {
+        "Name": "Sledgehammer",
+        "Damage": 3,
+        "DamageType": "Blunt",
+        "Reach": 1,
+        "Tags": [
+          "Two-handed"
+        ],
+        "Description": "Slow but devastating; requires full focus to swing."
+      },
+      {
+        "Name": "Pipe Wrench (Large)",
+        "Damage": 3,
+        "DamageType": "Blunt",
+        "Reach": 1,
+        "Tags": [
+          "Two-handed"
+        ],
+        "Description": "Industrial tool turned weapon; reduces target’s Armor by 1 until next turn."
+      },
+      {
+        "Name": "Baseball Bat (Reinforced)",
+        "Damage": 3,
+        "DamageType": "Blunt",
+        "Reach": 1,
+        "Tags": [
+          "Two-handed"
+        ],
+        "Description": "Weighted for consistent impact — clean and punishing. -1 Accuracy"
+      },
+      {
+        "Name": "Pickaxe",
+        "Damage": 3,
+        "DamageType": "Puncture",
+        "Reach": 1,
+        "Tags": [
+          "Two-handed"
+        ],
+        "Description": "Drives straight through cover; ignores 1 Defense."
+      },
+      {
+        "Name": "Barbed Club",
+        "Damage": 2,
+        "DamageType": "Slash",
+        "Reach": 1,
+        "Tags": [
+          "Two-handed"
+        ],
+        "Description": "Crude, jagged, and cruel; on hit, apply 1 Bleed."
+      },
+      {
+        "Name": "Rifle Stock / Buttstock",
+        "Damage": 2,
+        "DamageType": "Blunt",
+        "Reach": 1,
+        "Tags": [
+          "Two-handed"
+        ],
+        "Description": "Improvised and sturdy; stuns on a critical hit."
+      },
+      {
+        "Name": "Industrial Cleaver",
+        "Damage": 3,
+        "DamageType": "Cleave",
+        "Reach": 1,
+        "Tags": [],
+        "Description": "Oversized and heavy; not elegant, but final."
+      }
+    ],
+    "r1": [
+      {
+        "Name": "Light Bow",
+        "Damage": 1,
+        "DamageType": "Puncture",
+        "Range": 6,
+        "Ammo": null,
+        "Tags": [],
+        "Description": "Compact, quiet weapon ideal for stealth and precision."
+      },
+      {
+        "Name": "Light Crossbow",
+        "Damage": 2,
+        "DamageType": "Puncture",
+        "Range": 6,
+        "Ammo": null,
+        "Tags": [],
+        "Description": "Accurate and silent; reloads every turn after firing."
+      },
+      {
+        "Name": "Throwing Knife",
+        "Damage": 1,
+        "DamageType": "Puncture",
+        "Range": 3,
+        "Ammo": null,
+        "Tags": [],
+        "Description": "Quick and retrievable; gains +1 Accuracy at short range (≤2 tiles)."
+      },
+      {
+        "Name": "Molotov",
+        "Damage": 1,
+        "DamageType": "Blunt (Fire)",
+        "Range": 3,
+        "Ammo": null,
+        "Tags": [],
+        "Description": "Ignites a 1-tile area for 1 turn; affected creatures take 1 fire damage."
+      },
+      {
+        "Name": "Compound Bow",
+        "Damage": 2,
+        "DamageType": "Puncture",
+        "Range": 7,
+        "Ammo": null,
+        "Tags": [],
+        "Description": "Mechanically-assisted; precise and silent, +1 Accuracy at max range."
+      }
+    ],
+    "r2": [
+      {
+        "Name": "Hunting Bow (Heavy)",
+        "Damage": 2,
+        "DamageType": "Puncture",
+        "Range": 8,
+        "Ammo": null,
+        "Tags": [],
+        "Description": "Long draw and excellent reach; delay attack for +1 Accuracy."
+      },
+      {
+        "Name": "Medium Crossbow (Heavy)",
+        "Damage": 2,
+        "DamageType": "Puncture",
+        "Range": 7,
+        "Ammo": null,
+        "Tags": [],
+        "Description": "Punches through armor; ignores 1 Armor, reloads every turn."
+      },
+      {
+        "Name": "Heavy Crossbow",
+        "Damage": 3,
+        "DamageType": "Puncture",
+        "Range": 8,
+        "Ammo": null,
+        "Tags": [],
+        "Description": "Massive bolt impact; ignores 2 Armor and can pin small targets."
+      },
+      {
+        "Name": "Grenade",
+        "Damage": 2,
+        "DamageType": "Slash (Blast)",
+        "Range": 4,
+        "Ammo": null,
+        "Tags": [],
+        "Description": "Explodes in a 1-tile radius; deals full damage to all within."
+      }
+    ],
+    "f1": [
+      {
+        "Name": "Pocket Pistol",
+        "Damage": 1,
+        "DamageType": "Puncture",
+        "Range": 4,
+        "Ammo": 6,
+        "Tags": [],
+        "Description": "Small, concealable sidearm with limited range and power."
+      },
+      {
+        "Name": "Service Pistol",
+        "Damage": 2,
+        "DamageType": "Puncture",
+        "Range": 6,
+        "Ammo": 8,
+        "Tags": [],
+        "Description": "Reliable standard-issue firearm; well-balanced in speed and precision."
+      },
+      {
+        "Name": "Revolver",
+        "Damage": 2,
+        "DamageType": "Puncture",
+        "Range": 5,
+        "Ammo": 6,
+        "Tags": [],
+        "Description": "Durable and steady; fires slower but rarely jams."
+      },
+      {
+        "Name": "Automatic Pistol",
+        "Damage": 2,
+        "DamageType": "Puncture",
+        "Range": 6,
+        "Ammo": 10,
+        "Tags": [],
+        "Description": "Capable of controlled bursts; may fire twice per turn (each for –1 damage)."
+      },
+      {
+        "Name": "Sawed-Off Shotgun",
+        "Damage": 2,
+        "DamageType": "Slash",
+        "Range": 3,
+        "Ammo": 2,
+        "Tags": [],
+        "Description": "Wide scatter at close range; enemies within 1 tile take +1 damage."
+      }
+    ],
+    "f2": [
+      {
+        "Name": "Carbine Rifle",
+        "Damage": 2,
+        "DamageType": "Puncture",
+        "Range": 8,
+        "Ammo": 8,
+        "Tags": [],
+        "Description": "Reliable infantry weapon with balanced accuracy and rate of fire."
+      },
+      {
+        "Name": "Bolt-Action Rifle",
+        "Damage": 3,
+        "DamageType": "Puncture",
+        "Range": 9,
+        "Ammo": 5,
+        "Tags": [],
+        "Description": "High stopping power; must cycle between shots."
+      },
+      {
+        "Name": "Sniper Rifle",
+        "Damage": 3,
+        "DamageType": "Puncture",
+        "Range": 12,
+        "Ammo": 5,
+        "Tags": [],
+        "Description": "Extremely accurate; when aiming for a full turn, deals +1 damage."
+      },
+      {
+        "Name": "Automatic Rifle",
+        "Damage": 3,
+        "DamageType": "Puncture",
+        "Range": 8,
+        "Ammo": 20,
+        "Tags": [],
+        "Description": "Suppressive bursts; all enemies in a 3-tile cone take –1 Accuracy until next turn."
+      },
+      {
+        "Name": "Machine Gun (Mounted / Bipod)",
+        "Damage": 4,
+        "DamageType": "Puncture",
+        "Range": 9,
+        "Ammo": 50,
+        "Tags": [],
+        "Description": "Sustained fire weapon; can’t move and shoot. Hits up to 3 adjacent tiles."
+      },
+      {
+        "Name": "Combat Shotgun",
+        "Damage": 3,
+        "DamageType": "Slash",
+        "Range": 4,
+        "Ammo": 6,
+        "Tags": [],
+        "Description": "Wide spread; may target up to 2 adjacent enemies (each for –1 damage)."
+      },
+      {
+        "Name": "Rocket Tube (Prototype)",
+        "Damage": 4,
+        "DamageType": "Slash (Blast)",
+        "Range": 6,
+        "Ammo": 1,
+        "Tags": [],
+        "Description": "Experimental launcher; 2-tile radius, dangerous to user if fired in close range."
+      }
+    ]
+  },
+  "armor": {
+    "a1": [
+      {
+        "Name": "Leather Jacket",
+        "Armor": "7 + Reflex",
+        "Penalty": "None",
+        "Tags": [
+          "Concealable",
+          "Flexible"
+        ],
+        "Description": "Common protective wear; light resistance without hindering movement."
+      },
+      {
+        "Name": "Padded Vest",
+        "Armor": "7 + Fortitude",
+        "Penalty": "None",
+        "Tags": [
+          "Flexible"
+        ],
+        "Description": "Absorbs minor impacts and blunt trauma; easy to wear beneath uniforms."
+      },
+      {
+        "Name": "Trenchcoat (Reinforced)",
+        "Armor": "8 + Fortitude",
+        "Penalty": "None",
+        "Tags": [
+          "Concealable",
+          "Stylish"
+        ],
+        "Description": "Weighted lining and stitched plating; discreet but sturdy."
+      },
+      {
+        "Name": "Worker’s Overalls",
+        "Armor": "7 + Fortitude",
+        "Penalty": "None",
+        "Tags": [
+          "Fireproof",
+          "Industrial"
+        ],
+        "Description": "Rugged material provides minor resistance to heat and sparks."
+      },
+      {
+        "Name": "Flight Suit",
+        "Armor": "8 + Reflex",
+        "Penalty": "None",
+        "Tags": [
+          "Insulated",
+          "Fireproof"
+        ],
+        "Description": "Protects against friction, wind, and heat; designed for cockpit survival."
+      },
+      {
+        "Name": "Motor Jacket (Armored)",
+        "Armor": "8 + Reflex",
+        "Penalty": "None",
+        "Tags": [
+          "Reinforced"
+        ],
+        "Description": "Steel-backed leather favored by couriers, drivers, and messengers."
+      }
+    ],
+    "a2": [
+      {
+        "Name": "Ballistic Vest",
+        "Armor": "9 + Fortitude",
+        "Penalty": "–1 Reflex",
+        "Tags": [
+          "Ballistic",
+          "Restrictive"
+        ],
+        "Description": "Layered steel plates; reliable against low-caliber rounds."
+      },
+      {
+        "Name": "Combat Webbing",
+        "Armor": "9 + Reflex",
+        "Penalty": "None",
+        "Tags": [
+          "Tactical",
+          "Reinforced"
+        ],
+        "Description": "Balanced rigging and padding; worn by soldiers and mercenaries."
+      },
+      {
+        "Name": "Police Riot Gear",
+        "Armor": "10 + Fortitude (max 2)",
+        "Penalty": "–1 Finesse",
+        "Tags": [
+          "Impact Resistant",
+          "Restrictive"
+        ],
+        "Description": "Designed for blunt and shrapnel resistance; noisy and bulky."
+      },
+      {
+        "Name": "Field Jacket (Lined)",
+        "Armor": "9 + Fortitude (max 2)",
+        "Penalty": "None",
+        "Tags": [
+          "Military",
+          "Insulated"
+        ],
+        "Description": "Rugged and padded; offers balanced protection and comfort."
+      },
+      {
+        "Name": "Engineer’s Suit",
+        "Armor": "9 + Fortitude (max 2)",
+        "Penalty": "–1 Reflex",
+        "Tags": [
+          "Fireproof",
+          "Industrial",
+          "Restrictive"
+        ],
+        "Description": "Built for high-heat environments and machinery exposure."
+      }
+    ],
+    "a3": [
+      {
+        "Name": "Infantry Armor (Plated)",
+        "Armor": "11 + Fortitude (max 2)",
+        "Penalty": "–1 Reflex, –1 Finesse",
+        "Tags": [
+          "Ballistic",
+          "Restrictive"
+        ],
+        "Description": "Standard-issue reinforced chestplate; reliable but cumbersome."
+      },
+      {
+        "Name": "Bomb Disposal Suit",
+        "Armor": "12",
+        "Penalty": "–2 Reflex, –1 Finesse",
+        "Tags": [
+          "Blast Resistant",
+          "Restrictive",
+          "Fireproof"
+        ],
+        "Description": "Heavy armor specialized for explosive protection; limits awareness."
+      },
+      {
+        "Name": "Prototype Combat Suit",
+        "Armor": "12",
+        "Penalty": "–1 Reflex",
+        "Tags": [
+          "Powered",
+          "Reinforced",
+          "Restrictive"
+        ],
+        "Description": "Early combat exosuit; powered servos offset weight but restrict finesse."
+      },
+      {
+        "Name": "Industrial Exosuit",
+        "Armor": "13",
+        "Penalty": "–2 Reflex, –2 Finesse",
+        "Tags": [
+          "Mechanical",
+          "Heavy",
+          "Restrictive"
+        ],
+        "Description": "Built for lifting and mining; extreme protection, low grace."
+      },
+      {
+        "Name": "Trench Armor",
+        "Armor": "11 + Fortitude (max 2)",
+        "Penalty": "–1 Reflex",
+        "Tags": [
+          "Ballistic",
+          "Antiquated",
+          "Restrictive"
+        ],
+        "Description": "Old but durable; heavy plates and canvas straps still hold strong."
+      }
+    ]
+  },
+  "shields": {
+    "ss": [
+      {
+        "Name": "Police Riot Shield",
+        "Bonus": "+2",
+        "Penalty": "–1 Reflex",
+        "Tags": [
+          "Impact Resistant",
+          "Two-Handed"
+        ],
+        "Description": "Standard police-grade protection; reliable cover at the cost of mobility."
+      },
+      {
+        "Name": "Improvised Shield",
+        "Bonus": "+1",
+        "Penalty": "None",
+        "Tags": [
+          "Improvised",
+          "Fragile"
+        ],
+        "Description": "Any sturdy scrap — metal door, bin lid, or panel; breaks after 3 hits."
+      },
+      {
+        "Name": "Infantry Buckler",
+        "Bonus": "+1",
+        "Penalty": "None",
+        "Tags": [
+          "Compact",
+          "Flexible"
+        ],
+        "Description": "Small, maneuverable shield for parrying and redirection."
+      },
+      {
+        "Name": "Ballistic Shield",
+        "Bonus": "+3",
+        "Penalty": "–1 Reflex, –1 Finesse",
+        "Tags": [
+          "Ballistic",
+          "Two-Handed",
+          "Restrictive"
+        ],
+        "Description": "Full-coverage shield; absorbs gunfire but limits aim and mobility."
+      }
+    ]
+  }
+}

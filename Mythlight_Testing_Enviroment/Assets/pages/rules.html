@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mythlight RPG | Rules</title>
+<link rel="icon" type="image/svg+xml" href="../img/logo.png">
+<link rel="stylesheet" href="rules-theme.css">
+</head>
+<body>
+
+<canvas id="cosmos-canvas"></canvas>
+<div class="void-vignette"></div>
+
+<!-- ============================================================
+     THE LANTERN — hangs from the top of the page, pendulum physics,
+     click to unroll the table of contents
+     ============================================================ -->
+<div id="lantern-rig">
+    <div id="lantern-pivot">
+        <div id="lantern-chain"></div>
+        <div id="lantern-body" role="button" tabindex="0" aria-label="Open table of contents" aria-expanded="false">
+            <div id="lantern-glow"></div>
+            <svg width="76" height="96" viewBox="0 0 76 96" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="38" cy="10" rx="9" ry="4" fill="#a9762f"/>
+                <rect x="34" y="2" width="8" height="8" fill="#6e4a1e"/>
+                <path d="M14 16 Q38 6 62 16 L58 30 Q38 22 18 30 Z" fill="#a9762f"/>
+                <path d="M18 30 L58 30 L54 78 Q38 86 22 78 Z" fill="#3a2d1c" stroke="#a9762f" stroke-width="2"/>
+                <path d="M22 34 L54 34 L51 74 Q38 80 25 74 Z" fill="#ffb870" opacity="0.9">
+                    <animate attributeName="opacity" values="0.75;0.95;0.65;0.9;0.75" dur="2.6s" repeatCount="indefinite"/>
+                </path>
+                <line x1="26" y1="32" x2="23" y2="76" stroke="#6e4a1e" stroke-width="1.5"/>
+                <line x1="50" y1="32" x2="53" y2="76" stroke="#6e4a1e" stroke-width="1.5"/>
+                <path d="M22 78 Q38 86 54 78 L52 84 Q38 90 24 84 Z" fill="#a9762f"/>
+                <circle cx="38" cy="88" r="3" fill="#f0cf7a"/>
+            </svg>
+        </div>
+        <div id="lantern-hint">click to open the archive</div>
+    </div>
+</div>
+
+<div id="toc-backdrop"></div>
+<nav id="toc-scroll" aria-label="Table of contents">
+    <div class="toc-title">The Archive</div>
+    <div class="toc-sub">— reach for a chapter —</div>
+    <div class="toc-grid">
+        <a href="#core"><span class="n">01</span> Core Mechanics</a>
+        <a href="#creation"><span class="n">02</span> Character Creation</a>
+        <a href="#combat"><span class="n">03</span> Combat Rules</a>
+        <a href="#mounts"><span class="n">04</span> Mounts &amp; Vehicles</a>
+        <a href="#narrator"><span class="n">05</span> Narrator Rules</a>
+        <a href="#oneshot"><span class="n">06</span> One Shot Play</a>
+        <a href="#expansions"><span class="n">07</span> Expansion Rules</a>
+        <a href="../pages/species.html"><span class="n">→</span> Species</a>
+        <a href="../pages/paths.html"><span class="n">→</span> Paths</a>
+        <a href="../pages/traits.html"><span class="n">→</span> Traits</a>
+        <a href="../pages/spells.html"><span class="n">→</span> Spells</a>
+        <a href="../sheet/character_sheet.html"><span class="n">→</span> Character Sheet</a>
+    </div>
+</nav>
+
+<!-- ============================================================
+     BOOK TABS — right edge, jump between chapters
+     ============================================================ -->
+<div id="book-tabs">
+    <button class="book-tab" data-target="core">I · Core</button>
+    <button class="book-tab" data-target="creation">II · Creation</button>
+    <button class="book-tab" data-target="combat">III · Combat</button>
+    <button class="book-tab" data-target="mounts">IV · Mounts</button>
+    <button class="book-tab" data-target="narrator">V · Narrator</button>
+    <button class="book-tab" data-target="oneshot">VI · One Shot</button>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<header class="hero">
+    <div>
+        <div class="hero-eyebrow">A Lantern in the Dark</div>
+        <h1>The <span>Mythlight</span> Rules</h1>
+        <p class="lede">The complete reference for the 2d6 engine — how it resolves, how a character grows, how the fight unfolds, and how a Narrator holds it all together.</p>
+        <div class="hero-divider"></div>
+        <div class="mode-pills">
+            <a class="mode-pill active" href="#core">Campaign Rules</a>
+            <a class="mode-pill" href="#oneshot">One Shots</a>
+            <a class="mode-pill" href="#expansions">Expansion Rules</a>
+        </div>
+    </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     I. CORE MECHANICS
+     ============================================================ -->
+<section class="leaf" id="core">
+    <div class="leaf-seal">I</div>
+    <div class="leaf-kicker">Chapter One</div>
+    <h2>Core Mechanics</h2>
+    <p class="leaf-intro drop-cap">Mythlight is built to be simple and narrative-first — rules that are easy to carry to the table and that get out of the way of the story. Everything else in this book rests on the small handful of mechanics below.</p>
+
+    <h3>What You Need</h3>
+    <div class="card-row cols-3">
+        <div class="mini-card">
+            <div class="label">Dice</div>
+            <div class="body"><strong>2 six-sided dice</strong> per player. No polyhedral dice are used anywhere in this system.</div>
+        </div>
+        <div class="mini-card">
+            <div class="label">Character Sheet</div>
+            <div class="body">Stats, traits, equipment, and backstory, all in one place.</div>
+        </div>
+        <div class="mini-card">
+            <div class="label">One Narrator</div>
+            <div class="body">Guides the story, plays every NPC, and presents the challenges.</div>
+        </div>
+    </div>
+
+    <h3>The 2d6 Engine</h3>
+    <p>Most actions resolve on a roll of <span class="formula">2d6 + Modifiers vs CS</span> — you succeed if your total meets or beats the Challenge Score.</p>
+    <div class="card-row cols-2">
+        <div class="mini-card">
+            <div class="label">Advantage</div>
+            <div class="body">Roll one additional d6 (3d6 total) and keep all of them. There is no upper limit on dice added this way.</div>
+        </div>
+        <div class="mini-card">
+            <div class="label">Disadvantage</div>
+            <div class="body">Remove one d6 (1d6 total). The pool may be reduced all the way to 0d6 — and you lose the ability to Midnight.</div>
+        </div>
+    </div>
+
+    <div class="fate-row">
+        <div class="fate-box good">
+            <div class="fate-title">✦ Midnight — Critical Success</div>
+            <p>Triggered only on <strong>two natural sixes</strong>. The action automatically hits and deals double damage. With Advantage, the trigger stays the same, but every additional six rolled increases the effect further.</p>
+        </div>
+        <div class="fate-box bad">
+            <div class="fate-title">✷ Snake Eyes — Critical Failure</div>
+            <p>Triggered on <strong>two natural ones</strong>. The action automatically misses and causes a complication — tripping, self-damage, or a narrative setback. Snake Eyes cannot occur while rolling 0d6.</p>
+        </div>
+    </div>
+
+    <h3>Grace</h3>
+    <p>You gather Grace as you fail — a reserve to spend when the moment is dire.</p>
+    <div class="card-row cols-4">
+        <div class="mini-card"><div class="label">Gain</div><div class="body">+1 Grace on any failed roll.</div></div>
+        <div class="mini-card"><div class="label">Delay</div><div class="body">Success doesn't reset Grace, but delays its growth — you must fail twice in a row to gain another point.</div></div>
+        <div class="mini-card"><div class="label">Spend</div><div class="body">Spend <strong>all</strong> of your Grace at once to boost a single roll. Maximum Grace is 6.</div></div>
+        <div class="mini-card"><div class="label">Reset</div><div class="body">Resets whenever combat starts or ends, or when you sleep.</div></div>
+    </div>
+</section>
+
+<div class="chain-divider" aria-hidden="true"><div class="strand"></div><div class="pendant"></div></div>
+
+<!-- ============================================================
+     II. CHARACTER CREATION
+     ============================================================ -->
+<section class="leaf" id="creation">
+    <div class="leaf-seal">II</div>
+    <div class="leaf-kicker">Chapter Two</div>
+    <h2>Character Creation</h2>
+    <p class="leaf-intro drop-cap">These rules govern how a character is built, and how every part of them functions at the table — from a first breath of attribute points to the trait that finally defines who they are.</p>
+
+    <h3>Attributes — Point Buy</h3>
+    <p>You have <strong>3 points</strong> to distribute, with a maximum of <strong>2 points</strong> in any single stat initially. Species further modify these.</p>
+    <div class="card-row cols-4">
+        <div class="mini-card attr-body"><div class="label">Body</div><div class="body">Physical strength, agility, endurance.</div></div>
+        <div class="mini-card attr-skill"><div class="label">Skill</div><div class="body">Reflexes, tinkering, fine manual skill.</div></div>
+        <div class="mini-card attr-mind"><div class="label">Mind</div><div class="body">Magical knowledge, control, potency.</div></div>
+        <div class="mini-card attr-style"><div class="label">Style</div><div class="body">Conversation, persuasion, social understanding.</div></div>
+    </div>
+
+    <h3>Species &amp; Paths</h3>
+    <p>Your character is more than numbers — it's also past, culture, and appearance. Use these to inform both roleplay and mechanical choices.</p>
+    <div class="card-row cols-2">
+        <div class="mini-card">
+            <div class="label">Species</div>
+            <div class="body">Represent your character's physical traits and cultural background. Each grants minor bonuses to base attributes and one unique trait. You pick one at character creation.</div>
+        </div>
+        <div class="mini-card">
+            <div class="label">Paths</div>
+            <div class="body">Thematic collections of traits. You don't choose a Path directly — as you invest points into traits belonging to one, you progress along it automatically. Reaching certain thresholds unlocks <strong>Breakpoints</strong>: powerful passives or a +1 to a relevant attribute.</div>
+        </div>
+    </div>
+
+    <h3>Feats</h3>
+    <p>Each attribute governs a set of feats that can be enhanced over time. At character creation you increase <strong>4</strong> of these by <strong>1</strong>. Feat checks always follow <span class="formula">2d6 + Attribute + Feat Modifier</span>.</p>
+    <div class="card-row cols-4">
+        <div class="mini-card attr-body">
+            <div class="label">Body</div>
+            <div class="body"><strong>Might</strong> — lifting, breaking, melee power.<br><strong>Brawn</strong> — endurance, toughness, health.<br><strong>Fortitude</strong> — resisting poison, pain, fatigue.</div>
+        </div>
+        <div class="mini-card attr-skill">
+            <div class="label">Skill</div>
+            <div class="body"><strong>Finesse</strong> — dexterity, precision, ranged weapons.<br><strong>Reflex</strong> — dodging, reacting quickly.<br><strong>Tinker</strong> — crafting, repairing, modifying devices.</div>
+        </div>
+        <div class="mini-card attr-mind">
+            <div class="label">Mind</div>
+            <div class="body"><strong>Arcane</strong> — magical knowledge and manipulation.<br><strong>Spirit</strong> — mental and magical endurance.<br><strong>Scholarship</strong> — research, history, learned knowledge.</div>
+        </div>
+        <div class="mini-card attr-style">
+            <div class="label">Style</div>
+            <div class="body"><strong>Speech</strong> — getting what you want by talking.<br><strong>Insight</strong> — reading intentions and hidden truths.<br><strong>Awareness</strong> — perception of surroundings and danger.</div>
+        </div>
+    </div>
+
+    <h3>Health &amp; Guard</h3>
+    <div class="card-row cols-3">
+        <div class="mini-card"><div class="label">Health</div><div class="body">Scales with level. At level 1 you have <strong>4 + Brawn</strong> health; each subsequent level grants <strong>2 + Brawn</strong>.</div></div>
+        <div class="mini-card"><div class="label">Guard</div><div class="body">Temporary health, always lost before Health. Guard cannot be healed once lost — only regained through traits or external effects.</div></div>
+        <div class="mini-card"><div class="label">Death</div><div class="body">At 0 Health you fall unconscious. Only Final Blows can harm you further; you resist <strong>4 Final Blows</strong> before dying, at the Narrator's discretion.</div></div>
+    </div>
+
+    <h4>Rest (10+ minutes)</h4>
+    <p>A rest is time spent on tasks that aren't physically demanding — up to 4 hours. For each hour rested, including the first 10 minutes, you regain health equal to your level, and regain any Active trait uses.</p>
+    <h4>Sleep (8 hours)</h4>
+    <ul>
+        <li>Sleep at least 6 hours: fully recover health and mana — or reduce Fatigue by 1 if you have any.</li>
+        <li>Sleep at least 4 hours: recover half of your health and mana.</li>
+        <li>Sleep less than 4 hours: no recovery at all.</li>
+        <li>Any amount of sleep prevents Fatigue gain.</li>
+    </ul>
+    <p><span class="tag">Fatigue</span> imposes a stacking −2 penalty to all rolls per level. Reaching level 6 without sleep is fatal.</p>
+
+    <h3>Traits &amp; Leveling Up</h3>
+    <p>There are no classes and no professions in Mythlight. Instead, every feature, ability, and bonus is acquired from a <strong>trait</strong> — gained as you level, varying in price and power, and the true core of a character's progression. Many traits belong to a Path; investing enough into one unlocks its Breakpoints. At level 1 you have <strong>2 trait points</strong> to spend — choose wisely.</p>
+    <p>Leveling is dictated by the Narrator. Each level grants a trait point, and select levels also grant feat points — spendable only once per feat, so 2 feat points must raise 2 different feats. Characters run from level 1 to level 12.</p>
+
+    <div class="ledger-wrap">
+        <table class="ledger">
+            <thead><tr><th class="num">Level</th><th class="num">Trait Points</th><th class="num">Feat Points</th></tr></thead>
+            <tbody>
+                <tr><td class="num">1</td><td class="num">2</td><td class="num">4</td></tr>
+                <tr><td class="num">2</td><td class="num">2</td><td class="num">0</td></tr>
+                <tr><td class="num">3</td><td class="num">2</td><td class="num">2</td></tr>
+                <tr><td class="num">4</td><td class="num">2</td><td class="num">0</td></tr>
+                <tr><td class="num">5</td><td class="num">2</td><td class="num">0</td></tr>
+                <tr><td class="num">6</td><td class="num">2</td><td class="num">2</td></tr>
+                <tr><td class="num">7</td><td class="num">2</td><td class="num">0</td></tr>
+                <tr><td class="num">8</td><td class="num">2</td><td class="num">0</td></tr>
+                <tr><td class="num">9</td><td class="num">2</td><td class="num">2</td></tr>
+                <tr><td class="num">10</td><td class="num">2</td><td class="num">0</td></tr>
+                <tr><td class="num">11</td><td class="num">2</td><td class="num">0</td></tr>
+                <tr><td class="num">12</td><td class="num">2</td><td class="num">2</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Spellcasting</h3>
+    <p>A core part of the system — mana is spent to cast spells you know. Spellcasting requires a trait that grants it, such as <em>Arcane Student</em>, and no character can have more than one spellschool unlocked. If you intend to play a caster, read the dedicated <a href="../pages/spells.html">Spells</a> page in full.</p>
+
+    <h3>Equipment &amp; Encumbrance</h3>
+    <div class="card-row cols-2">
+        <div class="mini-card"><div class="label">Armor</div><div class="body">Base armor is <span class="formula">4 + Fortitude</span>, with worn armor granting a flat bonus. Shields 1–2, Light 1–2, Medium 2–3, Heavy 4–5. One piece per slot unless a trait says otherwise.</div></div>
+        <div class="mini-card"><div class="label">Weaponry</div><div class="body">You may wield as many weapons as you have arms, but without traits only <strong>1 weapon</strong> is fully effective. Might and Finesse set your maximum proficiency investment in Melee, Ranged, and Finesse weapons.</div></div>
+    </div>
+    <p><span class="formula">Encumbrance Limit = Level + Might + Brawn</span> — item weights run None (0), Light (1), Medium (2), Heavy (3), Cumbersome (4); 100 coins equal 1 weight.</p>
+    <div class="ledger-wrap">
+        <table class="ledger">
+            <thead><tr><th>State</th><th>Effect</th></tr></thead>
+            <tbody>
+                <tr><td>Non-encumbered <span class="tag">&lt; Limit</span></td><td>Business as usual.</td></tr>
+                <tr><td>Encumbered <span class="tag">&gt; Limit</span></td><td>Movement halved; 0 movement imposes disadvantage.</td></tr>
+                <tr><td>Overencumbered <span class="tag">&gt; 2× Limit</span></td><td>Movement halved, and disadvantage on all Body/Skill checks.</td></tr>
+                <tr><td>Crushed <span class="tag">&gt; 3× Limit</span></td><td>Movement 0, disadvantage on all checks, 1 damage every 10 minutes.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<div class="chain-divider" aria-hidden="true"><div class="strand"></div><div class="pendant"></div></div>
+
+<!-- ============================================================
+     III. COMBAT RULES
+     ============================================================ -->
+<section class="leaf" id="combat">
+    <div class="leaf-seal">III</div>
+    <div class="leaf-kicker">Chapter Three</div>
+    <h2>Combat Rules</h2>
+    <p class="leaf-intro drop-cap">These rules govern combat and all of its sub-systems — from the tile you stand on to the condition that's about to expire.</p>
+
+    <h3>Movement</h3>
+    <p>Combat takes place on a grid-based map. Each tile equals <strong>1 unit of Speed</strong>. Movement is limited to tiles directly adjacent to one another — diagonal movement never skips a tile.</p>
+    <p>A <strong>Dash</strong> ignores opportunity attacks and terrain penalties, but is never available without a strictly declared source. <strong>Jumping</strong> is an alternative to normal movement, useful for avoiding Rough or Slippery terrain or clearing hazards — its maximum distance is half your Speed (rounded up), and you cannot jump through an occupied space.</p>
+
+    <div class="ledger-wrap">
+        <table class="ledger">
+            <thead><tr><th>Terrain</th><th>Effect</th></tr></thead>
+            <tbody>
+                <tr><td>Firm</td><td>No movement penalties.</td></tr>
+                <tr><td>Rough</td><td>Each tile of movement costs 2 units of movement.</td></tr>
+                <tr><td>Slippery</td><td>You may only move in one direction at a time; each turn prompts a Reflex check.</td></tr>
+                <tr><td>Dark</td><td>No light — you are considered Blinded.</td></tr>
+                <tr><td>Dim</td><td>Visibility reduced; sight-based Awareness checks suffer disadvantage.</td></tr>
+                <tr><td>Visible</td><td>Lighting is clear; creatures and objects are seen normally.</td></tr>
+                <tr><td>Blinding</td><td>Light is overwhelming — you automatically fail sight-based checks.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Map Sizes &amp; Grappling</h3>
+    <p>Size defines a creature's "hitbox," affecting adjacency and area effects. Creatures generally cannot occupy the same space.</p>
+    <div class="card-row cols-4">
+        <div class="mini-card"><div class="label">Tiny · 1×1</div><div class="body">Can occupy the space of medium creatures and above with no penalty.</div></div>
+        <div class="mini-card"><div class="label">Small · 1×1</div><div class="body">Can occupy the space of large creatures and above with no penalty.</div></div>
+        <div class="mini-card"><div class="label">Medium · 1×1</div><div class="body">The standard size for most creatures and player characters.</div></div>
+        <div class="mini-card"><div class="label">Large · 2×2 / Huge · 3×3</div><div class="body">Larger creatures and true titans; anything bigger should be assembled from multiple size categories (a huge body, large wings, a medium head).</div></div>
+    </div>
+    <p>To <strong>grapple</strong>, both creatures roll a contesting Might check; success applies Restrained to both until one lets go or breaks free as an action. Grappling something larger than you imposes 1 disadvantage per size class above yours; grappling something smaller grants 1 advantage per size class below.</p>
+    <p>A <strong>Radius</strong> begins as a 3×3 square (1 unit radius) and expands outward by one tile per unit. A <strong>Cone</strong> is a triangle of tiles whose width equals half its height, rounded down, always centered on the caster.</p>
+
+    <h3>Ranged Combat &amp; Cover</h3>
+    <ul>
+        <li>Any creature within range can be shot at; attacks beyond range automatically fail.</li>
+        <li>Ranged attacks made while adjacent to an enemy suffer disadvantage.</li>
+        <li>Creatures within a 1-unit radius of a target — including diagonals — count as adjacent, and count as Partial (Reinforced) Cover for anyone shooting past them.</li>
+    </ul>
+    <div class="card-row cols-3">
+        <div class="mini-card"><div class="label">Partial Cover</div><div class="body">Flimsy, Sturdy, or Reinforced — imposes a −1 to −3 penalty depending on material.</div></div>
+        <div class="mini-card"><div class="label">Half Cover</div><div class="body">Imposes disadvantage on the attack roll.</div></div>
+        <div class="mini-card"><div class="label">Full Cover</div><div class="body">The target cannot be targeted at all, barring traits that bypass it.</div></div>
+    </div>
+
+    <h3>Turn Structure &amp; Action Economy</h3>
+    <div class="card-row cols-2">
+        <div class="mini-card"><div class="label">Scene</div><div class="body">One full cycle of every creature's turn. Unconscious creatures drop to the bottom of the order until revived.</div></div>
+        <div class="mini-card"><div class="label">Ambush</div><div class="body">When combat begins against an unaware target, the initiator acts before normal initiative or turn delay.</div></div>
+        <div class="mini-card"><div class="label">Opportunity Attack</div><div class="body">When a creature leaves another's melee range, the remaining creature may make a melee attack against it.</div></div>
+        <div class="mini-card"><div class="label">NPC Initiative</div><div class="body">NPCs act on a Turn Delay set by when they joined combat, specified on their stat block.</div></div>
+    </div>
+    <p>Each turn grants <strong>2 Actions</strong>, with only 1 Attack per turn by default. Each Scene grants <strong>1 Reaction</strong>. A Held Action may be kept until your next turn and triggered when a declared condition is met.</p>
+
+    <div class="ledger-wrap">
+        <table class="ledger">
+            <thead><tr><th>Attack Type</th><th>Formula</th></tr></thead>
+            <tbody>
+                <tr><td>Melee Attack</td><td class="num">2d6 + Proficiency + Weapon Mod + Accuracy</td></tr>
+                <tr><td>Finesse Attack</td><td class="num">2d6 + Proficiency + Weapon Mod + Accuracy</td></tr>
+                <tr><td>Firearm Attack</td><td class="num">2d6 + Proficiency + Weapon Mod + Accuracy</td></tr>
+                <tr><td>Magic Attack</td><td class="num">2d6 + Arcane Total + Focus Mod + Accuracy</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p>Off-hand attacks use only the base stat score. A weapon with 0 Proficiency is treated as Improvised — improvised weapons use only Might (melee) or Finesse (thrown).</p>
+
+    <h3>Companions</h3>
+    <p>Companions fight, assist, or travel alongside a character. They exist to support, not replace, player agency.</p>
+    <div class="card-row cols-3">
+        <div class="mini-card"><div class="label">Health</div><div class="body">Crafted companions: Health equals their Durability. Tamed companions: Health equals the max on their original stat block.</div></div>
+        <div class="mini-card"><div class="label">Armor</div><div class="body">Fixed at <span class="formula">6 + ½ Level (rounded down)</span>, before equipment or trait bonuses.</div></div>
+        <div class="mini-card"><div class="label">Attributes</div><div class="body">Only Body, Mind, and Skill. Crafted companions default to 2 in each unless stated otherwise; tamed companions use their original stat block.</div></div>
+    </div>
+    <p>Companions have no Feats, Grace, or Mana unless explicitly stated. At <strong>0 Health</strong> a companion is incapacitated, with 1 Final Blow resistance per Sleep — Narrators are encouraged to treat companion deaths narratively, the same weight as a player's. They act immediately after their controller, with 2 Actions, 1 Attack, and 1 Reaction per Scene. By default only one active combat companion is allowed per character, unless a trait says otherwise.</p>
+    <p>A companion only performs complex actions when commanded: a full <strong>Command</strong> (1 controller action) to Attack, Move, Interact, Defend, or use a Special ability, or a free <strong>Simple Direction</strong> to Follow, Stay, or Retreat.</p>
+
+    <h3>Conditions</h3>
+    <p>Conditions represent ongoing states — some stack, others simply persist until removed. Multiple stacks can be removed at once, and removal generally requires a check, item, magic, or rest.</p>
+    <dl class="condition-grid">
+        <div class="condition-entry"><dt>Poison</dt><dd>Stacks. Each scene one stack expires, dealing 1 Poison damage while active.</dd></div>
+        <div class="condition-entry"><dt>Mantra</dt><dd>Stacks. Each turn heal 1 and lose 1 stack; healing increases every 4 stacks.</dd></div>
+        <div class="condition-entry"><dt>Bleed</dt><dd>Stacks. Each stack reduces healing by 1; one stack expires per scene.</dd></div>
+        <div class="condition-entry"><dt>Boon</dt><dd>Stacks. The next healing, Guard, or Armor gain is increased by your stacks, then all are consumed.</dd></div>
+        <div class="condition-entry"><dt>Slow</dt><dd>Stacks. Lose 1 movement per stack and cannot react; expires next scene if not reapplied.</dd></div>
+        <div class="condition-entry"><dt>Speed</dt><dd>Stacks. Gain 1 movement per stack and may take 2 reactions; expires next scene if not reapplied.</dd></div>
+        <div class="condition-entry"><dt>Stunned</dt><dd>Stacks. Each stack removes 1 action; at 0 actions your turn is skipped.</dd></div>
+        <div class="condition-entry"><dt>Haste</dt><dd>Stacks. Each stack grants an additional action; expires at end of scene if not reapplied.</dd></div>
+        <div class="condition-entry"><dt>Prone</dt><dd>Movement becomes 0, non-ranged attacks against you gain advantage, standing costs 1 action, and you cannot dash.</dd></div>
+        <div class="condition-entry"><dt>Flying</dt><dd>Immune to floor hazards; move up to Movement in any direction at a fixed height.</dd></div>
+        <div class="condition-entry"><dt>Restrained</dt><dd>Movement 0, attacks against you gain advantage, you cannot attack. Ending usually requires a Might check.</dd></div>
+        <div class="condition-entry"><dt>Ethereal</dt><dd>Pass through creatures and obstacles; cannot be grappled or harmed by non-magical effects.</dd></div>
+        <div class="condition-entry"><dt>Exhausted</dt><dd>Stacks. Each grants 1 temporary Fatigue (never fatal this way); one stack expires per scene.</dd></div>
+        <div class="condition-entry"><dt>Invigorated</dt><dd>Stacks. Each removes 1 Fatigue, to a minimum of 0; one stack expires per scene.</dd></div>
+        <div class="condition-entry"><dt>Weakened</dt><dd>Stacks. Each reduces damage dealt by 1; an attack reduced to 0 damage cannot be made. Expires next scene.</dd></div>
+        <div class="condition-entry"><dt>Astute</dt><dd>Stacks. Reduces Midnight roll requirements by 1 per stack.</dd></div>
+        <div class="condition-entry"><dt>Blinded</dt><dd>Disadvantage on your attacks; attacks against you gain advantage.</dd></div>
+        <div class="condition-entry"><dt>Vigil</dt><dd>Advantage on your attacks; attacks against you suffer disadvantage.</dd></div>
+        <div class="condition-entry"><dt>Taunt</dt><dd>Your next attack, including opportunity attacks, must target the taunting creature; expires once made.</dd></div>
+        <div class="condition-entry"><dt>Charmed</dt><dd>You must follow the charmer's commands (never harmful ones); expires at end of scene if not reapplied.</dd></div>
+        <div class="condition-entry"><dt>Burn</dt><dd>Take 1 damage each turn; expires at end of scene if not reapplied.</dd></div>
+        <div class="condition-entry"><dt>Chilled</dt><dd>−2 to Reflex; expires at the end of your next turn if not reapplied.</dd></div>
+        <div class="condition-entry"><dt>Compromised</dt><dd>Stacks. Each reduces Armor by 1; at 0 Armor all attacks auto-hit. One stack expires per scene.</dd></div>
+        <div class="condition-entry"><dt>Bolstered</dt><dd>Stacks. Gain 1 Armor per stack; one stack expires each time you take damage.</dd></div>
+        <div class="condition-entry"><dt>Madness</dt><dd>Casting a spell requires rolling 1d6 and paying that result as the mana cost instead.</dd></div>
+        <div class="condition-entry"><dt>Focus</dt><dd>Stacks. Spells cost 1 less mana per stack of Focus.</dd></div>
+        <div class="condition-entry"><dt>Intoxicated</dt><dd>−2 Finesse and −2 Scholarship.</dd></div>
+        <div class="condition-entry"><dt>Stoned</dt><dd>−2 Reflex and −2 Insight.</dd></div>
+        <div class="condition-entry"><dt>Feared</dt><dd>Must use at least one movement action per turn to flee the source of fear.</dd></div>
+        <div class="condition-entry"><dt>Courage</dt><dd>Stacks. +1 to resisting Intimidation and Fear; a stack expires each time you resist such an effect.</dd></div>
+        <div class="condition-entry"><dt>Unconscious</dt><dd>Cannot act; taking damage costs 1 Final Blow Resistance.</dd></div>
+        <div class="condition-entry"><dt>Resolve</dt><dd>Stacks. If you'd fall unconscious, consume 1 Final Blow Resistance and 1 stack instead; at 0 Health from this, remain at 1.</dd></div>
+        <div class="condition-entry"><dt>Dazed</dt><dd>Active trait uses are disabled while any stacks remain; one decays at end of turn.</dd></div>
+        <div class="condition-entry"><dt>Vigor</dt><dd>Stacks. The next trait Use that would be consumed instead removes 1 stack of Vigor.</dd></div>
+        <div class="condition-entry"><dt>Silenced</dt><dd>Cannot cast spells while any stacks remain; one decays at end of turn.</dd></div>
+        <div class="condition-entry"><dt>Hesitation</dt><dd>Cannot make unarmed or weapon attacks while any stacks remain; one decays at end of turn.</dd></div>
+        <div class="condition-entry"><dt>Rage</dt><dd>Lose 6 Armor, gain +1 Damage and +2 Accuracy; dismissed after 2 scenes without attacking or being hit.</dd></div>
+        <div class="condition-entry"><dt>Pacifism</dt><dd>Cannot take any action that would directly harm another creature.</dd></div>
+        <div class="condition-entry"><dt>Sleep</dt><dd>Cannot act; regain 1 health per scene slept. Any damage taken causes Awakening.</dd></div>
+        <div class="condition-entry"><dt>Alert</dt><dd>Cannot be Ambushed, Surprised, or fall asleep involuntarily; you may still take rests.</dd></div>
+    </dl>
+</section>
+
+<div class="chain-divider" aria-hidden="true"><div class="strand"></div><div class="pendant"></div></div>
+
+<!-- ============================================================
+     IV. MOUNTS & VEHICLES
+     ============================================================ -->
+<section class="leaf" id="mounts">
+    <div class="leaf-seal">IV</div>
+    <div class="leaf-kicker">Chapter Four</div>
+    <h2>Mounts &amp; Vehicle Combat</h2>
+    <p class="leaf-intro drop-cap">Trusted steeds and fancy rides — faster and stronger than two feet. Here's how they carry you through a fight.</p>
+
+    <h3>Mounted Combat</h3>
+    <p>Any creature capable of carrying a passenger can serve as a mount; medium vehicles count as mounts too, while large vehicles use full vehicle rules. While mounted, rider and mount share a tile and an initiative slot, and the rider uses the mount's Movement instead of their own. Mounting and dismounting each cost 1 Action.</p>
+    <p>Melee attacks against a mounted target suffer an accuracy penalty equal to the rider's Reflex, and an attacker must declare whether they're targeting the rider or the mount. Area effects hit both; floor hazards affect only the mount. Opportunity Attacks normally hit the mount, though attackers with Reach may target the rider instead.</p>
+
+    <div class="ledger-wrap">
+        <table class="ledger">
+            <thead><tr><th>Stat</th><th>Unmounted</th><th>Mounted</th></tr></thead>
+            <tbody>
+                <tr><td>Health</td><td colspan="2">Health, replaced by Morale while mounted</td></tr>
+                <tr><td>Armor</td><td>6 + Mount's Body Score</td><td>6 + Rider's Reflex</td></tr>
+                <tr><td>Movement</td><td colspan="2">Movement</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p><strong>Morale</strong> is set to the mount's current Health at the moment it's mounted; whenever the rider takes damage, the mount loses Morale equal to half that damage, and a directly-targeted mount takes full Morale damage. A rider may spend 1 Action to Soothe their mount, restoring Morale equal to half the rider's level.</p>
+    <p>When Morale hits zero, the mount attempts to forcefully dismount its rider. On a success it recovers Morale equal to the rider's Reflex; on a failure the rider is dismounted, knocked Prone, and placed in an adjacent tile — the mount becomes Feared of whoever caused the loss and flees, obeying only Hide or Seek Cover commands.</p>
+    <p>Vehicle mounts use a fixed stat block that never changes while mounted and don't track Morale — they lose Durability only when targeted directly, hit by floor hazards, or drained by traits. An unridden vehicle is non-functional and acts as a combat obstacle.</p>
+
+    <h3>Vehicle Combat</h3>
+    <div class="card-row cols-3">
+        <div class="mini-card"><div class="label">Medium</div><div class="body">Motorcycle, quadbike. Seats 1 (up to 2). 1×1 tile. Hits land on the rider, rolled against their armor.</div></div>
+        <div class="mini-card"><div class="label">Big</div><div class="body">Car, wagon. Seats 4 (up to 5), 1 modification slot, 4×4 tiles, 13 Armor. Hits land on any rider, rolled against the vehicle's armor.</div></div>
+        <div class="mini-card"><div class="label">Large</div><div class="body">Tank, truck, train, larger ships. 5+ occupants, 2 modification slots, 6+ tiles (min. width 2), 17 Armor. Hits land on any visible rider, rolled against the vehicle's armor.</div></div>
+    </div>
+    <p>Movement: Medium 6 tiles, Big 10 tiles, Large 8 tiles. Cover: Medium grants Partial Cover, Big grants Half Cover and can block line of sight, Large grants Full (and sometimes Total) Cover. Basic repairs restore Durability at roughly 1 hour per 10 points, typically needing a successful Crafting or Engineering check; advanced repairs may need specific parts or magical assistance.</p>
+    <div class="ledger-wrap">
+        <table class="ledger">
+            <thead><tr><th>Modification</th><th>Effect</th></tr></thead>
+            <tbody>
+                <tr><td>Mounted Gun</td><td>Adds a fixed weapon the crew can fire as an action for extra damage.</td></tr>
+                <tr><td>Better Engine</td><td>Increases movement speed or allows special maneuvers like boosting.</td></tr>
+                <tr><td>Bigger Fuel Tank</td><td>Extends the fuel pool, reducing consumption.</td></tr>
+                <tr><td>Music Speakers</td><td>Buffs morale or distracts enemies with noise.</td></tr>
+                <tr><td>Shielding</td><td>Enhances armor or grants resistance to certain damage types.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<div class="chain-divider" aria-hidden="true"><div class="strand"></div><div class="pendant"></div></div>
+
+<!-- ============================================================
+     V. NARRATOR RULES
+     ============================================================ -->
+<section class="leaf" id="narrator">
+    <div class="leaf-seal">V</div>
+    <div class="leaf-kicker">Chapter Five</div>
+    <h2>Narrator Rules</h2>
+    <p class="leaf-intro drop-cap">You lead the story, control its forces, and guide the flow of events while your players shape the outcome through their choices. You hold final authority on rules and rulings — and on the table's tone, fairness, and safety.</p>
+
+    <h3>Overview &amp; System Familiarity</h3>
+    <p>Conflict between characters can enrich a story; conflict between players does not — protect the table's enjoyment and keep the experience collaborative. Mythlight is designed to be modified: adjust, remove, or expand rules as your story needs. The system is a framework, and you are its interpreter. Familiarize yourself with the core mechanics before running a session, but you're not expected to memorize everything — checking mid-session is fine, and players should know their own abilities.</p>
+
+    <h3>Starting Resources &amp; Tools</h3>
+    <p>Decide what characters begin with — early equipment shapes the tone and difficulty of the first sessions. Combine or choose between <strong>Starting Funds</strong> (an appropriate sum, spent freely within reason) and <strong>Starting Gear</strong> (a predefined loadout: light or medium armor, one proficient weapon, modest funds, essential supplies). Ground equipment in the narrative — consider how each character acquired their items.</p>
+    <p>Tools enhance specific feats and are defined by purpose rather than base feat (Brewing Tools, Crafting Tools). They typically grant a <strong>+1 to +3</strong> bonus when appropriately applied; characters gain proficiencies through traits, or may start play proficient at your discretion.</p>
+
+    <h3>Creature Taming</h3>
+    <p>Anyone can attempt to tame a creature if they pass the necessary checks, though using a tamed creature in combat is locked behind traits like <em>Beast Whisperer</em>. Different creatures need different prerequisites — a squirrel wants nuts and a decent Speech/Awareness roll, a bear could get you mauled. Not everything is tameable; wild beasts avoid or attack, and even purchased animals can escape or refuse to listen.</p>
+    <p>Taming requires repeated attempts, each costing 1–4 weight units of appropriate food (scaling with size) and a check that drops one difficulty tier per success. Purchased animals start between Difficult and Standard; wild animals always start at Hard.</p>
+
+    <h3>The Effect Stack</h3>
+    <p>Multiple effects may modify the same stat at once. To avoid confusion, all modifiers resolve in a fixed order:</p>
+    <div class="ledger-wrap">
+        <table class="ledger">
+            <thead><tr><th class="num">Order</th><th>Modifier Type</th><th>Examples</th></tr></thead>
+            <tbody>
+                <tr><td class="num">1</td><td>Species</td><td>Inherent stat modifiers and traits from a character's species.</td></tr>
+                <tr><td class="num">2</td><td>Breakpoints</td><td>Passive bonuses and attribute increases unlocked by Path investment.</td></tr>
+                <tr><td class="num">3</td><td>Traits</td><td>Character traits providing bonuses or penalties.</td></tr>
+                <tr><td class="num">4</td><td>Spells / Items / Crafts</td><td>Temporary effects from magic, equipment, or crafted items.</td></tr>
+                <tr><td class="num">5</td><td>Conditions / Hazards</td><td>Ongoing effects from conditions or the environment.</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="leaf-intro" style="margin-top:1.2rem;">Example — Movement, base 5: a species trait grants +1 (5→6); a Breakpoint grants +1 (6→7); traits reduce it by 2 (7→5); boots grant +3 (5→8); rough terrain then halves the fully-modified value on the move itself. In simple cases the order may not matter, but in complex interactions, sequencing keeps things balanced.</p>
+
+    <h3>CS Difficulty &amp; Social Interactions</h3>
+    <p>Whenever an action's outcome is uncertain, assign a CS (Challenge Score) reflecting its difficulty — this applies to physical feats, knowledge, environment, and social encounters alike.</p>
+    <div class="ledger-wrap">
+        <table class="ledger">
+            <thead><tr><th>Difficulty</th><th class="num">CS Range</th><th>Description</th></tr></thead>
+            <tbody>
+                <tr><td>Trivial</td><td class="num">4 (±2)</td><td>Easily accomplished by anyone with basic competence.</td></tr>
+                <tr><td>Easy</td><td class="num">6 (±2)</td><td>Requires some effort or skill, generally achievable.</td></tr>
+                <tr><td>Standard</td><td class="num">8 (±2)</td><td>A reasonable challenge for a competent character.</td></tr>
+                <tr><td>Difficult</td><td class="num">10 (±2)</td><td>Requires significant skill, preparation, or luck.</td></tr>
+                <tr><td>Hard</td><td class="num">12 (±2)</td><td>A formidable challenge needing multiple attempts or creative solutions.</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p>The ±2 range lets you adjust within a tier for context, preparation, tools, or narrative positioning. Impossible actions simply aren't assigned a CS — you're never required to give a chance at something that cannot reasonably occur.</p>
+    <p>Social encounters should default to roleplay first; roll only when the outcome is genuinely uncertain or contested. When a roll is needed, use the same tiers with <span class="formula">CS + Target Insight ± Reputation Modifier</span> — positive reputation may lower the effective difficulty, hostility or distrust may raise it. Adjust freely for tone and stakes.</p>
+
+    <h3>Campaign &amp; Session Preparation</h3>
+    <p>Before the first session, establish the world's stability, magic presence, and political tensions; clarify tone and player-safety expectations; give every character a reason to exist within the world and party; and introduce a central conflict, threat, or mystery to drive early engagement.</p>
+    <div class="card-row cols-3">
+        <div class="mini-card"><div class="label">1. NPCs</div><div class="body">Keep a quick-reference list of names, traits, quirks, and goals for on-the-spot creation.</div></div>
+        <div class="mini-card"><div class="label">2. Quests</div><div class="body">Prepare small jobs and at least one main questline, and connect them together where possible.</div></div>
+        <div class="mini-card"><div class="label">3. Points of Interest</div><div class="body">Prepare at least as many POIs as there are players for any new location, including expected sites like shops and taverns.</div></div>
+        <div class="mini-card"><div class="label">4. Loot &amp; Inventory</div><div class="body">Rollable tables for chests, and prepared price lists for stores — empty chests and empty shelves weaken immersion.</div></div>
+        <div class="mini-card"><div class="label">5. Random Events</div><div class="body">Themed tables for travel and rest, refreshed periodically; keep highly lethal outcomes out of general travel unless the region calls for it.</div></div>
+        <div class="mini-card"><div class="label">6. Improvisation</div><div class="body">No amount of prep accounts for every decision — preparation supports the campaign, but flexibility sustains it.</div></div>
+    </div>
+    <p>Languages can be added freely to reflect your setting — not every settlement speaks the same tongue, and private languages can create secrecy between factions or party members, used intentionally rather than as frustration.</p>
+    <p>Each session should stay open-ended: a clear Primary Objective, optional Secondary Hooks, NPC motivations, relevant stat blocks and CS values prepared in advance, anticipated player resources, and the flexibility to pivot. Let consequences emerge from player action — the world reacts, it does not revolve.</p>
+
+    <h3>Downtime &amp; Travel</h3>
+    <div class="card-row cols-2">
+        <div class="mini-card"><div class="label">1. Potions &amp; Crafting</div><div class="body">Guaranteed success if the character commits hours equal to the item's CS requirement — no roll needed. Discovering new potion recipes needs a Hard experimentation check per ingredient; crafting recipes must be learned, never discovered this way.</div></div>
+        <div class="mini-card"><div class="label">2. Spells</div><div class="body">Learned from scrolls or spellbooks in 4 hours per spell level (the level must already be unlocked, and enough mana to cast it must be available). Cantrips take 2 hours plus a successful Difficult Arcana check.</div></div>
+        <div class="mini-card"><div class="label">3. Traits</div><div class="body">Rare training manuals allow new traits to be learned — 10 days per trait point, with all normal prerequisites still required.</div></div>
+        <div class="mini-card"><div class="label">4. Proficiencies</div><div class="body">4 hours a day for 7 consecutive days increases a weapon proficiency by 1 point.</div></div>
+    </div>
+    <p><strong>Languages:</strong> 3 hours a day for one month raises Language Score by 1 (1→6); at 6 the character is fluent. The Narrator holds final authority over all downtime limits and time requirements.</p>
+
+    <h3>Combat-Relevant NPC Creation</h3>
+    <p>Combat-ready NPCs need a structured stat block to function within initiative, damage resolution, and the Effect Stack.</p>
+    <div class="ledger-wrap">
+        <table class="ledger">
+            <thead><tr><th>Stat</th><th>How to Set It</th></tr></thead>
+            <tbody>
+                <tr><td>Movement</td><td>Follows normal player movement rules. Average ranges: Slow ~3, Moderate ~5, High ~7.</td></tr>
+                <tr><td>Health</td><td>Calculate total party Health [H], then pick a pool: Easy 0.5×H, Moderate 1×H, Hard 2×H — distributed evenly among combatants (allies get equal HP but don't count toward the division).</td></tr>
+                <tr><td>Armor</td><td>Selected from the CS difficulty scale according to the desired encounter challenge.</td></tr>
+                <tr><td>Turn Delay</td><td>Fixed (acts after X player turns at combat start) or Recursive (acts every X player turns).</td></tr>
+                <tr><td>Attributes</td><td>Body (Melee), Skill (Ranged), Mind (Spells) in place of feats. Distribute 4 points total; +2 for a primary/boss target, −2 for a weak/swarm enemy.</td></tr>
+                <tr><td>Weakness / Resistance / Immunity</td><td>Weakness: 50% more damage from a type. Resistance: 50% less. Immunity: unaffected entirely.</td></tr>
+                <tr><td>Abilities &amp; Traits</td><td>Assign traits totaling 0.5× the NPC's Health in trait points; if a trait requires Level, use the NPC's highest Attribute score instead.</td></tr>
+                <tr><td>Spellcasting</td><td>Atk Bonus = Mind, Dmg Bonus = Mind ÷ 2, Spell CS = 5 + Mind, and 0.5× Health worth of spells (cantrips included).</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<div class="chain-divider" aria-hidden="true"><div class="strand"></div><div class="pendant"></div></div>
+
+<!-- ============================================================
+     VI. ONE SHOT PLAY
+     ============================================================ -->
+<section class="leaf" id="oneshot">
+    <div class="leaf-seal">VI</div>
+    <div class="leaf-kicker">Chapter Six</div>
+    <h2>One Shot Character Creation</h2>
+    <p class="leaf-intro drop-cap">One shot characters are quick to build and quick to play. The focus is flavor, not optimization — aim for a session of about 3 to 4 hours.</p>
+
+    <div class="card-row cols-2">
+        <div class="mini-card"><div class="label">1. Choose a Species</div><div class="body">Pick a single species and use only its Attribute bonus. Species also provides your base movement, a trait, and other minor statistics.</div></div>
+        <div class="mini-card"><div class="label">2. Assign Traits</div><div class="body"><strong>2</strong> starting Trait Points, plus <strong>+1</strong> per character level. For fast play, the Random Trait Generator is strongly recommended.</div></div>
+        <div class="mini-card"><div class="label">3. Attributes &amp; Feats</div><div class="body">No Feats are used — base Attributes apply directly to rolls. You have 4 attribute points, maximum 2 in any single Attribute.</div></div>
+        <div class="mini-card"><div class="label">4. Equipment</div><div class="body">Choose one appropriate weapon and one armor type (or none). Other gear is optional. Unarmored: Armor = <span class="formula">6 + Body</span>.</div></div>
+        <div class="mini-card"><div class="label">5. Spellcasting</div><div class="body">Only spellcasters track Mana, gaining 1 per level. Cantrips cost none; casting at a higher level costs 1 extra mana per level. Half your mana restores on Rest, all of it on Sleep.</div></div>
+    </div>
+
+    <h3>Health, Guard &amp; Defeat</h3>
+    <div class="card-row cols-3">
+        <div class="mini-card"><div class="label">Health</div><div class="body">6 + Brawn at level 1; +2 + Brawn each level after.</div></div>
+        <div class="mini-card"><div class="label">Guard</div><div class="body">Temporary health, always lost first, and cannot be healed.</div></div>
+        <div class="mini-card"><div class="label">Unconscious &amp; Final Blows</div><div class="body">At 0 Health you're unconscious and cannot act; resist 4 Final Blows per rest before dying.</div></div>
+    </div>
+    <p>Resting heals Health equal to your level per hour; sleeping fully restores Health and Mana.</p>
+
+    <h3>Core Mechanics, Turns &amp; Range</h3>
+    <div class="ledger-wrap">
+        <table class="ledger">
+            <thead><tr><th>Roll</th><th>Result</th><th>Outcome</th></tr></thead>
+            <tbody>
+                <tr><td rowspan="2">2d6 + Stat vs CS</td><td>≥ CS</td><td>Success</td></tr>
+                <tr><td>&lt; CS</td><td>Failure</td></tr>
+                <tr><td>Two natural 6s</td><td colspan="2">Midnight — automatic success, double damage</td></tr>
+                <tr><td>Two natural 1s</td><td colspan="2">Snake Eyes — automatic failure, complication</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p>Initiative is determined by word of mouth; non-players use a turn delay. Becoming unconscious drops you to the bottom of the order, and mounts/companions share their controller's turn. Actions: 2 per turn, 1 attack per turn, 1 reaction per scene — Move, Attack, Cast, Interact, and Command all count as common actions.</p>
+    <p>Combat uses a square grid; every character can move up to 5 tiles per action, only to tiles that are touching. Leaving melee range triggers Opportunity Attacks, which consume the attacker's Reaction. For ranged attacks: targets beyond max range can't be hit, attacking while an enemy is in melee range suffers disadvantage, Partial Cover imposes −2 Accuracy, and Full Cover prevents targeting entirely. Line of sight is measured tile-center to tile-center.</p>
+    <p><strong>Companions</strong> act immediately after their controller, with 2 Actions and 1 Attack, no Feats, Mana, or Grace, and only one combat companion per player.</p>
+
+    <h3>Narrator Guidance for One Shots</h3>
+    <div class="card-row cols-3">
+        <div class="mini-card"><div class="label">Default CS</div><div class="body">6 Easy, 8 Standard, 12 Hard, 16 "Impossible."</div></div>
+        <div class="mini-card"><div class="label">NPC Health</div><div class="body">0.5× party Health total = Easy, 1× = Standard, 2× = Hard — divided among all NPCs present in a multi-NPC encounter.</div></div>
+        <div class="mini-card"><div class="label">NPC Traits</div><div class="body">Between 1 and 4 traits, scaled to how difficult the NPC should be to defeat.</div></div>
+    </div>
+</section>
+
+<div class="chain-divider" aria-hidden="true"><div class="strand"></div><div class="pendant"></div></div>
+
+<!-- ============================================================
+     VII. EXPANSION RULES
+     ============================================================ -->
+<section class="leaf" id="expansions">
+    <div class="leaf-seal">VII</div>
+    <div class="leaf-kicker">Chapter Seven</div>
+    <h2>Expansion Rules</h2>
+    <p class="leaf-intro drop-cap">Beyond the core book, expansion modules layer new mechanics, Paths, and hazards onto specific settings and campaigns.</p>
+    <div class="card-row cols-2">
+        <div class="mini-card">
+            <div class="label">Lakeview</div>
+            <div class="body">Introduces <strong>Risk</strong> (a stackable debuff meter) and <strong>Smog</strong> (an HP-cap meter), alongside the Path of the Daredevil, the Path of the Modified, and a full Grafting &amp; Mutation system spanning mechanical implants and biological alteration.</div>
+        </div>
+        <div class="mini-card">
+            <div class="label">More on the way</div>
+            <div class="body">Additional expansion modules are in active development. This section will grow alongside the rest of the site.</div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="rules-footer">
+    <div class="sigil">✦ Mythlight ✦</div>
+    <p>© 2025 Mythlight RPG System · By Grinprim, Scuttlecrab &amp; River · <a href="../../index.html">Return Home</a></p>
+</footer>
+
+<script src="rules.js"></script>
+</body>
+</html>

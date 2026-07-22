@@ -1,0 +1,2680 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mythlight RPG | Inventory</title>
+    <link rel="icon" type="image/svg+xml" href="../img/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/rules-visual.css">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+        --ink: #e8e4dc; --ink-dim: #9a9488; --ink-faint: #5a5650;
+        --gold: #c9a84c; --gold-dim: rgba(201,168,76,0.18); --gold-line: rgba(201,168,76,0.30);
+        --indigo: #818cf8; --indigo-dim: rgba(129,140,248,0.12);
+        --red: #f87171; --sky: #67e8f9; --void: #060a14;
+        --surface-0: rgba(255,255,255,0.025); --surface-1: rgba(255,255,255,0.045);
+        --border: rgba(255,255,255,0.07); --border-gold: rgba(201,168,76,0.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        background: #060a14 !important;
+        color: var(--ink);
+        font-family: 'Crimson Pro', Georgia, serif;
+        font-size: 17px;
+        line-height: 1.75;
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, h5 {
+        font-family: 'Cinzel', serif;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        line-height: 1.2;
+        color: var(--ink);
+    }
+
+    strong, b { color: #f3ede2; }
+
+    /* ── Tabs ──────────────────────────────── */
+    .tab-btn {
+        font-family: 'JetBrains Mono', monospace !important;
+        font-size: 0.7rem !important;
+        letter-spacing: 0.15em !important;
+        text-transform: uppercase !important;
+        color: var(--ink-dim);
+        border: 1px solid var(--border) !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        transition: all 0.22s ease;
+        padding: 0.55rem 1.75rem;
+        cursor: pointer;
+    }
+
+    .tab-btn:hover {
+        border-color: var(--gold-line) !important;
+        color: var(--ink);
+        background: rgba(255,255,255,0.02) !important;
+    }
+
+    .tab-btn.active {
+        background: var(--gold-dim) !important;
+        border-color: var(--gold-line) !important;
+        color: var(--ink) !important;
+    }
+
+    /* ── Rule cards — flat, open ───────────── */
+    .rule-card {
+        background: transparent !important;
+        border: none !important;
+        border-top: 1px solid var(--border) !important;
+        border-radius: 0 !important;
+        padding: 1.75rem 0 !important;
+        margin-bottom: 0 !important;
+        backdrop-filter: none !important;
+    }
+
+    .rule-card.border-l-4 {
+        border-left: 3px solid !important;
+        border-top: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+        padding-left: 1.5rem !important;
+        margin: 0.5rem 0 !important;
+        background: var(--surface-0) !important;
+        padding-top: 1.1rem !important;
+        padding-bottom: 1.1rem !important;
+    }
+
+    /* ── Section dividers ──────────────────── */
+    .section-divider {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        margin: 2.5rem 0 1.5rem;
+    }
+
+    .section-divider h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--ink);
+        white-space: nowrap;
+    }
+
+    .section-divider .line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+    }
+
+    /* ── Sub-section headers ───────────────── */
+    .subsection-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--gold-line);
+        margin-bottom: 1rem;
+    }
+
+    /* ── Damage type tiles ─────────────────── */
+    .dmg-tile {
+        border-left: 3px solid;
+        background: var(--surface-0);
+        padding: 0.85rem 1rem;
+        transition: background 0.2s;
+    }
+
+    .dmg-tile:hover { background: var(--surface-1); }
+
+    .dmg-tile strong {
+        display: block;
+        font-family: 'Cinzel', serif;
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .dmg-tile span {
+        font-size: 0.78rem;
+        color: var(--ink-dim);
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── Generator result panel ────────────── */
+    .gen-panel {
+        background: var(--surface-0);
+        border: 1px solid var(--border-gold);
+        padding: 1.5rem;
+    }
+
+    .gen-panel .eyebrow {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.4rem;
+    }
+
+    .gen-panel h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin: 0 0 0.75rem;
+    }
+
+    /* ── Prefix toggle section ─────────────── */
+    .prefix-toggle-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.75rem;
+        margin-bottom: 0;
+    }
+
+    .prefix-toggle-header h3 {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin: 0;
+    }
+
+    .prefix-toggle-header:hover h3 { color: var(--ink); }
+
+    /* ── Prefix cards ──────────────────────── */
+    .prefix-card {
+        background: var(--surface-0);
+        border: 1px solid var(--border);
+        padding: 0.85rem 1rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+    }
+
+    .prefix-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        margin-top: 7px;
+        flex-shrink: 0;
+    }
+
+    /* ── Arsenal table wrapper ─────────────── */
+    .arsenal-wrapper {
+        border: 1px solid var(--border);
+        overflow: visible;
+    }
+
+    .arsenal-wrapper table thead tr {
+        background: var(--surface-1);
+        border-bottom: 1px solid var(--gold-line);
+    }
+
+    .arsenal-wrapper table thead th {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding: 0.65rem 1rem;
+    }
+
+    .arsenal-wrapper table tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+    }
+
+    .arsenal-wrapper table tbody tr:hover { background: var(--surface-0); }
+
+    .arsenal-wrapper table tbody td {
+        padding: 0.6rem 1rem;
+        font-size: 0.88rem;
+        color: #c0b8a8;
+    }
+
+    /* ── Arsenal category / filter buttons ─── */
+    .arsenal-category-btn {
+        font-family: 'JetBrains Mono', monospace !important;
+        font-size: 0.65rem !important;
+        letter-spacing: 0.12em !important;
+        text-transform: uppercase !important;
+        border-radius: 0 !important;
+        border: 1px solid var(--border) !important;
+        background: transparent !important;
+        color: var(--ink-dim) !important;
+        padding: 0.4rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .arsenal-category-btn:hover {
+        border-color: var(--border-gold) !important;
+        color: var(--ink) !important;
+        background: var(--surface-0) !important;
+    }
+
+    .arsenal-category-btn.active {
+        border-color: var(--gold-line) !important;
+        color: var(--gold) !important;
+        background: var(--gold-dim) !important;
+    }
+
+    /* ── Tables (crafting / brewing inline) ── */
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+    }
+
+    .data-table th {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding: 0.6rem 1rem;
+        border-bottom: 1px solid var(--gold-line);
+        text-align: left;
+    }
+
+    .data-table td {
+        padding: 0.55rem 1rem;
+        border-bottom: 1px solid var(--border);
+        color: #c0b8a8;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: var(--surface-0); }
+
+    /* Generic table inside crafting/brewing sections */
+    table { width: 100%; border-collapse: collapse; }
+
+    table th {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding: 0.6rem 1rem;
+        border-bottom: 1px solid var(--gold-line);
+        text-align: left;
+        font-weight: 500;
+    }
+
+    table td {
+        padding: 0.55rem 1rem;
+        border-bottom: 1px solid var(--border);
+        color: #c0b8a8;
+        font-size: 0.9rem;
+    }
+
+    table tr:last-child td { border-bottom: none; }
+    table tr:hover td { background: var(--surface-0); }
+    table thead tr { background: var(--surface-1); }
+
+    .row td { text-align: center; }
+    .row { border-bottom: 1px solid var(--border); }
+
+    /* ── Expandable rows ───────────────────── */
+    .expandable-row { cursor: pointer; transition: background 0.18s; }
+    .expandable-row:hover { background: var(--surface-0) !important; }
+
+    /* ── Category tag ──────────────────────── */
+    .category-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--gold);
+        border: 1px solid var(--gold-line);
+        padding: 2px 8px;
+        background: var(--gold-dim);
+    }
+
+    /* ── Tag badge ─────────────────────────── */
+    .tag-badge {
+        display: inline-block;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        color: #a5b4fc;
+        border: 1px solid rgba(129,140,248,0.2);
+        background: var(--indigo-dim);
+        padding: 2px 7px;
+        margin-right: 4px;
+        margin-bottom: 3px;
+    }
+
+    /* ── Inputs / selects ──────────────────── */
+    .search-input, .select-dark, input[type="number"], select {
+        background: var(--surface-1) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 0 !important;
+        color: var(--ink) !important;
+        font-family: 'Crimson Pro', serif !important;
+        padding: 0.6rem 0.9rem !important;
+        outline: none;
+        transition: border-color 0.2s;
+        width: 100%;
+    }
+
+    .search-input:focus, .select-dark:focus, input[type="number"]:focus, select:focus {
+        border-color: var(--gold) !important;
+    }
+
+    /* ── Details/summary (crafting & brewing) ─ */
+    details.rule-card > summary {
+        font-family: 'Cinzel', serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--ink);
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 1.25rem;
+    }
+
+    details.rule-card > summary::-webkit-details-marker { display: none; }
+    details.rule-card > summary::after {
+        content: '▼';
+        font-size: 0.7rem;
+        color: var(--ink-faint);
+        transition: transform 0.2s;
+    }
+    details.rule-card[open] > summary::after { transform: rotate(180deg); }
+    details.rule-card > summary:hover { color: var(--gold); }
+
+    /* ── Shuffling animation ───────────────── */
+    .weapon-roll.shuffling { filter: blur(1px); opacity: 0.8; }
+
+    /* ── Scrollbar ─────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-gold); }
+
+    /* ── View toggle ───────────────────────── */
+    .view-section.hidden { display: none !important; }
+
+    /* ── Trait tooltip override ────────────── */
+    .group\/trait:hover .trait-tooltip { opacity: 1; visibility: visible; }
+
+
+
+
+    
+</style>
+</head>
+
+<body class="text-slate-300" style="background:#060a14;">
+
+    <div id="navbar-placeholder"></div>
+    <div class="cosmos">
+        <div class="nebula"></div>
+
+        <div class="stars layer1"></div>
+        <div class="stars layer2"></div>
+        <div class="stars layer3"></div>
+
+        <div class="shooting-star s1"></div>
+        <div class="shooting-star s2"></div>
+        <div class="shooting-star s3"></div>
+    </div>
+    <main class="pt-32 pb-24 max-w-[1800px] mx-auto px-6 space-y-20">
+
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-white mb-4">Inventory & Creation</h1>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                Browse standard issue gear, or delve into the arts of crafting and alchemy.
+            </p>
+        </header>
+
+        <div id="inventoryViewTabs"
+            class="flex flex-wrap justify-center gap-4 py-5 mb-12 sticky top-20 z-30 backdrop-blur-md" style="background:rgba(6,10,20,0.95); border-top:1px solid var(--border); border-bottom:1px solid var(--border-gold);">
+            <button onclick="switchView('view-equipment')"
+                class="tab-btn active px-6 py-2 border border-slate-700 rounded-none text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+                Equipment
+            </button>
+            <button onclick="switchView('view-crafting')"
+                class="tab-btn px-6 py-2 border border-slate-700 rounded-none text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+                Crafting
+            </button>
+            <button onclick="switchView('view-brewing')"
+                class="tab-btn px-6 py-2 border border-slate-700 rounded-none text-sm font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">
+                Brewing
+            </button>
+        </div>
+
+        <div id="view-equipment" class="view-section space-y-12">
+            <div class="text-center space-y-4 mb-8">
+                <h2 class="text-3xl text-white font-bold">Standard Equipment</h2>
+                <p class="text-slate-400">Weapons, armor, and their damage types.</p>
+            </div>
+
+            <div>
+                <h3
+                    class="subsection-label">
+                    Physical Damage Types</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-red-500 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-red-400 transition-colors">Pierce</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Piercing (Knives, Rapiers)</span>
+                    </div>
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-orange-500 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-orange-400 transition-colors">Slash</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Cutting (Swords, Sabers)</span>
+                    </div>
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-slate-400 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-slate-300 transition-colors">Blunt</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Crushing (Hammers, Clubs)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3
+                    class="subsection-label">
+                    Elemental Damage Types</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-orange-500 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-orange-400 transition-colors">Fire</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Heat, fire, certain explosions.</span>
+                    </div>
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-blue-500 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-blue-400 transition-colors">Ice</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Frost, freezing.</span>
+                    </div>
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-slate-400 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-slate-300 transition-colors">Lightning</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Electrical devices and magic.</span>
+                    </div>
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-yellow-500 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-yellow-400 transition-colors">Light</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Holy energy.</span>
+                    </div>
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-black-500 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-black-400 transition-colors">Dark</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Unholy energy.</span>
+                    </div>
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-rose-500 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-rose-400 transition-colors">Force</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Pure kinetic force.</span>
+                    </div>
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-purple-400 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-purple-300 transition-colors">Psychic</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Damage directly to the mind.</span>
+                    </div>
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-lime-500 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-lime-400 transition-colors">Poison</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Toxins and venom.</span>
+                    </div>
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-green-500 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-green-400 transition-colors">Acid</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Melting substances.</span>
+                    </div>
+                    <div
+                        class="rule-card p-5 border-l-4 border-l-teal-500 hover:bg-slate-800/50 transition-colors group">
+                        <strong
+                            class="text-white block mb-2 text-lg group-hover:text-teal-400 transition-colors">Vibro</strong><span
+                            class="text-xs text-slate-400 leading-relaxed">Thunder and vibration.</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <section class="space-y-6">
+                <div class="section-divider">
+                    <h2>Random Weapon Generator</h2>
+                    <div style="flex:1; height:1px; background:var(--border);"></div>
+                </div>
+
+                <div class="rule-card space-y-6">
+                    <p class="text-sm text-slate-400">Build a random weapon by rolling a base type, one guaranteed
+                        quality prefix, plus extra functional prefixes.</p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end">
+                        <label class="space-y-2">
+                            <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Extra
+                                Prefixes</span>
+                            <input id="weapon-prefix-count" type="number" min="0" max="5" value="1"
+                                class="search-input w-full" />
+                        </label>
+                        <label class="space-y-2">
+                            <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Weapon</span>
+                            <select id="weapon-base-select" class="search-input w-full">
+                                <option value="">None (Random)</option>
+                            </select>
+                        </label>
+                        <label class="space-y-2">
+                            <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Quality</span>
+                            <select id="weapon-quality-select" class="search-input w-full">
+                                <option value="">None (Random)</option>
+                            </select>
+                        </label>
+                        <button onclick="pickRandomWeapon()"
+                            class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-widest border border-indigo-400/30 transition-all" style="border-radius:0;">Roll Weapon</button>
+                    </div>
+
+                    <div id="weapon-roll"
+                        class="weapon-roll gen-panel space-y-3 transition-all duration-100">
+                        <div class="eyebrow">Generated Weapon
+                        </div>
+                        <h3 id="weapon-name" class="text-3xl text-white font-bold">-</h3>
+                        <div id="weapon-meta" class="flex flex-wrap gap-2"></div>
+                        <div id="weapon-effects" class="text-sm text-slate-300 leading-relaxed"></div>
+                    </div>
+                </div>
+                <div class="mb-6 border-b border-slate-800 pb-2">
+                    <h3 class="prefix-toggle-header" onclick="togglePrefixGrid()">
+                        Weapon Prefixes
+                        <span id="prefix-arrow" class="transition-transform duration-200 inline-block">▼</span>
+                    </h3>
+                    <!-- Grid is hidden by default -->
+                    <div id="prefix-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 hidden">
+                    </div>
+                </div>
+
+                <div class="section-divider">
+                    <h2>Random Gear Generator</h2>
+                    <div style="flex:1; height:1px; background:var(--border);"></div>
+                </div>
+
+                <div class="rule-card space-y-6">
+                    <p class="text-sm text-slate-400">
+                        Generate random gear with 1 quality prefix and optional functional modifiers.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end">
+                        <label class="space-y-2">
+                            <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Extra
+                                Prefixes</span>
+                            <input id="gear-prefix-count" type="number" min="0" max="5" value="1"
+                                class="search-input w-full" />
+                        </label>
+
+                        <label class="space-y-2">
+                            <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Gear</span>
+                            <select id="gear-base-select" class="search-input w-full">
+                                <option value="">None (Random)</option>
+                            </select>
+                        </label>
+
+                        <label class="space-y-2">
+                            <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Quality</span>
+                            <select id="gear-quality-select" class="search-input w-full">
+                                <option value="">None (Random)</option>
+                            </select>
+                        </label>
+
+                        <button onclick="pickRandomGear()"
+                            class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-widest border border-indigo-400/30 transition-all" style="border-radius:0;">Roll Gear</button>
+                    </div>
+
+                    <div id="gear-roll"
+                        class="gen-panel space-y-3 transition-all duration-100">
+                        <div class="eyebrow">Generated Gear
+                        </div>
+                        <h3 id="gear-name" class="text-3xl text-white font-bold">-</h3>
+                        <div id="gear-meta" class="flex flex-wrap gap-2"></div>
+                        <div id="gear-effects" class="text-sm text-slate-300 leading-relaxed"></div>
+                    </div>
+                </div>
+
+                <div class="mb-6 border-b border-slate-800 pb-2">
+                    <h3 class="prefix-toggle-header" onclick="toggleGearPrefixGrid()">
+                        Gear Prefixes
+                        <span id="gear-prefix-arrow" class="transition-transform duration-200 inline-block">▼</span>
+                    </h3>
+
+                    <div id="gear-prefix-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 hidden">
+                    </div>
+                </div>
+
+                <div class="section-divider">
+                    <h2>Arsenal Browser</h2>
+                    <div style="flex:1; height:1px; background:var(--border);"></div>
+                </div>
+
+                <div class="rule-card space-y-6">
+                    <p class="text-sm text-slate-400">Browse all available weapons, armor, and gear with detailed statistics and requirements.</p>
+
+                    <!-- Category Filter (Always Visible) -->
+
+                    <!-- Damage Type Filter (Appears when category selected) -->
+                    <div id="damage-filter-container" class="space-y-3 hidden">
+                        <label class="text-xs uppercase tracking-widest text-slate-400 font-bold">Damage Type</label>
+                        <div class="flex flex-wrap gap-2" id="damage-filter-buttons"></div>
+                    </div>
+
+                    <!-- Hand Filter (Appears when damage type selected) -->
+                    <div id="hand-filter-container" class="space-y-3 hidden">
+                        <label class="text-xs uppercase tracking-widest text-slate-400 font-bold">Hand Configuration</label>
+                        <div class="flex flex-wrap gap-2" id="hand-filter-buttons"></div>
+                    </div>
+
+                    <!-- Arsenal Table -->
+                    <div class="arsenal-wrapper overflow-visible">
+                        <table class="w-full text-left text-sm min-w-[600px]">
+                                <thead class="bg-slate-800 border-b border-slate-700">
+                                    <tr>
+                                        <th class="px-4 py-3 font-bold text-indigo-400">Name</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400">Category</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400">Range</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400">Damage Type</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400 text-center">Damage</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400 text-center">Accuracy</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400">Requires</th>
+                                        <th class="px-4 py-3 font-bold text-indigo-400 text-right">Trait</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="arsenal-table-body">
+                                    <tr>
+                                        <td colspan="6" class="px-4 py-8 text-center text-slate-400">Loading arsenal data...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+
+                    <div id="arsenal-result-count" class="text-sm text-slate-400 text-center mt-4"></div>
+                </div>
+            </section>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div id="view-crafting" class="view-section hidden space-y-8">
+            <div class="text-center space-y-4 mb-8">
+                <h2 class="text-3xl text-white font-bold">Artisan Crafting</h2>
+                <p class="text-slate-400">Forge items of power using components found in your travels. Some crafts have durability, others don't, how to repair is specified in the gear itself.</p>
+            </div>
+            <section class="rule-card space-y-6" id="crafting-checks">
+                <h2 class="text-2xl text-white font-bold">Crafting Difficulty & Precision</h2>
+
+                <!-- CORE CHECKS -->
+                <div class="space-y-3 text-sm text-slate-300">
+                    <p>
+                        Crafting requires a <strong class="text-white">Crafting Skill Check</strong>
+                        (usually <strong>Tinkering</strong> or an equivalent skill).
+                    </p>
+
+                    <table class="w-full border border-slate-700 rounded-lg overflow-hidden">
+                        <thead class="bg-slate-800">
+                            <tr>
+                                <th class="p-2 text-left">Complexity</th>
+                                <th class="p-2 text-left">Craft Check</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">Trivial</td>
+                                <td class="p-2">No check required</td>
+                            </tr>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">Simple</td>
+                                <td class="p-2">Tinkering 8</td>
+                            </tr>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">Standard</td>
+                                <td class="p-2">Tinkering 12</td>
+                            </tr>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">Difficult</td>
+                                <td class="p-2">Tinkering 16</td>
+                            </tr>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">Complex</td>
+                                <td class="p-2">Tinkering 20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="text-xs text-red-400">
+                        <strong>Failure by 5 or more:</strong> One random component is destroyed.
+                    </p>
+                </div>
+
+                <!-- PRECISION -->
+                <div class="space-y-3">
+                    <h3 class="text-lg text-white font-bold">Precision Component Bonuses</h3>
+
+                    <p class="text-sm text-slate-400">
+                        Selecting the correct sub-components grants flat bonuses to the Craft Check.
+                    </p>
+
+                    <table class="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+                        <thead class="bg-slate-800">
+                            <tr>
+                                <th class="p-2 text-left">Precision</th>
+                                <th class="p-2 text-left">Bonus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">Correct Family Only</td>
+                                <td class="p-2">No bonus</td>
+                            </tr>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">Correct Sub-Component Ã—1</td>
+                                <td class="p-2">+1 Craft Bonus</td>
+                            </tr>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">All Components Correct</td>
+                                <td class="p-2">+2 to final roll (global, not per item)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- TIERS -->
+                <div class="space-y-3">
+                    <h3 class="text-lg text-white font-bold">Craft Tiers</h3>
+
+                    <table class="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+                        <thead class="bg-slate-800">
+                            <tr>
+                                <th class="p-2 text-left">Tier</th>
+                                <th class="p-2 text-left">Difficulty</th>
+                                <th class="p-2 text-left">Requirements</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">Trivial</td>
+                                <td class="p-2">Very Easy</td>
+                                <td class="p-2">Hands, basic tools</td>
+                            </tr>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">Simple</td>
+                                <td class="p-2">Easy</td>
+                                <td class="p-2">Tools</td>
+                            </tr>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">Standard</td>
+                                <td class="p-2">Moderate</td>
+                                <td class="p-2">Tools, workbench</td>
+                            </tr>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">Difficult</td>
+                                <td class="p-2">Hard</td>
+                                <td class="p-2">Specialized tools, workshop</td>
+                            </tr>
+                            <tr class="border-t border-slate-700">
+                                <td class="p-2">Complex</td>
+                                <td class="p-2">Very Hard</td>
+                                <td class="p-2">Full workshop</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+            <details open class="rule-card">
+                <summary
+                    class="text-2xl text-white font-bold cursor-pointer hover:text-indigo-300 flex items-center justify-between group">
+                    <span>Combat Crafts</span>
+                </summary>
+                Combat crafts are quickly deployable craftables. These can be made in the middle of combat using 1
+                Action, if you have the <strong>Combat Artisan</strong> trait otherwise they follow standard crafting rules.
+                <div class="space-y-8 mt-6">
+                    <div>
+                        <h3
+                            class="subsection-label" style="color:var(--gold);">
+                            Crafts</h3>
+                        <div class="arsenal-wrapper">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse min-w-[300px]">
+                                    <thead>
+                                        <tr
+                                            class="text-xs uppercase tracking-widest text-slate-500 border-b border-slate-800">
+                                            <th class="px-6 py-4 font-bold w-2/5">Name</th>
+                                            <th class="px-6 py-4 font-bold w-1/5">Cost</th>
+                                            <th class="px-6 py-4 font-bold w-1/5">Tier</th>
+                                            <th class="px-6 py-4 font-bold w-1/5 text-right">Expand</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="artisan-crafts-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details class="rule-card">
+                <summary
+                    class="text-2xl text-white font-bold cursor-pointer hover:text-indigo-300 flex items-center justify-between group">
+                    <span>Recipes</span>
+                </summary>
+
+                <div class="flex items-center gap-3 my-6 w-fit" style="background:var(--surface-0); border:1px solid var(--border); padding:0.6rem 1rem;">
+                    <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Filter Tier:</label>
+                    <select id="tierFilter" onchange="filterCrafting()" class="select-dark text-sm">
+                        <option value="all">All Tiers</option>
+                        <option>Trivial</option>
+                        <option>Simple</option>
+                        <option>Standard</option>
+                        <option>Difficult</option>
+                        <option>Complex</option>
+                    </select>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Tier</th>
+                                <th>Category</th>
+                                <th style="width: 200px;">Components</th>
+                                <th>Effect</th>
+                            </tr>
+                        </thead>
+                        <tbody id="crafting-recipes"></tbody>
+                    </table>
+                </div>
+            </details>
+
+            <details class="rule-card">
+                <summary class="text-2xl text-white font-bold cursor-pointer hover:text-indigo-300">Components</summary>
+                <div class="table-wrap mt-4">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Category</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="craft-components"></tbody>
+                    </table>
+                </div>
+            </details>
+        </div>
+
+        <div id="view-brewing" class="view-section hidden space-y-8">
+            <div class="text-center space-y-4 mb-8">
+                <h2 class="text-3xl text-white font-bold">Alchemy & Brewing</h2>
+                <p class="text-slate-400">Brew potions using aspects, quality, and skill.</p>
+            </div>
+
+            <details open class="rule-card">
+                <summary class="text-2xl text-white font-bold cursor-pointer hover:text-indigo-300">
+                    Brewing Rules
+                </summary>
+
+                <div class="text-slate-300 space-y-6 mt-6 text-sm leading-relaxed">
+
+                    <!-- Attempting a Brew -->
+                    <div>
+                        <h3 class="text-lg text-white font-bold mb-2">Brewing Process</h3>
+                        <p>
+                            During a rest, if you are able to access and use a <strong>Capable Brewing Setup</strong>,
+                            you may attempt to brew a potion of <strong>Simple</strong> difficulty.
+                            Attempting to brew a <strong>Medium</strong> or <strong>Hard</strong> recipe requires you to
+                            have
+                            <strong>Brewer</strong> as one of your traits.
+                        </p>
+                        <p class="mt-2">
+                            Brewing consumes all ingredients used in the attempt.
+                            All brews require <strong>Water (Null)</strong> in addition to the ingredients listed in the
+                            recipe.
+                        </p>
+                        <p class="mt-2">
+                            The order of ingredients does not matter. Ingredients may repeat if the recipe calls for it.
+                        </p>
+                    </div>
+
+                    <!-- Brewing Check -->
+                    <div>
+                        <h3 class="text-lg text-white font-bold mb-2">Brewing Check</h3>
+                        <div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border border-slate-700">
+                                    <thead class="bg-slate-800 text-white">
+                                        <tr>
+                                            <th class="p-2 border border-slate-700">Difficulty</th>
+                                            <th class="p-2 border border-slate-700">Ingredient Slots</th>
+                                            <th class="p-2 border border-slate-700">Target Number</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">Simple</td>
+                                            <td class="p-2 border border-slate-700">1 Ingredient</td>
+                                            <td class="p-2 border border-slate-700">â‰¥ 8</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">Medium</td>
+                                            <td class="p-2 border border-slate-700">2 Ingredients</td>
+                                            <td class="p-2 border border-slate-700">â‰¥ 10</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">Hard</td>
+                                            <td class="p-2 border border-slate-700">3 Ingredients</td>
+                                            <td class="p-2 border border-slate-700">â‰¥ 12</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p class="mt-3">Add the following to your roll:</p>
+
+                        <ul class="list-disc ml-5 space-y-1">
+                            <li>Tinkering Total</li>
+                            <li>Brewing Setup Bonus</li>
+                            <li>Any other Brewing Bonuses</li>
+                            <li><strong>+2 Ingredient Bonus</strong> if using multiple ingredients and all are of the
+                                same Quality</li>
+                        </ul>
+
+                        <p class="mt-3">
+                            If the final total is lower than the required value, the attempt fails and you gain nothing.
+                            Rolling snake eyes results in a <strong>Mystery Brew</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Ingredient Aspects -->
+                    <div>
+                        <div>
+                            <h3 class="text-lg text-white font-bold mb-2">Ingredient Aspects & Codes</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border border-slate-700">
+                                    <thead class="bg-slate-800 text-white">
+                                        <tr>
+                                            <th class="p-2 border border-slate-700">Code</th>
+                                            <th class="p-2 border border-slate-700">Aspect</th>
+                                            <th class="p-2 border border-slate-700">Effect</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">V</td>
+                                            <td class="p-2 border border-slate-700">Vital</td>
+                                            <td class="p-2 border border-slate-700">Regen, HP restoration, Guard gain
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">C</td>
+                                            <td class="p-2 border border-slate-700">Charge</td>
+                                            <td class="p-2 border border-slate-700">Movement modification, skill
+                                                enhancement</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">F</td>
+                                            <td class="p-2 border border-slate-700">Flux</td>
+                                            <td class="p-2 border border-slate-700">Inversion, paradoxical or odd
+                                                effects</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">Z</td>
+                                            <td class="p-2 border border-slate-700">Zeal</td>
+                                            <td class="p-2 border border-slate-700">Damage, resistance, offensive
+                                                scaling</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">A</td>
+                                            <td class="p-2 border border-slate-700">Arcane</td>
+                                            <td class="p-2 border border-slate-700">Magical effects, mana restoration
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">N</td>
+                                            <td class="p-2 border border-slate-700">Null (Water)</td>
+                                            <td class="p-2 border border-slate-700">Required stabilizer; used to fill
+                                                unused recipe slots</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <p class="mt-3">
+                            Some aspects may be rare in pure form. For example, pure Flux ingredients may be difficult
+                            to extract
+                            and commonly appear blended with other aspects. Separating aspects from a compound
+                            ingredient
+                            may require a Tinkering check (Narrator determined difficulty).
+                        </p>
+                    </div>
+
+                    <!-- Yield -->
+                    <div>
+                        <h3 class="text-lg text-white font-bold mb-2">Yield & Success</h3>
+                        <p>
+                            On success, you gain doses equal to the total yield of all ingredients used:
+                        </p>
+
+                        <div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border border-slate-700">
+                                    <thead class="bg-slate-800 text-white">
+                                        <tr>
+                                            <th class="p-2 border border-slate-700">Quality</th>
+                                            <th class="p-2 border border-slate-700">Yield Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">Subpar</td>
+                                            <td class="p-2 border border-slate-700">0.5 (rounded down; minimum total
+                                                yield = 1)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">Adequate</td>
+                                            <td class="p-2 border border-slate-700">1</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">Excellent</td>
+                                            <td class="p-2 border border-slate-700">2</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p class="mt-3">
+                            Add together the yield of all ingredients used in the brew.
+                            Minimum total yield is always 1 dose.
+                        </p>
+                    </div>
+
+                    <!-- Containers -->
+                    <div>
+                        <div>
+                            <h3 class="text-lg text-white font-bold mb-2">Containers</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border border-slate-700">
+                                    <thead class="bg-slate-800 text-white">
+                                        <tr>
+                                            <th class="p-2 border border-slate-700">Container</th>
+                                            <th class="p-2 border border-slate-700">Capacity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">Vial</td>
+                                            <td class="p-2 border border-slate-700">1 Dose</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">Bottle</td>
+                                            <td class="p-2 border border-slate-700">2 Doses</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border border-slate-700 font-semibold">Jug</td>
+                                            <td class="p-2 border border-slate-700">3 Doses</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p class="mt-3">
+                            A container may only hold one kind of potion.
+                            After a successful brew, the batch must be transferred into a container.
+                        </p>
+                    </div>
+
+                    <!-- Usage -->
+                    <div>
+                        <h3 class="text-lg text-white font-bold mb-2">Using Potions</h3>
+                        <ul class="list-disc ml-5 space-y-1">
+                            <li>Drinking or throwing a potion uses an Action.</li>
+                            <li>You must spend at least 1 dose to gain its effect.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Recipes & Mystery Brew -->
+                    <div>
+                        <h3 class="text-lg text-white font-bold mb-2">Recipes & Mystery Brews</h3>
+                        <p>
+                            Recipes may be granted by traits or discovered in the game world.
+                        </p>
+
+                        <ul class="list-disc ml-5 space-y-1 mt-2">
+                            <li>Brewing a non-Simple potion without knowing its recipe results in a <strong>Mystery
+                                    Brew</strong> (except when rolling a Midnight).</li>
+                            <li>Mixing two different potions in the same container creates a <strong>Mystery
+                                    Brew</strong>.</li>
+                            <li>Rolling snake eyes creates a <strong>Mystery Brew</strong>.</li>
+                            <li>A player may poison a batch by mixing brews together, largely negating its effect
+                                (Narrator adjudicated).</li>
+                        </ul>
+
+                        <p class="mt-3">
+                            The effects of a Mystery Brew are determined entirely by the Narrator.
+                            They cannot be predicted by Insight or any other roll.
+                        </p>
+                    </div>
+
+                </div>
+            </details>
+
+
+
+            <details class="rule-card">
+                <summary class="text-2xl text-white font-bold cursor-pointer hover:text-indigo-300">
+                    Ingredients
+                </summary>
+                <div class="table-wrap mt-4">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ingredient</th>
+                                <th>Aspect</th>
+                                <th>Quality</th>
+                            </tr>
+                        </thead>
+                        <tbody id="brew-ingredients"></tbody>
+                    </table>
+                </div>
+            </details>
+
+            <details class="rule-card">
+                <summary class="text-2xl text-white font-bold cursor-pointer hover:text-indigo-300">
+                    Potions
+                </summary>
+                <div class="table-wrap mt-4">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Tier</th>
+                                <th>Aspects</th>
+                                <th>Effect</th>
+                            </tr>
+                        </thead>
+                        <tbody id="brew-potions"></tbody>
+                    </table>
+                </div>
+            </details>
+
+
+    </main>
+    <div id="footer-placeholder"></div>
+
+    <script>
+        let weaponGeneratorData = null;
+        let gearGeneratorData = null;
+
+        function getGearPool() {
+            const categoryEntries = Object.entries(gearGeneratorData?.categories || {});
+            if (!categoryEntries.length) return [];
+
+            return categoryEntries.flatMap(([categoryKey, list]) =>
+                (Array.isArray(list) ? list : []).map((item) => ({
+                    id: `${categoryKey}::${item}`,
+                    categoryKey,
+                    categoryLabel: toTitleCase(categoryKey),
+                    name: item
+                }))
+            );
+        }
+
+        function populateGearSelect() {
+            const select = document.getElementById('gear-base-select');
+            if (!select) return;
+
+            const pool = getGearPool();
+
+            const options = pool
+                .sort((a, b) => `${a.categoryLabel} ${a.name}`.localeCompare(`${b.categoryLabel} ${b.name}`))
+                .map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.name)} (${escapeHtml(item.categoryLabel)})</option>`)
+                .join('');
+
+            select.innerHTML = `<option value="">None (Random)</option>${options}`;
+        }
+
+        function populateGearQualitySelect() {
+            const select = document.getElementById('gear-quality-select');
+            if (!select) return;
+
+            const pool = gearGeneratorData?.prefixes?.quality || [];
+
+            const options = pool
+                .map(q => `<option value="quality::${escapeHtml(q.name)}">${escapeHtml(q.name)}</option>`)
+                .join('');
+
+            select.innerHTML = `<option value="">None (Random)</option>${options}`;
+        }
+
+        // --- Tab Logic ---
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(viewId).classList.remove('hidden');
+            const index = ['view-equipment', 'view-crafting', 'view-brewing'].indexOf(viewId);
+            document.querySelectorAll('.tab-btn')[index].classList.add('active');
+        }
+
+        function toggleDetails(rowId) {
+            const row = document.getElementById(rowId);
+            row.classList.toggle('hidden');
+            const arrow = document.getElementById(`arrow-${rowId}`);
+            if (arrow) arrow.style.transform = row.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        // --- Standard Loading Logic ---
+        const formatTags = (tags) => {
+            if (!tags || tags === "-") return "-";
+            const list = Array.isArray(tags) ? tags : String(tags).split(',').map(t => t.trim());
+            return list.map(t => `<span class="tag-badge">${t}</span>`).join('');
+        };
+
+        const randomFromList = (list) => list[Math.floor(Math.random() * list.length)];
+
+        const toTitleCase = (value) => String(value || '')
+            .replace(/([a-z])([A-Z])/g, '$1 $2')
+            .split(/[_\s]+/)
+            .filter(Boolean)
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+            .join(' ');
+
+        const escapeHtml = (value) => String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+
+        const DAMAGE_TYPE_ALIASES = {
+            puncture: 'pierce',
+            pierce: 'pierce',
+            slash: 'slash',
+            blunt: 'blunt',
+            cleave: 'cleave',
+            fire: 'fire',
+            ice: 'ice',
+            lightning: 'lightning',
+            light: 'light',
+            dark: 'dark',
+            force: 'force',
+            psychic: 'psychic',
+            poison: 'poison',
+            acid: 'acid',
+            vibro: 'vibro'
+        };
+
+        const DAMAGE_TYPE_SCAN_ORDER = [
+            'lightning',
+            'puncture',
+            'pierce',
+            'cleave',
+            'slash',
+            'blunt',
+            'fire',
+            'force',
+            'psychic',
+            'poison',
+            'acid',
+            'vibro',
+            'light',
+            'dark',
+            'ice'
+        ];
+
+        function damageFromCategoryKey(categoryKey) {
+            const key = String(categoryKey || '').toLowerCase();
+            if (key.includes('light')) return 1;
+            if (key.includes('medium')) return 2;
+            if (key.includes('heavy')) return 3;
+            return 2;
+        }
+
+        function proficiencyFromCategoryKey(categoryKey) {
+            const key = String(categoryKey || '').toLowerCase();
+            if (key.includes('light')) return 1;
+            if (key.includes('medium')) return 2;
+            if (key.includes('heavy')) return 3;
+            return 2;
+        }
+
+        function getBaseGearBonuses(categoryKey, name = '') {
+            const key = String(categoryKey || '').toLowerCase();
+            if (key.includes('light_armor')) return { armor: 1 };
+            if (key.includes('medium_armor')) return { armor: 2 };
+            if (key.includes('heavy_armor')) return { armor: 3 };
+            if (key.includes('shield')) return { armor: 1 };
+            if (key.includes('backpack') || key.includes('pack')) {
+                const lowerName = String(name || '').toLowerCase();
+                if (lowerName.includes('satchel')) return { carryCapacity: 3 };
+                if (lowerName.includes('small backpack')) return { carryCapacity: 4 };
+                if (lowerName.includes('standard backpack')) return { carryCapacity: 5 };
+                if (lowerName.includes('large backpack')) return { carryCapacity: 6 };
+                if (lowerName.includes('war pack')) return { carryCapacity: 7 };
+                return { carryCapacity: 4 };
+            }
+            return {};
+        }
+
+        function interpretGearPrefix(description) {
+            const text = String(description || '');
+            const lower = text.toLowerCase();
+            const bonuses = {};
+            const notes = [];
+
+            const addBonus = (key, value) => {
+                if (!Number.isFinite(value) || value <= 0) return;
+                bonuses[key] = (bonuses[key] || 0) + value;
+            };
+
+            const numberFrom = (regex) => {
+                const match = lower.match(regex);
+                if (!match) return 0;
+                const value = Number.parseInt(match[1], 10);
+                return Number.isFinite(value) ? value : 0;
+            };
+
+            addBonus('armor', numberFrom(/\+(\d+)\s*armor\b/));
+            addBonus('allResist', numberFrom(/\+(\d+)\s*resist\s*\(all\)/));
+            addBonus('movement', numberFrom(/\+(\d+)\s*movement\b/));
+            addBonus('reflex', numberFrom(/\+(\d+)\s*reflex\b/));
+            addBonus('carryCapacity', numberFrom(/\+(\d+)\s*encumbrance\b/));
+            addBonus('healingReceived', numberFrom(/\+(\d+)\s*healing\s+received\b/));
+            addBonus('conditionResist', numberFrom(/\+(\d+)\s*resist\s+vs\s+conditions\b/));
+            addBonus('maxHealth', numberFrom(/\+(\d+)\s*max\s+health\b/));
+            addBonus('opportunityAccuracy', numberFrom(/\+(\d+)\s*accuracy\s+on\s+opportunity\s+attacks\b/));
+            addBonus('brewChecks', numberFrom(/\+(\d+)\s*to\s+brew\s+checks\b/));
+            addBonus('regenPerTurn', numberFrom(/heal\s+(\d+)\s+per\s+turn\b/));
+            addBonus('blockDamage', numberFrom(/deal\s+(\d+)\s+damage\s+on\s+block\b/));
+
+            if (/can\s+brew\s+potions\b/.test(lower)) notes.push('Can brew potions');
+            if (/immovable\b/.test(lower)) notes.push('Immovable');
+
+            const summaryOrder = [
+                ['armor', 'Armor'],
+                ['carryCapacity', 'Carry Capacity'],
+                ['allResist', 'Resist (All)'],
+                ['conditionResist', 'Resist vs Conditions'],
+                ['movement', 'Movement'],
+                ['reflex', 'Reflex'],
+                ['maxHealth', 'Max Health'],
+                ['healingReceived', 'Healing Received'],
+                ['regenPerTurn', 'Heal/Turn'],
+                ['opportunityAccuracy', 'Opportunity Accuracy'],
+                ['blockDamage', 'Block Damage'],
+                ['brewChecks', 'Brew Checks']
+            ];
+
+            const summaryParts = summaryOrder
+                .filter(([key]) => bonuses[key])
+                .map(([key, label]) => `+${bonuses[key]} ${label}`);
+
+            if (notes.length) summaryParts.push(...notes);
+
+            return {
+                bonuses,
+                summary: summaryParts.length ? summaryParts.join(' | ') : null
+            };
+        }
+
+        function applySuperiorBonus(target, statKey, label) {
+            if ((target[statKey] || 0) <= 0) return null;
+            target[statKey] += 1;
+            return `+1 ${label}`;
+        }
+
+        function applyRefinedBonus(target, statKey, label) {
+            if ((target[statKey] || 0) <= 0) return null;
+            target[statKey] += 2;
+            return `+2 ${label}`;
+        }
+
+        function applyMasterworkBonusByOrder(target, statOrder) {
+            const available = statOrder.filter(([key]) => (target[key] || 0) > 0);
+            if (!available.length) return null;
+
+            if (available.length === 1) {
+                const [key, label] = available[0];
+                target[key] = (target[key] || 0) + 3;
+                return `+3 ${label}`;
+            }
+
+            const [firstKey, firstLabel] = available[0];
+            const [secondKey, secondLabel] = available[1];
+            target[firstKey] = (target[firstKey] || 0) + 2;
+            target[secondKey] = (target[secondKey] || 0) + 1;
+            return `+2 ${firstLabel} | +1 ${secondLabel}`;
+        }
+
+        function clampCount(value) {
+            const parsed = Number.parseInt(value, 10);
+            if (Number.isNaN(parsed)) return 0;
+            return Math.max(0, Math.min(5, parsed));
+        }
+
+        function normalizeDamageType(type) {
+            return DAMAGE_TYPE_ALIASES[String(type || '').toLowerCase()] || String(type || '').toLowerCase();
+        }
+
+        function findDamageTypes(description) {
+            const text = String(description || '').toLowerCase();
+            return DAMAGE_TYPE_SCAN_ORDER
+                .filter(type => new RegExp(`\\b${type}\\b`, 'i').test(text))
+                .map(type => normalizeDamageType(type))
+                .filter((type, index, arr) => type && arr.indexOf(type) === index);
+        }
+
+        function interpretPrefixDamage(description, baseDamageType) {
+            const text = String(description || '');
+            const baseType = normalizeDamageType(baseDamageType);
+            const foundTypes = findDamageTypes(text); // recognized damage types
+
+            let sameTypeBonus = 0;
+            let accuracyBonus = 0;
+            const extraTypeBonuses = {};
+
+            // Match +N optionally followed by a word
+            const damageMatches = [...text.matchAll(/\+(\d+)\s*(\w+)?/g)];
+
+            damageMatches.forEach(([_, valueStr, maybeTypeRaw]) => {
+                const value = Number.parseInt(valueStr, 10);
+                if (!Number.isFinite(value)) return;
+
+                const maybeType = maybeTypeRaw ? normalizeDamageType(maybeTypeRaw) : null;
+
+                // If the word is missing, "damage", or "to a stat", treat as base type
+                if (!maybeTypeRaw || maybeTypeRaw.toLowerCase() === 'damage' || /to\s+a\s+stat/i.test(text)) {
+                    sameTypeBonus += value;
+                    return;
+                }
+
+                // Only add if maybeType is a recognized damage type
+                if (DAMAGE_TYPE_SCAN_ORDER.includes(maybeType)) {
+                    if (maybeType === baseType) sameTypeBonus += value;
+                    else extraTypeBonuses[maybeType] = (extraTypeBonuses[maybeType] || 0) + value;
+                }
+                if (maybeType === 'accuracy') {
+                    accuracyBonus += value;
+                }
+                // Otherwise ignore it (e.g., Accuracy, Armor)
+            });
+
+            const summaryParts = [];
+            if (sameTypeBonus > 0) summaryParts.push(`+${sameTypeBonus} ${toTitleCase(baseType)} damage`);
+            Object.entries(extraTypeBonuses).forEach(([type, bonus]) => {
+                summaryParts.push(`+${bonus} ${toTitleCase(type)} damage`);
+            });
+            if (accuracyBonus > 0) summaryParts.push(`+${accuracyBonus} Accuracy`);
+
+            return {
+                sameTypeBonus,
+                accuracyBonus,
+                extraTypeBonuses,
+                summary: summaryParts.length ? summaryParts.join(' | ') : null
+            };
+        }
+
+        function pickUniqueEntries(pool, count, excludeNames = new Set()) {
+            if (!Array.isArray(pool) || !pool.length || count <= 0) return [];
+            const copy = pool.filter(entry => entry && entry.name && !excludeNames.has(entry.name));
+            const picks = [];
+            const maxCount = Math.min(count, copy.length);
+            for (let i = 0; i < maxCount; i++) {
+                const index = Math.floor(Math.random() * copy.length);
+                picks.push(copy.splice(index, 1)[0]);
+            }
+            return picks;
+        }
+
+        function getWeaponPool() {
+            const categoryEntries = Object.entries(weaponGeneratorData?.categories || {});
+            if (!categoryEntries.length) return [];
+
+            return categoryEntries.flatMap(([categoryKey, list]) =>
+                (Array.isArray(list) ? list : []).map((weapon) => ({
+                    id: `${categoryKey}::${weapon?.name || 'Unknown Weapon'}`,
+                    categoryKey,
+                    categoryLabel: toTitleCase(categoryKey),
+                    name: weapon?.name || 'Unknown Weapon',
+                    damageType: weapon?.damage_type || 'unknown',
+                    damage: damageFromCategoryKey(categoryKey)
+                }))
+            );
+        }
+
+        function buildRandomGear(prefixCount, selectedId = '', selectedQualityId = '') {
+            if (!gearGeneratorData) return null;
+
+            const pool = getGearPool();
+            if (!pool.length) return null;
+
+            const qualityPool = gearGeneratorData.prefixes.quality || [];
+            const functionalPool = gearGeneratorData.prefixes.functional || [];
+
+            const base = selectedId
+                ? pool.find(i => i.id === selectedId)
+                : randomFromList(pool);
+
+            const extraPrefixCount = clampCount(prefixCount);
+
+            const selectedQuality = selectedQualityId
+                ? qualityPool.find(p => `quality::${p.name}` === selectedQualityId)
+                : null;
+
+            const qualityPrefix = selectedQuality
+                ? [selectedQuality]
+                : pickUniqueEntries(qualityPool, 1);
+
+            const extraPrefixes = pickUniqueEntries(
+                functionalPool,
+                extraPrefixCount,
+                new Set(qualityPrefix.map(p => p.name))
+            );
+
+            const rawPrefixes = [...qualityPrefix, ...extraPrefixes];
+            const hasMasterwork = rawPrefixes.some(prefix => String(prefix?.name || '').toLowerCase() === 'masterwork');
+            const hasSuperior = rawPrefixes.some(prefix => String(prefix?.name || '').toLowerCase() === 'superior');
+            const hasRefined = rawPrefixes.some(prefix => String(prefix?.name || '').toLowerCase() === 'refined');
+            const baseBonuses = getBaseGearBonuses(base.categoryKey, base.name);
+            const totalBonuses = { ...baseBonuses };
+            const prefixAddedKeys = [];
+            const gearMasterworkOrder = [
+                ['armor', 'Armor'],
+                ['carryCapacity', 'Carry Capacity'],
+                ['allResist', 'Resist (All)'],
+                ['conditionResist', 'Resist vs Conditions'],
+                ['movement', 'Movement'],
+                ['reflex', 'Reflex'],
+                ['maxHealth', 'Max Health'],
+                ['healingReceived', 'Healing Received'],
+                ['regenPerTurn', 'Heal/Turn'],
+                ['opportunityAccuracy', 'Opportunity Accuracy'],
+                ['blockDamage', 'Block Damage'],
+                ['brewChecks', 'Brew Checks']
+            ];
+
+            const prefixes = rawPrefixes.map((prefix) => {
+                if (String(prefix?.name || '').toLowerCase() === 'masterwork') {
+                    return {
+                        ...prefix,
+                        interpretedSummary: null
+                    };
+                }
+
+                const interpretation = interpretGearPrefix(prefix.description);
+                Object.entries(interpretation.bonuses).forEach(([key, value]) => {
+                    if (!(key in totalBonuses)) prefixAddedKeys.push(key);
+                    totalBonuses[key] = (totalBonuses[key] || 0) + value;
+                });
+
+                return {
+                    ...prefix,
+                    interpretedSummary: interpretation.summary
+                };
+            });
+
+            const baseKeys = Object.keys(baseBonuses).filter(k => (baseBonuses[k] || 0) > 0);
+            const superiorRefinedTarget = baseKeys.length > 0 ? baseKeys[0] : (prefixAddedKeys.length > 0 ? prefixAddedKeys[0] : 'armor');
+
+            if (hasMasterwork) {
+                const masterworkSummary = applyMasterworkBonusByOrder(totalBonuses, gearMasterworkOrder);
+                const masterworkIndex = prefixes.findIndex(prefix => String(prefix?.name || '').toLowerCase() === 'masterwork');
+                if (masterworkIndex >= 0) {
+                    prefixes[masterworkIndex] = {
+                        ...prefixes[masterworkIndex],
+                        interpretedSummary: masterworkSummary ? `Masterwork: ${masterworkSummary}` : 'Masterwork'
+                    };
+                }
+            }
+
+            if (hasSuperior) {
+                const superiorSummary = applySuperiorBonus(totalBonuses, superiorRefinedTarget, toTitleCase(superiorRefinedTarget));
+                const superiorIndex = prefixes.findIndex(prefix => String(prefix?.name || '').toLowerCase() === 'superior');
+                if (superiorIndex >= 0) {
+                    prefixes[superiorIndex] = {
+                        ...prefixes[superiorIndex],
+                        interpretedSummary: superiorSummary ? `Superior: ${superiorSummary}` : 'Superior'
+                    };
+                }
+            }
+
+            if (hasRefined) {
+                const refinedSummary = applyRefinedBonus(totalBonuses, superiorRefinedTarget, toTitleCase(superiorRefinedTarget));
+                const refinedIndex = prefixes.findIndex(prefix => String(prefix?.name || '').toLowerCase() === 'refined');
+                if (refinedIndex >= 0) {
+                    prefixes[refinedIndex] = {
+                        ...prefixes[refinedIndex],
+                        interpretedSummary: refinedSummary ? `Refined: ${refinedSummary}` : 'Refined'
+                    };
+                }
+            }
+
+            return {
+                name: [...prefixes.map(p => p.name), base.name].join(' '),
+                category: base.categoryKey,
+                categoryLabel: base.categoryLabel,
+                totalBonuses,
+                prefixes
+            };
+        }
+
+        function renderGearResult(result) {
+            const nameEl = document.getElementById('gear-name');
+            const metaEl = document.getElementById('gear-meta');
+            const effectsEl = document.getElementById('gear-effects');
+
+            if (!nameEl || !metaEl || !effectsEl) return;
+
+            nameEl.textContent = result.name;
+
+            const badgeOrder = [
+                ['armor', 'Armor'],
+                ['carryCapacity', 'Carry Capacity'],
+                ['allResist', 'Resist (All)'],
+                ['conditionResist', 'Resist vs Conditions'],
+                ['movement', 'Movement'],
+                ['reflex', 'Reflex'],
+                ['maxHealth', 'Max Health'],
+                ['healingReceived', 'Healing Received'],
+                ['regenPerTurn', 'Heal/Turn'],
+                ['opportunityAccuracy', 'Opportunity Accuracy'],
+                ['blockDamage', 'Block Damage'],
+                ['brewChecks', 'Brew Checks']
+            ];
+
+            const statBadges = badgeOrder
+                .filter(([key]) => (result.totalBonuses?.[key] || 0) > 0)
+                .map(([key, label]) => `<span class="px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 text-xs font-bold uppercase tracking-wide">+${result.totalBonuses[key]} ${label}</span>`)
+                .join('');
+
+            metaEl.innerHTML = `
+        <span class="px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-200 text-xs font-bold uppercase tracking-wide">
+            ${result.categoryLabel}
+        </span>
+        <span class="px-4 py-1.5 rounded-full bg-slate-500/10 border border-slate-500/30 text-slate-200 text-xs font-bold uppercase tracking-wide">Requires ${proficiencyFromCategoryKey(result.category)} Fortitude</span>
+        ${statBadges}
+    `;
+
+            effectsEl.innerHTML = result.prefixes.map(prefix => `
+        <div class="rounded-lg border border-slate-700/70 bg-slate-900/40 px-3 py-2" style="margin-top: 10px;">
+            <div class="text-sm text-white font-semibold">${escapeHtml(prefix.name)}</div>
+            <div class="text-xs text-slate-300">${escapeHtml(prefix.description)}</div>
+            ${prefix.interpretedSummary ? `<div class="text-[11px] text-emerald-300 mt-1">${escapeHtml(prefix.interpretedSummary)}</div>` : ''}
+        </div>
+    `).join('');
+        }
+
+        function populateWeaponSelect() {
+            const select = document.getElementById('weapon-base-select');
+            if (!select) return;
+
+            const pool = getWeaponPool();
+            const options = pool
+                .sort((a, b) => `${a.categoryLabel} ${a.name}`.localeCompare(`${b.categoryLabel} ${b.name}`))
+                .map((weapon) => `<option value="${escapeHtml(weapon.id)}">${escapeHtml(weapon.name)} (${escapeHtml(weapon.categoryLabel)})</option>`)
+                .join('');
+
+            select.innerHTML = `<option value="">None (Random)</option>${options}`;
+        }
+
+        function populateQualitySelect() {
+            const select = document.getElementById('weapon-quality-select');
+            if (!select) return;
+
+            const qualityPool = weaponGeneratorData?.prefixes?.quality || [];
+            const options = qualityPool
+                .map((quality) => `<option value="quality::${escapeHtml(quality.name)}">${escapeHtml(quality.name)}</option>`)
+                .join('');
+
+            select.innerHTML = `<option value="">None (Random)</option>${options}`;
+        }
+
+        function renderWeaponResult(result) {
+            const nameEl = document.getElementById('weapon-name');
+            const metaEl = document.getElementById('weapon-meta');
+            const effectsEl = document.getElementById('weapon-effects');
+            if (!nameEl || !metaEl || !effectsEl) return;
+
+            nameEl.textContent = result.name;
+            const baseType = normalizeDamageType(result.damageType);
+            const isFinesse = String(result.category || '').toLowerCase().includes('finesse');
+            const weaponType = isFinesse ? 'Finesse' : 'Might';
+            metaEl.innerHTML = `
+                <span class="px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-200 text-xs font-bold uppercase tracking-wide">${result.categoryLabel}</span>
+                <span class="px-4 py-1.5 rounded-full bg-slate-500/10 border border-slate-500/30 text-slate-200 text-xs font-bold uppercase tracking-wide">Requires ${proficiencyFromCategoryKey(result.category)} ${weaponType}</span>
+                <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 text-xs font-bold uppercase tracking-wide">${result.totalBaseDamage} ${toTitleCase(baseType)} Damage</span>
+                <span class="px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-200 text-xs font-bold uppercase tracking-wide">${result.totalAccuracy + Math.round(Math.random() * 3 + 1)} Accuracy</span>
+                ${Object.entries(result.extraDamageBonuses || {}).map(([type, bonus]) => `<span class="px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-200 text-xs font-bold uppercase tracking-wide">+${bonus} ${toTitleCase(type)} Damage</span>`).join('')}
+            `;
+
+            const effectBlocks = [];
+            if (result.prefixes.length) {
+                const prefixRows = result.prefixes.map((prefix) => {
+                    const interpreted = prefix.interpretedSummary ? `<div class="text-[11px] text-emerald-300 mt-1">${escapeHtml(prefix.interpretedSummary)}</div>` : '';
+                    return `<div class="rounded-lg border border-slate-700/70 bg-slate-900/40 px-3 py-2"><div class="text-sm text-white font-semibold">${escapeHtml(prefix.name)}</div><div class="text-xs text-slate-300">${escapeHtml(prefix.description)}</div>${interpreted}</div>`;
+                }).join('');
+                effectBlocks.push(`<div class="space-y-2"><div class="text-xs uppercase tracking-widest text-emerald-300 font-bold">Prefixes</div>${prefixRows}</div>`);
+            }
+            effectsEl.innerHTML = effectBlocks.length ? effectBlocks.join('') : '<span class="text-slate-500 italic">No modifiers selected.</span>';
+        }
+
+        function buildRandomWeapon(prefixCount, selectedWeaponId = '', selectedQualityId = '') {
+            if (!weaponGeneratorData) return null;
+            const qualityPool = weaponGeneratorData?.prefixes?.quality || [];
+            const functionalPool = weaponGeneratorData?.prefixes?.functional || [];
+            const weaponPool = getWeaponPool();
+            if (!weaponPool.length) return null;
+
+            const selectedBase = selectedWeaponId ? weaponPool.find(weapon => weapon.id === selectedWeaponId) : null;
+            const base = selectedBase || randomFromList(weaponPool);
+            const extraPrefixCount = clampCount(prefixCount);
+
+            const selectedQuality = selectedQualityId
+                ? qualityPool.find(prefix => `quality::${prefix.name}` === selectedQualityId)
+                : null;
+            const qualityPrefix = selectedQuality ? [selectedQuality] : pickUniqueEntries(qualityPool, 1);
+            const extraPrefixes = pickUniqueEntries(functionalPool, extraPrefixCount, new Set(qualityPrefix.map(item => item.name)));
+            const rawPrefixes = [...qualityPrefix, ...extraPrefixes];
+            const hasMasterwork = rawPrefixes.some(prefix => String(prefix?.name || '').toLowerCase() === 'masterwork');
+
+            const baseType = normalizeDamageType(base.damageType);
+            let totalBaseDamage = base.damage;
+            let totalAccuracy = 0;
+            const extraDamageBonuses = {};
+
+            const prefixes = rawPrefixes.map((prefix) => {
+                if (String(prefix?.name || '').toLowerCase() === 'masterwork') {
+                    return {
+                        ...prefix,
+                        interpretedSummary: null
+                    };
+                }
+
+                const interpretation = interpretPrefixDamage(prefix.description, baseType);
+                totalBaseDamage += interpretation.sameTypeBonus;
+                totalAccuracy += interpretation.accuracyBonus;
+
+                Object.entries(interpretation.extraTypeBonuses).forEach(([type, bonus]) => {
+                    extraDamageBonuses[type] = (extraDamageBonuses[type] || 0) + bonus;
+                });
+
+                return {
+                    ...prefix,
+                    interpretedSummary: interpretation.summary
+                };
+            });
+
+            if (hasMasterwork) {
+                const masterworkTarget = { totalBaseDamage, totalAccuracy };
+                const masterworkSummary = applyMasterworkBonusByOrder(masterworkTarget, [
+                    ['totalBaseDamage', `${toTitleCase(baseType)} Damage`],
+                    ['totalAccuracy', 'Accuracy']
+                ]);
+                totalBaseDamage = masterworkTarget.totalBaseDamage;
+                totalAccuracy = masterworkTarget.totalAccuracy;
+
+                const masterworkIndex = prefixes.findIndex(prefix => String(prefix?.name || '').toLowerCase() === 'masterwork');
+                if (masterworkIndex >= 0) {
+                    prefixes[masterworkIndex] = {
+                        ...prefixes[masterworkIndex],
+                        interpretedSummary: masterworkSummary ? `Masterwork: ${masterworkSummary}` : 'Masterwork'
+                    };
+                }
+            }
+
+            const nameParts = [
+                ...prefixes.map(item => item.name),
+                base.name
+            ];
+
+            return {
+                category: base.categoryKey,
+                categoryLabel: base.categoryLabel,
+                damage: base.damage,
+                damageType: base.damageType,
+                totalBaseDamage,
+                totalAccuracy,
+                extraDamageBonuses,
+                extraPrefixCount,
+                name: nameParts.join(' '),
+                prefixes
+            };
+        }
+
+        function pickRandomWeapon() {
+            const card = document.getElementById('weapon-roll');
+            if (!card || !weaponGeneratorData) return;
+
+            const prefixInput = document.getElementById('weapon-prefix-count');
+            const weaponSelect = document.getElementById('weapon-base-select');
+            const qualitySelect = document.getElementById('weapon-quality-select');
+            const prefixCount = clampCount(prefixInput ? prefixInput.value : 0);
+            const selectedWeaponId = weaponSelect ? weaponSelect.value : '';
+            const selectedQualityId = qualitySelect ? qualitySelect.value : '';
+
+            if (prefixInput) prefixInput.value = String(prefixCount);
+
+            let shuffleCount = 0;
+            const maxShuffles = 8;
+            card.classList.add('shuffling');
+
+            const shuffleInterval = setInterval(() => {
+                const sample = buildRandomWeapon(prefixCount, selectedWeaponId, selectedQualityId);
+                if (sample) renderWeaponResult(sample);
+                shuffleCount += 1;
+
+                if (shuffleCount >= maxShuffles) {
+                    clearInterval(shuffleInterval);
+                    const finalResult = buildRandomWeapon(prefixCount, selectedWeaponId, selectedQualityId);
+                    if (finalResult) renderWeaponResult(finalResult);
+                    card.classList.remove('shuffling');
+                }
+            }, 60);
+        }
+
+        function pickRandomGear() {
+            const prefixInput = document.getElementById('gear-prefix-count');
+            const gearSelect = document.getElementById('gear-base-select');
+            const qualitySelect = document.getElementById('gear-quality-select');
+            const card = document.getElementById('gear-roll');
+
+            if (!gearGeneratorData || !card) return;
+
+            const prefixCount = clampCount(prefixInput?.value || 0);
+            const selectedId = gearSelect?.value || '';
+            const selectedQuality = qualitySelect?.value || '';
+
+            let shuffleCount = 0;
+            const maxShuffles = 8;
+
+            const interval = setInterval(() => {
+                const sample = buildRandomGear(prefixCount, selectedId, selectedQuality);
+                if (sample) renderGearResult(sample);
+
+                shuffleCount++;
+                if (shuffleCount >= maxShuffles) {
+                    clearInterval(interval);
+                    const final = buildRandomGear(prefixCount, selectedId, selectedQuality);
+                    if (final) renderGearResult(final);
+                }
+            }, 60);
+        }
+
+        // --- Artisan Row Creator ---
+        function createArtisanRow(item, index, type) {
+            const rowId = `artisan-${index}-${type}`;
+            const isCraft = item.Description.includes("Using [");
+
+            return `
+            <tr onclick="toggleDetails('${rowId}')" class="expandable-row border-b border-slate-800/50 cursor-pointer hover:bg-slate-800/30">
+                <td class="px-6 py-4 font-bold text-white text-base">${item.Name}</td>
+                <td class="px-6 py-4 text-indigo-300 font-mono text-xs font-bold">${item.Material}</td>
+                <td class="px-6 py-4"><span class="category-tag">${item.Category || 'Artisan'}</span></td>
+                <td class="px-6 py-4 text-right text-xs text-slate-500"><div id="arrow-${rowId}" class="transition-transform duration-200 inline-block">▼</div></td>
+            </tr>
+            <tr id="${rowId}" class="hidden bg-slate-900/40"><td colspan="4" class="px-6 py-6 border-b border-slate-800"><div class="space-y-4">
+                    <div class="flex flex-wrap gap-4 text-xs uppercase tracking-widest"><span class="text-white font-bold bg-slate-700/50 px-2 py-1 rounded">Type: ${item.Type || '-'}</span><span class="text-slate-400 bg-slate-800 px-2 py-1 rounded">Range: ${item.Range || 'Self'}</span></div>
+                    <p class="text-slate-300 text-sm leading-relaxed">${item.Description}</p>
+                    <div class="text-slate-500 italic text-[11px] border-l-2 border-slate-700 pl-3">${item.Lore || ''}</div>
+            </div></td></tr>`;
+        }
+
+        async function loadData() {
+            // Weapon Generator
+            try {
+                const res = await fetch('../json/weapons.json');
+                weaponGeneratorData = await res.json();
+                populateWeaponSelect();
+                populateQualitySelect();
+                pickRandomWeapon();
+            } catch (e) {
+                console.error('Weapon generator data failed to load:', e);
+            }
+
+            // Crafting (Recipes)
+            try {
+                const res = await fetch('../json/crafting.json');
+                const data = await res.json();
+                document.getElementById("crafting-recipes").innerHTML = (data.recipes || []).map(r => `<tr class="row" data-tier="${r.tier}"><td class="font-bold text-white">${r.name}</td><td><span class="text-xs bg-slate-800 px-2 py-1 rounded border border-slate-700">${r.tier}</span></td><td>${r.category}</td><td class="text-xs">${(r.components || []).join(",<br> ")}</td><td class="text-slate-400 italic">${r.effect}</td></tr>`).join("");
+                document.getElementById("craft-components").innerHTML = (data.components || []).map(c => `<tr class="row"><td class="font-bold text-white">${c.name}</td><td>${c.category}</td><td class="text-slate-400 italic">${c.notes || ""}</td></tr>`).join("");
+            } catch (e) { }
+
+            try {
+                const res = await fetch('../json/artisan.json');
+                const data = await res.json();
+                const rawArtisan = data.filter(item => item.Cost != 0);
+                const sArtisanCrafts = rawArtisan.filter(i => i.Cost != 0);
+
+                document.getElementById('artisan-crafts-body').innerHTML = sArtisanCrafts.length ? sArtisanCrafts.map((item, i) => createArtisanRow(item, i, 'craft')).join('') : '<tr><td colspan="4" class="p-6 text-center text-slate-600 italic">No crafts found.</td></tr>';
+
+            } catch (e) { console.error("Error loading artisan items", e); }
+
+            // Brewing Data Loader (Fixed)
+            try {
+                const res = await fetch('../json/brewing.json');
+                const data = await res.json();
+
+                // INGREDIENTS
+                document.getElementById("brew-ingredients").innerHTML =
+                    (data.ingredients || []).map(i => `
+            <tr class="row">
+                <td class="font-bold text-white">${i.Name}</td>
+                <td>
+                    ${(i.Aspects || []).map(a =>
+                        `<span class="tag-badge">${a}</span>`
+                    ).join(" ")}
+                </td>
+                <td>${i.Quality}</td>
+            </tr>
+        `).join("");
+
+                // POTIONS
+                document.getElementById("brew-potions").innerHTML =
+                    (data.potions || []).map(p => `
+            <tr class="row">
+                <td class="font-bold text-white">${p.Name}</td>
+                <td class="text-indigo-400 capitalize">${p.Tier}</td>
+                <td>
+                    ${(p.Aspects || []).map(a =>
+                        `<span class="tag-badge">${a}</span>`
+                    ).join(" ")}
+                </td>
+                <td class="text-slate-400 text-sm">${p.Effect}</td>
+            </tr>
+        `).join("");
+
+            } catch (e) {
+                console.error("Brewing data failed to load:", e);
+            }
+        }
+
+
+        // Crafting Filter
+        function filterCrafting() {
+            const val = document.getElementById('tierFilter').value;
+            document.querySelectorAll('#crafting-recipes tr').forEach(row => {
+                row.style.display = (val === 'all' || row.dataset.tier === val) ? 'table-row' : 'none';
+            });
+        }
+        async function populatePrefixGrid() {
+            try {
+                const res = await fetch('../json/weapons.json');
+                const data = await res.json();
+                const grid = document.getElementById('prefix-grid');
+                if (!grid) return;
+
+                const prefixTypes = [
+                    { key: 'quality', color: 'emerald', shadow: '16,185,129' },
+                    { key: 'functional', color: 'orange', shadow: '249,115,22' }
+                ];
+
+                const cards = [];
+
+                prefixTypes.forEach(({ key, color, shadow }) => {
+                    const pool = data.prefixes[key] || [];
+                    pool.forEach(prefix => {
+                        cards.push(`
+                    <div class="prefix-card">
+                        <div class="prefix-dot" style="background:var(--${color === 'emerald' ? 'sky' : 'gold'});"></div>
+                        <div>
+                            <strong style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--${color === 'emerald' ? 'sky' : 'gold'}); margin-bottom:0.3rem;">${prefix.name}</strong>
+                            <p style="font-size:0.85rem; color:var(--ink-dim); margin:0;">${prefix.description}</p>
+                        </div>
+                    </div>
+                `);
+                    });
+                });
+
+                grid.innerHTML = cards.join('');
+            } catch (e) {
+                console.error("Failed to load prefixes:", e);
+            }
+        }
+
+        async function populateGearPrefixGrid() {
+            try {
+                const res = await fetch('../json/gear.json');
+                const data = await res.json();
+                const grid = document.getElementById('gear-prefix-grid');
+                if (!grid) return;
+
+                const prefixTypes = [
+                    { key: 'quality', color: 'emerald', shadow: '16,185,129' },
+                    { key: 'functional', color: 'orange', shadow: '249,115,22' }
+                ];
+
+                const cards = [];
+
+                prefixTypes.forEach(({ key, color, shadow }) => {
+                    const pool = data.prefixes[key] || [];
+                    pool.forEach(prefix => {
+                        cards.push(`
+                    <div class="prefix-card">
+                        <div class="prefix-dot" style="background:var(--${color === 'emerald' ? 'sky' : 'gold'});"></div>
+                        <div>
+                            <strong style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--${color === 'emerald' ? 'sky' : 'gold'}); margin-bottom:0.3rem;">${prefix.name}</strong>
+                            <p style="font-size:0.85rem; color:var(--ink-dim); margin:0;">${prefix.description}</p>
+                        </div>
+                    </div>
+                `);
+                    });
+                });
+
+                grid.innerHTML = cards.join('');
+            } catch (e) {
+                console.error("Failed to load gear prefixes:", e);
+            }
+        }
+
+        // --- Collapse/expand logic ---
+        function togglePrefixGrid() {
+            const grid = document.getElementById('prefix-grid');
+            const arrow = document.getElementById('prefix-arrow');
+            if (!grid || !arrow) return;
+
+            const isHidden = grid.classList.toggle('hidden');
+            arrow.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        function toggleGearPrefixGrid() {
+            const grid = document.getElementById('gear-prefix-grid');
+            const arrow = document.getElementById('gear-prefix-arrow');
+            if (!grid || !arrow) return;
+
+            const isHidden = grid.classList.toggle('hidden');
+            arrow.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        async function loadGearData() {
+            try {
+                const res = await fetch('../json/gear.json');
+                gearGeneratorData = await res.json();
+
+                populateGearSelect();
+                populateGearQualitySelect();
+                pickRandomGear();
+            } catch (e) {
+                console.error("Gear data failed:", e);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadGearData);
+
+        document.addEventListener('DOMContentLoaded', populatePrefixGrid);
+        document.addEventListener('DOMContentLoaded', populateGearPrefixGrid);
+        document.addEventListener('DOMContentLoaded', loadData);
+
+
+
+
+
+// ---------- GLOBAL STATE ----------
+
+const ArsenalState = {
+    data: [],
+
+    filters: {
+        category: 'all',
+        damage: 'all',
+        hand: 'all',
+        trait: 'all'
+    }
+};
+
+
+
+ // ---------- AUTO REQUIREMENTS ----------
+
+function computeRequirements(weapon) {
+    const dmg = Number(weapon.damage) || 0;
+    if (dmg <= 0) return [];
+
+    const req = weapon.requires || [];
+
+    const hasMight = req.includes("might");
+    const hasFinesse = req.includes("finesse");
+
+    let might = 0;
+    let finesse = 0;
+
+    if (hasMight && !hasFinesse) {
+        might = dmg;
+    }
+    else if (hasFinesse && !hasMight) {
+        finesse = dmg;
+    }
+    else if (hasMight && hasFinesse) {
+        might = Math.floor(dmg / 2);
+        finesse = Math.ceil(dmg / 2);
+    }
+    else {
+        might = Math.floor(dmg / 2);
+        finesse = Math.ceil(dmg / 2);
+    }
+
+    const out = [];
+
+    if (might > 0) out.push(`Might ${might}`);
+    if (finesse > 0) out.push(`Finesse ${finesse}`);
+
+    return out;
+}
+
+// ---------- NORMALIZE JSON ----------
+
+function normalizeArsenalData(rawData) {
+
+    // TRAIT LOOKUP
+    const traitMap = {};
+
+    (rawData.traits || []).forEach(trait => {
+        traitMap[trait.id] = trait;
+    });
+
+    const weapons = [];
+
+    Object.entries(rawData).forEach(([sectionKey, section]) => {
+
+        // skip traits array
+        if (sectionKey === 'traits') return;
+
+        Object.entries(section).forEach(([categoryKey, items]) => {
+
+            items.forEach(item => {
+
+                weapons.push({
+                    ...item,
+
+                    section: sectionKey,
+                    type: categoryKey,
+                    hand: extractHandType(categoryKey),
+
+                    // attach full trait object
+                    traitData: traitMap[item.trait] || null
+                });
+
+            });
+
+        });
+
+    });
+
+    return weapons;
+}
+
+// ---------- LOAD DATA ----------
+
+async function loadArsenalData() {
+
+    try {
+
+        const response = await fetch('../json/arsenal.json');
+        const rawData = await response.json();
+
+        ArsenalState.data = normalizeArsenalData(rawData);
+
+        updateFiltersUI();
+        renderArsenalTable();
+
+    } catch (err) {
+        console.error('Failed loading arsenal data:', err);
+    }
+}
+
+// ---------- FILTER SYSTEM ----------
+
+function setFilter(type, value) {
+
+    ArsenalState.filters[type] = value;
+
+    if (type === 'category') {
+        ArsenalState.filters.damage = 'all';
+        ArsenalState.filters.hand = 'all';
+    }
+
+    if (type === 'damage') {
+        ArsenalState.filters.hand = 'all';
+    }
+
+    updateFiltersUI();
+    renderArsenalTable();
+}
+
+// ---------- FILTERED DATA ----------
+
+function getFilteredWeapons() {
+
+    if (!ArsenalState.data) return [];
+
+    return ArsenalState.data.filter(w => {
+
+        const f = ArsenalState.filters;
+
+        if (f.category !== 'all' && w.type !== f.category) {
+            return false;
+        }
+
+        if (f.damage !== 'all' && w.damage_type !== f.damage) {
+            return false;
+        }
+
+        if (f.hand !== 'all' && w.hand !== f.hand) {
+            return false;
+        }
+
+        // OPTIONAL TRAIT FILTER
+        if (f.trait && f.trait !== 'all') {
+            if (!w.traitData || w.traitData.Name !== f.trait) {
+                return false;
+            }
+        }
+
+        return true;
+    });
+}
+
+// ---------- UI UPDATES ----------
+
+function updateFiltersUI() {
+    updateCategoryUI();
+    updateDamageFilters();
+    updateHandFilters();
+}
+
+function updateCategoryUI() {
+
+    document.querySelectorAll('.arsenal-category-btn').forEach(btn => {
+
+        const active =
+            btn.dataset.category === ArsenalState.filters.category;
+
+        btn.classList.toggle('active', active);
+        btn.classList.toggle('bg-indigo-600/20', active);
+        btn.classList.toggle('border-indigo-500/50', active);
+        btn.classList.toggle('text-indigo-300', active);
+
+        btn.classList.toggle('border-slate-700', !active);
+
+    });
+}
+
+function updateDamageFilters() {
+
+    const weapons = ArsenalState.data || [];
+
+    const pool =
+        ArsenalState.filters.category === 'all'
+            ? weapons
+            : weapons.filter(
+                w => w.type === ArsenalState.filters.category
+            );
+
+    const types = [
+        ...new Set(pool.map(w => w.damage_type))
+    ];
+
+    const container =
+        document.getElementById('damage-filter-container');
+
+    const box =
+        document.getElementById('damage-filter-buttons');
+
+    if (!types.length) {
+        container.classList.add('hidden');
+        return;
+    }
+
+    container.classList.remove('hidden');
+
+    box.innerHTML = [
+        createFilterButton('damage', 'all', 'All'),
+        ...types.map(t =>
+            createFilterButton('damage', t, t)
+        )
+    ].join('');
+}
+
+function updateHandFilters() {
+
+    const weapons = getFilteredWeapons();
+
+    const hands = [
+        ...new Set(weapons.map(w => w.hand))
+    ];
+
+    const container =
+        document.getElementById('hand-filter-container');
+
+    const box =
+        document.getElementById('hand-filter-buttons');
+
+    if (!hands.length) {
+        container.classList.add('hidden');
+        return;
+    }
+
+    container.classList.remove('hidden');
+
+    box.innerHTML = [
+        createFilterButton('hand', 'all', 'All'),
+        ...hands.map(h =>
+            createFilterButton(
+                'hand',
+                h,
+                formatHandLabel(h)
+            )
+        )
+    ].join('');
+}
+
+// ---------- BUTTON FACTORY ----------
+
+function createFilterButton(type, value, label) {
+
+    const active =
+        ArsenalState.filters[type] === value;
+
+    return `
+        <button
+            onclick="setFilter('${type}', '${value}')"
+            class="
+                px-4 py-2
+                border rounded-none
+                text-sm font-bold uppercase tracking-widest
+                transition-all
+            "
+            style="
+            ${active
+                    ? 'background-color: rgba(201,168,76,0.14); #c9a84c; color: #c9a84c;'
+                    : 'border-color: rgba(148,163,184,0.5); color: rgb(148 163 184);'}
+            
+            "
+            
+            
+            >
+
+            ${label}
+
+        </button>
+    `;
+}
+
+// ---------- TRAIT RENDER ----------
+
+function renderTrait(trait) {
+
+    if (!trait) {
+        return `<span class="text-slate-600">-</span>`;
+    }
+
+    return `
+        <div class="group relative">
+
+            <div class="
+                inline-flex items-center gap-2
+                px-2 py-1 rounded-lg
+                bg-violet-500/10
+                border border-violet-500/20
+                text-violet-300
+                text-xs font-bold uppercase tracking-wider
+            ">
+
+                <span>${trait.Action}</span>
+                <span>${trait.Name}</span>
+
+            </div>
+
+            <div class="
+                absolute left-0 top-full mt-2 z-50
+                w-72 p-3 rounded-xl
+                bg-slate-900
+                border border-slate-700
+                shadow-2xl shadow-black/50
+
+                opacity-0 invisible
+                group-hover:opacity-100
+                group-hover:visible
+
+                transition-all duration-150
+            ">
+
+                <div class="flex items-center gap-2 mb-2">
+
+                    <span class="text-violet-300 font-bold">
+                        ${trait.Action}
+                    </span>
+
+                    <span class="text-white font-bold">
+                        ${trait.Name}
+                    </span>
+
+                    <span class="text-slate-500 text-xs">
+                        ${trait.Symbols}
+                    </span>
+
+                </div>
+
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    ${trait.Description}
+                </p>
+
+            </div>
+
+        </div>
+    `;
+}
+
+// ---------- TABLE RENDER ----------
+
+function renderArsenalTable() {
+
+    const weapons = getFilteredWeapons();
+
+    const tbody =
+        document.getElementById('arsenal-table-body');
+
+    const countDiv =
+        document.getElementById('arsenal-result-count');
+
+    if (!weapons.length) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="8"
+                    class="
+                        px-4 py-8
+                        text-center
+                        text-slate-400
+                    ">
+
+                    No weapons match your filters
+
+                </td>
+            </tr>
+        `;
+
+        countDiv.textContent = '0 items';
+
+        return;
+    }
+
+    tbody.innerHTML = weapons.map(w => {
+
+        const requires =
+            computeRequirements(w).length
+                ? computeRequirements(w).join(' + ')
+                : '-';
+
+        const damageStars =
+            '★'.repeat(w.damage || 0) +
+            '☆'.repeat(3 - (w.damage || 0));
+
+        const accuracyStars =
+            '★'.repeat(w.accuracy || 0) +
+            '☆'.repeat(3 - (w.accuracy || 0));
+
+        return `
+            <tr class="
+                border-b border-slate-700/50
+                hover:bg-slate-800/30
+                transition-colors
+            ">
+
+                <td class="px-4 py-3 font-bold text-white">
+                    ${w.name}
+                </td>
+
+                <td class="px-4 py-3 text-slate-400 text-sm">
+                    ${formatCategoryLabel(w.type)}
+                </td>
+
+                <td class="px-4 py-3 text-slate-400 text-sm">
+                    ${w.range || 'N/A'}
+                </td>
+
+                <td class="px-4 py-3">
+                    <span class="
+                        inline-block
+                        px-2 py-1
+                        bg-slate-700/50
+                        rounded
+                        text-xs font-bold uppercase
+                        text-slate-300
+                    ">
+                        ${w.damage_type}
+                    </span>
+                </td>
+
+                <td class="px-4 py-3 text-center text-amber-400">
+                    ${damageStars}
+                </td>
+
+                <td class="px-4 py-3 text-center text-cyan-400">
+                    ${accuracyStars}
+                </td>
+
+                <td class="px-4 py-3 text-slate-400 text-sm">
+                    ${requires}
+                </td>
+
+                <td class="px-4 py-3">
+                    ${renderTrait(w.traitData)}
+                </td>
+
+            </tr>
+        `;
+
+    }).join('');
+
+    countDiv.textContent =
+        `${weapons.length} item${weapons.length !== 1 ? 's' : ''}`;
+}
+
+// ---------- HELPERS ----------
+
+function extractHandType(category) {
+
+    if (category.includes('free')) {
+        return 'free';
+    }
+
+    if (category.includes('one_handed')) {
+        return 'one-handed';
+    }
+
+    if (category.includes('two_handed')) {
+        return 'two-handed';
+    }
+
+    return 'other';
+}
+
+function formatCategoryLabel(category) {
+
+    return category
+        .replace(/_/g, ' ')
+        .split(' ')
+        .map(w =>
+            w.charAt(0).toUpperCase() + w.slice(1)
+        )
+        .join(' ');
+}
+
+function formatHandLabel(hand) {
+
+    if (hand === 'free') {
+        return 'Free-Handed';
+    }
+
+    return hand.charAt(0).toUpperCase() + hand.slice(1);
+}
+
+// ---------- INIT ----------
+
+document.addEventListener(
+    'DOMContentLoaded',
+    loadArsenalData
+);
+
+// ---------- COMPATIBILITY WRAPPERS ----------
+
+function setArsenalCategory(category) {
+    setFilter('category', category);
+}
+
+function setArsenalDamage(damageType) {
+    setFilter('damage', damageType);
+}
+
+function setArsenalHand(handType) {
+    setFilter('hand', handType);
+}
+    </script>
+    <script id="ml-layout" src="../dyn/layout.js" data-base=".." defer></script>
+</body>
+
+</html>
+

@@ -1,0 +1,14 @@
+{
+  "expansions": [
+    {
+      "id": "lakeview",
+      "name": "Lakeview",
+      "page": "lakeview.html"
+    },
+    {
+      "id": "lords",
+      "name": "Lords",
+      "page": "lords.html"
+    }
+  ]
+}

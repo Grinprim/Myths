@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    --ink:        #e8e4dc;
+    --ink-dim:    #9a9488;
+    --ink-faint:  #5a5650;
+    --gold:       #c9a84c;
+    --gold-dim:   rgba(201,168,76,0.18);
+    --gold-line:  rgba(201,168,76,0.30);
+    --indigo:     #818cf8;
+    --indigo-dim: rgba(129,140,248,0.12);
+    --red:        #f87171;
+    --sky:        #67e8f9;
+    --void:       #060a14;
+    --surface-0:  rgba(255,255,255,0.025);
+    --surface-1:  rgba(255,255,255,0.04);
+    --border:     rgba(148,163,184,0.06);
+}
+
+/* Global typographic & background defaults to match rules visual system */
+body {
+    background: var(--void) !important;
+    color: var(--ink);
+    font-family: 'Crimson Pro', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Basic cosmos helpers used across pages */
+.cosmos { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+.nebula { position: absolute; inset: 0; opacity: 0.7; }
+.stars { position: absolute; inset: 0; }
+.shooting-star { position: absolute; }
+
+/* Tab/button and tailwind overrides used in rules.css */
+.tab-btn.active { background-color: rgba(99, 102, 241, 0.12); border-color: var(--gold-line); color: var(--ink); }
+.text-indigo-300 { color: #a5b4fc !important; }
+.text-indigo-400 { color: var(--indigo) !important; }
+.text-slate-300  { color: #c8c0b0 !important; }
+.text-slate-400  { color: var(--ink-dim) !important; }
+.text-slate-500  { color: var(--ink-faint) !important; }
+.border-slate-700 { border-color: var(--border) !important; }
+.border-slate-800 { border-color: var(--border) !important; }
+.bg-slate-900\/50, .bg-slate-900\/40, .bg-slate-900\/30, .bg-slate-800\/50 { background: rgba(255,255,255,0.03) !important; }
+
+/* Small utility: ensure footer/navbar placeholders render over the cosmos */
+#navbar-placeholder, #footer-placeholder { position: relative; z-index: 40; }

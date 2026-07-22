@@ -1,0 +1,585 @@
+<div class="rule-card">
+    <h2 id="lv-introduction" class="text-3xl text-white font-bold mb-4">Lakeview Expansion</h2>
+    
+    <p class="text-slate-300 text-sm mb-6">Lakeview is a Massive City with multiple layers, and as such has many mechanics not present in the base system. To account for this, this expansion adds a few new traits, paths and systems. The systems bellow are explained from a strictly mechanical perspective, as their utilization in campaigns falls on the narrator to decide how they will be implemented.</p>
+    <p class="text-slate-300 text-sm mb-6">Lakeview introduces the Risk Meter, the Smog Meter, two new character paths, the Grafting & Mutation modification system.</p>
+</div>
+
+<section id="lv-risk-meter" class="rule-card scroll-offset-center">
+    <h3 class="text-2xl text-white font-bold mb-3">Risk Meter</h3>
+    <p class="text-slate-300 text-sm mb-4">Risk represents bad luck your character has bought themselves through dangerous gambles, morally dubious abilities, and bargains pushed too far. It is tracked on a separate meter and can stack without limit &mdash; there is no upper cap, and what eventually happens to a character buried in Risk is left to the Narrator. Risk can be added or removed Narratively, based on the actions your character takes during the course of the campaign. It is usually suggested to keep risk town/city specific</p>
+
+    <div class="condition-card text-sm">
+        Most Risk is gained voluntarily, by <strong>Betting</strong>. When a trait lets you Bet, you add Risk to a roll of your choice, but you must declare a success condition before rolling. The more specific the condition, the more Risk you may bet on it:
+    </div>
+    <div class="space-y-2 text-sm my-4">
+        <div class="bg-slate-900/30 p-2 rounded flex justify-between">
+            <span>Bet 1 Risk</span>
+            <span class="text-slate-400">Must Succeed the Check</span>
+        </div>
+        <div class="bg-slate-900/30 p-2 rounded flex justify-between">
+            <span>Bet 2 Risk</span>
+            <span class="text-slate-400">Must roll an Odd or Even number</span>
+        </div>
+        <div class="bg-slate-900/30 p-2 rounded flex justify-between">
+            <span>Bet 4 Risk</span>
+            <span class="text-slate-400">Must roll Above or Below 7</span>
+        </div>
+        <div class="bg-slate-900/30 p-2 rounded flex justify-between">
+            <span>Bet 8 Risk</span>
+            <span class="text-slate-400">Must roll a specific number</span>
+        </div>
+        <div class="bg-slate-900/30 p-2 rounded flex justify-between">
+            <span>Bet 16 Risk</span>
+            <span class="text-slate-400">Must roll a specific combination (ex. 3+4 = 7)</span>
+        </div>
+    </div>
+    <p class="text-slate-300 text-sm mb-4">Bet Risk is added to your pool upon failing the condition. Beyond betting, several Daredevil and Modified abilities pile on Risk directly: pushing a temporary bonus to its limit, taking a bonus action you weren't entitled to, or forcing a creature to fail a contest can all grant you Risk.</p>
+
+    <div class="condition-card text-sm">
+        Risk doesn't just sit there. Once it crosses certain thresholds, your body and luck start working against you. These effects are <strong>cumulative</strong> &mdash; at 36 Risk you suffer the Fatigue, no-feat-bonus, <em>and</em> Disadvantage penalties all at once.
+    </div>
+    <div class="grid md:grid-cols-4 gap-4 text-sm my-4">
+        <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
+            <strong class="text-white block mb-1">12 Risk</strong>
+            You suffer 1 point of Fatigue for as long as your Risk remains at or above this threshold.
+        </div>
+        <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
+            <strong class="text-white block mb-1">24 Risk</strong>
+            You no longer gain Feat bonuses on rolls.
+        </div>
+        <div class="bg-red-900/20 p-4 rounded border border-red-500/30">
+            <strong class="text-red-400 block mb-1">36 Risk</strong>
+            You suffer constant Disadvantage on all rolls.
+        </div>
+        <div class="bg-red-900/20 p-4 rounded border border-red-500/30">
+            <strong class="text-red-400 block mb-1">48 Risk</strong>
+            You no longer have Final Blow Resistances.
+        </div>
+    </div>
+    <p class="text-slate-300 text-sm">Risk at or above these thresholds is dangerous specifically because it's so easy to keep stacking &mdash; nothing stops you from betting again while already Fatigued, and a character at 48+ Risk is one unlucky Final Blow away from death with nothing left to resist it.</p>
+</section>
+
+<section id="lv-paths" class="rule-card scroll-offset-center">
+    <h3 class="text-2xl text-white font-bold mb-3">New Paths</h3>
+    <p class="text-slate-300 text-sm mb-4">Lakeview adds two optional paths built around its two new resources: the Path of the Daredevil (the "Risky Fella"), who gambles with Risk, and the Path of the Modified, who changes their body beyond mortal limits.</p>
+
+    <div class="rule-card border-l-4 border-l-red-600">
+        <h4 class="text-white font-bold mb-2">Path of the Daredevil</h4>
+        <p class="text-slate-300 text-sm mb-3">Revolves entirely around the Risk mechanic: you gamble certainty for power, betting on rolls for outsized bonuses. Fortune becomes a resource you constantly spend and constantly risk losing.</p>
+        <ul class="list-disc ml-6 space-y-1 text-sm text-slate-300">
+            <li><strong>Breakpoint 3:</strong> Spend all of your Grace to remove that much Risk.</li>
+            <li><strong>Breakpoint 6:</strong> When you roll with a bet, you may shift a rolled die value by +1/-1.</li>
+        </ul>
+    </div>
+
+    <div class="rule-card border-l-4 border-l-sky-500">
+        <h4 class="text-white font-bold mb-2">Path of the Modified</h4>
+        <p class="text-slate-300 text-sm mb-3">Built around replacing and enhancing the body through Grafts and Mutations. The character becomes a modular construct of biological, mechanical, and arcane modification, gaining power through sacrifice while becoming more dependent on alterations and less resilient naturally.</p>
+        <ul class="list-disc ml-6 space-y-1 text-sm text-slate-300">
+            <li><strong>Breakpoint 3:</strong> Maintain 1 additional active Modification beyond your normal maximum.</li>
+            <li><strong>Breakpoint 6:</strong> Install or remove a Graft during a Rest without needing surgical tools or a specialized facility. You gain advantage on checks revolving around instilation of modifications or stabilization of mutations.</li>
+        </ul>
+    </div>
+</section>
+
+<section id="lv-smog" class="rule-card scroll-offset-center">
+    <h3 class="text-2xl text-white font-bold mb-3">Smog</h3>
+    <p class="text-slate-300 text-sm mb-4">Smog is your bodies reaction to the toxic fumes of the lower levels, as smog builds up in your body, it imposes negative side effects, that will make you much weaker than when you came to lake view. Removing smog is not neccesarily difficult, as you just need fresh air or a gas mask etc.</p>
+
+    <div class="condition-card text-sm mb-4">
+        Smog is tracked on its own meter, capped at 12. Smog doesn't impose a status effect, it eats directly into your Health pool by capping how much of your maximum Health you can actually use.
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4 text-sm">
+        <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
+            <strong class="text-white block mb-1">6 Smog</strong>
+            Your maximum Health is halved.
+        </div>
+        <div class="bg-slate-900/40 p-4 rounded border border-slate-700">
+            <strong class="text-white block mb-1">9 Smog</strong>
+            Your maximum Health is reduced to a third.
+        </div>
+        <div class="bg-red-900/20 p-4 rounded border border-red-500/30">
+            <strong class="text-red-400 block mb-1">12 Smog</strong>
+            Your maximum Health is reduced to a quarter.
+        </div>
+    </div>
+    <p class="text-slate-300 text-sm mt-4">These thresholds don't stack with each other &mdash; only the highest one you've reached applies. If your current Health exceeds your new (reduced) maximum, it drops to match. A Modified character running several active Grafts and Mutations at once should expect to be living with a permanently smaller Health pool in exchange for everything those modifications are doing for them.</p>
+</section>
+
+<section id="lv-grafting" class="rule-card scroll-offset-center">
+    <h3 class="text-2xl text-white font-bold mb-3">Grafting & Mutation</h3>
+    <p class="text-slate-300 text-sm mb-4">Grafting is the process of permanently replacing or augmenting a part of your body with a built component &mdash; mechanical, bone, arcane, or otherwise &mdash; in exchange for a permanent benefit. Mutation works the same way through biological alteration instead of surgical replacement (injected or consumed mutagens rather than installed parts). In exchange for not requiring physical components, Mutations are inherently unstable and must be kept in check &mdash; usually with medication, as detailed below.</p>
+
+    <div class="condition-card text-sm mb-4">
+        <strong>Installing a Modification:</strong> Normally, installing or removing a Graft requires external intervention &mdash; a Graft shop, or Wild Mutagenic Material for a Mutation. Certain traits let you perform the Grafting or Mutating yourself instead. Either way, a Graft still needs its materials supplied for the procedure to succeed, and a Mutation still needs its proper medication on hand so it doesn't consume you.
+    </div>
+
+    <h4 class="text-white font-bold mb-2">Modification Slots</h4>
+    <p class="text-slate-300 text-sm mb-3">You may only maintain a limited number of active Modifications (Grafts and Mutations, combined) at once. This maximum scales with Level, and Path of the Modified traits can push it higher still:</p>
+    <div class="space-y-2 text-sm mb-4">
+        <div class="bg-slate-900/30 p-2 rounded flex justify-between">
+            <span>Level 1-3</span>
+            <span class="text-slate-400">1 active Modification</span>
+        </div>
+        <div class="bg-slate-900/30 p-2 rounded flex justify-between">
+            <span>Level 4-6</span>
+            <span class="text-slate-400">2 active Modifications</span>
+        </div>
+        <div class="bg-slate-900/30 p-2 rounded flex justify-between">
+            <span>Level 7-9 (Trait Required)</span>
+            <span class="text-slate-400">3 active Modifications</span>
+        </div>
+        <div class="bg-slate-900/30 p-2 rounded flex justify-between">
+            <span>Level 10-12 (Trait Required)</span>
+            <span class="text-slate-400">4 active Modifications</span>
+        </div>
+    </div>
+    <p class="text-slate-300 text-sm mb-4">A destroyed Graft is unusable until repaired or replaced. A Mutation has no physical part to break, so it can only be removed during a Rest instead.</p>
+
+    <h4 class="text-white font-bold mb-2">Mutation Stability</h4>
+    <p class="text-slate-300 text-sm mb-3">Every active Mutation must be dosed with Stabilizing Medication once per Rest. This is what you're paying instead of a material cost &mdash; skip a dose and the Mutation starts metabolizing <em>you</em> instead.</p>
+    <div class="condition-card text-sm mb-4">
+        For each active Mutation left unmedicated through a Rest, gain Smog equal to that Mutation's Rank. An unmedicated Mutation's beneficial effect still functions &mdash; you're not losing the upside, only paying for it through Smog instead of medication.
+    </div>
+    <div class="condition-card text-sm mb-4">
+    <p class="text-slate-300 text-sm mb-4">Stabilizing Medication is consumed on use and must be restocked like any other supply, typically from an apothecary, Graft shop, or specialist willing to work with Wild Mutagenic Material. A character who can't reliably afford or access their medication should expect their Smog, and the Health penalty that comes with it, to creep upward over time.</p>
+
+    <p class="text-slate-300 text-sm mb-4">Stabalizing Medication can also be crafted, using <b>[Vital][Vital][Flux][Arcane]</b> you may use a Brewing Kit capable of creating Hard potions to do so, as long as you have the abilty to use such a tool.</p>
+    </div>
+    <h4 class="text-white font-bold mb-2">Upgrading a Graft</h4>
+    <p class="text-slate-300 text-sm mb-4">Most Grafts and Mutations can be taken more than once. Their effects stack, however some Grafts/Mutations are upgrades, these replace one instance of the selected graft/mutation with a stronger version. They will specify a cost usually like "Same as base + ingredients", this means you must pay the base material cost AGAIN, and the added materials.</p>
+
+    <h4 class="text-white font-bold mb-2">Crafting Bonuses</h4>
+    <p class="text-slate-300 text-sm mb-4">If you are the one who created the graft, it will benefit from crafting trait bonuses, such as "Blacksmith": Grafts count as gear for the purposes of this trait</p>
+
+    <h4 class="text-white font-bold mb-2">Example Grafts</h4>
+    <p class="text-slate-300 text-sm mb-4">Grafts are built from the same components used in general crafting. The examples below lean on their mechanical effect rather than their flavor &mdash; treat them as a baseline for what the system can produce while the full Graft trait list is being written.</p>
+
+   <h2>Grafts</h2>
+ 
+<table class="w-full border-collapse border border-slate-700">
+    <thead>
+        <tr class="bg-slate-800">
+            <th class="border border-slate-700 p-2 text-left">Graft</th>
+            <th class="border border-slate-700 p-2 text-left">Replaced Body Part</th>
+            <th class="border border-slate-700 p-2 text-left">Recipe</th>
+            <th class="border border-slate-700 p-2 text-left">Effect</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="border border-slate-700 p-2">Reinforced Plating</td>
+            <td class="border border-slate-700 p-2">Skin</td>
+            <td class="border border-slate-700 p-2">2× Metal - Plate, 1× Bone - Plate</td>
+            <td class="border border-slate-700 p-2">Gain Guard equal to [your Level] at the start of each Scene.</td>
+        </tr>
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Subdermal Mesh</td>
+            <td class="border border-slate-700 p-2">Skin</td>
+            <td class="border border-slate-700 p-2">2× Metal - Wire, 1× Cloth - Thread</td>
+            <td class="border border-slate-700 p-2">Choose a Damage Type. Reduce incoming damage of that type by [your Level].</td>
+        </tr>
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Cogwork Joint</td>
+            <td class="border border-slate-700 p-2">Arm or Leg Joint</td>
+            <td class="border border-slate-700 p-2">1× Metal - Rod, 1× Arcane - Crystal</td>
+            <td class="border border-slate-700 p-2">Gain +2 Feat Points in a Body or Skill Feat.</td>
+        </tr>
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Ocular Analyzer</td>
+            <td class="border border-slate-700 p-2">Eye</td>
+            <td class="border border-slate-700 p-2">2× Metal - Wire, 2× Cloth - Thread</td>
+            <td class="border border-slate-700 p-2">Gain +2 to checks involving Crafting, Surgery and other tasks that require Fine Motor Skill.</td>
+        </tr>
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Arm Claws</td>
+            <td class="border border-slate-700 p-2">Forearm</td>
+            <td class="border border-slate-700 p-2">2× Metal - Plate, 1× Metal - Wire, 1× Bone - Marrow</td>
+            <td class="border border-slate-700 p-2">Gain a Natural Slash Weapon. Unarmed attacks gain +1 Damage and +1 Accuracy and inflict 1 Bleed. You may make one additional unarmed strike each turn.</td>
+        </tr>
+        
+        <tr>
+            <td class="border border-slate-700 p-2">Replacement Hip</td>
+            <td class="border border-slate-700 p-2">Hip</td>
+            <td class="border border-slate-700 p-2">1× Metal - Rod</td>
+            <td class="border border-slate-700 p-2">You know the weather 1 day in advance.</td>
+        </tr>
+
+        <tr>
+            <td class="border border-slate-700 p-2">Mule's Spine</td>
+            <td class="border border-slate-700 p-2">Spine</td>
+            <td class="border border-slate-700 p-2">2× Metal - Rod, 1× Bone - Marrow</td>
+            <td class="border border-slate-700 p-2">You have +5 Encumbrance.</td>
+        </tr>
+
+        <tr>
+            <td class="border border-slate-700 p-2">Double Arm</td>
+            <td class="border border-slate-700 p-2">Forearm</td>
+            <td class="border border-slate-700 p-2">2× Metal - Rod, 1× Metal - Wire, 1× Wood - Core</td>
+            <td class="border border-slate-700 p-2">You can wield two-handed weapons with one hand.</td>
+        </tr>
+
+        <tr>
+            <td class="border border-slate-700 p-2">Piston Arms</td>
+            <td class="border border-slate-700 p-2">Arm</td>
+            <td class="border border-slate-700 p-2">2× Metal - Rod, 1× Liquid - Oil, 1× Wood - Core</td>
+            <td class="border border-slate-700 p-2">When you hit with a melee attack, you may Push the target 2 tiles. Creatures pushed into solid surfaces or other creatures are knocked Prone.</td>
+        </tr>
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Spring Heels</td>
+            <td class="border border-slate-700 p-2">Feet / Lower Legs</td>
+            <td class="border border-slate-700 p-2">2× Metal - Rod, 1× Metal - Wire, 1× Liquid - Oil</td>
+            <td class="border border-slate-700 p-2">Double your Jump Distance. Ignore falling damage from falls up to 10 Units.</td>
+        </tr>
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Arcane Engine</td>
+            <td class="border border-slate-700 p-2">Heart</td>
+            <td class="border border-slate-700 p-2">2× Arcane - Crystal, 2× Arcane - Sigil, 1× Biological - Heart</td>
+            <td class="border border-slate-700 p-2">This Graft has 3 Charges per Rest. When casting a spell, spend a Charge to increase its Range by 3 tiles or its Damage/Healing by 2.</td>
+        </tr>
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Arcane Conduit</td>
+            <td class="border border-slate-700 p-2">Spine</td>
+            <td class="border border-slate-700 p-2">2× Arcane - Sigil, 1× Bone - Marrow</td>
+            <td class="border border-slate-700 p-2">Gain +6 Maximum Mana. Whenever Mana gained from this Graft is spent, gain 1 Smog.</td>
+        </tr>
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Iron Lung</td>
+            <td class="border border-slate-700 p-2">Lungs</td>
+            <td class="border border-slate-700 p-2">2× Metal - Plate, 1× Glass - Tube, 1× Liquid - Oil</td>
+            <td class="border border-slate-700 p-2">You no longer need to breathe and are immune to Suffocation. Reduce incoming damage from inhaled poison or gas by [your Level].</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Vocal Resonator</td>
+            <td class="border border-slate-700 p-2">Throat</td>
+            <td class="border border-slate-700 p-2">1× Metal - Wire, 1× Arcane - Sigil, 1× Bone - Splinter</td>
+            <td class="border border-slate-700 p-2">Gain +1 on checks involving Intimidation or Persuasion through speech. Once per Scene, emit a shout that Dazes one creature within 3 tiles.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Reinforced Skull Plate</td>
+            <td class="border border-slate-700 p-2">Skull</td>
+            <td class="border border-slate-700 p-2">2× Bone - Plate, 1× Metal - Plate</td>
+            <td class="border border-slate-700 p-2">You become immune to effects that would see into your mind.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Grip Servos</td>
+            <td class="border border-slate-700 p-2">Hands</td>
+            <td class="border border-slate-700 p-2">2× Metal - Wire, 1× Metal - Rod, 1× Liquid - Oil</td>
+            <td class="border border-slate-700 p-2">Gain +1 per Rank on Grapple and Climbing checks. You cannot be Disarmed, and your grapples deal 1 Blunt damage per turn held.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Auxiliary Stomach</td>
+            <td class="border border-slate-700 p-2">Stomach</td>
+            <td class="border border-slate-700 p-2">1× Bone - Marrow, 1× Biological - Heart, 1× Glass - Tube</td>
+            <td class="border border-slate-700 p-2">You can eat anything, and will gain nutrition from it.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Echo Plate Ears</td>
+            <td class="border border-slate-700 p-2">Ears</td>
+            <td class="border border-slate-700 p-2">2× Metal - Wire, 1× Arcane - Crystal</td>
+            <td class="border border-slate-700 p-2">Gain Echolocation out to 5 tiles, functioning even while Blinded. Gain +2 on hearing-based Awareness checks.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Chem Filter Sinuses</td>
+            <td class="border border-slate-700 p-2">Nose</td>
+            <td class="border border-slate-700 p-2">1× Glass - Tube, 1× Cloth - Thread, 1× Liquid - Oil</td>
+            <td class="border border-slate-700 p-2">You are immune to inhaled toxins and gas. Gain +2 to identify substances, poisons, or alchemical components by scent.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Back Vents</td>
+            <td class="border border-slate-700 p-2">Back</td>
+            <td class="border border-slate-700 p-2">2× Glass - Tube, 2× Metal - Plate</td>
+            <td class="border border-slate-700 p-2">As an action, cleanse all your current conditions, however Gain 1 Fatigue.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Iron Jaw</td>
+            <td class="border border-slate-700 p-2">Jaw</td>
+            <td class="border border-slate-700 p-2">2× Metal - Plate, 1× Bone - Splinter</td>
+            <td class="border border-slate-700 p-2">Gain a Natural Pierce Weapon with 2 Accuracy. Bite attacks deal 2 Damage and inflict 1 stack of Compromised.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Pulse Regulator</td>
+            <td class="border border-slate-700 p-2">Heart / Blood</td>
+            <td class="border border-slate-700 p-2">1× Arcane - Crystal, 1× Bone - Marrow, 1× Metal - Wire</td>
+            <td class="border border-slate-700 p-2">You are immune to Bleed. When reduced below 0 Health, automatically stabilize once per rest.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Counterweight Tail</td>
+            <td class="border border-slate-700 p-2">Tailbone / Spine</td>
+            <td class="border border-slate-700 p-2">2× Metal - Rod, 1× Bone - Plate, 1× Wood - Core</td>
+            <td class="border border-slate-700 p-2">Gain +2 to Reflex. You have advantage to resisting effects that would knock you prone.</td>
+        </tr>
+ 
+        <!-- ===================== UPGRADES (rewritten to restate full base effect, with bigger numbers) ===================== -->
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Adamant Plating</td>
+            <td class="border border-slate-700 p-2">Reinforced Plating</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Arcane - Sigil</td>
+            <td class="border border-slate-700 p-2">Gain Guard equal to [2x your Level] at the start of each Scene. Also reduce incoming Blunt damage by 3.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Reinforced Subdermal Mesh</td>
+            <td class="border border-slate-700 p-2">Subdermal Mesh</td>
+            <td class="border border-slate-700 p-2">Same as base (install a second copy)</td>
+            <td class="border border-slate-700 p-2">Choose a Damage Type. Gain Resistance to that Damage Type.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Hydraulic Joint</td>
+            <td class="border border-slate-700 p-2">Cogwork Joint</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Liquid - Oil, 1× Arcane - Sigil</td>
+            <td class="border border-slate-700 p-2">Gain +4 Feat Points in a Body or Skill Feat.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Padded Joint</td>
+            <td class="border border-slate-700 p-2">Cogwork Joint</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Metal - Plate</td>
+            <td class="border border-slate-700 p-2">Gain +2 Feat Points in a Body or Skill Feat, and +2 Feat Points in a second Body or Skill Feat.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Twin-Lens Ocular Analyzer</td>
+            <td class="border border-slate-700 p-2">Ocular Analyzer</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Arcane - Crystal</td>
+            <td class="border border-slate-700 p-2">Gain +4 to checks involving Crafting, Surgery and other tasks that require Fine Motor Skill.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Razor Arm Claws</td>
+            <td class="border border-slate-700 p-2">Arm Claws</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Bone - Marrow</td>
+            <td class="border border-slate-700 p-2">Gain a Natural Slash Weapon. Unarmed attacks gain +2 Damage and +1 Accuracy and inflict 2 Bleed. You may make one additional unarmed strike each turn.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Twin-Piston Arms</td>
+            <td class="border border-slate-700 p-2">Piston Arms</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Liquid - Oil</td>
+            <td class="border border-slate-700 p-2">When you hit with a melee attack, you may Push the target 3 tiles. Creatures pushed into solid surfaces or other creatures are knocked Prone and take 2 Blunt damage.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Recoil Spring Heels</td>
+            <td class="border border-slate-700 p-2">Spring Heels</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Metal - Rod</td>
+            <td class="border border-slate-700 p-2">Triple your Jump Distance. Ignore falling damage from falls up to 20 Units.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Shock-Absorbing Heels</td>
+            <td class="border border-slate-700 p-2">Spring Heels</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Liquid - Oil, 1× Cloth - Thread</td>
+            <td class="border border-slate-700 p-2">Double your Jump Distance. Ignore fall damage from any fall, regardless of distance. If you fell more than 25 units, you land with 2 stacks Dazed, and 2 Stacks of Hesitation.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Overcharged Arcane Engine</td>
+            <td class="border border-slate-700 p-2">Arcane Engine</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Arcane - Sigil, 1× Biological - Plasma</td>
+            <td class="border border-slate-700 p-2">This Graft has 6 Charges per Rest. When casting a spell, spend a Charge to increase its Range by 3 tiles and its Damage/Healing by 2.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Multiphase Arcane Engine</td>
+            <td class="border border-slate-700 p-2">Arcane Engine</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Arcane - Sigil, 1× Biological - Plasma</td>
+            <td class="border border-slate-700 p-2">You are able to multicast spells instead of upcasting, even with non cosmic spells.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Reinforced Arcane Conduit</td>
+            <td class="border border-slate-700 p-2">Arcane Conduit</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Arcane - Crystal</td>
+            <td class="border border-slate-700 p-2">Gain +10 Maximum Mana. Whenever Mana gained from this Graft is spent, gain 1 Smog.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Tempered Arcane Conduit</td>
+            <td class="border border-slate-700 p-2">Arcane Conduit</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Glass - Tube</td>
+            <td class="border border-slate-700 p-2">Gain +6 Maximum Mana.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Pressurized Iron Lung</td>
+            <td class="border border-slate-700 p-2">Iron Lung</td>
+            <td class="border border-slate-700 p-2">Same as base, + 1× Metal - Rod</td>
+            <td class="border border-slate-700 p-2">You no longer need to breathe and are immune to Suffocation. Reduce incoming damage from inhaled poison or gas by [2x your Level]. Once per Scene, exhale to clear gas or smoke from a 2 tile radius.</td>
+        </tr>
+    </tbody>
+</table>
+ 
+ 
+<h2 class="mt-8">Mutations</h2>
+ 
+<table class="w-full border-collapse border border-slate-700">
+    <thead>
+        <tr class="bg-slate-800">
+            <th class="border border-slate-700 p-2 text-left">Mutation</th>
+            <th class="border border-slate-700 p-2 text-left">Mutated Body Part</th>
+            <th class="border border-slate-700 p-2 text-left">Additional Materials</th>
+            <th class="border border-slate-700 p-2 text-left">Effect</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="border border-slate-700 p-2">Chitinous Hide</td>
+            <td class="border border-slate-700 p-2">Skin</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">Gain +1 Armor. Your Swimming and Climbing Movement are reduced by 1.</td>
+        </tr>
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Reactive Flesh</td>
+            <td class="border border-slate-700 p-2">Liver</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">Whenever you take damage, gain Guard equal to [your Level]. You are no longer affected by the Intoxicated or Stoned Condition.</td>
+        </tr>
+
+        <tr>
+            <td class="border border-slate-700 p-2">Surface Digestion</td>
+            <td class="border border-slate-700 p-2">Skin</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">You are no longer affected by potions.</td>
+        </tr>
+
+        <tr>
+            <td class="border border-slate-700 p-2">Internal Mimicry</td>
+            <td class="border border-slate-700 p-2">Heart</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">You gain a species trait you do not already possess.</td>
+        </tr>
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Predator Vision</td>
+            <td class="border border-slate-700 p-2">Eyes</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">Choose a creature within sight. For the next 10 hours, you always know its location. While targeting this creature, you do not suffer disadvantage from blindness when attacking it, and it gains no advantage against you from being unseen.</td>
+        </tr>
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Regenerative Tissue</td>
+            <td class="border border-slate-700 p-2">Some Muscular Tissue</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">At the start of your turn, heal Health equal to your Level. This effect is disabled until your next turn if you suffer Fire or Poison damage.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Adrenal Surge</td>
+            <td class="border border-slate-700 p-2">Adrenal Glands</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">Once per Scene, when you drop to half Health or below, gain +2 Might and 2 Speed Stacks until the end of the Scene.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Venomous Glands</td>
+            <td class="border border-slate-700 p-2">Saliva Glands</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">You gain a Bite Attack. The attack has 2 Accuracy, it deals no damage, but inflicts Poison Stacks equal to [half your Level], rounded up.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Hollow Bones</td>
+            <td class="border border-slate-700 p-2">Bones</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">Your Movement increases by 4. You take +2 Vibro and Blunt Damage.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Thermal Skin</td>
+            <td class="border border-slate-700 p-2">Skin</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">Reduce Fire and Cold damage taken by [half your Level], rounded down.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Enlightened Stomach</td>
+            <td class="border border-slate-700 p-2">Stomach</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">You can safely consume crafting components, your stomach may craft any tier simple item with the consumed components of your choice. It will produce the item in 4 Hours. The assmbled item is regurgitated.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Clotting Blood</td>
+            <td class="border border-slate-700 p-2">Blood</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">You are Immune to Bleed. Bleed stacks that would be applied, instead apply Boon.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Nightshade Eyes</td>
+            <td class="border border-slate-700 p-2">Eyes</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">Gain total immunity to darkness, including magical.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Echofin Membrane</td>
+            <td class="border border-slate-700 p-2">Lateral Line</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">Sense vibrations through solid ground or water out to 12 tiles, this can counteract the Blinded condition. You cannot be Surprised or Ambushed while in contact with the ground or water.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Acidic Sweat</td>
+            <td class="border border-slate-700 p-2">Skin / Glands</td>
+            <td class="border border-slate-700 p-2">-</td>
+            <td class="border border-slate-700 p-2">Creatures grappling you take 2 Acid damage per round. Each 3 Scenes a creature is grappeled by you, they gain 2 stacks of Compromised.</td>
+        </tr>
+ 
+        <!-- ===================== UPGRADES (rewritten to restate full base effect, with bigger numbers) ===================== -->
+ 
+        <tr>
+            <td class="border border-slate-700 p-2">Plated Hide</td>
+            <td class="border border-slate-700 p-2">Chitinous Hide</td>
+            <td class="border border-slate-700 p-2">1× Bone - Plate, 1× Stone - Cut</td>
+            <td class="border border-slate-700 p-2">Gain +2 Armor. Your Swimming and Climbing Movement are reduced by 1.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Caustic Flesh</td>
+            <td class="border border-slate-700 p-2">Reactive Flesh</td>
+            <td class="border border-slate-700 p-2">1× Powder - Conductive</td>
+            <td class="border border-slate-700 p-2">Whenever you take damage, gain Guard equal to 2× your Level. While that Guard remains, melee attackers that hit you take 5 Acid damage. You are no longer affected by the Intoxicated or Stoned Condition.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Apex Vision</td>
+            <td class="border border-slate-700 p-2">Predator Vision</td>
+            <td class="border border-slate-700 p-2">1× Arcane - Crystal</td>
+            <td class="border border-slate-700 p-2">Choose a creature within sight. For the next 10 hours, you always know its location, and can tell at a glance whether it's Wounded or Bleeding. While targeting this creature, you do not suffer disadvantage from blindness when attacking it, and it gains no advantage against you from being unseen. In addition you deal +3 Damage to it.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Rampant Regeneration</td>
+            <td class="border border-slate-700 p-2">Regenerative Tissue</td>
+            <td class="border border-slate-700 p-2">1× Biological - Heart</td>
+            <td class="border border-slate-700 p-2">At the start of your turn, heal Health equal to 2× your Level.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Surging Adrenaline</td>
+            <td class="border border-slate-700 p-2">Adrenal Surge</td>
+            <td class="border border-slate-700 p-2">1× Biological - Plasma</td>
+            <td class="border border-slate-700 p-2">Once per Scene, when you drop to half Health or below, gain +3 Might and 3 Speed Stacks until the end of the Scene, and Advantage on your next Might or Reflex check before the Scene ends.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Fortified Adrenaline</td>
+            <td class="border border-slate-700 p-2">Adrenal Surge</td>
+            <td class="border border-slate-700 p-2">1× Bone - Plate</td>
+            <td class="border border-slate-700 p-2">Once per Scene, when you drop to half Health or below, gain +2 Might, 2 Speed Stacks, and Guard equal to your Level, until the end of the Scene.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Necrotic Glands</td>
+            <td class="border border-slate-700 p-2">Venomous Glands</td>
+            <td class="border border-slate-700 p-2">1× Bone - Marrow</td>
+            <td class="border border-slate-700 p-2">You gain a Bite Attack. The attack has 2 Accuracy, it deals no damage, but inflicts Poison Stacks equal to [your Level], rounded up.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Magma Skin</td>
+            <td class="border border-slate-700 p-2">Thermal Skin</td>
+            <td class="border border-slate-700 p-2">1× Stone - Block</td>
+            <td class="border border-slate-700 p-2">When you take Fire or Cold damage, if the amount taken is bellow your Level, ignore it, otherwise, ignore it and apply 1 Smog.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Coagulant Blood</td>
+            <td class="border border-slate-700 p-2">Clotting Blood</td>
+            <td class="border border-slate-700 p-2">1× Cloth - Thread</td>
+            <td class="border border-slate-700 p-2">You are immune to Bleed, Poison, Weakened and Exhausted.</td>
+        </tr>
+        <tr>
+            <td class="border border-slate-700 p-2">Opulescent Eyes</td>
+            <td class="border border-slate-700 p-2">Nightshade Eyes</td>
+            <td class="border border-slate-700 p-2">1× Bone - Splinter</td>
+            <td class="border border-slate-700 p-2">Gain total immunity to darkness, including magical. You are also immune to Blinding Lights.</td>
+        </tr>
+    </tbody>
+</table>
+</section>
